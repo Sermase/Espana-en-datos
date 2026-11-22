@@ -3,7 +3,8 @@
 name: Datos y despliegue
 on:
   schedule:
-    - cron: '17 6 * * *'     # cada día, para la producción hidráulica de REE
+    - cron: '17 6 * * *'     # cada día: REE y gasolineras
+    - cron: '7 17 * * *'     # y por la tarde, que las gasolineras cambian precio a mediodía
     - cron: '43 15 * * 2'    # martes por la tarde, boletín semanal
   workflow_dispatch:
   push:
@@ -21,16 +22,27 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci
-      - name: Descargar datos oficiales
-        if: github.event_name != 'push'
+      # Los datos se descargan en las ejecuciones programadas, a mano, o al subir un commit con [datos] en el mensaje.
+      - name: Agua (MITECO y REE)
+        id: agua
+        if: github.event_name != 'push' || contains(github.event.head_commit.message, '[datos]')
+        continue-on-error: true
         run: node scripts/update-data.mjs
+      - name: Gasolineras (precios de hoy)
+        if: github.event_name != 'push' || contains(github.event.head_commit.message, '[datos]')
+        continue-on-error: true
+        run: node scripts/gasolineras.mjs
+      - name: Sondas de fuentes futuras
+        if: github.event_name != 'push' || contains(github.event.head_commit.message, '[datos]')
+        continue-on-error: true
+        run: node scripts/sondas.mjs
       - name: Guardar datos nuevos
-        if: github.event_name != 'push'
+        if: github.event_name != 'push' || contains(github.event.head_commit.message, '[datos]')
         run: |
           git config user.name "datos-bot"
           git config user.email "datos-bot@users.noreply.github.com"
-          git add src/agua/data/snapshot.json src/resumen.json public/agua/data
-          git diff --cached --quiet || git commit -m "Datos: boletín $(node -p "require('./src/agua/data/snapshot.json').meta.boletin")"
+          git add src/agua/data/snapshot.json src/resumen.json public/agua/data public/gasolineras/data fuentes/sondas.json
+          git diff --cached --quiet || git commit -m "Datos del $(date -u +%Y-%m-%d)"
           git push
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
