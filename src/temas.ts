@@ -1,0 +1,23 @@
+/**
+ * Los temas de España en datos. Cada uno tiene su color de acento y su vista principal:
+ * no todos son mapas, cada dato se enseña en la forma que mejor le va.
+ */
+export type Tema = {
+  id: string
+  nombre: string
+  lema: string
+  /** color de acento del tema, usado en su página y en la portada */
+  color: string
+  vista: 'mapa' | 'consola' | 'pirámide' | 'relieve'
+  /** carpeta de la página, si ya está abierta */
+  ruta?: string
+}
+
+export const TEMAS: Tema[] = [
+  { id: 'agua', nombre: 'Agua', lema: 'Embalses, ríos, lluvia y energía hidroeléctrica, semana a semana.', color: '#3fe6ff', vista: 'mapa', ruta: './agua/' },
+  { id: 'energia', nombre: 'Energía', lema: 'De dónde sale la electricidad que gastamos y cuánto cuesta cada hora.', color: '#ffb02e', vista: 'consola' },
+  { id: 'economia', nombre: 'Economía', lema: 'PIB, paro, precios y salarios, comunidad por comunidad.', color: '#3df5b0', vista: 'consola' },
+  { id: 'poblacion', nombre: 'Población', lema: 'Cuántos somos, dónde vivimos y cómo envejecemos.', color: '#c49bff', vista: 'pirámide' },
+  { id: 'carreteras', nombre: 'Carreteras', lema: 'Tráfico, accidentes y obras en la red de carreteras.', color: '#ff8a5c', vista: 'mapa' },
+  { id: 'montana', nombre: 'Montaña y nieve', lema: 'Cumbres, espesor de nieve y temporada de esquí.', color: '#d6ecff', vista: 'relieve' },
+]

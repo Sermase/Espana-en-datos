@@ -1,0 +1,127 @@
+{
+"year": 2024,
+"national": {
+"l": 128,
+"cost": 2.02,
+"supplied": 4267,
+"registered": 3283,
+"households": 2284,
+"lossReal": 624,
+"lossApparent": 360,
+"origin": {
+"sup": 62.1,
+"sub": 27.1,
+"otras": 10.8
+}
+},
+"regions": [
+{
+"n": "Cantabria",
+"l": 186,
+"v": -0.5,
+"cost": 1.53
+},
+{
+"n": "Castilla-La Mancha",
+"l": 172,
+"v": 22.1,
+"cost": 1.62
+},
+{
+"n": "Principado de Asturias",
+"l": 161,
+"v": 11.2,
+"cost": 1.27
+},
+{
+"n": "Castilla y León",
+"l": 161,
+"v": 9.3,
+"cost": 1.29
+},
+{
+"n": "Comunidad Foral de Navarra",
+"l": 153,
+"v": 15.0,
+"cost": 1.56
+},
+{
+"n": "Comunitat Valenciana",
+"l": 151,
+"v": 7.9,
+"cost": 2.63
+},
+{
+"n": "Región de Murcia",
+"l": 141,
+"v": 5.7,
+"cost": 2.6
+},
+{
+"n": "Illes Balears",
+"l": 136,
+"v": 7.4,
+"cost": 2.8
+},
+{
+"n": "Andalucía",
+"l": 130,
+"v": -7.7,
+"cost": 1.86
+},
+{
+"n": "Ceuta y Melilla",
+"l": 129,
+"v": -14.0,
+"cost": 1.46
+},
+{
+"n": "Comunidad de Madrid",
+"l": 128,
+"v": 2.3,
+"cost": 1.74
+},
+{
+"n": "Aragón",
+"l": 125,
+"v": 12.0,
+"cost": 1.69
+},
+{
+"n": "Canarias",
+"l": 119,
+"v": 3.4,
+"cost": 2.27
+},
+{
+"n": "Extremadura",
+"l": 118,
+"v": -7.6,
+"cost": 1.71
+},
+{
+"n": "La Rioja",
+"l": 116,
+"v": -2.6,
+"cost": 1.26
+},
+{
+"n": "Galicia",
+"l": 115,
+"v": -11.3,
+"cost": 1.29
+},
+{
+"n": "Cataluña",
+"l": 100,
+"v": -13.0,
+"cost": 2.72
+},
+{
+"n": "País Vasco",
+"l": 79,
+"v": -7.6,
+"cost": 2.32
+}
+]
+}

@@ -1,0 +1,100 @@
+Bidasoa|69|Cantábrico
+Nervión|72|Cantábrico
+Pas|57|Cantábrico
+Saja|67|Cantábrico
+Deva|64|Cantábrico
+Sella|56|Cantábrico
+Nalón|129|Cantábrico
+Narcea|97|Río Nalón
+Navia|159|Cantábrico
+Eo|91.5|Cantábrico
+Tambre|134|Atlántico
+Ulla|126|Atlántico
+Eume|100|Atlántico
+Miño|315|Atlántico
+Sil|234|Río Miño
+Duero|897|Atlántico
+Águeda|133|Río Duero
+Huebra|122|Río Duero
+Tormes|247|Río Duero
+Esla|288|Río Duero
+Tera|140|Río Esla
+Cea|157|Río Esla
+Valderaduey|158|Río Duero
+Zapardiel|105|Río Duero
+Adaja|176|Río Duero
+Eresma|134|Río Adaja
+Pisuerga|288|Río Duero
+Esgueva|127|Río Pisuerga
+Carrión|197|Río Pisuerga
+Arlanza|172|Río Pisuerga
+Arlanzón|131|Río Arlanza
+Cega|149|Río Duero
+Duratón|114|Río Duero
+Riaza|113|Río Duero
+Tajo|1007|Atlántico
+Salor|120|Río Tajo
+Alagón|201|Río Tajo
+Almonte|97|Río Tajo
+Tiétar|170|Río Tajo
+Alberche|182|Río Tajo
+Guadarrama|132|Río Tajo
+Jarama|194|Río Tajo
+Tajuña|225|Río Jarama
+Henares|158|Río Jarama
+Guadiela|115|Río Tajo
+Guadiana|744|Atlántico
+Záncara|168|Río Guadiana
+Cigüela|225|Río Guadiana
+Gigüela|225|Río Guadiana
+Jabalón|153|Río Guadiana
+Zújar|210|Río Guadiana
+Ruecas|97|Río Guadiana
+Matachel|124|Río Guadiana
+Ardila|116|Río Guadiana
+Chanza|117|Río Guadiana
+Odiel|121|Atlántico
+Tinto|93|Atlántico
+Guadalquivir|657|Atlántico
+Guadiana Menor|182|Río Guadalquivir
+Genil|337|Río Guadalquivir
+Guadalimar|167|Río Guadalquivir
+Viar|124|Río Guadalquivir
+Guadalete|173|Atlántico
+Guadiaro|79|Mediterráneo
+Guadalhorce|154|Mediterráneo
+Guadalfeo|72|Mediterráneo
+Adra|47|Mediterráneo
+Andarax|62|Mediterráneo
+Segura|325|Mediterráneo
+Mundo|150|Río Segura
+Guadalentín|121|Río Segura
+Vinalopó|81|Mediterráneo
+Serpis|74.5|Mediterráneo
+Júcar|498|Mediterráneo
+Cabriel|220|Río Júcar
+Magro|130|Río Júcar
+Valdemembra|85|Río Júcar
+Turia|280|Mediterráneo
+Palancia|85|Mediterráneo
+Mijares|156|Mediterráneo
+Ebro|910|Mediterráneo
+Ega|113|Río Ebro
+Aragón|197|Río Ebro
+Arga|145|Río Aragón
+Jalón|224|Río Ebro
+Jiloca|126|Río Jalón
+Huerva|135|Río Ebro
+Gállego|203|Río Ebro
+Aguasvivas|100|Río Ebro
+Martín|98|Río Ebro
+Guadalope|182|Río Ebro
+Segre|261|Río Ebro
+Cinca|170|Río Segre
+Ésera|99|Río Cinca
+Noguera Ribagorzana|133|Río Segre
+Noguera Pallaresa|154|Río Segre
+Matarraña|97|Río Ebro
+Llobregat|157|Mediterráneo
+Ter|209|Mediterráneo
+Fluvià|98|Mediterráneo

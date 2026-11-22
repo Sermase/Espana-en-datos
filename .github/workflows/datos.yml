@@ -1,0 +1,44 @@
+# Actualiza los datos y publica la web en GitHub Pages.
+# El boletín de MITECO sale los martes; REE se refresca cada día.
+name: Datos y despliegue
+on:
+  schedule:
+    - cron: '17 6 * * *'     # cada día, para la producción hidráulica de REE
+    - cron: '43 15 * * 2'    # martes por la tarde, boletín semanal
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency: { group: pages, cancel-in-progress: true }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Descargar datos oficiales
+        if: github.event_name != 'push'
+        run: node scripts/update-data.mjs
+      - name: Guardar datos nuevos
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "datos-bot"
+          git config user.email "datos-bot@users.noreply.github.com"
+          git add src/agua/data/snapshot.json src/resumen.json public/agua/data
+          git diff --cached --quiet || git commit -m "Datos: boletín $(node -p "require('./src/agua/data/snapshot.json').meta.boletin")"
+          git push
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: dist }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: '${{ steps.d.outputs.page_url }}' }
+    steps:
+      - id: d
+        uses: actions/deploy-pages@v4
