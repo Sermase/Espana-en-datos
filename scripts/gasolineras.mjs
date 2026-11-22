@@ -37,6 +37,7 @@ async function get() {
 }
 
 const num = (s) => { const v = parseFloat(String(s ?? '').replace(',', '.')); return Number.isFinite(v) && v > 0 ? v : null }
+const coord = (s) => { const v = parseFloat(String(s ?? '').replace(',', '.')); return Number.isFinite(v) && v !== 0 ? v : null }
 const median = (a) => { if (!a.length) return null; const s = [...a].sort((x, y) => x - y), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2 }
 const r3 = (v) => v == null ? null : Math.round(v * 1000) / 1000
 const title = (s) => String(s ?? '').trim().toLowerCase().replace(/(^|[\s(/-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase())
@@ -49,9 +50,9 @@ const fecha = `${yy}-${mm}-${dd}T${hh.padStart(2, '0')}:${mi}`
 const provs = new Map(), ccaa = new Map(), brands = new Map()
 const rows = []
 for (const e of j.ListaEESSPrecio) {
-  const lat = num(e.Latitud), lon = num(e['Longitud (WGS84)'])
-  if (lat == null || lon == null) continue
-  const lonS = String(e['Longitud (WGS84)']).trim().startsWith('-') ? -Math.abs(lon) : lon
+  // ojo: casi toda España está al oeste de Greenwich, la longitud es negativa
+  const lat = coord(e.Latitud), lonS = coord(e['Longitud (WGS84)'])
+  if (lat == null || lonS == null) continue
   const p = e.IDProvincia, c = e.IDCCAA
   if (!provs.has(p)) provs.set(p, { n: title(e.Provincia), c })
   const brand = String(e['Rótulo'] ?? '').trim().toUpperCase() || 'SIN RÓTULO'
@@ -72,7 +73,7 @@ const col = Object.keys(FUELS)
 const stats = (list) => Object.fromEntries(col.map((k, i) => [k, r3(median(list.map(r => r[6 + i]).filter(v => v != null)))]))
 const pub = rows.filter(r => !r[13])
 const byProv = {}
-for (const [p] of provs) byProv[p] = { ...stats(pub.filter(r => r[5] === p)), n: pub.filter(r => r[5] === p).length }
+for (const [p] of provs) byProv[p] = { ...stats(pub.filter(r => r[5] === p)), cnt: pub.filter(r => r[5] === p).length }
 
 const hoy = {
   fecha, fuels: col,

@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+/* Gasolineras: mismo chasis que el resto de España en datos, acento coral. */
+:root { --bg: #03090f; --panel: #07141d; --line: rgba(160, 220, 240, .12); --ink: #e6f6fb; --muted: #86a9b5; --acc: #ff5f7e; --cheap: #3df5b0; color-scheme: dark }
+* { box-sizing: border-box }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: Barlow, system-ui, sans-serif }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer }
+a { color: inherit }
+:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px }
+
+.gas { display: grid; grid-template-columns: 1fr 420px; height: 100vh; overflow: hidden }
+.boot { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--muted) }
+.boot svg { color: var(--acc) }
+
+.top { position: absolute; z-index: 3; left: 20px; top: 16px; right: 440px; display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: flex-start; pointer-events: none }
+.top > * { pointer-events: auto }
+.home-link { font-size: 12px; letter-spacing: .08em; color: var(--muted); text-decoration: none }
+.home-link::before { content: '‹ ' }
+.home-link:hover { color: var(--acc) }
+.brand h1 { font-family: Oxanium, sans-serif; font-weight: 700; font-size: 34px; letter-spacing: .14em; text-transform: uppercase; margin: 0; line-height: 1.05 }
+.brand p { margin: 2px 0 0; color: var(--acc); font-size: 14px }
+.fuels { display: flex; gap: 6px; flex-wrap: wrap }
+.fuels button { display: grid; text-align: left; padding: 7px 12px; border: 1px solid var(--line); background: rgba(7, 20, 29, .85); border-radius: 3px; font-family: Oxanium, sans-serif; font-weight: 600; font-size: 14px; min-width: 76px }
+.fuels button small { font-family: Barlow, sans-serif; font-weight: 500; color: var(--muted); font-size: 12px }
+.fuels button.is-on { border-color: var(--acc); background: color-mix(in oklab, var(--acc) 14%, #07141d); box-shadow: 0 0 0 1px var(--acc) inset }
+.fuels button.is-on small { color: #ffd0d9 }
+
+.stage { position: relative; overflow: hidden }
+.mapa { position: absolute; inset: 0 }
+.mapa-svg { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: grab }
+.mapa-svg:active { cursor: grabbing }
+.mapa-cv { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none }
+.provs path[data-prov] { stroke: #03090f; stroke-width: calc(1px / var(--k, 1)); transition: fill .4s, opacity .4s; cursor: pointer }
+.provs path[data-prov]:hover { filter: brightness(1.25) }
+.provs path.is-sel { stroke: #fff; stroke-width: calc(2px / var(--k, 1)) }
+.provs.is-faded path[data-prov] { opacity: .35 }
+.canarias-box { fill: none; stroke: var(--line); stroke-width: calc(1px / var(--k, 1)) }
+.mapa-hint { position: absolute; left: 50%; bottom: 84px; transform: translateX(-50%); margin: 0; font-size: 13px; color: var(--muted); pointer-events: none }
+
+.legend { position: absolute; left: 20px; bottom: 18px; display: grid; grid-template-columns: auto 120px auto; gap: 2px 8px; align-items: center; font-size: 12px; color: var(--muted); pointer-events: none }
+.legend i { height: 8px; border-radius: 4px; background: linear-gradient(90deg, rgb(61,245,176), rgb(200,180,190), rgb(255,77,94)) }
+.legend small { grid-column: 1 / -1; text-align: center }
+.tools { position: absolute; right: 18px; bottom: 18px; display: flex; flex-direction: column; gap: 8px }
+.tools button { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: rgba(7, 20, 29, .9); border: 1px solid var(--line); border-radius: 3px; font-weight: 600 }
+.tools button:hover { border-color: var(--acc) }
+.tools svg { color: var(--acc) }
+.toast { position: absolute; left: 50%; top: 120px; transform: translateX(-50%); background: rgba(7, 20, 29, .95); border: 1px solid var(--line); padding: 8px 14px; border-radius: 3px; margin: 0; font-size: 14px }
+
+.panel { overflow-y: auto; border-left: 1px solid var(--line); background: #040e15; padding: 14px; display: flex; flex-direction: column; gap: 12px }
+.card { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 16px 16px 14px }
+.card.is-sel { border-color: color-mix(in oklab, var(--acc) 55%, transparent) }
+.close { position: absolute; right: 10px; top: 10px; padding: 6px; border: 1px solid var(--line); border-radius: 3px; color: var(--muted) }
+.close:hover { color: var(--ink); border-color: var(--acc) }
+.kicker { margin: 0 0 4px; font-family: Oxanium, sans-serif; font-weight: 600; color: var(--acc); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding-right: 40px }
+.tag { display: inline-flex; gap: 4px; align-items: center; font-family: Barlow, sans-serif; font-size: 12px; font-weight: 600; color: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 1px 8px }
+.tag-warn { color: #ffd27a }
+.card h2 { margin: 0; font-family: Oxanium, sans-serif; font-size: 22px; line-height: 1.15; padding-right: 40px }
+.sub { margin: 4px 0 0; color: var(--muted); font-size: 14px }
+.link { color: var(--acc); text-decoration: underline; text-underline-offset: 3px; padding: 0 }
+.hero { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; margin: 14px 0 6px }
+.price { font-family: Oxanium, sans-serif; font-weight: 700; font-variant-numeric: tabular-nums }
+.price small { font-size: .45em; color: var(--muted); font-weight: 500 }
+.price-big { font-size: 38px; line-height: 1 }
+.hero-l { margin: 4px 0 0; font-size: 13px; color: var(--muted) }
+.hero-diff { margin: 0; text-align: right; font-family: Oxanium, sans-serif; font-weight: 700; font-size: 20px; display: grid }
+.hero-diff small { font-family: Barlow, sans-serif; font-weight: 500; font-size: 12px; color: var(--muted) }
+.card h3 { margin: 18px 0 8px; font-family: Oxanium, sans-serif; font-size: 14px; letter-spacing: .04em; color: var(--acc) }
+.note { color: var(--muted); font-size: 13.5px; line-height: 1.45; margin: 8px 0 0 }
+.facts { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 6px; font-size: 14.5px; line-height: 1.4 }
+.facts li { padding-left: 14px; position: relative }
+.facts li::before { content: ''; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; background: var(--acc) }
+.facts b { font-family: Oxanium, sans-serif }
+.rows { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px }
+.rows button { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 90px 52px; gap: 10px; align-items: center; padding: 6px 4px; text-align: left; border-radius: 2px }
+.rows button:not(:disabled):hover { background: rgba(255, 255, 255, .04) }
+.rows button:disabled { cursor: default }
+.row-name { min-width: 0; font-size: 14.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: grid }
+.row-name small { color: var(--muted); font-size: 12px; overflow: hidden; text-overflow: ellipsis }
+.row-bar { height: 6px; background: rgba(255, 255, 255, .06); border-radius: 3px; overflow: hidden }
+.row-bar i { display: block; height: 100%; border-radius: 3px }
+.rows b { font-family: Oxanium, sans-serif; font-variant-numeric: tabular-nums; text-align: right; font-size: 14px }
+.btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 9px 14px; border: 1px solid var(--acc); border-radius: 3px; color: var(--ink); text-decoration: none; font-weight: 600 }
+.btn:hover { background: color-mix(in oklab, var(--acc) 15%, transparent) }
+.spark svg { width: 100%; height: auto }
+.spark path { fill: none; stroke: var(--acc); stroke-width: 2 }
+.spark figcaption { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted) }
+.src { color: var(--muted); font-size: 12px; line-height: 1.5; padding: 4px 4px 12px }
+.peek { display: none }
+
+@media (max-width: 900px) {
+  .gas { display: block; height: auto; overflow: visible }
+  .top { position: relative; left: 0; right: 0; top: 0; padding: 14px 14px 10px; background: var(--bg) }
+  .brand h1 { font-size: 26px }
+  .fuels { flex-wrap: nowrap; overflow-x: auto; margin: 0 -14px; padding: 0 14px; scrollbar-width: none }
+  .fuels button { flex: none; min-width: 70px }
+  .stage { height: 64vh; min-height: 420px }
+  .legend { left: 12px; bottom: 12px; grid-template-columns: auto 70px auto }
+  .tools { right: 12px; bottom: auto; top: 12px }
+  .tools button span { display: none }
+  .mapa-hint { bottom: 52px }
+  .panel { border-left: 0; padding: 12px }
+  .panel .card.is-sel { display: none }
+  .peek { display: block; position: absolute; left: 8px; right: 8px; bottom: 8px; max-height: 58%; overflow-y: auto; z-index: 4; background: var(--panel); border: 1px solid color-mix(in oklab, var(--acc) 55%, transparent); border-radius: 6px; padding: 14px; box-shadow: 0 -10px 30px rgba(0, 0, 0, .5) }
+  .price-big { font-size: 32px }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important } }

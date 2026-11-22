@@ -117,7 +117,7 @@ export default function App() {
 
       <header className="hud-top">
         <div className="brand">
-          <a className="home-link" href="../">España en datos</a>
+          <a className="home-link" href="../index.html">España en datos</a>
           <h1>Caudal</h1>
           <p>Red hidrológica de España · {fechaLarga}</p>
         </div>

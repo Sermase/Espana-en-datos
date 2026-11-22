@@ -144,7 +144,12 @@ try {
   const lam = (() => { try { return JSON.parse(readFileSync(LAM, 'utf8')) } catch { return {} } })()
   const missing = reservoirs.filter(r => !lam[r.id])
   if (missing.length) {
-    const feats = await arcgis('L%C3%A1minas_Embalses', { outFields: 'OBJECTID', maxAllowableOffset: '0.0015', geometryPrecision: '4' }, 'Láminas')
+    // El servicio rechaza algunas combinaciones de parámetros: se prueban de más ligera a más básica.
+    let feats = null, lastErr = null
+    for (const extra of [{ outFields: '*', maxAllowableOffset: '0.0015' }, { outFields: '*', resultRecordCount: '500' }, { outFields: '*', where: '1=1', resultOffset: undefined }]) {
+      try { feats = await arcgis('L%C3%A1minas_Embalses', Object.fromEntries(Object.entries(extra).filter(([, v]) => v !== undefined)), 'Láminas'); break } catch (e) { lastErr = e; console.warn('Láminas, otro intento:', e.message) }
+    }
+    if (!feats) throw lastErr
     const inRing = (x, y, ring) => { let c = false; for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) { const [xi, yi] = ring[i], [xj, yj] = ring[j]; if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) c = !c } return c }
     const shapes = feats.filter(f => f.geometry?.rings?.length).map(f => {
       const pts = f.geometry.rings.flat()

@@ -20,6 +20,21 @@ function Mini({ t }: { t: Tema }) {
       </svg>
     )
   }
+  if (t.id === 'gasolineras') {
+    const g = (resumen as { gasolineras?: { g95: number; dsl: number } }).gasolineras
+    return (
+      <svg viewBox="0 0 120 80" className="mini" aria-hidden>
+        {Array.from({ length: 28 }, (_, i) => <circle key={i} cx={8 + (i % 7) * 17} cy={10 + Math.floor(i / 7) * 9} r="3" fill={i % 5 === 0 ? '#3df5b0' : i % 3 === 0 ? c : '#c9b7bd'} opacity={.4 + (i % 4) * .15} />)}
+        {g && <text x="60" y="74" textAnchor="middle" className="mini-big" style={{ fontSize: 20 }}>{g.g95.toLocaleString('es-ES', { minimumFractionDigits: 3 })}<tspan className="mini-unit"> €/l</tspan></text>}
+      </svg>
+    )
+  }
+  if (t.id === 'trenes') return (
+    <svg viewBox="0 0 120 80" className="mini" aria-hidden>
+      <path d="M4 60 L40 40 L70 44 L116 14 M40 40 L52 76 M70 44 L104 70" fill="none" stroke={c} strokeOpacity=".35" strokeWidth="2" />
+      {[0, 1, 2].map(i => <motion.circle key={i} r="3.5" fill={c} initial={{ offsetDistance: '0%' }} animate={{ offsetDistance: '100%' }} transition={{ duration: 5 + i * 2, repeat: Infinity, ease: 'linear', delay: i }} style={{ offsetPath: `path('${['M4 60 L40 40 L70 44 L116 14', 'M40 40 L52 76', 'M70 44 L104 70'][i]}')` }} />)}
+    </svg>
+  )
   if (t.vista === 'pirámide') return (
     <svg viewBox="0 0 120 80" className="mini" aria-hidden>{[30, 38, 44, 46, 44, 40, 34, 26, 16, 8].map((w, i) => (
       <g key={i}><rect x={60 - w} y={6 + i * 7} width={w - 1} height="5" fill={c} opacity=".55" /><rect x={61} y={6 + i * 7} width={w + (i > 6 ? 4 : 0)} height="5" fill={c} opacity=".85" /></g>))}</svg>
@@ -62,12 +77,12 @@ export default function Portada() {
           const abierto = !!t.ruta
           const Card = abierto ? motion.a : motion.div
           return (
-            <li key={t.id} className={abierto ? 'es-abierto' : ''} style={{ '--c': t.color } as React.CSSProperties}>
+            <li key={t.id} className={`${abierto ? 'es-abierto' : ''} ${i === 0 ? 'es-grande' : ''}`} style={{ '--c': t.color } as React.CSSProperties}>
               <Card href={t.ruta} className="tema" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .15 + i * .09, duration: .5 }}>
                 <div className="tema-txt">
                   <h2>{t.nombre}{abierto && <ArrowUpRight size={20} />}</h2>
                   <p>{t.lema}</p>
-                  <small>{abierto ? <><i className="vivo" /> Datos del {fecha}</> : 'En preparación'} · {VISTA[t.vista]}</small>
+                  <small>{abierto ? <><i className="vivo" /> {t.id === 'agua' ? `Datos del ${fecha}` : 'Datos de hoy'}</> : 'En preparación'} · {VISTA[t.vista]}</small>
                 </div>
                 <Mini t={t} />
               </Card>

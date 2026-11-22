@@ -14,7 +14,9 @@ export type Tema = {
 }
 
 export const TEMAS: Tema[] = [
-  { id: 'agua', nombre: 'Agua', lema: 'Embalses, ríos, lluvia y energía hidroeléctrica, semana a semana.', color: '#3fe6ff', vista: 'mapa', ruta: './agua/' },
+  { id: 'agua', nombre: 'Agua', lema: 'Embalses, ríos, lluvia y energía hidroeléctrica, semana a semana.', color: '#3fe6ff', vista: 'mapa', ruta: './agua/index.html' },
+  { id: 'gasolineras', nombre: 'Gasolineras', lema: 'El precio de hoy en las 12.000 gasolineras: la más barata cerca de ti, por provincia y por marca.', color: '#ff5f7e', vista: 'mapa', ruta: './gasolineras/index.html' },
+  { id: 'trenes', nombre: 'Trenes', lema: 'Todos los trenes de Renfe moviéndose por el mapa, con sus horarios y retrasos.', color: '#8fb4ff', vista: 'mapa' },
   { id: 'energia', nombre: 'Energía', lema: 'De dónde sale la electricidad que gastamos y cuánto cuesta cada hora.', color: '#ffb02e', vista: 'consola' },
   { id: 'economia', nombre: 'Economía', lema: 'PIB, paro, precios y salarios, comunidad por comunidad.', color: '#3df5b0', vista: 'consola' },
   { id: 'poblacion', nombre: 'Población', lema: 'Cuántos somos, dónde vivimos y cómo envejecemos.', color: '#c49bff', vista: 'pirámide' },

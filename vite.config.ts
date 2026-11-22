@@ -9,6 +9,6 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
     chunkSizeWarningLimit: 900,
-    rollupOptions: { input: { portada: resolve(__dirname, 'index.html'), agua: resolve(__dirname, 'agua/index.html') } },
+    rollupOptions: { input: { portada: resolve(__dirname, 'index.html'), agua: resolve(__dirname, 'agua/index.html'), gasolineras: resolve(__dirname, 'gasolineras/index.html') } },
   },
 })
