@@ -1,6 +1,7 @@
 // Comprueba fuentes candidatas para temas futuros y guarda qué responde en fuentes/sondas.json.
 // No falla nunca: es solo un informe.
 import { writeFileSync } from 'node:fs'
+import { execSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 
 const URLS = {
@@ -22,6 +23,20 @@ for (const [k, u] of Object.entries(URLS)) {
       muestra: /json|text/.test(r.headers.get('content-type') ?? '') ? buf.toString('utf8', 0, 600) : null,
     }
   } catch (e) { out.fuentes[k] = { url: u, error: String(e.message ?? e) } }
+}
+// Qué traen los GTFS de Renfe: ficheros y primeras líneas, para planear el tema Trenes.
+out.gtfs = {}
+for (const k of ['renfe_gtfs_av_ld_md', 'renfe_gtfs_cercanias']) {
+  try {
+    const f = `/tmp/${k}.zip`
+    writeFileSync(f, Buffer.from(await (await fetch(URLS[k])).arrayBuffer()))
+    const list = execSync(`unzip -l ${f}`).toString()
+    const head = {}
+    for (const t of ['agency.txt', 'routes.txt', 'trips.txt', 'stops.txt', 'stop_times.txt', 'shapes.txt', 'calendar.txt', 'calendar_dates.txt']) {
+      try { head[t] = execSync(`unzip -p ${f} ${t} | head -4; echo "líneas: $(unzip -p ${f} ${t} | wc -l)"`, { shell: '/bin/bash' }).toString() } catch { head[t] = null }
+    }
+    out.gtfs[k] = { list, head }
+  } catch (e) { out.gtfs[k] = { error: String(e.message ?? e) } }
 }
 writeFileSync(fileURLToPath(new URL('../fuentes/sondas.json', import.meta.url)), JSON.stringify(out, null, 1))
 console.log(Object.entries(out.fuentes).map(([k, v]) => `${k}: ${v.status ?? v.error} ${v.bytes ?? ''} cors=${v.cors ?? '-'}`).join('\n'))

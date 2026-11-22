@@ -33,7 +33,7 @@ a { color: inherit }
 .provs path[data-prov] { stroke: #03090f; stroke-width: calc(1px / var(--k, 1)); transition: fill .4s, opacity .4s; cursor: pointer }
 .provs path[data-prov]:hover { filter: brightness(1.25) }
 .provs path.is-sel { stroke: #fff; stroke-width: calc(2px / var(--k, 1)) }
-.provs.is-faded path[data-prov] { opacity: .35 }
+.provs.is-faded path[data-prov] { opacity: .16 }
 .canarias-box { fill: none; stroke: var(--line); stroke-width: calc(1px / var(--k, 1)) }
 .mapa-hint { position: absolute; left: 50%; bottom: 84px; transform: translateX(-50%); margin: 0; font-size: 13px; color: var(--muted); pointer-events: none }
 

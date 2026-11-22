@@ -23,9 +23,13 @@ export type Historia = { dias: { d: string; es: Record<Fuel, number | null>; p: 
 
 export type Datos = { hoy: Hoy; st: Station[]; byId: Map<number, Station>; hist: Historia | null }
 
+/** «Palmas (Las)» → «Las Palmas», como se escribe normalmente. */
+export const nice = (n: string) => n.replace(/^(.*?) \((.+)\)$/, (_, a, b) => `${b}${/'$/.test(b) ? '' : ' '}${a}`)
+
 function unpack(h: Hoy): Station[] {
+  for (const p of Object.values(h.provincias)) p.n = nice(p.n)
   return h.rows.map(r => ({
-    id: r[0] as number, lat: r[1] as number, lon: r[2] as number, marca: h.marcas[r[3] as number], mun: r[4] as string, prov: r[5] as string,
+    id: r[0] as number, lat: r[1] as number, lon: r[2] as number, marca: h.marcas[r[3] as number], mun: nice(r[4] as string), prov: r[5] as string,
     p: Object.fromEntries(h.fuels.map((f, i) => [f, r[6 + i] as number | null])) as Record<Fuel, number | null>,
     h24: r[6 + h.fuels.length] === 1, dir: r[7 + h.fuels.length] as string, restr: r[8 + h.fuels.length] === 1,
   }))
