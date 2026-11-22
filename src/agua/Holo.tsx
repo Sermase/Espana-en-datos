@@ -37,11 +37,16 @@ export const Holo = memo(function Holo({ r, shape, dam, ctx, size, x, y }: {
       const far = Math.max(...pts.map(([a, b]) => Math.hypot(a - cx, b - cy)), 1e-6)
       const k = (R * 0.8) / far
       tx = ([a, b]: XY): XY => [R + (a - cx) * k, R + (b - cy) * k]
+      // Orilla aligerada y redondeada (Chaikin): la forma se reconoce sin dientes de sierra.
+      const smooth = (rg: XY[]) => rg.flatMap((p, i) => {
+        const q = rg[(i + 1) % rg.length]
+        return [[p[0] * .75 + q[0] * .25, p[1] * .75 + q[1] * .25], [p[0] * .25 + q[0] * .75, p[1] * .25 + q[1] * .75]] as XY[]
+      })
       rings = shape.map(ring => {
         const out: XY[] = []
-        for (const q of ring.map(tx)) { const l = out[out.length - 1]; if (!l || Math.hypot(q[0] - l[0], q[1] - l[1]) > S / 70) out.push(q) }
+        for (const q of ring.map(tx)) { const l = out[out.length - 1]; if (!l || Math.hypot(q[0] - l[0], q[1] - l[1]) > S / 55) out.push(q) }
         return out
-      }).filter(rg => rg.length > 2)
+      }).filter(rg => rg.length > 2).map(rg => smooth(smooth(rg)))
       damPt = dam ? tx(dam) : rings[0][0]
       const dd = Math.hypot(damPt[0] - R, damPt[1] - R)
       if (dd > R * 0.86) damPt = [R + (damPt[0] - R) * (R * 0.86 / dd), R + (damPt[1] - R) * (R * 0.86 / dd)]
@@ -115,18 +120,18 @@ export const Holo = memo(function Holo({ r, shape, dam, ctx, size, x, y }: {
         <Shape cls="holo-bed" z={0} />
         {Array.from({ length: N }, (_, i) => <Shape key={i} cls={`holo-water ${i === N - 1 ? 'is-top' : ''}`} z={(hw * (i + 1)) / N} i={i} />)}
         <Shape cls="holo-cap" z={Hmax} />
-        {lastYear != null && <Shape cls="holo-ghost" z={Hmax * Math.max(0.04, Math.min(1, lastYear / 100))} />}
         <div className="holo-dam" style={{ left: geo.damPt[0] - damW / 2, top: geo.damPt[1] - Hmax * 1.08, width: damW, height: Hmax * 1.08, transform: `rotateZ(${geo.ang}deg) rotateX(-90deg)` }}>
           <i style={{ height: `${Math.min(100, p) * 0.92}%` }} />
+          {lastYear != null && <b className="dam-ly" style={{ bottom: `${Math.min(100, lastYear) * 0.92}%` }} />}
         </div>
         {hydro && [0, 90].map(a => (
-          <div key={a} className="holo-beam" style={{ left: geo.damPt[0] - 7, top: geo.damPt[1] - Hmax * 2.1, width: 14, height: Hmax * 2.1, transform: `rotateZ(${geo.ang + a}deg) rotateX(-90deg)` }} />
+          <div key={a} className="holo-beam" style={{ left: geo.damPt[0] - 4, top: geo.damPt[1] - Hmax * 1.9, width: 8, height: Hmax * 1.9, transform: `rotateZ(${geo.ang + a}deg) rotateX(-90deg)` }} />
         ))}
       </div>
       <div className="holo-tag" style={{ top: R + S * 0.27 }}>
         <strong>{r.n}</strong>
         <span>{fmtPct(p)} · {fmt(r.a)} de {fmt(r.c)} hm³{hydro ? ' · central' : ''}</span>
-        {lastYear != null && <em>hace un año: {fmtPct(lastYear)} <i className="ghost-key" /></em>}
+        {lastYear != null && <em><i className="ghost-key" /> hace un año: {fmtPct(lastYear)}</em>}
         {!shape && <em>forma aproximada</em>}
       </div>
     </div>

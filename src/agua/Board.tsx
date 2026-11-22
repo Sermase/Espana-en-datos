@@ -84,7 +84,7 @@ const Glyphs = memo(function Glyphs({ layer, filled, focusBasin, seen, hover }: 
     const v = layer === 'energia' ? ep : Math.min(p, 100)
     const st = layer === 'energia' ? 'volt' : status(p)
     return (
-      <g key={r.id} transform={`translate(${px} ${py})`} className={`node st-${st} ${focusBasin && r.b !== focusBasin ? 'is-dim' : ''}`}
+      <g key={r.id} transform={`translate(${px} ${py})`} data-res={r.id} className={`node st-${st} ${focusBasin && r.b !== focusBasin ? 'is-dim' : ''}`}
         onPointerMove={e => hover(e, r.n, layer === 'energia' ? `${fmt(r.e)} de ${fmt(r.ec)} GWh · ${fmtPct(ep)}` : `${fmtPct(p)} · ${fmt(r.a)} de ${fmt(r.c)} hm³`)}>
         <g className="gs">
           <circle r={s / 2} className="node-bg" />
@@ -420,6 +420,8 @@ export function Board({ layer, sel, onPick, seen, onDice }: {
         </svg>
       </motion.div>
 
+      {/* bajo el holograma sobra el icono plano del embalse */}
+      {holo && it?.k === 'res' && <style>{`.has-holo .node[data-res="${it.r.id}"]{opacity:0}`}</style>}
       {holo && it?.k === 'res' && (layer === 'agua' || layer === 'energia') && (
         <Holo key={it.r.id} r={it.r} shape={lam?.get(it.r.id)?.xy ?? null} dam={project(it.r.x, it.r.y)} ctx={RIVER_LINES} size={holoSize()} x={holo.x} y={holo.y} />
       )}
