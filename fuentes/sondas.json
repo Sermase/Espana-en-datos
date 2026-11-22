@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-22T23:34:50.863Z",
+ "fecha": "2026-11-22T23:41:29.413Z",
  "fuentes": {
   "renfe_gtfs_av_ld_md": {
    "url": "https://ssl.renfe.com/gtransit/Fichero_AV_LD/google_transit.zip",
@@ -20,15 +20,15 @@
   "renfe_rt_posiciones_json": {
    "url": "https://gtfsrt.renfe.com/vehicle_positions.json",
    "status": 200,
-   "bytes": 873,
+   "bytes": 85,
    "tipo": "application/json",
    "cors": null,
-   "muestra": "{\n  \"header\": {\n    \"gtfsRealtimeVersion\": \"2.0\",\n    \"timestamp\": \"1795390499\"\n  },\n  \"entity\": [{\n    \"id\": \"VP_C1-19807\",\n    \"vehicle\": {\n      \"trip\": {\n        \"tripId\": \"1026L19807C1\"\n      },\n      \"position\": {\n        \"latitude\": 40.4924,\n        \"longitude\": -3.593483\n      },\n      \"currentStatus\": \"STOPPED_AT\",\n      \"timestamp\": \"1795390499\",\n      \"stopId\": \"98305\",\n      \"vehicle\": {\n        \"id\": \"19807\",\n        \"label\": \"C1-19807-PLATF.(2)\"\n      }\n    }\n  }, {\n    \"id\": \"VP_C1-19945\",\n    \"vehicle\": {\n      \"trip\": {\n        \"tripId\": \"1026L19945C1\"\n      },\n      \"position"
+   "muestra": "{\n  \"header\": {\n    \"gtfsRealtimeVersion\": \"2.0\",\n    \"timestamp\": \"1795390899\"\n  }\n}"
   },
   "renfe_rt_posiciones_pb": {
    "url": "https://gtfsrt.renfe.com/vehicle_positions.pb",
    "status": 200,
-   "bytes": 191,
+   "bytes": 13,
    "tipo": "application/octet-stream",
    "cors": null,
    "muestra": null
@@ -36,18 +36,18 @@
   "renfe_rt_retrasos_json": {
    "url": "https://gtfsrt.renfe.com/trip_updates.json",
    "status": 200,
-   "bytes": 955,
+   "bytes": 85,
    "tipo": "application/json",
    "cors": null,
-   "muestra": "{\n  \"header\": {\n    \"gtfsRealtimeVersion\": \"2.0\",\n    \"timestamp\": \"1795390499\"\n  },\n  \"entity\": [{\n    \"id\": \"TUUPDATE_1026L19807C1\",\n    \"tripUpdate\": {\n      \"trip\": {\n        \"tripId\": \"1026L19807C1\",\n        \"scheduleRelationship\": \"SCHEDULED\"\n      },\n      \"stopTimeUpdate\": [{\n        \"arrival\": {\n          \"delay\": -21180,\n          \"time\": \"1795390440\"\n        },\n        \"stopId\": \"98304\"\n      }],\n      \"vehicle\": {\n        \"wheelchairAccessible\": \"WHEELCHAIR_INACCESSIBLE\"\n      },\n      \"delay\": -21180\n    }\n  }, {\n    \"id\": \"TUUPDATE_1026L19945C1\",\n    \"tripUpdate\": {\n      \"trip\":"
+   "muestra": "{\n  \"header\": {\n    \"gtfsRealtimeVersion\": \"2.0\",\n    \"timestamp\": \"1795390899\"\n  }\n}"
   },
   "renfe_ld_flota": {
    "url": "https://tiempo-real.largorecorrido.renfe.com/renfe-visor/flotaLD.json",
    "status": 200,
-   "bytes": 619,
+   "bytes": 56,
    "tipo": "application/json",
    "cors": null,
-   "muestra": "{\"fechaActualizacion\":\"2026-11-23T00:35:04\",\"trenes\":[{\"codComercial\":\"18065\",\"codEstAnt\":\"11213\",\"codEstSig\":\"11213\",\"horaLlegadaSigEst\":\"2026-11-23T00:27:00\",\"codProduct\":18,\"codOrigen\":\"11208\",\"codDestino\":\"11300\",\"accesible\":false,\"ultRetraso\":\"63\",\"latitud\":42.86924,\"longitud\":-2.3067968,\"time\":1795390504,\"p\":\"4\",\"mat\":\"449004\"},{\"codComercial\":\"17052\",\"codEstAnt\":\"78302\",\"codEstSig\":\"78400\",\"horaLlegadaSigEst\":\"2026-11-22T23:08:00\",\"codProduct\":18,\"codOrigen\":\"04040\",\"codDestino\":\"78400\",\"accesible\":false,\"ultRetraso\":\"0\",\"latitud\":41.730392,\"longitud\":0.44489872,\"time\":1795390504,\"p\":\"4"
+   "muestra": "{\"fechaActualizacion\":\"2026-11-23T00:41:34\",\"trenes\":[]}"
   }
  }
 }
