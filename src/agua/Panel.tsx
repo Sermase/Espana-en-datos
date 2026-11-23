@@ -2,9 +2,10 @@ import { riverLen, riverMouth, useRivers } from './rivers'
 import { useMemo, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { ArrowDown, ArrowUp, Search, Waves, X, Zap } from 'lucide-react'
-import { basinStats, consumo, data, energyTotals, fmt, fmtPct, hydroCount, pct, status } from './data'
+import { basinStats, consumo, data, depOrder, energyTotals, fmt, fmtPct, hydroCount, pct, status } from './data'
 import type { Layer } from './Board'
 import { byCapacity, resInBasin, type Sel } from './sel'
+import { Ciclo } from './Ciclo'
 import { Bar, CountUp, Head, HydroChart, Info, Ring, TimeChart } from './ui'
 import { byHydroYear, envelope, hydroLabel, hydroYear, toDate, useHistory, weekOf } from './history'
 
@@ -276,6 +277,7 @@ function FlowPanel({ onPick }: { onPick: Pick }) {
 function ConsPanel({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
   const N = consumo.national, max = consumo.regions[0].l
   const pool = byCapacity.find(r => r.c <= N.lossReal)
+  const fugas = consumo.regions.map((u, i) => ({ u, i })).filter(x => x.u.lossPct != null).sort((a, b) => (b.u.lossPct ?? 0) - (a.u.lossPct ?? 0))
   return (<>
     <section className="card">
       <h2>{N.l} litros por persona y día</h2>
@@ -301,8 +303,52 @@ function ConsPanel({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
       <ul className="facts">
         <li>Las fugas y roturas pierden <b>{fmt((N.lossReal / N.supplied) * 100, 1)} %</b> del agua que entra en la red{pool ? <>: más de lo que cabe en <button className="link" onClick={() => onPick({ k: 'res', id: pool.id })}>{pool.n}</button> ({fmt(pool.c)} hm³)</> : null}.</li>
         <li>Origen del agua: <b>{fmt(N.origin.sup, 1)} %</b> de ríos y embalses, <b>{fmt(N.origin.sub, 1)} %</b> de acuíferos y <b>{fmt(N.origin.otras, 1)} %</b> desalada.</li>
-        <li>Cada metro cúbico cuesta de media <b>{fmt(N.cost, 2)} €</b> entre abastecimiento y saneamiento. <Info k="coste" /></li>
+        {N.cost != null && <li>Cada metro cúbico cuesta de media <b>{fmt(N.cost, 2)} €</b> entre abastecimiento y saneamiento. <Info k="coste" /></li>}
       </ul>
+    </section>
+    {fugas.length > 0 && <section className="card">
+      <Head info="perdidas">Fugas por comunidad</Head>
+      <p className="lead">Parte del agua que entra en la red y se pierde por fugas y roturas, y cómo ha cambiado desde {consumo.prevYear}.</p>
+      <ul className="rank">{fugas.map(({ u, i }) => (
+        <li key={u.n}><button className={sel?.k === 'cons' && sel.i === i ? 'is-on' : ''} onClick={() => onPick({ k: 'cons', i })}>
+          <span className="rank-name">{u.n}{u.lossPctPrev != null && u.lossPct != null && Math.abs(u.lossPct - u.lossPctPrev) >= 0.5 && <small className={`flechita ${u.lossPct < u.lossPctPrev ? 'mejor' : 'peor'}`}> {u.lossPct < u.lossPctPrev ? <ArrowDown size={11} /> : <ArrowUp size={11} />}{fmt(Math.abs(u.lossPct - u.lossPctPrev), 1)}</small>}</span>
+          <Bar value={u.lossPct ?? 0} max={fugas[0].u.lossPct ?? 1} tone={(u.lossPct ?? 0) > (N.lossPct ?? 0) ? 'low' : 'water'} /><b>{fmt(u.lossPct ?? 0, 1)} %</b>
+        </button></li>
+      ))}</ul>
+      <p className="unit">% del agua suministrada a la red · flecha: puntos de cambio desde {consumo.prevYear}</p>
+    </section>}
+  </>)
+}
+
+function DepPanel({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
+  const N = consumo.national, lista = depOrder.map(i => ({ u: consumo.regions[i], i }))
+  const top = lista[0], max = top?.u.reusePct ?? 1
+  const vueltas = (N.sewerKm ?? 0) / 40075
+  return (<>
+    <section className="card">
+      <h2><CountUp value={N.reusePct ?? 0} decimals={1} /> % vuelve a usarse</h2>
+      <p className="lead">De cada 100 litros que depuran las EDAR españolas, {fmt(N.reusePct ?? 0, 0)} se reutilizan{N.reusePctPrev != null ? <> ({N.reusePct! >= N.reusePctPrev ? 'más' : 'menos'} que en {consumo.prevYear}: {fmt(N.reusePctPrev, 1)} %)</> : null}; el resto vuelve a ríos y mar. Año {consumo.year}, INE. <Info k="depuracion" /></p>
+      {N.dest && <Ciclo dest={N.dest} tratada={N.treated} km={N.sewerKm} titulo="Destino del agua depurada en España" />}
+    </section>
+    <section className="card">
+      <Head>¿Qué parte se reutiliza en mi comunidad?</Head>
+      <ul className="rank">{lista.map(({ u, i }) => (
+        <li key={u.n}><button className={sel?.k === 'dep' && sel.i === i ? 'is-on' : ''} onClick={() => onPick({ k: 'dep', i })}>
+          <span className="rank-name">{u.n}{u.reusePctPrev != null && u.reusePct != null && Math.abs(u.reusePct - u.reusePctPrev) >= 1 && <small className={`flechita ${u.reusePct > u.reusePctPrev ? 'mejor' : 'peor'}`}> {u.reusePct > u.reusePctPrev ? <ArrowUp size={11} /> : <ArrowDown size={11} />}{fmt(Math.abs(u.reusePct - u.reusePctPrev), 0)}</small>}</span>
+          <Bar value={u.reusePct ?? 0} max={max} tone={(u.reusePct ?? 0) >= (N.reusePct ?? 0) ? 'water' : 'ghost'} /><b>{fmt(u.reusePct ?? 0, (u.reusePct ?? 0) < 10 ? 1 : 0)} %</b>
+        </button></li>
+      ))}</ul>
+      <p className="unit">100 × agua reutilizada / agua tratada · {consumo.year} · flecha: puntos de cambio desde {consumo.prevYear}</p>
+    </section>
+    <section className="card">
+      <Head>Bajo la calle</Head>
+      <ul className="facts">
+        {N.treated ? <li>Las depuradoras tratan unos <b>{fmt(N.treated / 1e6, 1)} millones de m³</b> al día: {fmt(N.treated / 2500)} piscinas olímpicas diarias, contando la lluvia que recogen las alcantarillas.</li> : null}
+        {N.sewerKm ? <li>Hay <b>{fmt(N.sewerKm)} km</b> de alcantarillado: {fmt(vueltas, 1)} vueltas a la Tierra.</li> : null}
+        {N.sludge ? <li>Depurar deja <b>{fmt(N.sludge / 1e6, 2)} millones de toneladas</b> de lodos secos al año, que acaban sobre todo como abono, en incineración o en vertedero.</li> : null}
+        {N.usos && <li>El agua reutilizada riega campos (<b>{fmt(N.usos['Agricultura'] ?? 0, 0)} %</b>), jardines y zonas deportivas ({fmt(N.usos['Jardines y zonas deportivas de ocio'] ?? 0, 0)} %) y va a la industria ({fmt(N.usos['Industria'] ?? 0, 0)} %).</li>}
+      </ul>
+      <p className="note">El mapa de cada depuradora llegará en otra versión: el ministerio protege su descarga con un captcha.</p>
     </section>
   </>)
 }
@@ -346,6 +392,7 @@ export function Panel({ layer, onPick, sel, card }: { layer: Layer; onPick: Pick
           {layer === 'lluvia' && <RainPanel onPick={onPick} />}
           {layer === 'rios' && <FlowPanel onPick={onPick} />}
           {layer === 'consumo' && <ConsPanel onPick={onPick} sel={sel} />}
+          {layer === 'depuracion' && <DepPanel onPick={onPick} sel={sel} />}
           {layer === 'vertidos' && <DischargePanel onPick={onPick} />}
         </motion.div>
       </AnimatePresence>

@@ -10,7 +10,7 @@ import { resolve, type Sel } from './sel'
 import { Holo, RiverHolo } from './Holo'
 import { useRivers, type River } from './rivers'
 
-export type Layer = 'agua' | 'energia' | 'lluvia' | 'rios' | 'consumo' | 'vertidos'
+export type Layer = 'agua' | 'energia' | 'lluvia' | 'rios' | 'consumo' | 'depuracion' | 'vertidos'
 const W = 1000, H = 800
 
 type Tip = { x: number; y: number; title: string; line: string } | null
@@ -74,6 +74,14 @@ const consMin = Math.min(...consumo.regions.map(u => u.l)), consMax = Math.max(.
 function consColor(l: number) {
   const t = (l - consMin) / (consMax - consMin)
   const a = [18, 92, 104], b = [150, 70, 22]
+  return `rgb(${a.map((v, j) => Math.round(v + (b[j] - v) * t)).join(',')})`
+}
+
+const reuMax = Math.max(1, ...consumo.regions.map(u => u.reusePct ?? 0))
+/** Reutilización: de agua que se pierde (azul apagado) a agua que vuelve a usarse (verde menta brillante). */
+function reuColor(p: number) {
+  const t = Math.sqrt(Math.max(0, p) / reuMax)
+  const a = [20, 52, 74], b = [61, 245, 176]
   return `rgb(${a.map((v, j) => Math.round(v + (b[j] - v) * t)).join(',')})`
 }
 
@@ -180,11 +188,12 @@ const Ground = memo(function Ground({ layer, focusBasin, focusRegion, hover }: {
   return (<>
     <path d={SHAPES.land} className="land-side" transform="translate(0 9)" />
     <path d={SHAPES.land} className="land-side2" transform="translate(0 4)" />
-    {layer === 'consumo'
+    {layer === 'consumo' || layer === 'depuracion'
       ? SHAPES.regions.map(rg => {
         const u = consumo.regions[consIdx.get(rg.name) ?? -1]
-        return <path key={rg.name} d={rg.d} data-region={rg.name} className={`region ${focusRegion === rg.name ? 'is-focus' : focusRegion ? 'is-dim' : ''}`} style={{ fill: u ? consColor(u.l) : 'var(--land-neutral)' }}
-          onPointerMove={e => u && hover(e, rg.name, `${u.l} litros por habitante y día`)} />
+        const dep = layer === 'depuracion'
+        return <path key={rg.name} d={rg.d} data-region={rg.name} className={`region ${focusRegion === rg.name ? 'is-focus' : focusRegion ? 'is-dim' : ''}`} style={{ fill: !u ? 'var(--land-neutral)' : dep ? (u.reusePct != null ? reuColor(u.reusePct) : 'var(--land-neutral)') : consColor(u.l) }}
+          onPointerMove={e => u && hover(e, rg.name, dep ? (u.reusePct != null ? `Reutiliza el ${fmt(u.reusePct, 1)} % del agua que depura` : 'Sin dato') : `${u.l} litros por habitante y día`)} />
       })
       : SHAPES.basins.map(b => {
         const st = BASIN[b.id]
@@ -198,6 +207,10 @@ const Ground = memo(function Ground({ layer, focusBasin, focusRegion, hover }: {
       {SHAPES.rivers.map(r => <path key={'b' + r.o} d={r.d} className={`river-bed o${r.o}`} />)}
       {SHAPES.rivers.filter(r => r.o >= 6).map(r => <path key={r.o} d={r.d} className={`river o${r.o}`} />)}
     </g>
+    {layer === 'depuracion' && SHAPES.regions.map(rg => {
+      const u = consumo.regions[consIdx.get(rg.name) ?? -1]
+      return u && <g key={rg.name} className="reg-label" transform={`translate(${rg.c[0]} ${rg.c[1]})`}><g className="gs"><text className="reg-num">{u.reusePct != null ? `${fmt(u.reusePct, u.reusePct < 10 ? 1 : 0)} %` : 'Sin dato'}</text><text y={11} className="reg-unit">reutilizada</text></g></g>
+    })}
     {layer === 'consumo' && SHAPES.regions.map(rg => {
       const u = consumo.regions[consIdx.get(rg.name) ?? -1]
       return u && <g key={rg.name} className="reg-label" transform={`translate(${rg.c[0]} ${rg.c[1]})`}><g className="gs"><text className="reg-num">{u.l}</text><text y={11} className="reg-unit">l/hab/día</text></g></g>
@@ -301,7 +314,7 @@ export function Board({ layer, sel, onPick, seen, onDice }: {
       px = (x0 + x1) / 2; py = (y0 + y1) / 2
       holoAt.current = [px, py]
       kk = Math.min(12, Math.max(1, (holoSize() * 0.8) / (Math.hypot(x1 - x0, y1 - y0) * vbRef.current)))
-    } else if (it.k === 'basin' || it.k === 'cons') {
+    } else if (it.k === 'basin' || it.k === 'cons' || it.k === 'dep') {
       const b = it.k === 'basin' ? SHAPES.basins.find(x => x.id === it.b.id)?.bounds : SHAPES.regions.find(x => x.name === it.u.n)?.bounds
       if (!b) return
       const bw = b[1][0] - b[0][0], bh = b[1][1] - b[0][1]
@@ -368,6 +381,7 @@ export function Board({ layer, sel, onPick, seen, onDice }: {
       }
       if (rb) return onPick({ k: 'river', id: rb.id })
     }
+    if (layer === 'depuracion') { const n = t.closest?.('[data-region]')?.getAttribute('data-region'); const i = n ? consIdx.get(n) : undefined; return onPick(i != null ? { k: 'dep', i } : null) }
     if (layer === 'consumo') { const n = t.closest?.('[data-region]')?.getAttribute('data-region'); const i = n ? consIdx.get(n) : undefined; return onPick(i != null ? { k: 'cons', i } : null) }
     const basin = layer === 'agua' || layer === 'energia' ? t.closest?.('[data-basin]')?.getAttribute('data-basin') : null
     onPick(basin ? { k: 'basin', id: basin } : null)
@@ -380,7 +394,7 @@ export function Board({ layer, sel, onPick, seen, onDice }: {
 
   const it = resolve(sel)
   const focusBasin = it?.k === 'basin' ? it.b.id : null
-  const focusRegion = it?.k === 'cons' ? it.u.n : null
+  const focusRegion = it?.k === 'cons' || it?.k === 'dep' ? it.u.n : null
   const target = it && (it.k === 'res' || it.k === 'rain' || it.k === 'flow' || it.k === 'dis') ? (() => { const ll = it.k === 'res' ? it.r : it.k === 'rain' ? it.g : it.k === 'flow' ? it.f : it.d; return project(ll.x, ll.y) })() : null
   const selRiver = it?.k === 'river' ? rivProj?.find(x => x.v.id === it.v.id) ?? null : null
   // Coordenadas del holograma memorizadas: si cambiaran de identidad en cada render (p. ej. al mover el ratón

@@ -1,27 +1,28 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
-import { Activity, CloudRain, Droplets, Factory, House, Info as InfoIcon, X, Zap, ChevronUp, Trophy } from 'lucide-react'
+import { Activity, CloudRain, Droplets, Factory, House, Recycle, Info as InfoIcon, X, Zap, ChevronUp, Trophy } from 'lucide-react'
 import { Board, type Layer } from './Board'
 import { Panel } from './Panel'
 import { SelCard } from './SelCard'
-import { data, energyTotals, fechaLarga, fmt, fmtPct } from './data'
+import { consumo, data, energyTotals, fechaLarga, fmt, fmtPct } from './data'
 import { useRivers } from './rivers'
 import { fromKey, randomSel, sameSel, selKey, useCollection, type Milestone, type Sel } from './sel'
 import { CountUp, Info } from './ui'
 import { A } from '../Fuentes'
 
-const LAYERS: { id: Layer; label: string; icon: typeof Droplets }[] = [
+const LAYERS: { id: Layer; label: string; short?: string; icon: typeof Droplets }[] = [
   { id: 'agua', label: 'Agua', icon: Droplets },
   { id: 'energia', label: 'Energía', icon: Zap },
   { id: 'lluvia', label: 'Lluvia', icon: CloudRain },
   { id: 'rios', label: 'Ríos', icon: Activity },
-  { id: 'consumo', label: 'Consumo', icon: House },
+  { id: 'consumo', label: 'Abastecimiento', short: 'Grifo', icon: House },
+  { id: 'depuracion', label: 'Depuración', short: 'Depura', icon: Recycle },
   { id: 'vertidos', label: 'Vertidos', icon: Factory },
 ]
 
 const n = data.meta.national
 const wettest = [...data.rain].sort((a, b) => b.p - a.p)[0]
-const layerFor = (s: Sel, cur: Layer): Layer => s.k === 'river' ? (cur === 'energia' || cur === 'rios' ? cur : 'agua') : s.k === 'rain' ? 'lluvia' : s.k === 'dis' ? 'vertidos' : s.k === 'flow' ? 'rios' : s.k === 'cons' ? 'consumo' : cur === 'energia' ? 'energia' : 'agua'
+const layerFor = (s: Sel, cur: Layer): Layer => s.k === 'river' ? (cur === 'energia' || cur === 'rios' ? cur : 'agua') : s.k === 'rain' ? 'lluvia' : s.k === 'dis' ? 'vertidos' : s.k === 'flow' ? 'rios' : s.k === 'cons' ? 'consumo' : s.k === 'dep' ? 'depuracion' : cur === 'energia' ? 'energia' : 'agua'
 
 function useIsPhone() {
   const [phone, setPhone] = useState(() => matchMedia('(max-width: 980px)').matches)
@@ -160,7 +161,7 @@ export default function App() {
               const Icon = l.icon
               return (
                 <button key={l.id} className={`slot slot-${l.id} ${layer === l.id ? 'is-on' : ''}`} onClick={() => changeLayer(l.id)} aria-pressed={layer === l.id}>
-                  <kbd>{i + 1}</kbd><Icon size={19} aria-hidden /><span>{l.label}</span>
+                  <kbd>{i + 1}</kbd><Icon size={19} aria-hidden /><span className="l-largo">{l.label}</span>{l.short && <span className="l-corto" aria-hidden>{l.short}</span>}
                   {layer === l.id && <motion.i layoutId="slot-glow" className="slot-glow" transition={{ type: 'spring', stiffness: 400, damping: 32 }} />}
                 </button>
               )
@@ -182,7 +183,8 @@ export default function App() {
                 <li><b>Presas.</b> <A id="presas">Inventario de Presas y Embalses</A> del ministerio: río y altura desde cimientos, cuando consta.</li>
                 <li><b>Lluvia.</b> Precipitación semanal en {data.rain.length} observatorios principales de <A id="aemet">AEMET</A>, recogida en el boletín.</li>
                 <li><b>Ríos.</b> Caudal medio semanal en {data.flows.length} estaciones de aforo y salidas de embalse del boletín.</li>
-                <li><b>Consumo.</b> <A id="ine_agua">Estadística sobre el Suministro y Saneamiento del Agua</A> del INE, año 2024: consumo de los hogares por comunidad autónoma. No hay datos oficiales por municipio para toda España.</li>
+                <li><b>Abastecimiento.</b> <A id="ine_agua">Estadística sobre el Suministro y Saneamiento del Agua</A> del INE, año {consumo.year}: agua que entra en la red, la registrada, las pérdidas y el consumo de los hogares por comunidad autónoma. No hay datos oficiales por municipio para toda España.</li>
+                <li><b>Depuración.</b> La misma estadística del INE: agua residual tratada y reutilizada por comunidad, destino del agua depurada y kilómetros de alcantarillado. El mapa de depuradoras del ministerio llegará en otra versión.</li>
                 <li><b>Vertidos.</b> <A id="vertidos">Censo Nacional de Vertidos</A>: volumen anual autorizado, que no equivale al consumo.</li>
                 {data.hydro && <li><b>Producción hidráulica.</b> <A id="ree_generacion">REData de Red Eléctrica</A>.</li>}
                 <li><b>Equivalencias.</b> Piscina olímpica de 2.500 m³, bañera de 150 litros, hogar de unos 3.500 kWh al año: aproximaciones para hacerse una idea.</li>

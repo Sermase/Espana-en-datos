@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import { motion, type PanInfo } from 'motion/react'
-import { Activity, Bath, Building2, CalendarClock, ChevronLeft, House, ChevronRight, CloudRain, Droplets, Factory, Footprints, Map as MapIcon, Mountain, Ruler, Sparkles, Timer, Trophy, Waves, X, Zap } from 'lucide-react'
-import { basinStats, consumo, data, fmt, fmtBig, fmtPct, pct, status, type Reservoir } from './data'
+import { Activity, Bath, Building2, CalendarClock, ChevronLeft, House, ChevronRight, CloudRain, Droplets, Recycle, Factory, Footprints, Map as MapIcon, Mountain, Ruler, Sparkles, Timer, Trophy, Waves, X, Zap } from 'lucide-react'
+import { basinStats, consumo, data, depOrder, fmt, fmtBig, fmtPct, pct, status, type Reservoir } from './data'
 import { byCapacity, rankIn, resInBasin, resolve, sequence, sizeRank, type Sel } from './sel'
 import { Bar, CountUp, Head, HydroChart, Info, Ring, TimeChart } from './ui'
+import { Ciclo } from './Ciclo'
 import { riverLen, riverList, riverMouth, riverStats, type River } from './rivers'
 import { byHydroYear, envelope, fechaCorta, hydroLabel, hydroYear, near, toDate, useHistory, weekOf } from './history'
 
@@ -19,7 +20,8 @@ const KIND = {
   rain: { label: 'Pluviómetro', icon: CloudRain },
   dis: { label: 'Vertido', icon: Factory },
   flow: { label: 'Estación de aforo', icon: Activity },
-  cons: { label: 'Consumo doméstico', icon: House },
+  cons: { label: 'Abastecimiento', icon: House },
+  dep: { label: 'Depuración', icon: Recycle },
   river: { label: 'Río', icon: Waves },
 } as const
 
@@ -70,6 +72,7 @@ export function SelCard({ sel, onPick, isNew, compact, dir }: {
       {it.k === 'dis' && <DisBody i={it.i} />}
       {it.k === 'flow' && <FlowBody i={it.i} />}
       {it.k === 'cons' && <ConsBody i={it.i} />}
+      {it.k === 'dep' && <DepBody i={it.i} />}
       {it.k === 'river' && <RiverBody v={it.v} onPick={onPick} />}
       <nav className="sel-nav" aria-label="Recorrer">
         <button onClick={() => go(-1)} aria-label="Anterior"><ChevronLeft size={19} /></button>
@@ -311,8 +314,8 @@ function ConsBody({ i }: { i: number }) {
       <div className="stat-grid">
         <Stat label="Puesto">{i + 1}º <small>de {consumo.regions.length}</small></Stat>
         <Stat label="Vs. España" tone={u.l > N.l ? 'down' : 'up'}>{signed(u.l - N.l)} <small>litros</small></Stat>
-        <Stat label="En dos años" tone={u.v > 0 ? 'down' : 'up'}>{signed(u.v, 1)} <small>%</small></Stat>
-        <Stat label="Coste" info="coste">{fmt(u.cost, 2)} <small>€/m³</small></Stat>
+        {u.v != null && <Stat label="En dos años" tone={u.v > 0 ? 'down' : 'up'}>{signed(u.v, 1)} <small>%</small></Stat>}
+        {u.cost != null && <Stat label="Coste" info="coste">{fmt(u.cost, 2)} <small>€/m³</small></Stat>}
       </div>
     </div>
     <ul className="vs">
@@ -320,8 +323,42 @@ function ConsBody({ i }: { i: number }) {
       <li><span>Media de España</span><Bar value={N.l} max={max} tone="ghost" /><b>{N.l}</b></li>
     </ul>
     <Fun icon={Bath}>Una familia de cuatro gasta unos <b>{fmt(u.l * 4)}</b> litros al día en casa: {fmt((u.l * 4) / 150, 1)} bañeras llenas.</Fun>
-    <Fun icon={Waves}>Cada habitante usa unos <b>{fmt(yearM3)} m³</b> al año; al coste medio de la comunidad son unos <b>{fmt(yearM3 * u.cost)} €</b> por persona entre abastecimiento y saneamiento.</Fun>
+    {u.supplied ? <>
+      <h3 className="sel-h">De la red al contador <Info k="abastecimiento" /></h3>
+      <ul className="vs">
+        <li><span>Entra en la red</span><Bar value={u.supplied} max={u.supplied} /><b>{fmt(u.supplied, 1)}</b></li>
+        <li><span>Registrada</span><Bar value={u.registered ?? 0} max={u.supplied} tone="ghost" /><b>{fmt(u.registered ?? 0, 1)}</b></li>
+        <li><span>Fugas y roturas</span><Bar value={u.lossReal ?? 0} max={u.supplied} tone="low" /><b>{fmt(u.lossReal ?? 0, 1)}</b></li>
+        <li><span>Errores y fraudes</span><Bar value={u.lossApparent ?? 0} max={u.supplied} tone="ghost" /><b>{fmt(u.lossApparent ?? 0, 1)}</b></li>
+      </ul>
+      <p className="unit">hm³ al año · {consumo.year}</p>
+      {u.lossPct != null && <Fun icon={Droplets} tone={u.lossPctPrev != null && u.lossPct > u.lossPctPrev ? 'warn' : ''}>Por fugas y roturas se pierde el <b>{fmt(u.lossPct, 1)} %</b> del agua que entra en la red{u.lossPctPrev != null ? <> ({u.lossPct > u.lossPctPrev ? 'más' : u.lossPct < u.lossPctPrev ? 'menos' : 'lo mismo'} que en {consumo.prevYear}, cuando era el {fmt(u.lossPctPrev, 1)} %)</> : null}; en España, el {fmt(N.lossPct ?? 0, 1)} %.</Fun>}
+    </> : null}
+    {u.cost != null && <Fun icon={Waves}>Cada habitante usa unos <b>{fmt(yearM3)} m³</b> al año en casa; al coste medio de la comunidad son unos <b>{fmt(yearM3 * u.cost)} €</b> por persona entre abastecimiento y saneamiento.</Fun>}
     <p className="note">El INE publica este dato por comunidad autónoma. No hay una estadística oficial por municipio para toda España.</p>
+  </>)
+}
+
+function DepBody({ i }: { i: number }) {
+  const u = consumo.regions[i], N = consumo.national
+  const pos = depOrder.indexOf(i) + 1
+  const dia = (u.treated ?? 0), piscinas = dia / POOL
+  return (<>
+    <h2 className="sel-name">{u.n}</h2>
+    <p className="sel-sub">Depuración · año {consumo.year} · INE <Info k="depuracion" /></p>
+    <div className="sel-hero">
+      <Ring p={u.reusePct ?? 0} shown={u.reusePct ?? 0} unit="%" tone="water" label={`Reutiliza el ${fmt(u.reusePct ?? 0, 1)} % del agua que depura`} />
+      <div className="stat-grid">
+        <Stat label="Puesto">{pos}º <small>de {depOrder.length}</small></Stat>
+        {u.reusePct != null && N.reusePct != null && <Stat label="Vs. España" tone={u.reusePct >= N.reusePct ? 'up' : 'down'}>{signed(u.reusePct - N.reusePct, 1)} <small>puntos</small></Stat>}
+        {u.reusePctPrev != null && u.reusePct != null && <Stat label={`Desde ${consumo.prevYear}`} tone={u.reusePct >= u.reusePctPrev ? 'up' : 'down'}>{signed(u.reusePct - u.reusePctPrev, 1)} <small>puntos</small></Stat>}
+        {u.sewerKm ? <Stat label="Alcantarillado">{fmt(u.sewerKm)} <small>km</small></Stat> : null}
+      </div>
+    </div>
+    {u.dest && <Ciclo dest={u.dest} tratada={u.treated} km={u.sewerKm} titulo={`Destino del agua depurada en ${u.n}`} />}
+    {dia > 0 && <Fun icon={Waves}>Sus depuradoras tratan unos <b>{fmt(dia)} m³</b> al día: {fmt(piscinas)} piscinas olímpicas. {u.reused ? <>Vuelven a usarse <b>{fmt(u.reused)} m³</b> diarios.</> : null}</Fun>}
+    {u.usos && Object.values(u.usos).some(v => (v ?? 0) > 0) && <Fun icon={Recycle}>El agua reutilizada va sobre todo a <b>{(() => { const [k, v] = Object.entries(u.usos!).sort((a, b) => (b[1] ?? 0) - (a[1] ?? 0))[0]; return `${k.toLowerCase()} (${fmt(v ?? 0, 0)} %)` })()}</b>.</Fun>}
+    <p className="note">Volúmenes del INE en metros cúbicos al día. El reparto por destinos sale de otra tabla del INE y su «reutilizada» no coincide exactamente con el porcentaje de arriba.</p>
   </>)
 }
 
