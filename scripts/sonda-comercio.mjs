@@ -54,5 +54,9 @@ await prueba('world-atlas', 'https://cdn.jsdelivr.net/npm/world-atlas@2/countrie
 const ARC = 'https://services-eu1.arcgis.com/RvnYk1PBUJ9rrAuT/arcgis/rest/services'
 await prueba('presas:campos', `${ARC}/UP_Presas_y_embalses/FeatureServer/0?f=json`, t => { try { return JSON.parse(t).fields.map(f => f.name + ':' + (f.alias ?? '')).join(' | ') } catch { return t.slice(0, 300) } })
 await prueba('presas:ejemplo', `${ARC}/UP_Presas_y_embalses/FeatureServer/0/query?where=NOMBRE%20LIKE%20%27%25ALCANTARA%25%27&outFields=*&returnGeometry=false&f=json`, t => { try { return JSON.stringify(JSON.parse(t).features?.slice(0, 2).map(f => f.attributes)) } catch { return t.slice(0, 300) } })
+// Subvenciones: BDNS / Infosubvenciones
+const BD = 'https://www.infosubvenciones.es/bdnstrans/api'
+for (const u of [`${BD}/convocatorias/ultimas?vpd=GE&page=0&pageSize=3`, `${BD}/concesiones/busqueda?vpd=GE&page=0&pageSize=3`, `${BD}/organos?vpd=GE&idAdmon=C`, `${BD}/convocatorias/busqueda?vpd=GE&page=0&pageSize=3&order=fechaRecepcion&direccion=desc`, `${BD}/actividades?vpd=GE`, `${BD}/grandesbeneficiarios/busqueda?vpd=GE&page=0&pageSize=3`])
+  await prueba('bdns:' + u.split('/api/')[1].split('?')[0], u, t => t.slice(0, 700))
 writeFileSync(here('../fuentes/sonda-comercio.json'), JSON.stringify(out, null, 1))
 console.log('Sonda comercio:', Object.entries(out).map(([k, v]) => k + ' ' + (v.status ?? 'ERR')).join(' · '))
