@@ -4,7 +4,7 @@ import { Gauge, Home, KeyRound, Landmark, Search, TrendingUp } from 'lucide-reac
 import { Apiladas, Barras, CountUp, LineChart, nf } from '../graficos'
 import { Holo3D } from '../holo3d/Holo3D'
 import { edificio } from '../holo3d/modelos'
-import { MapaProvincias } from '../geo/MapaProvincias'
+import { ESCALA_CALOR, MapaProvincias, colorEscala } from '../geo/MapaProvincias'
 import { ccaaCorta, codigoProvincia } from '../geo/provincias'
 import { CCAA_DE_PROV } from '../poblacion/geo'
 import { Fuentes } from '../Fuentes'
@@ -90,15 +90,17 @@ function Precios({ d }: { d: Datos }) {
   const ult = e?.ga?.at(-1)
   const max07 = e?.gi ? e.gi.filter(x => x[0] < '2009').reduce((m, x) => (x[1] > m[1] ? x : m), e.gi[0]) : null
   const gi = e?.gi?.at(-1)
+  // ¿Qué año vale 100? Se calcula del propio dato (el INE cambia de base: 2015, 2025…)
+  const base = (() => { const m = new Map<string, number[]>(); for (const [p, v] of e?.gi ?? []) m.set(p.slice(0, 4), [...(m.get(p.slice(0, 4)) ?? []), v]); return [...m].map(([y, vs]) => [y, Math.abs(vs.reduce((a, b) => a + b, 0) / vs.length - 100)] as const).sort((a, b) => a[1] - b[1])[0]?.[0] })()
   return <div className="graficos">
-    <Card t="¿Cuánto sube la vivienda?" wide lead={<>{ult && <>En el {per(ult[0])} el precio subía un <b>{pct(ult[1])}</b> en un año. </>}{max07 && gi && <>El índice está en {nf(gi[1], 0)}, {gi[1] > max07[1] ? <>ya por encima del máximo de la burbuja ({nf(max07[1], 0)} en {per(max07[0])})</> : <>todavía por debajo del máximo de la burbuja ({nf(max07[1], 0)} en {per(max07[0])})</>}. 2015 = 100.</>}</>} fuente={<>{ineUrl(d.tablas.ipv)} · índice de precios de vivienda</>}>
+    <Card t="¿Cuánto sube la vivienda?" wide lead={<>{ult && <>En el {per(ult[0])} el precio subía un <b>{pct(ult[1])}</b> en un año. </>}{max07 && gi && <>El índice está en {nf(gi[1], 0)}, {gi[1] > max07[1] ? <>ya por encima del máximo de la burbuja ({nf(max07[1], 0)} en {per(max07[0])})</> : <>todavía por debajo del máximo de la burbuja ({nf(max07[1], 0)} en {per(max07[0])})</>}. {(() => { const y15 = e?.gi?.filter(x => x[0].startsWith('2015')); const v15 = y15?.length ? y15.reduce((a, b) => a + b[1], 0) / y15.length : null; return <> Cómo leerlo: {base} vale 100{v15 && base !== '2015' ? <>, y 2015 vale {nf(v15, 0)}: una casa que en {base} costaba 100.000 € costaba unos {nf(v15 * 1000, 0)} € en 2015</> : ''}.</> })()}</>}</>} fuente={<>{ineUrl(d.tablas.ipv)} · índice de precios de vivienda, base {base} = 100</>}>
       <LineChart titulo="Índice de precios de vivienda" series={[{ id: 'g', nombre: 'General', datos: pts(e?.gi), color: ACC, area: true }, { id: 'n', nombre: 'Nueva', datos: pts(e?.ni), color: NUEVA }, { id: 'u', nombre: 'Segunda mano', datos: pts(e?.ui), color: USADA }]} fx={t => per(new Date(t).toISOString().slice(0, 7).replace(/-(\d\d)$/, (_, m) => `-T${Math.ceil(+m / 3)}`))} fxEje={anio} fy={v => nf(v, 0)} />
     </Card>
     <Card t="Por comunidades" lead={<>Variación anual del precio. Donde más sube: <b>{ccaa[0]?.n}</b> ({pct(ccaa[0]?.a ?? 0)}); donde menos, {ccaa.at(-1)?.n} ({pct(ccaa.at(-1)?.a ?? 0)}). Toca el mapa.</>}>
-      <MapaProvincias valor={c => porCcaa.get(CCAA_DE_PROV[c] ?? '') ?? null} fmt={v => pct(v)} titulo="Subida del precio de la vivienda por comunidad" color={ACC} sel={sel} onSel={setSel} nota="El INE da el índice por comunidad: todas las provincias de una comunidad llevan su valor." />
+      <MapaProvincias grupo={c => CCAA_DE_PROV[c] ?? null} claveGrupo="ccaa" valor={r => porCcaa.get(r) ?? null} fmt={v => pct(v)} titulo="Subida del precio de la vivienda por comunidad" color={ACC} escala={ESCALA_CALOR} sel={sel} onSel={setSel} nota="Cuanto más sube, más oscuro y rojo. El INE da este dato por comunidad, no por provincia." />
     </Card>
     <Card t="Ranking">
-      <Barras titulo="Subida anual del precio por comunidad" fmt={v => pct(v)} limite={19} items={ccaa.map(x => ({ id: x.k, nombre: x.n, valor: x.a!, color: ACC, destacado: sel != null && CCAA_DE_PROV[sel] === x.n }))} />
+      <Barras titulo="Subida anual del precio por comunidad" fmt={v => pct(v)} limite={19} items={ccaa.map(x => ({ id: x.k, nombre: x.n, valor: x.a!, color: colorEscala(ESCALA_CALOR, (x.a! - ccaa.at(-1)!.a!) / ((ccaa[0].a! - ccaa.at(-1)!.a!) || 1)), destacado: sel === x.n, onClick: () => setSel(x.n) }))} />
     </Card>
   </div>
 }
@@ -145,7 +147,7 @@ function Hipotecas({ d, euribor }: { d: Datos; euribor: Ser | null }) {
       <LineChart titulo="Euríbor a 12 meses" series={[{ id: 'e', nombre: 'Euríbor', datos: pts(euribor), color: ACC, area: true }]} fx={t => per(new Date(t).toISOString().slice(0, 7))} fxEje={anio} fy={v => `${nf(v, 1)} %`} alto={180} />
     </Card>}
     <Card t="Hipoteca media por provincia" wide lead={rk[0] && <>Últimos 12 meses. La más alta, <b>{nombre(rk[0].c)}</b> ({eur(rk[0].v!)}); la más baja, {nombre(rk.at(-1)!.c)} ({eur(rk.at(-1)!.v!)}).</>}>
-      <MapaProvincias valor={media} fmt={eur} titulo="Importe medio de la hipoteca por provincia" color={ACC} sel={sel} onSel={setSel} />
+      <MapaProvincias valor={media} fmt={eur} titulo="Importe medio de la hipoteca por provincia" color={ACC} escala={ESCALA_CALOR} sel={sel} onSel={setSel} nota="Cuanto más alta la hipoteca, más oscuro y rojo." />
       <Barras titulo="Ranking de hipoteca media" fmt={eur} limite={10} items={rk.map(x => ({ id: x.c, nombre: nombre(x.c), valor: x.v!, color: ACC, destacado: x.c === sel, onClick: () => setSel(x.c) }))} />
     </Card>
   </div>
@@ -214,7 +216,7 @@ export default function App() {
         cv.nueva && <>De cada 10 casas que se venden, {nf((suma12(cv.nueva) / suma12(cv.total)) * 10, 0)} son nuevas: el resto, de segunda mano.</>,
       ]} />}
       <Fuentes ids={[]} extra={[{ n: 'INE · Índice de precios de vivienda', u: `https://www.ine.es/jaxiT3/Tabla.htm?t=${d.tablas.ipv}` }, { n: 'INE · Transmisiones de derechos de la propiedad', u: `https://www.ine.es/jaxiT3/Tabla.htm?t=${d.tablas.compraventas}` }, { n: 'INE · Hipotecas', u: `https://www.ine.es/jaxiT3/Tabla.htm?t=${d.tablas.hipotecas}` }, { n: 'INE · Índice de alquiler', u: `https://www.ine.es/jaxiT3/Tabla.htm?t=${d.tablas.alquiler}` }]} />
-      <p className="src">Datos del INE descargados cada semana. El precio es un índice (2015 = 100), no euros por metro cuadrado: el valor por metro cuadrado del Ministerio de Vivienda llegará en una próxima versión.</p>
+      <p className="src">Datos del INE descargados cada semana. El precio es un índice, no euros por metro cuadrado: el valor por metro cuadrado del Ministerio de Vivienda llegará en una próxima versión.</p>
     </main>
   )
 }

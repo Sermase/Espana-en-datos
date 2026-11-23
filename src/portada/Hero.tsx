@@ -42,7 +42,12 @@ export function Hero({ lecturas }: { lecturas: Lectura[] }) {
   useEffect(() => {
     if (!size || !proj) return
     const c = cv.current!, dpr = Math.min(2, devicePixelRatio || 1)
-    c.width = size.w * dpr; c.height = size.h * dpr
+    // El lienzo ocupa toda la ventana (los puntos llegan desde cualquier sitio) y el mapa se monta en su hueco.
+    const lz = c.parentElement!.getBoundingClientRect()
+    const ox = lz.left + scrollX, oy = lz.top + scrollY
+    const CW = document.documentElement.clientWidth, CH = Math.max(innerHeight, oy + size.h + 40)
+    Object.assign(c.style, { left: `${-ox}px`, top: `${-oy}px`, width: `${CW}px`, height: `${CH}px` })
+    c.width = CW * dpr; c.height = CH * dpr
     const ctx = c.getContext('2d')!
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     // 1) puntos dentro de España: se rellena la silueta en un lienzo auxiliar y se muestrea en rejilla
@@ -59,20 +64,22 @@ export function Hero({ lecturas }: { lecturas: Lectura[] }) {
       // color: el de la lectura más cercana, mezclado con el blanco azulado de la sala
       let best = anclas[0], bd = Infinity
       for (const a of anclas) { const dd = (a.p[0] - x) ** 2 + (a.p[1] - y) ** 2; if (dd < bd) { bd = dd; best = a } }
-      const ang = Math.random() * Math.PI * 2, rad = Math.max(size.w, size.h) * (0.7 + Math.random() * 0.6)
-      pts.push({ x: 0, y: 0, sx: size.w / 2 + Math.cos(ang) * rad, sy: size.h / 2 + Math.sin(ang) * rad, tx: x, ty: y, d: (x / size.w) * 0.9 + Math.random() * 0.5, c: best?.color ?? '#9fd8e8', r: 1.5 + Math.random() * 1.1, vx: 0, vy: 0, tw: Math.random() * Math.PI * 2 })
+      // salida: cualquier punto de la pantalla visible (y algunos desde fuera, por los bordes)
+      const fuera = Math.random() < 0.25, ang = Math.random() * Math.PI * 2
+      const sx = fuera ? CW / 2 + Math.cos(ang) * CW * 0.75 : Math.random() * CW, sy = fuera ? Math.min(CH, innerHeight) / 2 + Math.sin(ang) * innerHeight * 0.75 : Math.random() * Math.min(CH, innerHeight)
+      pts.push({ x: 0, y: 0, sx, sy, tx: x + ox, ty: y + oy, d: (x / size.w) * 0.9 + Math.random() * 0.5, c: best?.color ?? '#9fd8e8', r: 1.5 + Math.random() * 1.1, vx: 0, vy: 0, tw: Math.random() * Math.PI * 2 })
     }
     let raf = 0, t0 = performance.now(), last = 0, ptr: { x: number; y: number } | null = null, lanzado = false
     const DUR = 2.6
     const move = (e: PointerEvent) => { const r = c.getBoundingClientRect(); ptr = { x: e.clientX - r.left, y: e.clientY - r.top } }
     const leave = () => { ptr = null }
-    c.addEventListener('pointermove', move); c.addEventListener('pointerleave', leave)
+    addEventListener('pointermove', move); document.addEventListener('pointerleave', leave)
     const frame = (now: number) => {
       const t = (now - t0) / 1000
       const montado = t > DUR + 0.6
       if (montado && now - last < 33) { raf = requestAnimationFrame(frame); return } // ya montado: 30 imágenes por segundo bastan
       last = now
-      ctx.clearRect(0, 0, size.w, size.h)
+      ctx.clearRect(0, 0, CW, CH)
       for (const p of pts) {
         const k = ease((t - p.d) / (DUR - 0.9))
         let x = p.sx + (p.tx - p.sx) * k, y = p.sy + (p.ty - p.sy) * k
@@ -94,7 +101,7 @@ export function Hero({ lecturas }: { lecturas: Lectura[] }) {
     else raf = requestAnimationFrame(frame)
     const vis = () => { if (document.hidden) cancelAnimationFrame(raf); else if (!reduce()) raf = requestAnimationFrame(frame) }
     document.addEventListener('visibilitychange', vis)
-    return () => { cancelAnimationFrame(raf); c.removeEventListener('pointermove', move); c.removeEventListener('pointerleave', leave); document.removeEventListener('visibilitychange', vis) }
+    return () => { cancelAnimationFrame(raf); removeEventListener('pointermove', move); document.removeEventListener('pointerleave', leave); document.removeEventListener('visibilitychange', vis) }
   }, [size, proj, anclas])
 
   const Lect = ({ a, x, y, izq, i }: { a: (typeof anclas)[number]; x?: number; y?: number; izq?: boolean; i: number }) => {
@@ -106,7 +113,7 @@ export function Hero({ lecturas }: { lecturas: Lectura[] }) {
   return (
     <div className={`hero-mapa ${fase ? 'is-listo' : ''} ${ancho ? '' : 'is-estrecho'}`} ref={wrap}>
       <div className="hero-lienzo" style={{ height: size?.h }}>
-        <canvas ref={cv} style={{ width: size?.w, height: size?.h }} aria-hidden />
+        <canvas ref={cv} className="hero-puntos" aria-hidden />
         {ancho && <svg className="l-lineas" width={size?.w} height={size?.h} aria-hidden>
           {cajas.map(({ a, x, y, izq }, i) => { const xe = izq ? x + 150 : x - 150; return <polyline key={a.id} points={`${a.p[0]},${a.p[1]} ${xe + (izq ? 24 : -24)},${y} ${xe},${y}`} style={{ stroke: a.color, ['--i' as string]: i } as React.CSSProperties} /> })}
         </svg>}

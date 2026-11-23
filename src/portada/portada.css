@@ -139,3 +139,8 @@ a.lectura:hover { border-color: var(--c); background: color-mix(in oklab, var(--
 .tema:hover::after { opacity: 1 }
 a.tema:hover { box-shadow: 0 10px 30px -12px color-mix(in oklab, var(--c) 45%, transparent) }
 @media (prefers-reduced-motion: reduce) { .tema::after { display: none } }
+/* los puntos de la entrada vuelan por toda la ventana: lienzo a sangre, detrás del texto y sin capturar el ratón */
+.hero-lienzo canvas.hero-puntos { position: absolute; pointer-events: none; z-index: 0 }
+.hero-lienzo > :not(canvas) { z-index: 1 }
+.cab-txt { position: relative; z-index: 2 }
+html, body { overflow-x: hidden }
