@@ -48,8 +48,12 @@ jobs:
         if: contains(github.event.head_commit.message, '[sonda]')
         continue-on-error: true
         run: node scripts/sondas.mjs && node scripts/sonda-ine.mjs
+      - name: Enlaces a las fuentes
+        if: github.event.schedule == '43 15 * * 2' || contains(github.event.head_commit.message, '[enlaces]')
+        continue-on-error: true
+        run: node scripts/enlaces.mjs
       - name: Guardar datos nuevos
-        if: github.event_name != 'push' || contains(github.event.head_commit.message, '[datos]') || contains(github.event.head_commit.message, '[agua]') || contains(github.event.head_commit.message, '[gasolineras]') || contains(github.event.head_commit.message, '[poblacion]') || contains(github.event.head_commit.message, '[economia]') || contains(github.event.head_commit.message, '[energia]') || contains(github.event.head_commit.message, '[sonda]')
+        if: github.event_name != 'push' || contains(github.event.head_commit.message, '[datos]') || contains(github.event.head_commit.message, '[agua]') || contains(github.event.head_commit.message, '[gasolineras]') || contains(github.event.head_commit.message, '[poblacion]') || contains(github.event.head_commit.message, '[economia]') || contains(github.event.head_commit.message, '[energia]') || contains(github.event.head_commit.message, '[sonda]') || contains(github.event.head_commit.message, '[enlaces]')
         run: |
           git config user.name "datos-bot"
           git config user.email "datos-bot@users.noreply.github.com"

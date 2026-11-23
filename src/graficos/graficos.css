@@ -72,3 +72,12 @@ button.g-bar:hover, button.g-bar:focus-visible { background: rgba(255, 255, 255,
 .g-time button { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--acc, #3fe6ff); color: var(--g-ink); background: none; cursor: pointer; flex: none }
 .g-time button:hover { background: color-mix(in oklab, var(--acc, #3fe6ff) 18%, transparent) }
 .g-time input { flex: 1; accent-color: var(--acc, #3fe6ff) }
+
+/* Áreas apiladas */
+.g-capa { stroke: var(--g-surface); stroke-width: 1; transition: opacity .2s; cursor: pointer }
+.g-cross-l { stroke: #fff; stroke-opacity: .7; stroke-width: 1 }
+.g-tip-wide { width: 190px }
+.g-legend-sel button { display: inline-flex; align-items: center; gap: 6px; background: none; border: 1px solid transparent; border-radius: 3px; padding: 2px 5px; color: inherit; font: inherit; cursor: pointer }
+.g-legend-sel button:disabled { cursor: default }
+.g-legend-sel button.is-on { border-color: rgba(255, 255, 255, .35); color: #fff }
+.g-legend-sel i { width: 10px; border-radius: 2px }

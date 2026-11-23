@@ -146,3 +146,5 @@ a { color: inherit }
   .pob.is-graficos .top { padding: 12px 14px 10px }
   .big { font-size: 32px }
 }
+.src a, .pie a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--acc, #3fe6ff) 60%, transparent); text-underline-offset: 2px }
+.src a:hover, .pie a:hover { color: var(--acc, #3fe6ff) }

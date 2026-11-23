@@ -4,6 +4,7 @@ import { Clock, Crosshair, Fuel as FuelIcon, MapPin, Navigation, Palmtree, X } f
 import { FUEL_NAME, FUEL_SHORT, cents, eur, fechaLarga, int, km, priceColor, useDatos, type Datos, type Fuel, type Station } from './datos'
 import { Mapa, type MapaApi } from './Mapa'
 import { Barras, Columnas, LineChart, CountUp } from '../graficos'
+import { A } from '../Fuentes'
 
 type Sel = { k: 'st'; id: number } | { k: 'prov'; id: string } | null
 const LITROS = 50
@@ -256,7 +257,7 @@ export default function App() {
           <Barras titulo="Las más baratas cerca" fmt={p3} desde={floor2(nearList[0].s.p[fuel]!)} items={nearList.map(({ s, dk }) => ({ id: s.id, nombre: s.marca, sub: `${dk.toLocaleString('es-ES', { maximumFractionDigits: 1 })} km · ${s.dir}`, valor: s.p[fuel]!, color: '#3df5b0', onClick: () => onSt(s) }))} />
         </section>}
         <section className="card"><Resumen d={d} fuel={fuel} onSt={onSt} onProv={onProv} /></section>
-        <footer className="src">Fuente: Ministerio para la Transición Ecológica, precios que comunica cada gasolinera; se descargan dos veces al día. Mapa: IGN. Las de «solo socios» (cooperativas) no entran en medianas ni rankings.</footer>
+        <footer className="src">Fuente: <A id="geoportal">Ministerio para la Transición Ecológica</A> (<A id="carburantes_api">servicio de precios</A>), precios que comunica cada gasolinera; se descargan dos veces al día. Mapa: IGN. Las de «solo socios» (cooperativas) no entran en medianas ni rankings.</footer>
       </aside>
     </main>
   )

@@ -57,13 +57,12 @@ const ayer = new Date(HOY - 864e5), mañana = new Date(+HOY + 864e5)
 const AÑOS = Array.from({ length: HOY.getFullYear() - 2007 + 1 }, (_, i) => 2007 + i)
 
 // ---------- sonda: generación en tiempo real (la web de seguimiento de la demanda de REE) ----------
-try {
-  const r = await fetch(`https://demanda.ree.es/WSvisionaMovilesPeninsulaRest/resources/demandaGeneracionPeninsula?callback=cb&curva=DEMANDA&fecha=${iso(HOY)}`, { headers: { Origin: 'https://sermase.github.io' } })
-  const txt = await r.text()
-  log._sonda_tr = { status: r.status, cors: r.headers.get('access-control-allow-origin'), inicio: txt.slice(0, 700) }
-} catch (e) { log._sonda_tr = 'ERROR ' + e.message }
-for (const [id, ruta] of [['_h_estructura', 'generacion/estructura-generacion'], ['_h_renovable', 'generacion/evolucion-renovable-no-renovable']]) {
-  try { const r = await ree(ruta, `${iso(HOY)}T00:00`, `${iso(HOY)}T23:59`, 'hour', { geo_trunc: 'electric_system', geo_limit: 'peninsular', geo_ids: '8741' }); log[id] = Object.keys(r).join(', ') + ' · ' + Object.values(r)[0]?.v.length } catch (e) { log[id] = 'ERROR ' + String(e.message).slice(0, 160) }
+log._sonda_tr = {}
+for (const curva of ['DEMANDAAU', 'PENINSULA', 'DEMANDA_PENINSULA', 'DEMANDAPEN']) {
+  try {
+    const r = await fetch(`https://demanda.ree.es/WSvisionaMovilesPeninsulaRest/resources/demandaGeneracionPeninsula?callback=cb&curva=${curva}&fecha=${iso(HOY)}`)
+    log._sonda_tr[curva] = r.status + ' ' + (await r.text()).slice(0, 400)
+  } catch (e) { log._sonda_tr[curva] = 'ERROR ' + e.message }
 }
 
 // ---------- hoy ----------
@@ -89,8 +88,29 @@ const H = [
   ['intercambios_mes', 'intercambios/todas-fronteras-fisicos', 'month'],
 ]
 for (const [id, ruta, trunc] of H) historia[id] = (await paso(id, () => tramos(ruta, AÑOS, trunc))) ?? prev[id] ?? null
-historia.precio_dia = (await paso('precio_dia', () => tramos('mercados/precios-mercados-tiempo-real', AÑOS.filter(a => a >= 2014), 'day'))) ?? prev.precio_dia ?? null
-historia.potencia = (await paso('potencia', () => tramos('generacion/potencia-instalada', AÑOS, 'year'))) ?? prev.potencia ?? null
+// Precio diario: REE solo deja pedir un mes por consulta. Los meses pasados no cambian, así que solo se piden los que faltan.
+{
+  const viejo = prev.precio_dia ?? {}
+  const tiene = new Set(Object.values(viejo).flatMap(x => x.v.map(p => p[0].slice(0, 7))))
+  const meses = []
+  for (let y = 2014; y <= HOY.getFullYear(); y++) for (let m = 1; m <= 12; m++) {
+    const k = `${y}-${String(m).padStart(2, '0')}`
+    if (k > iso(HOY).slice(0, 7)) break
+    const reciente = (HOY - Date.UTC(y, m - 1, 1)) < 62 * 864e5
+    if (!tiene.has(k) || reciente) meses.push([y, m])
+  }
+  const out = JSON.parse(JSON.stringify(viejo)), fallos = []
+  for (const [y, m] of meses.slice(-60)) { // como mucho 60 meses por día: el histórico se completa en unos días
+    const fin = new Date(Date.UTC(y, m, 0)).getUTCDate()
+    try {
+      const r = await ree('mercados/precios-mercados-tiempo-real', `${y}-${String(m).padStart(2, '0')}-01T00:00`, `${y}-${String(m).padStart(2, '0')}-${fin}T23:59`, 'day')
+      for (const [k, x] of Object.entries(r)) { out[k] ??= { ...x, v: [] }; const mp = new Map(out[k].v.map(p => [p[0], p])); for (const p of x.v) mp.set(p[0], p); out[k].v = [...mp.values()].sort((a, b) => a[0].localeCompare(b[0])) }
+    } catch (e) { fallos.push(`${y}-${m}: ${String(e.message).slice(0, 50)}`) }
+  }
+  historia.precio_dia = Object.keys(out).length ? out : null
+  log.precio_dia = { pedidos: meses.slice(-60).length, fallos: fallos.slice(0, 8), series: Object.fromEntries(Object.entries(out).map(([k, x]) => [k, `${x.v.length} días · ${x.v[0]?.[0]} → ${x.v.at(-1)?.[0]}`])) }
+}
+historia.potencia = (await paso('potencia', () => ree('generacion/potencia-instalada', `${HOY.getFullYear() - 1}-01-01T00:00`, `${iso(HOY)}T23:59`, 'month', { geo_trunc: 'electric_system', geo_limit: 'nacional', geo_ids: '8741' }))) ?? prev.potencia ?? null
 writeFileSync(DIR + 'historia.json', JSON.stringify(historia))
 writeFileSync(here('../fuentes/energia-log.json'), JSON.stringify(log, null, 1))
 

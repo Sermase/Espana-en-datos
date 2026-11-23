@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import resumen from '../resumen.json'
 import { TEMAS, type Tema } from '../temas'
+import { A } from '../Fuentes'
 
 const fecha = new Date(resumen.agua.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
 const reserva = (resumen.agua.a / resumen.agua.c) * 100
@@ -108,7 +109,7 @@ export default function Portada() {
           )
         })}
       </ul>
-      <footer className="pie">Fuentes oficiales en cada tema: MITECO, IGN, INE, REE, AEMET, DGT. Sin registro, sin anuncios.</footer>
+      <footer className="pie">Fuentes oficiales, enlazadas en cada tema: <A id="boletin">MITECO</A>, <A id="siane">IGN</A>, <A id="ine_padron">INE</A>, <A id="eurostat">Eurostat</A>, <A id="ree">REE</A>, <A id="aemet">AEMET</A>. Sin registro, sin anuncios.</footer>
     </main>
   )
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export type Serie = { nombre: string; unidad: string; frec: 'M' | 'T' | 'S' | 'A'; fuente: string; d: [string, number][] }
+export type Serie = { nombre: string; unidad: string; frec: 'M' | 'T' | 'S' | 'A'; fuente: string; tablas?: string[]; d: [string, number][] }
 export type Datos = { fecha: string; nombres: Record<string, Record<string, string>>; temas: Record<string, Record<string, Serie>> }
 
 let cache: Promise<Datos> | null = null

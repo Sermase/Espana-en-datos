@@ -57,3 +57,5 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .kpi { padding: 12px }
   .kpi-v { font-size: 24px }
 }
+.fuente a, .fuentes a { color: var(--ink); text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--acc) 60%, transparent); text-underline-offset: 2px }
+.fuente a:hover, .fuentes a:hover { color: var(--acc) }

@@ -34,7 +34,9 @@ async function mejor(codes, filtros, varia) {
 }
 
 /** Eurostat JSON-stat → { [clave de la dimensión que varía]: [[periodo, valor]] } */
+let usadas = new Set()
 async function eurostat(code, filtros, varia = 'geo') {
+  usadas.add(code)
   const qs = new URLSearchParams({ format: 'JSON', lang: 'EN' })
   for (const [k, v] of Object.entries(filtros)) for (const x of [].concat(v)) qs.append(k, x)
   const j = await get(`${ES}/${code}?${qs}`)
@@ -58,9 +60,11 @@ let previo = {}; try { previo = JSON.parse(readFileSync(OUT, 'utf8')).temas ?? {
 const temas = {}, pendientes = []
 async function serie(tema, id, nombre, unidad, frec, fn, reintento = false) {
   try {
+    usadas = new Set()
     const r = await fn()
+    const tablas = [...usadas]
     temas[tema] ??= {}
-    for (const [k, d] of Object.entries(r)) if (d.length) temas[tema][`${id}${Object.keys(r).length > 1 ? ':' + k : ''}`] = { nombre: Object.keys(r).length > 1 ? `${nombre} · ${k}` : nombre, unidad, frec, fuente: 'Eurostat', d }
+    for (const [k, d] of Object.entries(r)) if (d.length) temas[tema][`${id}${Object.keys(r).length > 1 ? ':' + k : ''}`] = { nombre: Object.keys(r).length > 1 ? `${nombre} · ${k}` : nombre, unidad, frec, fuente: 'Eurostat', tablas, d }
     log[id] = Object.fromEntries(Object.entries(r).map(([k, d]) => [k, `${d.length} datos, último ${d.at(-1)?.join(' = ')}`]))
   } catch (e) {
     log[id] = 'ERROR ' + String(e.message).slice(0, 300)

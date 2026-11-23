@@ -6,6 +6,7 @@ import { last, popNow, provName, useDatos, type Datos, type Muni } from './datos
 import { METRICAS, colorDe, setYears, valorDe, type Metrica } from './metricas'
 import { Mapa, type MapaApi } from './Mapa'
 import { Graficos } from './Graficos'
+import { A } from '../Fuentes'
 
 type Vista = 'mapa' | 'graficos'
 const readHash = () => { const m = location.hash.match(/^#(mapa|graficos)(?:-(\d{5}))?$/); return { vista: (m?.[1] as Vista) ?? 'mapa', id: m?.[2] ?? null } }
@@ -140,7 +141,7 @@ export default function App() {
             <Leyenda metrica={metrica} />
             <Ranking d={d} metrica={metrica} onMuni={pick} />
           </section>
-          <p className="src">INE: padrón municipal {d.years[0]}–{last(d.years)}. Límites y núcleos: IGN. Mapa: © OpenStreetMap, © CARTO.</p>
+          <p className="src"><A id="ine_padron">INE: padrón municipal {d.years[0]}–{last(d.years)}</A>. Límites y núcleos: <A id="siane">IGN</A>. Mapa: Esri, <A id="osm">© OpenStreetMap</A>.</p>
         </aside>
       </>}
     </main>

@@ -118,3 +118,5 @@ a { color: inherit }
   .seg button { font-size: 12px; padding: 5px 8px }
   .legend { display: none }
 }
+.src a, .pie a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--acc, #3fe6ff) 60%, transparent); text-underline-offset: 2px }
+.src a:hover, .pie a:hover { color: var(--acc, #3fe6ff) }

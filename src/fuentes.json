@@ -1,0 +1,21 @@
+{
+  "boletin": { "n": "Boletín Hidrológico (MITECO)", "u": "https://www.miteco.gob.es/es/agua/temas/evaluacion-de-los-recursos-hidricos/boletin-hidrologico.html" },
+  "embalses_bd": { "n": "Base de datos de embalses (MITECO)", "u": "https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/agua.html" },
+  "presas": { "n": "Inventario de Presas y Embalses (MITECO)", "u": "https://www.miteco.gob.es/es/agua/temas/seguridad-de-presas-y-embalses/inventario-presas-y-embalses.html" },
+  "vertidos": { "n": "Censo Nacional de Vertidos (MITECO)", "u": "https://www.miteco.gob.es/es/agua/temas/concesiones-y-autorizaciones/vertidos-de-aguas-residuales/censo-vertidos.html" },
+  "aemet": { "n": "AEMET", "u": "https://www.aemet.es/" },
+  "ine_agua": { "n": "INE · Suministro y saneamiento del agua", "u": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176834" },
+  "siane": { "n": "IGN · Centro de Descargas (SIANE)", "u": "https://centrodedescargas.cnig.es/CentroDescargas/" },
+  "ree": { "n": "REData · Red Eléctrica", "u": "https://www.ree.es/es/datos/apidatos" },
+  "ree_generacion": { "n": "REE · Generación", "u": "https://www.ree.es/es/datos/generacion" },
+  "ree_demanda": { "n": "REE · Demanda", "u": "https://www.ree.es/es/datos/demanda" },
+  "ree_mercados": { "n": "REE · Mercados y precios", "u": "https://www.ree.es/es/datos/mercados" },
+  "ree_balance": { "n": "REE · Balance eléctrico", "u": "https://www.ree.es/es/datos/balance" },
+  "geoportal": { "n": "Geoportal de gasolineras (MITECO)", "u": "https://geoportalgasolineras.es/" },
+  "carburantes_api": { "n": "Servicio de precios de carburantes", "u": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/help" },
+  "ine_padron": { "n": "INE · Padrón municipal (tabla 29005)", "u": "https://www.ine.es/jaxiT3/Tabla.htm?t=29005" },
+  "ine_piramide": { "n": "INE · Población por edad (tabla 56934)", "u": "https://www.ine.es/jaxiT3/Tabla.htm?t=56934" },
+  "ine_idb": { "n": "INE · Indicadores Demográficos Básicos", "u": "https://www.ine.es/jaxiT3/Tabla.htm?t=1414" },
+  "eurostat": { "n": "Eurostat", "u": "https://ec.europa.eu/eurostat/web/main/data/database" },
+  "osm": { "n": "© OpenStreetMap", "u": "https://www.openstreetmap.org/copyright" }
+}

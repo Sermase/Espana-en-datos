@@ -519,3 +519,5 @@ button { font: inherit; color: inherit; cursor: pointer }
 .has-holo .river, .has-holo .river-sel-flow, .has-holo .ret-pulse, .has-holo .lamina.is-sel, .has-holo .bolt { animation: none }
 .has-holo .river-sel-glow { filter: none }
 .holo { z-index: 4 }
+.src a, .pie a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--acc, #3fe6ff) 60%, transparent); text-underline-offset: 2px }
+.src a:hover, .pie a:hover { color: var(--acc, #3fe6ff) }

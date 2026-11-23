@@ -43,3 +43,5 @@ a.tema:hover { border-color: var(--c); background: color-mix(in oklab, var(--c) 
   .mini { width: 96px }
 }
 @media (prefers-reduced-motion: reduce) { .vivo { animation: none } }
+.src a, .pie a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--acc, #3fe6ff) 60%, transparent); text-underline-offset: 2px }
+.src a:hover, .pie a:hover { color: var(--acc, #3fe6ff) }

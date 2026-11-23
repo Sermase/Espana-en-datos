@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { Barras, Columnas, LineChart, Piramide, nf, compact, type Serie as LSerie } from '../graficos'
 import { last, popNow, type Datos, type Muni, type Serie } from './datos'
 import { METRICAS, valorDe } from './metricas'
+import { A } from '../Fuentes'
 
 const H = '#3987e5', M = '#d95926' // hombres y mujeres, igual que en la pirámide
 const year = (v: number) => String(Math.round(v))
@@ -124,7 +125,7 @@ export function Graficos({ d, onMuni }: { d: Datos; onMuni: (m: Muni) => void })
         <Barras titulo="Municipios que más población han ganado" fmt={ESL} limite={10} items={[...losers].reverse().slice(0, 30).map(({ m, v }) => ({ id: m.id, nombre: m.n, sub: `${METRICAS.hab.fmt(m.pop[i00] ?? 0)} → ${METRICAS.hab.fmt(popNow(m))} vecinos`, valor: v, color: '#3987e5', onClick: () => onMuni(m) }))} />
       </Card>
 
-      <p className="src">Fuentes: INE — Revisión del Padrón Municipal (1996–{yl}), Estadística Continua de Población (pirámide desde 1971) e Indicadores Demográficos Básicos. Límites municipales: IGN.</p>
+      <p className="src">Fuentes: INE — <A id="ine_padron">Revisión del Padrón Municipal (1996–{yl})</A>, <A id="ine_piramide">Estadística Continua de Población</A> (pirámide desde 1971) e <A id="ine_idb">Indicadores Demográficos Básicos</A>. Límites municipales: <A id="siane">IGN</A>.</p>
     </div>
   )
 }
