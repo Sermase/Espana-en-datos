@@ -1,4 +1,136 @@
 {
- "cabeceras": "HTTP/2 301 \r\nlocation: https://sdi.eea.europa.eu/datastore/public/eea_t_uwwtd-final_p_2023_v10_r00/\r\ncontent-type: text/html; charset=iso-8859-1\r\nHTTP/2 301 \r\nlocation: https://sdi.eea.europa.eu/datastore/public?path=/eea_t_uwwtd-final_p_2023_v10_r00/\r\ncontent-type: text/html; charset=iso-8859-1\r\nHTTP/2 200 \r\ncontent-length: 28429\r\ncontent-type: text/html; charset=UTF-8\r\n",
- "error": "spawnSync bash ETIMEDOUT"
+ "raiz": [
+  "/eea_t_uwwtd-final_p_2023_v10_r00/ ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/ ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/DBaccess/ ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/README.md ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/ ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/Tabular-data-thumbnail.png ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/Urban_Waste_Water_Treatment_Directive_Waterbase_reported_under_UWWTD_d_metadata_52b2e779-a146-414f-bf00-d63dfbf9c4f1.xml ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/Waterbase_UWWTD_13thCall_final.xlsx "
+ ],
+ "ls /eea_t_uwwtd-final_p_2023_v10_r00/CSV/": [
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/ ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/Agglomerations.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/Art17_FLAAgglomeration.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/Art17_FLAUWWTP.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/Art17_Investments.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/DischargePoints.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/LOV_bigCity.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/LOV.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/LOV_NUTS.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/MSLevel.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/ReceivingAreas_LSA.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/ReceivingAreas_SA54.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/ReceivingAreas_SAMain.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/ReceivingAreas_SAParameter.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/ReceivingAreas_SASA.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/Reporter.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/ReportPeriod.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/UWWTPAgglos.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/UWWTPS.csv ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/UWWTPS_emission_load.csv "
+ ],
+ "ls /eea_t_uwwtd-final_p_2023_v10_r00/DBaccess/": [
+  "/eea_t_uwwtd-final_p_2023_v10_r00/DBaccess/ ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/DBaccess/Waterbase_UWWTD_13thCall_final.accdb "
+ ],
+ "ls /eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/": [
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/ ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_Agglomerations.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_Art17_FLAAgglomeration.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_Art17_FLAUWWTP.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_Art17_Investments.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_BigCity.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_DischargePoints.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_LOV.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_MSLevel.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_NUTS.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_ReceivingAreas_LSA.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_ReceivingAreas_SA54.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_ReceivingAreas_SAMain.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_ReceivingAreas_SAParameter.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_ReceivingAreas_SASA.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_Reporter.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_ReportPeriod.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_UWWTPAgglos.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_UWWTPS_emission_load.pdf ",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/TableScheme/T_UWWTPS.pdf "
+ ],
+ "tp": [
+  "/eea_v_4258_100_m_uwwtd-tp_p_2022-2023_v10_r00/ ",
+  "/eea_v_4258_100_m_uwwtd-tp_p_2022-2023_v10_r00/README.md ",
+  "/eea_v_4258_100_m_uwwtd-tp_p_2022-2023_v10_r00/Treatment-map.png ",
+  "/eea_v_4258_100_m_uwwtd-tp_p_2022-2023_v10_r00/Urban_Waste_Water_Treatment_Directive_Treatment_plants_reported_under__metadata_88b3b08d-3b1b-4a65-9406-365b218e09da.xml ",
+  "/eea_v_4258_100_m_uwwtd-tp_p_2022-2023_v10_r00/UWWTD_TreatmentPlants.gpkg ",
+  "/eea_v_4258_100_m_uwwtd-tp_p_2022-2023_v10_r00/UWWTD_TreatmentPlants_public.gdb.zip "
+ ],
+ "elegidos": [
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/Agglomerations.csv",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/Art17_FLAAgglomeration.csv",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/Art17_FLAUWWTP.csv",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/Art17_Investments.csv",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/DischargePoints.csv",
+  "/eea_t_uwwtd-final_p_2023_v10_r00/CSV/LOV_bigCity.csv"
+ ],
+ "bajado /eea_t_uwwtd-final_p_2023_v10_r00/CSV/Agglomerations.csv": 8533854,
+ "tabla /eea_t_uwwtd-final_p_2023_v10_r00/CSV/Agglomerations.csv": {
+  "cabecera": "﻿aggAccOverflowNumber,aggAccOverflows,aggBeginLife,aggBestTechnicalKnowledge,aggC1,aggC2,aggCalculation,aggCapacity,aggChanges,aggChangesComment,aggCode,aggDilutionRates,aggEndLife,aggExistMaintenancePlan,aggExplanationOther,aggForecast,aggGenerated,aggHaveRegistrationSystem,aggLatitude,aggLongitude,aggMethodC1,aggMethodC2,aggMethodWithoutTreatment,aggName,aggNUTS,aggOtherMeasures,aggPercPrimTreatment,aggPercSecTreatment,aggPercStringentTreatment,aggPercWithoutTreatment,aggPeriodOver,aggPressureTest,aggRemarks,aggSewageNetwork,aggSewerOverflows_m3,aggSewerOverflows_pe,aggState,aggVideoInspections,bigCityID,repCode,rptMStateKey,aggDateArt3,aggDateArt4,aggDateArt5,aggHyperlink,ReportNetEnvelopeFileId",
+  "filas": 26900,
+  "filasES": 2402,
+  "ejemplo": [
+   ",No,20080101,,100,0,\"Charge moyenne maximale hebdomadaire qui pénètre dans la station d'épuration au cours de l'année, à l'exclusion des situations inhabituelles comme celles qui sont dues à de fortes précipitations + rejets directs sans traitement par déversoirs d'orage\",No,false,,FR020000167132,No,,,,,14028,,48.876663533,7.7401956854,C,E,E,ESCHBACH,FRF11,No,,,,0,19981231000000,No,,,,,1,No,,FR2022,FR,19981231,19981231,19981231,,60585",
+   ",No,19830101,,100,0,\"Charge moyenne maximale hebdomadaire qui pénètre dans la station d'épuration au cours de l'année, à l'exclusion des situations inhabituelles comme celles qui sont dues à de fortes précipitations + rejets directs sans traitement par déversoirs d'orage\",No,false,,FR030000110141,No,,,,,2088,,48.0740789979,4.5078861948,C,E,E,ESSOYES,FRF22,No,,,,0,20051231000000,No,,,,,1,No,,FR2022,FR,20051231,20051231,,,60585"
+  ]
+ },
+ "bajado /eea_t_uwwtd-final_p_2023_v10_r00/CSV/Art17_FLAAgglomeration.csv": 915435,
+ "tabla /eea_t_uwwtd-final_p_2023_v10_r00/CSV/Art17_FLAAgglomeration.csv": {
+  "cabecera": "﻿ReportNetEnvelopeFileId,flarepCode,aggCode,aggName,flaggComments,flaggEUFund,flaggEUFundName,flaggExpecDateCompletion,flaggExpecDateStart,flaggExpecDateStartWork,flaggExpLoad,flaggExpLoadColl,flaggExpLoadIAS,flaggInv,flaggLoan,flaggLoanName,flaggMeasures,flaggOtherFund,flaggOtherFundName,flaggReasons,flaggStatus",
+  "filas": 3570,
+  "filasES": 67,
+  "ejemplo": [
+   "60626,RO09,ROAG_112254,ESELNITA,European Agricultural Fund for Rural Development,0.86077,EARDF,20271231,20071231,20080331,2457,98,2,6.85499,0,,\"New sewage system - 11,78 km, 900 connections to the sewerage system;",
+   "60602,ES,ES5380350131155,San Miguel,**Medidas orientadas a la ampliación de los sistemas colectores para reemplazar IAS**Medidas orientadas a la ampliación de los sistemas colectores para reemplazar IAS,,,20301231,20210228,20220331,3776,0,100,5.078,0,,\"**ES124_1_14-010-7-9 - Incremento de la cobertura de la red de alcantarillado y segregación de la Red de pluviales en el término municipal de San Miguel de Abona según Diagnóstico y propuestas de actuación en materia de saneamiento 2017 (DPS)**ES124_1_15-036-7-00 - Colectores, impulsiones y obras complementarias del sistema de saneamiento de Arona Este - San Miguel\",,,Es conforme,C"
+  ]
+ },
+ "bajado /eea_t_uwwtd-final_p_2023_v10_r00/CSV/Art17_FLAUWWTP.csv": 1458907,
+ "tabla /eea_t_uwwtd-final_p_2023_v10_r00/CSV/Art17_FLAUWWTP.csv": {
+  "cabecera": "﻿ReportNetEnvelopeFileId,flatpComments,flatpEUFund,flatpEUFundName,flatpExpCapacity,flatpExpecDateCompletion,flatpExpecDatePerformance,flatpExpecDateStart,flatpExpecDateStartWork,flatpExpecTreatment,flatpExpLoad,flatpExpLoadTruck,flatpInv,flatpLoan,flatpLoanName,flatpMeasures,flatpOtherFund,flatpOtherFundName,flatpReasons,flatpStatus,flarepCode,uwwCode,uwwName",
+  "filas": 5211,
+  "filasES": 475,
+  "ejemplo": [
+   "60602,La carga contaminante que entrará en la instalación (flatpExpLoad) se ha cumplimentado como la suma de las cargas de las aglomeraciones que se espera dirijan sus aguas a la misma.,,,72104,20281231,20291231,20190331,20261231,2,18615,,1.875,0,,**ES124_1_15-011-3-26 - Estación Depuradora de Aguas Residuales (EDAR) Comarcal de Acentejo. Fase I,0,,- Sin EDAR en la AAUU,C,ES,ES5380390130419E,Sin EDAR en Santa Úrsula",
+   "60602,\"**Aunque la aglomeración es conforme con la directiva, se reportan aquellas medidas previstas para el sistema comarcal al que está asociada\",,,93957,20270930,20280929,20220331,20260131,2,41128,,3.333,0,,**ES124_1_15-042-8-13 - Estación depuradora de aguas residuales del Oeste (T.M. de Guía de Isora) Estación de tratamiento de aguas residuales (ETAR+EBAR) de Playa de San Juan,0,,Es conforme,C,ES,ES5380400131361E,ETAR de Los Gigantes"
+  ]
+ },
+ "bajado /eea_t_uwwtd-final_p_2023_v10_r00/CSV/Art17_Investments.csv": 57672,
+ "tabla /eea_t_uwwtd-final_p_2023_v10_r00/CSV/Art17_Investments.csv": {
+  "cabecera": "﻿ReportNetEnvelopeFileId,flarepCode,soecCapacity,soecCode,soecEndYear,soecEUFunds,soecInvCol,soecInvIAS,soecInvTp,soecJobs,soecLenghtCoCs,soecLenghtSaCs,soecLenghtStCs,soecNumbIAS,soecOpCosts,soecPeriod,soecPop,soecStartYear,soecInvComments",
+  "filas": 366,
+  "filasES": 17,
+  "ejemplo": [
+   "60602,ES,18177988,ESUWWINV2017,20171231,1,119.1,,176.9,,0,0,,,16.6,EXP,,20170101,",
+   "60602,ES,18177988,ESUWWINV2018,20181231,3.98,133.4,,209.6,,0,0,,,16.9,EXP,,20180101,"
+  ]
+ },
+ "bajado /eea_t_uwwtd-final_p_2023_v10_r00/CSV/DischargePoints.csv": 4992819,
+ "tabla /eea_t_uwwtd-final_p_2023_v10_r00/CSV/DischargePoints.csv": {
+  "cabecera": "﻿dcpBeginLife,dcpCode,dcpCOMAccept,dcpDischargePointsID,dcpEndLife,dcpGeometry,dcpGroundWater,dcpGroundWaterReferenceDate,dcpIrrigation,dcpLatitude,dcpLongitude,dcpMSProvide,dcpName,dcpNotAffect,dcpNuts,dcpReceivingWater,dcpReceivingWaterReferenceDate,dcpRemarks,dcpState,dcpSurfaceWaters,dcpTypeOfReceivingArea,dcpWaterbodyID,dcpWaterBodyReferenceDate,dcpWaterBodyType,dcpWFDRBD,dcpWFDRBDReferenceDate,dcpWFDSubUnit,dcpWFDSubUnitReferenceDate,rcaCode,repCode,rptMStateKey,uwwCode,ReportNetEnvelopeFileId",
+  "filas": 25715,
+  "filasES": 2698,
+  "ejemplo": [
+   ",IE_TPEFF0600D0128SW001,,413717,,,,,,54.50554,-8.2208,,Ballyshannon,,IE041,,,,Yes,Yes,NA,IE_NW_030_0100,,ES,IEGBNIIENW,,IEGBNIIENW,,,IE2022,IE,IETP_D0128,60583",
+   ",IE_TPEFF0500D0132SW001,,413720,,,,,,51.69749,-8.54142,,Kinsale,,IE053,,,\"This agglomeration discharges into a sensitive area but the generated load is less than 10,000 p.e. and the agglomeration is not subject to Article 5.\",Yes,Yes,A523,IE_SW_080_0100,,ES,IEROI,,IEROI,,IETW_SW_2001_0033,IE2022,IE,IETP_D0132,60583"
+  ]
+ },
+ "bajado /eea_t_uwwtd-final_p_2023_v10_r00/CSV/LOV_bigCity.csv": 21627,
+ "tabla /eea_t_uwwtd-final_p_2023_v10_r00/CSV/LOV_bigCity.csv": {
+  "cabecera": "﻿bigCityID,bigCity,bigCountryCode,CountryName",
+  "filas": 677,
+  "filasES": 96,
+  "ejemplo": [
+   "DE151,ESSEN,DE,Germany",
+   "DK278,ESBJERG,DK,Denmark"
+  ]
+ }
 }
