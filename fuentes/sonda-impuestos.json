@@ -1,0 +1,91 @@
+{
+ "datosgob": {
+  "distribuciones": [
+   "application/vnd.ms-excel https://sede.agenciatributaria.gob.es/Sede/datosabiertos/catalogo/hacienda/Informe_mensual_de_Recaudacion_Tributaria.shtml"
+  ],
+  "pagina": "https://sede.agenciatributaria.gob.es/Sede/datosabiertos/catalogo/hacienda/Informe_mensual_de_Recaudacion_Tributaria.shtml"
+ },
+ "https://sede.agenciatributaria.gob.es/Sede/datosabiertos/catalogo/hacienda/Informe_mensual_de_Recaudacion_Tributaria.shtml": {
+  "bytes": 19244,
+  "excel": [
+   "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Cuadros_estadisticos_series_es_es.xlsx",
+   "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Serie_mensual_graficos_es_es.xlsx",
+   "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Ingresos_por_Delegaciones.xlsx",
+   "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/SeriesBases_trimestral.xlsx",
+   "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Resumen_normativo.xlsx"
+  ],
+  "paginas": [
+   "https://sede.agenciatributaria.gob.es/Sede/datosabiertos/catalogo/hacienda/Informe_mensual_de_Recaudacion_Tributaria.shtml#acc-main",
+   "https://sede.agenciatributaria.gob.es/Sede/datosabiertos/catalogo/hacienda/Informe_mensual_de_Recaudacion_Tributaria.shtml#",
+   "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Cuadros_estadisticos_series_es_es.xlsx",
+   "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Serie_mensual_graficos_es_es.xlsx",
+   "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Ingresos_por_Delegaciones.xlsx",
+   "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/SeriesBases_trimestral.xlsx",
+   "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Resumen_normativo.xlsx",
+   "https://sede.agenciatributaria.gob.es/Sede/estadisticas-recaudacion-tributaria-historico-informes-mensuales-anos-2016-2025.html",
+   "https://sede.agenciatributaria.gob.es/Sede/estadisticas-recaudacion-tributaria-historico-informes-mensuales-anos-2008-2015.html"
+  ]
+ },
+ "  https://sede.agenciatributaria.gob.es/Sede/datosabiertos/catalogo/hacienda/Informe_mensual_de_Recaudacion_Tributaria.shtml#acc-main": [
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Cuadros_estadisticos_series_es_es.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Serie_mensual_graficos_es_es.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Ingresos_por_Delegaciones.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/SeriesBases_trimestral.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Resumen_normativo.xlsx"
+ ],
+ "  https://sede.agenciatributaria.gob.es/Sede/datosabiertos/catalogo/hacienda/Informe_mensual_de_Recaudacion_Tributaria.shtml#": [
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Cuadros_estadisticos_series_es_es.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Serie_mensual_graficos_es_es.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Ingresos_por_Delegaciones.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/SeriesBases_trimestral.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Resumen_normativo.xlsx"
+ ],
+ "  https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Cuadros_estadisticos_series_es_es.xlsx": [],
+ "  https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Serie_mensual_graficos_es_es.xlsx": [],
+ "  https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Ingresos_por_Delegaciones.xlsx": [],
+ "  https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/SeriesBases_trimestral.xlsx": [],
+ "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informes-mensuales.html": {
+  "bytes": 4929,
+  "excel": [],
+  "paginas": [
+   "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informes-mensuales.html#acc-main",
+   "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informes-mensuales.html#"
+  ]
+ },
+ "  https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informes-mensuales.html#acc-main": [],
+ "  https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informes-mensuales.html#": [],
+ "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria.html": {
+  "bytes": 8343,
+  "excel": [],
+  "paginas": [
+   "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria.html#acc-main",
+   "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria.html#",
+   "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria.html",
+   "https://sede.agenciatributaria.gob.es/Sede/datosabiertos/catalogo/hacienda/Informes_Ventas_Empleos_y_Salarios_en_las_declaraciones_tributarias.shtml",
+   "https://sede.agenciatributaria.gob.es/Sede/datosabiertos/catalogo/hacienda/Informes_anuales_de_Recaudacion_Tributaria.shtml",
+   "https://sede.agenciatributaria.gob.es/Sede/datosabiertos/catalogo/hacienda/Informe_mensual_de_Recaudacion_Tributaria.shtml"
+  ]
+ },
+ "  https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria.html#acc-main": [],
+ "  https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria.html#": [],
+ "  https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria.html": [],
+ "  https://sede.agenciatributaria.gob.es/Sede/datosabiertos/catalogo/hacienda/Informes_Ventas_Empleos_y_Salarios_en_las_declaraciones_tributarias.shtml": [],
+ "  https://sede.agenciatributaria.gob.es/Sede/datosabiertos/catalogo/hacienda/Informes_anuales_de_Recaudacion_Tributaria.shtml": [
+  "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2025/Cuadros_IART25_es_es.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_anuales/Ingresos_por_Delegaciones_anual_web.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_anuales/Derechos_Reconocidos.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_anuales/DatosAICFS_IRPF.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_anuales/DatosAFS_IS.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_anuales/DistribucionSalarios.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_anuales/DistribucionSalariosCCAA.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_anuales/DistribucionesIRPF.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Resumen_normativo.xlsx"
+ ],
+ "  https://sede.agenciatributaria.gob.es/Sede/datosabiertos/catalogo/hacienda/Informe_mensual_de_Recaudacion_Tributaria.shtml": [
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Cuadros_estadisticos_series_es_es.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Serie_mensual_graficos_es_es.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Ingresos_por_Delegaciones.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/SeriesBases_trimestral.xlsx",
+  "https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Recaudacion_Tributaria/Informes_mensuales/Resumen_normativo.xlsx"
+ ]
+}
