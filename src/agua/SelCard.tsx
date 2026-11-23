@@ -5,6 +5,7 @@ import { basinStats, consumo, data, depOrder, fmt, fmtBig, fmtPct, pct, status, 
 import { byCapacity, rankIn, resInBasin, resolve, sequence, sizeRank, type Sel } from './sel'
 import { Bar, CountUp, Head, HydroChart, Info, Ring, TimeChart } from './ui'
 import { Ciclo } from './Ciclo'
+import { EXTRA, RED, TRATAMIENTO, edarList, type Edar } from './edar'
 import { riverLen, riverList, riverMouth, riverStats, type River } from './rivers'
 import { byHydroYear, envelope, fechaCorta, hydroLabel, hydroYear, near, toDate, useHistory, weekOf } from './history'
 
@@ -22,6 +23,7 @@ const KIND = {
   flow: { label: 'Estación de aforo', icon: Activity },
   cons: { label: 'Abastecimiento', icon: House },
   dep: { label: 'Depuración', icon: Recycle },
+  edar: { label: 'Depuradora', icon: Recycle },
   river: { label: 'Río', icon: Waves },
 } as const
 
@@ -73,6 +75,7 @@ export function SelCard({ sel, onPick, isNew, compact, dir }: {
       {it.k === 'flow' && <FlowBody i={it.i} />}
       {it.k === 'cons' && <ConsBody i={it.i} />}
       {it.k === 'dep' && <DepBody i={it.i} />}
+      {it.k === 'edar' && <EdarBody p={it.p} />}
       {it.k === 'river' && <RiverBody v={it.v} onPick={onPick} />}
       <nav className="sel-nav" aria-label="Recorrer">
         <button onClick={() => go(-1)} aria-label="Anterior"><ChevronLeft size={19} /></button>
@@ -336,6 +339,53 @@ function ConsBody({ i }: { i: number }) {
     </> : null}
     {u.cost != null && <Fun icon={Waves}>Cada habitante usa unos <b>{fmt(yearM3)} m³</b> al año en casa; al coste medio de la comunidad son unos <b>{fmt(yearM3 * u.cost)} €</b> por persona entre abastecimiento y saneamiento.</Fun>}
     <p className="note">El INE publica este dato por comunidad autónoma. No hay una estadística oficial por municipio para toda España.</p>
+  </>)
+}
+
+/** El decantador de la depuradora visto desde arriba: el anillo se llena con la carga que recibe frente a su capacidad. */
+function Decantador({ p }: { p: number }) {
+  const r = 44, C = 2 * Math.PI * r, v = Math.min(1, p / 100)
+  return <svg className="decantador" viewBox="0 0 110 110" role="img" aria-label={`Recibe el ${fmt(p)} % de su capacidad`}>
+    <circle cx={55} cy={55} r={r} className="dc-fondo" />
+    <circle cx={55} cy={55} r={r} className={`dc-carga ${p > 100 ? 'is-sobre' : ''}`} strokeDasharray={`${C * v} ${C}`} transform="rotate(-90 55 55)" />
+    <circle cx={55} cy={55} r={r - 9} className="dc-agua" />
+    <g className="dc-puente"><line x1={55} y1={55} x2={55 + r - 9} y2={55} /><circle cx={55 + r - 12} cy={55} r={2.5} /></g>
+    <circle cx={55} cy={55} r={4} className="dc-eje" />
+    <text x={55} y={52} textAnchor="middle" className="dc-num">{fmt(p)} %</text>
+    <text x={55} y={66} textAnchor="middle" className="dc-u">de su capacidad</text>
+  </svg>
+}
+
+/** habitantes equivalentes, corto: «2,3 M h-e», «45.000 h-e» */
+const hEq = (v: number) => v >= 1e6 ? <>{fmt(v / 1e6, 1)} <small>M h-e</small></> : <>{fmt(v)} <small>h-e</small></>
+
+function EdarBody({ p }: { p: Edar }) {
+  const uso = p.cap && p.load ? (p.load / p.cap) * 100 : null
+  const all = edarList() ?? [], pos = all.indexOf(p) + 1
+  const dia = p.vol ? p.vol / 365 : null
+  return (<>
+    <h2 className="sel-name">EDAR {p.n}</h2>
+    <p className="sel-sub">Depuradora · datos de 2022 · reporte a la UE</p>
+    <div className="sel-hero">
+      {uso != null ? <Decantador p={uso} /> : <Ring p={0} shown={0} unit="sin dato" label="Sin dato de carga" />}
+      <div className="stat-grid">
+        <Stat label="Capacidad">{p.cap ? hEq(p.cap) : '—'}</Stat>
+        <Stat label="Recibe">{p.load ? hEq(p.load) : '—'}</Stat>
+        <Stat label="Tamaño">{pos}º <small>de {fmt(all.length)}</small></Stat>
+        <Stat label="Cumple" tone={p.ok === 0 ? 'down' : p.ok === 1 ? 'up' : ''}>{p.ok === 1 ? 'Sí' : p.ok === 0 ? 'No' : '—'}</Stat>
+      </div>
+    </div>
+    <p className={`trat t${p.t}`}><b>{TRATAMIENTO[p.t]}</b>{p.e.length ? <>: {p.e.map(x => EXTRA[x] ?? x).join(', ')}</> : null}.</p>
+    {dia ? <Fun icon={Waves}>Trató unos <b>{fmt(dia)} m³</b> al día en 2022: {fmt(dia / POOL, 1)} piscinas olímpicas diarias.</Fun> : null}
+    {p.ag.length > 0 && <>
+      <h3 className="sel-h">Aglomeraciones que atiende</h3>
+      <ul className="aggs">{p.ag.map(a => <li key={a.c}>
+        <span className="agg-n">{a.n || a.c}{a.pe ? <small> · {fmtBig(a.pe)} hab. eq.</small> : null}</span>
+        {a.c1 != null && <span className="agg-b" title={`${fmt(a.c1, 1)} % de la carga la recogen los colectores`}><i style={{ width: `${Math.min(100, a.c1)}%` }} />{a.c2 ? <i className="ias" style={{ width: `${Math.min(100, a.c2)}%` }} /> : null}</span>}
+        <small className="agg-d">{a.c1 != null ? <>Colectores: <b>{fmt(a.c1, a.c1 % 1 ? 1 : 0)} %</b> de la carga{a.c2 ? <>, fosas y sistemas individuales {fmt(a.c2, 1)} %</> : null}. </> : null}{a.red && RED[a.red] ? <>Red {RED[a.red]}.</> : null}{a.pct != null && a.pct < 100 ? <> Llega aquí el {fmt(a.pct)} %.</> : null}</small>
+      </li>)}</ul>
+    </>}
+    <p className="note">Habitante equivalente: la contaminación que genera una persona al día; incluye industria y comercios. La capacidad es la media de diseño y la carga es la máxima semanal, por eso puede pasar del 100 %. «Cumple» se refiere a los límites de vertido que le exige la directiva. Fuente: Agencia Europea de Medio Ambiente, reporte de España (cuestionario 2023).</p>
   </>)
 }
 

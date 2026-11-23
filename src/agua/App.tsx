@@ -6,6 +6,7 @@ import { Panel } from './Panel'
 import { SelCard } from './SelCard'
 import { consumo, data, energyTotals, fechaLarga, fmt, fmtPct } from './data'
 import { useRivers } from './rivers'
+import { useEdar } from './edar'
 import { fromKey, randomSel, sameSel, selKey, useCollection, type Milestone, type Sel } from './sel'
 import { CountUp, Info } from './ui'
 import { A } from '../Fuentes'
@@ -22,7 +23,7 @@ const LAYERS: { id: Layer; label: string; short?: string; icon: typeof Droplets 
 
 const n = data.meta.national
 const wettest = [...data.rain].sort((a, b) => b.p - a.p)[0]
-const layerFor = (s: Sel, cur: Layer): Layer => s.k === 'river' ? (cur === 'energia' || cur === 'rios' ? cur : 'agua') : s.k === 'rain' ? 'lluvia' : s.k === 'dis' ? 'vertidos' : s.k === 'flow' ? 'rios' : s.k === 'cons' ? 'consumo' : s.k === 'dep' ? 'depuracion' : cur === 'energia' ? 'energia' : 'agua'
+const layerFor = (s: Sel, cur: Layer): Layer => s.k === 'river' ? (cur === 'energia' || cur === 'rios' ? cur : 'agua') : s.k === 'rain' ? 'lluvia' : s.k === 'dis' ? 'vertidos' : s.k === 'flow' ? 'rios' : s.k === 'cons' ? 'consumo' : s.k === 'dep' || s.k === 'edar' ? 'depuracion' : cur === 'energia' ? 'energia' : 'agua'
 
 function useIsPhone() {
   const [phone, setPhone] = useState(() => matchMedia('(max-width: 980px)').matches)
@@ -68,6 +69,7 @@ export default function App() {
   const [sheet, setSheet] = useState(false)
   const { seen, resSeen, discover } = useCollection()
   useRivers() // al llegar los ríos se repinta, por si el enlace apuntaba a uno
+  useEdar()
   const toastTimer = useRef(0)
   const endBoot = useCallback(() => setBoot(false), [])
 

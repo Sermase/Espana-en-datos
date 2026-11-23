@@ -555,3 +555,42 @@ button { font: inherit; color: inherit; cursor: pointer }
 .slot .l-corto { display: none }
 .slot-depuracion .slot-glow { background: linear-gradient(180deg, #3df5b02e, #3df5b00a); border-color: #3df5b088; box-shadow: inset 0 -2px 0 #3df5b0 }
 @media (max-width: 980px) { .slot-consumo, .slot-depuracion { width: 50px } .slot:has(.l-corto) .l-largo { display: none } .slot .l-corto { display: inline } }
+
+/* Depuradoras en el mapa: decantadores redondos, color según el tratamiento */
+.edar { cursor: pointer }
+.edar-balsa { fill: #0b2c33; stroke-width: 1.4; transition: transform .5s cubic-bezier(.2,.8,.2,1); transform-box: fill-box; transform-origin: center }
+.edar.t3 .edar-balsa { stroke: #3df5b0; fill: #3df5b026 }
+.edar.t2 .edar-balsa { stroke: #3fe6ff; fill: #3fe6ff1f }
+.edar.t1 .edar-balsa, .edar.t0 .edar-balsa { stroke: #ffb02e; fill: #ffb02e1f }
+.edar.no-cumple .edar-balsa { stroke: #ff4d5e; stroke-dasharray: 2 1.5 }
+.edar-centro { fill: none; stroke: #e6f6fb88; stroke-width: .8 }
+.layer-depuracion .region { opacity: .55 }
+.decantador { width: 110px; height: 110px; flex: none }
+.dc-fondo { fill: #0a1c26; stroke: #3fe6ff22; stroke-width: 7 }
+.dc-carga { fill: none; stroke: #3df5b0; stroke-width: 7; stroke-linecap: round; transition: stroke-dasharray 1s }
+.dc-carga.is-sobre { stroke: #ff8a3d }
+.dc-agua { fill: #0f3a44 }
+.dc-puente { animation: ci-gira 7s linear infinite; transform-origin: 55px 55px }
+.dc-puente line { stroke: #e6f6fb; stroke-width: 2 }
+.dc-puente circle { fill: #3df5b0 }
+.dc-eje { fill: #e6f6fb }
+.dc-num { font: 700 17px var(--display); fill: #fff; paint-order: stroke; stroke: #0f3a44; stroke-width: 4px }
+.dc-u { font: 500 8.5px Barlow, sans-serif; fill: #cfe3ea; paint-order: stroke; stroke: #0f3a44; stroke-width: 3px }
+@media (prefers-reduced-motion: reduce) { .dc-puente { animation: none } }
+.trat { margin: 12px 0 0; font-size: 14px; color: #cfe3ea; padding-left: 10px; border-left: 3px solid #3fe6ff }
+.trat.t3 { border-color: #3df5b0 }
+.trat.t1, .trat.t0 { border-color: #ffb02e }
+.aggs { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+.aggs li { display: grid; gap: 4px; font-size: 14px }
+.agg-n small { color: var(--mute) }
+.agg-b { position: relative; display: flex; height: 7px; border-radius: 4px; background: #ffffff10; overflow: hidden }
+.agg-b i { display: block; height: 100%; background: #3fe6ff }
+.agg-b i.ias { background: #ffb02e }
+.agg-d { color: var(--mute); font-size: 12.5px; line-height: 1.4 }
+.agg-d b { color: #fff }
+.trat-barra { display: flex; gap: 2px; height: 14px; border-radius: 3px; overflow: hidden; margin: 10px 0 6px; background: #ffffff0a }
+.trat-barra i { display: block; height: 100% }
+.trat-ley { margin: 0 0 10px }
+
+/* Saneamiento: sin ríos, para ver las depuradoras y los núcleos */
+.layer-depuracion .rivers, .layer-alcantarillado .rivers { display: none }

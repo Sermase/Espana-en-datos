@@ -6,6 +6,7 @@ import { basinStats, consumo, data, depOrder, energyTotals, fmt, fmtPct, hydroCo
 import type { Layer } from './Board'
 import { byCapacity, resInBasin, type Sel } from './sel'
 import { Ciclo } from './Ciclo'
+import { useEdar } from './edar'
 import { Bar, CountUp, Head, HydroChart, Info, Ring, TimeChart } from './ui'
 import { byHydroYear, envelope, hydroLabel, hydroYear, toDate, useHistory, weekOf } from './history'
 
@@ -320,6 +321,35 @@ function ConsPanel({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
   </>)
 }
 
+function EdarResumen({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
+  const ed = useEdar()
+  if (!ed) return <section className="card"><p className="lead">Cargando depuradoras…</p></section>
+  const n = ed.length, por = [3, 2, 1].map(t => ed.filter(p => p.t === t).length), no = ed.filter(p => p.ok === 0)
+  const cap = ed.reduce((s, p) => s + (p.cap ?? 0), 0), carga = ed.reduce((s, p) => s + (p.load ?? 0), 0)
+  const llenas = ed.filter(p => p.cap && p.load && p.load > p.cap).length
+  const col = ed.flatMap(p => p.ag).filter(a => a.c1 != null && a.pe), pe = col.reduce((s, a) => s + a.pe!, 0)
+  const c1 = pe ? col.reduce((s, a) => s + a.c1! * a.pe!, 0) / pe : null
+  const COL = ['#3df5b0', '#3fe6ff', '#ffb02e']
+  return <section className="card">
+    <Head>{fmt(n)} depuradoras</Head>
+    <p className="lead">Las que España reporta a la UE (núcleos de más de 2.000 habitantes equivalentes), con datos de 2022. Juntas pueden tratar la contaminación de {fmt(cap / 1e6, 1)} millones de habitantes equivalentes y reciben {fmt(carga / 1e6, 1)} millones.</p>
+    <div className="trat-barra" role="img" aria-label={`Tratamiento más riguroso ${por[0]}, secundario ${por[1]}, primario ${por[2]}`}>
+      {por.map((v, j) => <motion.i key={j} style={{ background: COL[j] }} initial={{ width: 0 }} animate={{ width: `${(v / n) * 100}%` }} transition={{ delay: j * 0.15, duration: 0.6 }} />)}
+    </div>
+    <ul className="g-legend trat-ley">{['Más riguroso', 'Secundario', 'Primario'].map((t, j) => <li key={t}><i style={{ background: COL[j], height: 8 }} />{t} · {fmt(por[j])}</li>)}</ul>
+    <ul className="facts">
+      <li><b>{fmt(no.length)}</b> no cumplen los límites de vertido que les exige la directiva ({fmt((no.length / n) * 100, 0)} %).</li>
+      <li><b>{fmt(llenas)}</b> reciben en la semana de más carga más de lo que están diseñadas para tratar de media.</li>
+      {c1 != null && <li>Los colectores recogen de media el <b>{fmt(c1, 1)} %</b> de la contaminación de las aglomeraciones con depuradora.</li>}
+    </ul>
+    <Head>Las más grandes</Head>
+    <ul className="rank">{ed.slice(0, 8).map((p, i) => <li key={p.c}><button className={sel?.k === 'edar' && sel.i === i ? 'is-on' : ''} onClick={() => onPick({ k: 'edar', i })}>
+      <span className="rank-name">{p.n}</span><Bar value={p.cap ?? 0} max={ed[0].cap ?? 1} /><b>{fmt((p.cap ?? 0) / 1e6, 1)} M</b>
+    </button></li>)}</ul>
+    <p className="unit">capacidad en millones de habitantes equivalentes</p>
+  </section>
+}
+
 function DepPanel({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
   const N = consumo.national, lista = depOrder.map(i => ({ u: consumo.regions[i], i }))
   const top = lista[0], max = top?.u.reusePct ?? 1
@@ -340,6 +370,7 @@ function DepPanel({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
       ))}</ul>
       <p className="unit">100 × agua reutilizada / agua tratada · {consumo.year} · flecha: puntos de cambio desde {consumo.prevYear}</p>
     </section>
+    <EdarResumen onPick={onPick} sel={sel} />
     <section className="card">
       <Head>Bajo la calle</Head>
       <ul className="facts">
@@ -348,7 +379,7 @@ function DepPanel({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
         {N.sludge ? <li>Depurar deja <b>{fmt(N.sludge / 1e6, 2)} millones de toneladas</b> de lodos secos al año, que acaban sobre todo como abono, en incineración o en vertedero.</li> : null}
         {N.usos && <li>El agua reutilizada riega campos (<b>{fmt(N.usos['Agricultura'] ?? 0, 0)} %</b>), jardines y zonas deportivas ({fmt(N.usos['Jardines y zonas deportivas de ocio'] ?? 0, 0)} %) y va a la industria ({fmt(N.usos['Industria'] ?? 0, 0)} %).</li>}
       </ul>
-      <p className="note">El mapa de cada depuradora llegará en otra versión: el ministerio protege su descarga con un captcha.</p>
+      <p className="note">Cada punto del mapa es una depuradora: tócala para ver qué trata y a quién atiende.</p>
     </section>
   </>)
 }

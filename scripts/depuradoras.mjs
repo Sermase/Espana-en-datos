@@ -78,11 +78,14 @@ try {
     })
   }
   out.sort((a, b) => (b.cap ?? 0) - (a.cap ?? 0))
-  // aglomeraciones que no van a ninguna depuradora (para Alcantarillado, más adelante)
-  const conPlanta = new Set(out.flatMap(p => p.ag.map(a => a.c)))
-  const sueltas = [...AGG.values()].filter(a => !conPlanta.has(a.c) && a.x != null).map(a => ({ ...a, x: +a.x.toFixed(4), y: +a.y.toFixed(4) }))
-  writeFileSync(OUT, JSON.stringify({ fuente: 'Agencia Europea de Medio Ambiente, Waterbase UWWTD (cuestionario 2023, datos de 2022)', fecha: new Date().toISOString().slice(0, 10), edar: out, sinEdar: sueltas }))
-  log.guardado = `${out.length} depuradoras, ${sueltas.length} aglomeraciones sin depuradora enlazada`
+  // Aglomeraciones (capa Alcantarillado): todas las activas con coordenadas, y a qué depuradoras van
+  const idxPlanta = new Map(out.map((p, i) => [p.c, i]))
+  const aggOut = [...AGG.values()].filter(a => a.x != null && a.y != null && Math.abs(a.x) > 0.0001).map(a => ({
+    ...a, x: +a.x.toFixed(4), y: +a.y.toFixed(4), ed: enlaces.filter(e => e[kA] === a.c).map(e => idxPlanta.get(e[kU])).filter(i => i != null),
+  })).sort((p, q) => (q.pe ?? 0) - (p.pe ?? 0))
+  const sueltas = aggOut.filter(a => !a.ed.length)
+  writeFileSync(OUT, JSON.stringify({ fuente: 'Agencia Europea de Medio Ambiente, Waterbase UWWTD (cuestionario 2023, datos de 2022)', fecha: new Date().toISOString().slice(0, 10), edar: out, aggs: aggOut }))
+  log.guardado = `${out.length} depuradoras, ${aggOut.length} aglomeraciones (${sueltas.length} sin depuradora enlazada)`
   log.trat = [0, 1, 2, 3].map(t => out.filter(p => p.t === t).length)
   log.ok = [1, 0, null].map(v => out.filter(p => p.ok === v).length)
 } catch (e) { log.error = String(e.message).slice(-400); if (previo) log.conserva = 'se conserva depuradoras.json anterior' }

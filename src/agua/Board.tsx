@@ -9,6 +9,7 @@ import { basins, basinStats, consumo, data, fmt, fmtPct, land, landColor, pct, r
 import { resolve, type Sel } from './sel'
 import { Holo, RiverHolo } from './Holo'
 import { useRivers, type River } from './rivers'
+import { edarSize, useEdar, TRATAMIENTO, type Edar } from './edar'
 
 export type Layer = 'agua' | 'energia' | 'lluvia' | 'rios' | 'consumo' | 'depuracion' | 'vertidos'
 const W = 1000, H = 800
@@ -85,7 +86,12 @@ function reuColor(p: number) {
   return `rgb(${a.map((v, j) => Math.round(v + (b[j] - v) * t)).join(',')})`
 }
 
-const Glyphs = memo(function Glyphs({ layer, filled, focusBasin, seen, hover }: { layer: Layer; filled: boolean; focusBasin: string | null; seen: Set<string>; hover: Hover }) {
+type EdarPt = { p: Edar; i: number; xy: [number, number]; s: number }
+const Glyphs = memo(function Glyphs({ layer, filled, focusBasin, seen, hover, edar }: { layer: Layer; filled: boolean; focusBasin: string | null; seen: Set<string>; hover: Hover; edar: EdarPt[] | null }) {
+  if (layer === 'depuracion') return <>{(edar ?? []).map(({ p, i, xy, s }, j) => (
+    <g key={p.c} transform={`translate(${xy[0]} ${xy[1]})`} data-edar={i} className={`edar t${p.t} ${p.ok === 0 ? 'no-cumple' : ''}`} onPointerMove={e => hover(e, `EDAR ${p.n}`, `${TRATAMIENTO[p.t]} · ${p.cap ? fmt(p.cap) + ' hab. eq.' : 'sin capacidad'}${p.ok === 0 ? ' · no cumple' : ''}`)}>
+      <g className="gs"><circle r={s / 2} className="edar-balsa" style={{ transform: `scale(${filled ? 1 : 0})`, transitionDelay: `${Math.min(900, j * 0.6)}ms` }} />{s > 7 && <circle r={s / 4} className="edar-centro" />}</g>
+    </g>))}</>
   if (layer === 'agua' || layer === 'energia') return <>{RES.map(({ r, px, py, s, p }, i) => {
     const hydro = r.ec > 0, ep = hydro ? (r.e / r.ec) * 100 : 0
     if (layer === 'energia' && !hydro) return <circle key={r.id} cx={px} cy={py} r={1.6} className="dot-off" />
@@ -238,6 +244,8 @@ export function Board({ layer, sel, onPick, seen, onDice }: {
   const holoAt = useRef<[number, number] | null>(null)
   const holoAny = useRef(false) // los ríos tienen holograma a cualquier zoom
   const rivs = useRivers()
+  const edars = useEdar()
+  const edarPts = useMemo(() => edars?.map((p, i) => ({ p, i, xy: project(p.x, p.y), s: edarSize(p.cap) })).filter(q => inView(q.xy)) ?? null, [edars])
   const rivProj = useMemo(() => rivs?.map(v => ({ v, g: v.g.map(l => l.map(([x, y]) => project(x, y))), b: (() => {
     const pts = v.g.flat().map(([x, y]) => project(x, y)); const xs = pts.map(q => q[0]), ys = pts.map(q => q[1])
     return [[Math.min(...xs), Math.min(...ys)], [Math.max(...xs), Math.max(...ys)]] as [[number, number], [number, number]]
@@ -270,9 +278,10 @@ export function Board({ layer, sel, onPick, seen, onDice }: {
     if (layer === 'agua' || layer === 'energia') return RES.filter(x => layer === 'agua' || x.r.ec > 0).map(x => ({ sel: { k: 'res', id: x.r.id }, px: x.px, py: x.py, s: x.s }))
     if (layer === 'lluvia') return RAIN.map(x => ({ sel: { k: 'rain', i: x.i }, px: x.xy[0], py: x.xy[1], s: 12 }))
     if (layer === 'rios') return FLOWS.map(x => ({ sel: { k: 'flow', i: x.i }, px: x.xy[0], py: x.xy[1], s: 8 + Math.sqrt(x.f.q) }))
+    if (layer === 'depuracion') return (edarPts ?? []).map(x => ({ sel: { k: 'edar', i: x.i } as Sel, px: x.xy[0], py: x.xy[1], s: x.s }))
     if (layer === 'vertidos') return DIS.map(x => ({ sel: { k: 'dis', i: x.i }, px: x.xy[0], py: x.xy[1], s: 6 + Math.sqrt(x.d.v) * 0.8 }))
     return []
-  }, [layer])
+  }, [layer, edarPts])
 
   useEffect(() => {
     const t = setTimeout(() => { setFilled(true); ready.current = true }, reduce ? 0 : 1200)
@@ -321,7 +330,7 @@ export function Board({ layer, sel, onPick, seen, onDice }: {
       px = (b[0][0] + b[1][0]) / 2; py = (b[0][1] + b[1][1]) / 2
       kk = Math.min(6, Math.max(1.2, 0.62 / Math.max(bw / W, bh / (H * (isPhone() ? 0.5 : 0.8)))))
     } else {
-      const ll = it.k === 'res' ? it.r : it.k === 'rain' ? it.g : it.k === 'flow' ? it.f : it.k === 'dis' ? it.d : null
+      const ll = it.k === 'res' ? it.r : it.k === 'rain' ? it.g : it.k === 'flow' ? it.f : it.k === 'dis' ? it.d : it.k === 'edar' ? it.p : null
       if (!ll) return
       ;[px, py] = project(ll.x, ll.y); kk = Math.max(kRef.current, 3.4)
     }
@@ -421,7 +430,7 @@ export function Board({ layer, sel, onPick, seen, onDice }: {
               <path d={selRiver.g.map(l => 'M' + l.map(q => q.join(' ')).join('L')).join('')} className="river-sel-glow" />
               <path d={'M' + selRiver.v.line.map(([x, y]) => project(x, y).join(' ')).join('L')} className="river-sel-flow" />
             </g>}
-            <Glyphs layer={layer} filled={filled} focusBasin={focusBasin} seen={seen} hover={hover} />
+            <Glyphs layer={layer} filled={filled} focusBasin={focusBasin} seen={seen} hover={hover} edar={edarPts} />
             {(layer === 'agua' || layer === 'energia') && k < 1.9 && !it && <BasinChips />}
             {labels.filter(({ r }) => !(it?.k === 'res' && it.r.id === r.id)).map(({ r, px, py, s }) => (
               <g key={r.id} transform={`translate(${px} ${py})`}><g className="gs"><text className="label" y={s / 2 + 11}>{r.n}</text></g></g>
