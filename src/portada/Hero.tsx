@@ -1,19 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { geoConicConformalSpain } from 'd3-composite-projections'
-import { geoArea, geoPath } from 'd3-geo'
-import type { FeatureCollection } from 'geojson'
-import provRaw from '../provincias.json'
-
-/** d3 dibuja en la esfera: si un anillo va en el sentido contrario, rellena «todo menos la provincia». Se corrige el sentido. */
-const prov = (() => {
-  const fc = JSON.parse(JSON.stringify(provRaw)) as FeatureCollection
-  for (const f of fc.features) {
-    const g = f.geometry as { type: string; coordinates: number[][][] | number[][][][] }
-    const polys = (g.type === 'Polygon' ? [g.coordinates] : g.coordinates) as number[][][][]
-    for (const poly of polys) if (geoArea({ type: 'Polygon', coordinates: poly } as never) > 2 * Math.PI) poly.forEach(r => r.reverse())
-  }
-  return fc
-})()
+import { geoPath } from 'd3-geo'
+import { PROVINCIAS as prov } from '../geo/provincias'
 
 /**
  * La entrada de la portada: miles de puntos de datos llegan desde fuera y forman España;

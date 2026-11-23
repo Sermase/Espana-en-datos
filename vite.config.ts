@@ -9,6 +9,6 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
     chunkSizeWarningLimit: 900,
-    rollupOptions: { input: { portada: resolve(__dirname, 'index.html'), agua: resolve(__dirname, 'agua/index.html'), gasolineras: resolve(__dirname, 'gasolineras/index.html'), poblacion: resolve(__dirname, 'poblacion/index.html'), economia: resolve(__dirname, 'economia/index.html'), energia: resolve(__dirname, 'energia/index.html'), comercio: resolve(__dirname, 'comercio/index.html') } },
+    rollupOptions: { input: { portada: resolve(__dirname, 'index.html'), agua: resolve(__dirname, 'agua/index.html'), gasolineras: resolve(__dirname, 'gasolineras/index.html'), poblacion: resolve(__dirname, 'poblacion/index.html'), economia: resolve(__dirname, 'economia/index.html'), energia: resolve(__dirname, 'energia/index.html'), comercio: resolve(__dirname, 'comercio/index.html'), vivienda: resolve(__dirname, 'vivienda/index.html') } },
   },
 })

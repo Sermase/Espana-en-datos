@@ -122,11 +122,12 @@ function cifras(id: string): { n: number; f: (v: number) => string; l: string }[
     case 'energia': return [{ n: Number(r.ren), f: pct(0), l: 'renovable ayer' }, { n: Number(r.pvpc), f: eur(), l: 'kWh hoy, tarifa regulada' }]
     case 'economia': return [{ n: par('pib'), f: pct(1, true), l: 'crece el PIB' }, { n: par('ipc'), f: pct(1), l: 'inflación' }, { n: par('paro'), f: pct(1), l: 'paro' }]
     case 'comercio': return [{ n: Number(r.exp), f: ent, l: `mil M€ vendidos en ${r.año}` }, { n: Number(r.exp) - Number(r.imp), f: v => es(v, 1), l: 'mil M€ de saldo' }]
+    case 'vivienda': return [{ n: par('ipv_a'), f: pct(1, true), l: 'sube el precio en un año' }, { n: Number(r.compraventas), f: ent, l: 'casas vendidas en 12 meses' }]
     case 'poblacion': return [{ n: Number(r.total) / 1e6, f: v => `${es(v, 2)} M`, l: `habitantes (${r.año})` }, { n: Number(r.municipios), f: ent, l: 'municipios' }]
     default: return []
   }
 }
-const FUENTE: Record<string, string> = { agua: `Datos del ${fecha}`, poblacion: 'Padrón del INE', economia: 'Eurostat, cada día', energia: 'En directo, Red Eléctrica', comercio: 'Eurostat, cada semana', gasolineras: 'Datos de hoy' }
+const FUENTE: Record<string, string> = { vivienda: 'INE, cada semana', agua: `Datos del ${fecha}`, poblacion: 'Padrón del INE', economia: 'Eurostat, cada día', energia: 'En directo, Red Eléctrica', comercio: 'Eurostat, cada semana', gasolineras: 'Datos de hoy' }
 
 
 const R = resumen as unknown as Record<string, Record<string, unknown>>

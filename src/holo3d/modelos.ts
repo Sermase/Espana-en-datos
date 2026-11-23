@@ -217,3 +217,25 @@ export const globo = (rutas: Ruta[]): Modelo => t => {
   }
   return { fuerte, tenue, puntos }
 }
+
+/** Bloque de viviendas: plantas, ventanas que se encienden y una casa al lado. `luz` 0–1 = cuántas ventanas encendidas. */
+export const edificio = (luz = 0.6): Modelo => t => {
+  const fuerte: Seg[] = [], tenue: Seg[] = []
+  const W = 0.34, D = 0.26, P = 9, hp = 0.1, x0 = -0.32
+  caja(fuerte, x0 - W / 2, x0 + W / 2, 0, P * hp, -D / 2, D / 2)
+  for (let k = 1; k < P; k++) { const y = k * hp; tenue.push([x0 - W / 2, y, D / 2, x0 + W / 2, y, D / 2], [x0 + W / 2, y, -D / 2, x0 + W / 2, y, D / 2]) }
+  // casa unifamiliar con tejado a dos aguas
+  const cx = 0.34, w = 0.22, d = 0.2, h = 0.2
+  caja(fuerte, cx - w / 2, cx + w / 2, 0, h, -d / 2, d / 2)
+  for (const z of [-d / 2, d / 2]) fuerte.push([cx - w / 2, h, z, cx, h + 0.14, z], [cx + w / 2, h, z, cx, h + 0.14, z])
+  fuerte.push([cx, h + 0.14, -d / 2, cx, h + 0.14, d / 2])
+  // ventanas: se encienden y apagan despacio
+  const puntos: [number, number, number][] = []
+  for (let k = 0; k < P; k++) for (let j = 0; j < 4; j++) {
+    const s = Math.sin(k * 12.9898 + j * 78.233) * 43758.5453, r = s - Math.floor(s)
+    const on = (r + t * 0.03 * (0.5 + r)) % 1 < luz
+    if (on) puntos.push([x0 - W / 2 + (j + 0.5) * (W / 4), k * hp + hp * 0.55, D / 2 + 0.005])
+  }
+  puntos.push([cx - 0.05, 0.1, d / 2 + 0.005], [cx + 0.05, 0.1, d / 2 + 0.005])
+  return { fuerte, tenue, puntos }
+}
