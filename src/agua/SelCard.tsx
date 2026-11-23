@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { motion, type PanInfo } from 'motion/react'
-import { Activity, Bath, Building2, CalendarClock, ChevronLeft, House, ChevronRight, CloudRain, Droplets, Recycle, Factory, Footprints, Map as MapIcon, Mountain, Ruler, Sparkles, Timer, Trophy, Waves, X, Zap } from 'lucide-react'
+import { Activity, Bath, Building2, Network, CalendarClock, ChevronLeft, House, ChevronRight, CloudRain, Droplets, Recycle, Factory, Footprints, Map as MapIcon, Mountain, Ruler, Sparkles, Timer, Trophy, Waves, X, Zap } from 'lucide-react'
 import { basinStats, consumo, data, depOrder, fmt, fmtBig, fmtPct, pct, status, type Reservoir } from './data'
 import { byCapacity, rankIn, resInBasin, resolve, sequence, sizeRank, type Sel } from './sel'
 import { Bar, CountUp, Head, HydroChart, Info, Ring, TimeChart } from './ui'
 import { Ciclo } from './Ciclo'
+import { habitantes, metrosPorHab, orden, regionDeNuts } from './ciudad'
 import { EXTRA, RED, TRATAMIENTO, aggList, c1Color, edarById, edarList, type AggPt, type Edar } from './edar'
 import { riverLen, riverList, riverMouth, riverStats, type River } from './rivers'
 import { byHydroYear, envelope, fechaCorta, hydroLabel, hydroYear, near, toDate, useHistory, weekOf } from './history'
@@ -23,6 +24,7 @@ const KIND = {
   flow: { label: 'Estación de aforo', icon: Activity },
   cons: { label: 'Abastecimiento', icon: House },
   dep: { label: 'Depuración', icon: Recycle },
+  alc: { label: 'Alcantarillado', icon: Network },
   edar: { label: 'Depuradora', icon: Recycle },
   agg: { label: 'Núcleo urbano', icon: Building2 },
   river: { label: 'Río', icon: Waves },
@@ -76,6 +78,7 @@ export function SelCard({ sel, onPick, isNew, compact, dir }: {
       {it.k === 'flow' && <FlowBody i={it.i} />}
       {it.k === 'cons' && <ConsBody i={it.i} />}
       {it.k === 'dep' && <DepBody i={it.i} />}
+      {it.k === 'alc' && <AlcBody i={it.i} onPick={onPick} />}
       {it.k === 'edar' && <EdarBody p={it.p} />}
       {it.k === 'agg' && <AggBody a={it.a} onPick={onPick} />}
       {it.k === 'river' && <RiverBody v={it.v} onPick={onPick} />}
@@ -427,6 +430,36 @@ function AggBody({ a, onPick }: { a: AggPt; onPick: (s: Sel) => void }) {
     </>}
     {!a.ed.length && <p className="note">No consta ninguna depuradora enlazada en el reporte.</p>}
     <p className="note">Aglomeración: el núcleo (o núcleos) cuya agua usada se recoge junta. Habitante equivalente: la contaminación de una persona al día, incluidas industria y comercios. Fuente: Agencia Europea de Medio Ambiente, reporte de España (2022).</p>
+  </>)
+}
+
+const MAD_BCN = 620 // km de autovía entre Madrid y Barcelona, para hacerse una idea
+function AlcBody({ i, onPick }: { i: number; onPick: (s: Sel) => void }) {
+  const u = consumo.regions[i], N = consumo.national, v = metrosPorHab(u), vN = metrosPorHab(N)
+  const lista = orden('alcantarillado'), pos = lista.findIndex(x => x.i === i) + 1, max = lista[0]?.v ?? 1
+  const hab = habitantes(u)
+  const ags = (aggList() ?? []).map((a, j) => ({ a, j })).filter(x => regionDeNuts(x.a.nuts) === u.n)
+  const faltan = ags.filter(x => x.a.c1 != null && x.a.c1 < 99.5).sort((p, q) => (q.a.pe ?? 0) - (p.a.pe ?? 0))
+  return (<>
+    <h2 className="sel-name">{u.n}</h2>
+    <p className="sel-sub">Alcantarillado · año {consumo.year} · INE <Info k="alcantarillado" /></p>
+    <div className="sel-hero">
+      {v != null ? <Ring p={(v / max) * 100} shown={v} unit="m/hab" tone="urb" label={`${fmt(v, 1)} metros de alcantarillado por habitante`} /> : <Ring p={0} shown={0} unit="sin dato" label="Sin dato" />}
+      <div className="stat-grid">
+        {pos > 0 && <Stat label="Puesto">{pos}º <small>de {lista.length}</small></Stat>}
+        {u.sewerKm ? <Stat label="Red">{fmt(u.sewerKm)} <small>km</small></Stat> : null}
+        {v != null && vN != null && <Stat label="Vs. España">{signed(v - vN, 1)} <small>m/hab</small></Stat>}
+        {hab ? <Stat label="Habitantes">{fmtBig(hab)}</Stat> : null}
+      </div>
+    </div>
+    {u.sewerKm ? <Fun icon={Ruler}>Puesto en fila, su alcantarillado iría <b>{fmt(u.sewerKm / MAD_BCN, 1)} veces</b> de Madrid a Barcelona.</Fun> : null}
+    {v != null && vN != null && <Fun icon={Network}>{v > vN ? <>Tiene más tubo por vecino que la media (<b>{fmt(vN, 1)} m</b>): suele pasar donde la gente vive más repartida, y encarece mantener y renovar la red.</> : <>Tiene menos tubo por vecino que la media (<b>{fmt(vN, 1)} m</b>): la población vive más concentrada y cada metro de red da servicio a más gente.</>}</Fun>}
+    {ags.length > 0 && <>
+      <h3 className="sel-h">Sus núcleos urbanos</h3>
+      <p className="lead sm">{fmt(ags.length)} núcleos de más de 2.000 habitantes equivalentes reportados a la UE; {faltan.length ? <>en <b>{fmt(faltan.length)}</b> las alcantarillas no recogen toda el agua usada.</> : <>en todos, las alcantarillas recogen toda el agua usada.</>}</p>
+      {faltan.length > 0 && <ul className="mini">{faltan.slice(0, 4).map(({ a, j }) => <li key={a.c}><button onClick={() => onPick({ k: 'agg', i: j })}><span>{a.n}<small>{a.pe ? `${fmtBig(a.pe)} hab. eq.` : ''}</small></span><b>{fmt(a.c1!, 1)} %</b></button></li>)}</ul>}
+    </>}
+    <p className="note">Metros de alcantarillado por habitante: kilómetros de red del INE divididos entre los habitantes, que salen del consumo de los hogares y los litros por persona que el INE calcula con el padrón. Los núcleos son del reporte de España a la Agencia Europea de Medio Ambiente (2022).</p>
   </>)
 }
 

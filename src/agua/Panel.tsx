@@ -6,6 +6,7 @@ import { basinStats, consumo, data, depOrder, energyTotals, fmt, fmtPct, hydroCo
 import type { Layer } from './Board'
 import { byCapacity, resInBasin, type Sel } from './sel'
 import { Ciclo } from './Ciclo'
+import { metrosPorHab, orden } from './ciudad'
 import { aggList, c1Color, RED, useEdar } from './edar'
 import { Bar, CountUp, Head, HydroChart, Info, Ring, TimeChart } from './ui'
 import { byHydroYear, envelope, hydroLabel, hydroYear, toDate, useHistory, weekOf } from './history'
@@ -360,7 +361,19 @@ function AlcPanel({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
   const redes = ['C', 'S', 'B'].map(k => ({ k, n: ags.filter(a => a.red === k).length }))
   const nr = redes.reduce((s, x) => s + x.n, 0) || 1
   const COL: Record<string, string> = { C: '#a98d6a', S: '#3fe6ff', B: '#9085e9' }
+  const lista = orden('alcantarillado'), vN = metrosPorHab(N), maxM = lista[0]?.v ?? 1
   return (<>
+    <section className="card">
+      <h2><CountUp value={N.sewerKm ?? 0} /> km de alcantarillado</h2>
+      <p className="lead">Lo que mide la red de cloacas de España según el INE ({consumo.year}){vN != null ? <>: <b>{fmt(vN, 1)} metros por habitante</b>. Donde la gente vive más repartida hay más tubo por vecino que mantener y renovar</> : null}. <Info k="alcantarillado" /></p>
+      <Head>Metros de alcantarillado por habitante</Head>
+      <ul className="rank">{lista.map(({ u, i, v }) => (
+        <li key={u.n}><button className={sel?.k === 'alc' && sel.i === i ? 'is-on' : ''} onClick={() => onPick({ k: 'alc', i })}>
+          <span className="rank-name">{u.n}</span><Bar value={v} max={maxM} tone={vN != null && v > vN ? 'urb' : 'water'} /><b>{fmt(v, 1)}</b>
+        </button></li>
+      ))}</ul>
+      <p className="unit">km de red del INE ÷ habitantes · en naranja, por encima de la media</p>
+    </section>
     <section className="card">
       <h2><CountUp value={c1} decimals={1} /> % llega a la alcantarilla</h2>
       <p className="lead">De la contaminación de los {fmt(ags.length)} núcleos urbanos que España reporta a la UE (más de 2.000 habitantes equivalentes), la que recogen los colectores, ponderada por tamaño. {fmt(enteras)} lo recogen todo. Datos de 2022.</p>
@@ -368,7 +381,6 @@ function AlcPanel({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
       <ul className="g-legend trat-ley">{redes.map(r => <li key={r.k}><i style={{ background: COL[r.k], height: 8 }} />{RED[r.k].split(' (')[0]} · {fmt(r.n)}</li>)}</ul>
       <p className="unit">tipo de red de los núcleos que lo declaran</p>
       <ul className="facts">
-        {N.sewerKm ? <li>España tiene <b>{fmt(N.sewerKm)} km</b> de alcantarillado (INE, {consumo.year}).</li> : null}
         <li>En la red <b>unitaria</b>, la lluvia y el agua usada van juntas: con tormentas fuertes desbordan y parte llega al río sin depurar.</li>
       </ul>
     </section>
@@ -379,7 +391,7 @@ function AlcPanel({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
       </button></li>)}</ul>
       <p className="unit">núcleos de más de 10.000 habitantes equivalentes · % recogido por colectores</p>
     </section>}
-    <p className="foot">Cada cuadrado del mapa es un núcleo: cian si las alcantarillas lo recogen todo; amarillo, naranja y rojo cuanto menos.</p>
+    <p className="foot">De lejos, el mapa pinta cada comunidad según sus metros de alcantarillado por habitante. Al acercarte, cada cuadrado es un núcleo: cian si las alcantarillas lo recogen todo; amarillo, naranja y rojo cuanto menos.</p>
   </>)
 }
 
@@ -412,7 +424,7 @@ function DepPanel({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
         {N.sludge ? <li>Depurar deja <b>{fmt(N.sludge / 1e6, 2)} millones de toneladas</b> de lodos secos al año, que acaban sobre todo como abono, en incineración o en vertedero.</li> : null}
         {N.usos && <li>El agua reutilizada riega campos (<b>{fmt(N.usos['Agricultura'] ?? 0, 0)} %</b>), jardines y zonas deportivas ({fmt(N.usos['Jardines y zonas deportivas de ocio'] ?? 0, 0)} %) y va a la industria ({fmt(N.usos['Industria'] ?? 0, 0)} %).</li>}
       </ul>
-      <p className="note">Cada punto del mapa es una depuradora: tócala para ver qué trata y a quién atiende.</p>
+      <p className="note">De lejos, el mapa pinta cada comunidad según el agua que reutiliza. Al acercarte, cada círculo es una depuradora: tócala para ver qué trata y a quién atiende.</p>
     </section>
   </>)
 }
@@ -440,11 +452,12 @@ function DischargePanel({ onPick }: { onPick: Pick }) {
 }
 
 type Tab = 'resumen' | 'historico' | 'rankings'
-export function Panel({ layer, onPick, sel, card }: { layer: Layer; onPick: Pick; sel: Sel | null; card: ReactNode }) {
+export function Panel({ layer, onPick, sel, card, leyenda }: { layer: Layer; onPick: Pick; sel: Sel | null; card: ReactNode; leyenda?: ReactNode }) {
   const [tab, setTab] = useState<Tab>('resumen')
   const tabbed = layer === 'agua' || layer === 'energia'
   return (
     <div className="panel-inner">
+      {leyenda}
       <Finder onPick={onPick} />
       <AnimatePresence mode="popLayout" initial={false}>{card}</AnimatePresence>
       {tabbed && <Tabs value={tab} onChange={setTab} items={[['resumen', layer === 'agua' ? 'Resumen' : 'Energía'], ['historico', 'Histórico'], ['rankings', 'Rankings']]} />}

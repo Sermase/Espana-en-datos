@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react'
 import { basinStats, consumo, data, depOrder, pct, type BasinStat, type Discharger, type Flow, type RainGauge, type RegionUse, type Reservoir } from './data'
 import { riverById, riverList, type River } from './rivers'
 import { aggById, aggList, edarById, edarList, type AggPt, type Edar } from './edar'
+import { orden } from './ciudad'
 
 /** Lo que el jugador tiene seleccionado en el mapa. */
 export type Sel =
@@ -12,6 +13,7 @@ export type Sel =
   | { k: 'flow'; i: number }
   | { k: 'cons'; i: number }
   | { k: 'dep'; i: number }
+  | { k: 'alc'; i: number }
   | { k: 'edar'; i: number }
   | { k: 'agg'; i: number }
   | { k: 'river'; id: number }
@@ -33,6 +35,7 @@ export type Resolved =
   | { k: 'flow'; f: Flow; i: number }
   | { k: 'cons'; u: RegionUse; i: number }
   | { k: 'dep'; u: RegionUse; i: number }
+  | { k: 'alc'; u: RegionUse; i: number }
   | { k: 'edar'; p: Edar; i: number }
   | { k: 'agg'; a: AggPt; i: number }
   | { k: 'river'; v: River }
@@ -45,6 +48,7 @@ export function resolve(s: Sel | null): Resolved | null {
   if (s.k === 'flow') { const f = data.flows[s.i]; return f ? { k: 'flow', f, i: s.i } : null }
   if (s.k === 'cons') { const u = consumo.regions[s.i]; return u ? { k: 'cons', u, i: s.i } : null }
   if (s.k === 'dep') { const u = consumo.regions[s.i]; return u ? { k: 'dep', u, i: s.i } : null }
+  if (s.k === 'alc') { const u = consumo.regions[s.i]; return u ? { k: 'alc', u, i: s.i } : null }
   if (s.k === 'agg') { const a = aggById(s.i); return a ? { k: 'agg', a, i: s.i } : null }
   if (s.k === 'edar') { const p = edarById(s.i); return p ? { k: 'edar', p, i: s.i } : null }
   if (s.k === 'river') { const v = riverById(s.id); return v ? { k: 'river', v } : null }
@@ -82,6 +86,10 @@ export function sequence(s: Sel): { list: Sel[]; at: number; label: string } {
     const list = depOrder.map(i => ({ k: 'dep', i }) as Sel)
     return { list, at: depOrder.indexOf(s.i), label: 'de más a menos agua reutilizada' }
   }
+  if (s.k === 'alc') {
+    const o = orden('alcantarillado').map(x => x.i), list = o.map(i => ({ k: 'alc', i }) as Sel)
+    return { list, at: o.indexOf(s.i), label: 'de más a menos metros de alcantarillado por habitante' }
+  }
   if (s.k === 'river') {
     const list = (riverList() ?? []).map(v => ({ k: 'river', id: v.id }) as Sel)
     return { list, at: s.id, label: 'de más largo a más corto' }
@@ -95,15 +103,16 @@ export function sequence(s: Sel): { list: Sel[]; at: number; label: string } {
 }
 
 export function selKey(s: Sel) {
-  return s.k === 'res' ? `embalse-${s.id}` : s.k === 'basin' ? `cuenca-${s.id}` : s.k === 'rain' ? `lluvia-${s.i}` : s.k === 'flow' ? `rio-${s.i}` : s.k === 'cons' ? `consumo-${s.i}` : s.k === 'dep' ? `depuracion-${s.i}` : s.k === 'edar' ? `edar-${s.i}` : s.k === 'agg' ? `nucleo-${s.i}` : s.k === 'river' ? `cauce-${s.id}` : `vertido-${s.i}`
+  return s.k === 'res' ? `embalse-${s.id}` : s.k === 'basin' ? `cuenca-${s.id}` : s.k === 'rain' ? `lluvia-${s.i}` : s.k === 'flow' ? `rio-${s.i}` : s.k === 'cons' ? `consumo-${s.i}` : s.k === 'dep' ? `depuracion-${s.i}` : s.k === 'alc' ? `alcantarillado-${s.i}` : s.k === 'edar' ? `edar-${s.i}` : s.k === 'agg' ? `nucleo-${s.i}` : s.k === 'river' ? `cauce-${s.id}` : `vertido-${s.i}`
 }
 export function fromKey(key: string): Sel | null {
-  const m = key.replace(/^#/, '').match(/^(embalse|cuenca|lluvia|vertido|rio|consumo|depuracion|edar|nucleo|cauce)-([A-Za-z0-9]+)$/)
+  const m = key.replace(/^#/, '').match(/^(embalse|cuenca|lluvia|vertido|rio|consumo|depuracion|alcantarillado|edar|nucleo|cauce)-([A-Za-z0-9]+)$/)
   if (!m) return null
   // Los ríos llegan en un fichero aparte: su enlace vale aunque aún no hayan cargado.
   if (m[1] === 'cauce') return { k: 'river', id: Number(m[2]) }
   if (m[1] === 'edar') return { k: 'edar', i: Number(m[2]) }
   if (m[1] === 'nucleo') return { k: 'agg', i: Number(m[2]) }
+  if (m[1] === 'alcantarillado') { const a: Sel = { k: 'alc', i: Number(m[2]) }; return resolve(a) ? a : null }
   const s: Sel = m[1] === 'embalse' ? { k: 'res', id: Number(m[2]) } : m[1] === 'cuenca' ? { k: 'basin', id: m[2] } : m[1] === 'lluvia' ? { k: 'rain', i: Number(m[2]) } : m[1] === 'rio' ? { k: 'flow', i: Number(m[2]) } : m[1] === 'consumo' ? { k: 'cons', i: Number(m[2]) } : m[1] === 'depuracion' ? { k: 'dep', i: Number(m[2]) } : { k: 'dis', i: Number(m[2]) }
   return resolve(s) ? s : null
 }
@@ -150,7 +159,8 @@ export function randomSel(layer: string, seen: Set<string>): Sel {
   if (layer === 'lluvia') return { k: 'rain', i: pick(data.rain.map((_, i) => i)) }
   if (layer === 'vertidos') return { k: 'dis', i: pick(data.dischargers.map((_, i) => i)) }
   if (layer === 'consumo') return { k: 'cons', i: pick(consumo.regions.map((_, i) => i)) }
-  if (layer === 'depuracion') return { k: 'dep', i: pick(depOrder) }
+  if (layer === 'depuracion') { const ed = edarList(); return ed?.length ? { k: 'edar', i: pick(ed.map((_, i) => i)) } : { k: 'dep', i: pick(depOrder) } }
+  if (layer === 'alcantarillado') { const ag = aggList(); return ag?.length ? { k: 'agg', i: pick(ag.map((_, i) => i)) } : { k: 'alc', i: pick(orden('alcantarillado').map(x => x.i)) } }
   if (layer === 'rios') return { k: 'flow', i: pick(data.flows.map((_, i) => i)) }
   const pool = data.reservoirs.filter(r => (layer !== 'energia' || r.ec > 0))
   const fresh = pool.filter(r => !seen.has(`embalse-${r.id}`))

@@ -2,7 +2,6 @@ import snapshot from './data/snapshot.json'
 import basinsGeo from './data/basins.json'
 import landGeo from './data/land.json'
 import riversGeo from './data/rivers.json'
-import regionsGeo from './data/regions.json'
 import consumoData from './data/consumo.json'
 import type { FeatureCollection, Geometry } from 'geojson'
 
@@ -38,7 +37,6 @@ type Snapshot = {
 export const data = snapshot as unknown as Snapshot
 export const basins = basinsGeo as unknown as FeatureCollection<Geometry, { id: string; name: string }>
 export const land = landGeo as unknown as FeatureCollection
-export const regions = regionsGeo as unknown as FeatureCollection<Geometry, { name: string }>
 /** Abastecimiento y saneamiento de una comunidad (INE). Volúmenes de la red en hm³ al año; tratada y reutilizada en m³ al día. */
 export type RegionUse = {
   n: string; l: number; v: number | null; cost: number | null
@@ -114,6 +112,7 @@ export const INFO: Record<string, { t: string; b: string }> = {
   vertidos: { t: 'Vertidos autorizados', b: 'Permisos para devolver agua usada a ríos o al mar: depuradoras de ciudades, refrigeración de centrales, piscifactorías, industria o desaladoras. Es el máximo autorizado al año, no lo que se consume.' },
   records: { t: 'Récords', b: 'El máximo y el mínimo porcentaje de llenado registrados en la base de datos histórica del ministerio desde 1988, contando desde que el embalse se llenó por primera vez por encima de la mitad.' },
   consumo: { t: 'Consumo de los hogares', b: `Litros que gasta de media cada habitante al día en su casa: agua registrada por los contadores de los hogares dividida entre la población. No incluye industria, riego ni comercios. Lo publica el INE cada dos años; los datos de municipios no se publican para toda España.${consumo.litrosCalculados ? ' Aquí se calcula con el volumen de los hogares del INE y la población del padrón, así que puede diferir en un litro de la cifra de su nota de prensa, que usa la población a 1 de julio.' : ''}` },
+  alcantarillado: { t: 'Alcantarillado', b: 'Las cloacas: la red de tubos bajo la calle que recoge el agua usada de casas, comercios e industrias y la lleva a la depuradora. Metros por habitante = kilómetros de red que da el INE ÷ habitantes. En la red unitaria la lluvia va por el mismo tubo y, con tormentas fuertes, desborda al río sin depurar; en la separativa, la lluvia va aparte.' },
   depuracion: { t: 'Depuración y reutilización', b: 'Agua residual que recogen las alcantarillas y tratan las depuradoras (EDAR), y la parte que se vuelve a usar para regar, limpiar calles o en la industria en lugar de devolverse al río o al mar. Reutilización = 100 × agua reutilizada / agua tratada, en la misma comunidad y el mismo año, como define el INE su indicador. El INE da estos volúmenes en metros cúbicos al día. La tabla de destinos del INE reparte el agua tratada de otra forma y su porcentaje de «reutilizada» no coincide exactamente.' },
   abastecimiento: { t: 'Abastecimiento', b: 'El agua que entra en la red pública y lo que se registra en los contadores. La diferencia es agua no registrada: fugas y roturas (pérdidas reales) y errores de contador, fraudes o usos sin medir (pérdidas aparentes). Lo publica el INE cada dos años por comunidad.' },
   perdidas: { t: 'Pérdidas en la red', b: 'Agua que entra en la red de abastecimiento pero no llega a nadie: las pérdidas reales son fugas, roturas y averías; las aparentes, errores de contador, fraudes y usos no medidos.' },

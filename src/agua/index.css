@@ -64,8 +64,6 @@ button { font: inherit; color: inherit; cursor: pointer }
 .reg-label { pointer-events: none }
 .reg-num { font: 600 15px var(--display); fill: #fff; text-anchor: middle; paint-order: stroke; stroke: #02080d; stroke-width: 3px }
 .reg-unit { font: 500 8.5px var(--display); fill: #cfe3ea; text-anchor: middle; paint-order: stroke; stroke: #02080d; stroke-width: 2.5px }
-.layer-consumo .river { display: none }
-.layer-consumo .river-bed { opacity: .5 }
 .land-side2 { fill: #072233 }
 .basin { stroke: #3fe6ff; stroke-opacity: .32; stroke-width: .8; vector-effect: non-scaling-stroke; transition: fill .7s, opacity .4s; cursor: pointer }
 .basin:hover { stroke-opacity: .8 }
@@ -550,11 +548,7 @@ button { font: inherit; color: inherit; cursor: pointer }
 .sel-h { display: flex; align-items: center; gap: 6px; margin: 16px 0 6px; font: 600 14px var(--display); color: #dfeff4 }
 .fun.warn { border-left-color: #ff8a95; background: #ff8a950d }
 
-.slot-consumo { width: 104px }
-.slot-depuracion { width: 82px }
-.slot .l-corto { display: none }
 .slot-depuracion .slot-glow { background: linear-gradient(180deg, #3df5b02e, #3df5b00a); border-color: #3df5b088; box-shadow: inset 0 -2px 0 #3df5b0 }
-@media (max-width: 980px) { .slot-consumo, .slot-depuracion { width: 50px } .slot:has(.l-corto) .l-largo { display: none } .slot .l-corto { display: inline } }
 
 /* Depuradoras en el mapa: decantadores redondos, color según el tratamiento */
 .edar { cursor: pointer }
@@ -564,7 +558,6 @@ button { font: inherit; color: inherit; cursor: pointer }
 .edar.t1 .edar-balsa, .edar.t0 .edar-balsa { stroke: #ffb02e; fill: #ffb02e1f }
 .edar.no-cumple .edar-balsa { stroke: #ff4d5e; stroke-dasharray: 2 1.5 }
 .edar-centro { fill: none; stroke: #e6f6fb88; stroke-width: .8 }
-.layer-depuracion .region { opacity: .55 }
 .decantador { width: 110px; height: 110px; flex: none }
 .dc-fondo { fill: #0a1c26; stroke: #3fe6ff22; stroke-width: 7 }
 .dc-carga { fill: none; stroke: #3df5b0; stroke-width: 7; stroke-linecap: round; transition: stroke-dasharray 1s }
@@ -593,12 +586,9 @@ button { font: inherit; color: inherit; cursor: pointer }
 .trat-ley { margin: 0 0 10px }
 
 /* Saneamiento: sin ríos, para ver las depuradoras y los núcleos */
-.layer-depuracion .rivers, .layer-alcantarillado .rivers { display: none }
 .nucleo { cursor: pointer }
 .nucleo-c { stroke: #03090f; stroke-width: .6; transition: transform .5s cubic-bezier(.2,.8,.2,1); transform-box: fill-box; transform-origin: center; opacity: .9 }
-.slot-alcantarillado { width: 92px }
 .slot-alcantarillado .slot-glow { background: linear-gradient(180deg, #a98d6a2e, #a98d6a0a); border-color: #a98d6a88; box-shadow: inset 0 -2px 0 #a98d6a }
-@media (max-width: 980px) { .slot-alcantarillado { width: 50px } }
 .redsvg { width: 110px; height: 100px; flex: none }
 .rs-tronco { stroke: #3fe6ff; stroke-width: 3; stroke-linecap: round }
 .redsvg line { stroke-width: 2; stroke-linecap: round }
@@ -611,38 +601,100 @@ button { font: inherit; color: inherit; cursor: pointer }
 
 /* Mapa de calles de Alcantarillado y Depuración */
 .mapa-calles { touch-action: auto }
-.mc-mapa { position: absolute; inset: 0; background: #0b0f12 }
-.mc-mapa .leaflet-control-attribution { background: rgba(3,9,15,.7); color: #86a9b5; font-size: 10px }
-.mc-mapa .leaflet-control-attribution a { color: #a9c6cf }
-.mc-zonas { position: absolute; z-index: 500; left: 16px; top: 112px; display: flex; flex-wrap: wrap; gap: 4px; max-width: 60% }
-.mc-zonas button, .mc-zoom button { padding: 6px 10px; border: 1px solid var(--line-hi, #3fe6ff55); border-radius: 4px; background: rgba(3, 16, 26, .85); color: #e6f6fb; font: 600 12.5px var(--display); backdrop-filter: blur(4px) }
-.mc-zonas button:hover, .mc-zoom button:hover { border-color: #3fe6ff; color: #fff }
-.mc-zoom { position: absolute; z-index: 500; right: 16px; bottom: 120px; display: grid; gap: 6px }
-.mc-zoom button { width: 40px; height: 40px; font-size: 20px; padding: 0 }
-.mc-estado { position: absolute; z-index: 500; left: 16px; top: 150px; margin: 0; font-size: 12.5px; color: #a9c6cf; background: rgba(3,16,26,.7); padding: 4px 8px; border-radius: 3px }
-.mc-tip { background: rgba(3, 12, 18, .95) !important; color: #e6f6fb !important; border: 1px solid #3fe6ff44 !important; font: 500 12.5px Barlow, sans-serif !important; box-shadow: 0 6px 20px rgba(0,0,0,.45) !important }
-.mc-tip::before { display: none }
-.mc-sel { animation: mc-pulso 1.6s ease-out infinite; transform-box: fill-box; transform-origin: center }
-@keyframes mc-pulso { 0% { stroke-opacity: 1 } 100% { stroke-opacity: .2 } }
-@media (prefers-reduced-motion: reduce) { .mc-sel { animation: none } }
-@media (max-width: 980px) { .mc-zonas { top: 132px; left: 10px; max-width: 92% } .mc-zonas button { padding: 5px 8px; font-size: 11.5px } .mc-estado { top: 170px; left: 10px } .mc-zoom { bottom: 150px; right: 10px } }
-.mc-et { pointer-events: none }
-.mc-et b, .mc-et span { position: absolute; left: 0; transform: translate(-50%, -50%); white-space: nowrap; text-align: center; paint-order: stroke; -webkit-text-stroke: 0; text-shadow: 0 0 4px #03090f, 0 0 2px #03090f, 0 1px 2px #03090f }
-.mc-et b { top: -6px; font: 700 18px var(--display); color: #fff }
-.mc-et span { top: 12px; font: 600 10.5px Barlow, sans-serif; color: #dfeff4 }
-.mc-ley { position: absolute; z-index: 500; left: 16px; bottom: 120px; display: grid; gap: 4px; max-width: 250px; padding: 10px 12px; border: 1px solid #3fe6ff33; border-radius: 6px; background: rgba(3, 16, 26, .88); backdrop-filter: blur(4px); font-size: 12.5px; color: #cfe3ea }
-.mc-ley b { font: 600 13px var(--display); color: #fff }
-.mc-ley span { display: flex; align-items: center; gap: 7px }
-.mc-ley span i { width: 10px; height: 10px; border-radius: 50%; flex: none }
-.mc-ley span i.no { background: transparent; border: 2px dashed #ff4d5e }
-.mc-ley small { color: #86a9b5; font-size: 11.5px }
-.mc-grad { display: block; height: 8px; border-radius: 4px }
-.mc-grad.depuracion { background: linear-gradient(90deg, rgb(20,52,74), rgb(61,245,176)) }
-.mc-grad.alcantarillado { background: linear-gradient(90deg, #ff4d5e, #3fe6ff) }
-.mc-ext { display: flex !important; justify-content: space-between }
-@media (max-width: 980px) { .mc-ley { left: 10px; bottom: 150px; max-width: 200px; padding: 8px 10px; font-size: 11.5px } .mc-et b { font-size: 14px } .mc-et span { font-size: 9.5px } }
-.mc-can { position: absolute; z-index: 500; left: 16px; bottom: 300px; padding: 0; border: 1px solid #3fe6ff33; border-radius: 6px; background: rgba(3, 16, 26, .88); cursor: pointer }
-.mc-can:hover { border-color: #3fe6ff }
-.mc-can svg { display: block }
-.mc-can-t { font: 600 11.5px var(--display); fill: #fff; paint-order: stroke; stroke: #03090f; stroke-width: 3px }
-@media (max-width: 980px) { .mc-can { left: auto; right: 10px; bottom: auto; top: 172px } .mc-can svg { width: 130px; height: 61px } }
+
+/* ---------- Caudal 2: un solo mapa para todas las capas ---------- */
+.land-extra { fill: var(--land-neutral) }
+.region.is-neutro { stroke: #3fe6ff26; cursor: default; pointer-events: none }
+.region.is-dato { transition: fill .6s, fill-opacity .45s, opacity .3s }
+.is-cerca .region.is-dato { fill-opacity: .28 }
+.reg-labels { pointer-events: none }
+.reg-num.is-nd { font-size: 11px; font-weight: 500; fill: var(--mute) }
+.is-moving .reg-labels, .is-moving .pl-ciudades { opacity: .35; transition: opacity .15s }
+/* Canarias en su recuadro; Ceuta y Melilla marcadas para que se vean */
+.can-marco rect { fill: #02101a66; stroke: #3fe6ff; stroke-opacity: .25; stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 3 5 }
+.can-esq { fill: none; stroke: #5feaff; stroke-width: 1.6; vector-effect: non-scaling-stroke }
+.can-n { font: 600 12px var(--display); fill: #9feeff; letter-spacing: .03em; paint-order: stroke; stroke: #02080d; stroke-width: 3px }
+.can-nota { font: 500 10.5px var(--text); fill: var(--mute); paint-order: stroke; stroke: #02080d; stroke-width: 3px }
+.can-marco { pointer-events: none }
+.ciudad-am circle { fill: none; stroke: #9feeff; stroke-width: 1.4; vector-effect: non-scaling-stroke }
+.ciudad-am.is-dato { cursor: pointer }
+.ciudad-am.is-dato circle { stroke: #fff; stroke-width: 1.6 }
+.ciudad-am text { font: 600 11px var(--display); fill: #cfeef7; paint-order: stroke; stroke: #02080d; stroke-width: 3px; pointer-events: none }
+.ciudad-am:not(.is-dato) { pointer-events: none }
+/* Plano de referencia: luces de ciudad y autovías, en el mismo cian del holograma */
+.plano { pointer-events: none }
+.pl-urbano { fill: #ffe2a8; fill-opacity: .16; stroke: #ffd98a; stroke-opacity: .35; stroke-width: .6; vector-effect: non-scaling-stroke }
+.pl-via { fill: none; stroke: #8fe6ff; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke }
+.pl-via.t1 { stroke-width: 1.3; stroke-opacity: .34 }
+.pl-via.t2 { stroke-width: .9; stroke-opacity: .22 }
+.pl-via.t3 { stroke-width: .7; stroke-opacity: .14 }
+.is-cerca .pl-urbano { fill-opacity: .24 }
+.pl-ciudades { pointer-events: none }
+.pl-punto { fill: #ffe2a8; stroke: #02080d; stroke-width: 1 }
+.pl-nombre { font: 500 11.5px var(--text); fill: #e8f4f8; paint-order: stroke; stroke: #02080d; stroke-width: 3px; stroke-linejoin: round; letter-spacing: .01em }
+.is-cerca .edar, .is-cerca .nucleo { animation: aparece .5s ease-out both }
+@keyframes aparece { from { opacity: 0 } }
+
+/* ---------- Barra: seis capas y, en «Ciudad», el recorrido del agua paso a paso ---------- */
+.hotbar-wrap { display: contents }
+.slots { display: flex; gap: 4px }
+.slot-ciudad .slot-glow { background: linear-gradient(180deg, #ffb27a2e, #ffb27a0a); border-color: #ffb27a88; box-shadow: inset 0 -2px 0 #ffb27a }
+.pasos { display: flex; align-items: center; justify-content: space-between; margin: -3px -5px 9px; padding-bottom: 8px; border-bottom: 1px solid var(--line) }
+.paso-w { display: flex; align-items: center }
+.paso { --pc: var(--cyan); display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border: 1px solid transparent; border-radius: 6px; background: transparent; font: 600 13px var(--display); color: var(--mute); transition: color .2s, background .2s }
+.paso svg { color: var(--pc) }
+.paso:hover { color: var(--ink) }
+.paso.is-on { color: #fff; background: color-mix(in srgb, var(--pc) 15%, transparent); border-color: color-mix(in srgb, var(--pc) 55%, transparent); box-shadow: inset 0 -2px 0 var(--pc) }
+.paso-consumo { --pc: #ff8a3d } .paso-alcantarillado { --pc: #c9a06a } .paso-depuracion { --pc: #3df5b0 }
+.paso-flecha { color: var(--dim); margin: 0 1px }
+
+/* ---------- Leyenda: la frase, la escala y «¿qué es esto?» ---------- */
+.leyenda { --lc: var(--cyan); position: relative; padding: 11px 13px 12px; background: var(--card); border: 1px solid var(--line); border-radius: 8px }
+.ley-cab { font: 600 13.5px var(--display); color: var(--lc); letter-spacing: .02em; padding-top: 4px }
+.leyenda.is-clave .ley-sub { margin-top: 6px }
+.leyenda::before { content: ""; position: absolute; left: -1px; top: -1px; width: 10px; height: 10px; border-top: 2px solid var(--lc); border-left: 2px solid var(--lc) }
+.ley-energia { --lc: var(--amber) } .ley-lluvia { --lc: var(--ice) } .ley-rios { --lc: var(--flow) } .ley-vertidos { --lc: var(--ind) }
+.ley-consumo { --lc: #ff8a3d } .ley-alcantarillado { --lc: #c9a06a } .ley-depuracion { --lc: #3df5b0 }
+.ley-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px }
+.leyenda h2 { margin: 0; font: 600 17px/1.22 var(--display); color: #fff; text-wrap: balance }
+.ley-q { flex: none; display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 9px; border: 1px solid var(--line); border-radius: 13px; background: transparent; color: var(--cyan); font: 600 12px var(--display) }
+.ley-q:hover, .ley-q.is-on { border-color: var(--line-hi); background: #3fe6ff14 }
+.ley-sub { margin: 4px 0 9px; font-size: 13.5px; line-height: 1.4; color: #cfe3ea }
+.ley-sub b { color: #fff; font-weight: 600 }
+.ley-grad { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 8px; font-size: 11.5px; color: var(--mute) }
+.ley-grad i { grid-column: 1 / -1; height: 8px; border-radius: 4px }
+.ley-grad span:last-child { text-align: right }
+.ley-claves { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--mute) }
+.ley-claves li { display: inline-flex; align-items: center; gap: 5px }
+.ley-claves li:empty { display: none }
+.ley-sw { width: 14px; height: 14px; flex: none; overflow: visible }
+.ley-sw circle, .ley-sw polygon { stroke-width: 1.4 }
+.ley-sw .ley-no { stroke-dasharray: 2.2 1.6 }
+.ley-fl { font-size: 10px } .ley-fl.up { color: var(--mint) } .ley-fl.down { color: var(--red) }
+.ley-txt { font-size: 12px }
+.ley-ayuda { overflow: hidden }
+.ley-ayuda p { margin: 9px 0 0; font-size: 13px; line-height: 1.45; color: #cfe3ea }
+.ley-mas { margin: 8px 0 0; font-size: 12px; color: var(--cyan) }
+.ley-ayuda .ley-mas { color: var(--cyan) }
+
+@media (max-width: 980px) {
+  .hotbar-wrap { display: flex; flex-direction: column; gap: 6px; position: absolute; z-index: 5; left: 8px; right: 8px; bottom: 62px }
+  .hotbar { position: static; translate: none; align-self: center; max-width: 100% }
+  .leyenda { padding: 8px 11px 9px; background: var(--panel); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px) }
+  .leyenda h2 { font-size: 15px }
+  .ley-sub { font-size: 12.5px; margin: 2px 0 6px; line-height: 1.35 }
+  .ley-q { width: 28px; height: 28px; padding: 0; justify-content: center }
+  .ley-q span { display: none }
+  .ley-grad { font-size: 11px }
+  .paso { height: 30px; padding: 0 8px; font-size: 12.5px; gap: 5px }
+  .pasos { margin: -2px -4px 7px; padding-bottom: 6px }
+  .pl-nombre { font-size: 11px }
+}
+@media (prefers-reduced-motion: reduce) { .is-cerca .edar, .is-cerca .nucleo { animation: none } }
+/* En pantallas táctiles se acerca con los dedos: los botones + y − solo tapaban Cataluña y Baleares */
+@media (max-width: 980px) and (pointer: coarse) { .zoom-pad .zp-zoom { display: none } }
+/* En el móvil, el dado y «ver toda España» suben a la cabecera y dejan el mapa libre */
+@media (max-width: 980px) {
+  .zoom-pad { top: 6px; right: 10px; bottom: auto; grid-auto-flow: column; gap: 6px }
+  .zoom-pad button { width: 36px; height: 36px }
+}

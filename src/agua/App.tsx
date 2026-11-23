@@ -1,31 +1,33 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
-import { Activity, CloudRain, Droplets, Factory, House, Recycle, Network, Info as InfoIcon, X, Zap, ChevronUp, Trophy } from 'lucide-react'
+import { Activity, Building2, CloudRain, Droplets, Factory, Info as InfoIcon, X, Zap, ChevronUp, Trophy } from 'lucide-react'
 import { Board, type Layer } from './Board'
+import { Leyenda } from './Leyenda'
+import { isUrb, type Urb } from './ciudad'
 import { Panel } from './Panel'
 import { SelCard } from './SelCard'
 import { consumo, data, energyTotals, fechaLarga, fmt, fmtPct } from './data'
 import { useRivers } from './rivers'
 import { useEdar } from './edar'
-import { MapaCalles } from './MapaCalles'
 import { fromKey, randomSel, sameSel, selKey, useCollection, type Milestone, type Sel } from './sel'
 import { CountUp, Info } from './ui'
 import { A } from '../Fuentes'
 
-const LAYERS: { id: Layer; label: string; short?: string; icon: typeof Droplets }[] = [
-  { id: 'agua', label: 'Agua', icon: Droplets },
+/** La barra: seis botones. «Ciudad» agrupa el recorrido del agua en la ciudad, del grifo a la depuradora. */
+type Grupo = 'agua' | 'energia' | 'lluvia' | 'rios' | 'ciudad' | 'vertidos'
+const GRUPOS: { id: Grupo; label: string; icon: typeof Droplets }[] = [
+  { id: 'agua', label: 'Embalses', icon: Droplets },
   { id: 'energia', label: 'Energía', icon: Zap },
   { id: 'lluvia', label: 'Lluvia', icon: CloudRain },
   { id: 'rios', label: 'Ríos', icon: Activity },
-  { id: 'consumo', label: 'Abastecimiento', short: 'Grifo', icon: House },
-  { id: 'alcantarillado', label: 'Alcantarillado', short: 'Cloacas', icon: Network },
-  { id: 'depuracion', label: 'Depuración', short: 'Depura', icon: Recycle },
+  { id: 'ciudad', label: 'Ciudad', icon: Building2 },
   { id: 'vertidos', label: 'Vertidos', icon: Factory },
 ]
+const grupoDe = (l: Layer): Grupo => (isUrb(l) ? 'ciudad' : l)
 
 const n = data.meta.national
 const wettest = [...data.rain].sort((a, b) => b.p - a.p)[0]
-const layerFor = (s: Sel, cur: Layer): Layer => s.k === 'river' ? (cur === 'energia' || cur === 'rios' ? cur : 'agua') : s.k === 'rain' ? 'lluvia' : s.k === 'dis' ? 'vertidos' : s.k === 'flow' ? 'rios' : s.k === 'cons' ? 'consumo' : s.k === 'dep' || s.k === 'edar' ? 'depuracion' : s.k === 'agg' ? 'alcantarillado' : cur === 'energia' ? 'energia' : 'agua'
+const layerFor = (s: Sel, cur: Layer): Layer => s.k === 'river' ? (cur === 'energia' || cur === 'rios' ? cur : 'agua') : s.k === 'rain' ? 'lluvia' : s.k === 'dis' ? 'vertidos' : s.k === 'flow' ? 'rios' : s.k === 'cons' ? 'consumo' : s.k === 'dep' || s.k === 'edar' ? 'depuracion' : s.k === 'agg' || s.k === 'alc' ? 'alcantarillado' : cur === 'energia' ? 'energia' : 'agua'
 
 function useIsPhone() {
   const [phone, setPhone] = useState(() => matchMedia('(max-width: 980px)').matches)
@@ -69,6 +71,9 @@ export default function App() {
   const [toast, setToast] = useState<Milestone | null>(null)
   const [sources, setSources] = useState(false)
   const [sheet, setSheet] = useState(false)
+  const [cerca, setCerca] = useState(false)
+  const ultimaUrb = useRef<Urb>('consumo')
+  if (isUrb(layer)) ultimaUrb.current = layer
   const { seen, resSeen, discover } = useCollection()
   useRivers() // al llegar los ríos se repinta, por si el enlace apuntaba a uno
   useEdar()
@@ -103,7 +108,7 @@ export default function App() {
     const onKey = (e: KeyboardEvent) => {
       if ((e.target as HTMLElement).tagName === 'INPUT') return
       const i = Number(e.key) - 1
-      if (i >= 0 && i < LAYERS.length) changeLayer(LAYERS[i].id)
+      if (i >= 0 && i < GRUPOS.length) changeLayer(GRUPOS[i].id === 'ciudad' ? ultimaUrb.current : GRUPOS[i].id as Layer)
       if (e.key === 'Escape') { setSources(false); pick(null) }
       if (e.key === '/') { e.preventDefault(); document.getElementById('buscar')?.focus() }
       if (e.key === 'r' || e.key === 'R') pick(randomSel(layer, seen))
@@ -118,9 +123,7 @@ export default function App() {
 
   return (
     <main className="game">
-      {layer === 'depuracion' || layer === 'alcantarillado'
-        ? <MapaCalles layer={layer} sel={sel} onPick={s => pick(s)} />
-        : <Board layer={layer} sel={sel} onPick={s => pick(s)} seen={seen} onDice={() => pick(randomSel(layer, seen))} />}
+      <Board layer={layer} sel={sel} onPick={s => pick(s)} seen={seen} onDice={() => pick(randomSel(layer, seen))} onCerca={setCerca} />
       <div className="vignette" aria-hidden />
 
       <header className="hud-top">
@@ -153,7 +156,7 @@ export default function App() {
         <button className="sheet-handle" onClick={() => setSheet(s => !s)} aria-expanded={sheet}>
           <ChevronUp size={17} className={sheet ? 'flip' : ''} aria-hidden /> {sheet ? 'Ocultar consola' : 'Consola: resumen, histórico y rankings'}
         </button>
-        <Panel layer={layer} onPick={pick} sel={sel} card={phone ? null : card} />
+        <Panel layer={layer} onPick={pick} sel={sel} card={phone ? null : card} leyenda={phone ? null : <Leyenda layer={layer} cerca={cerca} onLayer={changeLayer} modo="clave" />} />
       </aside>
 
       <AnimatePresence mode="popLayout">
@@ -162,18 +165,23 @@ export default function App() {
             <AnimatePresence mode="popLayout" initial={false}>{card}</AnimatePresence>
           </motion.div>
         ) : (
-          <motion.nav key="hotbar" className="hotbar" aria-label="Capas del mapa" initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 60, opacity: 0 }}>
-            {LAYERS.map((l, i) => {
-              const Icon = l.icon
-              return (
-                <button key={l.id} className={`slot slot-${l.id} ${layer === l.id ? 'is-on' : ''}`} onClick={() => changeLayer(l.id)} aria-pressed={layer === l.id}>
-                  <kbd>{i + 1}</kbd><Icon size={19} aria-hidden /><span className="l-largo">{l.label}</span>{l.short && <span className="l-corto" aria-hidden>{l.short}</span>}
-                  {layer === l.id && <motion.i layoutId="slot-glow" className="slot-glow" transition={{ type: 'spring', stiffness: 400, damping: 32 }} />}
-                </button>
-              )
-            })}
-            <button className="slot slot-info" onClick={() => setSources(true)}><InfoIcon size={18} aria-hidden /><span>Fuentes</span></button>
-          </motion.nav>
+          <motion.div key="hotbar" className="hotbar-wrap" initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 60, opacity: 0 }}>
+            {phone && <Leyenda layer={layer} cerca={cerca} onLayer={changeLayer} modo="completa" />}
+            <nav className="hotbar" aria-label="Capas del mapa">
+              <div className="slots">
+                {GRUPOS.map((g, i) => {
+                  const Icon = g.icon, on = grupoDe(layer) === g.id
+                  return (
+                    <button key={g.id} className={`slot slot-${g.id} ${on ? 'is-on' : ''}`} onClick={() => changeLayer(g.id === 'ciudad' ? (isUrb(layer) ? layer : ultimaUrb.current) : g.id)} aria-pressed={on}>
+                      <kbd>{i + 1}</kbd><Icon size={19} aria-hidden /><span>{g.label}</span>
+                      {on && <motion.i layoutId="slot-glow" className="slot-glow" transition={{ type: 'spring', stiffness: 400, damping: 32 }} />}
+                    </button>
+                  )
+                })}
+                <button className="slot slot-info" onClick={() => setSources(true)} aria-label="Fuentes"><InfoIcon size={18} aria-hidden /><span>Fuentes</span></button>
+              </div>
+            </nav>
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -190,11 +198,12 @@ export default function App() {
                 <li><b>Lluvia.</b> Precipitación semanal en {data.rain.length} observatorios principales de <A id="aemet">AEMET</A>, recogida en el boletín.</li>
                 <li><b>Ríos.</b> Caudal medio semanal en {data.flows.length} estaciones de aforo y salidas de embalse del boletín.</li>
                 <li><b>Abastecimiento.</b> <A id="ine_agua">Estadística sobre el Suministro y Saneamiento del Agua</A> del INE, año {consumo.year}: agua que entra en la red, la registrada, las pérdidas y el consumo de los hogares por comunidad autónoma. No hay datos oficiales por municipio para toda España.</li>
-                <li><b>Depuración.</b> La misma estadística del INE: agua residual tratada y reutilizada por comunidad, destino del agua depurada y kilómetros de alcantarillado. El mapa de depuradoras del ministerio llegará en otra versión.</li>
+                <li><b>Alcantarillado y depuración.</b> La misma estadística del INE: kilómetros de alcantarillado, agua residual tratada y reutilizada por comunidad y destino del agua depurada. Los metros por habitante dividen la red entre los habitantes que salen del consumo de los hogares y los litros por persona del INE.</li>
+                <li><b>Depuradoras y núcleos urbanos.</b> <a href="https://www.eea.europa.eu/en/datahub/datahubitem-view/6244937d-1c2c-47f5-bdf1-33ca01ff1715" target="_blank" rel="noreferrer">Waterbase UWWTD</a> de la Agencia Europea de Medio Ambiente: el reporte de España sobre la directiva de aguas residuales urbanas (datos de 2022), con cada depuradora de más de 2.000 habitantes equivalentes, su tratamiento, su carga y si cumple, y lo que recogen los colectores de cada núcleo.</li>
                 <li><b>Vertidos.</b> <A id="vertidos">Censo Nacional de Vertidos</A>: volumen anual autorizado, que no equivale al consumo.</li>
                 {data.hydro && <li><b>Producción hidráulica.</b> <A id="ree_generacion">REData de Red Eléctrica</A>.</li>}
                 <li><b>Equivalencias.</b> Piscina olímpica de 2.500 m³, bañera de 150 litros, hogar de unos 3.500 kWh al año: aproximaciones para hacerse una idea.</li>
-                <li><b>Mapa.</b> Demarcaciones hidrográficas del ministerio; red de ríos y canales del IGN (<A id="siane">SIANE</A>, escala 1:3 millones, CC BY 4.0); siluetas de embalses del IGN y del ministerio.</li>
+                <li><b>Mapa.</b> Demarcaciones hidrográficas del ministerio; red de ríos y canales del IGN (<A id="siane">SIANE</A>, escala 1:3 millones, CC BY 4.0); siluetas de embalses del IGN y del ministerio; provincias y comunidades del IGN. Canarias va en un recuadro a escala parecida a la de la península. Autovías, manchas urbanas y ciudades de <a href="https://www.naturalearthdata.com/" target="_blank" rel="noreferrer">Natural Earth</a> (dominio público).</li>
               </ul>
               <p className="unit">Tu colección de embalses explorados se guarda solo en este navegador. Caudal es un proyecto independiente de IstariCore, no una web oficial.</p>
             </motion.div>
