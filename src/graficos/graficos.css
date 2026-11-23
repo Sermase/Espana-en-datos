@@ -82,3 +82,16 @@ button.g-bar:hover, button.g-bar:focus-visible { background: rgba(255, 255, 255,
 .g-legend-sel button.is-on { border-color: rgba(255, 255, 255, .35); color: #fff }
 .g-legend-sel i { width: 10px; border-radius: 2px }
 .g-colst.is-hover rect { filter: brightness(1.2) }
+
+/* Sankey */
+.sk-lab { font: 600 13px Barlow, system-ui, sans-serif; fill: var(--g-ink); transition: opacity .25s }
+.sk-v { font-weight: 500; font-size: 12px; fill: var(--g-muted); font-variant-numeric: tabular-nums }
+.sk-centro { font: 600 12px Oxanium, sans-serif; fill: var(--g-ink2); letter-spacing: .06em }
+.sk-tronco { fill: color-mix(in oklab, var(--acc) 70%, #fff); filter: drop-shadow(0 0 10px color-mix(in oklab, var(--acc) 60%, transparent)) }
+.sk-nodo, .sk-cinta { cursor: pointer; outline: none }
+.sk-nodo:focus-visible rect:first-of-type { stroke: var(--acc); stroke-width: 2 }
+.sk-hilo { fill: none; stroke: #fff; stroke-dasharray: 1 14; stroke-linecap: round; animation: sk-flujo 2.4s linear infinite; pointer-events: none; transition: opacity .25s }
+@keyframes sk-flujo { to { stroke-dashoffset: -30 } }
+@media (prefers-reduced-motion: reduce) { .sk-hilo { animation: none; stroke-dasharray: none; opacity: .12 !important } }
+@media (max-width: 620px) { .sk-lab { font-size: 11.5px } .sk-v { font-size: 10.5px } }
+.sk-guia { fill: none; stroke: var(--g-muted); stroke-width: 1; opacity: .7 }

@@ -52,7 +52,7 @@ const desde = { sinceTimePeriod: '1995' }
 // Ingresos por tipo (consolidados del total de administraciones)
 await paso('ing', async () => anidar(await filas('gov_10a_main', { geo: 'ES', unit: 'MIO_EUR', sector: 'S13', na_item: ['TR', 'D2REC', 'D5REC', 'D61REC', 'P11_P12_P131', 'D4REC', 'D7REC', 'D9REC', 'D39REC'], ...desde }), 'na_item'))
 // Impuestos uno a uno
-await paso('imp', async () => anidar(await filas('gov_10a_taxag', { geo: 'ES', unit: 'MIO_EUR', sector: 'S13', na_item: ['D2', 'D211', 'D214', 'D29', 'D5', 'D51A', 'D51B', 'D59', 'D91', 'D61', 'D611', 'D613'], ...desde }), 'na_item'))
+await paso('imp', async () => anidar(await filas('gov_10a_taxag', { geo: 'ES', unit: 'MIO_EUR', sector: 'S13', na_item: ['D2', 'D211', 'D214', 'D29', 'D5', 'D51A', 'D51B', 'D51A_C1', 'D51B_C2', 'D51C', 'D59', 'D91', 'D61', 'D611', 'D613'], ...desde }), 'na_item'))
 // Gasto por tipo
 await paso('eco', async () => anidar(await filas('gov_10a_main', { geo: 'ES', unit: 'MIO_EUR', sector: SECT, na_item: ['TE', 'D1PAY', 'P2', 'D62PAY', 'D632PAY', 'D41PAY', 'D3PAY', 'P51G', 'D7PAY', 'D9PAY', 'TR', 'B9'], ...desde }), 'sector', 'na_item'))
 // Gasto por función: el total con todas las subfunciones; cada administración, las diez grandes
@@ -63,7 +63,7 @@ await paso('deuda', async () => anidar(await filas('gov_10dd_edpt1', { geo: 'ES'
 await paso('pib', async () => anidar(await filas('nama_10_gdp', { geo: 'ES', unit: 'CP_MEUR', na_item: 'B1GQ', ...desde }), 'geo').ES)
 await paso('pob', async () => anidar(await filas('demo_gind', { geo: 'ES', indic_de: 'AVG', ...desde }), 'geo').ES)
 // Europa: gasto por función, ingresos, gasto, déficit y deuda en % del PIB
-const UE = ['ES', 'EU27_2020', 'DE', 'FR', 'IT', 'PT', 'NL', 'BE', 'AT', 'SE', 'DK', 'FI', 'IE', 'GR', 'PL']
+const UE = ['ES', 'EU27_2020', 'DE', 'FR', 'IT', 'PT', 'NL', 'BE', 'AT', 'SE', 'DK', 'FI', 'IE', 'EL', 'PL']
 await paso('ueFun', async () => anidar(await filas('gov_10a_exp', { geo: UE, unit: 'PC_GDP', sector: 'S13', na_item: 'TE', cofog99: ['TOTAL', 'GF01', 'GF02', 'GF03', 'GF04', 'GF05', 'GF06', 'GF07', 'GF08', 'GF09', 'GF10'], sinceTimePeriod: '2015' }), 'geo', 'cofog99'))
 await paso('ueTot', async () => anidar(await filas('gov_10a_main', { geo: UE, unit: 'PC_GDP', sector: 'S13', na_item: ['TR', 'TE', 'B9'], sinceTimePeriod: '2015' }), 'geo', 'na_item'))
 await paso('ueDeuda', async () => anidar(await filas('gov_10dd_edpt1', { geo: UE, unit: 'PC_GDP', sector: 'S13', na_item: 'GD', sinceTimePeriod: '2015' }), 'geo'))

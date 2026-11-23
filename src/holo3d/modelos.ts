@@ -239,3 +239,46 @@ export const edificio = (luz = 0.6): Modelo => t => {
   puntos.push([cx - 0.05, 0.1, d / 2 + 0.005], [cx + 0.05, 0.1, d / 2 + 0.005])
   return { fuerte, tenue, puntos }
 }
+
+/** Edificio público de columnas: el dinero entra por un lado y sale repartido por el otro (`flujo` 0–1). */
+export const parlamento = (flujo = 0.5): Modelo => t => {
+  const fuerte: Seg[] = [], tenue: Seg[] = []
+  const W = 0.62, D = 0.34
+  for (let k = 0; k < 3; k++) caja(k === 0 ? fuerte : tenue, -W - 0.06 + k * 0.03, W + 0.06 - k * 0.03, k * 0.03, (k + 1) * 0.03, -D - 0.06 + k * 0.03, D + 0.06 - k * 0.03)
+  const y0 = 0.09, y1 = 0.56
+  for (let i = 0; i < 6; i++) { const x = -W + 0.06 + (i * (2 * W - 0.12)) / 5; cilindro(i === 0 || i === 5 ? fuerte : tenue, 0.035, 0.03, y0, y1, x, D - 0.04, 8, 1) }
+  caja(fuerte, -W, W, y1, y1 + 0.07, -D, D)
+  caja(tenue, -W + 0.08, W - 0.08, y0, y1, -D + 0.04, D - 0.12)
+  const yt = y1 + 0.07, yc = yt + 0.2
+  for (const z of [-D, D]) fuerte.push([-W, yt, z, 0, yc, z], [W, yt, z, 0, yc, z])
+  fuerte.push([0, yc, -D, 0, yc, D])
+  tenue.push([-W * 0.45, yt + 0.04, D, W * 0.45, yt + 0.04, D])
+  // el dinero: entra en un chorro por la izquierda y sale abierto en abanico por la derecha
+  const puntos: [number, number, number][] = [], v = 0.12 + flujo * 0.35
+  for (let i = 0; i < 18; i++) { const f = (t * v + i / 18) % 1; puntos.push([-1.05 + f * 0.5, 0.3 + Math.sin(i * 3.1) * 0.04, D * 0.4]) }
+  for (let i = 0; i < 24; i++) { const f = (t * v + i / 24) % 1, c = (i % 6) / 5 - 0.5; puntos.push([W - 0.05 + f * 0.5, 0.3 + c * f * 0.5, D * 0.4 + c * f * 0.2]) }
+  return { fuerte, tenue, puntos }
+}
+
+/** Pilas de monedas (una por cada parte, `partes` de 0 a 1) y una moneda que cae, gira y se apila. */
+export const monedas = (partes: number[]): Modelo => t => {
+  const fuerte: Seg[] = [], tenue: Seg[] = []
+  const n = partes.length, gap = 1.2 / Math.max(1, n), r = Math.min(0.15, gap * 0.38), h = 0.035
+  const tops: [number, number][] = []
+  partes.forEach((p, i) => {
+    const x = -0.6 + gap * (i + 0.5), pisos = Math.max(1, Math.round(p * 22))
+    for (let k = 0; k <= pisos; k++) anillo(k === pisos || k === 0 ? fuerte : tenue, r, k * h, 22, x, 0)
+    for (let j = 0; j < 8; j++) { const a = (j / 8) * TAU; tenue.push([x + Math.cos(a) * r, 0, Math.sin(a) * r, x + Math.cos(a) * r, pisos * h, Math.sin(a) * r]) }
+    tops.push([x, pisos * h])
+  })
+  // la moneda que cae: va pasando de pila en pila
+  const ciclo = 1.6, k = Math.floor(t / ciclo) % Math.max(1, n), f = (t % ciclo) / ciclo
+  const [x, top] = tops[k] ?? [0, 0], y = top + 0.05 + (1 - f * f) * 0.9, giro = t * 5
+  for (let i = 0; i < 18; i++) {
+    const a = (i / 18) * TAU, b = ((i + 1) / 18) * TAU
+    fuerte.push([x + Math.cos(a) * r * Math.cos(giro), y + Math.sin(a) * r, Math.cos(a) * r * Math.sin(giro), x + Math.cos(b) * r * Math.cos(giro), y + Math.sin(b) * r, Math.cos(b) * r * Math.sin(giro)])
+  }
+  const puntos: [number, number, number][] = []
+  if (f > 0.85) for (let i = 0; i < 10; i++) { const a = (i / 10) * TAU, e = (f - 0.85) * 3; puntos.push([x + Math.cos(a) * (r + e * 0.4), top + 0.02, Math.sin(a) * (r + e * 0.4)]) }
+  return { fuerte, tenue, puntos }
+}
