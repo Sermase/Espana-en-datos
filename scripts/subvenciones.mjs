@@ -12,6 +12,7 @@ const ESTADO = DIR + 'meses.json', OUT = DIR + 'subvenciones.json'
 const B = 'https://www.infosubvenciones.es/bdnstrans/api'
 const INICIO = '2024-01'
 const PAG = 10000
+const PARALELO = 6
 const FIN = Date.now() + Number(process.env.PRESUPUESTO_MIN ?? 40) * 60000
 const log = { meses: {} }
 let ORDEN = 'order=id&direccion=asc'
@@ -48,30 +49,37 @@ async function mes(y, m, finalidades) {
   const ag = { n: 0, imp: 0, adm: {}, fin: {}, tipo: {}, inst: {}, org: {}, ben: {}, conv: {} }
   const tot = await get(url(y, m, '', 0, 1))
   ag.total = tot.totalElements
-  const ben = {}, conv = {}
-  for (const f of finalidades) {
-    let page = 0, vistos = 0, total = Infinity
-    while (vistos < total) {
-      const j = await get(url(y, m, `&finalidad=${f.id}`, page))
-      total = j.totalElements ?? 0
+  const ben = {}, conv = {}, vistos = new Set()
+  const dia = (d) => `&fechaDesde=${dd(y, m, d)}&fechaHasta=${dd(y, m, d)}`
+  const pide = (f, d, page) => `${B}/concesiones/busqueda?vpd=GE&page=${page}&pageSize=${PAG}&${ORDEN}${dia(d)}&finalidad=${f.id}`
+  const suma1 = (r, f) => {
+    if (vistos.has(r.id)) { ag.dup = (ag.dup ?? 0) + 1; return }
+    vistos.add(r.id)
+    const imp = Number(r.importe) || 0
+    ag.n++; ag.imp += imp
+    suma(ag.adm, ADM[r.nivel1] ?? 'O', imp)
+    suma(ag.fin, f.id, imp)
+    const [tp, nif, nombre] = tipoNif(r.beneficiario)
+    suma(ag.tipo, tp, imp)
+    suma(ag.inst, String(r.instrumento ?? '').trim().toUpperCase() || '—', imp)
+    suma(ag.org, `${ADM[r.nivel1] ?? 'O'}|${r.nivel2 ?? ''}`, imp)
+    if (nif) { const b = (ben[nif] ??= [0, 0, nombre]); b[0]++; b[1] += imp }
+    const k = r.idConvocatoria
+    if (k != null) { const v = (conv[k] ??= [0, 0, r.convocatoria ?? '', ADM[r.nivel1] ?? 'O', r.nivel2 ?? '', f.id, 0]); v[0]++; v[1] += imp; if (!nif) v[6] += imp }
+  }
+  // Día a día y finalidad a finalidad: casi todo cabe en una página, y las páginas se piden de varias en varias
+  const cola = []
+  for (let d = 1; d <= diasMes(y, m); d++) for (const f of finalidades) cola.push([f, d, 0])
+  const trabajador = async () => {
+    while (cola.length) {
+      const [f, d, page] = cola.shift()
+      const j = await get(pide(f, d, page))
       const c = j.content ?? []
-      if (!c.length) break
-      for (const r of c) {
-        const imp = Number(r.importe) || 0
-        ag.n++; ag.imp += imp
-        suma(ag.adm, ADM[r.nivel1] ?? 'O', imp)
-        suma(ag.fin, f.id, imp)
-        const [tp, nif, nombre] = tipoNif(r.beneficiario)
-        suma(ag.tipo, tp, imp)
-        suma(ag.inst, String(r.instrumento ?? '').trim().toUpperCase() || '—', imp)
-        suma(ag.org, `${ADM[r.nivel1] ?? 'O'}|${r.nivel2 ?? ''}`, imp)
-        if (nif) { const b = (ben[nif] ??= [0, 0, nombre]); b[0]++; b[1] += imp }
-        const k = r.idConvocatoria
-        if (k != null) { const v = (conv[k] ??= [0, 0, r.convocatoria ?? '', ADM[r.nivel1] ?? 'O', r.nivel2 ?? '', f.id, 0]); v[0]++; v[1] += imp; if (!nif) v[6] += imp }
-      }
-      vistos += c.length; page++
+      for (const r of c) suma1(r, f)
+      if (page === 0) for (let p = 1; p * PAG < (j.totalElements ?? 0); p++) cola.push([f, d, p])
     }
   }
+  await Promise.all(Array.from({ length: PARALELO }, trabajador))
   // Solo lo grande pasa al estado, para que el archivo no crezca sin control
   for (const [k, v] of Object.entries(ben)) if (v[1] >= 250000) ag.ben[k] = [v[0], Math.round(v[1]), v[2]]
   for (const [k, v] of Object.entries(conv)) if (v[1] >= 1e6 && !(v[0] === 1 && v[6] > 0)) ag.conv[k] = [v[0], Math.round(v[1]), v[2].slice(0, 220), v[3], v[4], v[5]]
@@ -92,8 +100,10 @@ estado.finalidades = Object.fromEntries(finalidades.map(f => [f.id, f.descripcio
 // Orden: el mes en curso y los dos anteriores siempre (llegan concesiones con retraso); luego los que falten, del más reciente hacia atrás.
 const hoy = new Date(), lista = []
 for (let d = new Date(Date.UTC(hoy.getUTCFullYear(), hoy.getUTCMonth(), 1)); d.toISOString().slice(0, 7) >= INICIO; d.setUTCMonth(d.getUTCMonth() - 1)) lista.push(d.toISOString().slice(0, 7))
-const cola = [...lista.slice(0, 3), ...lista.slice(3).filter(k => !estado.meses[k])]
+const reciente = (k) => estado.meses[k] && Date.now() - Date.parse(estado.meses[k].hecho) < 20 * 3600e3
+const cola = [...lista.slice(0, 3).filter(k => !reciente(k)), ...lista.slice(3).filter(k => !estado.meses[k])]
 for (const k of cola) {
+  if (k === undefined) continue
   if (Date.now() > FIN) { log.parada = 'presupuesto de tiempo agotado antes de ' + k; break }
   const t0 = Date.now()
   try {

@@ -22,7 +22,7 @@ jobs:
         with: { node-version: 22 }
       - name: Concesiones de la BDNS
         continue-on-error: true
-        env: { PRESUPUESTO_MIN: "${{ github.event_name == 'schedule' && '25' || '55' }}" }
+        env: { PRESUPUESTO_MIN: "60" }
         run: node scripts/subvenciones.mjs
       - name: Guardar y publicar
         env: { GH_TOKEN: "${{ github.token }}" }
@@ -34,3 +34,5 @@ jobs:
           git commit -m "Subvenciones del $(date -u +%Y-%m-%d)"
           for i in 1 2 3 4; do git pull --rebase -q && git push && break; sleep 10; done
           gh workflow run datos.yml
+          # mientras falten meses por bajar, se vuelve a lanzar sola
+          if grep -q '"parada"' fuentes/subvenciones-log.json; then gh workflow run subvenciones.yml; fi
