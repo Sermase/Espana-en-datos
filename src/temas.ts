@@ -3,7 +3,7 @@
  * principal: no todos son mapas, cada dato se enseña en la forma que mejor le va. Un tema vive en un área,
  * aunque se enlace desde otras (el agua, por ejemplo, también cruza con Energía).
  */
-export type AreaId = 'gente' | 'economia' | 'territorio' | 'movilidad' | 'ocio'
+export type AreaId = 'gente' | 'economia' | 'publico' | 'territorio' | 'movilidad' | 'ocio'
 export type Tema = {
   id: string
   nombre: string
@@ -21,6 +21,7 @@ export type Tema = {
 export const AREAS: { id: AreaId; nombre: string; lema: string }[] = [
   { id: 'gente', nombre: 'Gente', lema: 'Cuántos somos, cómo vivimos, de qué enfermamos y qué estudiamos.' },
   { id: 'economia', nombre: 'Economía', lema: 'Lo que ganamos, lo que cuesta vivir, lo que reparte lo público y lo que vendemos al mundo.' },
+  { id: 'publico', nombre: 'Sector público', lema: 'Lo que ingresan y gastan las administraciones, en qué, y a quién ayudan.' },
   { id: 'territorio', nombre: 'Territorio', lema: 'El agua, el clima, las montañas y el campo.' },
   { id: 'movilidad', nombre: 'Energía y movilidad', lema: 'La luz, el combustible y cómo nos movemos.' },
   { id: 'ocio', nombre: 'Cultura y ocio', lema: 'Cine, museos, libros y deporte.' },
@@ -37,8 +38,13 @@ export const TEMAS: Tema[] = [
   { id: 'vivienda', area: 'economia', nombre: 'Vivienda', lema: 'Cuánto sube la vivienda, dónde se vende, cuánto se hipoteca y cuánto sube el alquiler en tu municipio.', color: '#ffd166', vista: 'mapa', ruta: './vivienda/index.html' },
   { id: 'comercio', area: 'economia', nombre: 'Comercio', lema: 'Lo que España vende y compra al mundo: países, productos y rutas, con diez años de historia.', color: '#c6f25e', vista: 'mapa', ruta: './comercio/index.html' },
   { id: 'turismo', area: 'economia', nombre: 'Turismo', lema: 'Quién nos visita, cuánto gasta y a dónde va.', color: '#ff9f43', vista: 'mapa', plan: 'Turistas por país de origen, gasto, pernoctaciones por provincia y destinos de moda.' },
-  { id: 'subvenciones', area: 'economia', nombre: 'Subvenciones', lema: 'Quién da ayudas públicas, a quién y para qué: Estado, comunidades y ayuntamientos.', color: '#e0a8ff', vista: 'consola', plan: 'Convocatorias y concesiones de la Base de Datos Nacional de Subvenciones: por administración, sector, comunidad y beneficiario.' },
   { id: 'industria', area: 'economia', nombre: 'Industria', lema: 'Empresas, sectores y lo que fabricamos.', color: '#9fb3c8', vista: 'consola', plan: 'Producción industrial, empresas por sector y tamaño, y exportación de coches.' },
+  // Sector público
+  { id: 'cuentas', area: 'publico', nombre: 'Cuentas públicas', lema: 'Ingresos, gastos, déficit y deuda del Estado, las comunidades, los ayuntamientos y la Seguridad Social.', color: '#7fd4c8', vista: 'consola', plan: 'Cuánto ingresa y gasta cada administración, en qué se gasta (sanidad, pensiones, educación…), déficit y deuda, comparado con Europa.' },
+  { id: 'impuestos', area: 'publico', nombre: 'Impuestos', lema: 'Cuánto se recauda, de qué impuestos y cómo cambia cada mes.', color: '#f2b880', vista: 'consola', plan: 'Recaudación mensual de la Agencia Tributaria por impuesto (IRPF, IVA, sociedades…) y por comunidad.' },
+  { id: 'presupuestos', area: 'publico', nombre: 'Presupuestos', lema: 'Los presupuestos de tu comunidad y de tu ayuntamiento, euro a euro.', color: '#9fc5ff', vista: 'mapa', plan: 'Presupuestos y liquidaciones de los 8.000 ayuntamientos y las comunidades: gasto por habitante y en qué se va.' },
+  { id: 'subvenciones', area: 'publico', nombre: 'Subvenciones', lema: 'Quién da ayudas públicas, a quién y para qué: Estado, comunidades y ayuntamientos.', color: '#e0a8ff', vista: 'consola', plan: 'Convocatorias y concesiones de la Base de Datos Nacional de Subvenciones: por administración, sector, comunidad y beneficiario.' },
+  { id: 'contratos', area: 'publico', nombre: 'Contratos públicos', lema: 'Qué compra la administración, a quién y por cuánto.', color: '#c8b6ff', vista: 'consola', plan: 'Licitaciones y adjudicaciones de la Plataforma de Contratación del Sector Público: por órgano, sector e importe.' },
   // Territorio
   { id: 'agua', area: 'territorio', nombre: 'Agua', lema: 'Embalses, ríos, lluvia, consumo y energía hidroeléctrica, semana a semana.', color: '#3fe6ff', vista: 'mapa', ruta: './agua/index.html' },
   { id: 'clima', area: 'territorio', nombre: 'Clima', lema: 'Temperaturas, olas de calor y lluvia, y cómo están cambiando.', color: '#ff7a59', vista: 'mapa', plan: 'Temperatura de cada observatorio desde hace décadas, olas de calor, noches tropicales y sequía.' },
