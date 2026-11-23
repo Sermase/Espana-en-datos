@@ -1,0 +1,425 @@
+{
+ "padron": {
+  "cabecera": [
+   "Municipios",
+   "Sexo",
+   "Periodo",
+   "Total"
+  ],
+  "municipios": 8136,
+  "años": [
+   1996,
+   2025
+  ]
+ },
+ "muni_vegetativo": {
+  "series": 155,
+  "ejemplos": [
+   [
+    "Alacant/Alicante. Indicadores de crecimiento y estructura de la población. Saldo vegetativo. Dato base. ",
+    [
+     "Municipios:03014:Alacant/Alicante",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Saldo vegetativo",
+     "Tipo de dato:0:Dato base"
+    ],
+    2024,
+    -0.86
+   ],
+   [
+    "Albacete. Indicadores de crecimiento y estructura de la población. Saldo vegetativo. Dato base. ",
+    [
+     "Municipios:02003:Albacete",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Saldo vegetativo",
+     "Tipo de dato:0:Dato base"
+    ],
+    2024,
+    -1.42
+   ],
+   [
+    "Alcalá de Guadaíra. Indicadores de crecimiento y estructura de la población. Saldo vegetativo. Dato base. ",
+    [
+     "Municipios:41004:Alcalá de Guadaíra",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Saldo vegetativo",
+     "Tipo de dato:0:Dato base"
+    ],
+    2024,
+    -0.68
+   ],
+   [
+    "Alcalá de Henares. Indicadores de crecimiento y estructura de la población. Saldo vegetativo. Dato base. ",
+    [
+     "Municipios:28005:Alcalá de Henares",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Saldo vegetativo",
+     "Tipo de dato:0:Dato base"
+    ],
+    2024,
+    -0.25
+   ],
+   [
+    "Alcobendas. Indicadores de crecimiento y estructura de la población. Saldo vegetativo. Dato base. ",
+    [
+     "Municipios:28006:Alcobendas",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Saldo vegetativo",
+     "Tipo de dato:0:Dato base"
+    ],
+    2024,
+    1.19
+   ],
+   [
+    "Alcoi/Alcoy. Indicadores de crecimiento y estructura de la población. Saldo vegetativo. Dato base. ",
+    [
+     "Municipios:03009:Alcoi/Alcoy",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Saldo vegetativo",
+     "Tipo de dato:0:Dato base"
+    ],
+    2024,
+    -3.2
+   ]
+  ]
+ },
+ "muni_edad": {
+  "series": 465,
+  "ejemplos": [
+   [
+    "Alacant/Alicante. Indicadores de crecimiento y estructura de la población. Edad media de la población. Total. Dato base. ",
+    [
+     "Municipios:03014:Alacant/Alicante",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Edad media de la población",
+     "Sexo:0:Ambos sexos",
+     "Tipo de dato:0:Dato base"
+    ],
+    2025,
+    43.87
+   ],
+   [
+    "Alacant/Alicante. Indicadores de crecimiento y estructura de la población. Edad media de la población. Hombres. Dato base. ",
+    [
+     "Municipios:03014:Alacant/Alicante",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Edad media de la población",
+     "Sexo:1:Hombres",
+     "Tipo de dato:0:Dato base"
+    ],
+    2025,
+    42.3
+   ],
+   [
+    "Alacant/Alicante. Indicadores de crecimiento y estructura de la población. Edad media de la población. Mujeres. Dato base. ",
+    [
+     "Municipios:03014:Alacant/Alicante",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Edad media de la población",
+     "Sexo:6:Mujeres",
+     "Tipo de dato:0:Dato base"
+    ],
+    2025,
+    45.33
+   ],
+   [
+    "Albacete. Indicadores de crecimiento y estructura de la población. Edad media de la población. Total. Dato base. ",
+    [
+     "Municipios:02003:Albacete",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Edad media de la población",
+     "Sexo:0:Ambos sexos",
+     "Tipo de dato:0:Dato base"
+    ],
+    2025,
+    43.53
+   ],
+   [
+    "Albacete. Indicadores de crecimiento y estructura de la población. Edad media de la población. Hombres. Dato base. ",
+    [
+     "Municipios:02003:Albacete",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Edad media de la población",
+     "Sexo:1:Hombres",
+     "Tipo de dato:0:Dato base"
+    ],
+    2025,
+    41.9
+   ],
+   [
+    "Albacete. Indicadores de crecimiento y estructura de la población. Edad media de la población. Mujeres. Dato base. ",
+    [
+     "Municipios:02003:Albacete",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Edad media de la población",
+     "Sexo:6:Mujeres",
+     "Tipo de dato:0:Dato base"
+    ],
+    2025,
+    45.1
+   ]
+  ]
+ },
+ "muni_envej": {
+  "series": 155,
+  "ejemplos": [
+   [
+    "Alacant/Alicante. Indicadores de crecimiento y estructura de la población. Índice de envejecimiento. Porcentaje. ",
+    [
+     "Municipios:03014:Alacant/Alicante",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Índice de envejecimiento",
+     "Tipo de dato::Porcentaje"
+    ],
+    2025,
+    138.39
+   ],
+   [
+    "Albacete. Indicadores de crecimiento y estructura de la población. Índice de envejecimiento. Porcentaje. ",
+    [
+     "Municipios:02003:Albacete",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Índice de envejecimiento",
+     "Tipo de dato::Porcentaje"
+    ],
+    2025,
+    126.03
+   ],
+   [
+    "Alcalá de Guadaíra. Indicadores de crecimiento y estructura de la población. Índice de envejecimiento. Porcentaje. ",
+    [
+     "Municipios:41004:Alcalá de Guadaíra",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Índice de envejecimiento",
+     "Tipo de dato::Porcentaje"
+    ],
+    2025,
+    101.3
+   ],
+   [
+    "Alcalá de Henares. Indicadores de crecimiento y estructura de la población. Índice de envejecimiento. Porcentaje. ",
+    [
+     "Municipios:28005:Alcalá de Henares",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Índice de envejecimiento",
+     "Tipo de dato::Porcentaje"
+    ],
+    2025,
+    146.41
+   ],
+   [
+    "Alcobendas. Indicadores de crecimiento y estructura de la población. Índice de envejecimiento. Porcentaje. ",
+    [
+     "Municipios:28006:Alcobendas",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Índice de envejecimiento",
+     "Tipo de dato::Porcentaje"
+    ],
+    2025,
+    111.89
+   ],
+   [
+    "Alcoi/Alcoy. Indicadores de crecimiento y estructura de la población. Índice de envejecimiento. Porcentaje. ",
+    [
+     "Municipios:03009:Alcoi/Alcoy",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Índice de envejecimiento",
+     "Tipo de dato::Porcentaje"
+    ],
+    2025,
+    164.18
+   ]
+  ]
+ },
+ "muni_nacidos": {
+  "series": 775,
+  "ejemplos": [
+   [
+    "Alacant/Alicante. Indicadores de crecimiento y estructura de la población. Proporción de personas nacidas en el mismo municipio en el que residen (autóctonos). Porcentaje. ",
+    [
+     "Municipios:03014:Alacant/Alicante",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Proporción de personas nacidas en el mismo municipio en el que residen (autóctonos)",
+     "Tipo de dato::Porcentaje"
+    ],
+    2025,
+    43.35
+   ],
+   [
+    "Alacant/Alicante. Indicadores de crecimiento y estructura de la población. Proporción de personas nacidas en distinto municipio en el que residen pero en la misma provincia. Porcentaje. ",
+    [
+     "Municipios:03014:Alacant/Alicante",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Proporción de personas nacidas en distinto municipio en el que residen pero en la misma provincia",
+     "Tipo de dato::Porcentaje"
+    ],
+    2025,
+    7.01
+   ],
+   [
+    "Alacant/Alicante. Indicadores de crecimiento y estructura de la población. Proporción de personas nacidas en distinta provincia en la que residen pero en la misma comunidad autónoma. Porcentaje. ",
+    [
+     "Municipios:03014:Alacant/Alicante",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Proporción de personas nacidas en distinta provincia en la que residen pero en la misma comunidad autónoma",
+     "Tipo de dato::Porcentaje"
+    ],
+    2025,
+    1.5
+   ],
+   [
+    "Alacant/Alicante. Indicadores de crecimiento y estructura de la población. Proporción de personas nacidas en distinta comunidad autónoma en la que residen pero en España. Porcentaje. ",
+    [
+     "Municipios:03014:Alacant/Alicante",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Proporción de personas nacidas en distinta comunidad autónoma en la que residen pero en España",
+     "Tipo de dato::Porcentaje"
+    ],
+    2025,
+    19.21
+   ],
+   [
+    "Alacant/Alicante. Indicadores de crecimiento y estructura de la población. Proporción de personas residentes en España y nacidas fuera de España. Porcentaje. ",
+    [
+     "Municipios:03014:Alacant/Alicante",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Proporción de personas residentes en España y nacidas fuera de España",
+     "Tipo de dato::Porcentaje"
+    ],
+    2025,
+    28.93
+   ],
+   [
+    "Albacete. Indicadores de crecimiento y estructura de la población. Proporción de personas nacidas en el mismo municipio en el que residen (autóctonos). Porcentaje. ",
+    [
+     "Municipios:02003:Albacete",
+     "Fecundidad, Nupcialidad, Mortalidad, Indicadores de población e Indicadores de migraciones::Indicadores de crecimiento y estructura de la población",
+     "Conceptos demógraficos::Proporción de personas nacidas en el mismo municipio en el que residen (autóctonos)",
+     "Tipo de dato::Porcentaje"
+    ],
+    2025,
+    60.51
+   ]
+  ]
+ },
+ "nac_vida": [
+  "Mortalidad. Total Nacional. Ambos sexos",
+  "Mortalidad. Total Nacional. Varones",
+  "Mortalidad. Total Nacional. Mujeres"
+ ],
+ "nac_natalidad": [
+  "Fecundidad. Total Nacional"
+ ],
+ "nac_mortalidad": [
+  "Mortalidad. Total Nacional"
+ ],
+ "nac_vegetativo": [
+  "Indicadores de crecimiento y estructura de la población. Total Nacional"
+ ],
+ "nac_fecundidad": [
+  "Fecundidad. Total Nacional. Ambas nacionalidades",
+  "Total Nacional. Fecundidad. Ambas nacionalidades. Primero",
+  "Total Nacional. Fecundidad. Ambas nacionalidades. Segundo",
+  "Total Nacional. Fecundidad. Ambas nacionalidades. Tercero",
+  "Total Nacional. Fecundidad. Ambas nacionalidades. Cuarto y más",
+  "Fecundidad. Total Nacional. Española",
+  "Total Nacional. Fecundidad. Española. Primero",
+  "Total Nacional. Fecundidad. Española. Segundo",
+  "Total Nacional. Fecundidad. Española. Tercero",
+  "Total Nacional. Fecundidad. Española. Cuarto y más",
+  "Fecundidad. Total Nacional. Extranjera",
+  "Total Nacional. Fecundidad. Extranjera. Primero",
+  "Total Nacional. Fecundidad. Extranjera. Segundo",
+  "Total Nacional. Fecundidad. Extranjera. Tercero",
+  "Total Nacional. Fecundidad. Extranjera. Cuarto y más"
+ ],
+ "nac_maternidad": [
+  "Fecundidad. Total Nacional. Ambas nacionalidades",
+  "Total Nacional, Fecundidad, Edad media a la maternidad                                     , Total, Todas las edades, Anual, Dato base, Total, Primero",
+  "Total Nacional, Fecundidad, Edad media a la maternidad                                     , Total, Todas las edades, Anual, Dato base, Total, Segundo",
+  "Total Nacional, Fecundidad, Edad media a la maternidad                                     , Total, Todas las edades, Anual, Dato base, Total, Tercero",
+  "Total Nacional, Fecundidad, Edad media a la maternidad                                     , Total, Todas las edades, Anual, Dato base, Total, Cuarto y más",
+  "Fecundidad. Total Nacional. Española",
+  "Total Nacional, Fecundidad, Edad media a la maternidad                                     , Total, Todas las edades, Anual, Dato base, Española, Primero",
+  "Total Nacional, Fecundidad, Edad media a la maternidad                                     , Total, Todas las edades, Anual, Dato base, Española, Segundo",
+  "Total Nacional, Fecundidad, Edad media a la maternidad                                     , Total, Todas las edades, Anual, Dato base, Española, Tercero",
+  "Total Nacional, Fecundidad, Edad media a la maternidad                                     , Total, Todas las edades, Anual, Dato base, Española, Cuarto y más",
+  "Fecundidad. Total Nacional. Extranjera",
+  "Total Nacional, Fecundidad, Edad media a la maternidad                                     , Total, Todas las edades, Anual, Dato base, Extranjera, Primero",
+  "Total Nacional, Fecundidad, Edad media a la maternidad                                     , Total, Todas las edades, Anual, Dato base, Extranjera, Segundo",
+  "Total Nacional, Fecundidad, Edad media a la maternidad                                     , Total, Todas las edades, Anual, Dato base, Extranjera, Tercero",
+  "Total Nacional, Fecundidad, Edad media a la maternidad                                     , Total, Todas las edades, Anual, Dato base, Extranjera, Cuarto y más"
+ ],
+ "nac_edadMedia": [
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Edad media de la población. Total. Anual. Dato base",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Edad media de la población. Hombres. Anual. Dato base",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Edad media de la población. Mujeres. Anual. Dato base"
+ ],
+ "nac_envejecimiento": [
+  "Indicadores de crecimiento y estructura de la población. Total Nacional"
+ ],
+ "nac_nacidosFuera": [
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. Todas las edades. Anual. Porcentaje. Total",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. Todas las edades. Anual. Porcentaje. Española",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. Todas las edades. Anual. Porcentaje. Extranjera",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 0 años. Anual. Porcentaje. Total",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 0 años. Anual. Porcentaje. Española",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 0 años. Anual. Porcentaje. Extranjera",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 1 año. Anual. Porcentaje. Total",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 1 año. Anual. Porcentaje. Española",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 1 año. Anual. Porcentaje. Extranjera",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 2 años. Anual. Porcentaje. Total",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 2 años. Anual. Porcentaje. Española",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 2 años. Anual. Porcentaje. Extranjera",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 3 años. Anual. Porcentaje. Total",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 3 años. Anual. Porcentaje. Española",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 3 años. Anual. Porcentaje. Extranjera",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 4 años. Anual. Porcentaje. Total",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 4 años. Anual. Porcentaje. Española",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 4 años. Anual. Porcentaje. Extranjera",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 5 años. Anual. Porcentaje. Total",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 5 años. Anual. Porcentaje. Española",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 5 años. Anual. Porcentaje. Extranjera",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 6 años. Anual. Porcentaje. Total",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 6 años. Anual. Porcentaje. Española",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 6 años. Anual. Porcentaje. Extranjera",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 7 años. Anual. Porcentaje. Total",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 7 años. Anual. Porcentaje. Española",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 7 años. Anual. Porcentaje. Extranjera",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 8 años. Anual. Porcentaje. Total",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 8 años. Anual. Porcentaje. Española",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 8 años. Anual. Porcentaje. Extranjera",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 9 años. Anual. Porcentaje. Total",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 9 años. Anual. Porcentaje. Española",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 9 años. Anual. Porcentaje. Extranjera",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 10 años. Anual. Porcentaje. Total",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 10 años. Anual. Porcentaje. Española",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 10 años. Anual. Porcentaje. Extranjera",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 11 años. Anual. Porcentaje. Total",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 11 años. Anual. Porcentaje. Española",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 11 años. Anual. Porcentaje. Extranjera",
+  "Total Nacional. Indicadores de crecimiento y estructura de la población. Proporción de población nacida en el extranjero. Total. 12 años. Anual. Porcentaje. Total"
+ ],
+ "nac_migracion": [
+  "Total Nacional. Indicadores de migraciones. Tasa de Migración Neta con el extranjero. Anual. Dato base. Total. Todas las edades. Total"
+ ],
+ "nac_migracion21": [
+  "Total Nacional. Indicadores de migraciones. Tasa de Migración Neta con el extranjero. Total. Todas las edades. Anual. Dato base. Total"
+ ],
+ "nac_dependencia": [
+  "Indicadores de crecimiento y estructura de la población. Total Nacional"
+ ],
+ "piramide": {
+  "cabecera": "Edad simple\tSexo\tPeriodo\tTotal",
+  "ejemplos": [
+   "Todas las edades\tTotal\t1 de enero de 2025\t49.128.297",
+   "Todas las edades\tTotal\t1 de octubre de 2024\t48.999.880",
+   "Todas las edades\tTotal\t1 de julio de 2024\t48.821.936",
+   "Todas las edades\tTotal\t1 de abril de 2024\t48.701.130",
+   "Todas las edades\tTotal\t1 de enero de 2024\t48.619.695",
+   "Todas las edades\tTotal\t1 de octubre de 2023\t48.486.865",
+   "Todas las edades\tTotal\t1 de julio de 2023\t48.320.520"
+  ],
+  "años": 55
+ }
+}
