@@ -1,6 +1,7 @@
 import { useEffect, useImperativeHandle, useRef, type Ref } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import { cuandoVisible, fondo } from '../mapa-base'
 import provRaw from '../provincias.json'
 import { priceColor, provColor, type Datos, type Fuel, type Station } from './datos'
 
@@ -13,7 +14,7 @@ type ProvFC = GeoJSON.FeatureCollection<GeoJSON.Geometry, { id: string; n: strin
 const PROVS = provRaw as unknown as ProvFC
 const PENINSULA: L.LatLngBoundsExpression = [[35.9, -9.4], [43.85, 4.4]]
 const CANARIAS: L.LatLngBoundsExpression = [[27.6, -18.2], [29.5, -13.3]]
-const DOTS_FROM = 8 // zoom a partir del que se ven las gasolineras una a una
+const DOTS_FROM = 7 // zoom a partir del que se ven las gasolineras una a una
 
 export type MapaApi = { flyStation: (s: Station) => void; flyProv: (id: string) => void; reset: () => void; canarias: () => void; locate: (lat: number, lon: number) => void }
 type Props = {
@@ -46,11 +47,10 @@ export function Mapa({ datos, fuel, selId, selProv, near, onStation, onProv, onE
   useEffect(() => {
     const m = L.map(el.current!, { zoomControl: false, preferCanvas: true, minZoom: 5, maxZoom: 18, zoomSnap: 0.25 })
     map.current = m
-    m.fitBounds(PENINSULA, { padding: [10, 10] })
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      subdomains: 'abcd', maxZoom: 19,
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a> · IGN · MITECO',
-    }).addTo(m)
+    m.setView([40.2, -3.7], 6)
+    cuandoVisible(m, () => m.fitBounds(PENINSULA, { padding: [10, 10] }))
+    fondo(m)
+    m.attributionControl.addAttribution('IGN · MITECO')
     const renderer = L.canvas({ tolerance: isPhone() ? 10 : 4 })
     provLayer.current = L.geoJSON(PROVS, {
       style: f => provStyle(f!.properties.id),
@@ -107,14 +107,14 @@ export function Mapa({ datos, fuel, selId, selProv, near, onStation, onProv, onE
     m.flyTo(target, z, { duration: 0.9 })
   }
   useImperativeHandle(api, () => ({
-    flyStation: s => flyTo(s.lat, s.lon, Math.max(map.current!.getZoom(), 15)),
-    flyProv: id => {
+    flyStation: s => cuandoVisible(map.current!, () => flyTo(s.lat, s.lon, Math.max(map.current!.getZoom(), 15))),
+    flyProv: id => cuandoVisible(map.current!, () => {
       const layer = provLayer.current?.getLayers().find(l => ((l as L.Polygon).feature as GeoJSON.Feature | undefined)?.properties?.id === id) as L.Polygon | undefined
       if (layer) map.current!.flyToBounds(layer.getBounds(), { paddingTopLeft: [20, 20], paddingBottomRight: [20, isPhone() ? Math.round(window.innerHeight * 0.3) : 20], duration: 0.9 })
-    },
+    }),
     reset: () => map.current!.flyToBounds(PENINSULA, { duration: 0.8 }),
     canarias: () => map.current!.flyToBounds(CANARIAS, { duration: 0.9 }),
-    locate: (lat, lon) => flyTo(lat, lon, 13),
+    locate: (lat, lon) => cuandoVisible(map.current!, () => flyTo(lat, lon, 13)),
   }))
 
   return <div ref={el} className="mapa" role="application" aria-label="Mapa de gasolineras" />

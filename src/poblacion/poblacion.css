@@ -28,7 +28,8 @@ a { color: inherit }
 .stage { position: relative; overflow: hidden }
 .mapa { position: absolute; inset: 0; background: #03090f }
 .mapa.leaflet-container { background: #03090f; font-family: Barlow, system-ui, sans-serif }
-.leaflet-tile-pane { filter: saturate(.7) brightness(1.15) }
+.fondo-calles { filter: brightness(1.45) contrast(1.15) }
+.fondo-nombres { filter: brightness(1.25) }
 .leaflet-control-attribution { background: rgba(3, 9, 15, .75) !important; color: var(--muted); font-size: 10px }
 .leaflet-control-attribution a { color: #a9c6cf }
 .mapa.is-close ~ .mapa-hint { display: none }

@@ -1,6 +1,7 @@
 import { useEffect, useImperativeHandle, useRef, type Ref } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import { cuandoVisible, fondo } from '../mapa-base'
 import { type Datos, type Muni } from './datos'
 import { METRICAS, colorDe, type Metrica } from './metricas'
 
@@ -34,11 +35,10 @@ export function Mapa({ d, metrica, selId, onMuni, onEmpty, api }: { d: Datos; me
   useEffect(() => {
     const m = L.map(el.current!, { zoomControl: false, preferCanvas: true, minZoom: 5, maxZoom: 16, zoomSnap: 0.25 })
     map.current = m
-    m.fitBounds(PENINSULA, { padding: [10, 10] })
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      subdomains: 'abcd', maxZoom: 19,
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a> · IGN · INE',
-    }).addTo(m)
+    m.setView([40.2, -3.7], 6)
+    cuandoVisible(m, () => m.fitBounds(PENINSULA, { padding: [10, 10] }))
+    fondo(m)
+    m.attributionControl.addAttribution('IGN · INE')
     const renderer = L.canvas({ tolerance: isPhone() ? 6 : 2 })
     polys.current = L.geoJSON(d.geo, {
       renderer,
@@ -78,13 +78,13 @@ export function Mapa({ d, metrica, selId, onMuni, onEmpty, api }: { d: Datos; me
     m.flyTo(m.unproject(m.project([lat, lon], z).add([0, dy]), z), z, { duration: 0.9 })
   }
   useImperativeHandle(api, () => ({
-    flyMuni: x => {
+    flyMuni: x => cuandoVisible(map.current!, () => {
       const layer = polys.current?.getLayers().find(l => ((l as L.Polygon).feature as GeoJSON.Feature | undefined)?.properties?.id === x.id) as L.Polygon | undefined
       if (layer) {
         const b = layer.getBounds(), z = Math.min(12, Math.max(9, map.current!.getBoundsZoom(b, false, L.point(60, 60))))
         flyTo(b.getCenter().lat, b.getCenter().lng, z)
       } else if (Number.isFinite(x.cy)) flyTo(x.cy, x.cx, 11)
-    },
+    }),
     reset: () => map.current!.flyToBounds(PENINSULA, { duration: 0.8 }),
     canarias: () => map.current!.flyToBounds(CANARIAS, { duration: 0.9 }),
   }))
