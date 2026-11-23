@@ -19,7 +19,7 @@ export const TEMAS: Tema[] = [
   { id: 'trenes', nombre: 'Trenes', lema: 'Todos los trenes de Renfe moviéndose por el mapa, con sus horarios y retrasos.', color: '#8fb4ff', vista: 'mapa' },
   { id: 'energia', nombre: 'Energía', lema: 'De dónde sale la electricidad que gastamos y cuánto cuesta cada hora.', color: '#ffb02e', vista: 'consola' },
   { id: 'economia', nombre: 'Economía', lema: 'PIB, paro, precios y salarios, comunidad por comunidad.', color: '#3df5b0', vista: 'consola' },
-  { id: 'poblacion', nombre: 'Población', lema: 'Cuántos somos, dónde vivimos y cómo envejecemos.', color: '#c49bff', vista: 'pirámide' },
+  { id: 'poblacion', nombre: 'Población', lema: 'Los 8.000 municipios en un mapa, y gráficos e históricos desde 1971: cuántos somos, dónde vivimos y cómo envejecemos.', color: '#c49bff', vista: 'pirámide', ruta: './poblacion/index.html' },
   { id: 'carreteras', nombre: 'Carreteras', lema: 'Tráfico, accidentes y obras en la red de carreteras.', color: '#ff8a5c', vista: 'mapa' },
   { id: 'montana', nombre: 'Montaña y nieve', lema: 'Cumbres, espesor de nieve y temporada de esquí.', color: '#d6ecff', vista: 'relieve' },
 ]

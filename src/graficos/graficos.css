@@ -41,16 +41,18 @@
 
 /* Rankings en barras */
 .g-bars { list-style: none; padding: 0; margin: 0; display: grid; gap: 1px; color: var(--acc, #3fe6ff) }
-.g-bar { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) minmax(50px, 28%) 60px; gap: 10px; align-items: center; padding: 6px 4px; text-align: left; border-radius: 3px; color: var(--g-ink, #e6f6fb); background: none; border: 0; font: inherit }
+.g-bar { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) minmax(50px, 28%) minmax(60px, auto); gap: 10px; align-items: center; padding: 6px 4px; text-align: left; border-radius: 3px; color: var(--g-ink, #e6f6fb); background: none; border: 0; font: inherit }
 button.g-bar { cursor: pointer }
 button.g-bar:hover, button.g-bar:focus-visible { background: rgba(255, 255, 255, .045) }
 .g-bar-n { min-width: 0; font-size: 14.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: grid }
 .g-bar-n small { color: #86a9b5; font-size: 12px; overflow: hidden; text-overflow: ellipsis }
-.g-bar-t { height: 8px; display: flex; align-items: center }
-.g-bar-t i { display: block; height: 8px; border-radius: 0 4px 4px 0; background: currentColor }
+.g-bar-t { position: relative; height: 8px }
+.g-bar-t i { position: absolute; top: 0; display: block; height: 8px; border-radius: 0 4px 4px 0; background: currentColor }
+.g-bar-t i.is-neg { border-radius: 4px 0 0 4px; transform-origin: right }
+.g-zero { position: absolute; top: -4px; bottom: -4px; width: 1px; background: rgba(160, 220, 240, .35) }
 .g-bars li:not(.is-dest) .g-bar-t i { opacity: .85 }
 .g-bars li.is-dest .g-bar-n { color: #fff; font-weight: 600 }
-.g-bar b { text-align: right; font-size: 13.5px; font-weight: 600; font-variant-numeric: tabular-nums }
+.g-bar b { white-space: nowrap; text-align: right; font-size: 13.5px; font-weight: 600; font-variant-numeric: tabular-nums }
 .g-more { margin-top: 4px; background: none; border: 0; color: var(--acc, #3fe6ff); font: 600 13px Barlow, sans-serif; cursor: pointer; padding: 4px }
 
 /* Columnas */
@@ -59,3 +61,14 @@ button.g-bar:hover, button.g-bar:focus-visible { background: rgba(255, 255, 255,
 .g-col .g-hit { cursor: default }
 
 @media (prefers-reduced-motion: reduce) { .g-fig *, .g-bars * { transition: none !important } }
+
+/* Pirámide */
+.g-pyr .g-legend i.is-ghost { height: 0; border-top: 1.5px solid var(--g-ink2); background: none }
+.g-pyr-read { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: baseline; margin: 2px 0 8px; color: var(--g-muted); font-size: 12.5px }
+.g-pyr-read b { font: 700 26px Oxanium, Barlow, sans-serif; color: var(--g-ink); margin-right: 4px }
+.g-pyr-read strong { color: var(--g-ink); font-weight: 600 }
+.g-ghost { fill: none; stroke: var(--g-ink2); stroke-width: 1.3; opacity: .7 }
+.g-time { display: flex; align-items: center; gap: 10px; margin-top: 6px; color: var(--g-muted); font-size: 12px }
+.g-time button { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--acc, #3fe6ff); color: var(--g-ink); background: none; cursor: pointer; flex: none }
+.g-time button:hover { background: color-mix(in oklab, var(--acc, #3fe6ff) 18%, transparent) }
+.g-time input { flex: 1; accent-color: var(--acc, #3fe6ff) }

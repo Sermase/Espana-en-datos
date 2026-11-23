@@ -67,7 +67,8 @@ const IND_MUNI = { 30699: 'edad', 30702: 'envej', 34982: 'nacidos', 30696: 'vege
         if (!muni) continue
         // nos quedamos con «ambos sexos / total» cuando la tabla trae más cortes
         const extra = md.filter(m => m !== muni).map(m => m.Nombre).join(' ')
-        if (/hombre|mujer|extranjer|españ/i.test(extra) && !/total|ambos/i.test(extra)) continue
+        if (key === 'nacidos' && !/nacidas en el extranjero/i.test(extra)) continue
+        if (key !== 'nacidos' && /hombre|mujer/i.test(extra) && !/total|ambos/i.test(extra)) continue
         const d = s.Data?.[0]; if (!d || d.Valor == null) continue
         if (out[key].v[muni.Codigo] != null && !/total|ambos/i.test(extra)) continue
         out[key].v[muni.Codigo] = d.Valor; out[key].año = d.Anyo
@@ -111,7 +112,9 @@ const NAC = {
       if (!m) continue
       const year = Number(m[1]), sex = /hombre/i.test(c[iSex]) ? 'h' : /mujer/i.test(c[iSex]) ? 'm' : null
       if (!sex) continue
+      // solo edades sueltas: los agregados «85 y más» se contarían dos veces (salvo «100 y más», que es el último)
       const am = c[iAge].match(/^(\d+)/); if (!am) continue
+      if (/y m[aá]s/i.test(c[iAge]) && Number(am[1]) !== 100) continue
       const age = Math.min(100, Number(am[1])), v = num(c[iVal]); if (v == null) continue
       py[year] ??= { h: Array(101).fill(0), m: Array(101).fill(0) }
       py[year][sex][age] += v

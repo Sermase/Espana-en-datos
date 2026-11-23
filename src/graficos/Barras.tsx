@@ -14,7 +14,13 @@ export function Barras({ items, fmt, titulo, desde = 0, max, limite = 12 }: { it
   const [all, setAll] = useState(false)
   const shown = all ? items : items.slice(0, limite)
   const hi = max ?? Math.max(...items.map(i => i.valor))
-  const w = (v: number) => hi > desde ? Math.max(2, ((v - desde) / (hi - desde)) * 100) : 100
+  // con valores negativos, las barras salen de un cero común (divergentes)
+  const neg = items.some(i => i.valor < 0)
+  const lo = neg ? Math.min(0, ...items.map(i => i.valor)) : desde, top = neg ? Math.max(0, hi) : hi
+  const span = top - lo || 1
+  const geo = (v: number) => neg
+    ? { left: `${((Math.min(0, v) - lo) / span) * 100}%`, width: `${Math.max(0.6, (Math.abs(v) / span) * 100)}%` }
+    : { left: '0%', width: `${top > lo ? Math.max(2, ((v - lo) / span) * 100) : 100}%` }
   return (
     <>
       <ul className="g-bars" ref={ref} aria-label={titulo}>
@@ -23,7 +29,10 @@ export function Barras({ items, fmt, titulo, desde = 0, max, limite = 12 }: { it
           return <li key={it.id} className={it.destacado ? 'is-dest' : ''}>
             <Tag className="g-bar" onClick={it.onClick} {...(it.onClick ? { type: 'button' as const } : {})}>
               <span className="g-bar-n">{it.nombre}{it.sub && <small>{it.sub}</small>}</span>
-              <span className="g-bar-t"><motion.i style={{ background: it.color }} initial={{ width: 0 }} animate={{ width: seen ? `${w(it.valor)}%` : 0 }} transition={{ duration: .8, delay: Math.min(i, 14) * .05, ease: [0.2, 0.8, 0.2, 1] }} /></span>
+              <span className={`g-bar-t ${neg ? 'is-div' : ''}`}>
+                {neg && <span className="g-zero" style={{ left: `${(-lo / span) * 100}%` }} />}
+                <motion.i className={it.valor < 0 ? 'is-neg' : ''} style={{ background: it.color, left: geo(it.valor).left }} initial={{ width: 0 }} animate={{ width: seen ? geo(it.valor).width : 0 }} transition={{ duration: .8, delay: Math.min(i, 14) * .05, ease: [0.2, 0.8, 0.2, 1] }} />
+              </span>
               <b><CountUp value={it.valor} fmt={fmt} start={seen} delay={Math.min(i, 14) * .05} duration={.8} /></b>
             </Tag>
           </li>
