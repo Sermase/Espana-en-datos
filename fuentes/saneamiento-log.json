@@ -34,7 +34,16 @@
   "_ok": "2024 (y 2022), 18 territorios"
  },
  "edar": {
-  "no es zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=depuradorasq2023.zip": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"utf-8\" />\r\n    <meta name=\"viewport\" content=\"width=device",
+  "no es zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=depuradorasq2023.zip": {
+   "texto": " [Descarga ficheros GIS] - Agricultura - mapa.gob.es Castellano â¾ | Buscar Descarga ficheros GIS Archivo: depuradorasq2023.zip Descargar fichero Ministerio para la TransiciÃ³n EcolÃ³gica y el Reto DemogrÃ¡fico Plaza San Juan de la Cruz, 10 28071 Madrid (EspaÃ±a) ",
+   "enlaces": [
+    "/descargas/app/DescargaFichero?handler=Download"
+   ],
+   "formularios": [
+    "<input type=\"hidden\"\r\n                       name=\"f\"\r\n                       value=\"depuradorasq2023.zip\" />",
+    "<input name=\"__RequestVerificationToken\" type=\"hidden\" value=\"CfDJ8PUxxfZWKbZGtMWQ60ASuwtwsaFHl6Xcm8neIVpIsRXQVOkSC4v91xY3cR7535GIX75IgExhsPihESLlPoTNpNg7p6BgPkrxtGnzrs63bxILiqN3eNPVJ7obxJj_Xx7LbwOLRlZl0XytjPVC5cOz2mc\" />"
+   ]
+  },
   "curl https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=depuradoras-q2023.zip": "en-datos -o /tmp/edar/edar.zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=depuradoras-q2023.zip\ncurl: (22) The requested URL returned error: 404\n",
   "curl https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=edar-q2023.zip": "espana-en-datos -o /tmp/edar/edar.zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=edar-q2023.zip\ncurl: (22) The requested URL returned error: 404\n",
   "curl https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=depuradoras_q2023.zip": "en-datos -o /tmp/edar/edar.zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=depuradoras_q2023.zip\ncurl: (22) The requested URL returned error: 404\n",
@@ -63,5 +72,49 @@
   "sup": "53445: Aguas superficiales []",
   "sub": "53445: Aguas subterráneas []"
  },
+ "paginaAgua": [
+  "/es/cartografia-y-sig/ide/descargas/agua/censo-nacional-vertidos.html",
+  "/es/cartografia-y-sig/ide/descargas/agua/situacion-q2023.html",
+  "/es/cartografia-y-sig/ide/descargas/agua/zonas-sensibles-q2023.html",
+  "/es/cartografia-y-sig/ide/descargas/agua/zonas-sensibles-q2023.html"
+ ],
+ "pagina /es/cartografia-y-sig/ide/descargas/agua/censo-nacional-vertidos.html": [
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=cnv.zip",
+  "/content/dam/miteco/es/cartografia-y-sig/ide/descargas/lyr-cnv_tcm30-506738.zip"
+ ],
+ "pagina /es/cartografia-y-sig/ide/descargas/agua/situacion-q2023.html": [
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=aauuq2023.zip",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=aauuq2023.kmz",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=gml-aauuq2023.zip",
+  "/content/dam/miteco/es/cartografia-y-sig/ide/descargas/lyr-aauuq2013_tcm30-522878.zip",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=aauuq2023_gpkg.zip",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=depuradorasq2023.zip",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=depuradorasq2023.kmz",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=gml-depuradorasq2023.zip",
+  "/content/dam/miteco/es/cartografia-y-sig/ide/descargas/lyr-depuradorasq2013_tcm30-522879.zip",
+  "/content/dam/miteco/es/cartografia-y-sig/ide/descargas/depuradorasq2023_gpkg.zip",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=pvertq2023.zip",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=pvertq2023.kmz",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=gml-pvertq2023.zip",
+  "/content/dam/miteco/es/cartografia-y-sig/ide/descargas/lyr-pvertq2013_tcm30-522880.zip",
+  "/content/dam/miteco/es/cartografia-y-sig/ide/descargas/pvertq2023_gpkg.zip"
+ ],
+ "pagina /es/cartografia-y-sig/ide/descargas/agua/zonas-sensibles-q2023.html": [
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=zonas-captacion-q2023.zip",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=zonas-captacion-q2023.kmz",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=gml-zonas-captacion-q2023.zip",
+  "/content/dam/miteco/es/cartografia-y-sig/ide/descargas/lyr-zonas-captacion-q2021_tcm30-546464.zip",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=zonas-captacion-q2023_gpkg.zip",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=zonas-sensibles-lin-q2023.zip",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=zonas-sensibles-lin-q2023.kmz",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=gml_zonassensiblestrataguasresurb_am_lin_q2023.zip",
+  "/content/dam/miteco/es/cartografia-y-sig/ide/descargas/lyr-zonas-sensibles-lin-q2021_tcm30-546463.zip",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=zonas-sensibles-lin-q2023_gpkg.zip",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=zonas-sensibles-pol-q2023.zip",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=zonas-sensibles-pol-q2023.kmz",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=gml_zonassensiblestrataguasresurb_am_pol_q2023.zip",
+  "/content/dam/miteco/es/cartografia-y-sig/ide/descargas/lyr-zonas-sensibles-pol-q2021_tcm30-546462.zip",
+  "https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=zonas-sensibles-pol-q2023_gpkg.zip"
+ ],
  "agg": "aglomeracionesq2023.zip: hero?f=aglomeracionesq2023.zip\ncurl: (22) The requested URL returned error: 404\n · aglomeraciones-q2023.zip: ero?f=aglomeraciones-q2023.zip\ncurl: (22) The requested URL returned error: 404\n · aauu-q2023.zip: scargaFichero?f=aauu-q2023.zip\ncurl: (22) The requested URL returned error: 404\n · aglomeraciones_q2023.zip: ero?f=aglomeraciones_q2023.zip\ncurl: (22) The requested URL returned error: 404\n · "
 }
