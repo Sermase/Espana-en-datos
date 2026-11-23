@@ -11,23 +11,23 @@
   "ES": "31 datos, último 2025 = 1690012"
  },
  "pib_pc_ppa": {
-  "EU27_2020": "26 datos, último 2025 = 100",
-  "BE": "26 datos, último 2025 = 113.9",
-  "CZ": "26 datos, último 2025 = 92.3",
-  "DK": "26 datos, último 2025 = 129.1",
-  "DE": "26 datos, último 2025 = 116.4",
-  "IE": "26 datos, último 2025 = 223.5",
-  "ES": "26 datos, último 2025 = 91.4",
-  "FR": "26 datos, último 2025 = 97.5",
-  "IT": "26 datos, último 2025 = 95.9",
-  "HU": "26 datos, último 2025 = 76.2",
-  "NL": "26 datos, último 2025 = 132",
-  "AT": "26 datos, último 2025 = 118.3",
-  "PL": "26 datos, último 2025 = 81.1",
-  "PT": "26 datos, último 2025 = 81.4",
-  "RO": "26 datos, último 2025 = 78",
-  "FI": "26 datos, último 2025 = 100.7",
-  "SE": "26 datos, último 2025 = 110.9"
+  "EU27_2020": "31 datos, último 2025 = 100",
+  "BE": "31 datos, último 2025 = 113.9",
+  "CZ": "31 datos, último 2025 = 92.3",
+  "DK": "31 datos, último 2025 = 129.1",
+  "DE": "31 datos, último 2025 = 116.4",
+  "IE": "31 datos, último 2025 = 223.5",
+  "ES": "31 datos, último 2025 = 91.4",
+  "FR": "31 datos, último 2025 = 97.5",
+  "IT": "31 datos, último 2025 = 95.9",
+  "HU": "31 datos, último 2025 = 76.2",
+  "NL": "31 datos, último 2025 = 132",
+  "AT": "31 datos, último 2025 = 118.3",
+  "PL": "31 datos, último 2025 = 81.1",
+  "PT": "31 datos, último 2025 = 81.4",
+  "RO": "31 datos, último 2025 = 78",
+  "FI": "31 datos, último 2025 = 100.7",
+  "SE": "31 datos, último 2025 = 110.9"
  },
  "pib_pc_ccaa": {
   "ES": "25 datos, último 2024 = 32600",
@@ -93,15 +93,15 @@
  },
  "paro": {
   "EU27_2020": "321 datos, último 2026-09 = 6.2",
-  "ES": "321 datos, último 2026-09 = 10.3"
+  "ES": "486 datos, último 2026-09 = 10.3"
  },
  "paro_joven": {
   "EU27_2020": "321 datos, último 2026-09 = 15.5",
-  "ES": "321 datos, último 2026-09 = 22.8"
+  "ES": "486 datos, último 2026-09 = 22.8"
  },
  "paro_sexo": {
-  "M": "321 datos, último 2026-09 = 9.4",
-  "F": "321 datos, último 2026-09 = 11.2"
+  "M": "486 datos, último 2026-09 = 9.4",
+  "F": "486 datos, último 2026-09 = 11.2"
  },
  "paro_paises": {
   "EU27_2020": "45 datos, último 2026-09 = 6.2",
@@ -123,25 +123,25 @@
   "SE": "46 datos, último 2026-10 = 8.2"
  },
  "paro_ccaa": {
-  "ES11": "26 datos, último 2025 = 8.4",
-  "ES12": "26 datos, último 2025 = 8.8",
-  "ES13": "26 datos, último 2025 = 7.3",
-  "ES21": "26 datos, último 2025 = 7.3",
-  "ES22": "26 datos, último 2025 = 7.7",
-  "ES23": "26 datos, último 2025 = 8.1",
-  "ES24": "26 datos, último 2025 = 8",
-  "ES30": "26 datos, último 2025 = 8",
-  "ES41": "26 datos, último 2025 = 8.6",
-  "ES42": "26 datos, último 2025 = 12.8",
-  "ES43": "26 datos, último 2025 = 14.8",
-  "ES51": "26 datos, último 2025 = 8.4",
-  "ES52": "26 datos, último 2025 = 11.6",
-  "ES53": "26 datos, último 2025 = 8.8",
-  "ES61": "26 datos, último 2025 = 15.2",
-  "ES62": "26 datos, último 2025 = 12.1",
-  "ES63": "24 datos, último 2025 = 24.3",
-  "ES64": "23 datos, último 2025 = 24.9",
-  "ES70": "26 datos, último 2025 = 13.5"
+  "ES11": "27 datos, último 2025 = 8.4",
+  "ES12": "27 datos, último 2025 = 8.8",
+  "ES13": "27 datos, último 2025 = 7.3",
+  "ES21": "27 datos, último 2025 = 7.3",
+  "ES22": "27 datos, último 2025 = 7.7",
+  "ES23": "27 datos, último 2025 = 8.1",
+  "ES24": "27 datos, último 2025 = 8",
+  "ES30": "27 datos, último 2025 = 8",
+  "ES41": "27 datos, último 2025 = 8.6",
+  "ES42": "27 datos, último 2025 = 12.8",
+  "ES43": "27 datos, último 2025 = 14.8",
+  "ES51": "27 datos, último 2025 = 8.4",
+  "ES52": "27 datos, último 2025 = 11.6",
+  "ES53": "27 datos, último 2025 = 8.8",
+  "ES61": "27 datos, último 2025 = 15.2",
+  "ES62": "27 datos, último 2025 = 12.1",
+  "ES63": "25 datos, último 2025 = 24.3",
+  "ES64": "24 datos, último 2025 = 24.9",
+  "ES70": "27 datos, último 2025 = 13.5"
  },
  "empleo_tasa": {
   "EU27_2020": "17 datos, último 2025 = 76.1",
@@ -149,7 +149,7 @@
  },
  "temporal": {
   "EU27_2020": "143 datos, último 2025 = 12.6",
-  "ES": "130 datos, último 2025 = 15.4"
+  "ES": "157 datos, último 2025 = 15.4"
  },
  "smi": {
   "BE": "54 datos, último 2026-S2 = 2234",
@@ -166,29 +166,29 @@
  },
  "coste_laboral": {
   "EU27_2020": "67 datos, último 2026-Q3 = 3.6",
-  "ES": "86 datos, último 2026-Q2 = 4.2"
+  "ES": "102 datos, último 2026-Q2 = 4.2"
  },
  "salario_medio": {
   "EU27_2020": "24 datos, último 2025 = 41464",
-  "BE": "26 datos, último 2025 = 61984",
-  "CZ": "26 datos, último 2025 = 25755",
-  "DK": "26 datos, último 2025 = 73500",
-  "DE": "26 datos, último 2025 = 56360",
-  "IE": "26 datos, último 2025 = 64387",
-  "ES": "26 datos, último 2025 = 35125",
-  "FR": "26 datos, último 2025 = 44734",
-  "IT": "26 datos, último 2025 = 34213",
-  "HU": "26 datos, último 2025 = 20138",
-  "AT": "26 datos, último 2025 = 60727",
+  "BE": "31 datos, último 2025 = 61984",
+  "CZ": "29 datos, último 2025 = 25755",
+  "DK": "31 datos, último 2025 = 73500",
+  "DE": "31 datos, último 2025 = 56360",
+  "IE": "31 datos, último 2025 = 64387",
+  "ES": "31 datos, último 2025 = 35125",
+  "FR": "31 datos, último 2025 = 44734",
+  "IT": "31 datos, último 2025 = 34213",
+  "HU": "30 datos, último 2025 = 20138",
+  "AT": "31 datos, último 2025 = 60727",
   "PL": "25 datos, último 2025 = 23853",
-  "PT": "26 datos, último 2025 = 26202",
-  "RO": "26 datos, último 2025 = 20818",
-  "FI": "26 datos, último 2025 = 50960",
-  "SE": "26 datos, último 2025 = 49622"
+  "PT": "31 datos, último 2025 = 26202",
+  "RO": "29 datos, último 2025 = 20818",
+  "FI": "31 datos, último 2025 = 50960",
+  "SE": "31 datos, último 2025 = 49622"
  },
  "vivienda_var": {
-  "EU27_2020": "74 datos, último 2026-Q2 = 4.7",
-  "ES": "74 datos, último 2026-Q2 = 12.1"
+  "EU27_2020": "82 datos, último 2026-Q2 = 4.7",
+  "ES": "79 datos, último 2026-Q2 = 12.1"
  },
  "vivienda_ind": {
   "TOTAL": "78 datos, último 2026-Q2 = 200.6",
@@ -200,22 +200,22 @@
  },
  "propiedad": {
   "EU27_2020": "16 datos, último 2025 = 68.5",
-  "BE": "16 datos, último 2025 = 70.9",
-  "CZ": "16 datos, último 2025 = 75.1",
-  "DK": "16 datos, último 2025 = 58.4",
-  "DE": "16 datos, último 2025 = 47.2",
-  "IE": "16 datos, último 2025 = 70.9",
-  "ES": "16 datos, último 2025 = 73.6",
-  "FR": "16 datos, último 2025 = 61.4",
-  "IT": "16 datos, último 2025 = 77.1",
-  "HU": "16 datos, último 2025 = 89.8",
-  "NL": "16 datos, último 2025 = 68.8",
-  "AT": "16 datos, último 2025 = 54.2",
-  "PL": "16 datos, último 2025 = 87.2",
-  "PT": "16 datos, último 2025 = 71.2",
-  "RO": "16 datos, último 2025 = 93.2",
-  "FI": "16 datos, último 2025 = 66.9",
-  "SE": "16 datos, último 2025 = 64.6"
+  "BE": "23 datos, último 2025 = 70.9",
+  "CZ": "21 datos, último 2025 = 75.1",
+  "DK": "23 datos, último 2025 = 58.4",
+  "DE": "17 datos, último 2025 = 47.2",
+  "IE": "23 datos, último 2025 = 70.9",
+  "ES": "19 datos, último 2025 = 73.6",
+  "FR": "21 datos, último 2025 = 61.4",
+  "IT": "22 datos, último 2025 = 77.1",
+  "HU": "21 datos, último 2025 = 89.8",
+  "NL": "21 datos, último 2025 = 68.8",
+  "AT": "19 datos, último 2025 = 54.2",
+  "PL": "19 datos, último 2025 = 87.2",
+  "PT": "22 datos, último 2025 = 71.2",
+  "RO": "19 datos, último 2025 = 93.2",
+  "FI": "22 datos, último 2025 = 66.9",
+  "SE": "22 datos, último 2025 = 64.6"
  },
  "deuda": {
   "EU27_2020": "26 datos, último 2025 = 81.5",
@@ -260,39 +260,43 @@
   "ES": "106 datos, último 2026-Q2 = 101.4"
  },
  "gasto": {
-  "GF01": "15 datos, último 2024 = 5.8",
-  "GF02": "15 datos, último 2024 = 0.9",
-  "GF03": "15 datos, último 2024 = 1.8",
-  "GF04": "15 datos, último 2024 = 5.1",
-  "GF05": "15 datos, último 2024 = 1",
-  "GF06": "15 datos, último 2024 = 0.5",
-  "GF07": "15 datos, último 2024 = 6.5",
-  "GF08": "15 datos, último 2024 = 1.2",
-  "GF09": "15 datos, último 2024 = 4.1",
-  "GF10": "15 datos, último 2024 = 18.7"
+  "GF01": "30 datos, último 2024 = 5.8",
+  "GF02": "30 datos, último 2024 = 0.9",
+  "GF03": "30 datos, último 2024 = 1.8",
+  "GF04": "30 datos, último 2024 = 5.1",
+  "GF05": "30 datos, último 2024 = 1",
+  "GF06": "30 datos, último 2024 = 0.5",
+  "GF07": "30 datos, último 2024 = 6.5",
+  "GF08": "30 datos, último 2024 = 1.2",
+  "GF09": "30 datos, último 2024 = 4.1",
+  "GF10": "30 datos, último 2024 = 18.7"
  },
  "riesgo_pobreza": {
   "EU27_2020": "11 datos, último 2025 = 20.9",
   "ES": "11 datos, último 2025 = 25.7"
  },
+ "riesgo_pobreza_ant": {
+  "EU27_2020": "11 datos, último 2020 = 21.5",
+  "ES": "17 datos, último 2020 = 26.4"
+ },
  "gini": {
   "EU27_2020": "32 datos, último 2025 = 28.6",
-  "BE": "42 datos, último 2025 = 20.6",
+  "BE": "46 datos, último 2025 = 20.6",
   "CZ": "42 datos, último 2025 = 24.1",
-  "DK": "42 datos, último 2025 = 23.3",
+  "DK": "46 datos, último 2025 = 23.3",
   "DE": "42 datos, último 2025 = 29.3",
-  "IE": "42 datos, último 2025 = 26.3",
-  "ES": "42 datos, último 2025 = 33.1",
-  "FR": "42 datos, último 2025 = 30.7",
-  "IT": "42 datos, último 2025 = 29.3",
+  "IE": "46 datos, último 2025 = 26.3",
+  "ES": "44 datos, último 2025 = 33.1",
+  "FR": "44 datos, último 2025 = 30.7",
+  "IT": "44 datos, último 2025 = 29.3",
   "HU": "42 datos, último 2025 = 28.9",
   "NL": "42 datos, último 2025 = 23.1",
-  "AT": "42 datos, último 2025 = 25.8",
+  "AT": "46 datos, último 2025 = 25.8",
   "PL": "42 datos, último 2025 = 24.6",
-  "PT": "42 datos, último 2025 = 29.2",
+  "PT": "44 datos, último 2025 = 29.2",
   "RO": "38 datos, último 2025 = 28.8",
-  "FI": "42 datos, último 2025 = 25.6",
-  "SE": "42 datos, último 2025 = 25.5"
+  "FI": "44 datos, último 2025 = 25.6",
+  "SE": "44 datos, último 2025 = 25.5"
  },
  "renta_mediana": {
   "EU27_2020": "21 datos, último 2025 = 22939",
