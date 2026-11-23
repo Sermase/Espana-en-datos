@@ -1,10 +1,14 @@
 {
  "meses": {
-  "2026-11": "62135 de 62135 concesiones (100.0 %), 872 M€, 66 s",
-  "2026-10": "390503 de 390503 concesiones (100.0 %), 2916 M€, 459 s",
-  "2026-09": "1425408 de 1425408 concesiones (100.0 %), 2389 M€, 2373 s",
-  "2026-08": "424997 de 424997 concesiones (100.0 %), 1356 M€, 519 s"
+  "2026-07": "910562 de 910562 concesiones (100.0 %), 4542 M€, 260 s",
+  "2026-06": "697880 de 697880 concesiones (100.0 %), 5185 M€, 200 s",
+  "2026-05": "887050 de 887050 concesiones (100.0 %), 2989 M€, 241 s",
+  "2026-04": "751568 de 751568 concesiones (100.0 %), 3340 M€, 197 s",
+  "2026-03": "1499347 de 1499347 concesiones (100.0 %), 3007 M€, 370 s",
+  "2026-02": "1020656 de 1020656 concesiones (100.0 %), 1827 M€, 263 s",
+  "2026-01": "770400 de 770400 concesiones (100.0 %), 801 M€, 224 s",
+  "2025-12": "6080498 de 6080498 concesiones (100.0 %), 12592 M€, 2045 s"
  },
  "orden": "order=fechaConcesion&direccion=asc",
- "parada": "presupuesto de tiempo agotado antes de 2026-07"
+ "parada": "presupuesto de tiempo agotado antes de 2025-11"
 }
