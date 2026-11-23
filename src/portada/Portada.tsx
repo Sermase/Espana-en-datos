@@ -29,6 +29,19 @@ function Mini({ t }: { t: Tema }) {
       </svg>
     )
   }
+  if (t.id === 'economia') {
+    const e = (resumen as unknown as { economia?: { ipc?: [string, number]; paro?: [string, number]; pib?: [string, number] } }).economia
+    const filas = ([['PIB', e?.pib], ['IPC', e?.ipc], ['Paro', e?.paro]] as const).filter(f => f[1])
+    return (
+      <svg viewBox="0 0 120 80" className="mini" aria-hidden>
+        {filas.map(([n, v], i) => <g key={n}>
+          <text x="4" y={20 + i * 25} className="mini-unit" style={{ fontSize: 11 }}>{n}</text>
+          <motion.rect x="34" y={12 + i * 25} height="9" rx="2" fill={c} initial={{ width: 0 }} animate={{ width: Math.min(52, v![1] * 4) }} transition={{ delay: .4 + i * .12, duration: .7 }} />
+          <text x="118" y={21 + i * 25} textAnchor="end" className="mini-big" style={{ fontSize: 13 }}>{v![1].toLocaleString('es-ES', { maximumFractionDigits: 1 })} %</text>
+        </g>)}
+      </svg>
+    )
+  }
   if (t.id === 'trenes') return (
     <svg viewBox="0 0 120 80" className="mini" aria-hidden>
       <path d="M4 60 L40 40 L70 44 L116 14 M40 40 L52 76 M70 44 L104 70" fill="none" stroke={c} strokeOpacity=".35" strokeWidth="2" />
@@ -87,7 +100,7 @@ export default function Portada() {
                 <div className="tema-txt">
                   <h2>{t.nombre}{abierto && <ArrowUpRight size={20} />}</h2>
                   <p>{t.lema}</p>
-                  <small>{abierto ? <><i className="vivo" /> {t.id === 'agua' ? `Datos del ${fecha}` : t.id === 'poblacion' ? 'Padrón y series del INE' : 'Datos de hoy'}</> : 'En preparación'} · {VISTA[t.vista]}</small>
+                  <small>{abierto ? <><i className="vivo" /> {t.id === 'agua' ? `Datos del ${fecha}` : t.id === 'poblacion' ? 'Padrón y series del INE' : t.id === 'economia' ? 'Eurostat, cada día' : 'Datos de hoy'}</> : 'En preparación'} · {VISTA[t.vista]}</small>
                 </div>
                 <Mini t={t} />
               </Card>

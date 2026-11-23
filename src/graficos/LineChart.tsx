@@ -57,7 +57,7 @@ export function LineChart({ series, alto = 200, titulo, fx, fy, fxEje, ticksX, y
   const x0 = Math.min(...all.map(p => p[0]), ...(banda?.lo.map(p => p[0]) ?? [])), x1 = Math.max(...all.map(p => p[0]), ...(banda?.hi.map(p => p[0]) ?? []))
   const ys = [...all.map(p => p[1]), ...(banda ? [...banda.lo, ...banda.hi].map(p => p[1]) : [])]
   const ticksY = niceTicks(yMin ?? Math.min(...ys), yMax ?? Math.max(...ys))
-  const y0 = yMin ?? ticksY[0], y1 = yMax ?? ticksY[ticksY.length - 1]
+  const y0 = Math.min(ticksY[0], yMin ?? Infinity), y1 = yMax ?? ticksY[ticksY.length - 1]
   const px = (v: number) => L + ((v - x0) / (x1 - x0 || 1)) * Math.max(10, W - L - R)
   const py = (v: number) => T + (1 - (v - y0) / (y1 - y0 || 1)) * (H - T - B)
   const line = (d: Punto[]) => d.map((p, i) => `${i ? 'L' : 'M'}${px(p[0]).toFixed(1)} ${py(p[1]).toFixed(1)}`).join('')

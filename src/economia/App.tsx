@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { motion } from 'motion/react'
-import { Banknote, Building2, ChartLine, Gauge, HandCoins, Home, Landmark, ShoppingCart, TrendingUp, Users } from 'lucide-react'
+import { Banknote, ChartLine, Gauge, HandCoins, Home, Landmark, ShoppingCart, TrendingUp, Users } from 'lucide-react'
 import { Barras, Columnas, CountUp, LineChart, nf, compact, type Serie as LSerie } from '../graficos'
 import { fechaDe, periodo, toT, useDatos, type Datos, type Serie } from './datos'
 
@@ -20,6 +20,7 @@ const SECCIONES = [
 ] as const
 type Sec = (typeof SECCIONES)[number]['id']
 
+const hay = (g: Record<string, unknown>) => Object.keys(g).length > 0
 const pct = (v: number, d = 1) => `${nf(v, d)} %`
 const signo = (v: number, d = 1) => `${v > 0 ? '+' : v < 0 ? '−' : ''}${nf(Math.abs(v), d)}`
 const pp = (v: number) => `${signo(v)} puntos`
@@ -42,15 +43,21 @@ function ls(x: Serie | null, nombre: string, rango: Rango, extra: Partial<LSerie
   return datos.length > 1 ? { id: nombre, nombre, datos, ...extra } : null
 }
 
-function Card({ t, lead, children, wide, fuente }: { t: string; lead?: ReactNode; children: ReactNode; wide?: boolean; fuente?: string }) {
+function Card({ t, lead, children, wide, fuente, si = true }: { t: string; lead?: ReactNode; children: ReactNode; wide?: boolean; fuente?: string; si?: boolean }) {
+  if (!si) return null
   return <section className={`gcard ${wide ? 'is-wide' : ''}`}><h2>{t}</h2>{lead && <p className="lead">{lead}</p>}{children}{fuente && <p className="fuente">{fuente}</p>}</section>
 }
 
 function Linea({ series, fy, frec, alto = 200, titulo, cero }: { series: (LSerie | null)[]; fy: (v: number) => string; frec: Serie['frec']; alto?: number; titulo: string; cero?: boolean }) {
   const ok = series.filter((x): x is LSerie => !!x)
   if (!ok.length) return <p className="note">Sin datos todavía para este gráfico.</p>
-  const ys = ok.flatMap(s => s.datos.map(p => p[1]))
-  return <LineChart titulo={titulo} series={ok} fx={t => fechaDe(t, frec)} fxEje={t => String(new Date(t).getUTCFullYear())} fy={fy} alto={alto} yMin={cero ? Math.min(0, ...ys) : undefined} />
+  const ys = ok.flatMap(s => s.datos.map(p => p[1])), ts = ok.flatMap(s => s.datos.map(p => p[0]))
+  // Una marca por año (o cada 2, 5…), en el 1 de enero, para que no se repitan años en el eje
+  const a0 = new Date(Math.min(...ts)).getUTCFullYear() + 1, a1 = new Date(Math.max(...ts)).getUTCFullYear()
+  const max = typeof innerWidth === 'number' && innerWidth < 640 ? 4 : 9
+  const paso = [1, 2, 5, 10].find(p => (a1 - a0) / p <= max) ?? 10
+  const ticksX: number[] = []; for (let a = Math.ceil(a0 / paso) * paso; a <= a1; a += paso) ticksX.push(Date.UTC(a, 0, 1))
+  return <LineChart titulo={titulo} series={ok} fx={t => fechaDe(t, frec)} fxEje={t => String(new Date(t).getUTCFullYear())} ticksX={ticksX} fy={fy} alto={alto} yMin={cero ? Math.min(0, ...ys) : undefined} />
 }
 
 /** Último valor de cada país o comunidad, con España resaltada. */
@@ -66,7 +73,7 @@ function Ranking({ g, nombre, fmt, titulo, orden = 'desc', limite = 12 }: { g: R
 }
 
 /** Tarjeta del resumen: valor actual, cambio y la evolución reciente en pequeño. */
-function Kpi({ label, s, fmt, cambio, onClick, invert }: { label: string; s: Serie | null; fmt: (v: number) => string; cambio?: 'anterior' | 'año'; onClick: () => void; invert?: boolean }) {
+function Kpi({ label, s, fmt, cambio, onClick, invert, neutro, ud = ' p.p.' }: { label: string; s: Serie | null; fmt: (v: number) => string; cambio?: 'anterior' | 'año'; onClick: () => void; invert?: boolean; neutro?: boolean; ud?: string }) {
   if (!s || s.d.length < 2) return null
   const [p, v] = s.d.at(-1)!
   const back = cambio === 'año' ? ({ M: 12, T: 4, S: 2, A: 1 } as const)[s.frec] : 1
@@ -74,12 +81,12 @@ function Kpi({ label, s, fmt, cambio, onClick, invert }: { label: string; s: Ser
   const delta = prev == null ? null : v - prev
   const pts = s.d.slice(-36).map(x => x[1]), lo = Math.min(...pts), hi = Math.max(...pts)
   const path = pts.map((y, i) => `${i ? 'L' : 'M'}${(i / (pts.length - 1)) * 100} ${28 - ((y - lo) / (hi - lo || 1)) * 26}`).join('')
-  const good = delta == null ? null : invert ? delta < 0 : delta > 0
+  const good = delta == null || neutro ? null : invert ? delta < 0 : delta > 0
   return (
     <button className="kpi" onClick={onClick}>
       <span className="kpi-l">{label}</span>
       <span className="kpi-v"><CountUp value={v} fmt={fmt} /></span>
-      {delta != null && <span className={`kpi-d ${Math.abs(delta) < 1e-9 ? '' : good ? 'is-good' : 'is-bad'}`}>{signo(delta, Math.abs(delta) < 1 ? 2 : 1)} {cambio === 'año' ? 'en un año' : 'sobre el dato anterior'}</span>}
+      {delta != null && <span className={`kpi-d ${Math.abs(delta) < 1e-9 || good == null ? '' : good ? 'is-good' : 'is-bad'}`}>{signo(delta, Math.abs(delta) >= 10 ? 0 : Math.abs(delta) < 1 ? 2 : 1)}{ud} {cambio === 'año' ? 'en un año' : 'sobre el dato anterior'}</span>}
       <svg viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden><motion.path d={path} initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.2 }} /></svg>
       <span className="kpi-p">{periodo(p)}</span>
     </button>
@@ -103,12 +110,12 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
       <Kpi label="Paro" s={s('empleo', 'paro:ES')} fmt={v => pct(v)} cambio="año" onClick={() => go('empleo')} invert />
       <Kpi label="Paro juvenil" s={s('empleo', 'paro_joven:ES')} fmt={v => pct(v)} cambio="año" onClick={() => go('empleo')} invert />
       <Kpi label="Euríbor a 12 meses" s={s('vivienda', 'euribor')} fmt={v => pct(v, 2)} onClick={() => go('vivienda')} invert />
-      <Kpi label="Precio de la vivienda" s={s('vivienda', 'vivienda_var:ES')} fmt={v => pct(v)} onClick={() => go('vivienda')} />
-      <Kpi label="Salario mínimo" s={s('salarios', 'smi:ES')} fmt={v => `${nf(v)} €`} cambio="año" onClick={() => go('salarios')} />
+      <Kpi label="Precio de la vivienda" s={s('vivienda', 'vivienda_var:ES')} fmt={v => pct(v)} onClick={() => go('vivienda')} neutro />
+      <Kpi label="Salario mínimo" s={s('salarios', 'smi:ES')} fmt={v => `${nf(v)} €`} cambio="año" onClick={() => go('salarios')} ud=" €" />
       <Kpi label="Deuda pública" s={s('publico', 'deuda:ES')} fmt={v => `${nf(v, 1)} % PIB`} onClick={() => go('publico')} invert />
       <Kpi label="Déficit público" s={s('publico', 'deficit:ES')} fmt={v => `${nf(v, 1)} % PIB`} onClick={() => go('publico')} />
       <Kpi label="Riesgo de pobreza" s={s('hogares', 'riesgo_pobreza:ES')} fmt={v => pct(v)} onClick={() => go('hogares')} invert />
-      <Kpi label="PIB por habitante (UE = 100)" s={s('pib', 'pib_pc_ppa:ES')} fmt={v => nf(v)} onClick={() => go('pib')} />
+      <Kpi label="PIB por habitante (UE = 100)" s={s('pib', 'pib_pc_ppa:ES')} fmt={v => nf(v)} onClick={() => go('pib')} ud="" neutro />
     </div>
   )
 
@@ -125,7 +132,7 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
       {niv && <Card t="El tamaño de la economía" lead={<>España produce <b>{nf(niv.d.at(-1)![1] / 1e6, 2)} billones de euros</b> al año ({niv.d.at(-1)![0]}), a precios de cada año.</>}>
         <Columnas titulo="PIB a precios corrientes" items={niv.d.map(([p, v]) => ({ x: p, valor: v / 1e3 }))} fmt={v => `${nf(v)} mil M€`} cadaX={5} />
       </Card>}
-      {ppa && <Card t="Riqueza por habitante en Europa" lead={<>Corrigiendo por lo que cuestan las cosas en cada país, el PIB por habitante de España es <b>{nf(ppa[1])}</b> sobre una media europea de 100.</>}>
+      {ppa && <Card si={hay(grupo('pib', 'pib_pc_ppa'))} t="Riqueza por habitante en Europa" lead={<>Corrigiendo por lo que cuestan las cosas en cada país, el PIB por habitante de España es <b>{nf(ppa[1])}</b> sobre una media europea de 100.</>}>
         <Ranking g={grupo('pib', 'pib_pc_ppa')} nombre={geo} fmt={v => nf(v)} titulo="PIB por habitante en poder de compra" />
       </Card>}
       <Card t="Por comunidades" lead="PIB por habitante en euros, último año publicado.">
@@ -148,7 +155,7 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
       {g.CP01 && <Card t="La cesta de la compra y la energía" lead="Alimentos y energía son lo que más se nota en el bolsillo y lo que más se mueve.">
         <Linea titulo="Inflación de alimentos, energía y servicios" series={[ls(g.CP01, 'Alimentos', rango, { color: CAT[1] }), ls(g.NRG, 'Energía', rango, { color: CAT[0] }), ls(g.SERV, 'Servicios', rango, { color: CAT[3] })]} fy={v => pct(v)} frec="M" cero />
       </Card>}
-      <Card t="Inflación en Europa" lead="Último mes publicado, de más a menos.">
+      <Card si={hay(grupo('precios', 'ipc_paises'))} t="Inflación en Europa" lead="Último mes publicado, de más a menos.">
         <Ranking g={grupo('precios', 'ipc_paises')} nombre={geo} fmt={v => pct(v)} titulo="Inflación por países" />
       </Card>
     </div>
@@ -174,7 +181,7 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
       {tmp && <Card t="Contratos temporales" lead={<>El <b>{pct(tmp[1])}</b> de los asalariados tiene contrato temporal ({tmp[0]}).</>}>
         <Linea titulo="Asalariados con contrato temporal" series={cmp('empleo', 'temporal', 'temporal')} fy={v => pct(v)} frec="A" />
       </Card>}
-      <Card t="Paro en Europa" lead="Último mes publicado.">
+      <Card si={hay(grupo('empleo', 'paro_paises'))} t="Paro en Europa" lead="Último mes publicado.">
         <Ranking g={grupo('empleo', 'paro_paises')} nombre={geo} fmt={v => pct(v)} titulo="Paro por países" />
       </Card>
     </div>
@@ -186,13 +193,13 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
       {sm && <Card t="Salario mínimo" wide lead={<>El salario mínimo es de <b>{nf(sm[1])} € al mes</b> en 12 pagas ({periodo(sm[0])}){sm0 && <>, un {pct(((sm[1] - sm0[1]) / sm0[1]) * 100, 0)} más que en 2018</>}.</>} fuente="Eurostat · salario mínimo mensual, prorrateado a 12 pagas">
         <Linea titulo="Salario mínimo mensual" series={[ls(smi, 'España', rango, { color: ES, area: true }), ls(s('salarios', 'smi:PT'), 'Portugal', rango, { color: CAT[0], fondo: true }), ls(s('salarios', 'smi:FR'), 'Francia', rango, { color: CAT[1], fondo: true }), ls(s('salarios', 'smi:DE'), 'Alemania', rango, { color: CAT[3], fondo: true })]} fy={v => `${nf(v)} €`} frec="S" />
       </Card>}
-      <Card t="El salario mínimo en Europa">
+      <Card si={hay(grupo('salarios', 'smi'))} t="El salario mínimo en Europa">
         <Ranking g={grupo('salarios', 'smi')} nombre={geo} fmt={v => `${nf(v)} €`} titulo="Salario mínimo por países" />
       </Card>
       <Card t="Lo que cuesta una hora de trabajo" lead="Variación anual del coste laboral por hora: sueldos más cotizaciones.">
         <Linea titulo="Coste laboral por hora" series={cmp('salarios', 'coste_laboral', 'coste')} fy={v => pct(v)} frec="T" cero />
       </Card>
-      <Card t="Salario medio a tiempo completo" lead="Sueldo bruto medio anual por empleado equivalente a tiempo completo.">
+      <Card si={hay(grupo('salarios', 'salario_medio'))} t="Salario medio a tiempo completo" lead="Sueldo bruto medio anual por empleado equivalente a tiempo completo.">
         <Ranking g={grupo('salarios', 'salario_medio')} nombre={geo} fmt={v => `${nf(v)} €`} titulo="Salario medio por países" />
       </Card>
     </div>
@@ -200,7 +207,7 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
 
   if (id === 'vivienda') {
     const v = last(s('vivienda', 'vivienda_var:ES')), eu = s('vivienda', 'euribor'), e = last(eu)
-    const emax = eu?.d.filter(x => x[0] >= '2008').reduce((m, x) => (x[1] > m[1] ? x : m))
+    const emax = eu?.d.filter(x => x[0] >= '2010').reduce((m, x) => (x[1] > m[1] ? x : m))
     return <div className="graficos">
       {v && <Card t="Precio de la vivienda" wide lead={<>La vivienda se ha encarecido un <b>{pct(v[1])}</b> en un año ({periodo(v[0])}).</>} fuente="Eurostat · índice de precios de vivienda (con datos del INE)">
         <Linea titulo="Precio de la vivienda, variación anual" series={cmp('vivienda', 'vivienda_var', 'vivienda')} fy={x => pct(x)} frec="T" cero />
@@ -208,10 +215,10 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
       <Card t="Nueva y usada" lead="Índice de precios: 2015 = 100.">
         <Linea titulo="Índice de precios de vivienda nueva y usada" series={[ls(s('vivienda', 'vivienda_ind:DW_NEW'), 'Nueva', rango, { color: CAT[0] }), ls(s('vivienda', 'vivienda_ind:DW_EXST'), 'Usada', rango, { color: CAT[1] })]} fy={x => nf(x)} frec="T" />
       </Card>
-      {e && <Card t="Euríbor" lead={<>El euríbor a 12 meses, que marca la cuota de la mayoría de hipotecas variables, está en <b>{pct(e[1], 2)}</b>{emax && <>; su máximo desde 2008 fue {pct(emax[1], 2)} en {periodo(emax[0])}</>}.</>}>
+      {e && <Card t="Euríbor" lead={<>El euríbor a 12 meses, que marca la cuota de la mayoría de hipotecas variables, está en <b>{pct(e[1], 2)}</b>{emax && <>; su pico desde 2010 fue {pct(emax[1], 2)} en {periodo(emax[0])}</>}.</>}>
         <Linea titulo="Euríbor a 12 meses" series={[ls(eu, 'Euríbor 12 meses', rango, { color: ES, area: true })]} fy={x => pct(x, 1)} frec="M" cero />
       </Card>}
-      <Card t="Vivir en propiedad" lead="Hogares que viven en una vivienda suya, con o sin hipoteca.">
+      <Card si={hay(grupo('vivienda', 'propiedad'))} t="Vivir en propiedad" lead="Hogares que viven en una vivienda suya, con o sin hipoteca.">
         <Ranking g={grupo('vivienda', 'propiedad')} nombre={geo} fmt={x => pct(x)} titulo="Hogares en vivienda en propiedad" />
       </Card>
     </div>
@@ -229,9 +236,9 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
         <Columnas titulo="Déficit o superávit público" items={def.d.filter(x => !rango || Number(x[0]) > new Date().getFullYear() - rango).map(([p, x]) => ({ x: p, valor: x, color: x < 0 ? '#ff4d5e' : ES }))} fmt={x => `${nf(x, 1)} %`} cadaX={4} />
       </Card>}
       {gl.length > 0 && <Card t="¿En qué se gasta?" lead={<>El gasto público es el <b>{nf(tot, 1)} % del PIB</b>; casi {nf((gl[0].v[1] / tot) * 100, 0)} de cada 100 euros van a {nombre('cofog99', gl[0].k).toLowerCase()}.</>}>
-        <Barras titulo="Gasto público por funciones" fmt={x => `${nf(x, 1)} % PIB`} limite={10} items={gl.map(x => ({ id: x.k, nombre: nombre('cofog99', x.k), valor: x.v[1] }))} />
+        <Barras titulo="Gasto público por funciones" fmt={x => `${nf(x, 1)} % PIB`} limite={10} items={gl.map(x => ({ id: x.k, nombre: nombre('cofog99', x.k), valor: x.v[1], color: ES }))} />
       </Card>}
-      <Card t="Deuda en Europa">
+      <Card si={hay(grupo('publico', 'deuda'))} t="Deuda en Europa">
         <Ranking g={grupo('publico', 'deuda')} nombre={geo} fmt={x => `${nf(x)} %`} titulo="Deuda pública por países" />
       </Card>
     </div>
@@ -243,10 +250,10 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
     {rp && <Card t="Riesgo de pobreza o exclusión" wide lead={<>El <b>{pct(rp[1])}</b> de la población está en riesgo de pobreza o exclusión social ({rp[0]}), {pp(vsUE('hogares', 'riesgo_pobreza') ?? 0)} frente a la UE.</>} fuente="Eurostat · encuesta de condiciones de vida (indicador AROPE)">
       <Linea titulo="Población en riesgo de pobreza o exclusión" series={cmp('hogares', 'riesgo_pobreza', 'riesgo')} fy={x => pct(x)} frec="A" />
     </Card>}
-    <Card t="Desigualdad" lead="Índice de Gini: 0 sería que todos ingresan lo mismo y 100 que una persona se lo lleva todo.">
+    <Card si={hay(grupo('hogares', 'gini'))} t="Desigualdad" lead="Índice de Gini: 0 sería que todos ingresan lo mismo y 100 que una persona se lo lleva todo.">
       <Ranking g={grupo('hogares', 'gini')} nombre={geo} fmt={x => nf(x, 1)} titulo="Índice de Gini por países" />
     </Card>
-    <Card t="Renta mediana" lead="La renta anual de la persona que está justo en el medio, ni rica ni pobre.">
+    <Card si={hay(grupo('hogares', 'renta_mediana'))} t="Renta mediana" lead="La renta anual de la persona que está justo en el medio, ni rica ni pobre.">
       <Ranking g={grupo('hogares', 'renta_mediana')} nombre={geo} fmt={x => `${nf(x)} €`} titulo="Renta mediana por países" />
     </Card>
   </div>
@@ -279,7 +286,7 @@ export default function App() {
         {SECCIONES.map(x => <button key={x.id} className={sec === x.id ? 'is-on' : ''} onClick={() => go(x.id)} aria-current={sec === x.id ? 'page' : undefined}><x.icon size={17} />{x.nombre}</button>)}
       </nav>
       <motion.div key={sec} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .3 }}>
-        {sec === 'resumen' && <p className="intro">Los grandes números de la economía española, del último dato publicado. Toca uno para ver su evolución y cómo queda España frente a Europa. <Building2 size={14} aria-hidden /></p>}
+        {sec === 'resumen' && <p className="intro">Los grandes números de la economía española, del último dato publicado. Toca uno para ver su evolución y cómo queda España frente a Europa.</p>}
         <Seccion id={sec} d={d} rango={rango} go={go} />
       </motion.div>
       <p className="src">Fuente: Eurostat (con datos del INE, el Banco de España y el resto de institutos europeos). Se actualiza cada día; cada serie llega cuando su organismo la publica.</p>

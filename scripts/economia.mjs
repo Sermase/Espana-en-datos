@@ -20,7 +20,7 @@ async function get(url) {
       if (r.status === 404) throw Object.assign(new Error('HTTP 404 ' + txt.slice(0, 200)), { final: true })
       if (!r.ok || txt.trimStart().startsWith('<')) throw new Error('HTTP ' + r.status + ' ' + txt.slice(0, 120))
       return JSON.parse(txt)
-    } catch (e) { if (e.final || i === 4) throw e; await espera(6000 * (i + 1)) }
+    } catch (e) { if (e.final || i === 4) throw e; await espera(/temporarily unava/i.test(e.message) ? 30000 * (i + 1) : 6000 * (i + 1)) }
   }
 }
 /** Prueba varios códigos de tabla (Eurostat renombra algunas) y se queda con la de datos más recientes. */
@@ -53,14 +53,33 @@ async function eurostat(code, filtros, varia = 'geo') {
   return out
 }
 
-const temas = {}
-async function serie(tema, id, nombre, unidad, frec, fn) {
+// Lo descargado la última vez: si una serie falla hoy, se conserva la que ya había.
+let previo = {}; try { previo = JSON.parse(readFileSync(OUT, 'utf8')).temas ?? {} } catch {}
+const temas = {}, pendientes = []
+async function serie(tema, id, nombre, unidad, frec, fn, reintento = false) {
   try {
     const r = await fn()
     temas[tema] ??= {}
     for (const [k, d] of Object.entries(r)) if (d.length) temas[tema][`${id}${Object.keys(r).length > 1 ? ':' + k : ''}`] = { nombre: Object.keys(r).length > 1 ? `${nombre} · ${k}` : nombre, unidad, frec, fuente: 'Eurostat', d }
     log[id] = Object.fromEntries(Object.entries(r).map(([k, d]) => [k, `${d.length} datos, último ${d.at(-1)?.join(' = ')}`]))
-  } catch (e) { log[id] = 'ERROR ' + String(e.message).slice(0, 300) }
+  } catch (e) {
+    log[id] = 'ERROR ' + String(e.message).slice(0, 300)
+    if (!reintento) pendientes.push([tema, id, nombre, unidad, frec, fn])
+  }
+}
+function conservar(tema, id) {
+  const viejas = Object.entries(previo[tema] ?? {}).filter(([k]) => k === id || k.startsWith(id + ':'))
+  if (!viejas.length) return
+  temas[tema] ??= {}
+  for (const [k, v] of viejas) temas[tema][k] ??= v
+  log[id] += ' · se conserva la descarga anterior'
+}
+/** Qué dimensiones y códigos tiene una tabla (para ajustar filtros cuando Eurostat la cambia). */
+async function sonda(code, filtros = {}) {
+  try {
+    const j = await get(`https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/${code}?` + new URLSearchParams({ format: 'JSON', lang: 'EN', lastTimePeriod: '1', ...filtros }))
+    log['_sonda_' + code] = Object.fromEntries(j.id.map(d => [d, Object.keys(j.dimension[d].category.index).slice(0, 40).join(',')]))
+  } catch (e) { log['_sonda_' + code] = 'ERROR ' + String(e.message).slice(0, 200) }
 }
 
 const UE = 'EU27_2020'
@@ -119,6 +138,13 @@ const NOMBRES = {
   purchase: { TOTAL: 'Todas', DW_NEW: 'Nueva', DW_EXST: 'Usada' },
   cofog99: { GF01: 'Servicios generales', GF02: 'Defensa', GF03: 'Orden y seguridad', GF04: 'Asuntos económicos', GF05: 'Medio ambiente', GF06: 'Vivienda y urbanismo', GF07: 'Sanidad', GF08: 'Ocio, cultura y religión', GF09: 'Educación', GF10: 'Protección social (pensiones, paro…)' },
 }
+// Segunda vuelta para lo que falló (Eurostat a veces corta un rato), y si aún falla, lo de ayer
+if (pendientes.length) { await espera(60000); for (const p of pendientes) await serie(...p, true) }
+for (const [tema, id] of pendientes) if (String(log[id]).startsWith('ERROR')) conservar(tema, id)
+await sonda('prc_hicp_minr', { geo: 'ES' })
+await sonda('ilc_di03', { geo: 'ES' })
+await sonda('ilc_lvho02', { geo: 'ES' })
+
 // Índice de tablas de Eurostat (filtrado) para localizar las que cambian de nombre
 try {
   await espera(1500)

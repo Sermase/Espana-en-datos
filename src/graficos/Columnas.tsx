@@ -13,7 +13,7 @@ export function Columnas({ items, fmt, titulo, alto = 170, cadaX = 1, etiqueta }
   const [view, seen] = useInView<HTMLDivElement>()
   const [hover, setHover] = useState<number | null>(null)
   const H = alto, L = 40, R = 8, T = 16, B = 22
-  const lo = Math.min(0, ...items.map(i => i.valor)), hi = Math.max(...items.map(i => i.valor))
+  const lo = Math.min(0, ...items.map(i => i.valor)), hi = Math.max(0, ...items.map(i => i.valor))
   const ticks = niceTicks(lo, hi, 3)
   const y0 = ticks[0], y1 = ticks[ticks.length - 1]
   const py = (v: number) => T + (1 - (v - y0) / (y1 - y0 || 1)) * (H - T - B)
