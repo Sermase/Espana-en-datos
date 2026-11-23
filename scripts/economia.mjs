@@ -9,14 +9,28 @@ const OUT = here('../public/economia/data/series.json')
 const ES = 'https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data'
 const log = {}
 
+const espera = (ms) => new Promise(s => setTimeout(s, ms))
+// Eurostat corta con una página HTML si se le piden muchas cosas seguidas: se va despacio y se reintenta.
 async function get(url) {
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 5; i++) {
+    await espera(1500)
     try {
-      const r = await fetch(url, { headers: { 'User-Agent': 'espana-en-datos (GitHub Actions)' } })
-      if (!r.ok) throw new Error('HTTP ' + r.status + ' ' + (await r.text()).slice(0, 200))
-      return await r.json()
-    } catch (e) { if (i === 3) throw e; await new Promise(s => setTimeout(s, 3000 * (i + 1))) }
+      const r = await fetch(url, { headers: { 'User-Agent': 'espana-en-datos (GitHub Actions)', Accept: 'application/json' } })
+      const txt = await r.text()
+      if (r.status === 404) throw Object.assign(new Error('HTTP 404 ' + txt.slice(0, 200)), { final: true })
+      if (!r.ok || txt.trimStart().startsWith('<')) throw new Error('HTTP ' + r.status + ' ' + txt.slice(0, 120))
+      return JSON.parse(txt)
+    } catch (e) { if (e.final || i === 4) throw e; await espera(6000 * (i + 1)) }
   }
+}
+/** Prueba varios códigos de tabla (Eurostat renombra algunas) y se queda con la de datos más recientes. */
+async function mejor(codes, filtros, varia) {
+  let best = null, bestT = '', errs = []
+  for (const c of codes) {
+    try { const r = await eurostat(c, filtros, varia); const t = Object.values(r).map(d => d.at(-1)?.[0] ?? '').sort().at(-1) ?? ''; if (t > bestT) { best = r; bestT = t } } catch (e) { errs.push(c + ': ' + String(e.message).slice(0, 80)) }
+  }
+  if (!best) throw new Error(errs.join(' | '))
+  return best
 }
 
 /** Eurostat JSON-stat → { [clave de la dimensión que varía]: [[periodo, valor]] } */
@@ -62,10 +76,10 @@ await serie('pib', 'pib_pc_ppa', 'PIB por habitante en poder de compra (UE = 100
 await serie('pib', 'pib_pc_ccaa', 'PIB por habitante', '€', 'A', () => eurostat('nama_10r_2gdp', { unit: 'EUR_HAB', geo: [...Object.keys(NUTS2), 'ES'], ...desde(2000) }))
 
 // --- Precios ---
-await serie('precios', 'ipc', 'Inflación (IPCA)', '%', 'M', () => eurostat('prc_hicp_manr', { coicop: 'CP00', geo: ['ES', UE], ...desde(1997) }))
-await serie('precios', 'ipc_sub', 'Inflación subyacente (sin energía ni alimentos)', '%', 'M', () => eurostat('prc_hicp_manr', { coicop: 'TOT_X_NRG_FOOD', geo: 'ES', ...desde(2002) }))
-await serie('precios', 'ipc_grupos', 'Inflación por grupos', '%', 'M', () => eurostat('prc_hicp_manr', { coicop: ['CP01', 'CP02', 'CP03', 'CP04', 'CP045', 'CP06', 'CP07', 'CP0722', 'CP09', 'CP11', 'NRG', 'SERV'], geo: 'ES', ...desde(2015) }, 'coicop'))
-await serie('precios', 'ipc_paises', 'Inflación en la UE', '%', 'M', () => eurostat('prc_hicp_manr', { coicop: 'CP00', geo: PAISES, ...desde(2023) }))
+await serie('precios', 'ipc', 'Inflación (IPCA)', '%', 'M', () => mejor(['prc_hicp_manr', 'prc_hicp_minr', 'prc_hicp_mv12r'], { coicop: 'CP00', geo: ['ES', UE], ...desde(1997) }))
+await serie('precios', 'ipc_sub', 'Inflación subyacente (sin energía ni alimentos)', '%', 'M', () => mejor(['prc_hicp_manr', 'prc_hicp_minr', 'prc_hicp_mv12r'], { coicop: 'TOT_X_NRG_FOOD', geo: 'ES', ...desde(2002) }))
+await serie('precios', 'ipc_grupos', 'Inflación por grupos', '%', 'M', () => mejor(['prc_hicp_manr', 'prc_hicp_minr'], { coicop: ['CP01', 'CP02', 'CP03', 'CP04', 'CP045', 'CP06', 'CP07', 'CP0722', 'CP09', 'CP11', 'NRG', 'SERV'], geo: 'ES', ...desde(2015) }, 'coicop'))
+await serie('precios', 'ipc_paises', 'Inflación en la UE', '%', 'M', () => mejor(['prc_hicp_manr', 'prc_hicp_minr', 'prc_hicp_mv12r'], { coicop: 'CP00', geo: PAISES, ...desde(2023) }))
 
 // --- Empleo ---
 await serie('empleo', 'paro', 'Tasa de paro', '%', 'M', () => eurostat('une_rt_m', { s_adj: 'SA', age: 'TOTAL', sex: 'T', unit: 'PC_ACT', geo: ['ES', UE], ...desde(2000) }))
@@ -74,7 +88,7 @@ await serie('empleo', 'paro_sexo', 'Tasa de paro por sexo', '%', 'M', () => euro
 await serie('empleo', 'paro_paises', 'Tasa de paro en la UE', '%', 'M', () => eurostat('une_rt_m', { s_adj: 'SA', age: 'TOTAL', sex: 'T', unit: 'PC_ACT', geo: PAISES, ...desde(2023) }))
 await serie('empleo', 'paro_ccaa', 'Tasa de paro por comunidad', '%', 'A', () => eurostat('lfst_r_lfu3rt', { sex: 'T', age: 'Y15-74', isced11: 'TOTAL', unit: 'PC', geo: Object.keys(NUTS2), ...desde(2000) }))
 await serie('empleo', 'empleo_tasa', 'Tasa de empleo (20-64 años)', '%', 'A', () => eurostat('lfsi_emp_a', { indic_em: 'EMP_LFS', sex: 'T', age: 'Y20-64', unit: 'PC_POP', geo: ['ES', UE], ...desde(2000) }))
-await serie('empleo', 'temporal', 'Asalariados con contrato temporal', '%', 'A', () => eurostat('lfsa_etpga', { sex: 'T', age: 'Y15-64', unit: 'PC', geo: ['ES', UE], ...desde(2000) }))
+await serie('empleo', 'temporal', 'Asalariados con contrato temporal', '%', 'A', () => mejor(['lfsa_etpgan', 'lfsa_etpga', 'lfsi_pt_a'], { sex: 'T', age: 'Y15-64', unit: 'PC', geo: ['ES', UE], ...desde(2000) }))
 
 // --- Salarios ---
 await serie('salarios', 'smi', 'Salario mínimo mensual', '€', 'S', () => eurostat('earn_mw_cur', { currency: 'EUR', geo: PAISES.filter(g => !['SE', 'AT', 'DK', 'FI', 'IT', UE].includes(g)), ...desde(2000) }))
@@ -105,6 +119,13 @@ const NOMBRES = {
   purchase: { TOTAL: 'Todas', DW_NEW: 'Nueva', DW_EXST: 'Usada' },
   cofog99: { GF01: 'Servicios generales', GF02: 'Defensa', GF03: 'Orden y seguridad', GF04: 'Asuntos económicos', GF05: 'Medio ambiente', GF06: 'Vivienda y urbanismo', GF07: 'Sanidad', GF08: 'Ocio, cultura y religión', GF09: 'Educación', GF10: 'Protección social (pensiones, paro…)' },
 }
+// Índice de tablas de Eurostat (filtrado) para localizar las que cambian de nombre
+try {
+  await espera(1500)
+  const toc = await (await fetch('https://ec.europa.eu/eurostat/api/dissemination/catalogue/toc/txt?lang=en')).text()
+  writeFileSync(here('../fuentes/eurostat-toc.txt'), toc.split('\n').filter(l => /prc_hicp_m|temporary|lfsa_etp|ilc_lvho0|gov_10dd|ilc_peps|ilc_di1|ilc_di03/i.test(l)).join('\n'))
+} catch {}
+
 const out = { fecha: new Date().toISOString().slice(0, 10), nombres: NOMBRES, temas }
 writeFileSync(OUT, JSON.stringify(out))
 writeFileSync(here('../fuentes/economia-log.json'), JSON.stringify(log, null, 1))
