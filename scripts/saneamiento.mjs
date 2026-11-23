@@ -121,6 +121,7 @@ function descargaMiteco(f, dest) {
   const h = execFileSync('curl', ['-sSfL', '-c', jar, '-A', 'Mozilla/5.0 espana-en-datos', `${base}?f=${f}`], { encoding: 'utf8', timeout: 120000 })
   const tok = (h.match(/name="__RequestVerificationToken"[^>]*value="([^"]+)"/) ?? [])[1]
   if (!tok) throw new Error('sin token en la página de descarga de ' + f)
+  log.formulario = { form: (h.match(/<form[\s\S]*?<\/form>/) ?? [''])[0].replace(/\s+/g, ' ').slice(0, 1500), cookies: readFileSync(jar, 'utf8').split('\n').filter(l => l && !l.startsWith('# ')).map(l => l.split('\t').slice(0, 6).join(' ')) }
   execFileSync('curl', ['-sSfL', '-b', jar, '-c', jar, '-A', 'Mozilla/5.0 espana-en-datos', '-e', `${base}?f=${f}`, '--data-urlencode', `f=${f}`, '--data-urlencode', `__RequestVerificationToken=${tok}`, '-o', dest, `${base}?handler=Download`], { timeout: 600000 })
   if (readFileSync(dest).subarray(0, 2).toString() !== 'PK') throw new Error(f + ': la descarga no es un zip')
 }
