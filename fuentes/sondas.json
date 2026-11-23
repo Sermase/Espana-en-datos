@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-23T14:15:21.138Z",
+ "fecha": "2026-11-23T15:57:12.034Z",
  "fuentes": {
   "renfe_gtfs_av_ld_md": {
    "url": "https://ssl.renfe.com/gtransit/Fichero_AV_LD/google_transit.zip",
@@ -20,15 +20,15 @@
   "renfe_rt_posiciones_json": {
    "url": "https://gtfsrt.renfe.com/vehicle_positions.json",
    "status": 200,
-   "bytes": 173412,
+   "bytes": 167342,
    "tipo": "application/json",
    "cors": null,
-   "muestra": "{\n  \"header\": {\n    \"gtfsRealtimeVersion\": \"2.0\",\n    \"timestamp\": \"1795443321\"\n  },\n  \"entity\": [{\n    \"id\": \"VP_C4-23637\",\n    \"vehicle\": {\n      \"trip\": {\n        \"tripId\": \"3026L23637C4\"\n      },\n      \"currentStatus\": \"STOPPED_AT\",\n      \"timestamp\": \"1795443317\",\n      \"stopId\": \"00000\",\n      \"vehicle\": {\n        \"id\": \"23637\",\n        \"label\": \"C4-23637\"\n      }\n    }\n  }, {\n    \"id\": \"VP_C5-23721\",\n    \"vehicle\": {\n      \"trip\": {\n        \"tripId\": \"3026L23721C5\"\n      },\n      \"position\": {\n        \"latitude\": 37.42662,\n        \"longitude\": -6.056732\n      },\n      \"currentStatus\": \""
+   "muestra": "{\n  \"header\": {\n    \"gtfsRealtimeVersion\": \"2.0\",\n    \"timestamp\": \"1795449440\"\n  },\n  \"entity\": [{\n    \"id\": \"VP_C1-23554\",\n    \"vehicle\": {\n      \"trip\": {\n        \"tripId\": \"3026L23554C1\"\n      },\n      \"position\": {\n        \"latitude\": 37.54619,\n        \"longitude\": -5.8666563\n      },\n      \"currentStatus\": \"STOPPED_AT\",\n      \"timestamp\": \"1795449437\",\n      \"stopId\": \"50702\",\n      \"vehicle\": {\n        \"id\": \"23554\",\n        \"label\": \"C1-23554\"\n      }\n    }\n  }, {\n    \"id\": \"VP_C1-23258\",\n    \"vehicle\": {\n      \"trip\": {\n        \"tripId\": \"3026L35558C1\"\n      },\n      \"position\": {\n   "
   },
   "renfe_rt_posiciones_pb": {
    "url": "https://gtfsrt.renfe.com/vehicle_positions.pb",
    "status": 200,
-   "bytes": 38411,
+   "bytes": 36947,
    "tipo": "application/octet-stream",
    "cors": null,
    "muestra": null
@@ -36,18 +36,18 @@
   "renfe_rt_retrasos_json": {
    "url": "https://gtfsrt.renfe.com/trip_updates.json",
    "status": 200,
-   "bytes": 184253,
+   "bytes": 174752,
    "tipo": "application/json",
    "cors": null,
-   "muestra": "{\n  \"header\": {\n    \"gtfsRealtimeVersion\": \"2.0\",\n    \"timestamp\": \"1795443342\"\n  },\n  \"entity\": [{\n    \"id\": \"TUUPDATE_3026L23637C4\",\n    \"tripUpdate\": {\n      \"trip\": {\n        \"tripId\": \"3026L23637C4\",\n        \"scheduleRelationship\": \"SCHEDULED\"\n      },\n      \"stopTimeUpdate\": [{\n        \"arrival\": {\n          \"delay\": 1740,\n          \"time\": \"1795444200\"\n        },\n        \"stopId\": \"51003\"\n      }],\n      \"vehicle\": {\n        \"wheelchairAccessible\": \"WHEELCHAIR_INACCESSIBLE\"\n      },\n      \"delay\": 1740\n    }\n  }, {\n    \"id\": \"TUUPDATE_3026L23721C5\",\n    \"tripUpdate\": {\n      \"trip\": {\n "
+   "muestra": "{\n  \"header\": {\n    \"gtfsRealtimeVersion\": \"2.0\",\n    \"timestamp\": \"1795449440\"\n  },\n  \"entity\": [{\n    \"id\": \"TUUPDATE_3026L23554C1\",\n    \"tripUpdate\": {\n      \"trip\": {\n        \"tripId\": \"3026L23554C1\",\n        \"scheduleRelationship\": \"SCHEDULED\"\n      },\n      \"stopTimeUpdate\": [{\n        \"arrival\": {\n          \"delay\": -120,\n          \"time\": \"1795449889\"\n        },\n        \"stopId\": \"50704\"\n      }],\n      \"vehicle\": {\n        \"wheelchairAccessible\": \"WHEELCHAIR_INACCESSIBLE\"\n      },\n      \"delay\": -120\n    }\n  }, {\n    \"id\": \"TUUPDATE_3026L35558C1\",\n    \"tripUpdate\": {\n      \"trip\": {\n "
   },
   "renfe_ld_flota": {
    "url": "https://tiempo-real.largorecorrido.renfe.com/renfe-visor/flotaLD.json",
    "status": 200,
-   "bytes": 36920,
+   "bytes": 40873,
    "tipo": "application/json",
    "cors": null,
-   "muestra": "{\"fechaActualizacion\":\"2026-11-23T15:15:36\",\"trenes\":[{\"codComercial\":\"18014\",\"codEstAnt\":\"11306\",\"codEstSig\":\"11300\",\"horaLlegadaSigEst\":\"2026-11-23T15:30:00\",\"codProduct\":16,\"codOrigen\":\"11511\",\"codDestino\":\"10000\",\"accesible\":false,\"ultRetraso\":\"0\",\"latitud\":43.007572,\"longitud\":-2.3293242,\"time\":1795443314,\"p\":\"2\",\"mat\":\"449037\"},{\"codComercial\":\"18770\",\"codEstAnt\":\"37410\",\"codEstSig\":\"37410\",\"horaLlegadaSigEst\":\"2026-11-23T15:03:40\",\"codProduct\":19,\"codOrigen\":\"37700\",\"codDestino\":\"37606\",\"accesible\":false,\"ultRetraso\":\"1\",\"latitud\":38.89697,\"longitud\":-6.1290045,\"time\":1795443336,\"p\":\"4\""
+   "muestra": "{\"fechaActualizacion\":\"2026-11-23T16:57:20\",\"trenes\":[{\"codComercial\":\"18014\",\"codEstAnt\":\"11200\",\"codEstSig\":\"11109\",\"horaLlegadaSigEst\":\"2026-11-23T17:09:00\",\"codProduct\":16,\"codOrigen\":\"11511\",\"codDestino\":\"10000\",\"accesible\":false,\"ultRetraso\":\"12\",\"latitud\":42.62407,\"longitud\":-3.134756,\"time\":1795449433,\"p\":\"2\",\"mat\":\"449037\"},{\"codComercial\":\"13083\",\"codEstAnt\":\"50504\",\"codEstSig\":\"50506\",\"horaLlegadaSigEst\":\"2026-11-23T17:10:30\",\"codProduct\":16,\"codOrigen\":\"50500\",\"codDestino\":\"51003\",\"accesible\":false,\"ultRetraso\":\"0\",\"latitud\":37.803844,\"longitud\":-5.1127505,\"time\":1795449435,\"p\":\"2\""
   }
  },
  "gtfs": {

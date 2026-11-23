@@ -308,5 +308,15 @@
   "status": 200,
   "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
   "resumen": "107760 bytes"
+ },
+ "presas:campos": {
+  "status": 200,
+  "url": "https://services-eu1.arcgis.com/RvnYk1PBUJ9rrAuT/arcgis/rest/services/UP_Presas_y_embalses/FeatureServer/0?f=json",
+  "resumen": "FID:FID | INFORME:Información | ID_INFRAES:Id. Infraestructura | CODIGO:Cód. Infraestructura | NOMBRE:Nombre | FASE:Fase | TITULAR:Titular | CATEGORIA:Categoría en función del riesgo potencial | CAUCE:Cauce | DEMARC:Demarcación | PROVINCIA:Provincia | CCAA:Comunidad autónoma | TIPO:Tipología | USUARIOS:Usuarios | USO:Uso | SUP_CUENCA:Superficie de la cuenca (km2) | AP_M_ANUAL:Aportación media anual (hm3) | NMN_CAPAC:Capacidad del embalse a NMN (hm3) | NMN_SUP:Superficie del embalse a NMN (ha) | COTA_CORON:Cota de coronación (m) | ALT_CIMIEN:Altura desde cimientos (m) | LONG_CORON:Longitud de coronación (m) | CAP_AL_NAE:Capacidad del aliviadero a NAE (m3/s) | CAP_MAX_DF:Capacidad máxima de los desagües (m3/s)"
+ },
+ "presas:ejemplo": {
+  "status": 200,
+  "url": "https://services-eu1.arcgis.com/RvnYk1PBUJ9rrAuT/arcgis/rest/services/UP_Presas_y_embalses/FeatureServer/0/query?where=NOMBRE%20LIKE%20%27%25ALCANTARA%25%27&outFields=*&returnGeometry=false&f=json",
+  "resumen": "[{\"FID\":106,\"INFORME\":\"https://sig.mapama.gob.es/WebServices/clientews/snczi/Default.aspx?nombre=EGISPE_PRESA&claves=ID_INFRAESTRUCTURA&valores=682\",\"ID_INFRAES\":682,\"CODIGO\":\"3100150\",\"NOMBRE\":\"MATA DE ALCANTARA II\",\"FASE\":\"Explotación\",\"TITULAR\":\"ESTADO\\nCONFEDERACION HIDROGRAFICA DEL TAJO\",\"CATEGORIA\":\"C\",\"CAUCE\":\"ARROYO CORREDOR\",\"DEMARC\":\"TAJO\",\"PROVINCIA\":\"Cáceres\",\"CCAA\":\"Extremadura\",\"TIPO\":\"Presa de fábrica de gravedad (hormigón vibrado)\",\"USUARIOS\":\"AYUNTAMIENTO DE MATA DE ALCÁNTARA\",\"USO\":\"Abastecimiento\",\"SUP_CUENCA\":\"6.02\",\"AP_M_ANUAL\":\"0.92\",\"NMN_CAPAC\":\"0.496\",\"NMN_SUP\":\"2267999999999.99\",\"COTA_CORON\":\"351\",\"ALT_CIMIEN\":\"9.9\",\"LONG_CORON\":\"195\",\"CAP_AL_NAE\":\"0\",\"CAP_MAX_DF\":\"0.61\"},{\"FID\":1860,\"INFORME\":\"https://sig.mapama.gob.es/WebServices/clientews/snczi/Default.aspx?nombre=EGISPE_PRESA&claves=ID_INFRAESTRUCTURA&valores=688\",\"ID_INFRAES\":688,\"CODIGO\":\"3100156\",\"NOMBRE\":\"ALCANTARA I\",\"FASE\":\"Explotación\",\"TITULAR\":\"AYUNTAMIENTO DE ALCANTARA\",\"CATEGORIA\":\" \",\"CAUCE\":\"RÍO JARTÍN\",\"DEMARC\":\"TAJO\",\"PROVINCIA\":\"Cáceres\",\"CCAA\":\"Extremadura\",\"TIPO\":\"Presa de fábrica de gravedad (hormigón vibrado)\",\"USUARIOS\":\"-\",\"USO\":\"Abastecimiento\",\"SUP_CUENCA\":\"54\",\"AP_M_ANUAL\":\"0\",\"NMN_CAPAC\":\"1.02\",\"NMN_SUP\":\"27.83\",\"COTA_CORON\":\"160.8\",\"ALT_CIMIEN\":\"14\",\"LONG_CORON\":\"177\",\"CAP_AL_NAE\":\"0\",\"CAP_MAX_DF\":\" \"}]"
  }
 }
