@@ -30,6 +30,19 @@ function Mini({ t }: { t: Tema }) {
       </svg>
     )
   }
+  if (t.id === 'comercio') {
+    const e = (resumen as unknown as { comercio?: { año: string; exp: number; imp: number } }).comercio
+    const max = Math.max(e?.exp ?? 1, e?.imp ?? 1)
+    return (
+      <svg viewBox="0 0 120 80" className="mini" aria-hidden>
+        {e && ([['Vende', e.exp, c], ['Compra', e.imp, '#3987e5']] as const).map(([n, v, col], i) => <g key={n}>
+          <text x="4" y={26 + i * 28} className="mini-unit" style={{ fontSize: 10.5 }}>{n}</text>
+          <motion.rect x="42" y={17 + i * 28} height="10" rx="2" fill={col} initial={{ width: 0 }} animate={{ width: (v / max) * 74 }} transition={{ delay: .4 + i * .15, duration: .8 }} />
+          <text x="44" y={41 + i * 28} className="mini-unit" style={{ fontSize: 9.5 }}>{v.toLocaleString('es-ES', { maximumFractionDigits: 0 })} mil M€</text>
+        </g>)}
+      </svg>
+    )
+  }
   if (t.id === 'economia') {
     const e = (resumen as unknown as { economia?: { ipc?: [string, number]; paro?: [string, number]; pib?: [string, number] } }).economia
     const filas = ([['PIB', e?.pib], ['IPC', e?.ipc], ['Paro', e?.paro]] as const).filter(f => f[1])
@@ -110,7 +123,7 @@ export default function Portada() {
                 <div className="tema-txt">
                   <h2>{t.nombre}{abierto && <ArrowUpRight size={20} />}</h2>
                   <p>{t.lema}</p>
-                  <small>{abierto ? <><i className="vivo" /> {t.id === 'agua' ? `Datos del ${fecha}` : t.id === 'poblacion' ? 'Padrón y series del INE' : t.id === 'economia' ? 'Eurostat, cada día' : t.id === 'energia' ? 'En directo, Red Eléctrica' : 'Datos de hoy'}</> : 'En preparación'} · {VISTA[t.vista]}</small>
+                  <small>{abierto ? <><i className="vivo" /> {t.id === 'agua' ? `Datos del ${fecha}` : t.id === 'poblacion' ? 'Padrón y series del INE' : t.id === 'economia' ? 'Eurostat, cada día' : t.id === 'energia' ? 'En directo, Red Eléctrica' : t.id === 'comercio' ? 'Eurostat, cada semana' : 'Datos de hoy'}</> : 'En preparación'} · {VISTA[t.vista]}</small>
                 </div>
                 <Mini t={t} />
               </Card>

@@ -194,9 +194,9 @@ export const portacontenedores = (): Modelo => t => {
 /** Globo con rutas: arcos desde cada socio hasta España, con pulsos que viajan (peso 0–1 = grosor del flujo). */
 export type Ruta = { lat: number; lon: number; peso: number; sale?: boolean }
 export const globo = (rutas: Ruta[]): Modelo => t => {
-  const fuerte: Seg[] = [], tenue: Seg[] = [], R = 0.42, C: [number, number, number] = [0, 0.55, 0]
+  const fuerte: Seg[] = [], tenue: Seg[] = [], R = 0.5, C: [number, number, number] = [0, 0.62, 0]
   const P = (lat: number, lon: number, r = R): [number, number, number] => { const a = (lat * Math.PI) / 180, b = (-lon * Math.PI) / 180; return [C[0] + Math.cos(a) * Math.cos(b) * r, C[1] + Math.sin(a) * r, C[2] + Math.cos(a) * Math.sin(b) * r] }
-  for (let la = -60; la <= 60; la += 30) { let prev: [number, number, number] | null = null; for (let lo = -180; lo <= 180; lo += 12) { const p = P(la, lo); if (prev) (la === 0 ? fuerte : tenue).push([...prev, ...p] as Seg); prev = p } }
+  for (let la = -60; la <= 60; la += 30) { let prev: [number, number, number] | null = null; for (let lo = -180; lo <= 180; lo += 12) { const p = P(la, lo); if (prev) tenue.push([...prev, ...p] as Seg); prev = p } }
   for (let lo = -180; lo < 180; lo += 30) { let prev: [number, number, number] | null = null; for (let la = -84; la <= 84; la += 12) { const p = P(la, lo); if (prev) tenue.push([...prev, ...p] as Seg); prev = p } }
   const es = P(40.4, -3.7)
   anillo(fuerte, 0.025, es[1], 10, es[0], es[2])

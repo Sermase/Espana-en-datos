@@ -78,5 +78,12 @@ if (forma) {
 }
 const out = datos ? { fecha: new Date().toISOString(), ...datos } : prev
 if (out) writeFileSync(OUT, JSON.stringify(out))
+// resumen para la portada
+try {
+  const RES = here('../src/resumen.json'), res = JSON.parse(readFileSync(RES, 'utf8'))
+  const y = Object.keys(out.porPais).sort().at(-1), w = out.porPais[y].WORLD
+  res.comercio = { año: y, exp: Math.round(w.exp / 1e8) / 10, imp: Math.round(w.imp / 1e8) / 10 }
+  writeFileSync(RES, JSON.stringify(res, null, 1))
+} catch (e) { log._resumen = String(e.message) }
 writeFileSync(here('../fuentes/comercio-log.json'), JSON.stringify(log, null, 1))
 console.log('Comercio:', datos ? 'ok' : 'sin datos nuevos')
