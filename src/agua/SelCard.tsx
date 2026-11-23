@@ -1,6 +1,6 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { motion, type PanInfo } from 'motion/react'
-import { Activity, Bath, ChevronLeft, House, ChevronRight, CloudRain, Droplets, Factory, Map as MapIcon, Sparkles, Waves, X, Zap } from 'lucide-react'
+import { Activity, Bath, Building2, CalendarClock, ChevronLeft, House, ChevronRight, CloudRain, Droplets, Factory, Footprints, Map as MapIcon, Mountain, Ruler, Sparkles, Timer, Trophy, Waves, X, Zap } from 'lucide-react'
 import { basinStats, consumo, data, fmt, fmtBig, fmtPct, pct, status, type Reservoir } from './data'
 import { byCapacity, rankIn, resInBasin, resolve, sequence, sizeRank, type Sel } from './sel'
 import { Bar, CountUp, Head, HydroChart, Info, Ring, TimeChart } from './ui'
@@ -27,6 +27,16 @@ function Stat({ label, info, children, tone }: { label: string; info?: string; c
   return <div className={`stat ${tone ?? ''}`}><span>{label}{info && <Info k={info} />}</span><b>{children}</b></div>
 }
 const Fun = ({ icon: I, children, tone }: { icon: typeof Waves; children: React.ReactNode; tone?: string }) => <p className={`fun ${tone ?? ''}`}><I size={15} aria-hidden /><span>{children}</span></p>
+/** Ficha de cada presa (inventario del ministerio + Wikidata); se carga una vez, al abrir el primer embalse. */
+type Ficha = { tit?: string; tipo?: string; uso?: string; prov?: string; cuenca?: number; aport?: number; sup?: number; cota?: number; lc?: number; alv?: number; url?: string; año?: number; wiki?: string }
+let fichasP: Promise<Record<string, Ficha>> | null = null
+function useFicha(id: number) {
+  const [f, setF] = useState<Ficha | null>(null)
+  useEffect(() => { fichasP ??= fetch('./data/presas.json').then(r => r.json()).catch(() => ({})); let ok = true; fichasP.then(m => ok && setF(m[id] ?? null)); return () => { ok = false } }, [id])
+  return f
+}
+const CAMPO_HA = 0.714 // un campo de fútbol de 105 × 68 m
+const minus = (t: string) => t.charAt(0).toLowerCase() + t.slice(1)
 const signed = (v: number, d = 0) => `${v > 0 ? '+' : v < 0 ? '−' : '±'}${fmt(Math.abs(v), d)}`
 
 export function SelCard({ sel, onPick, isNew, compact, dir }: {
@@ -132,7 +142,40 @@ function ResBody({ r, onPick }: { r: Reservoir; onPick: (s: Sel) => void }) {
     <Fun icon={Waves}>Guarda el agua de <b>{fmt((r.a * 1e6) / POOL)}</b> piscinas olímpicas. Lleno cabrían <b>{fmt(((r.c - r.a) * 1e6) / POOL)}</b> más.</Fun>
     <Fun icon={Droplets}>Es más grande que el <b>{bigger} %</b> de los embalses de España.</Fun>
     {r.e > 0 && <Fun icon={Zap} tone="volt">Sus {fmt(r.e)} GWh darían electricidad un año a unos <b>{fmt((r.e * 1e6) / HOME_KWH)}</b> hogares.</Fun>}
+    <PresaFicha r={r} />
   </>)
+}
+
+/** El resumen del artículo de Wikipedia (se pide en el momento; licencia CC BY-SA, con enlace al artículo). */
+function Wiki({ url }: { url: string }) {
+  const [t, setT] = useState<string | null>(null)
+  useEffect(() => {
+    let ok = true; setT(null)
+    const titulo = decodeURIComponent(url.split('/wiki/')[1] ?? '')
+    fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(titulo)}`).then(r => r.ok ? r.json() : null).then(j => ok && j?.extract && setT(j.extract)).catch(() => {})
+    return () => { ok = false }
+  }, [url])
+  if (!t) return null
+  return <blockquote className="wiki">{t}<cite><a href={url} target="_blank" rel="noopener noreferrer">Wikipedia</a> · CC BY-SA</cite></blockquote>
+}
+
+/** Lo que cuenta el inventario de la presa: año, tipo, quién la gestiona, sus medidas y su aliviadero. */
+function PresaFicha({ r }: { r: Reservoir }) {
+  const f = useFicha(r.id)
+  if (!f) return null
+  const año = new Date().getFullYear()
+  const llenado = f.aport && f.aport > 0 ? (r.c / f.aport) * 12 : null // meses que tardaría en llenarse con la aportación media
+  return <>
+    {f.año && <Fun icon={CalendarClock}>Data de <b>{f.año}</b>: lleva {fmt(año - f.año)} años guardando agua.</Fun>}
+    {f.tipo && <Fun icon={Building2}>Es una {minus(f.tipo)}{f.tit && <>, de <b>{f.tit.toLowerCase().split(' ').map((w, i) => w.length > 3 || i === 0 ? w.charAt(0).toUpperCase() + w.slice(1) : w).join(' ')}</b></>}{f.uso && <>, y su agua se usa sobre todo para {minus(f.uso)}</>}.</Fun>}
+    {r.hm && <Fun icon={Ruler}>Su presa mide <b>{fmt(r.hm)} m</b> desde los cimientos, como un edificio de unas {fmt(r.hm / 3)} plantas{f.lc && <>, y <b>{fmt(f.lc)} m</b> de largo por arriba</>}.</Fun>}
+    {f.cota && <Fun icon={Mountain}>Su coronación está a <b>{fmt(f.cota)} m</b> sobre el nivel del mar.</Fun>}
+    {f.sup && <Fun icon={MapIcon}>Lleno, el agua cubre <b>{fmt(f.sup)} ha</b>: unos {fmt(f.sup / CAMPO_HA)} campos de fútbol.</Fun>}
+    {llenado && llenado < 600 && <Fun icon={Timer}>Le llegan de media {fmt(f.aport!, f.aport! < 10 ? 1 : 0)} hm³ al año de una cuenca de {fmt(f.cuenca ?? 0)} km²: sin gastar nada, se llenaría desde cero en {llenado < 18 ? <b>{fmt(llenado)} meses</b> : <b>{fmt(llenado / 12, 1)} años</b>}.</Fun>}
+    {f.alv && f.alv > 5 && <Fun icon={Waves}>Su aliviadero puede soltar <b>{fmt(f.alv)} m³ por segundo</b>: llenaría una piscina olímpica en {fmt(POOL / f.alv, POOL / f.alv < 10 ? 1 : 0)} segundos.</Fun>}
+    {f.wiki && <Wiki url={f.wiki} />}
+    {(f.wiki || f.url) && <p className="fun-links">{f.wiki && <a href={f.wiki} target="_blank" rel="noopener noreferrer">Su historia en Wikipedia ↗</a>}{f.url && <a href={f.url} target="_blank" rel="noopener noreferrer">Ficha oficial de la presa ↗</a>}</p>}
+  </>
 }
 
 function BasinBody({ id, onPick }: { id: string; onPick: (s: Sel) => void }) {
@@ -330,6 +373,11 @@ function RiverBody({ v, onPick }: { v: River; onPick: (s: Sel) => void }) {
     <Head info="perfil">Perfil del río</Head>
     <Profile v={v} />
     <p className="note">Nace hacia los {fmt(st.top)} m y deja el mapa hacia los {fmt(st.bottom)} m. Perfil orientativo, sacado de las curvas de nivel del IGN.</p>
+    <Head>Curiosidades</Head>
+    <Fun icon={Trophy}>Es el <b>{lenRank}.º</b> río más largo de los {all.length} del mapa{waterRank > 0 && st.c > 0 && <> y el {waterRank}.º que más agua guarda en sus embalses</>}.</Fun>
+    <Fun icon={Footprints}>Recorrerlo andando, a 5 km/h y 8 horas al día, llevaría <b>{fmt(Math.max(1, riverLen(v) / 40))} días</b>.</Fun>
+    {st.drop > 0 && <Fun icon={Mountain}>Baja {fmt(st.drop)} m: de media, <b>{fmt(slope, slope < 1 ? 2 : 1)} m por kilómetro</b>{slope > 5 ? ', un río de montaña' : slope < 1 ? ', un río tranquilo de llanura' : ''}.</Fun>}
+    {st.qMax > 0 && <Fun icon={Waves}>Con su mayor caudal de esta semana, {fmt(st.qMax, st.qMax < 10 ? 1 : 0)} m³/s, llenaría una piscina olímpica en <b>{POOL / st.qMax < 120 ? `${fmt(POOL / st.qMax)} segundos` : `${fmt(POOL / st.qMax / 60)} minutos`}</b>.</Fun>}
     {st.res.length > 0 && <>
       <Head right={`${fmtPct(pc)} lleno`}>Sus embalses</Head>
       <ul className="rank">{st.res.map(({ r }) => <li key={r.id}><button onClick={() => onPick({ k: 'res', id: r.id })}><span className="rank-name">{r.n}</span><Bar value={pct(r)} max={100} tone={status(pct(r))} /><b>{fmtPct(pct(r))}</b></button></li>)}</ul>

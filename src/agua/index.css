@@ -521,3 +521,5 @@ button { font: inherit; color: inherit; cursor: pointer }
 .holo { z-index: 4 }
 .src a, .pie a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--acc, #3fe6ff) 60%, transparent); text-underline-offset: 2px }
 .src a:hover, .pie a:hover { color: var(--acc, #3fe6ff) }
+.fun-links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 8px 0 0; font-size: 13px } .fun-links a { color: var(--acc); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--acc) 40%, transparent) }
+.wiki { margin: 10px 0 0; padding: 10px 12px; border-left: 2px solid var(--acc); background: rgba(63, 230, 255, .05); font-size: 13.5px; line-height: 1.5; color: #c7dde4 } .wiki cite { display: block; margin-top: 6px; font-style: normal; font-size: 12px; color: var(--muted) } .wiki cite a { color: var(--acc) }

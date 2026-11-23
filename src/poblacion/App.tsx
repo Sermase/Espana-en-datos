@@ -6,10 +6,30 @@ import { last, popNow, provName, useDatos, type Datos, type Muni } from './datos
 import { METRICAS, colorDe, setYears, valorDe, type Metrica } from './metricas'
 import { Mapa, type MapaApi } from './Mapa'
 import { Graficos } from './Graficos'
+import { Curiosidades } from '../Curiosidades'
 import { A } from '../Fuentes'
 
 type Vista = 'mapa' | 'graficos'
 const readHash = () => { const m = location.hash.match(/^#(mapa|graficos)(?:-(\d{5}))?$/); return { vista: (m?.[1] as Vista) ?? 'mapa', id: m?.[2] ?? null } }
+
+const ESTADIO = 83186 // aforo del Santiago Bernabéu
+const BUS = 55
+/** «¿Sabías que…?» de un municipio, calculado con el padrón y la superficie. */
+function curiosidades(d: Datos, m: Muni) {
+  const now = popNow(m), Y = d.years, p0 = m.pop.find(v => v != null) ?? now, a0 = Y[m.pop.findIndex(v => v != null)]
+  const tocayos = d.munis.filter(x => x.n === m.n && x.id !== m.id)
+  const totPop = d.munis.reduce((t, x) => t + popNow(x), 0), totKm = d.munis.reduce((t, x) => t + (x.km2 ?? 0), 0)
+  const densEs = totPop / totKm, dens = m.km2 ? now / m.km2 : null
+  const masGrande = m.km2 ? Math.round((d.munis.filter(x => (x.km2 ?? 0) < m.km2!).length / d.munis.length) * 100) : null
+  const dif = now - p0
+  return [
+    tocayos.length > 0 && <>Hay {tocayos.length === 1 ? 'otro municipio' : <><b>{tocayos.length}</b> municipios más</>} en España con el mismo nombre: {tocayos.slice(0, 4).map(x => provName(x.prov)).join(', ')}{tocayos.length > 4 ? '…' : ''}.</>,
+    now >= 20000 ? <>Todos sus vecinos llenarían el estadio Santiago Bernabéu <b>{nf(now / ESTADIO, now / ESTADIO < 10 ? 1 : 0)} veces</b>.</> : <>Todos sus vecinos cabrían en <b>{nf(Math.max(1, Math.ceil(now / BUS)))} autobús{Math.ceil(now / BUS) > 1 ? 'es' : ''}</b>.</>,
+    dens != null && <>Tiene {nf(dens, dens < 10 ? 1 : 0)} habitantes por km²: <b>{dens > densEs ? `${nf(dens / densEs, 1)} veces más` : `${nf(densEs / dens, dens < 1 ? 0 : 1)} veces menos`}</b> que la media de España ({nf(densEs, 0)}).</>,
+    masGrande != null && masGrande >= 50 && <>Su término mide {nf(m.km2!, 0)} km²: es más grande que el <b>{masGrande} %</b> de los municipios de España.</>,
+    Math.abs(dif) > 0 && <>Desde {a0} ha {dif > 0 ? 'ganado' : 'perdido'} <b>{nf(Math.abs(dif))} vecinos</b>: unos {nf(Math.abs(dif) / Math.max(1, last(Y) - a0), Math.abs(dif) / (last(Y) - a0) < 10 ? 1 : 0)} al año.</>,
+  ]
+}
 
 function MuniCard({ d, m, onMuni }: { d: Datos; m: Muni; onMuni: (m: Muni) => void }) {
   const now = popNow(m), Y = d.years
@@ -39,6 +59,7 @@ function MuniCard({ d, m, onMuni }: { d: Datos; m: Muni; onMuni: (m: Muni) => vo
       {m.edad != null && <li>Edad media: <b>{nf(m.edad, 1)} años</b></li>}
       {m.nacidos != null && <li><b>{nf(m.nacidos, 1)} %</b> de sus vecinos nació en el extranjero</li>}
     </ul>
+    <Curiosidades items={curiosidades(d, m)} />
     <h3>Su población desde {Y[0]}</h3>
     <LineChart titulo={`Población de ${m.n} desde ${Y[0]}`} series={[{ id: 'p', nombre: m.n, datos: pts, area: true }]} fx={v => String(v)} fy={v => (v >= 1e4 ? compact(v) : nf(v))} alto={160}
       marcas={i2000 >= 0 && m.pop[i2000] != null ? [{ x: 2000, y: m.pop[i2000]!, texto: '2000' }] : []} />

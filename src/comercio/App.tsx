@@ -6,6 +6,9 @@ import { Holo3D } from '../holo3d/Holo3D'
 import { globo, portacontenedores, type Ruta } from '../holo3d/modelos'
 import { MapaMundo, isoDe, nombrePais } from '../mundo/MapaMundo'
 import { Fuentes } from '../Fuentes'
+import { Curiosidades } from '../Curiosidades'
+import resumen from '../resumen.json'
+const HAB = (resumen as unknown as { poblacion: { total: number } }).poblacion.total
 import { FAMILIAS, hs2, type Familia } from './hs2'
 
 const EXP = '#c6f25e', IMP = '#3987e5'
@@ -98,6 +101,16 @@ function Paises({ d }: { d: Datos }) {
     </Card>
     {clave && s && <Card t={nombrePais(clave)} lead={<>En {a} España le vendió {meur(s.exp)} y le compró {meur(s.imp)}: un {s.exp >= s.imp ? <b>superávit</b> : <b>déficit</b>} de {meur(Math.abs(s.exp - s.imp))}.</>}>
       <LineChart titulo={`Comercio con ${nombrePais(clave)}`} series={[{ id: 'e', nombre: 'Le vendemos', datos: años.map(y => [Date.UTC(+y, 6, 1), (d.porPais[y][clave]?.exp ?? 0) / 1e9] as [number, number]), color: EXP, area: true }, { id: 'i', nombre: 'Le compramos', datos: años.map(y => [Date.UTC(+y, 6, 1), (d.porPais[y][clave]?.imp ?? 0) / 1e9] as [number, number]), color: IMP }]} fx={t => String(new Date(t).getUTCFullYear())} ticksX={años.map(y => Date.UTC(+y, 6, 1)).filter((_, i, l) => i % 2 === (l.length - 1) % 2)} fy={v => `${nf(v, 1)} mil M€`} yMin={0} alto={200} />
+      {(() => {
+        const y0 = años.find(y => d.porPais[y][clave]) ?? años[0], v0 = d.porPais[y0][clave]
+        const rkE = Object.entries(d.porPais[a]).filter(([k]) => esPais(k)).sort((x, y) => y[1].exp - x[1].exp).findIndex(([k]) => k === clave) + 1
+        const rkI = Object.entries(d.porPais[a]).filter(([k]) => esPais(k)).sort((x, y) => y[1].imp - x[1].imp).findIndex(([k]) => k === clave) + 1
+        return <Curiosidades items={[
+          <>Es el <b>{rkE}.º cliente</b> de España y su <b>{rkI}.º proveedor</b>.</>,
+          v0 && v0.exp > 0 && y0 !== a && <>Desde {y0}, lo que le vendemos ha {s.exp >= v0.exp ? 'crecido' : 'caído'} un <b>{nf(Math.abs(s.exp / v0.exp - 1) * 100, 0)} %</b>.</>,
+          <>Cada español le vendió de media {(s.exp / HAB).toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })} en {a}, y le compró {(s.imp / HAB).toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })}.</>,
+        ]} />
+      })()}
       <button className="cerrar" onClick={() => setSel(null)}>Quitar selección</button>
     </Card>}
     <Card t="Ranking" lead={`${f === 'exp' ? 'Clientes' : 'Proveedores'} de ${a}, de más a menos.`}>

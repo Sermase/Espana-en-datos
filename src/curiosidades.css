@@ -1,0 +1,8 @@
+.curios { margin: 14px 0 4px; padding: 12px 14px 10px; border: 1px solid color-mix(in oklab, var(--acc, #3fe6ff) 28%, transparent); border-radius: 4px; background: linear-gradient(135deg, color-mix(in oklab, var(--acc, #3fe6ff) 7%, transparent), transparent 60%) }
+.curios h3 { display: flex; align-items: center; gap: 6px; margin: 0 0 8px; font: 600 14px Oxanium, sans-serif; letter-spacing: .04em; color: var(--acc, #3fe6ff) }
+.curios ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px }
+.curios li { position: relative; padding-left: 14px; font-size: 14px; line-height: 1.45; color: #c7dde4 }
+.curios li::before { content: ''; position: absolute; left: 0; top: .6em; width: 5px; height: 5px; border-radius: 1px; background: var(--acc, #3fe6ff); transform: rotate(45deg) }
+.curios li b { color: #fff }
+.curios-links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 10px 0 0; font-size: 13px }
+.curios-links a { color: var(--acc, #3fe6ff); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--acc, #3fe6ff) 40%, transparent) }

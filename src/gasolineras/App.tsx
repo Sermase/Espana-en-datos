@@ -4,6 +4,7 @@ import { Clock, Crosshair, Fuel as FuelIcon, MapPin, Navigation, Palmtree, X } f
 import { FUEL_NAME, FUEL_SHORT, cents, eur, fechaLarga, int, km, priceColor, useDatos, type Datos, type Fuel, type Station } from './datos'
 import { Mapa, type MapaApi } from './Mapa'
 import { Barras, Columnas, LineChart, CountUp } from '../graficos'
+import { Curiosidades } from '../Curiosidades'
 import { A } from '../Fuentes'
 
 type Sel = { k: 'st'; id: number } | { k: 'prov'; id: string } | null
@@ -54,6 +55,18 @@ function StationCard({ d, s, fuel, onProv, near }: { d: Datos; s: Station; fuel:
       {rank > 0 && <li><b>{rank}ª</b> más barata de {int(inProv.length)} en {prov.n}</li>}
       <li>Llenar {LITROS} litros: <b>{(v * LITROS).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</b>, {v <= med ? 'ahorras' : 'pagas'} <b>{Math.abs((v - med) * LITROS).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</b> {v <= med ? 'frente a' : 'más que'} la gasolinera típica de la provincia</li>
     </ul>}
+    {v != null && med != null && (() => {
+      // «¿Sabías que…?» de esta gasolinera, sacado de los precios de hoy
+      const es = d.hoy.espana[fuel], barata = inProv[0], cara = inProv[inProv.length - 1]
+      const anual = 1000 // litros que gasta al año un coche medio (unos 15.000 km)
+      const mismaMarca = inProv.filter(x => x.marca === s.marca)
+      return <Curiosidades items={[
+        barata && cara && barata.id !== cara.id && <>Entre la más barata y la más cara de {prov.n} hay <b>{cents(cara.p[fuel]! - barata.p[fuel]!).replace('+', '')}</b> por litro: {((cara.p[fuel]! - barata.p[fuel]!) * LITROS).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })} por depósito.</>,
+        es != null && <>Repostando siempre aquí, un coche que gasta unos {anual.toLocaleString("es-ES")} litros al año pagaría <b>{Math.abs((v - es) * anual).toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })} {v <= es ? 'menos' : 'más'}</b> que al precio medio de España.</>,
+        mismaMarca.length > 1 && <>{s.marca} tiene {mismaMarca.length} gasolineras en {prov.n}; esta es la {mismaMarca.findIndex(x => x.id === s.id) + 1}.ª más barata de la marca.</>,
+        s.h24 && <>Abre las 24 horas.</>,
+      ]} />
+    })()}
     {v != null && <>
       <h3>Dónde cae entre las de {prov?.n}</h3>
       <Reparto titulo={`Gasolineras de ${prov?.n} por precio de ${FUEL_NAME[fuel].toLowerCase()}`} precios={inProv.map(x => x.p[fuel]!)} marca={v} />

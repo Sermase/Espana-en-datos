@@ -81,8 +81,9 @@ const PRESAS = here('../public/agua/data/presas.json')
 const fichas = {}
 const num = (v) => { const n = Number(String(v ?? '').replace(',', '.')); return Number.isFinite(n) && n > 0 ? n : undefined }
 const limpio = (v) => { const t = String(v ?? '').replace(/\s+/g, ' ').trim(); return t && t !== '-' ? t : undefined }
+const lineas = (v) => String(v ?? '').split(/\n+/).map(x => x.trim()).filter(x => x && x !== '-')
 const ficha = (p) => ({
-  tit: limpio(p.TITULAR), tipo: limpio(p.TIPO), uso: limpio(p.USO), prov: limpio(p.PROVINCIA),
+  tit: limpio(lineas(p.TITULAR).at(-1)), tipo: limpio(p.TIPO), uso: limpio(lineas(p.USO).join(', ')), prov: limpio(p.PROVINCIA),
   cuenca: num(p.SUP_CUENCA), aport: num(p.AP_M_ANUAL), sup: num(p.NMN_SUP) && num(p.NMN_SUP) < 1e6 ? num(p.NMN_SUP) : undefined,
   cota: num(p.COTA_CORON), lc: num(p.LONG_CORON), alv: num(p.CAP_AL_NAE), url: limpio(p.INFORME),
 })
