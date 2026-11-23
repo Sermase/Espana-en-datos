@@ -41,8 +41,8 @@
   "households": 2284.4,
   "treated": 17180033,
   "reused": 2486232,
-  "reusePct": 12.3,
-  "reusePctPrev": 10.9,
+  "reusePct": 14.5,
+  "reusePctPrev": 9.5,
   "dest": {
    "Al mar": 30.2,
    "A un cauce fluvial": 55.4,
@@ -52,7 +52,7 @@
   },
   "usos": {
    "Agricultura": 69.3,
-   "Industria": 361206,
+   "Industria": 4.4,
    "Jardines y zonas deportivas de ocio": 8.7,
    "Limpieza de alcantarillado y baldeo de calles": 1.6,
    "Otros usos": 16
@@ -94,7 +94,7 @@
    },
    "usos": {
     "Agricultura": 100,
-    "Industria": null,
+    "Industria": 0,
     "Jardines y zonas deportivas de ocio": 0,
     "Limpieza de alcantarillado y baldeo de calles": 0,
     "Otros usos": 0
@@ -119,7 +119,7 @@
    "households": 132.9,
    "treated": 787684,
    "reused": 4573,
-   "reusePct": 1.4,
+   "reusePct": 0.6,
    "reusePctPrev": 0.4,
    "dest": {
     "Al mar": 0,
@@ -130,7 +130,7 @@
    },
    "usos": {
     "Agricultura": 81.3,
-    "Industria": null,
+    "Industria": 0,
     "Jardines y zonas deportivas de ocio": 17.6,
     "Limpieza de alcantarillado y baldeo de calles": 1.1,
     "Otros usos": 0
@@ -155,8 +155,8 @@
    "households": 140.8,
    "treated": 1292306,
    "reused": 62618,
-   "reusePct": 5,
-   "reusePctPrev": 1.1,
+   "reusePct": 4.8,
+   "reusePctPrev": 1,
    "dest": {
     "Al mar": 0,
     "A un cauce fluvial": 94.6,
@@ -166,7 +166,7 @@
    },
    "usos": {
     "Agricultura": 90.6,
-    "Industria": null,
+    "Industria": 4.8,
     "Jardines y zonas deportivas de ocio": 1.3,
     "Limpieza de alcantarillado y baldeo de calles": 0,
     "Otros usos": 3.3
@@ -191,7 +191,7 @@
    "households": 59.4,
    "treated": 675459,
    "reused": 104690,
-   "reusePct": 15.4,
+   "reusePct": 15.5,
    "reusePctPrev": 0.1,
    "dest": {
     "Al mar": 27.3,
@@ -202,7 +202,7 @@
    },
    "usos": {
     "Agricultura": 99.1,
-    "Industria": null,
+    "Industria": 0,
     "Jardines y zonas deportivas de ocio": 0,
     "Limpieza de alcantarillado y baldeo de calles": 0,
     "Otros usos": 0.9
@@ -227,7 +227,7 @@
    "households": 38.1,
    "treated": 304558,
    "reused": 30806,
-   "reusePct": 0,
+   "reusePct": 10.1,
    "reusePctPrev": 7.3,
    "dest": {
     "Al mar": 0,
@@ -238,7 +238,7 @@
    },
    "usos": {
     "Agricultura": 0,
-    "Industria": null,
+    "Industria": 59.8,
     "Jardines y zonas deportivas de ocio": 40.2,
     "Limpieza de alcantarillado y baldeo de calles": 0,
     "Otros usos": 0
@@ -263,7 +263,7 @@
    "households": 295.4,
    "treated": 2208381,
    "reused": 754362,
-   "reusePct": 29.3,
+   "reusePct": 34.2,
    "reusePctPrev": 34.9,
    "dest": {
     "Al mar": 38,
@@ -274,7 +274,7 @@
    },
    "usos": {
     "Agricultura": 82,
-    "Industria": null,
+    "Industria": 1.3,
     "Jardines y zonas deportivas de ocio": 7.9,
     "Limpieza de alcantarillado y baldeo de calles": 4.7,
     "Otros usos": 4
@@ -299,8 +299,8 @@
    "households": 81,
    "treated": 307029,
    "reused": 294840,
-   "reusePct": 95.3,
-   "reusePctPrev": 95.2,
+   "reusePct": 96,
+   "reusePctPrev": 96.1,
    "dest": {
     "Al mar": 4,
     "A un cauce fluvial": 0,
@@ -310,7 +310,7 @@
    },
    "usos": {
     "Agricultura": 98.7,
-    "Industria": null,
+    "Industria": 0,
     "Jardines y zonas deportivas de ocio": 0.5,
     "Limpieza de alcantarillado y baldeo de calles": 0,
     "Otros usos": 0.8
@@ -335,8 +335,8 @@
    "households": 61.4,
    "treated": 333182,
    "reused": 64932,
-   "reusePct": 22.7,
-   "reusePctPrev": 42.1,
+   "reusePct": 19.5,
+   "reusePctPrev": 18.6,
    "dest": {
     "Al mar": 53,
     "A un cauce fluvial": 21.2,
@@ -346,7 +346,7 @@
    },
    "usos": {
     "Agricultura": 63.6,
-    "Industria": null,
+    "Industria": 0,
     "Jardines y zonas deportivas de ocio": 30.5,
     "Limpieza de alcantarillado y baldeo de calles": 0,
     "Otros usos": 5.9
@@ -371,8 +371,8 @@
    "households": 410,
    "treated": 1455227,
    "reused": 134396,
-   "reusePct": 4,
-   "reusePctPrev": 5.5,
+   "reusePct": 9.2,
+   "reusePctPrev": 5.4,
    "dest": {
     "Al mar": 43.8,
     "A un cauce fluvial": 51.9,
@@ -382,7 +382,7 @@
    },
    "usos": {
     "Agricultura": 12.6,
-    "Industria": null,
+    "Industria": 10.3,
     "Jardines y zonas deportivas de ocio": 17.2,
     "Limpieza de alcantarillado y baldeo de calles": 0.2,
     "Otros usos": 59.8
@@ -407,7 +407,7 @@
    "households": 8,
    "treated": 62588,
    "reused": 5833,
-   "reusePct": 12,
+   "reusePct": 9.3,
    "reusePctPrev": 38,
    "dest": {
     "Al mar": 88,
@@ -418,7 +418,7 @@
    },
    "usos": {
     "Agricultura": 0,
-    "Industria": null,
+    "Industria": 84.6,
     "Jardines y zonas deportivas de ocio": 10.6,
     "Limpieza de alcantarillado y baldeo de calles": 4.8,
     "Otros usos": 0
@@ -443,7 +443,7 @@
    "households": 328.3,
    "treated": 1621309,
    "reused": 317116,
-   "reusePct": 4.5,
+   "reusePct": 19.6,
    "reusePctPrev": 3.8,
    "dest": {
     "Al mar": 0,
@@ -454,7 +454,7 @@
    },
    "usos": {
     "Agricultura": 0,
-    "Industria": null,
+    "Industria": 3.4,
     "Jardines y zonas deportivas de ocio": 13.2,
     "Limpieza de alcantarillado y baldeo de calles": 0.7,
     "Otros usos": 82.7
@@ -479,8 +479,8 @@
    "households": 61.7,
    "treated": 921835,
    "reused": 6851,
-   "reusePct": 3.2,
-   "reusePctPrev": 0.4,
+   "reusePct": 0.7,
+   "reusePctPrev": 0.3,
    "dest": {
     "Al mar": 0,
     "A un cauce fluvial": 96.8,
@@ -490,7 +490,7 @@
    },
    "usos": {
     "Agricultura": 86.8,
-    "Industria": null,
+    "Industria": 0,
     "Jardines y zonas deportivas de ocio": 13.2,
     "Limpieza de alcantarillado y baldeo de calles": 0,
     "Otros usos": 0
@@ -515,8 +515,8 @@
    "households": 97.6,
    "treated": 379444,
    "reused": 125811,
-   "reusePct": 47.1,
-   "reusePctPrev": 53.1,
+   "reusePct": 33.2,
+   "reusePctPrev": 28,
    "dest": {
     "Al mar": 51.2,
     "A un cauce fluvial": 0.5,
@@ -526,7 +526,7 @@
    },
    "usos": {
     "Agricultura": 68.7,
-    "Industria": null,
+    "Industria": 0.3,
     "Jardines y zonas deportivas de ocio": 28.9,
     "Limpieza de alcantarillado y baldeo de calles": 0,
     "Otros usos": 2.1
@@ -562,7 +562,7 @@
    },
    "usos": {
     "Agricultura": 0,
-    "Industria": null,
+    "Industria": 0,
     "Jardines y zonas deportivas de ocio": 0,
     "Limpieza de alcantarillado y baldeo de calles": 0,
     "Otros usos": 100
@@ -598,7 +598,7 @@
    },
    "usos": {
     "Agricultura": 100,
-    "Industria": null,
+    "Industria": 0,
     "Jardines y zonas deportivas de ocio": 0,
     "Limpieza de alcantarillado y baldeo de calles": 0,
     "Otros usos": 0
@@ -634,7 +634,7 @@
    },
    "usos": {
     "Agricultura": 0,
-    "Industria": null,
+    "Industria": 0,
     "Jardines y zonas deportivas de ocio": 0,
     "Limpieza de alcantarillado y baldeo de calles": 0,
     "Otros usos": 0
@@ -659,8 +659,8 @@
    "households": 293.3,
    "treated": 2808849,
    "reused": 331605,
-   "reusePct": 11.3,
-   "reusePctPrev": 12.6,
+   "reusePct": 11.8,
+   "reusePctPrev": 12.5,
    "dest": {
     "Al mar": 44.3,
     "A un cauce fluvial": 44.1,
@@ -670,7 +670,7 @@
    },
    "usos": {
     "Agricultura": 78.7,
-    "Industria": null,
+    "Industria": 12.6,
     "Jardines y zonas deportivas de ocio": 5.8,
     "Limpieza de alcantarillado y baldeo de calles": 0.2,
     "Otros usos": 2.7
@@ -695,7 +695,7 @@
    "households": 64.5,
    "treated": 1370996,
    "reused": 9111,
-   "reusePct": 1.1,
+   "reusePct": 0.7,
    "reusePctPrev": 9.8,
    "dest": {
     "Al mar": 58.5,
@@ -706,7 +706,7 @@
    },
    "usos": {
     "Agricultura": 0,
-    "Industria": null,
+    "Industria": 54.8,
     "Jardines y zonas deportivas de ocio": 0,
     "Limpieza de alcantarillado y baldeo de calles": 0,
     "Otros usos": 45.2

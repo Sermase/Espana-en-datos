@@ -34,7 +34,7 @@
   "_ok": "2024 (y 2022), 18 territorios"
  },
  "edar": {
-  "descarga": "CfDJ8PUxxfZWKbZGtMWQ60ASuwuKcUR3ZNMKTD9m-kNW6izBusvDbTsoCbRocqvsXkiyfYOawemLjEayHF8Jj2i2LqRP-7Pv5pq3j6M9ynXTVrS8oaKYwrfzYYcW4R1YEo-maf9XsI0ID7NXtb92s0Pkvg4 -o /tmp/edar/edar.zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?handler=Download\ncurl: (22) The requested URL returned error: 400\n",
+  "descarga": "CfDJ8PUxxfZWKbZGtMWQ60ASuwtwaM_MkSCndmHUOYX9eCSZfCgI2BOzXZAd73zOUci7eJdXYoA7T3BrXylTFch5nEKRJ1eCOBdObTQyA8XHSNVXn9OUCMwiTeg7OrmSRNqIV1_9RP8Fh-yi6pv5GJOhx4Y -o /tmp/edar/edar.zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?handler=Download\ncurl: (22) The requested URL returned error: 400\n",
   "_ok": "sin shapefile: se conserva depuradoras.json si existía"
  },
  "conceptos": {
@@ -57,10 +57,10 @@
   "sub": "53445: Aguas subterráneas []"
  },
  "formulario": {
-  "form": "<form method=\"post\" action=\"/descargas/app/DescargaFichero?handler=Download\"> <input type=\"hidden\" name=\"f\" value=\"aauuq2023.zip\" /> <altcha-widget name=\"altcha\" challengeurl=\"/descargas/app/DescargaFichero?handler=Altcha\"> </altcha-widget> <br /> <button type=\"submit\" class=\"btn-download\"> Descargar fichero </button> <input name=\"__RequestVerificationToken\" type=\"hidden\" value=\"CfDJ8PUxxfZWKbZGtMWQ60ASuwsMHT801bFPunu7WA5S8bTR_-nGjl_xspwxuSF1Mi0s1cJvGDGR-xuerid5LCE5faF6DRFCP0taN7_j4n88_QFMuFGXsf9hbESXMm1tSytvOSbgRqUzPUo9emGEB0uSplw\" /></form>",
+  "form": "<form method=\"post\" action=\"/descargas/app/DescargaFichero?handler=Download\"> <input type=\"hidden\" name=\"f\" value=\"aauuq2023.zip\" /> <altcha-widget name=\"altcha\" challengeurl=\"/descargas/app/DescargaFichero?handler=Altcha\"> </altcha-widget> <br /> <button type=\"submit\" class=\"btn-download\"> Descargar fichero </button> <input name=\"__RequestVerificationToken\" type=\"hidden\" value=\"CfDJ8PUxxfZWKbZGtMWQ60ASuwt6exMG6mgSjgOHGYJJPJQuGDUBg2UJo15bwVdmb06UN5KsLg1Km9AsSBYY3IvdJCEXidScU_QSjK7Y-HNUzojzmbhe8R1P-mEsWgcQ0dDemVHcmWDo97lz9VDhD5XOAVc\" /></form>",
   "cookies": [
    "#HttpOnly_gis.miteco.gob.es FALSE /descargas/app FALSE 0 .AspNetCore.Antiforgery.PbUI0Dvg9tI"
   ]
  },
- "agg": "=CfDJ8PUxxfZWKbZGtMWQ60ASuwsMHT801bFPunu7WA5S8bTR_-nGjl_xspwxuSF1Mi0s1cJvGDGR-xuerid5LCE5faF6DRFCP0taN7_j4n88_QFMuFGXsf9hbESXMm1tSytvOSbgRqUzPUo9emGEB0uSplw -o /tmp/edar/agg.zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?handler=Download\ncurl: (22) The requested URL returned error: 400\n"
+ "agg": "=CfDJ8PUxxfZWKbZGtMWQ60ASuwt6exMG6mgSjgOHGYJJPJQuGDUBg2UJo15bwVdmb06UN5KsLg1Km9AsSBYY3IvdJCEXidScU_QSjK7Y-HNUzojzmbhe8R1P-mEsWgcQ0dDemVHcmWDo97lz9VDhD5XOAVc -o /tmp/edar/agg.zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?handler=Download\ncurl: (22) The requested URL returned error: 400\n"
 }
