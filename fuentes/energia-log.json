@@ -1,11 +1,18 @@
 {
+ "_sonda_tr": {
+  "status": 200,
+  "cors": null,
+  "inicio": "curva DEMANDA no valida"
+ },
  "_cors": "*",
+ "_h_estructura": "ERROR HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error Interno\",\"detail\":\"Los datos solicitados no est\\u00e1n disponibles en este momento. Int\\u00e9ntelo de nuevo m",
+ "_h_renovable": "ERROR HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error Interno\",\"detail\":\"Los datos solicitados no est\\u00e1n disponibles en este momento. Int\\u00e9ntelo de nuevo m",
  "mix_hora": "ERROR HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error Interno\",\"detail\":\"Los datos solicitados no est\\u00e1n disponibles en este momento. Int\\u00e9ntelo de nuevo m\\u00e1s t",
  "demanda_tr": {
   "Prevista": "288 datos · 2026-11-23T00:00 → 2026-11-23T23:55 28284 0.342",
   "Programada": "288 datos · 2026-11-23T00:00 → 2026-11-23T23:55 27183 0.329",
-  "Real": "160 datos · 2026-11-23T00:00 → 2026-11-23T13:15 36451 0.258",
-  "Programada total": "288 datos · 2026-11-23T00:00 → 2026-11-23T23:55 27175 0.329"
+  "Real": "162 datos · 2026-11-23T00:00 → 2026-11-23T13:25 36341 0.26",
+  "Programada total": "288 datos · 2026-11-23T00:00 → 2026-11-23T23:55 27183 0.329"
  },
  "precios_hora": {
   "PVPC": "48 datos · 2026-11-22T00:00 → 2026-11-23T23:00 245.8 0.522",
@@ -64,44 +71,48 @@
   "Generación total": "30 datos · 2026-10-24T00:00 → 2026-11-22T00:00 769367.41 1"
  },
  "mix_mes": {
-  "Hidráulica": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 1351393.76 0.081",
-  "Nuclear": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 3153063.65 0.19",
-  "Carbón": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 29742.46 0.002",
-  "Fuel + Gas": "88 datos · 2011-01-01T00:00 → 2026-09-01T00:00 0 0",
-  "Motores diésel": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 157207.64 0.009",
-  "Turbina de gas": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 41572.12 0.003",
-  "Turbina de vapor": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 206571.72 0.012",
-  "Ciclo combinado": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 3061282.28 0.184",
-  "Eólica": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 5221419.43 0.314",
-  "Solar fotovoltaica": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 2246611.92 0.135",
-  "Solar térmica": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 72683.54 0.004",
-  "Otras renovables": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 244317.7 0.015",
-  "Cogeneración": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 723383.02 0.044",
-  "Residuos no renovables": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 59545.53 0.004",
-  "Residuos renovables": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 41626.94 0.003",
-  "Generación total": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 16610478.4 1",
+  "Hidráulica": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 1351393.76 0.081",
+  "Nuclear": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 3153063.65 0.19",
+  "Carbón": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 29742.46 0.002",
+  "Fuel + Gas": "136 datos · 2007-01-01T00:00 → 2026-09-01T00:00 0 0",
+  "Motores diésel": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 157207.64 0.009",
+  "Turbina de gas": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 41572.12 0.003",
+  "Turbina de vapor": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 206571.72 0.012",
+  "Ciclo combinado": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 3061282.28 0.184",
+  "Eólica": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 5221419.43 0.314",
+  "Solar fotovoltaica": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 2246611.92 0.135",
+  "Solar térmica": "237 datos · 2007-03-01T00:00 → 2026-11-01T00:00 72683.54 0.004",
+  "Otras renovables": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 244317.7 0.015",
+  "Cogeneración": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 723383.02 0.044",
+  "Residuos no renovables": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 59545.53 0.004",
+  "Residuos renovables": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 41626.94 0.003",
+  "Generación total": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 16610478.4 1",
   "Hidroeólica": "150 datos · 2014-06-01T00:00 → 2026-11-01T00:00 56.7 0"
  },
  "renovable_mes": {
-  "Renovable": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 9178109.99 0.553",
-  "No renovable": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 7432368.42 0.447"
+  "Renovable": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 9178109.99 0.553",
+  "No renovable": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 7432368.42 0.447"
  },
  "demanda_mes": {
-  "Demanda": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 14817175.45 1"
+  "Demanda": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 14817175.45 1"
  },
  "co2_mes": {
-  "Carbón": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 32650.05 0.017",
-  "Fuel + Gas": "61 datos · 2011-01-01T00:00 → 2026-09-01T00:00 0 0",
-  "Motores diésel": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 111624.57 0.059",
-  "Turbina de gas": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 47640.72 0.025",
-  "Turbina de vapor": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 150780.71 0.079",
-  "Ciclo combinado": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 1265559.82 0.665",
-  "Cogeneración": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 281273.63 0.148",
-  "Residuos no renovables": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 14849.65 0.008",
-  "Total tCO2 eq.": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 1904379.16 1",
-  "tCO2 eq./MWh": "191 datos · 2011-01-01T00:00 → 2026-11-01T00:00 0.11 1"
+  "Carbón": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 32650.05 0.017",
+  "Fuel + Gas": "109 datos · 2007-01-01T00:00 → 2026-09-01T00:00 0 0",
+  "Motores diésel": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 111624.57 0.059",
+  "Turbina de gas": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 47640.72 0.025",
+  "Turbina de vapor": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 150780.71 0.079",
+  "Ciclo combinado": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 1265559.82 0.665",
+  "Cogeneración": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 281273.63 0.148",
+  "Residuos no renovables": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 14849.65 0.008",
+  "Total tCO2 eq.": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 1904379.16 1",
+  "tCO2 eq./MWh": "239 datos · 2007-01-01T00:00 → 2026-11-01T00:00 0.11 1"
  },
- "precio_mes": "ERROR HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error Interno\",\"detail\":\"Los datos solicitados no est\\u00e1n disponibles en este momento. Int\\u00e9ntelo de nuevo m\\u00e1s t",
- "intercambios_mes": "ERROR HTTP 502 {\"errors\":[{\"status\":\"502\",\"title\":\"Error Interno\",\"detail\":\"Los datos solicitados no est\\u00e1n disponibles en este momento. Int\\u00e9ntelo de nuevo m\\u00e1s t",
- "potencia": "ERROR HTTP 500 <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"robots\" content=\"noindex,nofollow,noarchive\" />\n    <title>An Error Occurre"
+ "intercambios_mes": {
+  "Exportación": "238 datos · 2007-01-01T00:00 → 2026-11-01T00:00 -14131.42 1",
+  "Importación": "202 datos · 2007-05-01T00:00 → 2026-11-01T00:00 0.02 0",
+  "saldo": "238 datos · 2007-01-01T00:00 → 2026-11-01T00:00 -14131.4 1"
+ },
+ "precio_dia": "ERROR 2014: HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error Interno\", | 2015: HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error Interno\", | 2016: HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error Interno\", | 2017: HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error Interno\", | 2018: HTTP 400 {\"errors\"",
+ "potencia": "ERROR 2007: HTTP 500 <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta c | 2008: HTTP 500 <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta c | 2009: HTTP 500 <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta c | 2010: HTTP 500 <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta c | 2011: HTTP 500 <!DOCTYPE"
 }
