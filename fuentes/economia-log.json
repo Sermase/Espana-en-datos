@@ -1,0 +1,206 @@
+{
+ "pib_anual": {
+  "EU27_2020": "123 datos, último 2026-Q3 = 1.5",
+  "ES": "123 datos, último 2026-Q3 = 2.7"
+ },
+ "pib_trim": {
+  "EU27_2020": "123 datos, último 2026-Q3 = 0.5",
+  "ES": "123 datos, último 2026-Q3 = 0.6"
+ },
+ "pib_nivel": {
+  "ES": "31 datos, último 2025 = 1690012"
+ },
+ "pib_pc_ppa": {
+  "EU27_2020": "26 datos, último 2025 = 100",
+  "BE": "26 datos, último 2025 = 113.9",
+  "CZ": "26 datos, último 2025 = 92.3",
+  "DK": "26 datos, último 2025 = 129.1",
+  "DE": "26 datos, último 2025 = 116.4",
+  "IE": "26 datos, último 2025 = 223.5",
+  "ES": "26 datos, último 2025 = 91.4",
+  "FR": "26 datos, último 2025 = 97.5",
+  "IT": "26 datos, último 2025 = 95.9",
+  "HU": "26 datos, último 2025 = 76.2",
+  "NL": "26 datos, último 2025 = 132",
+  "AT": "26 datos, último 2025 = 118.3",
+  "PL": "26 datos, último 2025 = 81.1",
+  "PT": "26 datos, último 2025 = 81.4",
+  "RO": "26 datos, último 2025 = 78",
+  "FI": "26 datos, último 2025 = 100.7",
+  "SE": "26 datos, último 2025 = 110.9"
+ },
+ "pib_pc_ccaa": {
+  "ES": "25 datos, último 2024 = 32600",
+  "ES11": "25 datos, último 2024 = 30200",
+  "ES12": "25 datos, último 2024 = 29700",
+  "ES13": "25 datos, último 2024 = 29900",
+  "ES21": "25 datos, último 2024 = 41000",
+  "ES22": "25 datos, último 2024 = 39100",
+  "ES23": "25 datos, último 2024 = 34100",
+  "ES24": "25 datos, último 2024 = 36700",
+  "ES30": "25 datos, último 2024 = 44700",
+  "ES41": "25 datos, último 2024 = 30900",
+  "ES42": "25 datos, último 2024 = 26300",
+  "ES43": "25 datos, último 2024 = 25200",
+  "ES51": "25 datos, último 2024 = 37500",
+  "ES52": "25 datos, último 2024 = 27600",
+  "ES53": "25 datos, último 2024 = 36100",
+  "ES61": "25 datos, último 2024 = 24500",
+  "ES62": "25 datos, último 2024 = 26900",
+  "ES63": "25 datos, último 2024 = 23100",
+  "ES64": "25 datos, último 2024 = 21100",
+  "ES70": "25 datos, último 2024 = 25900"
+ },
+ "ipc": {
+  "EU27_2020": "301 datos, último 2025-12 = 2.3",
+  "ES": "348 datos, último 2025-12 = 3"
+ },
+ "ipc_sub": {
+  "ES": "288 datos, último 2025-12 = 3"
+ },
+ "ipc_grupos": {
+  "CP01": "132 datos, último 2025-12 = 3",
+  "CP02": "132 datos, último 2025-12 = 4.4",
+  "CP03": "132 datos, último 2025-12 = 0.6",
+  "CP04": "132 datos, último 2025-12 = 5.6",
+  "CP045": "132 datos, último 2025-12 = 8.7",
+  "CP06": "132 datos, último 2025-12 = 2.2",
+  "CP07": "132 datos, último 2025-12 = 2.1",
+  "CP0722": "132 datos, último 2025-12 = -2.3",
+  "CP09": "132 datos, último 2025-12 = 0.8",
+  "CP11": "132 datos, último 2025-12 = 4.7",
+  "NRG": "132 datos, último 2025-12 = 3.2",
+  "SERV": "132 datos, último 2025-12 = 3.9"
+ },
+ "ipc_paises": {
+  "EU27_2020": "36 datos, último 2025-12 = 2.3",
+  "BE": "36 datos, último 2025-12 = 2.2",
+  "CZ": "36 datos, último 2025-12 = 1.8",
+  "DK": "36 datos, último 2025-12 = 1.9",
+  "DE": "36 datos, último 2025-12 = 2",
+  "IE": "36 datos, último 2025-12 = 2.7",
+  "ES": "36 datos, último 2025-12 = 3",
+  "FR": "36 datos, último 2025-12 = 0.7",
+  "IT": "36 datos, último 2025-12 = 1.2",
+  "HU": "36 datos, último 2025-12 = 3.3",
+  "NL": "36 datos, último 2025-12 = 2.7",
+  "AT": "36 datos, último 2025-12 = 3.8",
+  "PL": "36 datos, último 2025-12 = 2.5",
+  "PT": "36 datos, último 2025-12 = 2.4",
+  "RO": "36 datos, último 2025-12 = 8.6",
+  "FI": "36 datos, último 2025-12 = 1.7",
+  "SE": "36 datos, último 2025-12 = 2.1"
+ },
+ "paro": {
+  "EU27_2020": "321 datos, último 2026-09 = 6.2",
+  "ES": "321 datos, último 2026-09 = 10.3"
+ },
+ "paro_joven": {
+  "EU27_2020": "321 datos, último 2026-09 = 15.5",
+  "ES": "321 datos, último 2026-09 = 22.8"
+ },
+ "paro_sexo": {
+  "M": "321 datos, último 2026-09 = 9.4",
+  "F": "321 datos, último 2026-09 = 11.2"
+ },
+ "paro_paises": {
+  "EU27_2020": "45 datos, último 2026-09 = 6.2",
+  "BE": "45 datos, último 2026-09 = 6",
+  "CZ": "45 datos, último 2026-09 = 2.8",
+  "DK": "45 datos, último 2026-09 = 6.8",
+  "DE": "45 datos, último 2026-09 = 4.1",
+  "IE": "46 datos, último 2026-10 = 4.8",
+  "ES": "45 datos, último 2026-09 = 10.3",
+  "FR": "45 datos, último 2026-09 = 8.5",
+  "IT": "45 datos, último 2026-09 = 6.3",
+  "HU": "45 datos, último 2026-09 = 4.6",
+  "NL": "46 datos, último 2026-10 = 4",
+  "AT": "45 datos, último 2026-09 = 6.3",
+  "PL": "45 datos, último 2026-09 = 3.4",
+  "PT": "45 datos, último 2026-09 = 5.6",
+  "RO": "45 datos, último 2026-09 = 6.3",
+  "FI": "45 datos, último 2026-09 = 11",
+  "SE": "46 datos, último 2026-10 = 8.2"
+ },
+ "paro_ccaa": {
+  "ES11": "26 datos, último 2025 = 8.4",
+  "ES12": "26 datos, último 2025 = 8.8",
+  "ES13": "26 datos, último 2025 = 7.3",
+  "ES21": "26 datos, último 2025 = 7.3",
+  "ES22": "26 datos, último 2025 = 7.7",
+  "ES23": "26 datos, último 2025 = 8.1",
+  "ES24": "26 datos, último 2025 = 8",
+  "ES30": "26 datos, último 2025 = 8",
+  "ES41": "26 datos, último 2025 = 8.6",
+  "ES42": "26 datos, último 2025 = 12.8",
+  "ES43": "26 datos, último 2025 = 14.8",
+  "ES51": "26 datos, último 2025 = 8.4",
+  "ES52": "26 datos, último 2025 = 11.6",
+  "ES53": "26 datos, último 2025 = 8.8",
+  "ES61": "26 datos, último 2025 = 15.2",
+  "ES62": "26 datos, último 2025 = 12.1",
+  "ES63": "24 datos, último 2025 = 24.3",
+  "ES64": "23 datos, último 2025 = 24.9",
+  "ES70": "26 datos, último 2025 = 13.5"
+ },
+ "empleo_tasa": {
+  "EU27_2020": "17 datos, último 2025 = 76.1",
+  "ES": "17 datos, último 2025 = 72.4"
+ },
+ "temporal": "ERROR HTTP 404 { \"error\": [{\"status\": 404,\"id\": 100,\"label\": \"ERR_NOT_FOUND_4: LFSA_ETPGA (DATA_FLOW:ALL,1.0) is not available for dissemination.\"}]}",
+ "smi": {
+  "BE": "54 datos, último 2026-S2 = 2234",
+  "CZ": "54 datos, último 2026-S2 = 923",
+  "DE": "24 datos, último 2026-S2 = 2343",
+  "IE": "53 datos, último 2026-S2 = 2391",
+  "ES": "54 datos, último 2026-S2 = 1425",
+  "FR": "54 datos, último 2026-S2 = 1867",
+  "HU": "54 datos, último 2026-S2 = 906",
+  "NL": "54 datos, último 2026-S2 = 2338",
+  "PL": "54 datos, último 2026-S2 = 1119",
+  "PT": "54 datos, último 2026-S2 = 1073",
+  "RO": "54 datos, último 2026-S2 = 825"
+ },
+ "coste_laboral": {
+  "EU27_2020": "67 datos, último 2026-Q3 = 3.6",
+  "ES": "86 datos, último 2026-Q2 = 4.2"
+ },
+ "salario_medio": {
+  "EU27_2020": "24 datos, último 2025 = 41464",
+  "BE": "26 datos, último 2025 = 61984",
+  "CZ": "26 datos, último 2025 = 25755",
+  "DK": "26 datos, último 2025 = 73500",
+  "DE": "26 datos, último 2025 = 56360",
+  "IE": "26 datos, último 2025 = 64387",
+  "ES": "26 datos, último 2025 = 35125",
+  "FR": "26 datos, último 2025 = 44734",
+  "IT": "26 datos, último 2025 = 34213",
+  "HU": "26 datos, último 2025 = 20138",
+  "AT": "26 datos, último 2025 = 60727",
+  "PL": "25 datos, último 2025 = 23853",
+  "PT": "26 datos, último 2025 = 26202",
+  "RO": "26 datos, último 2025 = 20818",
+  "FI": "26 datos, último 2025 = 50960",
+  "SE": "26 datos, último 2025 = 49622"
+ },
+ "vivienda_var": {
+  "EU27_2020": "74 datos, último 2026-Q2 = 4.7",
+  "ES": "74 datos, último 2026-Q2 = 12.1"
+ },
+ "vivienda_ind": {
+  "TOTAL": "78 datos, último 2026-Q2 = 200.6",
+  "DW_NEW": "78 datos, último 2026-Q2 = 221.3",
+  "DW_EXST": "78 datos, último 2026-Q2 = 196.86"
+ },
+ "euribor": {
+  "EA": "334 datos, último 2026-10 = 3.239"
+ },
+ "propiedad": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
+ "deuda": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
+ "deficit": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
+ "deuda_trim": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
+ "gasto": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
+ "riesgo_pobreza": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
+ "gini": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
+ "renta_mediana": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
+}
