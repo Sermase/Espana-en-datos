@@ -1,6 +1,6 @@
 {
  "_ipv_tablas": "79541: Ponderaciones IPV nacional: general, vivienda nueva y de segunda mano. | 80270: Índices por CCAA: general, vivienda nueva y de segunda mano. Trimestrales | 79540: Índices por CCAA: general, vivienda nueva y de segunda mano | 79563: Índices por CCAA: general, vivienda nueva y de segunda mano  | 80271: Índices por CCAA: general, vivienda nueva y de segunda mano. Medias anuales | 80272: Ponderaciones IPV nacional: general, vivienda nueva y de segunda mano.",
- "ipv": "20 territorios · ej. [[\"gi\",76,[\"2025-T4\",186.75]],[\"ga\",76,[\"2025-T4\",12.9]],[\"ni\",76,[\"2025-T4\",211.73]],[\"na\",76,[\"2025-T4\",11.2]],[\"ui\",76,[\"2025-T4\",182.853]],[\"ua\",76,[\"2025-T4\",13.1]]]",
+ "ipv": "20 territorios · ej. [[\"gi\",78,[\"2026-T2\",111.095]],[\"ga\",78,[\"2026-T2\",12.2]],[\"ni\",78,[\"2026-T2\",107.228]],[\"na\",78,[\"2026-T2\",7.4]],[\"ui\",78,[\"2026-T2\",111.682]],[\"ua\",78,[\"2026-T2\",12.9]]]",
  "compraventas": "67 territorios · ej. [[\"total\",237,[\"2026-09\",54548]],[\"nueva\",237,[\"2026-09\",12145]],[\"usada\",237,[\"2026-09\",42403]]]",
  "hipotecas": "53 territorios · ej. [[\"num\",284,[\"2026-08\",33841]],[\"imp\",284,[\"2026-08\",6134856]]]",
  "alquiler": "765 territorios · ej. [[\"i\",14,[\"2024\",122.92]],[\"a\",13,[\"2024\",3.5]]]",
