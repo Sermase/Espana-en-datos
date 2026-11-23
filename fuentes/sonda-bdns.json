@@ -1,0 +1,2138 @@
+{
+ "doc/v3/api-docs": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/v3/api-docs",
+  "resumen": "<!doctype html>\n<html lang=\"es\">\n\n<head>\n  <meta charset=\"utf-8\">\n  <title>Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas</title>\n  <base href=\"/bdnstrans/\">\n\n  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"SNPSAP es el portal de transparencia y publicidad de convocatorias, ayudas de minimis, ayudas de Estado y otros tipos de concesiones.\n  Permite la suscripción de avisos de subvenciones personalizados. Ofrece una API para la consulta de los datos.\">\n  <meta name=\"author\" content=\"IGAE - OIP - División I - Área 3.2\">\n\n  <!-- Favicon de la aplicación -->\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"styles.ef7d952bd3104e45.css\"></head>\n\n<!-- Cuerpo -->\n\n<body class=\"background\">\n  <app-root></app-root>\n<script src=\"runtime.d5d935aeceb4c521.js\" type=\"module\"></script><script src=\"polyfills.b6bcf3bf6b25ed6b.js\" type=\"module\"></script><script src=\"main.581a6c046733f1a2.js\" type=\"module\"></script></body>\n\n</html>"
+ },
+ "doc/api/v3/api-docs": {
+  "status": 404,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/v3/api-docs",
+  "resumen": "<!doctype html><html lang=\"es\"><head><title>Estado HTTP 404 – No encontrado</title><style type=\"text/css\">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:blac"
+ },
+ "doc/v2/api-docs": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/v2/api-docs",
+  "resumen": "<!doctype html>\n<html lang=\"es\">\n\n<head>\n  <meta charset=\"utf-8\">\n  <title>Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas</title>\n  <base href=\"/bdnstrans/\">\n\n  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"SNPSAP es el portal de transparencia y publicidad de convocatorias, ayudas de minimis, ayudas de Estado y otros tipos de concesiones.\n  Permite la suscripción de avisos de subvenciones personalizados. Ofrece una API para la consulta de los datos.\">\n  <meta name=\"author\" content=\"IGAE - OIP - División I - Área 3.2\">\n\n  <!-- Favicon de la aplicación -->\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"styles.ef7d952bd3104e45.css\"></head>\n\n<!-- Cuerpo -->\n\n<body class=\"background\">\n  <app-root></app-root>\n<script src=\"runtime.d5d935aeceb4c521.js\" type=\"module\"></script><script src=\"polyfills.b6bcf3bf6b25ed6b.js\" type=\"module\"></script><script src=\"main.581a6c046733f1a2.js\" type=\"module\"></script></body>\n\n</html>"
+ },
+ "doc/api-docs": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api-docs",
+  "resumen": "<!doctype html>\n<html lang=\"es\">\n\n<head>\n  <meta charset=\"utf-8\">\n  <title>Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas</title>\n  <base href=\"/bdnstrans/\">\n\n  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"SNPSAP es el portal de transparencia y publicidad de convocatorias, ayudas de minimis, ayudas de Estado y otros tipos de concesiones.\n  Permite la suscripción de avisos de subvenciones personalizados. Ofrece una API para la consulta de los datos.\">\n  <meta name=\"author\" content=\"IGAE - OIP - División I - Área 3.2\">\n\n  <!-- Favicon de la aplicación -->\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"styles.ef7d952bd3104e45.css\"></head>\n\n<!-- Cuerpo -->\n\n<body class=\"background\">\n  <app-root></app-root>\n<script src=\"runtime.d5d935aeceb4c521.js\" type=\"module\"></script><script src=\"polyfills.b6bcf3bf6b25ed6b.js\" type=\"module\"></script><script src=\"main.581a6c046733f1a2.js\" type=\"module\"></script></body>\n\n</html>"
+ },
+ "doc/api/api-docs": {
+  "status": 404,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/api-docs",
+  "resumen": "<!doctype html><html lang=\"es\"><head><title>Estado HTTP 404 – No encontrado</title><style type=\"text/css\">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:blac"
+ },
+ "doc/swagger-ui/index.html": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/swagger-ui/index.html",
+  "resumen": "<!doctype html>\n<html lang=\"es\">\n\n<head>\n  <meta charset=\"utf-8\">\n  <title>Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas</title>\n  <base href=\"/bdnstrans/\">\n\n  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"SNPSAP es el portal de transparencia y publicidad de convocatorias, ayudas de minimis, ayudas de Estado y otros tipos de concesiones.\n  Permite la suscripción de avisos de subvenciones personalizados. Ofrece una API para la consulta de los datos.\">\n  <meta name=\"author\" content=\"IGAE - OIP - División I - Área 3.2\">\n\n  <!-- Favicon de la aplicación -->\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"styles.ef7d952bd3104e45.css\"></head>\n\n<!-- Cuerpo -->\n\n<body class=\"background\">\n  <app-root></app-root>\n<script src=\"runtime.d5d935aeceb4c521.js\" type=\"module\"></script><script src=\"polyfills.b6bcf3bf6b25ed6b.js\" type=\"module\"></script><script src=\"main.581a6c046733f1a2.js\" type=\"module\"></script></body>\n\n</html>"
+ },
+ "doc/openapi.json": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/openapi.json",
+  "resumen": "<!doctype html>\n<html lang=\"es\">\n\n<head>\n  <meta charset=\"utf-8\">\n  <title>Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas</title>\n  <base href=\"/bdnstrans/\">\n\n  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"description\" content=\"SNPSAP es el portal de transparencia y publicidad de convocatorias, ayudas de minimis, ayudas de Estado y otros tipos de concesiones.\n  Permite la suscripción de avisos de subvenciones personalizados. Ofrece una API para la consulta de los datos.\">\n  <meta name=\"author\" content=\"IGAE - OIP - División I - Área 3.2\">\n\n  <!-- Favicon de la aplicación -->\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\">\n<link rel=\"stylesheet\" href=\"styles.ef7d952bd3104e45.css\"></head>\n\n<!-- Cuerpo -->\n\n<body class=\"background\">\n  <app-root></app-root>\n<script src=\"runtime.d5d935aeceb4c521.js\" type=\"module\"></script><script src=\"polyfills.b6bcf3bf6b25ed6b.js\" type=\"module\"></script><script src=\"main.581a6c046733f1a2.js\" type=\"module\"></script></body>\n\n</html>"
+ },
+ "doc/api/openapi.json": {
+  "status": 404,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/openapi.json",
+  "resumen": "<!doctype html><html lang=\"es\"><head><title>Estado HTTP 404 – No encontrado</title><style type=\"text/css\">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:blac"
+ },
+ "cat:finalidades": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/finalidades?vpd=GE",
+  "resumen": [
+   {
+    "descripcion": "ACCESO A LA VIVIENDA Y FOMENTO DE LA EDIFICACIÓN",
+    "id": 8
+   },
+   {
+    "descripcion": "AGRICULTURA, PESCA Y ALIMENTACIÓN",
+    "id": 12
+   },
+   {
+    "descripcion": "COMERCIO, TURISMO Y PYMES",
+    "id": 14
+   },
+   {
+    "descripcion": "COOPERACIÓN INTERNACIONAL PARA EL DESARROLLO Y CULTURAL",
+    "id": 20
+   },
+   {
+    "descripcion": "CULTURA",
+    "id": 11
+   },
+   {
+    "descripcion": "DEFENSA",
+    "id": 2
+   },
+   {
+    "descripcion": "DESEMPLEO",
+    "id": 7
+   },
+   {
+    "descripcion": "EDUCACIÓN",
+    "id": 10
+   },
+   {
+    "descripcion": "FOMENTO DEL EMPLEO",
+    "id": 6
+   },
+   {
+    "descripcion": "INDUSTRIA Y ENERGÍA",
+    "id": 13
+   },
+   {
+    "descripcion": "INFORMACIÓN NO DISPONIBLE",
+    "id": 21
+   },
+   {
+    "descripcion": "INFRAESTRUCTURAS",
+    "id": 16
+   },
+   {
+    "descripcion": "INVESTIGACIÓN, DESARROLLO E INNOVACIÓN",
+    "id": 17
+   },
+   {
+    "descripcion": "JUSTICIA",
+    "id": 1
+   },
+   {
+    "descripcion": "OTRAS ACTUACIONES DE CARÁCTER ECONÓMICO",
+    "id": 18
+   },
+   {
+    "descripcion": "OTRAS PRESTACIONES ECONÓMICAS",
+    "id": 4
+   },
+   {
+    "descripcion": "SANIDAD",
+    "id": 9
+   },
+   {
+    "descripcion": "SEGURIDAD CIUDADANA E INSTITUCIONES PENITENCIARIAS",
+    "id": 3
+   },
+   {
+    "descripcion": "SERVICIOS SOCIALES Y PROMOCIÓN SOCIAL",
+    "id": 5
+   },
+   {
+    "descripcion": "SIN INFORMACION ESPECIFICA",
+    "id": 19
+   },
+   {
+    "descripcion": "SUBVENCIONES AL TRANSPORTE",
+    "id": 15
+   }
+  ]
+ },
+ "cat:instrumentos": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/instrumentos?vpd=GE",
+  "resumen": [
+   {
+    "descripcion": "SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "id": 1
+   },
+   {
+    "descripcion": "PRÉSTAMO",
+    "id": 2
+   },
+   {
+    "descripcion": "GARANTÍA",
+    "id": 4
+   },
+   {
+    "descripcion": "VENTAJA FISCAL",
+    "id": 5
+   },
+   {
+    "descripcion": "APORTACIÓN DE FINANCIACIÓN RIESGO",
+    "id": 6
+   },
+   {
+    "descripcion": "OTROS INSTRUMENTOS DE AYUDA",
+    "id": 7
+   }
+  ]
+ },
+ "cat:regiones": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/regiones?vpd=GE",
+  "resumen": [
+   {
+    "id": 1,
+    "children": [
+     {
+      "id": 12,
+      "children": [
+       {
+        "id": 13,
+        "children": [
+         {
+          "id": 14,
+          "children": [],
+          "descripcion": "ES211 - Araba/Álava"
+         },
+         {
+          "id": 16,
+          "children": [],
+          "descripcion": "ES213 - Bizkaia"
+         },
+         {
+          "id": 15,
+          "children": [],
+          "descripcion": "ES212 - Gipuzkoa"
+         }
+        ],
+        "descripcion": "ES21 - PAIS VASCO"
+       },
+       {
+        "id": 17,
+        "children": [
+         {
+          "id": 18,
+          "children": [],
+          "descripcion": "ES220 - Navarra"
+         }
+        ],
+        "descripcion": "ES22 - COMUNIDAD FORAL DE NAVARRA"
+       },
+       {
+        "id": 19,
+        "children": [
+         {
+          "id": 20,
+          "children": [],
+          "descripcion": "ES230 - La Rioja"
+         }
+        ],
+        "descripcion": "ES23 - LA RIOJA"
+       },
+       {
+        "id": 21,
+        "children": [
+         {
+          "id": 22,
+          "children": [],
+          "descripcion": "ES241 - Huesca"
+         },
+         {
+          "id": 23,
+          "children": [],
+          "descripcion": "ES242 - Teruel"
+         },
+         {
+          "id": 24,
+          "children": [],
+          "descripcion": "ES243 - Zaragoza"
+         }
+        ],
+        "descripcion": "ES24 - ARAGON"
+       }
+      ],
+      "descripcion": "ES2 - NORESTE"
+     },
+     {
+      "id": 28,
+      "children": [
+       {
+        "id": 29,
+        "children": [
+         {
+          "id": 31,
+          "children": [],
+          "descripcion": "ES412 - Burgos"
+         },
+         {
+          "id": 33,
+          "children": [],
+          "descripcion": "ES414 - Palencia"
+         },
+         {
+          "id": 36,
+          "children": [],
+          "descripcion": "ES417 - Soria"
+         },
+         {
+          "id": 30,
+          "children": [],
+          "descripcion": "ES411 - Ávila"
+         },
+         {
+          "id": 32,
+          "children": [],
+          "descripcion": "ES413 - León"
+         },
+         {
+          "id": 34,
+          "children": [],
+          "descripcion": "ES415 - Salamanca"
+         },
+         {
+          "id": 35,
+          "children": [],
+          "descripcion": "ES416 - Segovia"
+         },
+         {
+          "id": 37,
+          "children": [],
+          "descripcion": "ES418 - Valladolid"
+         },
+         {
+          "id": 38,
+          "children": [],
+          "descripcion": "ES419 - Zamora"
+         }
+        ],
+        "descripcion": "ES41 - CASTILLA Y LEON"
+       },
+       {
+        "id": 39,
+        "children": [
+         {
+          "id": 40,
+          "children": [],
+          "descripcion": "ES421 - Albacete"
+         },
+         {
+          "id": 43,
+          "children": [],
+          "descripcion": "ES424 - Guadalajara"
+         },
+         {
+          "id": 44,
+          "children": [],
+          "descripcion": "ES425 - Toledo"
+         },
+         {
+          "id": 41,
+          "children": [],
+          "descripcion": "ES422 - Ciudad Real"
+         },
+         {
+          "id": 42,
+          "children": [],
+          "descripcion": "ES423 - Cuenca"
+         }
+        ],
+        "descripcion": "ES42 - CASTILLA LA MANCHA"
+       },
+       {
+        "id": 45,
+        "children": [
+         {
+          "id": 46,
+          "children": [],
+          "descripcion": "ES431 - Badajoz"
+         },
+         {
+          "id": 47,
+          "children": [],
+          "descripcion": "ES432 - Cáceres"
+         }
+        ],
+        "descripcion": "ES43 - EXTREMADURA"
+       }
+      ],
+      "descripcion": "ES4 - CENTRO (ES)"
+     },
+     {
+      "id": 78,
+      "children": [
+       {
+        "id": 79,
+        "children": [
+         {
+          "id": 81,
+          "children": [],
+          "descripcion": "ES704 - Fuerteventura"
+         },
+         {
+          "id": 84,
+          "children": [],
+          "descripcion": "ES707 - La Palma"
+         },
+         {
+          "id": 86,
+          "children": [],
+          "descripcion": "ES709 - Tenerife"
+         },
+         {
+          "id": 80,
+          "children": [],
+          "descripcion": "ES703 - El Hierro"
+         },
+         {
+          "id": 82,
+          "children": [],
+          "descripcion": "ES705 - Gran Canaria"
+         },
+         {
+          "id": 83,
+          "children": [],
+          "descripcion": "ES706 - La Gomera"
+         },
+         {
+          "id": 85,
+          "children": [],
+          "descripcion": "ES708 - Lanzarote"
+         }
+        ],
+        "descripcion": "ES70 - CANARIAS"
+       }
+      ],
+      "descripcion": "ES7 - CANARIAS"
+     },
+     {
+      "id": 2,
+      "children": [
+       {
+        "id": 3,
+        "children": [
+         {
+          "id": 5,
+          "children": [],
+          "descripcion": "ES112 - Lugo"
+         },
+         {
+          "id": 7,
+          "children": [],
+          "descripcion": "ES114 - Pontevedra"
+         },
+         {
+          "id": 4,
+          "children": [],
+          "descripcion": "ES111 - A Coruña"
+         },
+         {
+          "id": 6,
+          "children": [],
+          "descripcion": "ES113 - Ourense"
+         }
+        ],
+        "descripcion": "ES11 - GALICIA"
+       },
+       {
+        "id": 10,
+        "children": [
+         {
+          "id": 11,
+          "children": [],
+          "descripcion": "ES130 - Cantabria"
+         }
+        ],
+        "descripcion": "ES13 - CANTABRIA"
+       },
+       {
+        "id": 8,
+        "children": [
+         {
+          "id": 9,
+          "children": [],
+          "descripcion": "ES120 - Asturias"
+         }
+        ],
+        "descripcion": "ES12 - PRINCIPADO DE ASTURIAS"
+       }
+      ],
+      "descripcion": "ES1 - NOROESTE"
+     },
+     {
+      "id": 25,
+      "children": [
+       {
+        "id": 26,
+        "children": [
+         {
+          "id": 27,
+          "children": [],
+          "descripcion": "ES300 - Madrid"
+         }
+        ],
+        "descripcion": "ES30 - COMUNIDAD DE MADRID"
+       }
+      ],
+      "descripcion": "ES3 - COMUNIDAD DE MADRID"
+     },
+     {
+      "id": 48,
+      "children": [
+       {
+        "id": 54,
+        "children": [
+         {
+          "id": 56,
+          "children": [],
+          "descripcion": "ES522 - Castellón / Castelló"
+         },
+         {
+          "id": 55,
+          "children": [],
+          "descripcion": "ES521 - Alicante / Alacant"
+         },
+         {
+          "id": 57,
+          "children": [],
+          "descripcion": "ES523 - Valencia / València"
+         }
+        ],
+        "descripcion": "ES52 - COMUNIDAD VALENCIANA"
+       },
+       {
+        "id": 49,
+        "children": [
+         {
+          "id": 53,
+          "children": [],
+          "descripcion": "ES514 - Tarragona"
+         },
+         {
+          "id": 50,
+          "children": [],
+          "descripcion": "ES511 - Barcelona"
+         },
+         {
+          "id": 51,
+          "children": [],
+          "descripcion": "ES512 - Girona"
+         },
+         {
+          "id": 52,
+          "children": [],
+          "descripcion": "ES513 - Lleida"
+         }
+        ],
+        "descripcion": "ES51 - CATALUÑA"
+       },
+       {
+        "id": 58,
+        "children": [
+         {
+          "id": 59,
+          "children": [],
+          "descripcion": "ES531 - Eivissa y Formentera"
+         },
+         {
+          "id": 60,
+          "children": [],
+          "descripcion": "ES532 - Mallorca"
+         },
+         {
+          "id": 61,
+          "children": [],
+          "descripcion": "ES533 - Menorca"
+         }
+        ],
+        "descripcion": "ES53 - ILLES BALEARS"
+       }
+      ],
+      "descripcion": "ES5 - ESTE"
+     },
+     {
+      "id": 62,
+      "children": [
+       {
+        "id": 63,
+        "children": [
+         {
+          "id": 64,
+          "children": [],
+          "descripcion": "ES611 - Almería"
+         },
+         {
+          "id": 65,
+          "children": [],
+          "descripcion": "ES612 - Cádiz"
+         },
+         {
+          "id": 66,
+          "children": [],
+          "descripcion": "ES613 - Córdoba"
+         },
+         {
+          "id": 70,
+          "children": [],
+          "descripcion": "ES617 - Málaga"
+         },
+         {
+          "id": 67,
+          "children": [],
+          "descripcion": "ES614 - Granada"
+         },
+         {
+          "id": 68,
+          "children": [],
+          "descripcion": "ES615 - Huelva"
+         },
+         {
+          "id": 69,
+          "children": [],
+          "descripcion": "ES616 - Jaén"
+         },
+         {
+          "id": 71,
+          "children": [],
+          "descripcion": "ES618 - Sevilla"
+         }
+        ],
+        "descripcion": "ES61 - ANDALUCIA"
+       },
+       {
+        "id": 72,
+        "children": [
+         {
+          "id": 73,
+          "children": [],
+          "descripcion": "ES620 - Murcia"
+         }
+        ],
+        "descripcion": "ES62 - REGION DE MURCIA"
+       },
+       {
+        "id": 74,
+        "children": [
+         {
+          "id": 75,
+          "children": [],
+          "descripcion": "ES630 - Ceuta"
+         }
+        ],
+        "descripcion": "ES63 - CIUDAD AUTONOMA DE CEUTA"
+       },
+       {
+        "id": 76,
+        "children": [
+         {
+          "id": 77,
+          "children": [],
+          "descripcion": "ES640 - Melilla"
+         }
+        ],
+        "descripcion": "ES64 - CIUDAD AUTONOMA DE MELILLA"
+       }
+      ],
+      "descripcion": "ES6 - SUR"
+     },
+     {
+      "id": 87,
+      "children": [],
+      "descripcion": "ESZ - EXTRA-REGIO NUTS 1"
+     }
+    ],
+    "descripcion": "ES - ESPAÑA "
+   },
+   {
+    "id": 90,
+    "children": [
+     {
+      "id": 91,
+      "children": [],
+      "descripcion": "BE1 - RÉGION DE BRUXELLES-CAPITALE / BRUSSELS HOOFDSTEDELIJK GEWEST"
+     }
+    ],
+    "descripcion": "BE - BELGIQUE-BELGIË "
+   },
+   {
+    "id": 107,
+    "children": [],
+    "descripcion": "BG - BULGARIA"
+   },
+   {
+    "id": 118,
+    "children": [
+     {
+      "id": 119,
+      "children": [],
+      "descripcion": "CZ0 - CESKÁ REPUBLIKA"
+     }
+    ],
+    "descripcion": "CZ - CESKÁ REPUBLIKA"
+   },
+   {
+    "id": 130,
+    "children": [
+     {
+      "id": 137,
+      "children": [],
+      "descripcion": "DKZ - EXTRA-REGIO NUTS 1"
+     }
+    ],
+    "descripcion": "DK - DANMARK"
+   },
+   {
+    "id": 139,
+    "children": [
+     {
+      "id": 140,
+      "children": [],
+      "descripcion": "DE1 - BADEN-WÜRTTEMBERG"
+     },
+     {
+      "id": 145,
+      "children": [],
+      "descripcion": "DE2 - BAYERN"
+     },
+     {
+      "id": 153,
+      "children": [],
+      "descripcion": "DE3 - BERLIN"
+     },
+     {
+      "id": 155,
+      "children": [],
+      "descripcion": "DE4 - BRANDENBURG"
+     },
+     {
+      "id": 159,
+      "children": [],
+      "descripcion": "DE6 - HAMBURG"
+     },
+     {
+      "id": 172,
+      "children": [],
+      "descripcion": "DEA - NORDRHEIN-WESTFALEN"
+     },
+     {
+      "id": 184,
+      "children": [],
+      "descripcion": "DED - SACHSEN"
+     }
+    ],
+    "descripcion": "DE - DEUTSCHLAND "
+   },
+   {
+    "id": 196,
+    "children": [],
+    "descripcion": "EE - EESTI"
+   },
+   {
+    "id": 201,
+    "children": [
+     {
+      "id": 202,
+      "children": [],
+      "descripcion": "IE0 - IRELAND"
+     }
+    ],
+    "descripcion": "IE - IRELAND"
+   },
+   {
+    "id": 207,
+    "children": [
+     {
+      "id": 225,
+      "children": [],
+      "descripcion": "ELZ - EXTRA-REGIO NUTS 1"
+     }
+    ],
+    "descripcion": "EL - ELLADA"
+   },
+   {
+    "id": 227,
+    "children": [
+     {
+      "id": 228,
+      "children": [],
+      "descripcion": "FR1 - ÎLE DE FRANCE"
+     },
+     {
+      "id": 247,
+      "children": [],
+      "descripcion": "FR6 - SUD-OUEST"
+     },
+     {
+      "id": 251,
+      "children": [],
+      "descripcion": "FR7 - CENTRE-EST"
+     },
+     {
+      "id": 254,
+      "children": [],
+      "descripcion": "FR8 - MÉDITERRANÉE"
+     }
+    ],
+    "descripcion": "FR - FRANCE"
+   },
+   {
+    "id": 266,
+    "children": [
+     {
+      "id": 267,
+      "children": [],
+      "descripcion": "HR0 - HRVATSKA"
+     },
+     {
+      "id": 270,
+      "children": [],
+      "descripcion": "HRZ - EXTRA-REGIO NUTS 1"
+     }
+    ],
+    "descripcion": "HR - HRVATSKA"
+   },
+   {
+    "id": 272,
+    "children": [
+     {
+      "id": 273,
+      "children": [],
+      "descripcion": "ITC - NORD-OVEST"
+     },
+     {
+      "id": 294,
+      "children": [],
+      "descripcion": "ITI - CENTRO (IT)"
+     }
+    ],
+    "descripcion": "IT - ITALIA "
+   },
+   {
+    "id": 301,
+    "children": [],
+    "descripcion": "CY - KÝPROS"
+   },
+   {
+    "id": 306,
+    "children": [
+     {
+      "id": 307,
+      "children": [],
+      "descripcion": "LV0 - LATVIJA"
+     }
+    ],
+    "descripcion": "LV - LATVIJA"
+   },
+   {
+    "id": 311,
+    "children": [
+     {
+      "id": 312,
+      "children": [],
+      "descripcion": "LT0 - LIETUVA"
+     }
+    ],
+    "descripcion": "LT - LIETUVA"
+   },
+   {
+    "id": 316,
+    "children": [
+     {
+      "id": 319,
+      "children": [],
+      "descripcion": "LUZ - EXTRA-REGIO NUTS 1"
+     }
+    ],
+    "descripcion": "LU - LUXEMBOURG"
+   },
+   {
+    "id": 321,
+    "children": [],
+    "descripcion": "HU - MAGYARORSZÁG"
+   },
+   {
+    "id": 334,
+    "children": [
+     {
+      "id": 337,
+      "children": [],
+      "descripcion": "MTZ - EXTRA-REGIO NUTS 1"
+     }
+    ],
+    "descripcion": "MT - MALTA"
+   },
+   {
+    "id": 339,
+    "children": [],
+    "descripcion": "NL - NEDERLAND "
+   },
+   {
+    "id": 358,
+    "children": [
+     {
+      "id": 366,
+      "children": [],
+      "descripcion": "AT3 - WESTÖSTERREICH"
+     },
+     {
+      "id": 371,
+      "children": [],
+      "descripcion": "ATZ - EXTRA-REGIO NUTS 1"
+     }
+    ],
+    "descripcion": "AT - ÖSTERREICH"
+   },
+   {
+    "id": 373,
+    "children": [
+     {
+      "id": 374,
+      "children": [],
+      "descripcion": "PL1 - REGION CENTRALNY"
+     }
+    ],
+    "descripcion": "PL - POLSKA"
+   },
+   {
+    "id": 398,
+    "children": [
+     {
+      "id": 399,
+      "children": [],
+      "descripcion": "PT1 - CONTINENTE"
+     }
+    ],
+    "descripcion": "PT - PORTUGAL"
+   },
+   {
+    "id": 411,
+    "children": [],
+    "descripcion": "RO - ROMÂNIA"
+   },
+   {
+    "id": 426,
+    "children": [],
+    "descripcion": "SI - SLOVENIJA"
+   },
+   {
+    "id": 432,
+    "children": [],
+    "descripcion": "SK - SLOVENSKO"
+   },
+   {
+    "id": 440,
+    "children": [
+     {
+      "id": 448,
+      "children": [],
+      "descripcion": "FIZ - EXTRA-REGIO NUTS 1"
+     }
+    ],
+    "descripcion": "FI - SUOMI / FINLAND"
+   },
+   {
+    "id": 450,
+    "children": [
+     {
+      "id": 462,
+      "children": [],
+      "descripcion": "SEZ - EXTRA-REGIO NUTS 1"
+     },
+     {
+      "id": 451,
+      "children": [],
+      "descripcion": "SE1 - ÖSTRA SVERIGE"
+     }
+    ],
+    "descripcion": "SE - SVERIGE"
+   },
+   {
+    "id": 464,
+    "children": [
+     {
+      "id": 487,
+      "children": [],
+      "descripcion": "UKH - EAST OF ENGLAND"
+     },
+     {
+      "id": 491,
+      "children": [],
+      "descripcion": "UKI - LONDON"
+     },
+     {
+      "id": 502,
+      "children": [],
+      "descripcion": "UKK - SOUTH WEST (ENGLAND)"
+     },
+     {
+      "id": 517,
+      "children": [],
+      "descripcion": "UKZ - EXTRA-REGIO NUTS 1"
+     },
+     {
+      "id": 465,
+      "children": [],
+      "descripcion": "UKC - NORTH EAST (ENGLAND)"
+     },
+     {
+      "id": 468,
+      "children": [],
+      "descripcion": "UKD - NORTH WEST (ENGLAND)"
+     },
+     {
+      "id": 479,
+      "children": [],
+      "descripcion": "UKF - EAST MIDLANDS (ENGLAND)"
+     },
+     {
+      "id": 483,
+      "children": [],
+      "descripcion": "UKG - WEST MIDLANDS (ENGLAND)"
+     },
+     {
+      "id": 497,
+      "children": [],
+      "descripcion": "UKJ - SOUTH EAST (ENGLAND)"
+     },
+     {
+      "id": 510,
+      "children": [],
+      "descripcion": "UKM - SCOTLAND"
+     }
+    ],
+    "descripcion": "UK - UNITED KINGDOM"
+   },
+   {
+    "id": 520,
+    "children": [],
+    "descripcion": "XXX - Regiones o países no europeos, no contemplados en NUTS"
+   },
+   {
+    "id": 521,
+    "children": [],
+    "descripcion": "XXXX - TODO EL MUNDO"
+   }
+  ]
+ },
+ "cat:beneficiarios": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/beneficiarios?vpd=GE",
+  "resumen": [
+   {
+    "descripcion": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+    "id": 3
+   },
+   {
+    "descripcion": "GRAN EMPRESA",
+    "id": 4
+   },
+   {
+    "descripcion": "PERSONAS JURÍDICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+    "id": 2
+   },
+   {
+    "descripcion": "PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA",
+    "id": 1
+   },
+   {
+    "descripcion": "SIN INFORMACION ESPECIFICA",
+    "id": 5
+   }
+  ]
+ },
+ "cat:tiposbeneficiario": {
+  "status": 404,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/tiposbeneficiario?vpd=GE",
+  "resumen": "<!doctype html><html lang=\"es\"><head><title>Estado HTTP 404 – No encontrado</title><style type=\"text/css\">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:blac"
+ },
+ "cat:sectores": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/sectores?vpd=GE",
+  "resumen": [
+   {
+    "descripcion": "Todos",
+    "id": 24
+   },
+   {
+    "descripcion": "Cereales (parte I)",
+    "id": 1
+   },
+   {
+    "descripcion": "Arroz (parte II)",
+    "id": 2
+   },
+   {
+    "descripcion": "Azúcar (parte III)",
+    "id": 3
+   },
+   {
+    "descripcion": "Forrajes desecados (parte IV)",
+    "id": 4
+   },
+   {
+    "descripcion": "Semillas (parte V)",
+    "id": 5
+   },
+   {
+    "descripcion": "Lúpulo (parte VI)",
+    "id": 6
+   },
+   {
+    "descripcion": "Aceite de oliva y aceitunas de mesa (parte VII)",
+    "id": 7
+   },
+   {
+    "descripcion": "Lino y cáñamo (parte VIII)",
+    "id": 8
+   },
+   {
+    "descripcion": "Frutas y hortalizas (parte IX)",
+    "id": 9
+   },
+   {
+    "descripcion": "Productos transformados a base de frutas y hortalizas (parte X)",
+    "id": 10
+   },
+   {
+    "descripcion": "Plátanos (parte XI)",
+    "id": 11
+   },
+   {
+    "descripcion": "Vino (parte XII)",
+    "id": 12
+   },
+   {
+    "descripcion": "Árboles y otras plantas vivos, bulbos, raíces y similares, flores cortadas y follaje ornamental (parte XIII)",
+    "id": 13
+   },
+   {
+    "descripcion": "Tabaco (parte XIV)",
+    "id": 14
+   },
+   {
+    "descripcion": "Carne de vacuno (parte XV)",
+    "id": 15
+   },
+   {
+    "descripcion": "Leche y productos lácteos (parte XVI)",
+    "id": 16
+   },
+   {
+    "descripcion": "Carne de porcino (parte XVII)",
+    "id": 17
+   },
+   {
+    "descripcion": "Carne de ovino y caprino (parte XVIII)",
+    "id": 18
+   },
+   {
+    "descripcion": "Huevos (parte XIX)",
+    "id": 19
+   },
+   {
+    "descripcion": "Carne de aves de corral (parte XX)",
+    "id": 20
+   },
+   {
+    "descripcion": "Alcohol etílico de origen agrícola (parte XXI)",
+    "id": 21
+   },
+   {
+    "descripcion": "Productos apícolas (parte XXII)",
+    "id": 22
+   },
+   {
+    "descripcion": "Gusanos de seda (parte XXIII)",
+    "id": 23
+   }
+  ]
+ },
+ "cat:objetivos": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/objetivos?vpd=GE",
+  "resumen": [
+   {
+    "descripcion": "ART. 13 AYUDAS A LA INNOVACIÓN",
+    "id": 1
+   },
+   {
+    "descripcion": "ART. 14 AYUDAS DESTINADAS A LAS INVERSIONES EN EXPLOTACIONES AGRÍCOLAS VINCULADAS A LA PRODUCCIÓN AGRÍCOLA PRIMARIA",
+    "id": 177
+   },
+   {
+    "descripcion": "ART. 14 AYUDAS DESTINADAS A LAS INVERSIONES EN EXPLOTACIONES AGRÍCOLAS VINCULADAS A LA PRODUCCIÓN AGRÍCOLA PRIMARIA",
+    "id": 223
+   },
+   {
+    "descripcion": "ART. 14 AYUDAS PARA INVERSIONES EN ACTIVOS MATERIALES O INMATERIALES EN EXPLOTACIONES AGRÍCOLAS VINCULADAS A LA PRODUCCIÓN AGRÍCOLA PRIMARIA",
+    "id": 88
+   },
+   {
+    "descripcion": "ART. 14 AYUDAS PARA INVERSIONES EN ACTIVOS MATERIALES O INMATERIALES EN EXPLOTACIONES AGRÍCOLAS VINCULADAS A LA PRODUCCIÓN AGRÍCOLA PRIMARIA",
+    "id": 126
+   },
+   {
+    "descripcion": "ART. 14 AYUDAS PARA SERVICIOS DE ASESORAMIENTO",
+    "id": 2
+   },
+   {
+    "descripcion": "ART. 14 AYUDAS REGIONALES A LA INVERSIÓN ",
+    "id": 34
+   },
+   {
+    "descripcion": "ART. 15 AYUDAS REGIONALES DE FUNCIONAMIENTO.",
+    "id": 164
+   },
+   {
+    "descripcion": "ART. 16  AYUDAS REGIONALES AL DESARROLLO URBANO.",
+    "id": 37
+   },
+   {
+    "descripcion": "ART. 16 AYUDAS DESTINADAS A SERVICIOS DE ASESORAMIENTO",
+    "id": 270
+   },
+   {
+    "descripcion": "ART. 17 AYUDAS A LAS PYME. A LA INVERSIÓN EN FAVOR DE LAS PYME.",
+    "id": 38
+   },
+   {
+    "descripcion": "ART. 17 AYUDAS DESTINADAS A LAS INVERSIONES RELACIONADAS CON LA TRANSFORMACIÓN O COMERCIALIZACIÓN DE PRODUCTOS AGRÍCOLAS",
+    "id": 226
+   },
+   {
+    "descripcion": "ART. 17 AYUDAS DESTINADAS A LAS INVERSIONES RELACIONADAS CON LA TRANSFORMACIÓN O COMERCIALIZACIÓN DE PRODUCTOS AGRÍCOLAS",
+    "id": 180
+   },
+   {
+    "descripcion": "ART. 17 AYUDAS PARA INVERSIONES RELACIONADAS CON LA TRANSFORMACIÓN Y LA COMERCIALIZACIÓN DE PRODUCTOS AGRÍCOLAS",
+    "id": 129
+   },
+   {
+    "descripcion": "ART. 17 AYUDAS PARA INVERSIONES RELACIONADAS CON LA TRANSFORMACIÓN Y LA COMERCIALIZACIÓN DE PRODUCTOS AGRÍCOLAS",
+    "id": 91
+   },
+   {
+    "descripcion": "ART. 18 AYUDAS A LAS PYME. PARA SERVICIOS DE CONSULTORÍA.",
+    "id": 39
+   },
+   {
+    "descripcion": "ART. 19 AYUDAS A LAS PYME. PARA SU PARTICIPACIÓN EN FERIAS COMERCIALES.",
+    "id": 40
+   },
+   {
+    "descripcion": "ART. 19 AYUDAS DESTINADAS A LA CREACIÓN DE AGRUPACIONES Y ORGANIZACIONES DE PRODUCTORES DEL SECTOR AGRÍCOLA",
+    "id": 182
+   },
+   {
+    "descripcion": "ART. 19 AYUDAS INICIALES A LAS AGRUPACIONES Y ORGANIZACIONES DE PRODUCTORES DEL SECTOR AGRÍCOLA",
+    "id": 131
+   },
+   {
+    "descripcion": "ART. 19 AYUDAS INICIALES A LAS AGRUPACIONES Y ORGANIZACIONES DE PRODUCTORES DEL SECTOR AGRÍCOLA",
+    "id": 93
+   },
+   {
+    "descripcion": "ART. 19BIS AYUDAS PARA LOS COSTES EN QUE INCURRAN LAS PYMES PARTICIPANTES EN PROYECTOS DE DESARROLLO LOCAL PARTICIPATIVO («DLP»).",
+    "id": 165
+   },
+   {
+    "descripcion": "ART. 20 AYUDAS A LAS PYME. AYUDA A LOS COSTES DE LOS PROYECTOS DE COOPERACIÓN TERRITORIAL EUROPEA.",
+    "id": 41
+   },
+   {
+    "descripcion": "ART. 20 AYUDAS DESTINADAS A LA PARTICIPACIÓN DE PRODUCTORES DE PRODUCTOS AGRÍCOLAS EN REGÍMENES DE CALIDAD",
+    "id": 183
+   },
+   {
+    "descripcion": "ART. 20 AYUDAS DESTINADAS A LA PARTICIPACIÓN DE PRODUCTORES DE PRODUCTOS AGRÍCOLAS EN REGÍMENES DE CALIDAD",
+    "id": 229
+   },
+   {
+    "descripcion": "ART. 20 AYUDAS PARA LA PARTICIPACIÓN DE PRODUCTORES DE PRODUCTOS AGRÍCOLAS EN REGÍMENES DE CALIDAD",
+    "id": 94
+   },
+   {
+    "descripcion": "ART. 20 AYUDAS PARA LA PARTICIPACIÓN DE PRODUCTORES DE PRODUCTOS AGRÍCOLAS EN REGÍMENES DE CALIDAD",
+    "id": 132
+   },
+   {
+    "descripcion": "ART. 21 AYUDAS A LA TRANSFERENCIA DE CONOCIMIENTOS Y A LAS ACTIVIDADES DE INFORMACIÓN EN EL SECTOR FORESTAL",
+    "id": 95
+   },
+   {
+    "descripcion": "ART. 21 AYUDAS A LA TRANSFERENCIA DE CONOCIMIENTOS Y A LAS ACTIVIDADES DE INFORMACIÓN EN EL SECTOR FORESTAL",
+    "id": 133
+   },
+   {
+    "descripcion": "ART. 21 AYUDAS A LAS PYME. AYUDAS A LA FINANCIACIÓN DE RIESGO.",
+    "id": 42
+   },
+   {
+    "descripcion": "ART. 21 AYUDAS DESTINADAS AL INTERCAMBIO DE CONOCIMIENTOS Y ACTIVIDADES DE INFORMACIÓN",
+    "id": 184
+   },
+   {
+    "descripcion": "ART. 21 AYUDAS DESTINADAS AL INTERCAMBIO DE CONOCIMIENTOS Y ACTIVIDADES DE INFORMACIÓN",
+    "id": 230
+   },
+   {
+    "descripcion": "ART. 22 AYUDAS A LAS PYME. AYUDAS DESTINADAS A NUEVOS PROYECTOS EMPRESARIALES.",
+    "id": 43
+   },
+   {
+    "descripcion": "ART. 22 AYUDAS DESTINADAS A SERVICIOS DE ASESORAMIENTO",
+    "id": 231
+   },
+   {
+    "descripcion": "ART. 22 AYUDAS DESTINADAS A SERVICIOS DE ASESORAMIENTO",
+    "id": 185
+   },
+   {
+    "descripcion": "ART. 22 AYUDAS DESTINADAS AL PAGO DE PRIMAS DE SEGUROS Y A CONTRIBUCIONES FINANCIERAS A FONDOS MUTUALES",
+    "id": 276
+   },
+   {
+    "descripcion": "ART. 22 AYUDAS PARA SERVICIOS DE ASESORAMIENTO EN EL SECTOR AGRÍCOLA",
+    "id": 134
+   },
+   {
+    "descripcion": "ART. 22 AYUDAS PARA SERVICIOS DE ASESORAMIENTO EN EL SECTOR AGRÍCOLA",
+    "id": 96
+   },
+   {
+    "descripcion": "ART. 23 AYUDAS DESTINADAS A SERVICIOS DE SUSTITUCIÓN EN LA EXPLOTACIÓN AGRÍCOLA",
+    "id": 186
+   },
+   {
+    "descripcion": "ART. 23 AYUDAS DESTINADAS A SERVICIOS DE SUSTITUCIÓN EN LA EXPLOTACIÓN AGRÍCOLA",
+    "id": 232
+   },
+   {
+    "descripcion": "ART. 23 AYUDAS PARA SERVICIOS DE SUSTITUCIÓN EN LA EXPLOTACIÓN AGRÍCOLA",
+    "id": 97
+   }
+  ]
+ },
+ "cat:reglamentos": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/reglamentos?vpd=GE",
+  "resumen": [
+   {
+    "descripcion": "SIN REGLAMENTO - NOTIFICACIÓN PREVIA",
+    "id": 0
+   },
+   {
+    "descripcion": "GENERAL DE EXENCIÓN - REG (UE) 651/2014",
+    "id": 3
+   },
+   {
+    "descripcion": "PRODUCCIÓN AGRÍCOLA PRIMARIA - REG (UE) 2022/2472",
+    "id": 9
+   },
+   {
+    "descripcion": "OTROS DISTINTOS DE PRODUCCIÓN ACRÍGOLA PRIMARIA - REG (UE) 2022/2472",
+    "id": 10
+   },
+   {
+    "descripcion": "PESCA Y ACUICULTURA - REG (UE) 2022/2473",
+    "id": 11
+   },
+   {
+    "descripcion": "PRODUCCIÓN AGRÍCOLA PRIMARIA - REG (UE) 702/2014",
+    "id": 4
+   },
+   {
+    "descripcion": "OTROS DISTINTOS DE PRODUCCIÓN AGRÍCOLA PRIMARIA - REG (UE) 702/2014",
+    "id": 8
+   },
+   {
+    "descripcion": "PESCA Y ACUICULTURA - REG (UE) 1388/2014",
+    "id": 5
+   },
+   {
+    "descripcion": "COMPENSACIÓN POR SIEG EXENTA NOTIFICACIÓN",
+    "id": 99
+   }
+  ]
+ },
+ "conc:pageSize10000": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=10000",
+  "resumen": {
+   "n": 10000,
+   "total": 32025697,
+   "bytes": 7500443
+  }
+ },
+ "conc:pageSize2000": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2000",
+  "resumen": {
+   "n": 2000,
+   "total": 32025697,
+   "bytes": 1571057
+  }
+ },
+ "conc:base": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2",
+  "resumen": {
+   "total": 32025697,
+   "n": 2,
+   "primero": {
+    "id": 159939788,
+    "codConcesion": "SB159939788",
+    "fechaConcesion": "2026-11-23",
+    "beneficiario": "G75370288 MOTO CLUB MONTCADA-RIPOLLET",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "importe": 1500,
+    "ayudaEquivalente": 1500,
+    "urlBR": "https://www.biguesiriells.cat/admin/index.php?pagina=descargar&doc=ordenanza_general_de_subvenciones-457.pdf&linial=true",
+    "tieneProyecto": false,
+    "numeroConvocatoria": "944144",
+    "idConvocatoria": 1145705,
+    "convocatoria": "Subvención nominal a la entidad Moto Club Ripollet-Montcada Esdeveniments Esportius para el año 2026",
+    "descripcionCooficial": "Subvención nominal a l`entitat Moto Club Ripollet-Montcada Esdeveniments Esportius per a l`any 2026",
+    "nivel1": "LOCAL",
+    "nivel2": "BIGUES I RIELLS",
+    "nivel3": "AYUNTAMIENTO DE BIGUES I RIELLS",
+    "codigoInvente": null,
+    "idPersona": 21125143,
+    "fechaAlta": "2026-11-23"
+   },
+   "ultimo": {
+    "fecha": "2026-11-23",
+    "nivel1": "LOCAL"
+   }
+  }
+ },
+ "conc:fechas": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026",
+  "resumen": {
+   "total": 390503,
+   "n": 2,
+   "primero": {
+    "id": 159909370,
+    "codConcesion": "SB159909370",
+    "fechaConcesion": "2026-10-31",
+    "beneficiario": "B22912984 TRANSPORTES LA NIÑA LA JARA SL",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "importe": 15000,
+    "ayudaEquivalente": 15000,
+    "urlBR": "https://juntadeandalucia.es/eboja/2024/197/BOJA24-197-00041-51790-01_00308739.pdf",
+    "tieneProyecto": false,
+    "numeroConvocatoria": "894133",
+    "idConvocatoria": 1095694,
+    "convocatoria": "Resolución de 20 de marzo de 2026, DGIECE, Línea 2 Incentivo a la segunda o sucesivas contrataciones indefinidas ordinarias por parte de personas trabajadoras autónomas, y a cualquier contratación indefinida ordinaria por parte de Pymes. Mínimis General.",
+    "descripcionCooficial": null,
+    "nivel1": "AUTONOMICA",
+    "nivel2": "ANDALUCÍA",
+    "nivel3": "CONSEJERÍA DE EMPLEO, EMPRESA Y TRABAJO AUTÓNOMO",
+    "codigoInvente": null,
+    "idPersona": 22433127,
+    "fechaAlta": "2026-11-20"
+   },
+   "ultimo": {
+    "fecha": "2026-10-31",
+    "nivel1": "AUTONOMICA"
+   }
+  }
+ },
+ "conc:fechasISO": {
+  "status": 400,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=2026-10-01&fechaHasta=2026-10-31",
+  "resumen": "{\"codigo\":\"ERR_VALIDACION\",\"errores\":[\"No se ha podido obtener el cuerpo de la petición. Alguno de los parámetros es incorrecto.\",\"El parámetro 'fechaDesde' no tiene un formato correcto.\",\"El parámetro 'fechaHasta' no tiene un formato correcto.\"]}"
+ },
+ "conc:tipoAdministracion=C": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&tipoAdministracion=C",
+  "resumen": {
+   "total": 6407,
+   "n": 2,
+   "primero": {
+    "id": 89121407,
+    "codConcesion": "SB89121407",
+    "fechaConcesion": "2026-10-31",
+    "beneficiario": "A08699670 PREMIUM, S.A.",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "importe": 552624.82,
+    "ayudaEquivalente": 552624.82,
+    "urlBR": "https://www.boe.es/boe/dias/2021/07/27/pdfs/BOE-A-2021-12591.pdf",
+    "tieneProyecto": false,
+    "numeroConvocatoria": "650039",
+    "idConvocatoria": 851599,
+    "convocatoria": "Segunda convocatoria del programa de incentivos a Proyectos singulares en movilidad eléctrica (Programa MOVES Proyectos Singulares II). Plan de Recuperación, Transformación y Resiliencia “Financiado por la Unión Europea-NexGenerationEu”.",
+    "descripcionCooficial": null,
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO PARA LA TRANSICIÓN ECOLÓGICA Y EL RETO DEMOGRÁFICO",
+    "nivel3": "INSTITUTO PARA LA DIVERSIFICACIÓN Y AHORRO DE LA ENERGÍA (IDAE)",
+    "codigoInvente": "INV00001947",
+    "idPersona": 5542184,
+    "fechaAlta": "2026-11-10"
+   },
+   "ultimo": {
+    "fecha": "2026-10-30",
+    "nivel1": "ESTADO"
+   }
+  }
+ },
+ "conc:tipoAdministracion=A": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&tipoAdministracion=A",
+  "resumen": {
+   "total": 328652,
+   "n": 2,
+   "primero": {
+    "id": 159909370,
+    "codConcesion": "SB159909370",
+    "fechaConcesion": "2026-10-31",
+    "beneficiario": "B22912984 TRANSPORTES LA NIÑA LA JARA SL",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "importe": 15000,
+    "ayudaEquivalente": 15000,
+    "urlBR": "https://juntadeandalucia.es/eboja/2024/197/BOJA24-197-00041-51790-01_00308739.pdf",
+    "tieneProyecto": false,
+    "numeroConvocatoria": "894133",
+    "idConvocatoria": 1095694,
+    "convocatoria": "Resolución de 20 de marzo de 2026, DGIECE, Línea 2 Incentivo a la segunda o sucesivas contrataciones indefinidas ordinarias por parte de personas trabajadoras autónomas, y a cualquier contratación indefinida ordinaria por parte de Pymes. Mínimis General.",
+    "descripcionCooficial": null,
+    "nivel1": "AUTONOMICA",
+    "nivel2": "ANDALUCÍA",
+    "nivel3": "CONSEJERÍA DE EMPLEO, EMPRESA Y TRABAJO AUTÓNOMO",
+    "codigoInvente": null,
+    "idPersona": 22433127,
+    "fechaAlta": "2026-11-20"
+   },
+   "ultimo": {
+    "fecha": "2026-10-31",
+    "nivel1": "AUTONOMICA"
+   }
+  }
+ },
+ "conc:tipoAdministracion=L": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&tipoAdministracion=L",
+  "resumen": {
+   "total": 53258,
+   "n": 2,
+   "primero": {
+    "id": 159872738,
+    "codConcesion": "SB159872738",
+    "fechaConcesion": "2026-10-31",
+    "beneficiario": "G03097284 UNION PROVINCIAL DE ASOCIACIONES PRO-MINUSVALIDOS SIQUICOS",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "importe": 25000,
+    "ayudaEquivalente": 25000,
+    "urlBR": "https://www.dip-alicante.es/bop2/pdftotal/2026/01/19_11/2026_000282.pdf",
+    "tieneProyecto": false,
+    "numeroConvocatoria": "943355",
+    "idConvocatoria": 1144916,
+    "convocatoria": "Subvención a la Unión Provincial de Asociaciones Pro Minusválidos Psíquicos de Alicante (UPAPSA), destinada al Proyecto de Asesoramiento y Consultoría en Discapacidad Intelectual",
+    "descripcionCooficial": null,
+    "nivel1": "LOCAL",
+    "nivel2": "DIPUTACIÓN PROV. DE ALICANTE",
+    "nivel3": "DIPUTACIÓN PROVINCIAL DE ALACANT/ALICANTE",
+    "codigoInvente": null,
+    "idPersona": 5809835,
+    "fechaAlta": "2026-11-19"
+   },
+   "ultimo": {
+    "fecha": "2026-10-31",
+    "nivel1": "LOCAL"
+   }
+  }
+ },
+ "conc:tipoAdministracion=O": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&tipoAdministracion=O",
+  "resumen": {
+   "total": 2186,
+   "n": 2,
+   "primero": {
+    "id": 159939557,
+    "codConcesion": "SB159939557",
+    "fechaConcesion": "2026-10-30",
+    "beneficiario": "***4416** MARÍA DEL MAR HERRADA FERNÁNDEZ",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "importe": 12000,
+    "ayudaEquivalente": 12000,
+    "urlBR": "http://sede.uco.es/bouco/bandejaAnuncios/BOUCO/2026/00266",
+    "tieneProyecto": false,
+    "numeroConvocatoria": "902052",
+    "idConvocatoria": 1103613,
+    "convocatoria": "Resolución 28/04/2026, del Vicerrector de Estudios de Grado, Calidad e Innovación Docente, por la que se convocan las becas Santander Excelencia 360º para el estudiantado de la UCO, matriculado en el último curso de estudios de Grado curso 2025-2026.",
+    "descripcionCooficial": null,
+    "nivel1": "OTROS",
+    "nivel2": "UNIVERSIDAD DE CÓRDOBA",
+    "nivel3": null,
+    "codigoInvente": "INV00005335",
+    "idPersona": 22461983,
+    "fechaAlta": "2026-11-23"
+   },
+   "ultimo": {
+    "fecha": "2026-10-30",
+    "nivel1": "OTROS"
+   }
+  }
+ },
+ "conc:nivel1=ESTADO": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&nivel1=ESTADO",
+  "resumen": {
+   "total": 390503,
+   "n": 2,
+   "primero": {
+    "id": 159909370,
+    "codConcesion": "SB159909370",
+    "fechaConcesion": "2026-10-31",
+    "beneficiario": "B22912984 TRANSPORTES LA NIÑA LA JARA SL",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "importe": 15000,
+    "ayudaEquivalente": 15000,
+    "urlBR": "https://juntadeandalucia.es/eboja/2024/197/BOJA24-197-00041-51790-01_00308739.pdf",
+    "tieneProyecto": false,
+    "numeroConvocatoria": "894133",
+    "idConvocatoria": 1095694,
+    "convocatoria": "Resolución de 20 de marzo de 2026, DGIECE, Línea 2 Incentivo a la segunda o sucesivas contrataciones indefinidas ordinarias por parte de personas trabajadoras autónomas, y a cualquier contratación indefinida ordinaria por parte de Pymes. Mínimis General.",
+    "descripcionCooficial": null,
+    "nivel1": "AUTONOMICA",
+    "nivel2": "ANDALUCÍA",
+    "nivel3": "CONSEJERÍA DE EMPLEO, EMPRESA Y TRABAJO AUTÓNOMO",
+    "codigoInvente": null,
+    "idPersona": 22433127,
+    "fechaAlta": "2026-11-20"
+   },
+   "ultimo": {
+    "fecha": "2026-10-31",
+    "nivel1": "AUTONOMICA"
+   }
+  }
+ },
+ "conc:finalidad=1": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&finalidad=1",
+  "resumen": {
+   "total": 1917,
+   "n": 2,
+   "primero": {
+    "id": 159075030,
+    "codConcesion": "SB159075030",
+    "fechaConcesion": "2026-10-29",
+    "beneficiario": "Q1500269D CONSELLO GALEGO DOS PROCURADORES DOS TRIBUNAIS",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "importe": 40000,
+    "ayudaEquivalente": 40000,
+    "urlBR": "https://transparencia.xunta.gal/es/tema/informacion-economica-orzamentaria-e-estatistica/convenios/rexistro",
+    "tieneProyecto": false,
+    "numeroConvocatoria": "939384",
+    "idConvocatoria": 1140945,
+    "convocatoria": "CONVENIO DE COLABORACIÓN ENTRE LA CONSELLERÍA DE PRESIDENCIA, JUSTICIA Y DEPORTES, LA CONSELLERÍA DE POLÍTICA SOCIAL E IGUALDAD Y EL CONSEJO GALLEGO DE LOS PROCURADORES DE LOS TRIBUNALES, PARA EL DESARROLLO DE ACCIONES DE FORMACIÓN EN VIOLENCIA DE GÉNERO",
+    "descripcionCooficial": null,
+    "nivel1": "AUTONOMICA",
+    "nivel2": "GALICIA",
+    "nivel3": "CONSELLERÍA DE PRESIDENCIA, JUSTICIA Y DEPORTES",
+    "codigoInvente": null,
+    "idPersona": 12713441,
+    "fechaAlta": "2026-11-03"
+   },
+   "ultimo": {
+    "fecha": "2026-10-29",
+    "nivel1": "AUTONOMICA"
+   }
+  }
+ },
+ "conc:finalidades=1": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&finalidades=1",
+  "resumen": {
+   "total": 390503,
+   "n": 2,
+   "primero": {
+    "id": 159909370,
+    "codConcesion": "SB159909370",
+    "fechaConcesion": "2026-10-31",
+    "beneficiario": "B22912984 TRANSPORTES LA NIÑA LA JARA SL",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "importe": 15000,
+    "ayudaEquivalente": 15000,
+    "urlBR": "https://juntadeandalucia.es/eboja/2024/197/BOJA24-197-00041-51790-01_00308739.pdf",
+    "tieneProyecto": false,
+    "numeroConvocatoria": "894133",
+    "idConvocatoria": 1095694,
+    "convocatoria": "Resolución de 20 de marzo de 2026, DGIECE, Línea 2 Incentivo a la segunda o sucesivas contrataciones indefinidas ordinarias por parte de personas trabajadoras autónomas, y a cualquier contratación indefinida ordinaria por parte de Pymes. Mínimis General.",
+    "descripcionCooficial": null,
+    "nivel1": "AUTONOMICA",
+    "nivel2": "ANDALUCÍA",
+    "nivel3": "CONSEJERÍA DE EMPLEO, EMPRESA Y TRABAJO AUTÓNOMO",
+    "codigoInvente": null,
+    "idPersona": 22433127,
+    "fechaAlta": "2026-11-20"
+   },
+   "ultimo": {
+    "fecha": "2026-10-31",
+    "nivel1": "AUTONOMICA"
+   }
+  }
+ },
+ "conc:instrumentos=1": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&instrumentos=1",
+  "resumen": {
+   "total": 390295,
+   "n": 2,
+   "primero": {
+    "id": 159909370,
+    "codConcesion": "SB159909370",
+    "fechaConcesion": "2026-10-31",
+    "beneficiario": "B22912984 TRANSPORTES LA NIÑA LA JARA SL",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "importe": 15000,
+    "ayudaEquivalente": 15000,
+    "urlBR": "https://juntadeandalucia.es/eboja/2024/197/BOJA24-197-00041-51790-01_00308739.pdf",
+    "tieneProyecto": false,
+    "numeroConvocatoria": "894133",
+    "idConvocatoria": 1095694,
+    "convocatoria": "Resolución de 20 de marzo de 2026, DGIECE, Línea 2 Incentivo a la segunda o sucesivas contrataciones indefinidas ordinarias por parte de personas trabajadoras autónomas, y a cualquier contratación indefinida ordinaria por parte de Pymes. Mínimis General.",
+    "descripcionCooficial": null,
+    "nivel1": "AUTONOMICA",
+    "nivel2": "ANDALUCÍA",
+    "nivel3": "CONSEJERÍA DE EMPLEO, EMPRESA Y TRABAJO AUTÓNOMO",
+    "codigoInvente": null,
+    "idPersona": 22433127,
+    "fechaAlta": "2026-11-20"
+   },
+   "ultimo": {
+    "fecha": "2026-10-31",
+    "nivel1": "AUTONOMICA"
+   }
+  }
+ },
+ "conc:regiones=1": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&regiones=1",
+  "resumen": {
+   "total": 4172,
+   "n": 2,
+   "primero": {
+    "id": 159845343,
+    "codConcesion": "SB159845343",
+    "fechaConcesion": "2026-10-30",
+    "beneficiario": "F79366878 COOPERATIVAS AGROALIMENTARIAS DE ESPAÑA",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "importe": 215500,
+    "ayudaEquivalente": 215500,
+    "urlBR": "https://www.boe.es/eli/es/rd/2026/10/07/810",
+    "tieneProyecto": false,
+    "numeroConvocatoria": "935069",
+    "idConvocatoria": 1136630,
+    "convocatoria": "Subvención de concesión directa a Cooperativas Agroalimentarias de España U. de COOP. para la realización de actividades de fomento y apoyo a los seguros agrarios en 2026",
+    "descripcionCooficial": null,
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE AGRICULTURA, PESCA Y ALIMENTACIÓN",
+    "nivel3": "ENTIDAD ESTATAL DE SEGUROS AGRARIOS - ENESA",
+    "codigoInvente": null,
+    "idPersona": 5805723,
+    "fechaAlta": "2026-11-18"
+   },
+   "ultimo": {
+    "fecha": "2026-10-30",
+    "nivel1": "ESTADO"
+   }
+  }
+ },
+ "conc:actividad=1": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&actividad=1",
+  "resumen": {
+   "total": 58669,
+   "n": 2,
+   "primero": {
+    "id": 159122519,
+    "codConcesion": "SB159122519",
+    "fechaConcesion": "2026-10-31",
+    "beneficiario": "F70121140 GRANXA O CANTEIRO SCG",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "importe": 4000,
+    "ayudaEquivalente": 4000,
+    "urlBR": "http://www.xunta.gal/diario-oficial-galicia",
+    "tieneProyecto": false,
+    "numeroConvocatoria": "907330",
+    "idConvocatoria": 1108891,
+    "convocatoria": "Orden del 3 de junio de 2026 por la que se establecen las bases reguladoras del programa ES-Transforma en cooperativas o sociedades laborales y se procede a su convocatoria para la anualidad 2026..Regl 1408/2013  ",
+    "descripcionCooficial": "Orde do 3 de xuño de 2026 pola que se establecen as bases reguladoras do programa ES-Transforma en cooperativas ou sociedades laborais e se procede a súa convocatoria para a anualidade 2026.  Regl 1408/2013",
+    "nivel1": "AUTONOMICA",
+    "nivel2": "GALICIA",
+    "nivel3": "CONSELLERÍA DE EMPLEO, COMERCIO Y EMIGRACIÓN",
+    "codigoInvente": null,
+    "idPersona": 18960278,
+    "fechaAlta": "2026-11-03"
+   },
+   "ultimo": {
+    "fecha": "2026-10-31",
+    "nivel1": "AUTONOMICA"
+   }
+  }
+ },
+ "conc:order=importe&direccion=desc": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&order=importe&direccion=desc",
+  "resumen": {
+   "total": 390503,
+   "n": 2,
+   "primero": {
+    "id": 159864652,
+    "codConcesion": "SB159864652",
+    "fechaConcesion": "2026-10-22",
+    "beneficiario": "P1110100C AYUNTAMIENTO DE CEUTA",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "importe": 45320000,
+    "ayudaEquivalente": 45320000,
+    "urlBR": "https://www.boe.es/boe/dias/2026/10/14/pdfs/BOE-A-2026-21318.pdf",
+    "tieneProyecto": false,
+    "numeroConvocatoria": "935098",
+    "idConvocatoria": 1136659,
+    "convocatoria": "Real Decreto-ley 30/2026, de 13 de octubre, por el que se aprueban medidas extraordinarias y urgentes de apoyo financiero a la Ciudad de Ceuta.",
+    "descripcionCooficial": null,
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE HACIENDA",
+    "nivel3": "SECRETARÍA GENERAL DE FINANCIACIÓN AUTONÓMICA Y LOCAL",
+    "codigoInvente": null,
+    "idPersona": 5948912,
+    "fechaAlta": "2026-11-19"
+   },
+   "ultimo": {
+    "fecha": "2026-10-13",
+    "nivel1": "ESTADO"
+   }
+  }
+ },
+ "conc:order=fechaConcesion&direccion=asc": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&order=fechaConcesion&direccion=asc",
+  "resumen": {
+   "total": 390503,
+   "n": 2,
+   "primero": {
+    "id": 81394288,
+    "codConcesion": "SB81394288",
+    "fechaConcesion": "2026-10-01",
+    "beneficiario": "P3702300I AYUNTAMIENTO DE ALDEATEJADA",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "importe": 289685.76,
+    "ayudaEquivalente": 289685.76,
+    "urlBR": "https://www.boe.es/boe/dias/2021/08/04/pdfs/BOE-A-2021-13269.pdf",
+    "tieneProyecto": false,
+    "numeroConvocatoria": "578594",
+    "idConvocatoria": 780154,
+    "convocatoria": "Concesión directa de ayudas para inversiones a proyectos singulares locales de energía limpia en municipios de reto demográfico. Plan de Recuperación, Transformación y Resiliencia “Financiado por la Unión Europea-NexGenerationEu”.",
+    "descripcionCooficial": null,
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO PARA LA TRANSICIÓN ECOLÓGICA Y EL RETO DEMOGRÁFICO",
+    "nivel3": "INSTITUTO PARA LA DIVERSIFICACIÓN Y AHORRO DE LA ENERGÍA (IDAE)",
+    "codigoInvente": "INV00001947",
+    "idPersona": 5953834,
+    "fechaAlta": "2026-10-09"
+   },
+   "ultimo": {
+    "fecha": "2026-10-01",
+    "nivel1": "ESTADO"
+   }
+  }
+ },
+ "conc:exportar": {
+  "status": 404,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/concesiones/busqueda/exportar?vpd=GE&tipoDoc=csv&fechaDesde=01/11/2026&fechaHasta=02/11/2026",
+  "resumen": "<!doctype html><html lang=\"es\"><head><title>Estado HTTP 404 – No encontrado</title><style type=\"text/css\">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:blac"
+ },
+ "conv:fechas": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/convocatorias/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026",
+  "resumen": {
+   "total": 6279,
+   "n": 2,
+   "primero": {
+    "id": 1140744,
+    "mrr": false,
+    "numeroConvocatoria": "939183",
+    "descripcion": "DESARROLLO DEL PROYECTO \"TRABAJO CON APOYO PARA PERSONAS CON SINDROME DE DOWN\"",
+    "descripcionLeng": null,
+    "fechaRecepcion": "2026-10-30",
+    "nivel1": "LOCAL",
+    "nivel2": "CUENCA",
+    "nivel3": "AYUNTAMIENTO DE CUENCA",
+    "codigoInvente": null
+   },
+   "ultimo": {
+    "fecha": "2026-10-30",
+    "nivel1": "AUTONOMICA"
+   }
+  }
+ },
+ "conv:tipoAdministracion=C": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/convocatorias/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&tipoAdministracion=C",
+  "resumen": {
+   "total": 269,
+   "n": 2,
+   "primero": {
+    "id": 1140696,
+    "mrr": false,
+    "numeroConvocatoria": "939135",
+    "descripcion": "Líneas 3 y 4 del Real Decreto-ley 22/2026, de 1 de septiembre, por el que se aprueban medidas urgentes de carácter social y económico de apoyo a la ciudad de Ceuta",
+    "descripcionLeng": null,
+    "fechaRecepcion": "2026-10-30",
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE INDUSTRIA Y TURISMO",
+    "nivel3": "SECRETARÍA DE ESTADO DE TURISMO",
+    "codigoInvente": null
+   },
+   "ultimo": {
+    "fecha": "2026-10-30",
+    "nivel1": "ESTADO"
+   }
+  }
+ },
+ "conv:tipoAdministracion=L": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/convocatorias/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&tipoAdministracion=L",
+  "resumen": {
+   "total": 4703,
+   "n": 2,
+   "primero": {
+    "id": 1140744,
+    "mrr": false,
+    "numeroConvocatoria": "939183",
+    "descripcion": "DESARROLLO DEL PROYECTO \"TRABAJO CON APOYO PARA PERSONAS CON SINDROME DE DOWN\"",
+    "descripcionLeng": null,
+    "fechaRecepcion": "2026-10-30",
+    "nivel1": "LOCAL",
+    "nivel2": "CUENCA",
+    "nivel3": "AYUNTAMIENTO DE CUENCA",
+    "codigoInvente": null
+   },
+   "ultimo": {
+    "fecha": "2026-10-30",
+    "nivel1": "LOCAL"
+   }
+  }
+ },
+ "conv:finalidad=1": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/convocatorias/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&finalidad=1",
+  "resumen": {
+   "total": 34,
+   "n": 2,
+   "primero": {
+    "id": 1140469,
+    "mrr": false,
+    "numeroConvocatoria": "938908",
+    "descripcion": "AJG 2026 PROCURADORES SANTA CRUZ TENERIFE",
+    "descripcionLeng": null,
+    "fechaRecepcion": "2026-10-29",
+    "nivel1": "AUTONOMICA",
+    "nivel2": "CANARIAS",
+    "nivel3": "CONSEJERÍA DE PRESIDENCIA, ADMINISTRACIONES PÚBLICAS, JUSTICIA Y SEGURIDAD",
+    "codigoInvente": null
+   },
+   "ultimo": {
+    "fecha": "2026-10-29",
+    "nivel1": "AUTONOMICA"
+   }
+  }
+ },
+ "conv:finalidades=1": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/convocatorias/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&finalidades=1",
+  "resumen": {
+   "total": 6279,
+   "n": 2,
+   "primero": {
+    "id": 1140744,
+    "mrr": false,
+    "numeroConvocatoria": "939183",
+    "descripcion": "DESARROLLO DEL PROYECTO \"TRABAJO CON APOYO PARA PERSONAS CON SINDROME DE DOWN\"",
+    "descripcionLeng": null,
+    "fechaRecepcion": "2026-10-30",
+    "nivel1": "LOCAL",
+    "nivel2": "CUENCA",
+    "nivel3": "AYUNTAMIENTO DE CUENCA",
+    "codigoInvente": null
+   },
+   "ultimo": {
+    "fecha": "2026-10-30",
+    "nivel1": "AUTONOMICA"
+   }
+  }
+ },
+ "conv:mrr=true": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/convocatorias/busqueda?vpd=GE&page=0&pageSize=2&fechaDesde=01/10/2026&fechaHasta=31/10/2026&mrr=true",
+  "resumen": {
+   "total": 6,
+   "n": 2,
+   "primero": {
+    "id": 1139648,
+    "mrr": true,
+    "numeroConvocatoria": "938087",
+    "descripcion": "ESPAÑA CRECE - ICO CRECIMIENTO Y EXPANSIÓN (MRR) (minimis pesca)",
+    "descripcionLeng": null,
+    "fechaRecepcion": "2026-10-27",
+    "nivel1": "ESTADO",
+    "nivel2": "MINISTERIO DE ECONOMÍA, COMERCIO Y EMPRESA",
+    "nivel3": "INSTITUTO DE CRÉDITO OFICIAL",
+    "codigoInvente": "INV00003678"
+   },
+   "ultimo": {
+    "fecha": "2026-10-27",
+    "nivel1": "ESTADO"
+   }
+  }
+ },
+ "conv:detalle": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/convocatorias?vpd=GE&numConv=944145",
+  "resumen": "{\"id\":1145706,\"organo\":{\"nivel1\":\"LOCAL\",\"nivel2\":\"CARREÑO\",\"nivel3\":\"AYUNTAMIENTO DE CARREÑO\"},\"sedeElectronica\":\"www.ayto-carreno.es\",\"codigoBDNS\":\"944145\",\"fechaRecepcion\":\"2026-11-23\",\"instrumentos\":[{\"descripcion\":\"SUBVENCIÓN Y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN \"}],\"tipoConvocatoria\":\"Concurrencia competitiva - canónica\",\"presupuestoTotal\":8000,\"mrr\":false,\"descripcion\":\"Convocatoria de ayudas económicas para el pago del impuesto sobre bienes inmuebles (IBI) del año 2026.\",\"descripcionLeng\":null,\"tiposBeneficiarios\":[{\"descripcion\":\"PERSONAS FÍSICAS QUE NO DESARROLLAN ACTIVIDAD ECONÓMICA\"}],\"sectores\":[{\"descripcion\":\"OTROS SERVICIOS\",\"codigo\":\"T\"}],\"regiones\":[{\"descripcion\":\"ES120 - Asturias\"}],\"descripcionFinalidad\":\"Otras Prestaciones económicas\",\"descripcionBasesReguladoras\":\"Bases Reguladoras de ayudas económicas para el pago del impuesto sobre bienes inmuebles (IBI) del año 2026.\",\"urlBasesReguladoras\":\"https://miprincipado.asturias.es/bopa/2026/11/17/2026-09221.pdf\",\"sePublicaDiarioOficial\":true,\"abierto\":false,\"fechaInicioSolicitud\":null,\"fechaFinSolicitud\":null,\"textInicio\":\"A partir del día siguiente a la publicación del extracto de la convocatoria en el BOPA\",\"textFin\":\"QUINCE DÍAS HÁBILES\",\"ayudaEstado\":null,\"urlAyudaEstado\":null,\"fondos\":[],\"reglamento\":null,\"objetivos\":[],\"sectoresProductos\":[],\"documentos\":[],\"anuncios\":[],\"advertencia\":\"La reutilización de los datos del Sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas está sujeta a una serie de restricciones y consideraciones legales. Consulte el aviso legal en https://www.infosubvenciones.es/bdnstrans/GE/es/avisolegal.Además, el usuario debe ser consciente que la información presentada es de naturaleza dinámica, y que los datos pueden ser sometidos a correcciones, inserciones, modificaciones y eliminaciones en momentos posteriores a su extracción. Accesos al API del sistema Nacional de Publicidad de Subvenciones y Ayudas Públicas. La Administración Presupuestaria, para salvaguardar la protección del acceso libre e irrestricto de los ciudadanos a este Portal y a su información podrá adoptar medidas restrictivas de acceso al API ante situaciones de manifiesto abuso del servicio, riesgos de seguridad, o uso fraudulento de la información descargada, de acuerdo con las buenas prácticas de gestión de datos abiertos (https://datos.gob.es/es/blog/limitaciones-la-consulta-de-una-api) establecidas por el Ministerio para la Transformación Digital y de la Función Pública.\"}"
+ },
+ "gb:2024": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/grandesbeneficiarios/busqueda?vpd=GE&page=0&pageSize=5&ejercicio=2024&order=ayudaETotal&direccion=desc",
+  "resumen": {
+   "total": 154386,
+   "n": 5,
+   "primero": {
+    "idPersona": 5970208,
+    "beneficiario": "S2827001E Mº SANIDAD CONSUMO Y BIENESTAR SOCIAL",
+    "ejercicio": 2022,
+    "ayudaETotal": 1202543914.62
+   },
+   "ultimo": {}
+  }
+ },
+ "gb:anios": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/grandesbeneficiarios/anios?vpd=GE",
+  "resumen": "[{\"id\":2022,\"descripcion\":2022},{\"id\":2023,\"descripcion\":2023},{\"id\":2024,\"descripcion\":2024},{\"id\":2025,\"descripcion\":2025},{\"id\":2026,\"descripcion\":2026}]"
+ },
+ "minimis": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/minimis/busqueda?vpd=GE&page=0&pageSize=2",
+  "resumen": {
+   "total": 4411813,
+   "n": 2,
+   "primero": {
+    "idConcesion": 159939543,
+    "numeroConvocatoria": "876989",
+    "idConvocatoria": 1078550,
+    "idPersona": 19959555,
+    "codigoConcesion": "SB159939543",
+    "convocante": "AUTONOMICA ARAGÓN INSTITUTO ARAGONÉS DE EMPLEO (INAEM)",
+    "reglamento": "REG (UE) 2023/2831 de minimis, General",
+    "sectorProducto": null,
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "fechaConcesion": "2026-11-23",
+    "fechaRegistro": "2026-11-23",
+    "beneficiario": "***4616** MARTA OLASO LOPEZ .",
+    "sectorActividad": "82 - Actividades administrativas de oficina y otras actividades auxiliares a las empresas",
+    "ayudaEquivalente": 960
+   },
+   "ultimo": {
+    "fecha": "2026-11-23"
+   }
+  }
+ },
+ "ayudasestado": {
+  "status": 200,
+  "url": "https://www.infosubvenciones.es/bdnstrans/api/ayudasestado/busqueda?vpd=GE&page=0&pageSize=2",
+  "resumen": {
+   "total": 6597533,
+   "n": 2,
+   "primero": {
+    "idConcesion": 159918525,
+    "numeroConvocatoria": "852848",
+    "idConvocatoria": 1054409,
+    "convocatoria": "Resolución de la Consejería de Desarrollo Sostenible, por la que se aprueba la convocatoria del programa de incentivoss ligados a mov eléctrica (MOVES III) 2025  RGEC 651/2014",
+    "idPersona": 22095069,
+    "codConcesion": "SB159918525",
+    "convocante": "AUTONOMICA CASTILLA-LA MANCHA DIRECCIÓN GENERAL DE TRANSICIÓN ENERGÉTICA",
+    "reglamento": "REG (UE) 651/2014, DE 17 DE JUNIO, de exención de notificación",
+    "objetivo": "ART. 36 AYUDAS A LA INVERSIÓN PARA LA PROTECCIÓN DEL MEDIO AMBIENTE, INCLUIDA LA DESCARBONIZACIÓN.",
+    "instrumento": "SUBVENCIÓN y ENTREGA DINERARIA SIN CONTRAPRESTACIÓN ",
+    "tipoBeneficiario": "PYME Y PERSONAS FÍSICAS QUE DESARROLLAN ACTIVIDAD ECONÓMICA",
+    "fechaConcesion": "2026-11-20",
+    "fechaAlta": "2026-11-21",
+    "beneficiario": "B75449181 - ACUMULADORES BAUTISTA S.L",
+    "importe": 2900,
+    "ayudaEquivalente": 2900,
+    "region": "ES425 - Toledo",
+    "sectores": "S - ACTIVIDADES ARTÍSTICAS, DEPORTIVAS Y DE ENTRETENIMIENTO",
+    "ayudaEstado": "SA.118793",
+    "urlAyudaEstado": "https://competition-cases.ec.europa.eu/cases/SA.118793",
+    "entidad": null,
+    "intermediario": null
+   },
+   "ultimo": {
+    "fecha": "2026-11-20"
+   }
+  }
+ },
+ "es:gov_10a_main": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10a_main?format=JSON&geo=ES&unit=MIO_EUR&time=2024",
+  "resumen": {
+   "dims": {
+    "freq": "A",
+    "unit": "MIO_EUR",
+    "sector": "S1,S13,S1311,S1312,S1313,S1314,S212",
+    "na_item": "B1G,B1N,B2N,B5N,B6N,B8G,B8N,B9,P1,P11_P12,P11_P12_P131,P13,P131,P132,P2,P3,P31,P32,P5,P51G,P51C,P52_P53,P11,P12,D1PAY,D11PAY,D12PAY,D2REC,D21REC,D211REC,D29PAY,D29REC,D3PAY,D3REC_S212,D31PAY,D39PAY,D39REC,D4PAY,D4PAY_S1311,D4PAY_S1312,D4PAY_S1313,D4PAY_S1314,D4REC,D41GREC,D41GPAY,D41PAY,D41REC,D42_TO_D45PAY,D42_TO_D45REC,D42REC,D42PAY,D43REC,D43PAY,D44REC,D44PAY,D45REC,D45PAY,D5PAY,D5REC,D51A_C1REC,D51B_C2REC,D51REC,D59REC,D61REC,D611REC,D613REC,D62_D632PAY,D62PAY,D62PAY_GF1002,D62PAY_GF1003,D62PAY_GF1005,D621PAY,D622PAY,D623PAY,D632PAY,D7PAY,D7PAY_S1311,D7PAY_S1312,D7PAY_S1313,D7PAY_S1314",
+    "geo": "ES",
+    "time": "2024"
+   },
+   "n": 351
+  }
+ },
+ "es:gov_10a_exp": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10a_exp?format=JSON&geo=ES&unit=MIO_EUR&time=2024&na_item=TE",
+  "resumen": {
+   "dims": {
+    "freq": "A",
+    "unit": "MIO_EUR",
+    "sector": "S13,S1311,S1312,S1313,S1314",
+    "cofog99": "TOTAL,GF01,GF0101,GF0102,GF0103,GF0104,GF0105,GF0106,GF0107,GF0108,GF02,GF0201,GF0202,GF0203,GF0204,GF0205,GF03,GF0301,GF0302,GF0303,GF0304,GF0305,GF0306,GF04,GF0401,GF0402,GF0403,GF0404,GF0405,GF0406,GF0407,GF0408,GF0409,GF05,GF0501,GF0502,GF0503,GF0504,GF0505,GF0506,GF06,GF0601,GF0602,GF0603,GF0604,GF0605,GF0606,GF07,GF0701,GF0702,GF0703,GF0704,GF0705,GF0706,GF08,GF0801,GF0802,GF0803,GF0804,GF0805,GF0806,GF09,GF0901,GF0902,GF0903,GF0904,GF0905,GF0906,GF0907,GF0908,GF10,GF1001,GF1002,GF1003,GF1004,GF1005,GF1006,GF1007,GF1008,GF1009",
+    "na_item": "TE",
+    "geo": "ES",
+    "time": "2024"
+   },
+   "n": 400
+  }
+ },
+ "es:gov_10a_taxag": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10a_taxag?format=JSON&geo=ES&unit=MIO_EUR&time=2024",
+  "resumen": {
+   "dims": {
+    "freq": "A",
+    "unit": "MIO_EUR",
+    "sector": "S13_S212,S13,S1311,S1312,S1313,S1314,S212",
+    "na_item": "D2_D5_D91,D2_D5_D91_D61_M_D611V_D612_M_M_D613V_D614_M_D995,D2_D5_D91_D61_M_D612_M_D614_M_D995,D2_D5_D91_D61_M_D995,D2,D21,D211,D212,D2121,D2122,D2122A,D2122B,D2122C,D2122D,D2122E,D2122F,D214,D214A,D214B,D214C,D214D,D214E,D214F,D214G,D214H,D214I,D214J,D214K,D214L,D29,D29A,D29B,D29C,D29D,D29E,D29F,D29G,D29H,D5,D51,D51A,D51A_C1,D51B,D51B_C2,D51C,D51C1,D51C2,D51C3,D51D,D51E,D59,D59A,D59B,D59C,D59D,D59E,D59F,D61,D61SC,D611,D611C,D611V,D6111,D6112,D612,D6121,D6122,D613,D613CE,D613CN,D613C,D613CS,D613V,D6131,D6132,D614,D6141,D6142,D91,D91A",
+    "geo": "ES",
+    "time": "2024"
+   },
+   "n": 591
+  }
+ },
+ "es:gov_10dd_edpt1": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10dd_edpt1?format=JSON&geo=ES&unit=MIO_EUR&time=2024",
+  "resumen": {
+   "dims": {
+    "freq": "A",
+    "unit": "MIO_EUR",
+    "sector": "S1,S13,S1311,S1312,S1313,S1314",
+    "na_item": "B1GQ,B5GQ,B9,P51G,D41PAY,IGL_F4_EA21,IGL_F4_EA20,IGL_F4_EA19,IGL_F4_EU27_2020,GD,GD_F2,GD_F3,GD_F31,GD_F32,GD_F4,GD_F41,GD_F42,AF_81L",
+    "geo": "ES",
+    "time": "2024"
+   },
+   "n": 26
+  }
+ },
+ "es:gov_10q_ggnfa": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10q_ggnfa?format=JSON&geo=ES&unit=MIO_EUR&s_adj=NSA&lastTimePeriod=2",
+  "resumen": {
+   "dims": {
+    "freq": "Q",
+    "unit": "MIO_EUR",
+    "s_adj": "NSA",
+    "sector": "S13,S1311,S1312,S1313,S1314,S212",
+    "na_item": "B1G,B8G,B9,P1,P11_P12_P131,P2,P3,P31,P32,P5,P51G,P51C,P52_P53,D1PAY,D2_D5_D91_D61_M_D995,D2REC,D21REC,D211REC,D29PAY,D29REC,D3PAY,D31PAY,D39PAY,D39REC,D4PAY,D4REC,D41PAY,D41REC,D42_TO_D45PAY,D42_TO_D45REC,D5PAY,D5REC,D51REC,D59REC,D61REC,D611REC,D613REC,D62_D632PAY,D62PAY,D632PAY,D7PAY,D7REC,D8,D9PAY,D9REC,D91REC,D92_D99REC,D92PAY,D995,OP5ANP,NP,TE,TR",
+    "geo": "ES",
+    "time": "2026-Q1,2026-Q2"
+   },
+   "n": 104
+  }
+ }
+}
