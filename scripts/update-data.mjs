@@ -75,8 +75,19 @@ const fecha = iso(first.fecha)
 const A = reservoirs.reduce((t, r) => t + r.a, 0), C = reservoirs.reduce((t, r) => t + r.c, 0)
 
 // --- presas: río y altura (se cruza por nombre; si no casa, se conserva lo anterior) ---
+// Además, la ficha de cada presa (titular, tipo, uso, coronación, aliviadero…) va a public/agua/data/presas.json,
+// que solo se carga al abrir un embalse.
+const PRESAS = here('../public/agua/data/presas.json')
+const fichas = {}
+const num = (v) => { const n = Number(String(v ?? '').replace(',', '.')); return Number.isFinite(n) && n > 0 ? n : undefined }
+const limpio = (v) => { const t = String(v ?? '').replace(/\s+/g, ' ').trim(); return t && t !== '-' ? t : undefined }
+const ficha = (p) => ({
+  tit: limpio(p.TITULAR), tipo: limpio(p.TIPO), uso: limpio(p.USO), prov: limpio(p.PROVINCIA),
+  cuenca: num(p.SUP_CUENCA), aport: num(p.AP_M_ANUAL), sup: num(p.NMN_SUP) && num(p.NMN_SUP) < 1e6 ? num(p.NMN_SUP) : undefined,
+  cota: num(p.COTA_CORON), lc: num(p.LONG_CORON), alv: num(p.CAP_AL_NAE), url: limpio(p.INFORME),
+})
 try {
-  const pres = await arcgis('UP_Presas_y_embalses', { where: 'CAST(NMN_CAPAC AS FLOAT)>=5', outFields: 'NOMBRE,CAUCE,ALT_CIMIEN', returnGeometry: 'false' }, 'Presas')
+  const pres = await arcgis('UP_Presas_y_embalses', { where: 'CAST(NMN_CAPAC AS FLOAT)>=5', outFields: 'NOMBRE,CAUCE,ALT_CIMIEN,TITULAR,TIPO,USO,PROVINCIA,SUP_CUENCA,AP_M_ANUAL,NMN_SUP,COTA_CORON,LONG_CORON,CAP_AL_NAE,INFORME', returnGeometry: 'false' }, 'Presas')
   const byName = new Map()
   for (const { attributes: p } of pres) {
     const n = p.NOMBRE ?? '', m = n.match(/^(.*), (EL|LA|LOS|LAS)$/)
@@ -89,8 +100,46 @@ try {
     const hm = Number(p?.ALT_CIMIEN)
     r.riv = riv ? riv.charAt(0) + riv.slice(1).toLowerCase() : old.get(r.id)?.riv
     r.hm = hm > 5 ? Math.round(hm) : old.get(r.id)?.hm
+    if (p) fichas[r.id] = ficha(p)
   }
 } catch (e) { console.warn('Presas:', e.message) }
+// Año de construcción y artículo de Wikipedia, desde Wikidata (embalses y presas de España con coordenadas)
+try {
+  const q = `SELECT ?it ?itLabel ?co ?y ?art WHERE {
+    VALUES ?tipo { wd:Q131681 wd:Q12323 wd:Q1244922 wd:Q3215290 }
+    ?it wdt:P31 ?tipo; wdt:P17 wd:Q29; wdt:P625 ?co .
+    OPTIONAL { ?it wdt:P571 ?f1 } OPTIONAL { ?it wdt:P729 ?f2 } OPTIONAL { ?it wdt:P580 ?f3 }
+    BIND(YEAR(COALESCE(?f2, ?f1, ?f3)) AS ?y)
+    OPTIONAL { ?art schema:about ?it; schema:isPartOf <https://es.wikipedia.org/> }
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "es". }
+  }`
+  const r = await fetch('https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(q), { headers: { 'User-Agent': 'espana-en-datos/1.0 (https://github.com/Sermase/Espana-en-datos)', Accept: 'application/sparql-results+json' } })
+  if (!r.ok) throw new Error('HTTP ' + r.status)
+  const filas = (await r.json()).results.bindings.map(b => {
+    const m = b.co.value.match(/Point\(([-\d.]+) ([-\d.]+)\)/)
+    return { n: norm(b.itLabel.value.replace(/^(embalse|presa|pantano) de (la |el |los |las )?/i, '')), x: m ? +m[1] : null, y: m ? +m[2] : null, año: b.y ? +b.y.value : null, art: b.art?.value }
+  }).filter(f => f.x != null)
+  let casan = 0
+  for (const res of reservoirs) {
+    const k = norm(res.n.replace(/^(la |el |los |las )/i, ''))
+    // mismo nombre y a menos de ~15 km; si no, el más cercano a menos de 2 km
+    const cand = filas.map(f => ({ f, d: Math.hypot((f.x - res.x) * Math.cos(res.y * Math.PI / 180), f.y - res.y) * 111 }))
+    const c = cand.filter(({ f, d }) => d < 15 && (f.n === k || f.n.includes(k) || k.includes(f.n))).sort((a, b) => (b.f.año ? 1 : 0) - (a.f.año ? 1 : 0) || a.d - b.d)[0] ?? cand.filter(({ d }) => d < 2).sort((a, b) => a.d - b.d)[0]
+    if (!c) continue
+    const fi = (fichas[res.id] ??= {})
+    if (c.f.año && c.f.año > 1500 && c.f.año <= new Date().getFullYear()) fi.año = c.f.año
+    if (c.f.art) fi.wiki = c.f.art
+    casan++
+  }
+  console.log(`Wikidata: ${filas.length} presas y embalses, ${casan} casan con el boletín`)
+} catch (e) { console.warn('Wikidata:', e.message) }
+try {
+  const viejo = JSON.parse(readFileSync(PRESAS, 'utf8'))
+  for (const [k, v] of Object.entries(viejo)) fichas[k] = { ...v, ...fichas[k] }
+} catch {}
+for (const f of Object.values(fichas)) for (const k of Object.keys(f)) if (f[k] == null) delete f[k]
+if (Object.keys(fichas).length) writeFileSync(PRESAS, JSON.stringify(fichas))
+
 for (const r of reservoirs) { delete r.raw; if (!r.riv) delete r.riv; if (!r.hm) delete r.hm }
 
 // --- histórico semanal ---
