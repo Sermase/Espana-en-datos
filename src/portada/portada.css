@@ -45,3 +45,47 @@ a.tema:hover { border-color: var(--c); background: color-mix(in oklab, var(--c) 
 @media (prefers-reduced-motion: reduce) { .vivo { animation: none } }
 .src a, .pie a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--acc, #3fe6ff) 60%, transparent); text-underline-offset: 2px }
 .src a:hover, .pie a:hover { color: var(--acc, #3fe6ff) }
+
+/* ---------- Entrada: España hecha de puntos de datos ---------- */
+.portada { max-width: 1280px }
+.cabecera { display: grid; grid-template-columns: minmax(0, .62fr) minmax(0, 1.38fr); gap: 24px; align-items: center }
+.cab-txt p { font-size: 19px }
+.cab-pista { font-size: 14px !important; color: #9fd8e8 !important; letter-spacing: .02em }
+.hero-mapa { position: relative; width: 100% }
+.hero-lienzo { position: relative; touch-action: pan-y }
+.hero-lienzo canvas { display: block }
+.l-lineas { position: absolute; inset: 0; pointer-events: none; overflow: visible }
+.l-lineas polyline { fill: none; stroke-width: 1; stroke-opacity: .55; stroke-dasharray: 400; stroke-dashoffset: 400; transition: stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1) calc(var(--i) * .2s) }
+.is-listo .l-lineas polyline { stroke-dashoffset: 0 }
+.l-punto { position: absolute; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: var(--c); box-shadow: 0 0 12px var(--c); opacity: 0; transition: opacity .4s calc(var(--i) * .2s); pointer-events: none }
+.is-listo .l-punto { opacity: 1 }
+.l-punto::after { content: ''; position: absolute; inset: -8px; border-radius: 50%; border: 1px solid var(--c); opacity: 0; animation: l-onda 2.6s ease-out infinite; animation-delay: calc(var(--i) * .4s) }
+@keyframes l-onda { 0% { transform: scale(.3); opacity: .9 } 100% { transform: scale(1.6); opacity: 0 } }
+.lectura { display: grid; width: 150px; padding: 6px 10px 7px; background: rgba(3, 12, 18, .85); border: 1px solid color-mix(in oklab, var(--c) 40%, transparent); border-radius: 3px; opacity: 0; transition: opacity .5s calc(.3s + var(--i) * .2s), border-color .2s, background .2s }
+.lectura.is-izq, .lectura.is-der { position: absolute; transform: translateY(-50%) }
+.lectura.is-izq { border-left: 2px solid var(--c) }
+.lectura.is-der { transform: translate(-100%, -50%); border-right: 2px solid var(--c); text-align: right }
+.is-listo .lectura { opacity: 1 }
+.lectura b { font: 700 20px/1.1 Oxanium, sans-serif; color: #fff; font-variant-numeric: tabular-nums }
+.lectura small { font-size: 12px; color: #b6d4dc; line-height: 1.3 }
+a.lectura:hover { border-color: var(--c); background: color-mix(in oklab, var(--c) 18%, #03090f) }
+.lecturas-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px }
+.lectura.is-lista { width: auto; border-left: 2px solid var(--c) }
+.lectura.is-lista b { font-size: 17px }
+.lectura.is-lista small { font-size: 11.5px }
+
+/* Cinta de datos */
+.ticker { margin: 26px -28px 0; overflow: hidden; border-block: 1px solid rgba(160, 220, 240, .12); background: rgba(7, 20, 29, .6); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent) }
+.ticker-pista { display: flex; width: max-content; animation: ticker 48s linear infinite }
+.ticker:hover .ticker-pista { animation-play-state: paused }
+.ticker-pista span { display: flex }
+.ticker a { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; font-size: 14px; color: #b6d4dc; white-space: nowrap; border-right: 1px solid rgba(160, 220, 240, .08) }
+.ticker a i { width: 6px; height: 6px; border-radius: 50%; background: var(--c) }
+.ticker a b { font: 700 15px Oxanium, sans-serif; color: #fff; font-variant-numeric: tabular-nums }
+@keyframes ticker { to { transform: translateX(-50%) } }
+@media (prefers-reduced-motion: reduce) { .ticker-pista { animation: none } .l-punto::after { animation: none } .lectura, .l-lineas polyline, .l-punto { transition: none } }
+@media (max-width: 860px) {
+  .cabecera { grid-template-columns: 1fr; gap: 6px }
+  .cab-txt p { font-size: 16px }
+  .ticker { margin: 18px -18px 0 }
+}

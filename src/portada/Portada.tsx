@@ -3,6 +3,7 @@ import { ArrowUpRight } from 'lucide-react'
 import resumen from '../resumen.json'
 import { TEMAS, type Tema } from '../temas'
 import { A } from '../Fuentes'
+import { Hero, type Lectura } from './Hero'
 
 const fecha = new Date(resumen.agua.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
 const reserva = (resumen.agua.a / resumen.agua.c) * 100
@@ -106,13 +107,40 @@ function Mini({ t }: { t: Tema }) {
 
 const VISTA = { mapa: 'Se explora en un mapa', consola: 'Se explora en paneles y series', 'pirámide': 'Se explora en pirámides y flujos', relieve: 'Se explora en relieve 3D' }
 
+const R = resumen as unknown as Record<string, Record<string, unknown>>
+const color = (id: string) => TEMAS.find(t => t.id === id)?.color ?? '#9fd8e8'
+const ruta = (id: string) => TEMAS.find(t => t.id === id)?.ruta
+const es = (v: number, d = 1) => v.toLocaleString('es-ES', { maximumFractionDigits: d, minimumFractionDigits: d })
+/** Las lecturas del mapa de entrada: un dato vivo de cada tema, colocado donde tiene sentido. */
+const LECTURAS: Lectura[] = [
+  { id: 'agua', lon: -6.3, lat: 39.4, color: color('agua'), valor: `${Math.round(reserva)} %`, texto: 'agua en los embalses', href: ruta('agua') },
+  { id: 'gasolineras', lon: -0.9, lat: 41.65, color: color('gasolineras'), valor: `${es(Number(R.gasolineras?.g95 ?? 0), 3)} €`, texto: 'litro de gasolina 95', href: ruta('gasolineras') },
+  { id: 'energia', lon: -7.9, lat: 42.9, color: color('energia'), valor: `${Math.round(Number(R.energia?.ren ?? 0))} %`, texto: 'luz renovable ayer', href: ruta('energia') },
+  { id: 'poblacion', lon: -3.7, lat: 40.42, color: color('poblacion'), valor: `${es(Number(R.poblacion?.total ?? 0) / 1e6, 1)} M`, texto: 'habitantes', href: ruta('poblacion') },
+  { id: 'economia', lon: 2.17, lat: 41.39, color: color('economia'), valor: `${es((R.economia?.ipc as [string, number])?.[1] ?? 0, 1)} %`, texto: 'inflación anual (IPC)', href: ruta('economia') },
+  { id: 'comercio', lon: -5.45, lat: 36.15, color: color('comercio'), valor: `${es(Number(R.comercio?.exp ?? 0), 0)} mil M€`, texto: 'vendido al mundo', href: ruta('comercio') },
+]
+const TICKER = [
+  ['Embalses', `${Math.round(reserva)} %`, 'agua'], ['Gasolina 95', `${es(Number(R.gasolineras?.g95 ?? 0), 3)} €/l`, 'gasolineras'], ['Diésel', `${es(Number(R.gasolineras?.dsl ?? 0), 3)} €/l`, 'gasolineras'],
+  ['Luz hoy (PVPC)', `${es(Number(R.energia?.pvpc ?? 0), 3)} €/kWh`, 'energia'], ['Renovable ayer', `${Math.round(Number(R.energia?.ren ?? 0))} %`, 'energia'],
+  ['IPC', `${es((R.economia?.ipc as [string, number])?.[1] ?? 0, 1)} %`, 'economia'], ['Paro', `${es((R.economia?.paro as [string, number])?.[1] ?? 0, 1)} %`, 'economia'], ['PIB', `+${es((R.economia?.pib as [string, number])?.[1] ?? 0, 1)} %`, 'economia'],
+  ['Habitantes', `${es(Number(R.poblacion?.total ?? 0) / 1e6, 1)} M`, 'poblacion'], ['Exportaciones', `${es(Number(R.comercio?.exp ?? 0), 0)} mil M€`, 'comercio'],
+] as const
+
 export default function Portada() {
   return (
     <main className="portada">
       <header className="cabecera">
-        <h1>España<span>en datos</span></h1>
-        <p>Datos oficiales de España para explorar como un tablero de mando. Cada tema con su vista, sus fichas y su color.</p>
+        <div className="cab-txt">
+          <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8, delay: .2 }}>España<span>en datos</span></motion.h1>
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: .8 }}>El país como un cuadro de mando. Datos oficiales que se actualizan solos: cuánta agua queda, cuánto cuesta la luz esta hora, cuántos somos y qué le vendemos al mundo.</motion.p>
+          <motion.p className="cab-pista" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.2, duration: .8 }}>Pasa el ratón o el dedo por el mapa. Toca un dato para abrir su tema.</motion.p>
+        </div>
+        <Hero lecturas={LECTURAS} />
       </header>
+      <div className="ticker" aria-label="Datos de hoy">
+        <div className="ticker-pista">{[0, 1].map(k => <span key={k} aria-hidden={k === 1}>{TICKER.map(([n, v, id]) => <a key={n} href={ruta(id)} style={{ ['--c' as string]: color(id) }}><i />{n} <b>{v}</b></a>)}</span>)}</div>
+      </div>
       <ul className="temas">
         {TEMAS.map((t, i) => {
           const abierto = !!t.ruta
