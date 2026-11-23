@@ -52,44 +52,44 @@
   "ES70": "25 datos, último 2024 = 25900"
  },
  "ipc": {
-  "EU27_2020": "301 datos, último 2025-12 = 2.3",
-  "ES": "348 datos, último 2025-12 = 3"
+  "EU27_2020": "311 datos, último 2026-10 = 4",
+  "ES": "358 datos, último 2026-10 = 4.9"
  },
  "ipc_sub": {
-  "ES": "288 datos, último 2025-12 = 3"
+  "ES": "298 datos, último 2026-10 = 3.6"
  },
  "ipc_grupos": {
-  "CP01": "132 datos, último 2025-12 = 3",
-  "CP02": "132 datos, último 2025-12 = 4.4",
-  "CP03": "132 datos, último 2025-12 = 0.6",
-  "CP04": "132 datos, último 2025-12 = 5.6",
-  "CP045": "132 datos, último 2025-12 = 8.7",
-  "CP06": "132 datos, último 2025-12 = 2.2",
-  "CP07": "132 datos, último 2025-12 = 2.1",
-  "CP0722": "132 datos, último 2025-12 = -2.3",
-  "CP09": "132 datos, último 2025-12 = 0.8",
-  "CP11": "132 datos, último 2025-12 = 4.7",
-  "NRG": "132 datos, último 2025-12 = 3.2",
-  "SERV": "132 datos, último 2025-12 = 3.9"
+  "CP01": "142 datos, último 2026-10 = 2.4",
+  "CP02": "142 datos, último 2026-10 = 2.9",
+  "CP03": "142 datos, último 2026-10 = 1",
+  "CP04": "142 datos, último 2026-10 = 7.6",
+  "CP045": "142 datos, último 2026-10 = 14.1",
+  "CP06": "142 datos, último 2026-10 = 2",
+  "CP07": "142 datos, último 2026-10 = 10.8",
+  "CP0722": "142 datos, último 2026-10 = 28.7",
+  "CP09": "142 datos, último 2026-10 = 5",
+  "CP11": "142 datos, último 2026-10 = 5",
+  "NRG": "142 datos, último 2026-10 = 21.1",
+  "SERV": "142 datos, último 2026-10 = 4.2"
  },
  "ipc_paises": {
-  "EU27_2020": "36 datos, último 2025-12 = 2.3",
-  "BE": "36 datos, último 2025-12 = 2.2",
-  "CZ": "36 datos, último 2025-12 = 1.8",
-  "DK": "36 datos, último 2025-12 = 1.9",
-  "DE": "36 datos, último 2025-12 = 2",
-  "IE": "36 datos, último 2025-12 = 2.7",
-  "ES": "36 datos, último 2025-12 = 3",
-  "FR": "36 datos, último 2025-12 = 0.7",
-  "IT": "36 datos, último 2025-12 = 1.2",
-  "HU": "36 datos, último 2025-12 = 3.3",
-  "NL": "36 datos, último 2025-12 = 2.7",
-  "AT": "36 datos, último 2025-12 = 3.8",
-  "PL": "36 datos, último 2025-12 = 2.5",
-  "PT": "36 datos, último 2025-12 = 2.4",
-  "RO": "36 datos, último 2025-12 = 8.6",
-  "FI": "36 datos, último 2025-12 = 1.7",
-  "SE": "36 datos, último 2025-12 = 2.1"
+  "EU27_2020": "46 datos, último 2026-10 = 4",
+  "BE": "46 datos, último 2026-10 = 5.2",
+  "CZ": "46 datos, último 2026-10 = 2.1",
+  "DK": "46 datos, último 2026-10 = 2.1",
+  "DE": "46 datos, último 2026-10 = 2.9",
+  "IE": "46 datos, último 2026-10 = 4.2",
+  "ES": "46 datos, último 2026-10 = 4.9",
+  "FR": "46 datos, último 2026-10 = 3.7",
+  "IT": "46 datos, último 2026-10 = 5.6",
+  "HU": "46 datos, último 2026-10 = 2.4",
+  "NL": "46 datos, último 2026-10 = 3.3",
+  "AT": "46 datos, último 2026-10 = 3.5",
+  "PL": "46 datos, último 2026-10 = 3.7",
+  "PT": "46 datos, último 2026-10 = 3.9",
+  "RO": "46 datos, último 2026-10 = 7",
+  "FI": "46 datos, último 2026-10 = 3.2",
+  "SE": "46 datos, último 2026-10 = 0.6"
  },
  "paro": {
   "EU27_2020": "321 datos, último 2026-09 = 6.2",
@@ -198,7 +198,25 @@
  "euribor": {
   "EA": "334 datos, último 2026-10 = 3.239"
  },
- "propiedad": "ERROR HTTP 400 { \"error\": [{\"status\": 400,\"id\": 150,\"label\": \"INVALID_QUERY_DIMENSION: Query is invalid as per its structure's definiti",
+ "propiedad": {
+  "EU27_2020": "16 datos, último 2025 = 68.5",
+  "BE": "16 datos, último 2025 = 70.9",
+  "CZ": "16 datos, último 2025 = 75.1",
+  "DK": "16 datos, último 2025 = 58.4",
+  "DE": "16 datos, último 2025 = 47.2",
+  "IE": "16 datos, último 2025 = 70.9",
+  "ES": "16 datos, último 2025 = 73.6",
+  "FR": "16 datos, último 2025 = 61.4",
+  "IT": "16 datos, último 2025 = 77.1",
+  "HU": "16 datos, último 2025 = 89.8",
+  "NL": "16 datos, último 2025 = 68.8",
+  "AT": "16 datos, último 2025 = 54.2",
+  "PL": "16 datos, último 2025 = 87.2",
+  "PT": "16 datos, último 2025 = 71.2",
+  "RO": "16 datos, último 2025 = 93.2",
+  "FI": "16 datos, último 2025 = 66.9",
+  "SE": "16 datos, último 2025 = 64.6"
+ },
  "deuda": {
   "EU27_2020": "26 datos, último 2025 = 81.5",
   "BE": "31 datos, último 2025 = 108.1",
@@ -276,30 +294,24 @@
   "FI": "42 datos, último 2025 = 25.6",
   "SE": "42 datos, último 2025 = 25.5"
  },
- "renta_mediana": "ERROR HTTP 400 { \"error\": [{\"status\": 400,\"id\": 150,\"label\": \"INVALID_QUERY_DIMENSION: Query is invalid as per its structure's definiti",
- "_sonda_prc_hicp_minr": {
-  "freq": "M",
-  "unit": "I25,I15,RCH_M,RCH_A,RCH_MV12MAVR",
-  "coicop18": "TOTAL,CP01,CP011,CP0111,CP01111,CP01112,CP01113,CP011131,CP011139,CP01114,CP01115,CP01119,CP0112,CP01121,CP01122,CP011221,CP011222,CP011223,CP011224,CP011225,CP011226,CP011229,CP01123,CP01124,CP01125,CP0113,CP01131,CP01132,CP01133,CP01134,CP01135,CP01136,CP01137,CP0114,CP01141,CP01142,CP01143,CP01144,CP01145,CP01146",
-  "geo": "ES",
-  "time": "2026-10"
+ "renta_mediana": {
+  "EU27_2020": "21 datos, último 2025 = 22939",
+  "BE": "21 datos, último 2025 = 31299",
+  "CZ": "21 datos, último 2025 = 15199",
+  "DK": "21 datos, último 2025 = 36192",
+  "DE": "21 datos, último 2025 = 28891",
+  "IE": "21 datos, último 2025 = 35138",
+  "ES": "21 datos, último 2025 = 20367",
+  "FR": "21 datos, último 2025 = 26459",
+  "IT": "21 datos, último 2025 = 22062",
+  "HU": "21 datos, último 2025 = 8792",
+  "NL": "21 datos, último 2025 = 34466",
+  "AT": "21 datos, último 2025 = 36546",
+  "PL": "21 datos, último 2025 = 14394",
+  "PT": "21 datos, último 2025 = 14465",
+  "RO": "19 datos, último 2025 = 8187",
+  "FI": "21 datos, último 2025 = 29740",
+  "SE": "21 datos, último 2025 = 28574"
  },
- "_sonda_ilc_di03": {
-  "freq": "A",
-  "age": "TOTAL,Y_LT6,Y6-10,Y6-11,Y11-15,Y12-17,Y_LT16,Y16-24,Y16-64,Y_GE16,Y_LT18,Y18-24,Y18-64,Y_GE18,Y25-49,Y25-54,Y50-64,Y55-64,Y_LT60,Y_GE60,Y_LT65,Y65-74,Y_GE65,Y_LT75,Y_GE75",
-  "sex": "T,M,F",
-  "statinfo": "MEAN_EI,MED_EI",
-  "unit": "EUR,NAC,PPS",
-  "geo": "ES",
-  "time": "2025"
- },
- "_sonda_ilc_lvho02": {
-  "freq": "A",
-  "rskpovth": "TOTAL,A_60,B_60",
-  "hhcomp": "TOTAL,M1,F1,A1,A1_DCH,A2,A2_DCH1,A2_DCH2,A2_DCH_GE3,A_GE3,A_GE3_DCH,DCH,NDCH,A1_LT65,A1_GE65,A2_2LT65,A2_GE1_GE65",
-  "tenure": "TOTAL,OWN,OWN_L,OWN_NL,RENT,RENT_MKT,RENT_FR",
-  "unit": "PC",
-  "geo": "ES",
-  "time": "2025"
- }
+ "_sonda_coicop18": "TOTAL=Total | CP01=Food and non-alcoholic beverages | CP011=Food | CP012=Non-alcoholic beverages | CP013=Services for processing primary goods for food and non-alcoholic beverages | CP02=Alcoholic beverages, tobacco and narcotics | CP021=Alcoholic beverages | CP022=Alcohol production services | CP023=Tobacco | CP03=Clothing and footwear | CP031=Clothing | CP032=Footwear | CP04=Housing, water, electricity, gas and other fuels | CP041=Actual rental payments made for housing | CP043=Maintenance, repair and security of the dwelling | CP044=Water supply and miscellaneous services relating to the dwelling | CP045=Electricity, gas and other fuels | CP05=Furnishings, household equipment and routine household maintenance | CP051=Furniture, furnishings, and loose carpets | CP052=Household textiles | CP053=Household appliances | CP054=Glassware, tableware and household utensils | CP055=Tools and equipment for house and garden | CP056=Goods and services for routine household maintenance | CP06=Health | CP061=Medicines and health products | CP062=Outpatient care services | CP063=Inpatient care services | CP064=Other health services | CP07=Transport | CP071=Purchase of vehicles | CP072=Operation of personal transport equipment | CP073=Passenger transport services | CP074=Transport services for goods | CP08=Information and communication | CP081=Information and communication equipment | CP082=Software, excluding games | CP083=Information and communication services | CP09=Recreation, sport and culture | CP091=Recreational durables | CP092=Other recreational goods | CP093=Garden products and pets | CP094=Recreational services | CP095=Cultural goods | CP096=Cultural services | CP097=Newspapers, books and stationery | CP098=Package holidays | CP10=Education services | CP101=Early childhood and primary education | CP102=Secondary education | CP103=Post-secondary non-tertiary education | CP104=Tertiary education | CP105=Education not defined by level | CP11=Restaurants and accommodation services | CP111=Food and beverage serving services | CP112=Accommodation services | CP12=Insurance and financial services | CP121=Insurance | CP122=Financial services | CP13=Personal care, social protection and miscellaneous goods and services | CP131=Personal care | CP132=Other personal effects | CP133=Social protection | CP139=Other services | GD=Goods (overall index excluding services) | FOOD=Food including alcohol and tobacco | FOOD_P=Processed food including alcohol and tobacco | FOOD_P_X_TBC=Processed food excluding tobacco | FOOD_P_X_ALC_TBC=Processed food excluding alcohol and tobacco | FOOD_NP=Unprocessed food | FOOD_S=Seasonal food | IGD=Industrial goods | IGD_NNRG=Non-energy industrial goods | IGD_NNRG_D=Non-energy industrial goods, durables only | IGD_NNRG_SD=Non-energy industrial goods, semi-durables only | IGD_NNRG_ND=Non-energy industrial goods, non-durables only | NRG=Energy | ELC_GAS=Electricity, gas, solid fuels and heat energy | FUEL=Liquid fuels and fuels for personal transport equipment | SERV=Services (overall index excluding goods) | SERV_COM=Services related to communication | SERV_HOUS=Services related to housing | SERV_MSC=Services - miscellaneous | SERV_REC=Services related to recreation, including repairs and personal care | SERV_REC_X_HOA=Services related to recreation and personal care, excluding package holidays and accommodation | SERV_REC_HOA=Services related to package holidays and accommodation | SERV_TRA=Services related to transport | NRG_FOOD_NP=Energy and unprocessed food | NRG_FOOD_S=Energy and seasonal food | EDUC_HLTH_SPR=Education, health and social protection | FROOPP=Frequent out-of-pocket purchases | TOT_X_FOOD_S=Overall index excluding seasonal food | TOT_X_ALC_TBC=Overall index excluding alcohol and tobacco | TOT_X_TBC=Overall index excluding tobacco | TOT_X_NRG=Overall index excluding energy | TOT_X_NRG_FOOD=Overall index excluding energy, food, alcohol and tobacco | TOT_X_NRG_FOOD_NP=Overall index excluding energy and unprocessed food | TOT_X_NRG_FOOD_S=Overall index excluding energy and seasonal food | TOT_X_FUEL=Overall index excluding liquid fuels and fuels for personal transport equipment | TOT_X_HOUS=Overall index excluding housing, water, electricity, gas and other fuels | TOT_X_EDUC_HLTH_SPR=Overall index excluding education, health and social protection | TOT_X_FROOPP=Overall index excluding frequent out-of-pocket purchases | AP=Administered prices | AP_NRG=Administered prices - energy | AP_X_NRG=Administered prices excluding energy | AP_X_NRG_FOOD=Administered prices excluding energy and food | AP_NRG_FOOD=Administered prices - energy and food | APF=Fully administered prices | APM=Mainly administered prices | TOT_X_AP=Overall index excluding administered prices | TOT_X_APF=Overall index excluding fully administered prices | TOT_X_APM=Overall index excluding mainly administered prices"
 }
