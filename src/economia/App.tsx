@@ -66,8 +66,9 @@ function Ranking({ g, nombre, fmt, titulo, orden = 'desc', limite = 12 }: { g: R
   if (!items.length) return null
   const año = items.map(x => x.p[0]).sort().at(-1)!
   const rows = items.filter(x => x.p[0] === año || items.length < 6).sort((a, b) => (orden === 'desc' ? b.p[1] - a.p[1] : a.p[1] - b.p[1]))
+  const iEs = rows.findIndex(x => x.k === 'ES')
   return <>
-    <Barras titulo={titulo} fmt={fmt} limite={limite} items={rows.map(x => ({ id: x.k, nombre: nombre(x.k), valor: x.p[1], destacado: x.k === 'ES', color: x.k === 'ES' ? ES : x.k === 'EU27_2020' ? UE : '#3987e5' }))} />
+    <Barras titulo={titulo} fmt={fmt} limite={Math.max(limite, iEs + 1)} items={rows.map(x => ({ id: x.k, nombre: nombre(x.k), valor: x.p[1], destacado: x.k === 'ES', color: x.k === 'ES' ? ES : x.k === 'EU27_2020' ? UE : '#3987e5' }))} />
     <p className="note">Dato de {periodo(año)}.</p>
   </>
 }
@@ -130,7 +131,7 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
         <Columnas titulo="Crecimiento trimestral del PIB" items={t.d.filter(x => !rango || toT(x[0]) > Date.now() - rango * 365.25 * 864e5).map(([p, v]) => ({ x: p.replace('-Q', 'T'), valor: v, color: v < 0 ? '#ff4d5e' : ES }))} fmt={v => pct(v)} cadaX={8} />
       </Card>}
       {niv && <Card t="El tamaño de la economía" lead={<>España produce <b>{nf(niv.d.at(-1)![1] / 1e6, 2)} billones de euros</b> al año ({niv.d.at(-1)![0]}), a precios de cada año.</>}>
-        <Columnas titulo="PIB a precios corrientes" items={niv.d.map(([p, v]) => ({ x: p, valor: v / 1e3 }))} fmt={v => `${nf(v)} mil M€`} cadaX={5} />
+        <Columnas titulo="PIB a precios corrientes" items={niv.d.map(([p, v]) => ({ x: p, valor: v / 1e6 }))} fmt={v => `${nf(v, 2)} bill. €`} cadaX={5} />
       </Card>}
       {ppa && <Card si={hay(grupo('pib', 'pib_pc_ppa'))} t="Riqueza por habitante en Europa" lead={<>Corrigiendo por lo que cuestan las cosas en cada país, el PIB por habitante de España es <b>{nf(ppa[1])}</b> sobre una media europea de 100.</>}>
         <Ranking g={grupo('pib', 'pib_pc_ppa')} nombre={geo} fmt={v => nf(v)} titulo="PIB por habitante en poder de compra" />
@@ -144,7 +145,8 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
   if (id === 'precios') {
     const ipc = last(s('precios', 'ipc:ES')), sub = last(s('precios', 'ipc_sub')), dif = vsUE('precios', 'ipc')
     const g = grupo('precios', 'ipc_grupos')
-    const gl = Object.entries(g).map(([k, x]) => ({ k, v: x.d.at(-1)! })).sort((a, b) => b.v[1] - a.v[1])
+    const gl0 = Object.entries(g).map(([k, x]) => ({ k, v: x.d.at(-1)! })), mes = gl0.map(x => x.v[0]).sort().at(-1)
+    const gl = gl0.filter(x => x.v[0] === mes).sort((a, b) => b.v[1] - a.v[1])
     return <div className="graficos">
       {ipc && <Card t="Inflación" wide lead={<>Los precios suben un <b>{pct(ipc[1])}</b> en un año ({periodo(ipc[0])}){dif != null && <>, {pp(dif)} frente a la UE</>}{sub && <>. Sin energía ni alimentos frescos, la subyacente está en {pct(sub[1])}</>}.</>} fuente="Eurostat · índice de precios armonizado (IPCA), tasa anual">
         <Linea titulo="Inflación anual" series={[...cmp('precios', 'ipc', 'IPCA'), ls(s('precios', 'ipc_sub'), 'Subyacente', rango, { color: CAT[0] })]} fy={v => pct(v)} frec="M" cero />

@@ -95,10 +95,30 @@ await serie('pib', 'pib_pc_ppa', 'PIB por habitante en poder de compra (UE = 100
 await serie('pib', 'pib_pc_ccaa', 'PIB por habitante', '€', 'A', () => eurostat('nama_10r_2gdp', { unit: 'EUR_HAB', geo: [...Object.keys(NUTS2), 'ES'], ...desde(2000) }))
 
 // --- Precios ---
-await serie('precios', 'ipc', 'Inflación (IPCA)', '%', 'M', () => mejor(['prc_hicp_manr', 'prc_hicp_minr', 'prc_hicp_mv12r'], { coicop: 'CP00', geo: ['ES', UE], ...desde(1997) }))
-await serie('precios', 'ipc_sub', 'Inflación subyacente (sin energía ni alimentos)', '%', 'M', () => mejor(['prc_hicp_manr', 'prc_hicp_minr', 'prc_hicp_mv12r'], { coicop: 'TOT_X_NRG_FOOD', geo: 'ES', ...desde(2002) }))
-await serie('precios', 'ipc_grupos', 'Inflación por grupos', '%', 'M', () => mejor(['prc_hicp_manr', 'prc_hicp_minr'], { coicop: ['CP01', 'CP02', 'CP03', 'CP04', 'CP045', 'CP06', 'CP07', 'CP0722', 'CP09', 'CP11', 'NRG', 'SERV'], geo: 'ES', ...desde(2015) }, 'coicop'))
-await serie('precios', 'ipc_paises', 'Inflación en la UE', '%', 'M', () => mejor(['prc_hicp_manr', 'prc_hicp_minr', 'prc_hicp_mv12r'], { coicop: 'CP00', geo: PAISES, ...desde(2023) }))
+// IPCA: Eurostat congeló prc_hicp_manr en dic-2025 y sigue en prc_hicp_minr (ECOICOP v2, dimensión coicop18).
+// Se empalman: tasas anuales de la tabla vieja hasta 2025 y de la nueva desde 2026.
+async function hicp(codes, geo, since, varia = 'geo') {
+  let viejo = {}
+  try { viejo = await eurostat('prc_hicp_manr', { coicop: codes, geo, ...desde(since) }, varia) } catch (e) { log['_hicp_viejo_' + codes[0]] = String(e.message).slice(0, 120) }
+  const nuevo = {}
+  for (const c of codes) {
+    try {
+      const r = await eurostat('prc_hicp_minr', { unit: 'RCH_A', coicop18: c === 'CP00' ? 'TOTAL' : c, geo, sinceTimePeriod: '2026-01' }, varia === 'coicop' ? 'coicop18' : varia)
+      for (const [k, d] of Object.entries(r)) nuevo[varia === 'coicop' ? c : k] = d
+    } catch (e) { log['_hicp_nuevo_' + c] = String(e.message).slice(0, 120) }
+  }
+  const out = {}
+  for (const k of new Set([...Object.keys(viejo), ...Object.keys(nuevo)])) {
+    const n = nuevo[k] ?? [], desdeN = n[0]?.[0] ?? '9999'
+    out[k] = [...(viejo[k] ?? []).filter(p => p[0] < desdeN), ...n]
+  }
+  if (!Object.values(out).some(d => d.length)) throw new Error('IPCA sin datos en ninguna tabla')
+  return out
+}
+await serie('precios', 'ipc', 'Inflación (IPCA)', '%', 'M', () => hicp(['CP00'], ['ES', UE], 1997))
+await serie('precios', 'ipc_sub', 'Inflación subyacente (sin energía ni alimentos)', '%', 'M', () => hicp(['TOT_X_NRG_FOOD'], 'ES', 2002))
+await serie('precios', 'ipc_grupos', 'Inflación por grupos', '%', 'M', () => hicp(['CP01', 'CP02', 'CP03', 'CP04', 'CP045', 'CP06', 'CP07', 'CP0722', 'CP09', 'CP11', 'NRG', 'SERV'], 'ES', 2015, 'coicop'))
+await serie('precios', 'ipc_paises', 'Inflación en la UE', '%', 'M', () => hicp(['CP00'], PAISES, 2023))
 
 // --- Empleo ---
 await serie('empleo', 'paro', 'Tasa de paro', '%', 'M', () => eurostat('une_rt_m', { s_adj: 'SA', age: 'TOTAL', sex: 'T', unit: 'PC_ACT', geo: ['ES', UE], ...desde(2000) }))
@@ -118,7 +138,7 @@ await serie('salarios', 'salario_medio', 'Salario medio anual a tiempo completo'
 await serie('vivienda', 'vivienda_var', 'Precio de la vivienda, variación anual', '%', 'T', () => eurostat('prc_hpi_q', { purchase: 'TOTAL', unit: 'RCH_A', geo: ['ES', UE], ...desde(2008) }))
 await serie('vivienda', 'vivienda_ind', 'Precio de la vivienda (2015 = 100)', 'índice', 'T', () => eurostat('prc_hpi_q', { purchase: ['TOTAL', 'DW_NEW', 'DW_EXST'], unit: 'I15_Q', geo: 'ES', ...desde(2007) }, 'purchase'))
 await serie('vivienda', 'euribor', 'Euríbor a 12 meses', '%', 'M', () => eurostat('irt_st_m', { int_rt: 'IRT_M12', geo: 'EA', ...desde(1999) }))
-await serie('vivienda', 'propiedad', 'Hogares en vivienda en propiedad', '%', 'A', () => eurostat('ilc_lvho02', { tenure: 'OWN', hhtyp: 'TOTAL', incgrp: 'TOTAL', geo: PAISES, ...desde(2010) }))
+await serie('vivienda', 'propiedad', 'Hogares en vivienda en propiedad', '%', 'A', () => eurostat('ilc_lvho02', { tenure: 'OWN', hhcomp: 'TOTAL', rskpovth: 'TOTAL', unit: 'PC', geo: PAISES, ...desde(2010) }))
 
 // --- Cuentas públicas ---
 await serie('publico', 'deuda', 'Deuda pública', '% del PIB', 'A', () => eurostat('gov_10dd_edpt1', { unit: 'PC_GDP', sector: 'S13', na_item: 'GD', geo: PAISES, ...desde(1995) }))
@@ -129,7 +149,7 @@ await serie('publico', 'gasto', 'Gasto público por funciones', '% del PIB', 'A'
 // --- Bolsillos: renta y pobreza ---
 await serie('hogares', 'riesgo_pobreza', 'En riesgo de pobreza o exclusión social', '%', 'A', () => eurostat('ilc_peps01n', { unit: 'PC', age: 'TOTAL', sex: 'T', geo: ['ES', UE], ...desde(2015) }))
 await serie('hogares', 'gini', 'Desigualdad (índice de Gini)', 'índice', 'A', () => eurostat('ilc_di12', { geo: PAISES, ...desde(2005) }))
-await serie('hogares', 'renta_mediana', 'Renta mediana por persona', '€', 'A', () => eurostat('ilc_di03', { indic_il: 'MED_E', age: 'TOTAL', sex: 'T', unit: 'EUR', geo: PAISES, ...desde(2005) }))
+await serie('hogares', 'renta_mediana', 'Renta mediana por persona', '€', 'A', () => eurostat('ilc_di03', { statinfo: 'MED_EI', age: 'TOTAL', sex: 'T', unit: 'EUR', geo: PAISES, ...desde(2005) }))
 
 const NOMBRES = {
   geo: { ES: 'España', [UE]: 'UE', EA: 'Zona euro', DE: 'Alemania', FR: 'Francia', IT: 'Italia', PT: 'Portugal', NL: 'Países Bajos', BE: 'Bélgica', IE: 'Irlanda', PL: 'Polonia', SE: 'Suecia', AT: 'Austria', GR: 'Grecia', DK: 'Dinamarca', FI: 'Finlandia', CZ: 'Chequia', RO: 'Rumanía', HU: 'Hungría', ...NUTS2 },
@@ -141,9 +161,11 @@ const NOMBRES = {
 // Segunda vuelta para lo que falló (Eurostat a veces corta un rato), y si aún falla, lo de ayer
 if (pendientes.length) { await espera(60000); for (const p of pendientes) await serie(...p, true) }
 for (const [tema, id] of pendientes) if (String(log[id]).startsWith('ERROR')) conservar(tema, id)
-await sonda('prc_hicp_minr', { geo: 'ES' })
-await sonda('ilc_di03', { geo: 'ES' })
-await sonda('ilc_lvho02', { geo: 'ES' })
+try {
+  const j = await get('https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hicp_minr?' + new URLSearchParams({ format: 'JSON', lang: 'EN', lastTimePeriod: '1', geo: 'ES', unit: 'RCH_A' }))
+  const cat = j.dimension.coicop18.category
+  log._sonda_coicop18 = Object.keys(cat.index).filter(k => !/^CP\d{4,}/.test(k)).map(k => k + '=' + (cat.label?.[k] ?? '')).join(' | ')
+} catch (e) { log._sonda_coicop18 = 'ERROR ' + String(e.message).slice(0, 200) }
 
 // Índice de tablas de Eurostat (filtrado) para localizar las que cambian de nombre
 try {
