@@ -53,9 +53,14 @@ export function Graficos({ d, onMuni }: { d: Datos; onMuni: (m: Muni) => void })
     const tot = d.munis.reduce((t, m) => t + popNow(m), 0)
     return cuts.map(([a, b, x]) => { const ms = d.munis.filter(m => popNow(m) >= a && popNow(m) < b); return { x, n: ms.length, share: (ms.reduce((t, m) => t + popNow(m), 0) / tot) * 100 } })
   }, [d])
-  const losers = useMemo(() => d.munis.filter(m => (m.pop[0] ?? 0) >= 1000).map(m => ({ m, v: valorDe('cambio', m) ?? 0 })).sort((a, b) => a.v - b.v), [d])
+  const i00 = Math.max(0, Y.indexOf(2000))
+  const losers = useMemo(() => d.munis.filter(m => (m.pop[i00] ?? 0) >= 1000).map(m => ({ m, v: valorDe('cambio', m) ?? 0 })).sort((a, b) => a.v - b.v), [d])
   const ESL = (v: number) => `${v > 0 ? '+' : ''}${nf(v, 1)} %`
   const shrinking = d.munis.filter(m => (valorDe('cambio', m) ?? 0) < 0).length
+  const small = sizes[0].n + sizes[1].n, smallPct = (small / d.munis.length) * 100
+  const fecEl = fecE ? last(fecE.d)[1] : null, fecXl = fecX ? last(fecX.d)[1] : null
+  const migNeg = mig.filter(p => p[1] < 0).map(p => p[0])
+  const v19 = vidaM?.d.find(p => p[0] === 2019)?.[1], v20 = vidaM?.d.find(p => p[0] === 2020)?.[1]
 
   return (
     <div className="graficos">
@@ -76,7 +81,7 @@ export function Graficos({ d, onMuni }: { d: Datos; onMuni: (m: Muni) => void })
         <Columnas titulo="Saldo vegetativo por mil habitantes" items={veg.d.map(([x, v]) => ({ x: String(x), valor: v, color: v < 0 ? '#d95926' : '#3987e5', destacado: x === vegNeg?.[0] }))} fmt={v => nf(v, 1)} cadaX={10} etiqueta={c => `primer año negativo: ${c.x}`} />
       </Card>}
 
-      {fec && <Card t="Hijos por mujer" lead={<>Hacen falta unos 2,1 para que una generación se reemplace. España está en <b>{nf(last(fec.d)[1], 2)}</b> ({last(fec.d)[0]}), y las madres extranjeras tienen más que las españolas.</>}>
+      {fec && <Card t="Hijos por mujer" lead={<>Hacen falta unos 2,1 para que una generación se reemplace. España está en <b>{nf(last(fec.d)[1], 2)}</b> ({last(fec.d)[0]}){fecEl != null && fecXl != null ? <>: {nf(fecEl, 2)} las madres españolas y {nf(fecXl, 2)} las extranjeras.</> : '.'}</>}>
         <LineChart titulo="Indicador coyuntural de fecundidad" series={[{ id: 't', nombre: 'Todas', datos: toPts(fec), color: '#c49bff' }, ...(fecE ? [{ id: 'e', nombre: 'Madre española', datos: toPts(fecE), color: '#3987e5', fondo: true }] : []), ...(fecX ? [{ id: 'x', nombre: 'Madre extranjera', datos: toPts(fecX), color: '#d95926', fondo: true }] : [])] as LSerie[]} fx={year} fy={v => nf(v, 2)} alto={190} />
       </Card>}
 
@@ -84,7 +89,7 @@ export function Graficos({ d, onMuni }: { d: Datos; onMuni: (m: Muni) => void })
         <LineChart titulo="Edad media a la maternidad" series={[{ id: 'm', nombre: 'Edad media', datos: toPts(mat), area: true }]} fx={year} fy={v => `${nf(v, 1)} años`} alto={170} />
       </Card>}
 
-      {vidaH && vidaM && <Card t="Esperanza de vida" lead={<>Las mujeres viven de media <b>{nf(last(vidaM.d)[1] - last(vidaH.d)[1], 1)} años más</b> que los hombres. El bache de 2020 es la covid.</>}>
+      {vidaH && vidaM && <Card t="Esperanza de vida" lead={<>Las mujeres viven de media <b>{nf(last(vidaM.d)[1] - last(vidaH.d)[1], 1)} años más</b> que los hombres.{v19 != null && v20 != null && v20 < v19 ? <> En 2020 bajó {nf(v19 - v20, 1)} años de golpe: la covid.</> : null}</>}>
         <LineChart titulo="Esperanza de vida al nacer" series={[{ id: 'h', nombre: 'Hombres', datos: toPts(vidaH), color: H }, { id: 'm', nombre: 'Mujeres', datos: toPts(vidaM), color: M }]} fx={year} fy={v => `${nf(v, 1)} años`} alto={190} />
       </Card>}
 
@@ -97,7 +102,7 @@ export function Graficos({ d, onMuni }: { d: Datos; onMuni: (m: Muni) => void })
         <LineChart titulo="Porcentaje de población nacida en el extranjero" series={[{ id: 'f', nombre: 'Nacidos fuera', datos: toPts(fuera), area: true }]} fx={year} fy={v => `${nf(v, 1)} %`} alto={170} />
       </Card>}
 
-      {mig.length > 1 && <Card t="Migración con el extranjero" lead="Llegadas menos salidas, por mil habitantes. La crisis de 2008 dio la vuelta al saldo unos años.">
+      {mig.length > 1 && <Card t="Migración con el extranjero" lead={<>Llegadas menos salidas, por mil habitantes. {migNeg.length ? <>Se marchó más gente de la que llegó en {migNeg.length === 1 ? migNeg[0] : `${migNeg[0]}–${last(migNeg)}`}.</> : 'Llega más gente de la que se va todos los años de la serie.'}</>}>
         <Columnas titulo="Tasa de migración neta con el extranjero" items={mig.map(([x, v]) => ({ x: String(x), valor: v, color: v < 0 ? '#d95926' : '#3987e5' }))} fmt={v => nf(v, 1)} cadaX={3} />
       </Card>}
 
@@ -105,18 +110,18 @@ export function Graficos({ d, onMuni }: { d: Datos; onMuni: (m: Muni) => void })
         <Barras titulo="Cambio de población por comunidad" fmt={ESL} limite={19} items={regions.ccaa.map(r => ({ id: r.n, nombre: r.n, sub: `${compact(r.a)} → ${compact(r.b)}`, valor: r.pct, color: r.pct < 0 ? '#d95926' : '#3987e5' }))} />
       </Card>
 
-      <Card t="La España vaciada en un gráfico" lead={<><b>{nf(shrinking)}</b> de {nf(d.munis.length)} municipios tienen hoy menos gente que en 2000. Casi la mitad de los municipios tiene menos de 500 vecinos, pero entre todos no llegan al {nf(sizes[0].share + sizes[1].share, 1)} % de la población.</>}>
+      <Card t="La España vaciada en un gráfico" lead={<><b>{nf(shrinking)}</b> de {nf(d.munis.length)} municipios tienen hoy menos gente que en 2000. El {nf(smallPct, 0)} % de los municipios tiene menos de 500 vecinos, pero entre todos suman solo el {nf(sizes[0].share + sizes[1].share, 1)} % de la población.</>}>
         <Columnas titulo="Número de municipios por tamaño" items={sizes.map(s => ({ x: s.x, valor: s.n }))} fmt={v => nf(v)} alto={160} />
         <Columnas titulo="Porcentaje de la población que vive en cada tamaño de municipio" items={sizes.map(s => ({ x: s.x, valor: s.share, color: '#3987e5' }))} fmt={v => `${nf(v, 1)} %`} alto={160} />
         <p className="note">Arriba, cuántos municipios hay de cada tamaño; abajo, qué parte de la población vive en ellos.</p>
       </Card>
 
-      <Card t="Los que más gente han perdido" lead={`Municipios que tenían al menos 1.000 vecinos en ${Y[0]}, por su cambio desde 2000.`}>
-        <Barras titulo="Municipios que más población han perdido" fmt={v => `−${nf(v, 1)} %`} limite={10} items={losers.slice(0, 30).map(({ m, v }) => ({ id: m.id, nombre: m.n, sub: `${METRICAS.hab.fmt(m.pop[0] ?? 0)} → ${METRICAS.hab.fmt(popNow(m))} vecinos`, valor: -v, color: '#d95926', onClick: () => onMuni(m) }))} />
+      <Card t="Los que más gente han perdido" lead="Municipios que tenían al menos 1.000 vecinos en 2000, por cuánto han cambiado desde entonces.">
+        <Barras titulo="Municipios que más población han perdido" fmt={v => `−${nf(v, 1)} %`} limite={10} items={losers.slice(0, 30).map(({ m, v }) => ({ id: m.id, nombre: m.n, sub: `${METRICAS.hab.fmt(m.pop[i00] ?? 0)} → ${METRICAS.hab.fmt(popNow(m))} vecinos`, valor: -v, color: '#d95926', onClick: () => onMuni(m) }))} />
       </Card>
 
-      <Card t="Y los que más han crecido" lead="Mismo criterio: al menos 1.000 vecinos al principio de la serie.">
-        <Barras titulo="Municipios que más población han ganado" fmt={ESL} limite={10} items={[...losers].reverse().slice(0, 30).map(({ m, v }) => ({ id: m.id, nombre: m.n, sub: `${METRICAS.hab.fmt(m.pop[0] ?? 0)} → ${METRICAS.hab.fmt(popNow(m))} vecinos`, valor: v, color: '#3987e5', onClick: () => onMuni(m) }))} />
+      <Card t="Y los que más han crecido" lead="Mismo criterio: al menos 1.000 vecinos en 2000.">
+        <Barras titulo="Municipios que más población han ganado" fmt={ESL} limite={10} items={[...losers].reverse().slice(0, 30).map(({ m, v }) => ({ id: m.id, nombre: m.n, sub: `${METRICAS.hab.fmt(m.pop[i00] ?? 0)} → ${METRICAS.hab.fmt(popNow(m))} vecinos`, valor: v, color: '#3987e5', onClick: () => onMuni(m) }))} />
       </Card>
 
       <p className="src">Fuentes: INE — Revisión del Padrón Municipal (1996–{yl}), Estadística Continua de Población (pirámide desde 1971) e Indicadores Demográficos Básicos. Límites municipales: IGN.</p>

@@ -67,7 +67,7 @@ const IND_MUNI = { 30699: 'edad', 30702: 'envej', 34982: 'nacidos', 30696: 'vege
         if (!muni) continue
         // nos quedamos con «ambos sexos / total» cuando la tabla trae más cortes
         const extra = md.filter(m => m !== muni).map(m => m.Nombre).join(' ')
-        if (key === 'nacidos' && !/nacidas en el extranjero/i.test(extra)) continue
+        if (key === 'nacidos' && !/extranjer|otro pa[ií]s/i.test(extra)) continue
         if (key !== 'nacidos' && /hombre|mujer/i.test(extra) && !/total|ambos/i.test(extra)) continue
         const d = s.Data?.[0]; if (!d || d.Valor == null) continue
         if (out[key].v[muni.Codigo] != null && !/total|ambos/i.test(extra)) continue

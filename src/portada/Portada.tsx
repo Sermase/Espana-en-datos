@@ -35,10 +35,15 @@ function Mini({ t }: { t: Tema }) {
       {[0, 1, 2].map(i => <motion.circle key={i} r="3.5" fill={c} initial={{ offsetDistance: '0%' }} animate={{ offsetDistance: '100%' }} transition={{ duration: 5 + i * 2, repeat: Infinity, ease: 'linear', delay: i }} style={{ offsetPath: `path('${['M4 60 L40 40 L70 44 L116 14', 'M40 40 L52 76', 'M70 44 L104 70'][i]}')` }} />)}
     </svg>
   )
-  if (t.vista === 'pirámide') return (
-    <svg viewBox="0 0 120 80" className="mini" aria-hidden>{[30, 38, 44, 46, 44, 40, 34, 26, 16, 8].map((w, i) => (
-      <g key={i}><rect x={60 - w} y={6 + i * 7} width={w - 1} height="5" fill={c} opacity=".55" /><rect x={61} y={6 + i * 7} width={w + (i > 6 ? 4 : 0)} height="5" fill={c} opacity=".85" /></g>))}</svg>
-  )
+  if (t.vista === 'pirámide') {
+    const p = (resumen as { poblacion?: { total: number } }).poblacion
+    return (
+      <svg viewBox="0 0 120 88" className="mini" aria-hidden>{[30, 38, 44, 46, 44, 40, 34, 26, 16, 8].map((w, i) => (
+        <g key={i}><motion.rect y={4 + i * 6} height="4.5" fill="#3987e5" initial={{ x: 60, width: 0 }} animate={{ x: 60 - w, width: w - 1 }} transition={{ delay: .4 + i * .05, duration: .6 }} /><motion.rect x={61} y={4 + i * 6} height="4.5" fill="#d95926" initial={{ width: 0 }} animate={{ width: w + (i > 6 ? 4 : 0) }} transition={{ delay: .4 + i * .05, duration: .6 }} /></g>))}
+        {p && <text x="60" y="84" textAnchor="middle" className="mini-big" style={{ fontSize: 17 }}>{(p.total / 1e6).toLocaleString('es-ES', { maximumFractionDigits: 1 })}<tspan className="mini-unit"> M</tspan></text>}
+      </svg>
+    )
+  }
   if (t.vista === 'relieve') return (
     <svg viewBox="0 0 120 80" className="mini" aria-hidden>
       <path d="M0 74 L22 40 L34 52 L56 14 L72 38 L84 28 L120 74 Z" fill={c} fillOpacity=".12" stroke={c} strokeOpacity=".7" />
@@ -82,7 +87,7 @@ export default function Portada() {
                 <div className="tema-txt">
                   <h2>{t.nombre}{abierto && <ArrowUpRight size={20} />}</h2>
                   <p>{t.lema}</p>
-                  <small>{abierto ? <><i className="vivo" /> {t.id === 'agua' ? `Datos del ${fecha}` : 'Datos de hoy'}</> : 'En preparación'} · {VISTA[t.vista]}</small>
+                  <small>{abierto ? <><i className="vivo" /> {t.id === 'agua' ? `Datos del ${fecha}` : t.id === 'poblacion' ? 'Padrón y series del INE' : 'Datos de hoy'}</> : 'En preparación'} · {VISTA[t.vista]}</small>
                 </div>
                 <Mini t={t} />
               </Card>
