@@ -19,7 +19,7 @@ export function useEnergia() {
 
 // ---- lo de hoy, en directo desde la API pública de REE (permite pedirla desde el navegador) ----
 const API = 'https://apidatos.ree.es/es/datos/'
-async function ree(ruta: string, desde: string, hasta: string, trunc: string): Promise<Grupo> {
+export async function ree(ruta: string, desde: string, hasta: string, trunc: string): Promise<Grupo> {
   const r = await fetch(`${API}${ruta}?start_date=${desde}&end_date=${hasta}&time_trunc=${trunc}`)
   if (!r.ok) throw new Error(String(r.status))
   const j = await r.json(), out: Grupo = {}
@@ -31,9 +31,9 @@ async function ree(ruta: string, desde: string, hasta: string, trunc: string): P
   for (const it of j.included ?? []) meter(it)
   return out
 }
-const dia = (d: Date) => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Madrid' }).format(d)
+export const dia = (d: Date) => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Madrid' }).format(d)
 /** Generación peninsular cada 10 minutos: REE la sirve en JSONP (sin CORS), así que se pide con una etiqueta script. */
-function tiempoReal(fecha: string) {
+export function tiempoReal(fecha: string) {
   return new Promise<FilaTR[]>((ok, ko) => {
     const cb = `__ree${Date.now()}`, sc = document.createElement('script')
     const fin = () => { delete (window as never as Record<string, unknown>)[cb]; sc.remove() }

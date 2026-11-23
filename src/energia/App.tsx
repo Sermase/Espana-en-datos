@@ -1,11 +1,12 @@
-import { useMemo, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { motion } from 'motion/react'
-import { Activity, CloudFog, Euro, Factory, Gauge, Zap } from 'lucide-react'
+import { Activity, ChevronLeft, ChevronRight, CloudFog, Euro, Factory, Gauge, Zap } from 'lucide-react'
 import { Apiladas, Barras, Columnas, CountUp, LineChart, nf } from '../graficos'
 import { Holo3D } from '../holo3d/Holo3D'
 import { eolica, hidraulica, nuclear, red, solar, termica } from '../holo3d/modelos'
 import { A, Fuentes } from '../Fuentes'
-import { TEC, agrupar, agruparTR, fDia, fHora, fMes, tLocal, useEnergia, useVivo, type Grupo, type Hoy, type Historia, type Tec } from './datos'
+import { Precios as PreciosV2 } from './Precios'
+import { TEC, agrupar, agruparTR, dia as diaEs, tiempoReal, type FilaTR, fDia, fHora, fMes, tLocal, useEnergia, useVivo, type Grupo, type Hoy, type Historia, type Tec } from './datos'
 
 const ACC = '#ffb02e'
 const SECCIONES = [
@@ -132,7 +133,36 @@ function Ahora({ hoy, tec, setTec, vivo }: { hoy: Hoy; tec: Tec | null; setTec: 
   </>
 }
 
-function Generacion({ hist, desde }: { hist: Historia; desde: number }) {
+const sumaDias = (d: string, n: number) => { const t = new Date(d + 'T12:00:00Z'); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10) }
+/** Un día cualquiera, cada 10 minutos (península), pedido en el momento a Red Eléctrica. */
+function DiaGeneracion({ hoy }: { hoy: Hoy }) {
+  const dHoy = diaEs(new Date())
+  const [fecha, setFecha] = useState(sumaDias(dHoy, -1))
+  const [filas, setFilas] = useState<{ d: string; f: FilaTR[] | null; err?: boolean } | null>(null)
+  const [sel, setSel] = useState<Tec | null>(null)
+  useEffect(() => {
+    if (fecha === dHoy && hoy.tr?.length) { setFilas({ d: fecha, f: hoy.tr }); return }
+    let ok = true; setFilas({ d: fecha, f: null })
+    tiempoReal(fecha).then(f => ok && setFilas({ d: fecha, f }), () => ok && setFilas({ d: fecha, f: null, err: true }))
+    return () => { ok = false }
+  }, [fecha, dHoy, hoy.tr])
+  const ag = useMemo(() => filas?.d === fecha ? agruparTR(filas.f) : null, [filas, fecha])
+  const tot = ag?.capas.map(c => ({ c, e: c.v.reduce((a, b) => a + b, 0) / 6 })).sort((a, b) => b.e - a.e) // MW cada 10 min → MWh
+  const suma = tot?.reduce((a, b) => a + b.e, 0) ?? 0
+  const ren = tot?.filter(x => x.c.ren).reduce((a, b) => a + b.e, 0) ?? 0
+  return <Card t="Un día concreto" wide lead={ag && tot ? <>El {fDia(ag.xs[0])} {new Date(ag.xs[0]).getUTCFullYear()} la primera fuente fue la <b>{tot[0].c.nombre.toLowerCase()}</b> ({pct(tot[0].e / suma)}) y el <b>{pct(ren / suma)}</b> fue renovable. Elige otro día en el calendario.</> : 'Elige un día en el calendario para ver cómo se generó la electricidad, cada 10 minutos.'}
+    fuente={<><A id="ree_tr">REE, seguimiento de la demanda</A> (península)</>}>
+    <div className="cal">
+      <button aria-label="Día anterior" onClick={() => setFecha(sumaDias(fecha, -1))}><ChevronLeft size={18} /></button>
+      <input type="date" value={fecha} min="2015-01-01" max={dHoy} onChange={e => e.target.value && setFecha(e.target.value)} aria-label="Elige el día" />
+      <button aria-label="Día siguiente" onClick={() => setFecha(sumaDias(fecha, 1))} disabled={fecha >= dHoy}><ChevronRight size={18} /></button>
+    </div>
+    {ag ? <Apiladas xs={ag.xs} capas={ag.capas} titulo={`Generación del ${fecha}`} fx={fHora} ticksX={horas(ag.xs[0], innerWidth < 640 ? 6 : 3)} fy={v => `${nf(v)} MW`} alto={240} sel={sel} onSel={id => setSel(sel === id ? null : id as Tec)} />
+      : <p className="note">{filas?.err ? 'Red Eléctrica no ha respondido. Prueba otro día o vuelve en un momento.' : 'Pidiendo los datos a Red Eléctrica…'}</p>}
+  </Card>
+}
+
+function Generacion({ hist, desde, hoy }: { hist: Historia; desde: number; hoy: Hoy }) {
   const [modo, setModo] = useState<'pct' | 'abs'>('pct')
   const ag = useMemo(() => agrupar(hist.mix_mes), [hist.mix_mes])
   if (!ag) return <p className="note">Sin datos todavía.</p>
@@ -146,6 +176,7 @@ function Generacion({ hist, desde }: { hist: Historia; desde: number }) {
   const suma = (c: typeof ag.capas[number], y: string) => c.v.reduce((s, v, i) => s + (ag.fechas[i].startsWith(y) ? v : 0), 0)
   const cambio = ag.capas.map(c => ({ c, x: suma(c, a1) - suma(c, a0) })).sort((a, b) => b.x - a.x)
   return <div className="graficos">
+    <DiaGeneracion hoy={hoy} />
     <Card t="Cómo ha cambiado la mezcla" wide lead={<>Cada mes, qué parte de la electricidad salió de cada tecnología.{rmax && <> El récord renovable fue en {fMes(rmax[0])}: <b>{nf(rmax[1])} %</b>.</>}</>} fuente={<A id="ree_generacion">REE, estructura de la generación</A>}>
       <div className="modo" role="radiogroup" aria-label="Unidades">{(['pct', 'abs'] as const).map(m => <button key={m} role="radio" aria-checked={modo === m} className={modo === m ? 'is-on' : ''} onClick={() => setModo(m)}>{m === 'pct' ? 'En %' : 'En GWh'}</button>)}</div>
       <Apiladas xs={xs} capas={capas} titulo="Generación mensual por tecnología" fx={fMes} fxEje={t => String(new Date(t).getUTCFullYear())} fy={v => gwh(v)} alto={280} pct={modo === 'pct'} />
@@ -170,21 +201,6 @@ function Demanda({ hist, desde }: { hist: Historia; desde: number }) {
     </Card>}
     <Card t="Mes a mes" wide lead="El consumo sube en invierno y en verano: calefacción y aire acondicionado.">
       <LineChart titulo="Demanda mensual" series={[{ id: 'd', nombre: 'Demanda', datos: d.map(p => [tLocal(p[0]), p[1] / 1e3] as [number, number]).filter(p => p[0] >= desde), color: ACC, area: true }]} fx={fMes} fxEje={t => String(new Date(t).getUTCFullYear())} fy={v => `${nf(v)} GWh`} />
-    </Card>
-  </div>
-}
-
-function Precios({ hist, desde }: { hist: Historia; desde: number }) {
-  const pd = hist.precio_dia
-  const serie = pd ? Object.entries(pd).find(([k]) => /spot|mercado/i.test(k)) ?? Object.entries(pd)[0] : null
-  if (!serie) return <div className="graficos"><Card t="Precio de la electricidad" wide lead="El histórico de precios se está descargando poco a poco: Red Eléctrica solo deja pedir un mes cada vez. Estará completo en unos días."><p className="note">Mientras tanto, el precio de hoy y de mañana está en la pestaña «Ahora».</p></Card></div>
-  const v = serie[1].v.map(p => [tLocal(p[0]), p[1]] as [number, number]).filter(p => p[0] >= desde)
-  const porMes = new Map<string, number[]>(); for (const p of serie[1].v) { const k = p[0].slice(0, 7); porMes.set(k, [...(porMes.get(k) ?? []), p[1]]) }
-  const meses = [...porMes].map(([k, xs]) => ({ k, v: xs.reduce((a, b) => a + b, 0) / xs.length }))
-  const caro = meses.reduce((m, x) => (x.v > m.v ? x : m), meses[0]), inicio = serie[1].v[0][0]
-  return <div className="graficos">
-    <Card t="Precio de la electricidad en el mercado" wide lead={<>Media de cada día, en euros por megavatio hora. Desde {fMes(Date.parse(inicio.slice(0, 7) + '-15'))}, el mes más caro fue {fMes(Date.parse(caro.k + '-15'))}, con <b>{nf(caro.v)} €/MWh</b> de media.{inicio > '2015' && ' El histórico se va completando hacia atrás cada día, hasta 2014.'}</>} fuente={<A id="ree_mercados">REE, mercados</A>}>
-      <LineChart titulo="Precio diario de la electricidad" series={[{ id: 'p', nombre: serie[0], datos: v, color: ACC }]} fx={fDia} fxEje={t => String(new Date(t).getUTCFullYear())} fy={x => `${nf(x)} €`} yMin={0} />
     </Card>
   </div>
 }
@@ -224,7 +240,7 @@ export default function App() {
           <h1>Energía</h1>
           <p>{vivo ? <><i className="vivo" /> En directo desde Red Eléctrica</> : 'Datos de Red Eléctrica'}</p>
         </div>
-        {sec !== 'ahora' && <div className="rango" role="radiogroup" aria-label="Periodo de los gráficos">
+        {sec !== 'ahora' && sec !== 'precios' && <div className="rango" role="radiogroup" aria-label="Periodo de los gráficos">
           {([5, 10, 0] as const).map(r => <button key={r} role="radio" aria-checked={rango === r} className={rango === r ? 'is-on' : ''} onClick={() => setRango(r)}>{r ? `${r} años` : 'Desde 2007'}</button>)}
         </div>}
       </header>
@@ -233,10 +249,10 @@ export default function App() {
       </nav>
       <motion.div key={sec} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .3 }}>
         {sec === 'ahora' && <Ahora hoy={hoy} tec={tec} setTec={setTec} vivo={vivo} />}
-        {sec !== 'ahora' && !hist && <p className="note">Cargando el histórico…</p>}
-        {sec === 'generacion' && hist && <Generacion hist={hist} desde={desde} />}
+        {sec !== 'ahora' && sec !== 'precios' && !hist && <p className="note">Cargando el histórico…</p>}
+        {sec === 'generacion' && hist && <Generacion hist={hist} desde={desde} hoy={hoy} />}
         {sec === 'demanda' && hist && <Demanda hist={hist} desde={desde} />}
-        {sec === 'precios' && hist && <Precios hist={hist} desde={desde} />}
+        {sec === 'precios' && <PreciosV2 hoy={hoy} hist={hist} />}
         {sec === 'emisiones' && hist && <Emisiones hist={hist} desde={desde} />}
       </motion.div>
       <Fuentes ids={['ree', 'ree_generacion', 'ree_demanda', 'ree_mercados', 'ree_balance']} />
