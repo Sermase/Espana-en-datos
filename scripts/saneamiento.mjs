@@ -140,7 +140,7 @@ let zip = null
 for (const u of URLS) {
   const get = (extra = []) => execFileSync('curl', ['-sSfL', '--retry', '3', ...extra, '-A', 'Mozilla/5.0 espana-en-datos', '-o', join(tmp, 'edar.zip'), u], { timeout: 300000 })
   const esZip = () => readFileSync(join(tmp, 'edar.zip')).subarray(0, 2).toString() === 'PK'
-  try { get(); if (esZip()) { zip = u; break } log.edar['no es zip ' + u] = readFileSync(join(tmp, 'edar.zip')).subarray(0, 120).toString('latin1') }
+  try { get(); if (esZip()) { zip = u; break } const h = readFileSync(join(tmp, 'edar.zip'), 'latin1'); log.edar['no es zip ' + u] = { texto: h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').slice(0, 700), enlaces: [...h.matchAll(/(?:href|action|src)="([^"]+)"/g)].map(m => m[1]).filter(x => !/\.(css|png|svg|ico|js)/.test(x)).slice(0, 30), formularios: [...h.matchAll(/<input[^>]+>/g)].map(m => m[0]).slice(0, 15) } }
   catch (e) {
     log.edar['curl ' + u] = String(e.message).slice(-160)
     if (/\(60\)/.test(String(e.message))) { try { get(['--cacert', cadena(new URL(u).host)]); if (esZip()) { zip = u; log.edar.cadena = 'completada'; break } } catch (e2) { log.edar['curl con cadena ' + u] = String(e2.message).slice(-200) } }
@@ -193,6 +193,16 @@ if (shp.length) {
   log.edar.guardadas = out.length
 } else log.edar._ok = 'sin shapefile: se conserva depuradoras.json si existía'
 
+// Página de descargas de agua del MITECO: enlaces a depuradoras y aglomeraciones
+try {
+  const h = execFileSync('curl', ['-sSfL', 'https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/agua.html'], { encoding: 'utf8', timeout: 60000 })
+  log.paginaAgua = [...h.matchAll(/href="([^"]+)"/g)].map(m => m[1]).filter(x => /depur|aglom|edar|saneam|vertid|q2023|uwwt/i.test(x)).slice(0, 40)
+  for (const l of log.paginaAgua.filter(x => /\.html$/.test(x)).slice(0, 4)) {
+    const u = l.startsWith('http') ? l : 'https://www.miteco.gob.es' + l
+    const h2 = execFileSync('curl', ['-sSfL', u], { encoding: 'utf8', timeout: 60000 })
+    log['pagina ' + l] = [...h2.matchAll(/href="([^"]+)"/g)].map(m => m[1]).filter(x => /DescargaFichero|\.zip|gpkg/i.test(x)).slice(0, 30)
+  }
+} catch (e) { log.paginaAgua = String(e.message).slice(-200) }
 // Aglomeraciones (para Alcantarillado): de momento solo se mira qué trae
 for (const f of ['aglomeracionesq2023.zip', 'aglomeraciones-q2023.zip', 'aauu-q2023.zip', 'aglomeraciones_q2023.zip']) {
   const z = join(tmp, 'agg.zip')
