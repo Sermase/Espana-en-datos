@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { Clock, Crosshair, Fuel as FuelIcon, MapPin, Navigation, X } from 'lucide-react'
+import { Clock, Crosshair, Fuel as FuelIcon, MapPin, Navigation, Palmtree, X } from 'lucide-react'
 import { FUEL_NAME, FUEL_SHORT, cents, eur, fechaLarga, int, km, priceColor, useDatos, type Datos, type Fuel, type Station } from './datos'
 import { Mapa, type MapaApi } from './Mapa'
 
@@ -156,7 +156,7 @@ export default function App() {
       setNear(here); setGeoMsg(null)
       if (!d) return
       const best = priced(d, fuel).map(s => ({ s, dk: km(here, s) })).filter(x => x.dk < 10).sort((a, b) => a.s.p[fuel]! - b.s.p[fuel]!)[0]
-      if (best) onSt(best.s); else setGeoMsg('No hay gasolineras a menos de 10 km.')
+      if (best) onSt(best.s); else { api.current?.locate(here.lat, here.lon); setGeoMsg('No hay gasolineras a menos de 10 km.') }
     }, () => setGeoMsg('Sin permiso para ver tu ubicación.'), { enableHighAccuracy: false, timeout: 10000 })
   }
   const nearList = useMemo(() => !d || !near ? [] : priced(d, fuel).map(s => ({ s, dk: km(near, s) })).filter(x => x.dk < 10).sort((a, b) => a.s.p[fuel]! - b.s.p[fuel]!).slice(0, 8), [d, near, fuel])
@@ -186,8 +186,10 @@ export default function App() {
           <span>Más barata</span><i /><span>Más cara</span>
           <small>que la mediana de su provincia</small>
         </div>
+        <p className="mapa-hint">Acércate para ver cada gasolinera</p>
         <div className="tools">
           <button onClick={locate} aria-label="Las más baratas cerca de mí"><Crosshair size={18} /><span>Cerca de mí</span></button>
+          <button onClick={() => api.current?.canarias()} aria-label="Ir a Canarias"><Palmtree size={18} /><span>Canarias</span></button>
           {(sel || near) && <button onClick={() => { pick(null); setNear(null); api.current?.reset() }} aria-label="Volver a España"><MapPin size={18} /><span>España</span></button>}
         </div>
         {geoMsg && <p className="toast">{geoMsg}</p>}
