@@ -1,0 +1,312 @@
+{
+ "ree:mercados/componentes-precio-energia-cierre-desglose": {
+  "status": 200,
+  "url": "https://apidatos.ree.es/es/datos/mercados/componentes-precio-energia-cierre-desglose?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "Mercados: 0 · undefined · contenido Mercado diario(12), Mercado intradiario (subastas MIBEL y continuo)(12) | Servicios-ajuste: 0 · undefined · contenido Restricciones técnicas PDBF(12), Banda de regulación secundaria(12), Restricciones técnicas en tiempo real(12), Incumplimiento de energía de balance(12), Coste desvíos(12), Saldo desvíos(12), Control del factor de potencia(12), Saldo PO 14.6(12), Servicios de ajuste(12) | Servicios-pagos: 0 · undefined · contenido Pagos por capacidad(12) | Precio total: 0 · undefined · contenido Precio total (€/MWh)(12) | Energia: 0 · undefined · contenido Energía de cierre (MWh)(12)"
+ },
+ "ree:mercados/componentes-precio": {
+  "status": 500,
+  "url": "https://apidatos.ree.es/es/datos/mercados/componentes-precio?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "{\"errors\":[{\"status\":\"500\",\"title\":\"Error Interno\",\"detail\":\"Los datos solicitados no est\\u00e1n disponibles en este momento. Int\\u00e9ntelo de nuevo m\\u00e1s tarde.\"}]}"
+ },
+ "ree:mercados/precios-mercados-tiempo-real": {
+  "status": 400,
+  "url": "https://apidatos.ree.es/es/datos/mercados/precios-mercados-tiempo-real?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "{\"errors\":[{\"status\":\"400\",\"title\":\"Error Interno\",\"detail\":\"Los datos solicitados no est\\u00e1n disponibles en este momento. Int\\u00e9ntelo de nuevo m\\u00e1s tarde.\"}]}"
+ },
+ "ree:mercados/energia-precios-ponderados": {
+  "status": 500,
+  "url": "https://apidatos.ree.es/es/datos/mercados/energia-precios-ponderados?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"robots\" content=\"noindex,nofollow,noarchive\" />\n    <title>An Error Occurred: Internal Server Error</title>\n    <style>body { background-color: #fff; color: #222; font: 16px/1.5 -apple-system, BlinkMacSystemFont, \"S"
+ },
+ "ree:intercambios/francia-frontera": {
+  "status": 200,
+  "url": "https://apidatos.ree.es/es/datos/intercambios/francia-frontera?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "Exportación: 12 · {\"value\":-399174.74,\"percentage\":0.26028513187186975,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Importación: 12 · {\"value\":1134430.876,\"percentage\":0.7397148681281303,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | saldo: 12 · {\"value\":735256.1359999999,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido "
+ },
+ "ree:intercambios/francia-frontera-programado": {
+  "status": 200,
+  "url": "https://apidatos.ree.es/es/datos/intercambios/francia-frontera-programado?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "Exportación: 12 · {\"value\":-735266.875,\"percentage\":0.329710635390278,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Importación: 12 · {\"value\":1494770,\"percentage\":0.670289364609722,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | saldo: 12 · {\"value\":759503.125,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido "
+ },
+ "ree:intercambios/francia-fisicos-frontera": {
+  "status": 500,
+  "url": "https://apidatos.ree.es/es/datos/intercambios/francia-fisicos-frontera?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"robots\" content=\"noindex,nofollow,noarchive\" />\n    <title>An Error Occurred: Internal Server Error</title>\n    <style>body { background-color: #fff; color: #222; font: 16px/1.5 -apple-system, BlinkMacSystemFont, \"S"
+ },
+ "ree:intercambios/portugal-frontera": {
+  "status": 200,
+  "url": "https://apidatos.ree.es/es/datos/intercambios/portugal-frontera?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "Exportación: 12 · {\"value\":-999101.677,\"percentage\":0.7926712497073207,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Importación: 12 · {\"value\":261322.083,\"percentage\":0.20732875029267936,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | saldo: 12 · {\"value\":-737779.594,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido "
+ },
+ "ree:intercambios/portugal-frontera-programado": {
+  "status": 200,
+  "url": "https://apidatos.ree.es/es/datos/intercambios/portugal-frontera-programado?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "Exportación: 12 · {\"value\":-1187269.875,\"percentage\":0.7251889548287225,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Importación: 12 · {\"value\":449917.05,\"percentage\":0.2748110451712775,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | saldo: 12 · {\"value\":-737352.825,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido "
+ },
+ "ree:intercambios/portugal-fisicos-frontera": {
+  "status": 500,
+  "url": "https://apidatos.ree.es/es/datos/intercambios/portugal-fisicos-frontera?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"robots\" content=\"noindex,nofollow,noarchive\" />\n    <title>An Error Occurred: Internal Server Error</title>\n    <style>body { background-color: #fff; color: #222; font: 16px/1.5 -apple-system, BlinkMacSystemFont, \"S"
+ },
+ "ree:intercambios/marruecos-frontera": {
+  "status": 200,
+  "url": "https://apidatos.ree.es/es/datos/intercambios/marruecos-frontera?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "Exportación: 12 · {\"value\":-379934.712,\"percentage\":0.950651393178815,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Importación: 12 · {\"value\":19722.528,\"percentage\":0.04934860682118507,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | saldo: 12 · {\"value\":-360212.184,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido "
+ },
+ "ree:intercambios/marruecos-frontera-programado": {
+  "status": 200,
+  "url": "https://apidatos.ree.es/es/datos/intercambios/marruecos-frontera-programado?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "Exportación: 12 · {\"value\":-379763.6,\"percentage\":0.9622430367834793,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Importación: 12 · {\"value\":14901.35,\"percentage\":0.03775696321652075,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | saldo: 12 · {\"value\":-364862.25,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido "
+ },
+ "ree:intercambios/marruecos-fisicos-frontera": {
+  "status": 500,
+  "url": "https://apidatos.ree.es/es/datos/intercambios/marruecos-fisicos-frontera?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"robots\" content=\"noindex,nofollow,noarchive\" />\n    <title>An Error Occurred: Internal Server Error</title>\n    <style>body { background-color: #fff; color: #222; font: 16px/1.5 -apple-system, BlinkMacSystemFont, \"S"
+ },
+ "ree:intercambios/andorra-frontera": {
+  "status": 200,
+  "url": "https://apidatos.ree.es/es/datos/intercambios/andorra-frontera?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "Exportación: 12 · {\"value\":-24358.25,\"percentage\":0.9998559217396444,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Importación: 12 · {\"value\":3.51,\"percentage\":0.00014407826035557365,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | saldo: 12 · {\"value\":-24354.74,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido "
+ },
+ "ree:intercambios/andorra-frontera-programado": {
+  "status": 200,
+  "url": "https://apidatos.ree.es/es/datos/intercambios/andorra-frontera-programado?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "Exportación: 12 · {\"value\":-24622.7,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | saldo: 12 · {\"value\":-24622.7,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido "
+ },
+ "ree:intercambios/andorra-fisicos-frontera": {
+  "status": 500,
+  "url": "https://apidatos.ree.es/es/datos/intercambios/andorra-fisicos-frontera?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"robots\" content=\"noindex,nofollow,noarchive\" />\n    <title>An Error Occurred: Internal Server Error</title>\n    <style>body { background-color: #fff; color: #222; font: 16px/1.5 -apple-system, BlinkMacSystemFont, \"S"
+ },
+ "ree:intercambios/todas-fronteras-programados": {
+  "status": 200,
+  "url": "https://apidatos.ree.es/es/datos/intercambios/todas-fronteras-programados?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "francia: 0 · undefined · contenido Exportación(12), Importación(12), saldo(12) | portugal: 0 · undefined · contenido Exportación(12), Importación(12), saldo(12) | marruecos: 0 · undefined · contenido Exportación(12), Importación(12), saldo(12) | andorra: 0 · undefined · contenido Exportación(12), saldo(12)"
+ },
+ "ree:demanda/ire-general": {
+  "status": 200,
+  "url": "https://apidatos.ree.es/es/datos/demanda/ire-general?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "Índice general: 12 · {\"value\":89.289,\"percentage\":0.4957112639696208,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Índice general corregido: 12 · {\"value\":90.834,\"percentage\":0.48841165056260044,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Variación mensual: 12 · {\"value\":5.855364552459997,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Variación mensual corregida: 12 · {\"value\":5.062632291196791,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido "
+ },
+ "ree:demanda/ire-industria": {
+  "status": 200,
+  "url": "https://apidatos.ree.es/es/datos/demanda/ire-industria?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "Índice industria: 12 · {\"value\":82.787,\"percentage\":0.4965928858496791,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Índice industria corregido: 12 · {\"value\":83.923,\"percentage\":0.4865140383134914,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Variación mensual: 12 · {\"value\":5.788619548411006,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Variación mensual corregida: 12 · {\"value\":5.167984561210034,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido "
+ },
+ "ree:demanda/ire-servicios": {
+  "status": 200,
+  "url": "https://apidatos.ree.es/es/datos/demanda/ire-servicios?start_date=2025-01-01T00:00&end_date=2025-12-31T23:59&time_trunc=month",
+  "resumen": "Índice servicios: 12 · {\"value\":106.358,\"percentage\":0.49548806678686064,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Índice servicios corregido: 12 · {\"value\":108.295,\"percentage\":0.4873322555951169,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Variación mensual: 12 · {\"value\":7.567053683401431,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido  | Variación mensual corregida: 12 · {\"value\":6.269503267717305,\"percentage\":1,\"datetime\":\"2025-12-01T00:00:00.000+01:00\"} · contenido "
+ },
+ "es:nrg_bal_c": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nrg_bal_c?format=JSON&lang=EN&geo=ES&siec=E7000&unit=GWH&lastTimePeriod=1",
+  "resumen": {
+   "dims": {
+    "freq": "A",
+    "nrg_bal": "PPRD,RCV_RCY,IMP,EXP,STK_CHG,GAE,INTMARB,GIC,INTAVI,NRGSUP,GIC_EED,PEC_EED,FEC_EED,GIC2020-2030,PEC2020-2030,FEC2020-2030,TI_E,TI_EHG_E,TI_EHG_MAPE_E,TI_EHG_MAPCHP_E,TI_EHG_MAPH_E,TI_EHG_APE_E,TI_EHG_APCHP_E,TI_EHG_APH_E,TI_EHG_EDHP,TI_EHG_EB,TI_EHG_EPS,TI_EHG_DHEP,TI_EHG_CB,TI_CO_E,TI_BF_E,TI_GW_E,TI_RPI_E,TI_RPI_RI_E,TI_RPI_BPI_E,TI_RPI_PT_E,TI_RPI_IT_E,TI_RPI_DU_E,TI_RPI_PII_E,TI_PF_E,TI_BKBPB_E,TI_CL_E,TI_BNG_E,TI_LBB_E,TI_CPP_E,TI_GTL_E,TI_NSP_E,TI_NRG_FC_IND_NE,TI_NE,TO,TO_EHG,TO_EHG_MAPE,TO_EHG_MAPCHP,TO_EHG_MAPH,TO_EHG_APE,TO_EHG_APCHP,TO_EHG_APH,TO_EHG_EDHP,TO_EHG_EB,TO_EHG_PH",
+    "siec": "E7000",
+    "unit": "GWH",
+    "geo": "ES",
+    "time": "2024"
+   },
+   "n": 70,
+   "label": "Complete energy balances"
+  }
+ },
+ "es:nrg_ti_gasm": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nrg_ti_gasm?format=JSON&lang=EN&geo=ES&lastTimePeriod=1",
+  "resumen": {
+   "dims": {
+    "freq": "M",
+    "siec": "G3000,G3200",
+    "partner": "BE,BG,CZ,DK,DE,EE,IE,EL,ES,FR,HR,IT,CY,LV,LT,LU,HU,MT,NL,AT,PL,PT,RO,SI,SK,FI,SE,IS,LI,NO,CH,UK,BA,ME,MD,MK,GE,AL,RS,TR,UA,XK,AD,BY,GI,RU,EX_SU_OTH,EUR_OTH,AO,CM,CG,CD,GQ,GA,ST,DJ,ER,ET,KE,MG",
+    "unit": "MIO_M3,TJ_GCV",
+    "geo": "ES",
+    "time": "2026-10"
+   },
+   "n": 664,
+   "label": "Natural gas imports - monthly data"
+  }
+ },
+ "es:nrg_ti_gas": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nrg_ti_gas?format=JSON&lang=EN&geo=ES&lastTimePeriod=1",
+  "resumen": {
+   "dims": {
+    "freq": "A",
+    "siec": "G3000,G3200",
+    "partner": "BE,BG,CZ,DK,DE,EE,IE,EL,ES,FR,HR,IT,CY,LV,LT,LU,HU,MT,NL,AT,PL,PT,RO,SI,SK,FI,SE,IS,LI,NO,CH,UK,BA,ME,MD,MK,GE,AL,RS,TR,UA,XK,AD,BY,GI,RU,EX_SU_OTH,EUR_OTH,AO,CM,CG,CD,GQ,GA,ST,DJ,ER,ET,KE,MG",
+    "unit": "MIO_M3,TJ_GCV",
+    "geo": "ES",
+    "time": "2024"
+   },
+   "n": 668,
+   "label": "Natural gas imports - annual data"
+  }
+ },
+ "es:nrg_ti_oilm": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nrg_ti_oilm?format=JSON&lang=EN&geo=ES&lastTimePeriod=1",
+  "resumen": {
+   "dims": {
+    "freq": "M",
+    "siec": "O4000,O4100_TOT_4200-4500,O4100_TOT,O4200,O4300,O4400,O4410,O4500,O4600,O4610,O4620,O4630,O4640,O4651,O4652,O4652XR5210B,O4653,O4661,O4661XR5230B,O4669,O4671,O4671XR5220B,O46711,O46712,O4680,O4681,O46811,O4682,O4690XO4694,O4694,R5210B,R5220B,R5230,R5230B",
+    "partner": "EU27_2020,EU28,BE,BG,CZ,DK,DE,EE,IE,EL,ES,FR,HR,IT,CY,LV,LT,LU,HU,MT,NL,AT,PL,PT,RO,SI,SK,FI,SE,IS,LI,NO,CH,UK,BA,ME,MD,MK,GE,AL,RS,TR,UA,XK,AD,BY,GI,RU,EX_YU_OTH,EX_SU_OTH,EUR_OTH,AO,CM,CG,CD,GQ,GA,ST,DJ,ER",
+    "unit": "THS_T",
+    "geo": "ES",
+    "time": "2026-10"
+   },
+   "n": 0,
+   "label": "Oil and petroleum products imports - monthly data"
+  }
+ },
+ "es:nrg_ti_oil": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nrg_ti_oil?format=JSON&lang=EN&geo=ES&lastTimePeriod=1",
+  "resumen": {
+   "dims": {
+    "freq": "A",
+    "siec": "O4000,O4000XBIO,O4100_TOT_4200-4500,O4100_TOT_4200-4500XBIO,O4100_TOT,O4200,O4300,O4400X4410,O4400,O4500,O4600,O4600XBIO,O4620,O4630,O4640,O4651,O4652,O4652XR5210B,O4653,O4661,O4661XR5230B,O4669,O4671,O4671XR5220B,O46711,O46712,O4680,O4681,O4682,O4691,O4692,O4693,O4694,O4695,O4699,R5210B,R5220B,R5230B",
+    "partner": "BE,BG,CZ,DK,DE,EE,IE,EL,ES,FR,HR,IT,CY,LV,LT,LU,HU,MT,NL,AT,PL,PT,RO,SI,SK,FI,SE,IS,LI,NO,CH,UK,BA,ME,MD,MK,GE,AL,RS,TR,UA,XK,AD,BY,GI,RU,EX_SU_OTH,EUR_OTH,AO,CM,CG,CD,GQ,GA,ST,DJ,ER,ET,KE,MG",
+    "unit": "THS_T",
+    "geo": "ES",
+    "time": "2024"
+   },
+   "n": 6346,
+   "label": "Oil and petroleum products imports - annual data"
+  }
+ },
+ "es:ext_st_eu27_2020sitc": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ext_st_eu27_2020sitc?format=JSON&lang=EN&geo=ES&lastTimePeriod=1",
+  "resumen": {
+   "dims": {
+    "freq": "M",
+    "stk_flow": "IMP,EXP,BAL_RT",
+    "indic_et": "TRD_VAL,TRD_VAL_RT12,TRD_VAL_SCA,TRD_VAL_SCA_RT1,IVU,IVU_RT1,IVU_RT12,IVOL_NSA,IVOL_NSA_RT12,IVOL_SCA,IVOL_SCA_RT1",
+    "partner": "EU27_2020,EFTA,NO,CH,UK,CC9_23,TR,UA,WBC,RU,CIS,EXT_EU27_2020,EUR_NEU27_2020,AFR,DZ,EG,LY,MA,TN,ZA,NG,AME,CA,US,AME_LAT,MX,AR,BR,CL,ASI,KZ,CN_X_HK,HK,JP,KR,TW,IN,IR,ID,MY,SG,TH,VN,ASI_W_IR,IL,SA,AE,ASI_OTH,OCE_PLR,AU,ACP,ASEAN,MED_X_HR,OPEC,USMCA,DAE",
+    "sitc06": "TOTAL,SITC0_1,SITC0,SITC1,SITC2_4,SITC2,SITC3,SITC33,SITC4,SITC5-8,SITC5,SITC6_8,SITC6,SITC7,SITC8,SITC9",
+    "geo": "",
+    "time": "2026-09"
+   },
+   "n": 0,
+   "label": "EU27 (from 2020) trade by SITC product group"
+  }
+ },
+ "es:ext_lt_intertrd": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ext_lt_intertrd?format=JSON&lang=EN&geo=ES&lastTimePeriod=1",
+  "resumen": {
+   "dims": {
+    "freq": "A",
+    "indic_et": "IVOL_IMP,IVOL_EXP,RT_IVOL,PC_IMP_EU,PC_EXP_EU,IVU_EXP,IVU_IMP,RT_IVU,MIO_BAL_VAL,MIO_EXP_VAL,MIO_IMP_VAL",
+    "sitc06": "TOTAL,SITC0_1,SITC2_4,SITC3,SITC5,SITC6_8,SITC7,SITC9",
+    "partner": "EU27_2020,EXT_EU27_2020,EXT_EA21,WORLD",
+    "geo": "ES",
+    "time": "2025"
+   },
+   "n": 82,
+   "label": "International trade of EU, the euro area and the Member States by SITC product group"
+  }
+ },
+ "es:ext_lt_maineu": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ext_lt_maineu?format=JSON&lang=EN&geo=ES&lastTimePeriod=1",
+  "resumen": {
+   "dims": {
+    "freq": "A",
+    "indic_et": "MIO_BAL_VAL,MIO_EXP_VAL,MIO_IMP_VAL,PC_IMP_PART,PC_EXP_PART",
+    "sitc06": "TOTAL",
+    "partner": "ES630,ES640,YT,EFTA,IS,LI,NO,CH,UK,CC9_23,BA,ME,MD,MK,GE,AL,RS,TR,UA,XK,WBC,AD,BY,FO,GI,VA,RU,SM,RS_ME,CIS,EXT_EU27_2020,EUR_NEU27_2020,AFR,AO,CM,CF,TD,CG,CD,GQ,GA,ST,BI,KM,DJ,ER,ET,KE,MG,MW,MU,MZ,RW,SC,SO,UG,TZ,ZM,ZW,DZ",
+    "geo": "",
+    "time": "2025"
+   },
+   "n": 0,
+   "label": "Extra-EU trade by partner"
+  }
+ },
+ "es:bop_its6_det": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/bop_its6_det?format=JSON&lang=EN&geo=ES&lastTimePeriod=1",
+  "resumen": {
+   "dims": {
+    "freq": "A",
+    "currency": "MIO_EUR",
+    "bop_item": "S,SA,SAY,SAZ,SB,SC,SC1,SC11,SC12,SC13,SC2,SC21,SC22,SC23,SC3,SC31,SC32,SC33,SC3A,SC3B,SC3B1,SC3B2,SC3B3,SC3C,SC3C1,SC3C2,SC3C3,SC3D,SC3D1,SC3D2,SC3D3,SC3E,SC3F,SC3G,SC4,SC41X,SC42X,SCA,SCAZ,SCB,SCC,SCC1,SD,SD1,SD2,SD3,SD4,SD5,SD5Y,SD5Z,SDA,SDA1,SDA2,SDB,SDB1,SDB2,SDB3,SDZ,SE,SE1",
+    "stk_flow": "CRE,DEB,BAL",
+    "partner": "EUR,EU27_2020,EU28,EU27_2007,EA21,EA20,EA19,BE,BG,CZ,DK,DE,EE,IE,EL,ES,FR,HR,IT,CY,LV,LT,LU,HU,MT,NL,AT,PL,PT,RO,SI,SK,FI,SE,EU27_2020_NEA20,EU27_2020_NEA20_X_DK_SE,INT_EU_NAL,INT_EA_NAL,EFTA,IS,LI,NO,CH,UK,CC9_23,CC8_22,CC5_13,BA,ME,MD,MK,GE,AL,RS,TR,UA,XK,EUR_C_E,AD,BY",
+    "geo": "ES",
+    "time": "2025"
+   },
+   "n": 1699,
+   "label": "International trade in services (since 2010) (BPM6)"
+  }
+ },
+ "cx:DS-045409": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?format=JSON&lang=EN&reporter=ES&partner=US&product=TOTAL&flow=1&indicators=VALUE_IN_EUROS&freq=A&lastTimePeriod=1",
+  "resumen": {
+   "dims": {
+    "freq": "A",
+    "reporter": "ES",
+    "partner": "US",
+    "product": "TOTAL",
+    "flow": "1",
+    "indicators": "VALUE_IN_EUROS",
+    "time": ""
+   },
+   "n": 0,
+   "label": "EU trade since 1988 by HS2-4-6 and CN8"
+  }
+ },
+ "cx:DS-059341": {
+  "status": 200,
+  "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-059341?format=JSON&lang=EN&reporter=ES&partner=US&product=TOTAL&flow=1&indicators=VALUE_IN_EUROS&freq=A&lastTimePeriod=1",
+  "resumen": {
+   "dims": {
+    "freq": "A",
+    "reporter": "ES",
+    "partner": "US",
+    "product": "TOTAL",
+    "flow": "1",
+    "indicators": "",
+    "time": ""
+   },
+   "n": 0,
+   "label": "International trade of EU and non-EU countries since 2002 by HS2-4-6"
+  }
+ },
+ "cx:DS-059322": {
+  "status": 404,
+  "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-059322?format=JSON&lang=EN&reporter=ES&lastTimePeriod=1",
+  "resumen": "{ \"error\": [{\"status\": 404,\"id\": 100,\"label\": \"ERR_NOT_FOUND_4: DS-059322 (DATA_FLOW:ALL,1.0) is not available for dissemination.\"}]}"
+ },
+ "cx:DS-018995": {
+  "status": 404,
+  "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-018995?format=JSON&lang=EN&reporter=ES&lastTimePeriod=1",
+  "resumen": "{ \"error\": [{\"status\": 404,\"id\": 100,\"label\": \"ERR_NOT_FOUND_4: DS-018995 (DATA_FLOW:ALL,1.0) is not available for dissemination.\"}]}"
+ },
+ "cores": {
+  "status": 200,
+  "url": "https://www.cores.es/es/estadisticas",
+  "resumen": "href=\"https://www.cores.es/sites/default/files/archivos/estadisticas/est-gas-cdm-2025.xls\" href=\"/sites/default/files/archivos/estadisticas/importaciones-crudo.xlsx\" href=\"/sites/default/files/archivos/estadisticas/produccion-crudo.xlsx\" href=\"/sites/default/files/archivos/estadisticas/movimiento-de-crudos-y-produccion-refineria.xlsx\" href=\"/sites/default/files/archivos/estadisticas/capacidad-refineria.xlsx\" href=\"/sites/default/files/archivos/estadisticas/produccion-refineria-por-grupo.xlsx\" href=\"/sites/default/files/archivos/estadisticas/consumos-pp-por-grupo.xlsx\" href=\"/sites/default/files/archivos/estadisticas/consumos-pp.xlsx\" href=\"/sites/default/files/archivos/estadisticas/consumos-pp-ccaa-provincias.xlsx\" href=\"/sites/default/files/archivos/estadisticas/existencias-pp.xlsx\" href=\"/sites/default/files/archivos/estadisticas/exportaciones-pp-por-grupo.xlsx\" href=\"/sites/default/files/archivos/estadisticas/exportaciones-pp.xlsx\" href=\"/sites/default/files/archivos/estadisticas/importaciones-pp-por-grupo.xlsx\" href=\"/sites/default/files/archivos/estadisticas/importaciones-pp.xlsx\" href=\"/sites/default/files/archivos/estadisticas/balance-pp-anual.xlsx\" href=\"/sites/default/files/archivos/estadisticas/sectorializacion-pp.xlsx\" href=\"/sites/default/files/archivos/estadisticas/balance-gas-anual.xlsx\" href=\"/sites/default/files/archivos/estadisticas/consumos-gas.xlsx\" href=\"/sites/default/files/archivos/estadisticas/existencias-gas.xlsx\" href=\"/sites/default/files/archivos/estadisticas/exportaciones-gas.xlsx\" href=\"/sites/default/files/archivos/estadisticas/exportaciones-gas-punto-salida.xlsx\" href=\"/sites/default/files/archivos/estadisticas/importaciones-gas.xlsx\" href=\"/sites/default/files/archivos/estadisticas/importaciones-gas-punto-entrada.xlsx\" href=\"/sites/default/files/archivos/estadisticas/produccion-gas.xlsx\" href=\" /sites/default/files/archivos/estadisticas/est-petroliferos-consumo-2026.xls\" href=\" /sites/default/files/archivos/estadisticas/est-petroliferos-exportaciones-2026.xls\" href=\" /sites/default/files/archivos/estadisticas/est-petroliferos-importaciones-2026.xls\" href=\" /sites/default/files/archivos/estadisticas/est-petroliferos-balance-2025.xls\" href=\" /sites/default/files/archivos/estadisticas/est-gas-cdm-2026.xls\" href=\" /sites/default/files/archivos/estadisticas/est-gas-consumo-2026.xls\""
+ },
+ "enagas": {
+  "status": 200,
+  "url": "https://www.enagas.es/es/gestion-tecnica-sistema/energy-data/",
+  "resumen": "\n<!DOCTYPE HTML>\n<html lang=\"es\">\n\n<head>\n    <!-- Google Tag Manager -->\n    <meta name=\"content-page-ref\" content=\"DPzjxAyC3kfz4XEJe_4oyhH_yiu8Bkf9cmi9fX9pzhghHvt5W5X6qT3rNkWVCUaDwGQWhr3b_G2uWJ5R5lq"
+ },
+ "datacomex": {
+  "status": 406,
+  "url": "https://comercio.serviciosmin.gob.es/Datacomex/",
+  "resumen": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\"/>\r\n<title>406: el explorador del cliente no acepta el tipo MIME "
+ },
+ "world-atlas": {
+  "status": 200,
+  "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+  "resumen": "107760 bytes"
+ }
+}

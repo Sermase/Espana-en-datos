@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-23T00:22:15.010Z",
+ "fecha": "2026-11-23T14:15:21.138Z",
  "fuentes": {
   "renfe_gtfs_av_ld_md": {
    "url": "https://ssl.renfe.com/gtransit/Fichero_AV_LD/google_transit.zip",
@@ -12,7 +12,7 @@
   "renfe_gtfs_cercanias": {
    "url": "https://ssl.renfe.com/ftransit/Fichero_CER_FOMENTO/fomento_transit.zip",
    "status": 200,
-   "bytes": 15683314,
+   "bytes": 15847739,
    "tipo": "application/zip",
    "cors": null,
    "muestra": null
@@ -20,15 +20,15 @@
   "renfe_rt_posiciones_json": {
    "url": "https://gtfsrt.renfe.com/vehicle_positions.json",
    "status": 200,
-   "bytes": 85,
+   "bytes": 173412,
    "tipo": "application/json",
    "cors": null,
-   "muestra": "{\n  \"header\": {\n    \"gtfsRealtimeVersion\": \"2.0\",\n    \"timestamp\": \"1795393359\"\n  }\n}"
+   "muestra": "{\n  \"header\": {\n    \"gtfsRealtimeVersion\": \"2.0\",\n    \"timestamp\": \"1795443321\"\n  },\n  \"entity\": [{\n    \"id\": \"VP_C4-23637\",\n    \"vehicle\": {\n      \"trip\": {\n        \"tripId\": \"3026L23637C4\"\n      },\n      \"currentStatus\": \"STOPPED_AT\",\n      \"timestamp\": \"1795443317\",\n      \"stopId\": \"00000\",\n      \"vehicle\": {\n        \"id\": \"23637\",\n        \"label\": \"C4-23637\"\n      }\n    }\n  }, {\n    \"id\": \"VP_C5-23721\",\n    \"vehicle\": {\n      \"trip\": {\n        \"tripId\": \"3026L23721C5\"\n      },\n      \"position\": {\n        \"latitude\": 37.42662,\n        \"longitude\": -6.056732\n      },\n      \"currentStatus\": \""
   },
   "renfe_rt_posiciones_pb": {
    "url": "https://gtfsrt.renfe.com/vehicle_positions.pb",
    "status": 200,
-   "bytes": 13,
+   "bytes": 38411,
    "tipo": "application/octet-stream",
    "cors": null,
    "muestra": null
@@ -36,18 +36,18 @@
   "renfe_rt_retrasos_json": {
    "url": "https://gtfsrt.renfe.com/trip_updates.json",
    "status": 200,
-   "bytes": 85,
+   "bytes": 184253,
    "tipo": "application/json",
    "cors": null,
-   "muestra": "{\n  \"header\": {\n    \"gtfsRealtimeVersion\": \"2.0\",\n    \"timestamp\": \"1795393359\"\n  }\n}"
+   "muestra": "{\n  \"header\": {\n    \"gtfsRealtimeVersion\": \"2.0\",\n    \"timestamp\": \"1795443342\"\n  },\n  \"entity\": [{\n    \"id\": \"TUUPDATE_3026L23637C4\",\n    \"tripUpdate\": {\n      \"trip\": {\n        \"tripId\": \"3026L23637C4\",\n        \"scheduleRelationship\": \"SCHEDULED\"\n      },\n      \"stopTimeUpdate\": [{\n        \"arrival\": {\n          \"delay\": 1740,\n          \"time\": \"1795444200\"\n        },\n        \"stopId\": \"51003\"\n      }],\n      \"vehicle\": {\n        \"wheelchairAccessible\": \"WHEELCHAIR_INACCESSIBLE\"\n      },\n      \"delay\": 1740\n    }\n  }, {\n    \"id\": \"TUUPDATE_3026L23721C5\",\n    \"tripUpdate\": {\n      \"trip\": {\n "
   },
   "renfe_ld_flota": {
    "url": "https://tiempo-real.largorecorrido.renfe.com/renfe-visor/flotaLD.json",
    "status": 200,
-   "bytes": 56,
+   "bytes": 36920,
    "tipo": "application/json",
    "cors": null,
-   "muestra": "{\"fechaActualizacion\":\"2026-11-23T01:22:34\",\"trenes\":[]}"
+   "muestra": "{\"fechaActualizacion\":\"2026-11-23T15:15:36\",\"trenes\":[{\"codComercial\":\"18014\",\"codEstAnt\":\"11306\",\"codEstSig\":\"11300\",\"horaLlegadaSigEst\":\"2026-11-23T15:30:00\",\"codProduct\":16,\"codOrigen\":\"11511\",\"codDestino\":\"10000\",\"accesible\":false,\"ultRetraso\":\"0\",\"latitud\":43.007572,\"longitud\":-2.3293242,\"time\":1795443314,\"p\":\"2\",\"mat\":\"449037\"},{\"codComercial\":\"18770\",\"codEstAnt\":\"37410\",\"codEstSig\":\"37410\",\"horaLlegadaSigEst\":\"2026-11-23T15:03:40\",\"codProduct\":19,\"codOrigen\":\"37700\",\"codDestino\":\"37606\",\"accesible\":false,\"ultRetraso\":\"1\",\"latitud\":38.89697,\"longitud\":-6.1290045,\"time\":1795443336,\"p\":\"4\""
   }
  },
  "gtfs": {
@@ -65,15 +65,15 @@
    }
   },
   "renfe_gtfs_cercanias": {
-   "list": "Archive:  /tmp/renfe_gtfs_cercanias.zip\n  Length      Date    Time    Name\n---------  ---------- -----   ----\n      302  2026-11-22 03:07   agency.txt\n    68101  2026-11-22 03:07   calendar.txt\n    42227  2026-11-22 03:07   routes.txt\n  4201535  2026-11-22 03:07   shapes.txt\n   176708  2026-11-22 03:07   stops.txt\n273160661  2026-11-22 03:07   stop_times.txt\n     3020  2026-11-22 03:07   transfers.txt\n 19873714  2026-11-22 03:07   trips.txt\n---------                     -------\n297526268                     8 files\n",
+   "list": "Archive:  /tmp/renfe_gtfs_cercanias.zip\n  Length      Date    Time    Name\n---------  ---------- -----   ----\n      302  2026-11-23 03:07   agency.txt\n    68101  2026-11-23 03:07   calendar.txt\n    42076  2026-11-23 03:07   routes.txt\n  4201535  2026-11-23 03:08   shapes.txt\n   176708  2026-11-23 03:07   stops.txt\n276067562  2026-11-23 03:07   stop_times.txt\n     3020  2026-11-23 03:08   transfers.txt\n 20081188  2026-11-23 03:07   trips.txt\n---------                     -------\n300640492                     8 files\n",
    "head": {
     "agency.txt": "agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone                                                                             \n1071VC,Renfe Cercanias,https://www.renfe.com/es/es/cercanias,Europe/Madrid,es,(34) 912.320.320                                                        \nlíneas: 2\n",
-    "routes.txt": "route_id,route_short_name,route_long_name,route_type,route_color,route_text_color                                                                     \n10T0001C1  ,C1  ,Principe Pio                            -Aeropuerto-T4                           ,2,75B6E0,FFFFFF                                    \n10T0002C1  ,C1  ,Aeropuerto-T4                           -Principe Pio                            ,2,75B6E0,FFFFFF                                    \n10T0003C10 ,C10 ,Villalba                                -Aeropuerto-T4                           ,2,BCCF00,FFFFFF                                    \nlíneas: 279\n",
-    "trips.txt": "route_id,service_id,trip_id,trip_headsign,wheelchair_accessible,block_id,shape_id                                                                     \n10T0001C1,1025D,1025D19799C1,       ,1,1025D19799,10_C1                                                                                               \n10T0001C1,1025D,1025D19800C1,       ,1,1025D19800,10_C1                                                                                               \n10T0001C1,1025D,1025D19802C1,       ,1,1025D19802,10_C1                                                                                               \nlíneas: 131614\n",
+    "routes.txt": "route_id,route_short_name,route_long_name,route_type,route_color,route_text_color                                                                     \n10T0001C1  ,C1  ,Principe Pio                            -Aeropuerto-T4                           ,2,75B6E0,FFFFFF                                    \n10T0002C1  ,C1  ,Aeropuerto-T4                           -Principe Pio                            ,2,75B6E0,FFFFFF                                    \n10T0003C10 ,C10 ,Villalba                                -Aeropuerto-T4                           ,2,BCCF00,FFFFFF                                    \nlíneas: 278\n",
+    "trips.txt": "route_id,service_id,trip_id,trip_headsign,wheelchair_accessible,block_id,shape_id                                                                     \n10T0001C1,1026L,1026L19799C1,       ,1,1026L19799,10_C1                                                                                               \n10T0001C1,1026L,1026L19800C1,       ,1,1026L19800,10_C1                                                                                               \n10T0001C1,1026L,1026L19802C1,       ,1,1026L19802,10_C1                                                                                               \nlíneas: 132988\n",
     "stops.txt": "stop_id,stop_name,stop_lat,stop_lon,wheelchair_boarding                                                                                               \n04040,Zaragoza Delicias,41.6586576,-0.9112693,1                                                                                                       \n05102,San Xoán,43.4945654,-8.2142733,1                                                                                                                \n05103,Santa Icía,43.4997707,-8.1999226,1                                                                                                              \nlíneas: 1168\n",
-    "stop_times.txt": "trip_id,arrival_time,departure_time,stop_id,stop_sequence                                                                                             \n1025D27616C8b,11:28:00,11:31:00,12006,010                                                                                                             \n1025D27616C8b,11:35:00,11:35:00,12005,011                                                                                                             \n1025D27616C8b,11:40:00,11:40:00,12004,012                                                                                                             \nlíneas: 1809011\n",
+    "stop_times.txt": "trip_id,arrival_time,departure_time,stop_id,stop_sequence                                                                                             \n1026L17098C8a,06:35:00,06:36:00,10206,005                                                                                                             \n1026L17098C8a,06:41:00,06:41:00,10205,006                                                                                                             \n1026L17098C8a,06:47:00,06:47:00,10204,007                                                                                                             \nlíneas: 1828262\n",
     "shapes.txt": "shape_id,shape_pt_lat,shape_pt_lon,shape_pt_sequence\n40_C6,39.9882116,-0.0520723,1\n40_C6,39.9877724,-0.0524404,2\n40_C6,39.9874651,-0.0526704,3\nlíneas: 123735\n",
-    "calendar.txt": "service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,start_date,end_date                                                               \n1025D,0,0,0,0,0,0,1,20261122,20261122                                                                                                                 \n1026L,1,0,0,0,0,0,0,20261123,20261123                                                                                                                 \n1027M,0,1,0,0,0,0,0,20261124,20261124                                                                                                                 \nlíneas: 451\n",
+    "calendar.txt": "service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,start_date,end_date                                                               \n1026L,1,0,0,0,0,0,0,20261123,20261123                                                                                                                 \n1027M,0,1,0,0,0,0,0,20261124,20261124                                                                                                                 \n1028X,0,0,1,0,0,0,0,20261125,20261125                                                                                                                 \nlíneas: 451\n",
     "calendar_dates.txt": "líneas: 0\n"
    }
   }
