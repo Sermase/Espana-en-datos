@@ -1,0 +1,102 @@
+{
+ "precio_componentes": {
+  "Mercados/Mercado diario": "154 · 2014-01 → 2026-10 168.45",
+  "Mercados/Mercado intradiario (subastas MIBEL y continuo)": "154 · 2014-01 → 2026-10 -0.35",
+  "Servicios-ajuste/Restricciones técnicas PDBF": "154 · 2014-01 → 2026-10 18.23",
+  "Servicios-ajuste/Banda de regulación secundaria": "154 · 2014-01 → 2026-10 4.84",
+  "Servicios-ajuste/Restricciones técnicas en tiempo real": "154 · 2014-01 → 2026-10 3.03",
+  "Servicios-ajuste/Incumplimiento de energía de balance": "143 · 2014-06 → 2026-10 -0.89",
+  "Servicios-ajuste/Coste desvíos": "154 · 2014-01 → 2026-10 0.66",
+  "Servicios-ajuste/Saldo desvíos": "154 · 2014-01 → 2026-10 -0.69",
+  "Servicios-ajuste/Control del factor de potencia": "154 · 2014-01 → 2026-10 -0.01",
+  "Servicios-ajuste/Saldo PO 14.6": "154 · 2014-01 → 2026-10 0.12",
+  "Servicios-ajuste/Servicios de ajuste": "154 · 2014-01 → 2026-10 25.29",
+  "Servicios-pagos/Pagos por capacidad": "154 · 2014-01 → 2026-10 0.13",
+  "Precio total/Precio total (€/MWh)": "154 · 2014-01 → 2026-10 192",
+  "Energia/Energía de cierre (MWh)": "154 · 2014-01 → 2026-10 19171580.81"
+ },
+ "_fallos_intercambios/todas-fronteras-programados": [
+  "2010: HTTP 502 {\"errors\":[{\"status\":\"502\",\"title\":\"Error Interno\",",
+  "2011: HTTP 502 {\"errors\":[{\"status\":\"502\",\"title\":\"Error Interno\",",
+  "2012: HTTP 502 {\"errors\":[{\"status\":\"502\",\"title\":\"Error Interno\",",
+  "2013: HTTP 502 {\"errors\":[{\"status\":\"502\",\"title\":\"Error Interno\","
+ ],
+ "intercambios": {
+  "francia/Exportación": "155 · 2014-01 → 2026-11 -652991.02",
+  "francia/Importación": "155 · 2014-01 → 2026-11 331530.18",
+  "francia/saldo": "155 · 2014-01 → 2026-11 -321460.85",
+  "portugal/Exportación": "155 · 2014-01 → 2026-11 -1016506.65",
+  "portugal/Importación": "155 · 2014-01 → 2026-11 298001.18",
+  "portugal/saldo": "155 · 2014-01 → 2026-11 -718505.48",
+  "marruecos/Exportación": "155 · 2014-01 → 2026-11 -354553.17",
+  "marruecos/saldo": "155 · 2014-01 → 2026-11 -354129.77",
+  "andorra/Exportación": "152 · 2014-01 → 2026-11 -21423.95",
+  "andorra/saldo": "152 · 2014-01 → 2026-11 -21423.95",
+  "marruecos/Importación": "98 · 2015-07 → 2026-11 423.4"
+ },
+ "ire": {
+  "Índice general": "202 · 2010-01 → 2026-10 103.35",
+  "Índice general corregido": "202 · 2010-01 → 2026-10 101.35",
+  "Variación mensual": "190 · 2011-01 → 2026-10 2.76",
+  "Variación mensual corregida": "190 · 2011-01 → 2026-10 6.09",
+  "Índice industria": "202 · 2010-01 → 2026-10 99.35",
+  "Índice industria corregido": "202 · 2010-01 → 2026-10 96.99",
+  "Índice servicios": "202 · 2010-01 → 2026-10 113.44",
+  "Índice servicios corregido": "202 · 2010-01 → 2026-10 114.67"
+ },
+ "sectores": {
+  "FC_E": "25 · 2000 → 2024 229964.37",
+  "FC_IND_E": "25 · 2000 → 2024 68201.45",
+  "FC_TRA_E": "25 · 2000 → 2024 4692.39",
+  "FC_OTH_CP_E": "25 · 2000 → 2024 76076.26",
+  "FC_OTH_HH_E": "25 · 2000 → 2024 75158.04",
+  "FC_OTH_AF_E": "25 · 2000 → 2024 5286.53"
+ },
+ "gas_origen": {
+  "BE": "130 · 2015-01 → 2026-10 0",
+  "BG": "130 · 2015-01 → 2026-10 0",
+  "CZ": "130 · 2015-01 → 2026-10 0",
+  "DK": "130 · 2015-01 → 2026-10 0",
+  "DE": "130 · 2015-01 → 2026-10 0",
+  "EE": "130 · 2015-01 → 2026-10 0",
+  "IE": "130 · 2015-01 → 2026-10 0",
+  "EL": "130 · 2015-01 → 2026-10 0",
+  "ES": "130 · 2015-01 → 2026-10 0",
+  "FR": "142 · 2015-01 → 2026-10 0",
+  "HR": "130 · 2015-01 → 2026-10 0",
+  "IT": "130 · 2015-01 → 2026-10 0",
+  "CY": "130 · 2015-01 → 2026-10 0",
+  "LV": "130 · 2015-01 → 2026-10 0"
+ },
+ "crudo_origen": {
+  "EU27_2020": "21 · 2022-04 → 2023-12 0",
+  "EU28": "9 · 2022-04 → 2022-12 246.66",
+  "BE": "128 · 2015-01 → 2026-08 0",
+  "BG": "128 · 2015-01 → 2026-08 0",
+  "CZ": "128 · 2015-01 → 2026-08 0",
+  "DK": "128 · 2015-01 → 2026-08 0",
+  "DE": "128 · 2015-01 → 2026-08 0",
+  "EE": "128 · 2015-01 → 2026-08 0",
+  "IE": "128 · 2015-01 → 2026-08 0",
+  "EL": "128 · 2015-01 → 2026-08 0",
+  "ES": "128 · 2015-01 → 2026-08 0",
+  "FR": "128 · 2015-01 → 2026-08 0",
+  "HR": "128 · 2015-01 → 2026-08 0",
+  "IT": "139 · 2015-01 → 2026-08 0"
+ },
+ "_cores_crudo": {
+  "Inicio": " |  | Importaciones de crudo por áreas geográficas y países\n |  | Fuente/Notas | 1960-1967 | Archivo historico de CAMPSA y elaboración propia\r\nÚnicamente disponible total anual\r\nNo disponible desglose anual por áreas geográficas y países\n |  |  | 1968-1991 | Archivo historico de CAMPSA y elaboración propia\r\nÚnicamente disponible total anual\r\n\n |  |  | 1992-1995 | Agencia Internacional de la Energía y elaboración propia\r\nÚnicamente disponible total anual\n |  |  | 1996-2002 | Anejos de la Resolución del 25 de Abril de 1996\n |  |  | 2003-2006 | Anejos de la Resolución del 15 de Julio de 2002\n |  |  | 2007-actualidad | Anejos de la Resolución del 29 de Mayo de 2007\n |  |  |  | A partir de agosto 2021 aparecen nuevos países que anteriormente se encontraban en otras agrupaciones\nActualizado el 12-11-2026 |  |  |  |  |  | Para más información: cores.institucional@cores.es. Tlf.: +34 91 360 09 10, o visite: www.cores.es",
+  "África": " |  | Importaciones de crudo por áreas geográficas y países\nActualizado el 12-11-2026 |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n |  | África\nAño | Mes | Angola | Argelia | Benin | Camerún | Congo | Costa de Marfil | Egipto | Gabón | Ghana | Guinea Ecuatorial | Libia | Nigeria | Senegal | Túnez\n1968 | total |  | 31.866 |  |  |  |  |  |  |  |  | 7144.101 | 887.907 |  | \n1969 | total | 285.315 | 415.851 |  |  |  |  | 700.884 |  |  |  | 7834.701 | 769.468 |  | \n1970 | total | 609.846 | 1244.01 |  |  |  |  | 1305.803 |  |  |  | 8012.583 | 1745.915 |  | \n1971 | total | 0 | 2447.432 |  |  |  |  | 1178.805 |  |  |  | 5983.406 | 1413.29 |  | \n1972 | total | 262.07 | 4722.605 |  |  |  |  | 329.312 |  |  |  | 2739.118 | 1224.502 |  | \n1973 | total | 98.536 | 4658.129 |  |  |  |  |  |  |  |  | 1658.067 | 223.651 |  | \n1974 | total |  | 2699.17 |  |  |  |  |  | 102.128 |  |  | 2555.817 | 68.562 |  | \n1975 | total | 189.042 | 1485.298 |  |  |  |  | 99.566 | 1781.151 |  |  | 3180.731 | 68.368 |  | \n1976 | total |  | 1105.496 |  |  | 258.656 |  |  | 605.466 |  |  | 4522.079 | 72.875 |  | 123.601\n1977 | total |  | 990.817 |  |  | 239.473 |  |  | 226.349 |  |  | 4769.061 |  |  | ",
+  "América": " |  | Importaciones de crudo por áreas geográficas y países\nActualizado el 12-11-2026 |  |  |  |  |  |  |  |  |  |  |  |  |  | Unidad: miles de toneladas\n |  | América\nAño | Mes | Argentina | Brasil | Canadá | Colombia | Cuba | Ecuador | Estados Unidos | Guyana | México | Trinidad y Tobago | Venezuela | Otros América | Total América\n1968 | total |  |  |  | 33.158 |  |  |  |  |  |  | 3166.768 |  | 3199.926\n1969 | total |  |  |  |  |  |  |  |  |  |  | 3022.156 |  | 3022.156\n1970 | total |  |  |  |  |  |  |  |  |  |  | 1996.708 |  | 1996.708\n1971 | total |  |  |  |  |  |  |  |  |  |  | 1846.543 |  | 1846.543\n1972 | total |  |  |  |  |  |  |  |  |  |  | 1544.602 |  | 1544.602\n1973 | total |  |  |  |  |  |  |  |  |  |  | 1363.358 |  | 1363.358\n1974 | total |  |  |  |  |  |  |  |  |  |  | 1539.739 |  | 1539.739\n1975 | total |  |  |  |  |  |  |  |  |  |  | 1087.592 |  | 1087.592\n1976 | total |  |  |  |  |  |  |  |  |  |  | 1026.731 |  | 1026.731\n1977 | total |  |  |  |  |  |  |  |  | 59.06 |  | 1081.3 |  | 1140.36",
+  " Europa y Euroasia": " |  |  | Importaciones de crudo por áreas geográficas y países\nActualizado el 12-11-2026 |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n |  | Europa y Euroasia\nAño | Mes | Albania | Alemania | Azerbaiyán | Dinamarca | Estonia | Francia | Georgia | Grecia | Italia | Kazajistán | Letonia | Lituania | Noruega | Países Bajos\n1968 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1969 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1970 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1971 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1972 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1973 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1974 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1975 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1976 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1977 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | ",
+  "Oriente Medio": " |  | Importaciones de crudo por áreas geográficas y países\nActualizado el 12-11-2026 |  |  |  |  |  |  |  |  |  |  |  | Unidad: miles de toneladas\n |  | Oriente Medio\nAño | Mes | Arabia Saudí | EAU | Irak | Irán | Kuwait | Omán | Qatar | Siria | Yemen | Otros OM | Total OM\n1968 | total | 9992.847 |  | 3322.141 | 892.294 | 1884.579 |  |  |  |  |  | 16091.860999999999\n1969 | total | 9211.155 |  | 2936.143 | 1509.45 | 1940.129 |  |  |  |  |  | 15596.877\n1970 | total | 8952.899 | 1231.335 | 2522.206 | 2256.654 | 2070.849 |  |  |  |  |  | 17033.943\n1971 | total | 12004.886 | 1646.489 | 2020.486 | 3227.021 | 3276.023 |  | 84.873 |  |  |  | 22259.778000000002\n1972 | total | 15626.531 | 1749.671 | 1735.592 | 3253.466 | 3260.505 |  | 89.633 |  |  |  | 25715.398000000005\n1973 | total | 20891.584 | 2878.049 | 2589.42 | 5384.31 | 2828.659 |  | 0.498 |  |  |  | 34572.520000000004\n1974 | total | 26930.758 | 2743.658 | 3353.264 | 3072.009 | 1743.216 |  |  |  |  |  | 37842.905\n1975 | total | 17548.928 | 3026.95 | 5937.973 | 4625.593 | 1552.484 |  | 109.296 |  |  | 111.776999999995 | 32913.001\n1976 | total | 17036.116 | 4176.385 | 3856.981 | 11853.617 | 2966.382 |  |  |  |  |  | 39889.481\n1977 | total | 17302.634 | 3819.822 | 5693.998 | 11284.503 | 1507.133 |  |  |  |  |  | 39608.09",
+  "Asia-Pacífico": " |  | Importaciones de crudo por áreas geográficas y países\nActualizado el 12-11-2026 |  |  |  |  | Unidad: miles de toneladas\n |  | Asia-Pacífico\nAño | Mes | China | India | Indonesia | Total Asia-Pacífico\n1968 | total\n1969 | total\n1970 | total\n1971 | total\n1972 | total\n1973 | total\n1974 | total\n1975 | total\n1976 | total\n1977 | total",
+  "Todos": " |  | Importaciones de crudo por áreas geográficas y países\nActualizado el 12-11-2026 |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n |  | África |  |  |  |  |  |  |  |  |  |  |  |  | \nAño | Mes | Angola | Argelia | Benin | Camerún | Congo | Costa de Marfil | Egipto | Gabón | Ghana | Guinea Ecuatorial | Libia | Nigeria | Senegal | Túnez\n1960 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1961 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1962 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1963 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1964 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1965 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1966 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1967 | total |  |  |  |  |  |  |  |  |  |  |  |  |  | \n1968 | total | 0 | 31.866 | 0 | 0 | 0 |  | 0 | 0 |  | 0 | 7144.101 | 887.907 |  | 0\n1969 | total | 285.315 | 415.851 | 0 | 0 | 0 |  | 700.884 | 0 |  | 0 | 7834.701 | 769.468 |  | 0"
+ },
+ "_cores_gas": {
+  "CDM GN2026": " | Consumidores directos en el mercado de gas natural (CDM)\n | Año 2026\n | 2026\n | 46053 | 46081 | 46112 | 46142 | 46173 | 46203 | 46234 | 46265 | 46295 | 46326 | 46356 | 46387\nNúmero de CDM activos | 86 | 92 | 97 | 104 | 103 | 102 | 104 | 100 | 106\nConsumo de gas natural de CDM activos (MWh) | 2089473 | 1871176 | 2173947 | 2058514 | 2189055 | 2413422 | 2753277 | 2441529 | 2569451\n% Consumo de gas natural de CDM activos | 0.05861820667714187 | 0.06813765089012684 | 0.07873572834859555 | 0.08574576439215269 | 0.09048712763043687 | 0.1015995403940371 | 0.10067694318947133 | 0.0967497387609761 | 0.09915786947796969\nConsumo total de gas natural (MWh) | 35645461 | 27461704 | 27610680 | 24007180 | 24191894 | 23754261 | 27347642 | 25235510 | 25912729\n |  |  |  |  |  |  |  |  |  |  |  | Fuente: Cores\nNota: Se considera CDM activo aquel consumidor directo en mercado que haya reportado consumos en el mes correspondiente que no hayan sido suministrados por un comercializador.\nActualizado el 12-11-2026 |  |  |  |  |  |  |  |  |  |  |  | Para más información: cores.institucional@cores.es. Tlf.: +34 91 360 09 10, o visite: www.cores.es"
+ },
+ "_cores_gas_ant": {
+  "CDM GN2025": " | Consumidores directos en el mercado de gas natural (CDM)\n | Año 2025\n | 2025\n | 45688 | 45716 | 45747 | 45777 | 45808 | 45838 | 45869 | 45900 | 45930 | 45961 | 45991 | 46022\nNúmero de CDM activos | 48 | 53 | 54 | 54 | 54 | 56 | 57 | 57 | 62 | 63 | 63 | 62\nConsumo de gas natural de CDM activos (MWh) | 1545055 | 1464562 | 1499524 | 1378621 | 1484827 | 1803337 | 2010504 | 1830241 | 1894766 | 1941888 | 1712736 | 1708591\n% Consumo de gas natural de CDM activos | 0.047631111682595595 | 0.05148821537552673 | 0.05346479865539699 | 0.05906979388743635 | 0.0602324114253225 | 0.070424873962838 | 0.07957767749457909 | 0.07881525522897274 | 0.076891919909387 | 0.06690579344907646 | 0.056096772513650514 | 0.04859869976887195\nConsumo total de gas natural (MWh) | 32437937 | 28444606 | 28046940 | 23338849 | 24651628 | 25606535 | 25264673 | 23221913 | 24641939 | 29024213 | 30531810 | 35157134\n |  |  |  |  |  |  |  |  |  |  |  | Fuente: Cores\nNota: Se considera CDM activo aquel consumidor directo en mercado que haya reportado consumos en el mes correspondiente que no hayan sido suministrados por un comercializador.\nActualizado el 13-07-2026 |  |  |  |  |  |  |  |  |  |  |  | Para más información: cores.institucional@cores.es. Tlf.: +34 91 360 09 10, o visite: www.cores.es"
+ }
+}
