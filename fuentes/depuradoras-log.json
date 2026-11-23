@@ -104,16 +104,16 @@
   "kA": "aucAggCode",
   "kP": "aucPercEnteringUWWTP"
  },
- "guardado": "2322 depuradoras, 29 aglomeraciones sin depuradora enlazada",
+ "guardado": "2139 depuradoras, 212 aglomeraciones sin depuradora enlazada",
  "trat": [
-  163,
-  27,
-  794,
-  1338
+  0,
+  26,
+  778,
+  1335
  ],
  "ok": [
-  191,
-  251,
-  1880
+  1835,
+  244,
+  60
  ]
 }
