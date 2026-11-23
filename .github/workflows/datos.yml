@@ -59,7 +59,7 @@ jobs:
       - name: Saneamiento y depuradoras (INE y MITECO), los martes
         if: github.event.schedule == '43 15 * * 2' || github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[datos]') || contains(github.event.head_commit.message, '[saneamiento]')
         continue-on-error: true
-        run: node scripts/saneamiento.mjs
+        run: node scripts/saneamiento.mjs; node scripts/depuradoras.mjs
       - name: Impuestos (Agencia Tributaria), los martes
         if: github.event.schedule == '43 15 * * 2' || github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[datos]') || contains(github.event.head_commit.message, '[impuestos]')
         continue-on-error: true
