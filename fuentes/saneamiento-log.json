@@ -34,13 +34,14 @@
   "_ok": "2024 (y 2022), 18 territorios"
  },
  "edar": {
+  "no es zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=depuradorasq2023.zip": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"utf-8\" />\r\n    <meta name=\"viewport\" content=\"width=device",
+  "curl https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=depuradoras-q2023.zip": "en-datos -o /tmp/edar/edar.zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=depuradoras-q2023.zip\ncurl: (22) The requested URL returned error: 404\n",
+  "curl https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=edar-q2023.zip": "espana-en-datos -o /tmp/edar/edar.zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=edar-q2023.zip\ncurl: (22) The requested URL returned error: 404\n",
+  "curl https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=depuradoras_q2023.zip": "en-datos -o /tmp/edar/edar.zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=depuradoras_q2023.zip\ncurl: (22) The requested URL returned error: 404\n",
   "curl https://www.mapa.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip": "er and therefore could not\nestablish a secure connection to it. To learn more about this situation and\nhow to fix it, please visit the webpage mentioned above.\n",
   "emisor 0": "http://www.cert.fnmt.es/certs/ACSS2G2R.crt",
   "emisor 1": "http://www.cert.fnmt.es/certs/ACRAIZSERVIDORESSEGUROSFNMTG2R.crt",
   "emisor 2": "sin CA Issuers",
-  "cadena": "completada",
-  "descarga": "31192 bytes, empieza por \"<!DOCTYPE html PUBLIC \\\"-//W3C//DTD XHTML 1.0 Strict//EN\\\" \\\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\\\">\\n\\n<html lang=\\\"es\\\" xml:lang=\\\"es\\\" xmlns=\\\"http://www.w3.org/1999/xhtml\\\" xmlns:exsl=\\\"http://exslt.org/common\\\" xmlns:msxsl=\\\"urn:schemas-microsoft-com:xslt\\\" xmlns:xalan=\\\"http://xml.apache.org/xalan\"",
-  "unzip": "Command failed: unzip -o -q /tmp/edar/edar.zip -d /tmp/edar\n[/tmp/edar/edar.zip]\n  End-of-central-directory signature not found.  Either this file is not\n  a zipfile, or it constitutes one disk of a m",
   "_ok": "sin shapefile: se conserva depuradoras.json si existía"
  },
  "conceptos": {
@@ -61,5 +62,6 @@
   "billSup": "53448: Importe facturado por el agua suministrada []",
   "sup": "53445: Aguas superficiales []",
   "sub": "53445: Aguas subterráneas []"
- }
+ },
+ "agg": "aglomeracionesq2023.zip: hero?f=aglomeracionesq2023.zip\ncurl: (22) The requested URL returned error: 404\n · aglomeraciones-q2023.zip: ero?f=aglomeraciones-q2023.zip\ncurl: (22) The requested URL returned error: 404\n · aauu-q2023.zip: scargaFichero?f=aauu-q2023.zip\ncurl: (22) The requested URL returned error: 404\n · aglomeraciones_q2023.zip: ero?f=aglomeraciones_q2023.zip\ncurl: (22) The requested URL returned error: 404\n · "
 }
