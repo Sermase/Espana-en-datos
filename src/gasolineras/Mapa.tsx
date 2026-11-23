@@ -19,12 +19,14 @@ const DOTS_FROM = 7 // zoom a partir del que se ven las gasolineras una a una
 export type MapaApi = { flyStation: (s: Station) => void; flyProv: (id: string) => void; reset: () => void; canarias: () => void; locate: (lat: number, lon: number) => void }
 type Props = {
   datos: Datos; fuel: Fuel; selId: number | null; selProv: string | null; near: { lat: number; lon: number } | null
+  /** gasolineras resaltadas; null = todas por igual */
+  destacadas: Set<number> | null
   onStation: (s: Station) => void; onProv: (id: string) => void; onEmpty: () => void; api: Ref<MapaApi>
 }
 
 const isPhone = () => window.innerWidth < 900
 
-export function Mapa({ datos, fuel, selId, selProv, near, onStation, onProv, onEmpty, api }: Props) {
+export function Mapa({ datos, fuel, selId, selProv, near, destacadas, onStation, onProv, onEmpty, api }: Props) {
   const el = useRef<HTMLDivElement>(null)
   const map = useRef<L.Map | null>(null)
   const provLayer = useRef<L.GeoJSON | null>(null)
@@ -33,15 +35,33 @@ export function Mapa({ datos, fuel, selId, selProv, near, onStation, onProv, onE
   const selMark = useRef<L.CircleMarker | null>(null)
   const nearMark = useRef<L.CircleMarker | null>(null)
   const cb = useRef({ onStation, onProv, onEmpty }); cb.current = { onStation, onProv, onEmpty }
-  const state = useRef({ fuel, selProv }); state.current = { fuel, selProv }
+  const state = useRef({ fuel, selProv, destacadas }); state.current = { fuel, selProv, destacadas }
 
   const provStyle = (id: string): L.PathOptions => {
     const z = map.current?.getZoom() ?? 6, p = datos.hoy.provincias[id], f = state.current.fuel
-    const op = z < 7 ? 0.62 : z < DOTS_FROM ? 0.4 : z < 10 ? 0.12 : 0
+    // con gasolineras resaltadas, las provincias se apagan para que los puntos destaquen
+    const op = (z < 7 ? 0.62 : z < DOTS_FROM ? 0.4 : z < 10 ? 0.12 : 0) * (state.current.destacadas ? 0.35 : 1)
     const sel = state.current.selProv === id
     return { fillColor: provColor(p?.[f], datos.hoy.espana[f]), fillOpacity: op, color: sel ? '#ffffff' : '#03090f', weight: sel ? 2.5 : z < DOTS_FROM ? 1 : 0.6, opacity: sel ? 0.9 : 0.6 }
   }
   const radius = (z: number) => z < 10 ? 3 : z < 13 ? 4.5 : 6.5
+  /** Pinta cada punto según combustible, zoom y resaltado. */
+  const paint = () => {
+    const m = map.current; if (!m) return
+    const z = m.getZoom(), { fuel: f, destacadas: hl } = state.current, close = z >= DOTS_FROM
+    const show = close || !!hl
+    if (show && !m.hasLayer(dotLayer.current!)) dotLayer.current!.addTo(m)
+    if (!show && m.hasLayer(dotLayer.current!)) m.removeLayer(dotLayer.current!)
+    if (!show) return
+    const r = radius(z)
+    for (const { s, m: mk } of dots.current) {
+      const v = s.p[f], med = datos.hoy.provincias[s.prov]?.[f]
+      const col = v == null ? '#3a464d' : priceColor(med == null ? null : v - med)
+      if (!hl) { mk.setRadius(r); mk.setStyle({ fillColor: col, fillOpacity: v == null ? 0.35 : 0.95, weight: 0 }); continue }
+      if (hl.has(s.id)) { mk.setRadius(close ? r + 2.5 : 4.5); mk.setStyle({ fillColor: '#3df5b0', fillOpacity: 1, weight: 1.5, color: '#03090f' }); mk.bringToFront() }
+      else { mk.setRadius(close ? Math.max(2, r - 1) : 0); mk.setStyle({ fillColor: '#5b6b73', fillOpacity: close ? 0.45 : 0, weight: 0 }) }
+    }
+  }
 
   // montar el mapa una vez
   useEffect(() => {
@@ -66,9 +86,8 @@ export function Mapa({ datos, fuel, selId, selProv, near, onStation, onProv, onE
     const onZoom = () => {
       const z = m.getZoom()
       provLayer.current?.setStyle(f => provStyle(f!.properties.id))
-      if (z >= DOTS_FROM) { if (!m.hasLayer(dotLayer.current!)) dotLayer.current!.addTo(m); const r = radius(z); dots.current.forEach(d => d.m.setRadius(r)) }
-      else if (m.hasLayer(dotLayer.current!)) m.removeLayer(dotLayer.current!)
-      el.current?.classList.toggle('is-close', z >= DOTS_FROM)
+      paint()
+      el.current?.classList.toggle('is-close', z >= DOTS_FROM || !!state.current.destacadas)
     }
     m.on('zoomend', onZoom); onZoom()
     m.on('click', () => cb.current.onEmpty())
@@ -79,12 +98,10 @@ export function Mapa({ datos, fuel, selId, selProv, near, onStation, onProv, onE
   // colores al cambiar de combustible o de provincia elegida
   useEffect(() => {
     provLayer.current?.setStyle(f => provStyle(f!.properties.id))
-    for (const { s, m } of dots.current) {
-      const v = s.p[fuel], med = datos.hoy.provincias[s.prov]?.[fuel]
-      m.setStyle({ fillColor: v == null ? '#3a464d' : priceColor(med == null ? null : v - med), fillOpacity: v == null ? 0.35 : 0.95 })
-    }
+    paint()
+    el.current?.classList.toggle('is-close', (map.current?.getZoom() ?? 0) >= DOTS_FROM || !!destacadas)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fuel, selProv, datos])
+  }, [fuel, selProv, datos, destacadas])
 
   // gasolinera elegida: anillo coral
   useEffect(() => {

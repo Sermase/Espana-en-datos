@@ -93,7 +93,7 @@ a { color: inherit }
   .fuels button { flex: none; min-width: 70px }
   .stage { height: 64vh; min-height: 420px }
   .legend { left: 12px; bottom: 22px; grid-template-columns: auto 70px auto }
-  .tools { right: 12px; bottom: auto; top: 12px }
+  .tools { right: 12px; bottom: 12px; top: auto; flex-direction: row }
   .tools button span { display: none }
   .mapa-hint { bottom: 52px }
   .panel { border-left: 0; padding: 12px }
@@ -102,3 +102,19 @@ a { color: inherit }
   .price-big { font-size: 32px }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important } }
+
+.resaltar { position: absolute; z-index: 500; left: 20px; bottom: 70px; width: 300px; background: rgba(7, 20, 29, .92); border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; display: grid; gap: 8px }
+.resaltar p { margin: 0; font: 600 12px Oxanium, sans-serif; letter-spacing: .04em; color: var(--muted) }
+.seg { display: flex; gap: 4px; flex-wrap: wrap }
+.seg button { padding: 6px 9px; border: 1px solid var(--line); border-radius: 3px; font-size: 13px; font-weight: 600 }
+.seg button.is-on { border-color: var(--cheap); background: color-mix(in oklab, var(--cheap) 15%, #07141d) }
+.ctl { display: grid; gap: 4px; font-size: 13px; color: #c7dde4 }
+.ctl b { color: var(--cheap) }
+.ctl input { accent-color: var(--cheap) }
+.resaltar small { font-size: 12px; color: var(--muted) }
+@media (max-width: 900px) {
+  .resaltar { left: 8px; right: 8px; width: auto; bottom: auto; top: 58px; padding: 8px 10px; gap: 6px }
+  .resaltar p { display: none }
+  .seg button { font-size: 12px; padding: 5px 8px }
+  .legend { display: none }
+}

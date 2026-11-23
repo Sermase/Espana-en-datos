@@ -140,6 +140,10 @@ export default function App() {
   const [near, setNear] = useState<{ lat: number; lon: number } | null>(null)
   const [geoMsg, setGeoMsg] = useState<string | null>(null)
   const api = useRef<MapaApi>(null)
+  // Resaltar: las N más baratas de cada provincia, o las que no pasen de un precio
+  const [modo, setModo] = useState<'todas' | 'top' | 'precio'>('todas')
+  const [topN, setTopN] = useState(5)
+  const [tope, setTope] = useState<number | null>(null)
 
   const pick = useCallback((s: Sel) => {
     setSel(s)
@@ -173,6 +177,23 @@ export default function App() {
   }
   const nearList = useMemo(() => !d || !near ? [] : priced(d, fuel).map(s => ({ s, dk: km(near, s) })).filter(x => x.dk < 10).sort((a, b) => a.s.p[fuel]! - b.s.p[fuel]!).slice(0, 8), [d, near, fuel])
 
+  const rango = useMemo(() => {
+    if (!d) return null
+    const v = priced(d, fuel).map(s => s.p[fuel]!).sort((a, b) => a - b)
+    return v.length ? { lo: v[Math.floor(v.length * 0.005)], hi: v[Math.floor(v.length * 0.6)], mid: v[Math.floor(v.length * 0.1)] } : null
+  }, [d, fuel])
+  const limite = tope ?? rango?.mid ?? 0
+  const destacadas = useMemo(() => {
+    if (!d || modo === 'todas') return null
+    const list = priced(d, fuel)
+    if (modo === 'precio') return new Set(list.filter(s => s.p[fuel]! <= limite + 1e-9).map(s => s.id))
+    const by = new Map<string, Station[]>()
+    for (const s of list) { const a = by.get(s.prov) ?? []; a.push(s); by.set(s.prov, a) }
+    const out = new Set<number>()
+    for (const a of by.values()) a.sort((x, y) => x.p[fuel]! - y.p[fuel]!).slice(0, topN).forEach(s => out.add(s.id))
+    return out
+  }, [d, fuel, modo, topN, limite])
+
   if (err) return <main className="gas boot"><p>No se han podido cargar los precios. Vuelve a intentarlo en un rato.</p></main>
   if (!d) return <main className="gas boot"><FuelIcon size={28} /><p>Cargando los precios de hoy…</p></main>
 
@@ -193,7 +214,20 @@ export default function App() {
         </div>
       </header>
       <section className="stage">
-        <Mapa datos={d} fuel={fuel} selId={st?.id ?? null} selProv={sel?.k === 'prov' ? sel.id : st?.prov ?? null} near={near} onStation={onSt} onProv={onProv} onEmpty={() => pick(null)} api={api} />
+        <Mapa datos={d} fuel={fuel} destacadas={destacadas} selId={st?.id ?? null} selProv={sel?.k === 'prov' ? sel.id : st?.prov ?? null} near={near} onStation={onSt} onProv={onProv} onEmpty={() => pick(null)} api={api} />
+        <div className="resaltar" role="group" aria-label="Resaltar gasolineras">
+          <p>Resaltar</p>
+          <div className="seg">
+            <button className={modo === 'todas' ? 'is-on' : ''} onClick={() => setModo('todas')}>Todas</button>
+            <button className={modo === 'top' ? 'is-on' : ''} onClick={() => setModo('top')}>Más baratas por provincia</button>
+            <button className={modo === 'precio' ? 'is-on' : ''} onClick={() => setModo('precio')}>Hasta un precio</button>
+          </div>
+          {modo === 'top' && <label className="ctl">Las <b>{topN}</b> más baratas de cada provincia
+            <input type="range" min={1} max={20} value={topN} onChange={e => setTopN(Number(e.target.value))} /></label>}
+          {modo === 'precio' && rango && <label className="ctl">Hasta <b>{eur(limite)} €/l</b>
+            <input type="range" min={rango.lo} max={rango.hi} step={0.001} value={limite} onChange={e => setTope(Number(e.target.value))} /></label>}
+          {destacadas && <small>{int(destacadas.size)} gasolineras resaltadas en verde</small>}
+        </div>
         <div className="legend" aria-label="Leyenda">
           <span>Más barata</span><i /><span>Más cara</span>
           <small>que la mediana de su provincia</small>
