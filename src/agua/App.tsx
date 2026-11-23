@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
-import { Activity, CloudRain, Droplets, Factory, House, Recycle, Info as InfoIcon, X, Zap, ChevronUp, Trophy } from 'lucide-react'
+import { Activity, CloudRain, Droplets, Factory, House, Recycle, Network, Info as InfoIcon, X, Zap, ChevronUp, Trophy } from 'lucide-react'
 import { Board, type Layer } from './Board'
 import { Panel } from './Panel'
 import { SelCard } from './SelCard'
@@ -17,13 +17,14 @@ const LAYERS: { id: Layer; label: string; short?: string; icon: typeof Droplets 
   { id: 'lluvia', label: 'Lluvia', icon: CloudRain },
   { id: 'rios', label: 'Ríos', icon: Activity },
   { id: 'consumo', label: 'Abastecimiento', short: 'Grifo', icon: House },
+  { id: 'alcantarillado', label: 'Alcantarillado', short: 'Cloacas', icon: Network },
   { id: 'depuracion', label: 'Depuración', short: 'Depura', icon: Recycle },
   { id: 'vertidos', label: 'Vertidos', icon: Factory },
 ]
 
 const n = data.meta.national
 const wettest = [...data.rain].sort((a, b) => b.p - a.p)[0]
-const layerFor = (s: Sel, cur: Layer): Layer => s.k === 'river' ? (cur === 'energia' || cur === 'rios' ? cur : 'agua') : s.k === 'rain' ? 'lluvia' : s.k === 'dis' ? 'vertidos' : s.k === 'flow' ? 'rios' : s.k === 'cons' ? 'consumo' : s.k === 'dep' || s.k === 'edar' ? 'depuracion' : cur === 'energia' ? 'energia' : 'agua'
+const layerFor = (s: Sel, cur: Layer): Layer => s.k === 'river' ? (cur === 'energia' || cur === 'rios' ? cur : 'agua') : s.k === 'rain' ? 'lluvia' : s.k === 'dis' ? 'vertidos' : s.k === 'flow' ? 'rios' : s.k === 'cons' ? 'consumo' : s.k === 'dep' || s.k === 'edar' ? 'depuracion' : s.k === 'agg' ? 'alcantarillado' : cur === 'energia' ? 'energia' : 'agua'
 
 function useIsPhone() {
   const [phone, setPhone] = useState(() => matchMedia('(max-width: 980px)').matches)

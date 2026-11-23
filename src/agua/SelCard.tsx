@@ -5,7 +5,7 @@ import { basinStats, consumo, data, depOrder, fmt, fmtBig, fmtPct, pct, status, 
 import { byCapacity, rankIn, resInBasin, resolve, sequence, sizeRank, type Sel } from './sel'
 import { Bar, CountUp, Head, HydroChart, Info, Ring, TimeChart } from './ui'
 import { Ciclo } from './Ciclo'
-import { EXTRA, RED, TRATAMIENTO, edarList, type Edar } from './edar'
+import { EXTRA, RED, TRATAMIENTO, aggList, c1Color, edarById, edarList, type AggPt, type Edar } from './edar'
 import { riverLen, riverList, riverMouth, riverStats, type River } from './rivers'
 import { byHydroYear, envelope, fechaCorta, hydroLabel, hydroYear, near, toDate, useHistory, weekOf } from './history'
 
@@ -24,6 +24,7 @@ const KIND = {
   cons: { label: 'Abastecimiento', icon: House },
   dep: { label: 'Depuración', icon: Recycle },
   edar: { label: 'Depuradora', icon: Recycle },
+  agg: { label: 'Núcleo urbano', icon: Building2 },
   river: { label: 'Río', icon: Waves },
 } as const
 
@@ -76,6 +77,7 @@ export function SelCard({ sel, onPick, isNew, compact, dir }: {
       {it.k === 'cons' && <ConsBody i={it.i} />}
       {it.k === 'dep' && <DepBody i={it.i} />}
       {it.k === 'edar' && <EdarBody p={it.p} />}
+      {it.k === 'agg' && <AggBody a={it.a} onPick={onPick} />}
       {it.k === 'river' && <RiverBody v={it.v} onPick={onPick} />}
       <nav className="sel-nav" aria-label="Recorrer">
         <button onClick={() => go(-1)} aria-label="Anterior"><ChevronLeft size={19} /></button>
@@ -386,6 +388,45 @@ function EdarBody({ p }: { p: Edar }) {
       </li>)}</ul>
     </>}
     <p className="note">Habitante equivalente: la contaminación que genera una persona al día; incluye industria y comercios. La capacidad es la media de diseño y la carga es la máxima semanal, por eso puede pasar del 100 %. «Cumple» se refiere a los límites de vertido que le exige la directiva. Fuente: Agencia Europea de Medio Ambiente, reporte de España (cuestionario 2023).</p>
+  </>)
+}
+
+/** La aglomeración vista como una red: el colector principal y sus ramales, encendidos según lo que recogen. */
+function Red({ c1, c2 }: { c1: number; c2: number }) {
+  const ramas = 12, on = Math.round((c1 / 100) * ramas), ias = Math.round((c2 / 100) * ramas)
+  return <svg className="redsvg" viewBox="0 0 120 110" role="img" aria-label={`Los colectores recogen el ${fmt(c1, 1)} %`}>
+    <line x1={60} y1={8} x2={60} y2={92} className="rs-tronco" />
+    {Array.from({ length: ramas }, (_, j) => { const y = 14 + (j >> 1) * 13, lado = j % 2 ? 1 : -1, cls = j < on ? 'rs-on' : j < on + ias ? 'rs-ias' : 'rs-off'
+      return <g key={j} className={cls}><line x1={60} y1={y} x2={60 + lado * 34} y2={y - 5} /><circle cx={60 + lado * 38} cy={y - 6} r={3.2} /></g> })}
+    <rect x={48} y={92} width={24} height={12} rx={3} className="rs-edar" />
+    <text x={60} y={58} textAnchor="middle" className="dc-num">{fmt(c1, c1 % 1 ? 1 : 0)} %</text>
+  </svg>
+}
+
+function AggBody({ a, onPick }: { a: AggPt; onPick: (s: Sel) => void }) {
+  const all = aggList() ?? [], pos = all.indexOf(a) + 1
+  const sinRed = a.c1 != null ? Math.max(0, 100 - a.c1 - (a.c2 ?? 0)) : null
+  return (<>
+    <h2 className="sel-name">{a.n}</h2>
+    <p className="sel-sub">Aglomeración urbana · datos de 2022 · reporte a la UE</p>
+    <div className="sel-hero">
+      {a.c1 != null ? <Red c1={a.c1} c2={a.c2 ?? 0} /> : <Ring p={0} shown={0} unit="sin dato" label="Sin dato" />}
+      <div className="stat-grid">
+        <Stat label="Contamina como">{a.pe ? (a.pe >= 1e6 ? <>{fmt(a.pe / 1e6, 1)} <small>M h-e</small></> : <>{fmt(a.pe)} <small>h-e</small></>) : '—'}</Stat>
+        <Stat label="Tamaño">{pos}º <small>de {fmt(all.length)}</small></Stat>
+        {a.c2 ? <Stat label="Fosas e individuales">{fmt(a.c2, 1)} <small>%</small></Stat> : null}
+        {sinRed ? <Stat label="Sin recoger" tone="down">{fmt(sinRed, 1)} <small>%</small></Stat> : null}
+      </div>
+    </div>
+    {a.c1 != null && <Fun icon={Waves} tone={a.c1 < 99.5 ? 'warn' : ''}>{a.c1 >= 99.5 ? <>Toda su agua usada la recogen las alcantarillas</> : <>Las alcantarillas recogen el <b>{fmt(a.c1, 1)} %</b> de su agua usada{a.c2 ? <>; otro {fmt(a.c2, 1)} % va a fosas sépticas y sistemas individuales</> : null}{sinRed ? <> y un {fmt(sinRed, 1)} % no se recoge</> : null}</>}.</Fun>}
+    {a.red && RED[a.red] && <p className="trat" style={{ borderColor: c1Color(a.c1) }}>Red <b>{RED[a.red]}</b>.</p>}
+    {a.sin ? <p className="note">El {fmt(a.sin, 1)} % de su carga llega a un río o al mar sin depurar.</p> : null}
+    {a.ed.length > 0 && <>
+      <h3 className="sel-h">Va a parar a</h3>
+      <ul className="mini">{a.ed.map(i => { const p = edarById(i); return p && <li key={i}><button onClick={() => onPick({ k: 'edar', i })}><span>EDAR {p.n}<small>{TRATAMIENTO[p.t]}</small></span><b>{p.ok === 0 ? 'no cumple' : p.ok === 1 ? 'cumple' : ''}</b></button></li> })}</ul>
+    </>}
+    {!a.ed.length && <p className="note">No consta ninguna depuradora enlazada en el reporte.</p>}
+    <p className="note">Aglomeración: el núcleo (o núcleos) cuya agua usada se recoge junta. Habitante equivalente: la contaminación de una persona al día, incluidas industria y comercios. Fuente: Agencia Europea de Medio Ambiente, reporte de España (2022).</p>
   </>)
 }
 

@@ -6,7 +6,7 @@ import { basinStats, consumo, data, depOrder, energyTotals, fmt, fmtPct, hydroCo
 import type { Layer } from './Board'
 import { byCapacity, resInBasin, type Sel } from './sel'
 import { Ciclo } from './Ciclo'
-import { useEdar } from './edar'
+import { aggList, c1Color, RED, useEdar } from './edar'
 import { Bar, CountUp, Head, HydroChart, Info, Ring, TimeChart } from './ui'
 import { byHydroYear, envelope, hydroLabel, hydroYear, toDate, useHistory, weekOf } from './history'
 
@@ -350,6 +350,39 @@ function EdarResumen({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
   </section>
 }
 
+function AlcPanel({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
+  const ed = useEdar(), ags = ed ? aggList() ?? [] : null
+  if (!ags) return <section className="card"><p className="lead">Cargando núcleos urbanos…</p></section>
+  const N = consumo.national, conC = ags.filter(a => a.c1 != null && a.pe), pe = conC.reduce((s, a) => s + a.pe!, 0)
+  const c1 = pe ? conC.reduce((s, a) => s + a.c1! * a.pe!, 0) / pe : 0
+  const enteras = conC.filter(a => a.c1! >= 99.5).length
+  const peor = ags.map((a, i) => ({ a, i })).filter(x => x.a.c1 != null && x.a.c1 < 99.5 && (x.a.pe ?? 0) >= 10000).sort((p, q) => p.a.c1! - q.a.c1!)
+  const redes = ['C', 'S', 'B'].map(k => ({ k, n: ags.filter(a => a.red === k).length }))
+  const nr = redes.reduce((s, x) => s + x.n, 0) || 1
+  const COL: Record<string, string> = { C: '#a98d6a', S: '#3fe6ff', B: '#9085e9' }
+  return (<>
+    <section className="card">
+      <h2><CountUp value={c1} decimals={1} /> % llega a la alcantarilla</h2>
+      <p className="lead">De la contaminación de los {fmt(ags.length)} núcleos urbanos que España reporta a la UE (más de 2.000 habitantes equivalentes), la que recogen los colectores, ponderada por tamaño. {fmt(enteras)} lo recogen todo. Datos de 2022.</p>
+      <div className="trat-barra" role="img" aria-label="Tipo de red de alcantarillado">{redes.map((r, j) => <motion.i key={r.k} style={{ background: COL[r.k] }} initial={{ width: 0 }} animate={{ width: `${(r.n / nr) * 100}%` }} transition={{ delay: j * 0.15, duration: 0.6 }} />)}</div>
+      <ul className="g-legend trat-ley">{redes.map(r => <li key={r.k}><i style={{ background: COL[r.k], height: 8 }} />{RED[r.k].split(' (')[0]} · {fmt(r.n)}</li>)}</ul>
+      <p className="unit">tipo de red de los núcleos que lo declaran</p>
+      <ul className="facts">
+        {N.sewerKm ? <li>España tiene <b>{fmt(N.sewerKm)} km</b> de alcantarillado (INE, {consumo.year}).</li> : null}
+        <li>En la red <b>unitaria</b>, la lluvia y el agua usada van juntas: con tormentas fuertes desbordan y parte llega al río sin depurar.</li>
+      </ul>
+    </section>
+    {peor.length > 0 && <section className="card">
+      <Head>Donde menos se recoge</Head>
+      <ul className="rank">{peor.slice(0, 12).map(({ a, i }) => <li key={a.c}><button className={sel?.k === 'agg' && sel.i === i ? 'is-on' : ''} onClick={() => onPick({ k: 'agg', i })}>
+        <span className="rank-name">{a.n}</span><Bar value={a.c1!} max={100} tone="low" /><b style={{ color: c1Color(a.c1) }}>{fmt(a.c1!, 0)} %</b>
+      </button></li>)}</ul>
+      <p className="unit">núcleos de más de 10.000 habitantes equivalentes · % recogido por colectores</p>
+    </section>}
+    <p className="foot">Cada cuadrado del mapa es un núcleo: cian si las alcantarillas lo recogen todo; amarillo, naranja y rojo cuanto menos.</p>
+  </>)
+}
+
 function DepPanel({ onPick, sel }: { onPick: Pick; sel: Sel | null }) {
   const N = consumo.national, lista = depOrder.map(i => ({ u: consumo.regions[i], i }))
   const top = lista[0], max = top?.u.reusePct ?? 1
@@ -424,6 +457,7 @@ export function Panel({ layer, onPick, sel, card }: { layer: Layer; onPick: Pick
           {layer === 'rios' && <FlowPanel onPick={onPick} />}
           {layer === 'consumo' && <ConsPanel onPick={onPick} sel={sel} />}
           {layer === 'depuracion' && <DepPanel onPick={onPick} sel={sel} />}
+          {layer === 'alcantarillado' && <AlcPanel onPick={onPick} sel={sel} />}
           {layer === 'vertidos' && <DischargePanel onPick={onPick} />}
         </motion.div>
       </AnimatePresence>

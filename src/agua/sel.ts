@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 import { basinStats, consumo, data, depOrder, pct, type BasinStat, type Discharger, type Flow, type RainGauge, type RegionUse, type Reservoir } from './data'
 import { riverById, riverList, type River } from './rivers'
-import { edarById, edarList, type Edar } from './edar'
+import { aggById, aggList, edarById, edarList, type AggPt, type Edar } from './edar'
 
 /** Lo que el jugador tiene seleccionado en el mapa. */
 export type Sel =
@@ -13,6 +13,7 @@ export type Sel =
   | { k: 'cons'; i: number }
   | { k: 'dep'; i: number }
   | { k: 'edar'; i: number }
+  | { k: 'agg'; i: number }
   | { k: 'river'; id: number }
 
 export const resById = new Map(data.reservoirs.map(r => [r.id, r]))
@@ -33,6 +34,7 @@ export type Resolved =
   | { k: 'cons'; u: RegionUse; i: number }
   | { k: 'dep'; u: RegionUse; i: number }
   | { k: 'edar'; p: Edar; i: number }
+  | { k: 'agg'; a: AggPt; i: number }
   | { k: 'river'; v: River }
 
 export function resolve(s: Sel | null): Resolved | null {
@@ -43,6 +45,7 @@ export function resolve(s: Sel | null): Resolved | null {
   if (s.k === 'flow') { const f = data.flows[s.i]; return f ? { k: 'flow', f, i: s.i } : null }
   if (s.k === 'cons') { const u = consumo.regions[s.i]; return u ? { k: 'cons', u, i: s.i } : null }
   if (s.k === 'dep') { const u = consumo.regions[s.i]; return u ? { k: 'dep', u, i: s.i } : null }
+  if (s.k === 'agg') { const a = aggById(s.i); return a ? { k: 'agg', a, i: s.i } : null }
   if (s.k === 'edar') { const p = edarById(s.i); return p ? { k: 'edar', p, i: s.i } : null }
   if (s.k === 'river') { const v = riverById(s.id); return v ? { k: 'river', v } : null }
   const d = data.dischargers[s.i]; return d ? { k: 'dis', d, i: s.i } : null
@@ -67,6 +70,10 @@ export function sequence(s: Sel): { list: Sel[]; at: number; label: string } {
     const list = consumo.regions.map((_, i) => ({ k: 'cons', i }) as Sel)
     return { list, at: s.i, label: 'de más a menos consumo' }
   }
+  if (s.k === 'agg') {
+    const list = (aggList() ?? []).map((_, i) => ({ k: 'agg', i }) as Sel)
+    return { list, at: s.i, label: 'núcleos, de mayor a menor' }
+  }
   if (s.k === 'edar') {
     const list = (edarList() ?? []).map((_, i) => ({ k: 'edar', i }) as Sel)
     return { list, at: s.i, label: 'depuradoras, de mayor a menor' }
@@ -88,14 +95,15 @@ export function sequence(s: Sel): { list: Sel[]; at: number; label: string } {
 }
 
 export function selKey(s: Sel) {
-  return s.k === 'res' ? `embalse-${s.id}` : s.k === 'basin' ? `cuenca-${s.id}` : s.k === 'rain' ? `lluvia-${s.i}` : s.k === 'flow' ? `rio-${s.i}` : s.k === 'cons' ? `consumo-${s.i}` : s.k === 'dep' ? `depuracion-${s.i}` : s.k === 'edar' ? `edar-${s.i}` : s.k === 'river' ? `cauce-${s.id}` : `vertido-${s.i}`
+  return s.k === 'res' ? `embalse-${s.id}` : s.k === 'basin' ? `cuenca-${s.id}` : s.k === 'rain' ? `lluvia-${s.i}` : s.k === 'flow' ? `rio-${s.i}` : s.k === 'cons' ? `consumo-${s.i}` : s.k === 'dep' ? `depuracion-${s.i}` : s.k === 'edar' ? `edar-${s.i}` : s.k === 'agg' ? `nucleo-${s.i}` : s.k === 'river' ? `cauce-${s.id}` : `vertido-${s.i}`
 }
 export function fromKey(key: string): Sel | null {
-  const m = key.replace(/^#/, '').match(/^(embalse|cuenca|lluvia|vertido|rio|consumo|depuracion|edar|cauce)-([A-Za-z0-9]+)$/)
+  const m = key.replace(/^#/, '').match(/^(embalse|cuenca|lluvia|vertido|rio|consumo|depuracion|edar|nucleo|cauce)-([A-Za-z0-9]+)$/)
   if (!m) return null
   // Los ríos llegan en un fichero aparte: su enlace vale aunque aún no hayan cargado.
   if (m[1] === 'cauce') return { k: 'river', id: Number(m[2]) }
   if (m[1] === 'edar') return { k: 'edar', i: Number(m[2]) }
+  if (m[1] === 'nucleo') return { k: 'agg', i: Number(m[2]) }
   const s: Sel = m[1] === 'embalse' ? { k: 'res', id: Number(m[2]) } : m[1] === 'cuenca' ? { k: 'basin', id: m[2] } : m[1] === 'lluvia' ? { k: 'rain', i: Number(m[2]) } : m[1] === 'rio' ? { k: 'flow', i: Number(m[2]) } : m[1] === 'consumo' ? { k: 'cons', i: Number(m[2]) } : m[1] === 'depuracion' ? { k: 'dep', i: Number(m[2]) } : { k: 'dis', i: Number(m[2]) }
   return resolve(s) ? s : null
 }
