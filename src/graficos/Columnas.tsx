@@ -18,6 +18,9 @@ export function Columnas({ items, fmt, titulo, alto = 170, cadaX = 1, etiqueta }
   const y0 = ticks[0], y1 = ticks[ticks.length - 1]
   const py = (v: number) => T + (1 - (v - y0) / (y1 - y0 || 1)) * (H - T - B)
   const band = (W - L - R) / Math.max(1, items.length)
+  // que las etiquetas del eje no se pisen: se salta las que hagan falta según el ancho disponible
+  const anchoEt = Math.max(...items.map(c => String(c.x).length)) * 6.4 + 10
+  const paso = Math.max(cadaX, Math.ceil(anchoEt / Math.max(1, band)))
   const bw = Math.min(24, Math.max(2, band - 2))
   return (
     <figure className="g-fig" ref={view}>
@@ -34,7 +37,7 @@ export function Columnas({ items, fmt, titulo, alto = 170, cadaX = 1, etiqueta }
               : `M${x} ${base}v${-(h - r)}q0 ${-r} ${r} ${-r}h${bw - 2 * r}q${r} 0 ${r} ${r}v${h - r}Z`
             return <g key={c.x} className={`g-col ${c.destacado ? 'is-dest' : ''} ${hover === i ? 'is-hover' : ''}`}>
               <motion.path d={d} style={{ fill: c.color, originY: `${base}px` }} initial={{ scaleY: 0 }} animate={{ scaleY: seen ? 1 : 0 }} transition={{ duration: .7, delay: Math.min(.9, i * (0.9 / items.length)), ease: [0.2, 0.8, 0.2, 1] }} />
-              {(i % cadaX === 0 || c.destacado) && <text className="g-ax" x={x + bw / 2} y={H - 6} textAnchor="middle">{c.x}</text>}
+              {(i % paso === 0 || (c.destacado && paso === cadaX)) && <text className="g-ax" x={x + bw / 2} y={H - 6} textAnchor="middle">{c.x}</text>}
               {c.destacado && etiqueta && <text className="g-mlabel" x={x + bw / 2} y={(neg ? base + h + 12 : top - 5)} textAnchor="middle">{etiqueta(c)}</text>}
               <rect className="g-hit" x={L + i * band} y={T} width={band} height={H - T - B} tabIndex={-1} onPointerEnter={() => setHover(i)} onPointerLeave={() => setHover(null)} />
             </g>

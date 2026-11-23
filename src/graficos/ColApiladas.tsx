@@ -19,7 +19,8 @@ export function ColApiladas({ xs, tramos, titulo, fy, alto = 220, cadaX = 1, tot
   const ticks = niceTicks(Math.min(0, ...neg), Math.max(0, ...pos))
   const y0 = ticks[0], y1 = ticks[ticks.length - 1]
   const py = (v: number) => T + (1 - (v - y0) / (y1 - y0 || 1)) * (H - T - B)
-  const band = (W - L - R) / Math.max(1, xs.length), bw = Math.min(28, Math.max(3, band - 3))
+  const band = (W - L - R) / Math.max(1, xs.length), bw = Math.min(28, Math.max(2, band - (band > 8 ? 3 : 1)))
+  const paso = Math.max(cadaX, Math.ceil((Math.max(...xs.map(x => x.length)) * 6.4 + 10) / Math.max(1, band)))
   return (
     <figure className="g-fig" ref={view}>
       <ul className="g-legend">{tramos.map(t => <li key={t.id}><i style={{ background: t.color, height: 8 }} />{t.nombre}</li>)}</ul>
@@ -37,7 +38,7 @@ export function ColApiladas({ xs, tramos, titulo, fy, alto = 220, cadaX = 1, tot
                   return <rect key={t.id} x={cx} width={bw} y={Math.min(py(a), py(b))} height={Math.max(0.5, Math.abs(py(a) - py(b)) - 1)} style={{ fill: t.color }} />
                 })}
               </motion.g>
-              {i % cadaX === 0 && <text className="g-ax" x={cx + bw / 2} y={H - 6} textAnchor="middle">{x}</text>}
+              {i % paso === 0 && <text className="g-ax" x={cx + bw / 2} y={H - 6} textAnchor="middle">{x}</text>}
               <rect className="g-hit" x={L + i * band} y={T} width={band} height={H - T - B} onPointerEnter={() => setHi(i)} onPointerLeave={() => setHi(null)} onPointerDown={() => setHi(i)} />
             </g>
           })}
