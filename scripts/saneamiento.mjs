@@ -57,8 +57,8 @@ for (let id = 53430; id <= 53459; id++) {
   await espera(400)
 }
 /** Busca en todas las tablas el concepto que encaja con la expresión. */
-function buscar(re) {
-  for (const [id, { out, uds }] of Object.entries(T)) for (const c of Object.keys(out['España'] ?? Object.values(out)[0] ?? {})) if (re.test(c)) return { id: +id, c, u: uds[c], val: (terr, a) => out[terr]?.[c]?.[a], terrs: Object.keys(out) }
+function buscar(re, solo) {
+  for (const [id, { out, uds }] of Object.entries(T).filter(([i]) => !solo || +i === solo)) for (const c of Object.keys(out['España'] ?? Object.values(out)[0] ?? {})) if (re.test(c)) return { id: +id, c, u: uds[c], val: (terr, a) => out[terr]?.[c]?.[a], terrs: Object.keys(out) }
   return null
 }
 const C = {
@@ -70,8 +70,8 @@ const C = {
   sup: buscar(/superficiales/i), sub: buscar(/subterráneas/i),
 }
 log.conceptos = Object.fromEntries(Object.entries(C).map(([k, v]) => [k, v ? `${v.id}: ${v.c} [${v.u}]` : 'NO ENCONTRADO']))
-const DEST = ['Al mar', 'A un cauce fluvial', 'Agua reutilizada', 'Infiltraciones al terreno', 'Otros'].map(c => [c, buscar(new RegExp('^' + c + '$', 'i'))])
-const USOS = ['Agricultura', 'Industria', 'Jardines y zonas deportivas de ocio', 'Limpieza de alcantarillado y baldeo de calles', 'Otros usos'].map(c => [c, buscar(new RegExp('^' + c + '$', 'i'))])
+const DEST = ['Al mar', 'A un cauce fluvial', 'Agua reutilizada', 'Infiltraciones al terreno', 'Otros'].map(c => [c, buscar(new RegExp('^' + c + '$', 'i'), C.reusePct?.id)])
+const USOS = ['Agricultura', 'Industria', 'Jardines y zonas deportivas de ocio', 'Limpieza de alcantarillado y baldeo de calles', 'Otros usos'].map(c => [c, buscar(new RegExp('^' + c + '$', 'i'), (buscar(/^Jardines y zonas deportivas/i)?.id))])
 
 let previo = null; try { previo = JSON.parse(readFileSync(CONS, 'utf8')) } catch {}
 // Población por comunidad (padrón, de Población) para calcular los litros por habitante si el INE no da la tabla
@@ -89,7 +89,8 @@ if (C.supplied && C.treated) {
   const fila = (terr) => {
     const g = (k, y = a) => C[k]?.val(terr, y) ?? null
     const pctP = (y) => g('supplied', y) ? (g('lossReal', y) / g('supplied', y)) * 100 : null
-    const reu = (y) => C.reusePct?.val(terr, y) ?? (g('treated', y) ? (g('reused', y) / g('treated', y)) * 100 : null)
+    // reutilización = 100 × reutilizada / tratada, como define el INE su indicador (mismo territorio y año)
+    const reu = (y) => g('treated', y) > 0 && g('reused', y) != null ? (g('reused', y) / g('treated', y)) * 100 : null
     const prevReg = previo?.regions?.find(x => x.n === terr)
     return {
       n: terr,
