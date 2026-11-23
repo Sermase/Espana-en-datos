@@ -33,10 +33,7 @@
   "_serieCruda": "{\"Nombre\":\"España, Volumen de aguas residuales tratadas\",\"MetaData\":[{\"T3_Variable\":\"Total Nacional\",\"Nombre\":\"España\",\"Codigo\":\"00\"},{\"T3_Variable\":\"tipo de indicador\",\"Nombre\":\"Volumen de aguas residuales tratadas\",\"Codigo\":\"volumendeaguasresidualestratadas\"}],\"Data\":[{\"NombrePeriodo\":\"2024\",\"Valor\":17180033}]}",
   "_ok": "2024 (y 2022), 18 territorios"
  },
- "edar": {
-  "descarga": "CfDJ8PUxxfZWKbZGtMWQ60ASuwtwaM_MkSCndmHUOYX9eCSZfCgI2BOzXZAd73zOUci7eJdXYoA7T3BrXylTFch5nEKRJ1eCOBdObTQyA8XHSNVXn9OUCMwiTeg7OrmSRNqIV1_9RP8Fh-yi6pv5GJOhx4Y -o /tmp/edar/edar.zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?handler=Download\ncurl: (22) The requested URL returned error: 400\n",
-  "_ok": "sin shapefile: se conserva depuradoras.json si existía"
- },
+ "edar": {},
  "conceptos": {
   "supplied": "53447: Volumen de agua suministrada a la red de abastecimiento público []",
   "registered": "53447: Volumen total de agua registrada y distribuida por tipo de usuario []",
@@ -55,12 +52,5 @@
   "billSup": "53448: Importe facturado por el agua suministrada []",
   "sup": "53445: Aguas superficiales []",
   "sub": "53445: Aguas subterráneas []"
- },
- "formulario": {
-  "form": "<form method=\"post\" action=\"/descargas/app/DescargaFichero?handler=Download\"> <input type=\"hidden\" name=\"f\" value=\"aauuq2023.zip\" /> <altcha-widget name=\"altcha\" challengeurl=\"/descargas/app/DescargaFichero?handler=Altcha\"> </altcha-widget> <br /> <button type=\"submit\" class=\"btn-download\"> Descargar fichero </button> <input name=\"__RequestVerificationToken\" type=\"hidden\" value=\"CfDJ8PUxxfZWKbZGtMWQ60ASuwt6exMG6mgSjgOHGYJJPJQuGDUBg2UJo15bwVdmb06UN5KsLg1Km9AsSBYY3IvdJCEXidScU_QSjK7Y-HNUzojzmbhe8R1P-mEsWgcQ0dDemVHcmWDo97lz9VDhD5XOAVc\" /></form>",
-  "cookies": [
-   "#HttpOnly_gis.miteco.gob.es FALSE /descargas/app FALSE 0 .AspNetCore.Antiforgery.PbUI0Dvg9tI"
-  ]
- },
- "agg": "=CfDJ8PUxxfZWKbZGtMWQ60ASuwt6exMG6mgSjgOHGYJJPJQuGDUBg2UJo15bwVdmb06UN5KsLg1Km9AsSBYY3IvdJCEXidScU_QSjK7Y-HNUzojzmbhe8R1P-mEsWgcQ0dDemVHcmWDo97lz9VDhD5XOAVc -o /tmp/edar/agg.zip https://gis.miteco.gob.es/descargas/app/DescargaFichero?handler=Download\ncurl: (22) The requested URL returned error: 400\n"
+ }
 }
