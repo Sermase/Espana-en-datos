@@ -1,0 +1,50 @@
+{
+ "ine": {
+  "53440": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
+  "53441": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
+  "53442": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
+  "53443": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
+  "53444": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
+  "53445": "Total [] | Aguas superficiales [] | Aguas subterráneas [] | Desalación []",
+  "53446": "Volumen de agua disponible no potabilizada [] | Volumen de agua disponible para su potabilización []",
+  "53447": "Volumen de agua suministrada a la red de abastecimiento público [] | Volumen total de agua registrada y distribuida por tipo de usuario [] | Volumen de agua no registrada [] | Pérdidas reales [] | Pérdidas aparentes []",
+  "53448": "Volumen total de agua registrada y distribuida por tipo de usuario [] | Sectores económicos [] | Hogares [] | Consumos municipales [] | Importe facturado por el agua suministrada [] | Importe total de la inversión en los servicios de suministro [] | Longitud de la red de suministro (km) []",
+  "53449": "Total [] | Hogares [] | Industria [] | Servicios [] | Usos turísticos y recreativos [] | Agricultura y ganadería [] | Construcción [] | Consumos municipales []",
+  "53450": "Volumen de aguas residuales tratadas [] | Volumen total de agua reutilizada [] | Importe facturado por alcantarillado y depuración [] | Longitud de la red de alcantarillado (km) [] | Volumen de lodos generados en el tratamiento de aguas residuales (toneladas de materia seca/año) []",
+  "53451": "Al mar [] | A un cauce fluvial [] | Agua reutilizada [] | Infiltraciones al terreno [] | Otros []",
+  "53452": "Agricultura [] | Industria [] | Jardines y zonas deportivas de ocio [] | Limpieza de alcantarillado y baldeo de calles [] | Otros usos []",
+  "53453": "Agricultura, silvicultura y jardinería [] | Incineración o aprovechamiento energético [] | Vertedero []",
+  "53454": "Volumen de agua disponible potabilizada [] | Volumen de agua suministrada a la red de abastecimiento público [] | Volumen total de agua registrada y distribuida [] | Volumen de agua registrada y distribuida a los Hogares [] | Volumen de agua no registrada [] | Pérdidas reales [] | Pérdidas aparentes [] | Porcentaje de pérdidas reales sobre el volumen de agua suministrada []",
+  "53455": "Volumen de aguas residuales depuradas [] | Volumen de agua reutilizada []",
+  "53456": "Coste unitario del agua [] | Suministro de agua [] | Alcantarillado y Depuración []",
+  "53457": "Longitud de la red de suministro por habitante (metros/habitante) [] | Longitud de la red de alcantarillado por habitante (metros/habitante) [] | Pérdidas reales por km de red de suministro (m3/km/año) [] | Número de tanques de tormenta []",
+  "53458": "Nacional. Alimentos. Índice. [] | Andalucía. Alimentos. Índice. [] | Aragón. Alimentos. Índice. [] | Asturias, Principado de. Alimentos. Índice. [] | Balears, Illes. Alimentos. Índice. [] | Canarias. Alimentos. Índice. [] | Cantabria. Alimentos. Índice. [] | Castilla y León. Alimentos. Índice. [] | Castilla - La Mancha. Alimentos. Índice. [] | Cataluña. Alimentos. Índice. [] | Comunitat Valenciana. Alimentos. Índice. [] | Extremadura. Alimentos. Índice. []",
+  "53459": "Nacional. Alimentos. Índice. [] | Albacete. Alimentos. Índice. [] | Alicante/Alacant. Alimentos. Índice. [] | Almería. Alimentos. Índice. [] | Araba/Álava. Alimentos. Índice. [] | Asturias. Alimentos. Índice. [] | Ávila. Alimentos. Índice. [] | Badajoz. Alimentos. Índice. [] | Balears, Illes. Alimentos. Índice. [] | Barcelona. Alimentos. Índice. [] | Bizkaia. Alimentos. Índice. [] | Burgos. Alimentos. Índice. []",
+  "53460": "ERROR HTTP 404 <!DOCTYPE html>\r\n<html lang=\"es\">\r\n<head>\r\n<title>404</title>\r\n\r\n\r\n<meta http-equiv=\"X-UA-Compatible",
+  "_ok": "2024 (y 2022), 18 territorios"
+ },
+ "edar": {
+  "curl https://www.mapa.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip": "Command failed: curl -sSfL --retry 3 -A Mozilla/5.0 espana-en-datos -o /tmp/edar/edar.zip https://www.mapa.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip\ncurl: (60) SSL certificate O",
+  "curl https://www.miteco.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip": "Command failed: curl -sSfL --retry 3 -A Mozilla/5.0 espana-en-datos -o /tmp/edar/edar.zip https://www.miteco.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip\ncurl: (22) The requested U",
+  "_ok": "sin shapefile: se conserva depuradoras.json si existía"
+ },
+ "conceptos": {
+  "supplied": "53447: Volumen de agua suministrada a la red de abastecimiento público []",
+  "registered": "53447: Volumen total de agua registrada y distribuida por tipo de usuario []",
+  "lossReal": "53447: Pérdidas reales []",
+  "lossApparent": "53447: Pérdidas aparentes []",
+  "households": "53448: Hogares []",
+  "treated": "53450: Volumen de aguas residuales tratadas []",
+  "reused": "53450: Volumen total de agua reutilizada []",
+  "reusePct": "53451: Agua reutilizada []",
+  "sewerKm": "53450: Longitud de la red de alcantarillado (km) []",
+  "supplyKm": "53448: Longitud de la red de suministro (km) []",
+  "sludge": "53450: Volumen de lodos generados en el tratamiento de aguas residuales (toneladas de materia seca/año) []",
+  "l": "NO ENCONTRADO",
+  "cost": "53456: Coste unitario del agua []",
+  "billSan": "53450: Importe facturado por alcantarillado y depuración []",
+  "billSup": "53448: Importe facturado por el agua suministrada []",
+  "sup": "53445: Aguas superficiales []",
+  "sub": "53445: Aguas subterráneas []"
+ }
+}

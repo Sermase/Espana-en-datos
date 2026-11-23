@@ -1,127 +1,720 @@
 {
-"year": 2024,
-"national": {
-"l": 128,
-"cost": 2.02,
-"supplied": 4267,
-"registered": 3283,
-"households": 2284,
-"lossReal": 624,
-"lossApparent": 360,
-"origin": {
-"sup": 62.1,
-"sub": 27.1,
-"otras": 10.8
-}
-},
-"regions": [
-{
-"n": "Cantabria",
-"l": 186,
-"v": -0.5,
-"cost": 1.53
-},
-{
-"n": "Castilla-La Mancha",
-"l": 172,
-"v": 22.1,
-"cost": 1.62
-},
-{
-"n": "Principado de Asturias",
-"l": 161,
-"v": 11.2,
-"cost": 1.27
-},
-{
-"n": "Castilla y León",
-"l": 161,
-"v": 9.3,
-"cost": 1.29
-},
-{
-"n": "Comunidad Foral de Navarra",
-"l": 153,
-"v": 15.0,
-"cost": 1.56
-},
-{
-"n": "Comunitat Valenciana",
-"l": 151,
-"v": 7.9,
-"cost": 2.63
-},
-{
-"n": "Región de Murcia",
-"l": 141,
-"v": 5.7,
-"cost": 2.6
-},
-{
-"n": "Illes Balears",
-"l": 136,
-"v": 7.4,
-"cost": 2.8
-},
-{
-"n": "Andalucía",
-"l": 130,
-"v": -7.7,
-"cost": 1.86
-},
-{
-"n": "Ceuta y Melilla",
-"l": 129,
-"v": -14.0,
-"cost": 1.46
-},
-{
-"n": "Comunidad de Madrid",
-"l": 128,
-"v": 2.3,
-"cost": 1.74
-},
-{
-"n": "Aragón",
-"l": 125,
-"v": 12.0,
-"cost": 1.69
-},
-{
-"n": "Canarias",
-"l": 119,
-"v": 3.4,
-"cost": 2.27
-},
-{
-"n": "Extremadura",
-"l": 118,
-"v": -7.6,
-"cost": 1.71
-},
-{
-"n": "La Rioja",
-"l": 116,
-"v": -2.6,
-"cost": 1.26
-},
-{
-"n": "Galicia",
-"l": 115,
-"v": -11.3,
-"cost": 1.29
-},
-{
-"n": "Cataluña",
-"l": 100,
-"v": -13.0,
-"cost": 2.72
-},
-{
-"n": "País Vasco",
-"l": 79,
-"v": -7.6,
-"cost": 2.32
-}
-]
+ "year": 2024,
+ "prevYear": 2022,
+ "unidades": {
+  "treated": "",
+  "reused": "",
+  "sewerKm": "",
+  "sludge": "",
+  "bill": ""
+ },
+ "tablas": {
+  "supplied": 53447,
+  "registered": 53447,
+  "lossReal": 53447,
+  "lossApparent": 53447,
+  "households": 53448,
+  "treated": 53450,
+  "reused": 53450,
+  "reusePct": 53451,
+  "sewerKm": 53450,
+  "supplyKm": 53448,
+  "sludge": 53450,
+  "cost": 53456,
+  "billSan": 53450,
+  "billSup": 53448,
+  "sup": 53445,
+  "sub": 53445
+ },
+ "national": {
+  "n": "España",
+  "l": 128,
+  "v": null,
+  "cost": 2.02,
+  "supplied": 4266.7,
+  "registered": 3283.1,
+  "lossReal": 623.9,
+  "lossApparent": 359.7,
+  "lossPct": 14.6,
+  "lossPctPrev": 16.3,
+  "households": 2284.4,
+  "treated": 17180033,
+  "reused": 2486232,
+  "reusePct": 12.3,
+  "reusePctPrev": 10.9,
+  "dest": {
+   "Al mar": 30.2,
+   "A un cauce fluvial": 55.4,
+   "Agua reutilizada": 12.3,
+   "Infiltraciones al terreno": 0.5,
+   "Otros": 1.6
+  },
+  "usos": {
+   "Agricultura": 69.3,
+   "Industria": 361206,
+   "Jardines y zonas deportivas de ocio": 8.7,
+   "Limpieza de alcantarillado y baldeo de calles": 1.6,
+   "Otros usos": 16
+  },
+  "sewerKm": 155583,
+  "supplyKm": 268061,
+  "sludge": 1500465,
+  "billSan": 3055590,
+  "billSup": 3567883,
+  "origin": {
+   "sup": 2062791,
+   "sub": 899119,
+   "otras": -2961810
+  }
+ },
+ "regions": [
+  {
+   "n": "Cantabria",
+   "l": 186,
+   "v": -0.5,
+   "cost": 1.53,
+   "supplied": 87.1,
+   "registered": 55.8,
+   "lossReal": 22.1,
+   "lossApparent": 9.2,
+   "lossPct": 25.4,
+   "lossPctPrev": 23.9,
+   "households": 40.2,
+   "treated": 717893,
+   "reused": 2822,
+   "reusePct": 0.4,
+   "reusePctPrev": 0,
+   "dest": {
+    "Al mar": 87.8,
+    "A un cauce fluvial": 11.8,
+    "Agua reutilizada": 0.4,
+    "Infiltraciones al terreno": 0,
+    "Otros": 0
+   },
+   "usos": {
+    "Agricultura": 100,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 0,
+    "Limpieza de alcantarillado y baldeo de calles": 0,
+    "Otros usos": 0
+   },
+   "sewerKm": 3840,
+   "supplyKm": 6774,
+   "sludge": 18402,
+   "billSan": 38143,
+   "billSup": 47213
+  },
+  {
+   "n": "Castilla-La Mancha",
+   "l": 172,
+   "v": 22.1,
+   "cost": 1.62,
+   "supplied": 258.2,
+   "registered": 177.8,
+   "lossReal": 55.1,
+   "lossApparent": 25.3,
+   "lossPct": 21.4,
+   "lossPctPrev": 23.5,
+   "households": 132.9,
+   "treated": 787684,
+   "reused": 4573,
+   "reusePct": 1.4,
+   "reusePctPrev": 0.4,
+   "dest": {
+    "Al mar": 0,
+    "A un cauce fluvial": 98,
+    "Agua reutilizada": 1.4,
+    "Infiltraciones al terreno": 0.6,
+    "Otros": 0
+   },
+   "usos": {
+    "Agricultura": 81.3,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 17.6,
+    "Limpieza de alcantarillado y baldeo de calles": 1.1,
+    "Otros usos": 0
+   },
+   "sewerKm": 8865,
+   "supplyKm": 17048,
+   "sludge": 44246,
+   "billSan": 103109,
+   "billSup": 184760
+  },
+  {
+   "n": "Principado de Asturias",
+   "l": 161,
+   "v": 11.2,
+   "cost": 1.27,
+   "supplied": 122.7,
+   "registered": 82.7,
+   "lossReal": 26.3,
+   "lossApparent": 13.7,
+   "lossPct": 21.4,
+   "lossPctPrev": 24.4,
+   "households": 59.4,
+   "treated": 675459,
+   "reused": 104690,
+   "reusePct": 15.4,
+   "reusePctPrev": 0.1,
+   "dest": {
+    "Al mar": 27.3,
+    "A un cauce fluvial": 57.3,
+    "Agua reutilizada": 15.4,
+    "Infiltraciones al terreno": 0,
+    "Otros": 0
+   },
+   "usos": {
+    "Agricultura": 99.1,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 0,
+    "Limpieza de alcantarillado y baldeo de calles": 0,
+    "Otros usos": 0.9
+   },
+   "sewerKm": 4732,
+   "supplyKm": 8030,
+   "sludge": 20807,
+   "billSan": 55998,
+   "billSup": 48877
+  },
+  {
+   "n": "Castilla y León",
+   "l": 161,
+   "v": 9.3,
+   "cost": 1.29,
+   "supplied": 286.7,
+   "registered": 211.6,
+   "lossReal": 49,
+   "lossApparent": 26.1,
+   "lossPct": 17.1,
+   "lossPctPrev": 16.9,
+   "households": 140.8,
+   "treated": 1292306,
+   "reused": 62618,
+   "reusePct": 5,
+   "reusePctPrev": 1.1,
+   "dest": {
+    "Al mar": 0,
+    "A un cauce fluvial": 94.6,
+    "Agua reutilizada": 5,
+    "Infiltraciones al terreno": 0,
+    "Otros": 0.3
+   },
+   "usos": {
+    "Agricultura": 90.6,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 1.3,
+    "Limpieza de alcantarillado y baldeo de calles": 0,
+    "Otros usos": 3.3
+   },
+   "sewerKm": 12340,
+   "supplyKm": 15679,
+   "sludge": 56086,
+   "billSan": 117426,
+   "billSup": 155764
+  },
+  {
+   "n": "Comunidad Foral de Navarra",
+   "l": 153,
+   "v": 15,
+   "cost": 1.56,
+   "supplied": 75.7,
+   "registered": 61.4,
+   "lossReal": 10.4,
+   "lossApparent": 4,
+   "lossPct": 13.7,
+   "lossPctPrev": 16.9,
+   "households": 38.1,
+   "treated": 304558,
+   "reused": 30806,
+   "reusePct": 0,
+   "reusePctPrev": 7.3,
+   "dest": {
+    "Al mar": 0,
+    "A un cauce fluvial": 100,
+    "Agua reutilizada": 0,
+    "Infiltraciones al terreno": 0,
+    "Otros": 0
+   },
+   "usos": {
+    "Agricultura": 0,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 40.2,
+    "Limpieza de alcantarillado y baldeo de calles": 0,
+    "Otros usos": 0
+   },
+   "sewerKm": 4258,
+   "supplyKm": 4109,
+   "sludge": 50999,
+   "billSan": 46124,
+   "billSup": 49404
+  },
+  {
+   "n": "Comunitat Valenciana",
+   "l": 151,
+   "v": 7.9,
+   "cost": 2.63,
+   "supplied": 542.7,
+   "registered": 411.5,
+   "lossReal": 95,
+   "lossApparent": 36.3,
+   "lossPct": 17.5,
+   "lossPctPrev": 17,
+   "households": 295.4,
+   "treated": 2208381,
+   "reused": 754362,
+   "reusePct": 29.3,
+   "reusePctPrev": 34.9,
+   "dest": {
+    "Al mar": 38,
+    "A un cauce fluvial": 29.7,
+    "Agua reutilizada": 29.3,
+    "Infiltraciones al terreno": 2.8,
+    "Otros": 0.2
+   },
+   "usos": {
+    "Agricultura": 82,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 7.9,
+    "Limpieza de alcantarillado y baldeo de calles": 4.7,
+    "Otros usos": 4
+   },
+   "sewerKm": 16979,
+   "supplyKm": 47075,
+   "sludge": 124022,
+   "billSan": 559128,
+   "billSup": 522494
+  },
+  {
+   "n": "Región de Murcia",
+   "l": 141,
+   "v": 5.7,
+   "cost": 2.6,
+   "supplied": 149.5,
+   "registered": 120.4,
+   "lossReal": 19.3,
+   "lossApparent": 9.8,
+   "lossPct": 12.9,
+   "lossPctPrev": 12.8,
+   "households": 81,
+   "treated": 307029,
+   "reused": 294840,
+   "reusePct": 95.3,
+   "reusePctPrev": 95.2,
+   "dest": {
+    "Al mar": 4,
+    "A un cauce fluvial": 0,
+    "Agua reutilizada": 95.3,
+    "Infiltraciones al terreno": 0.8,
+    "Otros": 0
+   },
+   "usos": {
+    "Agricultura": 98.7,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 0.5,
+    "Limpieza de alcantarillado y baldeo de calles": 0,
+    "Otros usos": 0.8
+   },
+   "sewerKm": 6625,
+   "supplyKm": 15752,
+   "sludge": 35859,
+   "billSan": 122336,
+   "billSup": 190733
+  },
+  {
+   "n": "Illes Balears",
+   "l": 136,
+   "v": 7.4,
+   "cost": 2.8,
+   "supplied": 123.2,
+   "registered": 97.6,
+   "lossReal": 19.4,
+   "lossApparent": 6.1,
+   "lossPct": 15.8,
+   "lossPctPrev": 16.4,
+   "households": 61.4,
+   "treated": 333182,
+   "reused": 64932,
+   "reusePct": 22.7,
+   "reusePctPrev": 42.1,
+   "dest": {
+    "Al mar": 53,
+    "A un cauce fluvial": 21.2,
+    "Agua reutilizada": 22.7,
+    "Infiltraciones al terreno": 1.6,
+    "Otros": 1.6
+   },
+   "usos": {
+    "Agricultura": 63.6,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 30.5,
+    "Limpieza de alcantarillado y baldeo de calles": 0,
+    "Otros usos": 5.9
+   },
+   "sewerKm": 2836,
+   "supplyKm": 4441,
+   "sludge": 85127,
+   "billSan": 131626,
+   "billSup": 141549
+  },
+  {
+   "n": "Andalucía",
+   "l": 130,
+   "v": -7.7,
+   "cost": 1.86,
+   "supplied": 739.9,
+   "registered": 566.6,
+   "lossReal": 119.9,
+   "lossApparent": 53.4,
+   "lossPct": 16.2,
+   "lossPctPrev": 17,
+   "households": 410,
+   "treated": 1455227,
+   "reused": 134396,
+   "reusePct": 4,
+   "reusePctPrev": 5.5,
+   "dest": {
+    "Al mar": 43.8,
+    "A un cauce fluvial": 51.9,
+    "Agua reutilizada": 4,
+    "Infiltraciones al terreno": 0,
+    "Otros": 0.3
+   },
+   "usos": {
+    "Agricultura": 12.6,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 17.2,
+    "Limpieza de alcantarillado y baldeo de calles": 0.2,
+    "Otros usos": 59.8
+   },
+   "sewerKm": 31708,
+   "supplyKm": 42434,
+   "sludge": 232505,
+   "billSan": 443333,
+   "billSup": 613906
+  },
+  {
+   "n": "Ceuta y Melilla",
+   "l": 129,
+   "v": -14,
+   "cost": 1.46,
+   "supplied": 18.1,
+   "registered": 10.9,
+   "lossReal": 3.4,
+   "lossApparent": 3.8,
+   "lossPct": 18.9,
+   "lossPctPrev": 19.3,
+   "households": 8,
+   "treated": 62588,
+   "reused": 5833,
+   "reusePct": 12,
+   "reusePctPrev": 38,
+   "dest": {
+    "Al mar": 88,
+    "A un cauce fluvial": 0,
+    "Agua reutilizada": 12,
+    "Infiltraciones al terreno": 0,
+    "Otros": 0
+   },
+   "usos": {
+    "Agricultura": 0,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 10.6,
+    "Limpieza de alcantarillado y baldeo de calles": 4.8,
+    "Otros usos": 0
+   },
+   "sewerKm": 305,
+   "supplyKm": 670,
+   "sludge": 4064,
+   "billSan": 6536,
+   "billSup": 9307
+  },
+  {
+   "n": "Comunidad de Madrid",
+   "l": 128,
+   "v": 2.3,
+   "cost": 1.74,
+   "supplied": 496.8,
+   "registered": 453.2,
+   "lossReal": 10.1,
+   "lossApparent": 33.5,
+   "lossPct": 2,
+   "lossPctPrev": 1.9,
+   "households": 328.3,
+   "treated": 1621309,
+   "reused": 317116,
+   "reusePct": 4.5,
+   "reusePctPrev": 3.8,
+   "dest": {
+    "Al mar": 0,
+    "A un cauce fluvial": 79.4,
+    "Agua reutilizada": 4.5,
+    "Infiltraciones al terreno": 0,
+    "Otros": 16.2
+   },
+   "usos": {
+    "Agricultura": 0,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 13.2,
+    "Limpieza de alcantarillado y baldeo de calles": 0.7,
+    "Otros usos": 82.7
+   },
+   "sewerKm": 20929,
+   "supplyKm": 47075,
+   "sludge": 110258,
+   "billSan": 325120,
+   "billSup": 460594
+  },
+  {
+   "n": "Aragón",
+   "l": 125,
+   "v": 12,
+   "cost": 1.69,
+   "supplied": 131.3,
+   "registered": 96.3,
+   "lossReal": 17.7,
+   "lossApparent": 17.3,
+   "lossPct": 13.5,
+   "lossPctPrev": 24.6,
+   "households": 61.7,
+   "treated": 921835,
+   "reused": 6851,
+   "reusePct": 3.2,
+   "reusePctPrev": 0.4,
+   "dest": {
+    "Al mar": 0,
+    "A un cauce fluvial": 96.8,
+    "Agua reutilizada": 3.2,
+    "Infiltraciones al terreno": 0,
+    "Otros": 0
+   },
+   "usos": {
+    "Agricultura": 86.8,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 13.2,
+    "Limpieza de alcantarillado y baldeo de calles": 0,
+    "Otros usos": 0
+   },
+   "sewerKm": 2429,
+   "supplyKm": 4015,
+   "sludge": 39205,
+   "billSan": 104410,
+   "billSup": 58932
+  },
+  {
+   "n": "Canarias",
+   "l": 119,
+   "v": 3.4,
+   "cost": 2.27,
+   "supplied": 186.2,
+   "registered": 144.6,
+   "lossReal": 32.4,
+   "lossApparent": 9.2,
+   "lossPct": 17.4,
+   "lossPctPrev": 22,
+   "households": 97.6,
+   "treated": 379444,
+   "reused": 125811,
+   "reusePct": 47.1,
+   "reusePctPrev": 53.1,
+   "dest": {
+    "Al mar": 51.2,
+    "A un cauce fluvial": 0.5,
+    "Agua reutilizada": 47.1,
+    "Infiltraciones al terreno": 0.3,
+    "Otros": 0.8
+   },
+   "usos": {
+    "Agricultura": 68.7,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 28.9,
+    "Limpieza de alcantarillado y baldeo de calles": 0,
+    "Otros usos": 2.1
+   },
+   "sewerKm": 4968,
+   "supplyKm": 13552,
+   "sludge": 21675,
+   "billSan": 76198,
+   "billSup": 251904
+  },
+  {
+   "n": "Extremadura",
+   "l": 118,
+   "v": -7.6,
+   "cost": 1.71,
+   "supplied": 86.9,
+   "registered": 59.2,
+   "lossReal": 20.9,
+   "lossApparent": 6.8,
+   "lossPct": 24,
+   "lossPctPrev": 24.6,
+   "households": 45.2,
+   "treated": 182918,
+   "reused": 303,
+   "reusePct": 0.2,
+   "reusePctPrev": 0,
+   "dest": {
+    "Al mar": 0,
+    "A un cauce fluvial": 99.8,
+    "Agua reutilizada": 0.2,
+    "Infiltraciones al terreno": 0,
+    "Otros": 0
+   },
+   "usos": {
+    "Agricultura": 0,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 0,
+    "Limpieza de alcantarillado y baldeo de calles": 0,
+    "Otros usos": 100
+   },
+   "sewerKm": 3756,
+   "supplyKm": 7656,
+   "sludge": 14787,
+   "billSan": 24576,
+   "billSup": 76123
+  },
+  {
+   "n": "La Rioja",
+   "l": 116,
+   "v": -2.6,
+   "cost": 1.26,
+   "supplied": 39.4,
+   "registered": 25.6,
+   "lossReal": 8,
+   "lossApparent": 5.8,
+   "lossPct": 20.3,
+   "lossPctPrev": 58.6,
+   "households": 13.4,
+   "treated": 163346,
+   "reused": 0,
+   "reusePct": 0,
+   "reusePctPrev": 0,
+   "dest": {
+    "Al mar": 0,
+    "A un cauce fluvial": 100,
+    "Agua reutilizada": 0,
+    "Infiltraciones al terreno": 0,
+    "Otros": 0
+   },
+   "usos": {
+    "Agricultura": 0,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 0,
+    "Limpieza de alcantarillado y baldeo de calles": 0,
+    "Otros usos": 0
+   },
+   "sewerKm": 895,
+   "supplyKm": 1282,
+   "sludge": 5821,
+   "billSan": 15878,
+   "billSup": 16304
+  },
+  {
+   "n": "Galicia",
+   "l": 115,
+   "v": -11.3,
+   "cost": 1.29,
+   "supplied": 250.3,
+   "registered": 179,
+   "lossReal": 45.5,
+   "lossApparent": 25.8,
+   "lossPct": 18.2,
+   "lossPctPrev": 25.8,
+   "households": 113.2,
+   "treated": 1587029,
+   "reused": 235565,
+   "reusePct": 14.8,
+   "reusePctPrev": 0.1,
+   "dest": {
+    "Al mar": 26.1,
+    "A un cauce fluvial": 59.1,
+    "Agua reutilizada": 14.8,
+    "Infiltraciones al terreno": 0.1,
+    "Otros": 0
+   },
+   "usos": {
+    "Agricultura": 100,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 0,
+    "Limpieza de alcantarillado y baldeo de calles": 0,
+    "Otros usos": 0
+   },
+   "sewerKm": 12672,
+   "supplyKm": 13336,
+   "sludge": 34960,
+   "billSan": 92905,
+   "billSup": 138106
+  },
+  {
+   "n": "Cataluña",
+   "l": 100,
+   "v": -13,
+   "cost": 2.72,
+   "supplied": 538.5,
+   "registered": 419.9,
+   "lossReal": 54.8,
+   "lossApparent": 63.7,
+   "lossPct": 10.2,
+   "lossPctPrev": 12.9,
+   "households": 293.3,
+   "treated": 2808849,
+   "reused": 331605,
+   "reusePct": 11.3,
+   "reusePctPrev": 12.6,
+   "dest": {
+    "Al mar": 44.3,
+    "A un cauce fluvial": 44.1,
+    "Agua reutilizada": 11.3,
+    "Infiltraciones al terreno": 0.4,
+    "Otros": 0
+   },
+   "usos": {
+    "Agricultura": 78.7,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 5.8,
+    "Limpieza de alcantarillado y baldeo de calles": 0.2,
+    "Otros usos": 2.7
+   },
+   "sewerKm": 12103,
+   "supplyKm": 33536,
+   "sludge": 204911,
+   "billSan": 630032,
+   "billSup": 511603
+  },
+  {
+   "n": "País Vasco",
+   "l": 79,
+   "v": -7.6,
+   "cost": 2.32,
+   "supplied": 133.5,
+   "registered": 108.9,
+   "lossReal": 14.5,
+   "lossApparent": 10,
+   "lossPct": 10.9,
+   "lossPctPrev": 15.8,
+   "households": 64.5,
+   "treated": 1370996,
+   "reused": 9111,
+   "reusePct": 1.1,
+   "reusePctPrev": 9.8,
+   "dest": {
+    "Al mar": 58.5,
+    "A un cauce fluvial": 40.4,
+    "Agua reutilizada": 1.1,
+    "Infiltraciones al terreno": 0,
+    "Otros": 0
+   },
+   "usos": {
+    "Agricultura": 0,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 0,
+    "Limpieza de alcantarillado y baldeo de calles": 0,
+    "Otros usos": 45.2
+   },
+   "sewerKm": 3851,
+   "supplyKm": 8531,
+   "sludge": 76036,
+   "billSan": 162713,
+   "billSup": 90311
+  }
+ ]
 }
