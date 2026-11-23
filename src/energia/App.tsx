@@ -45,15 +45,15 @@ function modelo(t: Tec, uso: number) {
 
 /** La sala: holograma de la tecnología elegida y lo que aportó en los últimos 30 días. */
 /** La sala: holograma de la tecnología elegida. Con la generación cada 10 minutos si REE la da; si no, la del último día. */
-function Sala({ hoy, tec, setTec }: { hoy: Hoy; tec: Tec; setTec: (t: Tec) => void }) {
+function Sala({ hoy, tec, setTec }: { hoy: Hoy; tec: Tec | null; setTec: (t: Tec) => void }) {
   const tr = useMemo(() => agruparTR(hoy.tr), [hoy.tr])
   const dia = useMemo(() => agrupar(hoy.mix30), [hoy.mix30])
   const ag = tr ?? dia
   if (!ag) return null
   const n = ag.xs.length, tot = ag.capas.reduce((s, c) => s + c.v[n - 1], 0)
-  const c = ag.capas.find(x => x.id === tec) ?? ag.capas[0]
-  const ult = c.v[n - 1] ?? 0, max = Math.max(...c.v), uso = max ? ult / max : 0.5
   const ranking = ag.capas.filter(x => x.v[n - 1] > 0 || x.id === tec).sort((a, b) => b.v[n - 1] - a.v[n - 1])
+  const c = ag.capas.find(x => x.id === tec) ?? ranking[0] // sin elegir: la que más aporta ahora
+  const ult = c.v[n - 1] ?? 0, max = Math.max(...c.v), uso = max ? ult / max : 0.5
   const pos = ranking.findIndex(x => x.id === c.id) + 1
   const pico = c.v.indexOf(max)
   return (
@@ -89,7 +89,7 @@ function Kpis({ hoy }: { hoy: Hoy }) {
   </div>
 }
 
-function Ahora({ hoy, tec, setTec, vivo }: { hoy: Hoy; tec: Tec; setTec: (t: Tec) => void; vivo: Date | null }) {
+function Ahora({ hoy, tec, setTec, vivo }: { hoy: Hoy; tec: Tec | null; setTec: (t: Tec) => void; vivo: Date | null }) {
   const dHoy = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Madrid' }).format(new Date())
   const ser = (k: string, extra: object) => { const v = sv(hoy.demanda, k).map(p => [tLocal(p[0]), p[1]] as [number, number]); return v.length > 1 ? { id: k, nombre: k === 'Real' ? 'Real' : k === 'Prevista' ? 'Prevista' : 'Programada', datos: v, ...extra } : null }
   const dem = [ser('Real', { color: ACC, area: true }), ser('Prevista', { color: '#9fb6bf', fondo: true }), ser('Programada', { color: '#3987e5', fondo: true })].filter(Boolean) as Parameters<typeof LineChart>[0]['series']
@@ -181,9 +181,9 @@ function Precios({ hist, desde }: { hist: Historia; desde: number }) {
   const v = serie[1].v.map(p => [tLocal(p[0]), p[1]] as [number, number]).filter(p => p[0] >= desde)
   const porMes = new Map<string, number[]>(); for (const p of serie[1].v) { const k = p[0].slice(0, 7); porMes.set(k, [...(porMes.get(k) ?? []), p[1]]) }
   const meses = [...porMes].map(([k, xs]) => ({ k, v: xs.reduce((a, b) => a + b, 0) / xs.length }))
-  const caro = meses.reduce((m, x) => (x.v > m.v ? x : m), meses[0])
+  const caro = meses.reduce((m, x) => (x.v > m.v ? x : m), meses[0]), inicio = serie[1].v[0][0]
   return <div className="graficos">
-    <Card t="Precio de la electricidad en el mercado" wide lead={<>Media de cada día, en euros por megavatio hora. El mes más caro de la serie fue {fMes(Date.parse(caro.k + '-15'))}, con <b>{nf(caro.v)} €/MWh</b> de media.</>} fuente={<A id="ree_mercados">REE, mercados</A>}>
+    <Card t="Precio de la electricidad en el mercado" wide lead={<>Media de cada día, en euros por megavatio hora. Desde {fMes(Date.parse(inicio.slice(0, 7) + '-15'))}, el mes más caro fue {fMes(Date.parse(caro.k + '-15'))}, con <b>{nf(caro.v)} €/MWh</b> de media.{inicio > '2015' && ' El histórico se va completando hacia atrás cada día, hasta 2014.'}</>} fuente={<A id="ree_mercados">REE, mercados</A>}>
       <LineChart titulo="Precio diario de la electricidad" series={[{ id: 'p', nombre: serie[0], datos: v, color: ACC }]} fx={fDia} fxEje={t => String(new Date(t).getUTCFullYear())} fy={x => `${nf(x)} €`} yMin={0} />
     </Card>
   </div>
@@ -210,7 +210,7 @@ export default function App() {
   const vivo = useVivo(setHoy)
   const init = location.hash.slice(1) as Sec
   const [sec, setSec] = useState<Sec>(SECCIONES.some(x => x.id === init) ? init : 'ahora')
-  const [tec, setTec] = useState<Tec>('eolica')
+  const [tec, setTec] = useState<Tec | null>(null)
   const [rango, setRango] = useState<0 | 10 | 5>(0)
   const desde = rango ? Date.now() - rango * 365.25 * 864e5 : -Infinity
   const go = (s: Sec) => { setSec(s); history.replaceState(null, '', `#${s}`) }

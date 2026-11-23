@@ -34,7 +34,7 @@ export function Apiladas({ xs, capas, titulo, fx, fxEje, ticksX, fy, alto = 240,
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [xs, capas, pct, tot])
   const path = (lo: number[], up: number[]) => `M${xs.map((t, i) => `${px(t).toFixed(1)} ${py(up[i]).toFixed(1)}`).join('L')}L${xs.map((t, i) => [t, i] as const).reverse().map(([t, i]) => `${px(t).toFixed(1)} ${py(lo[i]).toFixed(1)}`).join('L')}Z`
-  const tx = ticksX ?? niceTicks(x0, x1, Math.max(2, Math.floor(W / 110))).filter(v => v >= x0 && v <= x1)
+  const tx = (ticksX ?? niceTicks(x0, x1, Math.max(2, Math.floor(W / 110)))).filter(v => v >= x0 && v <= x1)
   const onMove = (e: PointerEvent<SVGRectElement>) => {
     const r = e.currentTarget.getBoundingClientRect(), t = x0 + ((e.clientX - r.left) / r.width) * (x1 - x0)
     let b = 0; xs.forEach((x, i) => { if (Math.abs(x - t) < Math.abs(xs[b] - t)) b = i }); setHi(b)
@@ -54,7 +54,7 @@ export function Apiladas({ xs, capas, titulo, fx, fxEje, ticksX, fy, alto = 240,
           {ticks.map(v => <g key={v}><line className="g-grid" x1={L} x2={W - R} y1={py(v)} y2={py(v)} /><text className="g-ax" x={L - 6} y={py(v) + 3.5} textAnchor="end">{pct ? `${v} %` : fy(v)}</text></g>)}
           {tx.map(v => <text key={v} className="g-ax" x={px(v)} y={H - 6} textAnchor="middle">{(fxEje ?? fx)(v)}</text>)}
           <motion.g style={{ originY: `${py(0)}px` }} initial={{ scaleY: 0 }} animate={{ scaleY: seen ? 1 : 0 }} transition={{ duration: 1.1, ease: [0.2, 0.8, 0.2, 1] }}>
-            {bandas.map(({ c, lo, up }) => <path key={c.id} className="g-capa" d={path(lo, up)} style={{ fill: c.color, opacity: sel && sel !== c.id ? 0.28 : 0.92 }} onClick={() => onSel?.(c.id)} />)}
+            {bandas.map(({ c, lo, up }) => <path key={c.id} className="g-capa" d={path(lo, up)} style={{ fill: c.color, opacity: sel && sel !== c.id ? 0.5 : 0.92 }} onClick={() => onSel?.(c.id)} />)}
           </motion.g>
           {hi != null && <line className="g-cross-l" x1={px(xs[hi])} x2={px(xs[hi])} y1={T} y2={H - B} />}
           <rect className="g-hit" x={L} y={0} width={Math.max(0, W - L - R)} height={H} tabIndex={0} aria-label={`${titulo}: usa las flechas para recorrer los datos`}

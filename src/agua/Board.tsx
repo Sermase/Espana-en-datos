@@ -383,6 +383,11 @@ export function Board({ layer, sel, onPick, seen, onDice }: {
   const focusRegion = it?.k === 'cons' ? it.u.n : null
   const target = it && (it.k === 'res' || it.k === 'rain' || it.k === 'flow' || it.k === 'dis') ? (() => { const ll = it.k === 'res' ? it.r : it.k === 'rain' ? it.g : it.k === 'flow' ? it.f : it.d; return project(ll.x, ll.y) })() : null
   const selRiver = it?.k === 'river' ? rivProj?.find(x => x.v.id === it.v.id) ?? null : null
+  // Coordenadas del holograma memorizadas: si cambiaran de identidad en cada render (p. ej. al mover el ratón
+  // y mostrar la etiqueta), el holograma se recalcularía y volvería a empezar su giro.
+  const resId = it?.k === 'res' ? it.r.id : null
+  const holoDam = useMemo(() => (it?.k === 'res' ? project(it.r.x, it.r.y) : null), [resId]) // eslint-disable-line react-hooks/exhaustive-deps
+  const riverPlan = useMemo(() => selRiver?.v.line.map(([x, y]) => project(x, y)) ?? null, [selRiver?.v.id]) // eslint-disable-line react-hooks/exhaustive-deps
   const labels = useMemo(() => (layer === 'agua' || layer === 'energia') && k > 2.1 ? RES.filter(({ r }) => r.c > (k > 5 ? 40 : k > 3.5 ? 120 : 450)) : [], [layer, k])
 
   return (
@@ -424,9 +429,9 @@ export function Board({ layer, sel, onPick, seen, onDice }: {
       {/* bajo el holograma sobra el icono plano del embalse */}
       {holo && it?.k === 'res' && <style>{`.has-holo .node[data-res="${it.r.id}"]{opacity:0}`}</style>}
       {holo && it?.k === 'res' && (layer === 'agua' || layer === 'energia') && (
-        <Holo key={it.r.id} r={it.r} shape={lam?.get(it.r.id)?.xy ?? null} dam={project(it.r.x, it.r.y)} ctx={RIVER_LINES} size={holoSize()} x={holo.x} y={holo.y} />
+        <Holo key={it.r.id} r={it.r} shape={lam?.get(it.r.id)?.xy ?? null} dam={holoDam} ctx={RIVER_LINES} size={holoSize()} x={holo.x} y={holo.y} />
       )}
-      {holo && selRiver && <RiverHolo key={selRiver.v.id} v={selRiver.v} plan={selRiver.v.line.map(([x, y]) => project(x, y))} size={holoSize()} x={holo.x} y={holo.y} />}
+      {holo && selRiver && <RiverHolo key={selRiver.v.id} v={selRiver.v} plan={riverPlan!} size={holoSize()} x={holo.x} y={holo.y} />}
       {tip && <div className="tip" style={{ left: tip.x, top: tip.y }} role="status"><strong>{tip.title}</strong><span>{tip.line}</span></div>}
 
       <div className="zoom-pad" aria-label="Controles del mapa">

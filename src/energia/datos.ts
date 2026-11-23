@@ -45,7 +45,7 @@ function tiempoReal(fecha: string) {
   })
 }
 /** Columnas de la web de REE que forman cada tecnología (sol ya suma fotovoltaica y térmica). */
-const TR: Record<Tec, string[]> = { eolica: ['eol'], solar: ['sol'], hidraulica: ['hid', 'turb'], otras_ren: ['bio', 'termRenov'], nuclear: ['nuc'], ciclo: ['cc'], cogeneracion: ['cogenResto'], carbon: ['car'], resto: ['gf', 'diesel', 'tnr', 'trn'] }
+const TR: Record<Tec, string[]> = { eolica: ['eol'], solar: ['sol'], hidraulica: ['hid', 'turb'], otras_ren: ['bio', 'termRenov'], nuclear: ['nuc'], ciclo: ['cc'], cogeneracion: ['cogenResto'], carbon: ['car'], resto: ['gf', 'vap'] }
 export function agruparTR(f: FilaTR[] | null | undefined) {
   if (!f?.length) return null
   const filas = f.filter(x => TEC.some(t => TR[t.id].some(k => Number(x[k]) > 0)))
