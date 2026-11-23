@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react'
 /** Serie aplanada de REE: [fecha ISO hasta minutos, valor, fracción del total o null]. */
 export type S = { color?: string; tipo?: string | null; total?: boolean; v: [string, number, number | null][] }
 export type Grupo = Record<string, S>
-export type Hoy = { fecha: string; demanda: Grupo | null; precios: Grupo | null; balance: Grupo | null; co2: Grupo | null; mix30: Grupo | null; mix?: Grupo | null }
+export type FilaTR = Record<string, number | string> & { ts: string; dem: number }
+export type Hoy = { fecha: string; tr?: FilaTR[] | null; demanda: Grupo | null; precios: Grupo | null; balance: Grupo | null; co2: Grupo | null; mix30: Grupo | null; mix?: Grupo | null }
 export type Historia = { fecha: string; mix_mes: Grupo | null; renovable_mes: Grupo | null; demanda_mes: Grupo | null; co2_mes: Grupo | null; intercambios_mes?: Grupo | null; precio_dia?: Grupo | null; potencia?: Grupo | null }
 
 const get = <T,>(f: string) => fetch(f).then(r => { if (!r.ok) throw new Error(f); return r.json() as Promise<T> })
@@ -31,6 +32,29 @@ async function ree(ruta: string, desde: string, hasta: string, trunc: string): P
   return out
 }
 const dia = (d: Date) => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Madrid' }).format(d)
+/** Generación peninsular cada 10 minutos: REE la sirve en JSONP (sin CORS), así que se pide con una etiqueta script. */
+function tiempoReal(fecha: string) {
+  return new Promise<FilaTR[]>((ok, ko) => {
+    const cb = `__ree${Date.now()}`, sc = document.createElement('script')
+    const fin = () => { delete (window as never as Record<string, unknown>)[cb]; sc.remove() }
+    ;(window as never as Record<string, unknown>)[cb] = (j: { valoresHorariosGeneracion?: FilaTR[] }) => { fin(); ok((j.valoresHorariosGeneracion ?? []).filter(f => f.ts.startsWith(fecha))) }
+    sc.onerror = () => { fin(); ko(new Error('REE')) }
+    sc.src = `https://demanda.ree.es/WSvisionaMovilesPeninsulaRest/resources/demandaGeneracionPeninsula?callback=${cb}&curva=DEMANDAAU&fecha=${fecha}`
+    document.head.appendChild(sc)
+    setTimeout(() => { fin(); ko(new Error('tiempo')) }, 15000)
+  })
+}
+/** Columnas de la web de REE que forman cada tecnología (sol ya suma fotovoltaica y térmica). */
+const TR: Record<Tec, string[]> = { eolica: ['eol'], solar: ['sol'], hidraulica: ['hid', 'turb'], otras_ren: ['bio', 'termRenov'], nuclear: ['nuc'], ciclo: ['cc'], cogeneracion: ['cogenResto'], carbon: ['car'], resto: ['gf', 'diesel', 'tnr', 'trn'] }
+export function agruparTR(f: FilaTR[] | null | undefined) {
+  if (!f?.length) return null
+  const filas = f.filter(x => TEC.some(t => TR[t.id].some(k => Number(x[k]) > 0)))
+  if (filas.length < 2) return null
+  const xs = filas.map(x => Date.parse(x.ts.replace(' ', 'T') + ':00Z'))
+  const capas = TEC.map(t => ({ ...t, v: filas.map(x => TR[t.id].reduce((s, k) => s + Math.max(0, Number(x[k]) || 0), 0)) })).filter(c => c.v.some(v => v > 0))
+  return { xs, capas, dem: filas.map(x => Number(x.dem)) }
+}
+
 /** Refresca demanda y precios cada 5 minutos; si REE no responde, se queda lo descargado por el robot. */
 export function useVivo(setHoy: (f: (h: Hoy | null) => Hoy | null) => void) {
   const [vivo, setVivo] = useState<Date | null>(null)
@@ -39,12 +63,13 @@ export function useVivo(setHoy: (f: (h: Hoy | null) => Hoy | null) => void) {
     const tick = async () => {
       const hoy = dia(new Date()), ayer = dia(new Date(Date.now() - 864e5)), mañana = dia(new Date(Date.now() + 864e5))
       try {
-        const [demanda, precios] = await Promise.all([
+        const [demanda, precios, tr] = await Promise.all([
           ree('demanda/demanda-tiempo-real', `${hoy}T00:00`, `${hoy}T23:59`, 'hour'),
           ree('mercados/precios-mercados-tiempo-real', `${ayer}T00:00`, `${mañana}T23:59`, 'hour'),
+          tiempoReal(hoy).catch(() => null),
         ])
         if (parar) return
-        setHoy(h => h && { ...h, demanda: Object.keys(demanda).length ? demanda : h.demanda, precios: Object.keys(precios).length ? precios : h.precios })
+        setHoy(h => h && { ...h, demanda: Object.keys(demanda).length ? demanda : h.demanda, precios: Object.keys(precios).length ? precios : h.precios, tr: tr?.length ? tr : h.tr })
         setVivo(new Date())
       } catch { /* se queda la copia */ }
     }
@@ -65,7 +90,7 @@ export const TEC: { id: Tec; nombre: string; color: string; ren: boolean; de: st
   { id: 'ciclo', nombre: 'Ciclo combinado (gas)', color: '#d95926', ren: false, de: ['Ciclo combinado'] },
   { id: 'cogeneracion', nombre: 'Cogeneración', color: '#d55181', ren: false, de: ['Cogeneración'] },
   { id: 'carbon', nombre: 'Carbón', color: '#8b939c', ren: false, de: ['Carbón'] },
-  { id: 'resto', nombre: 'Resto (diésel, fuel, gas, residuos)', color: '#5d6f7a', ren: false, de: ['Motores diésel', 'Turbina de gas', 'Turbina de vapor', 'Fuel + Gas', 'Residuos no renovables'] },
+  { id: 'resto', nombre: 'Resto no renovable', color: '#5d6f7a', ren: false, de: ['Motores diésel', 'Turbina de gas', 'Turbina de vapor', 'Fuel + Gas', 'Residuos no renovables'] },
 ]
 /** Agrupa un Grupo de REE por tecnología: { xs (fechas), capas por Tec }. */
 export function agrupar(g: Grupo | null) {

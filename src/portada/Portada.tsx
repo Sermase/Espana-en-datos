@@ -71,9 +71,18 @@ function Mini({ t }: { t: Tema }) {
       <circle cx="70" cy="22" r="4" fill={c} />
     </svg>
   )
-  if (t.id === 'energia') return (
-    <svg viewBox="0 0 120 80" className="mini" aria-hidden>{[22, 30, 46, 58, 52, 64, 70, 56, 40, 34, 28, 24].map((h, i) => <rect key={i} x={4 + i * 9.5} y={76 - h} width="6.5" height={h} fill={c} opacity={.35 + (h / 70) * .6} />)}</svg>
-  )
+  if (t.id === 'energia') {
+    const e = (resumen as unknown as { energia?: { ren?: number | null } }).energia
+    const ren = e?.ren ?? null, R = 26, L = 2 * Math.PI * R
+    return (
+      <svg viewBox="0 0 120 80" className="mini" aria-hidden>
+        <circle cx="60" cy="38" r={R} fill="none" stroke={c} strokeOpacity=".15" strokeWidth="7" />
+        {ren != null && <motion.circle cx="60" cy="38" r={R} fill="none" stroke={c} strokeWidth="7" strokeLinecap="round" transform="rotate(-90 60 38)" strokeDasharray={L} initial={{ strokeDashoffset: L }} animate={{ strokeDashoffset: L * (1 - ren / 100) }} transition={{ delay: .4, duration: 1.1 }} />}
+        {ren != null && <text x="60" y="44" textAnchor="middle" className="mini-big" style={{ fontSize: 17 }}>{Math.round(ren)}<tspan className="mini-unit"> %</tspan></text>}
+        <text x="60" y="78" textAnchor="middle" className="mini-unit" style={{ fontSize: 9.5 }}>renovable ayer</text>
+      </svg>
+    )
+  }
   return (
     <svg viewBox="0 0 120 80" className="mini" aria-hidden>
       <path d="M4 60 L18 54 L30 58 L44 44 L58 48 L72 34 L86 38 L100 22 L116 26" fill="none" stroke={c} strokeWidth="2" />
@@ -101,7 +110,7 @@ export default function Portada() {
                 <div className="tema-txt">
                   <h2>{t.nombre}{abierto && <ArrowUpRight size={20} />}</h2>
                   <p>{t.lema}</p>
-                  <small>{abierto ? <><i className="vivo" /> {t.id === 'agua' ? `Datos del ${fecha}` : t.id === 'poblacion' ? 'Padrón y series del INE' : t.id === 'economia' ? 'Eurostat, cada día' : 'Datos de hoy'}</> : 'En preparación'} · {VISTA[t.vista]}</small>
+                  <small>{abierto ? <><i className="vivo" /> {t.id === 'agua' ? `Datos del ${fecha}` : t.id === 'poblacion' ? 'Padrón y series del INE' : t.id === 'economia' ? 'Eurostat, cada día' : t.id === 'energia' ? 'En directo, Red Eléctrica' : 'Datos de hoy'}</> : 'En preparación'} · {VISTA[t.vista]}</small>
                 </div>
                 <Mini t={t} />
               </Card>

@@ -66,7 +66,8 @@ export const hidraulica = (caudal = 0.5): Modelo => t => {
   const fuerte: Seg[] = [], tenue: Seg[] = []
   const R = 0.9, a0 = -0.55, a1 = 0.55, n = 14, Hm = 0.6
   const P = (a: number, y: number, r = R): [number, number, number] => [Math.sin(a) * r, y, Math.cos(a) * r - R + 0.1]
-  for (let i = 0; i < n; i++) { const a = a0 + (a1 - a0) * (i / n), b = a0 + (a1 - a0) * ((i + 1) / n); fuerte.push([...P(a, Hm), ...P(b, Hm)] as Seg); tenue.push([...P(a, 0), ...P(b, 0)] as Seg, [...P(a, Hm * 0.5, R - 0.03), ...P(b, Hm * 0.5, R - 0.03)] as Seg) }
+  fuerte.push([...P(a0, 0), ...P(a0, Hm)] as Seg, [...P(a1, 0), ...P(a1, Hm)] as Seg)
+  for (let i = 0; i < n; i++) { const a = a0 + (a1 - a0) * (i / n), b = a0 + (a1 - a0) * ((i + 1) / n); fuerte.push([...P(a, Hm), ...P(b, Hm)] as Seg, [...P(a, 0, R + 0.08), ...P(b, 0, R + 0.08)] as Seg); tenue.push([...P(a, 0), ...P(b, 0)] as Seg, [...P(a, Hm * 0.5, R - 0.03), ...P(b, Hm * 0.5, R - 0.03)] as Seg) }
   for (let i = 0; i <= n; i += 2) { const a = a0 + (a1 - a0) * (i / n); tenue.push([...P(a, 0, R + 0.08), ...P(a, Hm)] as Seg) }
   // lámina de agua con ondas
   for (let k = 0; k < 5; k++) { const r = R + 0.12 + k * 0.1, y = Hm * 0.85 + 0.01 * Math.sin(t * 2 + k); for (let i = 0; i < n; i++) { const a = a0 + (a1 - a0) * (i / n), b = a0 + (a1 - a0) * ((i + 1) / n); tenue.push([...P(a, y, r), ...P(b, y, r)] as Seg) } }

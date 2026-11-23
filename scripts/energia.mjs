@@ -29,7 +29,7 @@ async function ree(ruta, desde, hasta, trunc, extra = {}) {
       }
       for (const it of j.included ?? []) meter(it)
       return out
-    } catch (e) { if (i === 2) throw e; await espera(4000 * (i + 1)) }
+    } catch (e) { if (i === 2 || /HTTP 400/.test(e.message)) throw e; await espera(4000 * (i + 1)) }
   }
 }
 async function paso(id, fn) {
@@ -57,16 +57,21 @@ const ayer = new Date(HOY - 864e5), mañana = new Date(+HOY + 864e5)
 const AÑOS = Array.from({ length: HOY.getFullYear() - 2007 + 1 }, (_, i) => 2007 + i)
 
 // ---------- sonda: generación en tiempo real (la web de seguimiento de la demanda de REE) ----------
-log._sonda_tr = {}
-for (const curva of ['DEMANDAAU', 'PENINSULA', 'DEMANDA_PENINSULA', 'DEMANDAPEN']) {
-  try {
-    const r = await fetch(`https://demanda.ree.es/WSvisionaMovilesPeninsulaRest/resources/demandaGeneracionPeninsula?callback=cb&curva=${curva}&fecha=${iso(HOY)}`)
-    log._sonda_tr[curva] = r.status + ' ' + (await r.text()).slice(0, 400)
-  } catch (e) { log._sonda_tr[curva] = 'ERROR ' + e.message }
+/** Generación peninsular cada 10 minutos (la web «Seguimiento de la demanda» de REE). Responde en JSONP. */
+async function tiempoReal(fecha) {
+  const r = await fetch(`https://demanda.ree.es/WSvisionaMovilesPeninsulaRest/resources/demandaGeneracionPeninsula?callback=cb&curva=DEMANDAAU&fecha=${fecha}`)
+  const txt = await r.text(), j = JSON.parse(txt.slice(txt.indexOf('(') + 1, txt.lastIndexOf(')')))
+  return j.valoresHorariosGeneracion ?? []
 }
+let tr = null
+try {
+  const filas = await tiempoReal(iso(HOY))
+  log.tiempo_real = { filas: filas.length, primera: filas[0]?.ts, ultima: filas.at(-1)?.ts, claves: Object.keys(filas[0] ?? {}).join(',') }
+  tr = filas.filter(f => f.ts.startsWith(iso(HOY)))
+} catch (e) { log.tiempo_real = 'ERROR ' + String(e.message).slice(0, 200) }
 
 // ---------- hoy ----------
-const hoy = { fecha: HOY.toISOString() }
+const hoy = { fecha: HOY.toISOString(), tr }
 hoy.mix = await paso('mix_hora', () => ree('generacion/estructura-generacion', `${iso(ayer)}T00:00`, `${iso(HOY)}T23:59`, 'hour'))
 hoy.demanda = await paso('demanda_tr', () => ree('demanda/demanda-tiempo-real', `${iso(HOY)}T00:00`, `${iso(HOY)}T23:59`, 'hour'))
 hoy.precios = await paso('precios_hora', () => ree('mercados/precios-mercados-tiempo-real', `${iso(ayer)}T00:00`, `${iso(mañana)}T23:59`, 'hour'))
@@ -88,38 +93,48 @@ const H = [
   ['intercambios_mes', 'intercambios/todas-fronteras-fisicos', 'month'],
 ]
 for (const [id, ruta, trunc] of H) historia[id] = (await paso(id, () => tramos(ruta, AÑOS, trunc))) ?? prev[id] ?? null
-// Precio diario: REE solo deja pedir un mes por consulta. Los meses pasados no cambian, así que solo se piden los que faltan.
+// Precio diario: REE solo da los precios por horas; se piden de mes en mes y se guarda la media de cada día.
+// Los meses pasados no cambian: cada día se piden como mucho 18 meses que falten (el histórico se completa en unos días).
 {
   const viejo = prev.precio_dia ?? {}
   const tiene = new Set(Object.values(viejo).flatMap(x => x.v.map(p => p[0].slice(0, 7))))
   const meses = []
-  for (let y = 2014; y <= HOY.getFullYear(); y++) for (let m = 1; m <= 12; m++) {
+  for (let y = HOY.getFullYear(); y >= 2014; y--) for (let m = 12; m >= 1; m--) {
     const k = `${y}-${String(m).padStart(2, '0')}`
-    if (k > iso(HOY).slice(0, 7)) break
-    const reciente = (HOY - Date.UTC(y, m - 1, 1)) < 62 * 864e5
-    if (!tiene.has(k) || reciente) meses.push([y, m])
+    if (k > iso(HOY).slice(0, 7)) continue
+    if (!tiene.has(k) || (HOY - Date.UTC(y, m - 1, 1)) < 62 * 864e5) meses.push([y, m])
   }
   const out = JSON.parse(JSON.stringify(viejo)), fallos = []
-  for (const [y, m] of meses.slice(-60)) { // como mucho 60 meses por día: el histórico se completa en unos días
-    const fin = new Date(Date.UTC(y, m, 0)).getUTCDate()
+  let seguidos = 0
+  for (const [y, m] of meses.slice(0, 18)) {
+    if (seguidos >= 3) break
+    const mm = String(m).padStart(2, '0'), fin = new Date(Date.UTC(y, m, 0)).getUTCDate()
     try {
-      const r = await ree('mercados/precios-mercados-tiempo-real', `${y}-${String(m).padStart(2, '0')}-01T00:00`, `${y}-${String(m).padStart(2, '0')}-${fin}T23:59`, 'day')
-      for (const [k, x] of Object.entries(r)) { out[k] ??= { ...x, v: [] }; const mp = new Map(out[k].v.map(p => [p[0], p])); for (const p of x.v) mp.set(p[0], p); out[k].v = [...mp.values()].sort((a, b) => a[0].localeCompare(b[0])) }
-    } catch (e) { fallos.push(`${y}-${m}: ${String(e.message).slice(0, 50)}`) }
+      const r = await ree('mercados/precios-mercados-tiempo-real', `${y}-${mm}-01T00:00`, `${y}-${mm}-${fin}T23:59`, 'hour')
+      for (const [k, x] of Object.entries(r)) {
+        const dias = new Map(); for (const p of x.v) { const d = p[0].slice(0, 10); dias.set(d, [...(dias.get(d) ?? []), p[1]]) }
+        out[k] ??= { color: x.color, v: [] }
+        const mp = new Map(out[k].v.map(p => [p[0], p]))
+        for (const [d, vs] of dias) mp.set(d + 'T00:00', [d + 'T00:00', Math.round(vs.reduce((a, b) => a + b, 0) / vs.length * 100) / 100, null])
+        out[k].v = [...mp.values()].sort((a, b) => a[0].localeCompare(b[0]))
+      }
+      seguidos = 0
+    } catch (e) { seguidos++; fallos.push(`${y}-${m}: ${String(e.message).slice(0, 50)}`) }
   }
   historia.precio_dia = Object.keys(out).length ? out : null
-  log.precio_dia = { pedidos: meses.slice(-60).length, fallos: fallos.slice(0, 8), series: Object.fromEntries(Object.entries(out).map(([k, x]) => [k, `${x.v.length} días · ${x.v[0]?.[0]} → ${x.v.at(-1)?.[0]}`])) }
+  log.precio_dia = { pedidos: meses.slice(0, 18).length, fallos: fallos.slice(0, 6), series: Object.fromEntries(Object.entries(out).map(([k, x]) => [k, `${x.v.length} días · ${x.v[0]?.[0]} → ${x.v.at(-1)?.[0]}`])) }
 }
-historia.potencia = (await paso('potencia', () => ree('generacion/potencia-instalada', `${HOY.getFullYear() - 1}-01-01T00:00`, `${iso(HOY)}T23:59`, 'month', { geo_trunc: 'electric_system', geo_limit: 'nacional', geo_ids: '8741' }))) ?? prev.potencia ?? null
+// Potencia instalada: la API responde con error 500 desde hace tiempo; pendiente de otra fuente.
 writeFileSync(DIR + 'historia.json', JSON.stringify(historia))
 writeFileSync(here('../fuentes/energia-log.json'), JSON.stringify(log, null, 1))
 
 // ---------- resumen para la portada ----------
 try {
   const RES = here('../src/resumen.json'), res = JSON.parse(readFileSync(RES, 'utf8'))
-  const ren = hoy.mix30?.['Renovable'] ?? hoy.mix30?.['Generación renovable']
-  const pvpc = hoy.precios?.['PVPC (€/MWh)'] ?? Object.values(hoy.precios ?? {})[0]
-  res.energia = { ren: ren?.v.at(-1)?.[2] ?? null, precio: pvpc?.v.at(-1)?.[1] ?? null, fecha: iso(HOY) }
+  const r = hoy.balance?.['Generación renovable']?.v[0]?.[1], nr = hoy.balance?.['Generación no renovable']?.v[0]?.[1]
+  const pv = hoy.precios?.['PVPC']?.v ?? []
+  const media = pv.filter(p => p[0].startsWith(iso(HOY))).map(p => p[1])
+  res.energia = { ren: r != null && nr != null ? Math.round((r / (r + nr)) * 1000) / 10 : null, pvpc: media.length ? Math.round(media.reduce((a, b) => a + b, 0) / media.length) / 1000 : null, fecha: iso(HOY) }
   writeFileSync(RES, JSON.stringify(res, null, 1))
 } catch (e) { log._resumen = String(e.message) }
 console.log('Energía:', Object.entries(log).filter(([, v]) => typeof v === 'string' && v.startsWith('ERROR')).map(([k]) => k).join(', ') || 'todo bien')

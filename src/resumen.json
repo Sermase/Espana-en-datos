@@ -30,8 +30,8 @@
   ]
  },
  "energia": {
-  "ren": null,
-  "precio": 245.8,
+  "ren": 63.4,
+  "pvpc": 0.247,
   "fecha": "2026-11-23"
  }
 }
