@@ -43,10 +43,43 @@ function tipoNif(benef) {
   return ['X']
 }
 const ADM = { ESTADO: 'E', AUTONOMICA: 'A', LOCAL: 'L', OTROS: 'O' }
+// Temas con más detalle que la «finalidad» oficial: se buscan palabras en el título de la convocatoria.
+// Gana el primero que encaja; es una aproximación y así se explica en la web.
+const VERSION = 2
+const TEMAS = [
+  ['Coche eléctrico y recarga', /\bmoves\b|veh[ií]culos? (el[eé]ctric|de energ[ií]as alternativas)|movilidad el[eé]ctrica|puntos? de recarga|infraestructura de recarga/],
+  ['Billetes y transporte de residentes', /transporte a[eé]reo|transporte mar[ií]timo|residentes en (canarias|baleares|illes|ceuta|melilla)|bonificaci[oó]n.*transporte|abono (transporte|[uú]nico)|descuento.*(billete|transporte)/],
+  ['Rehabilitación y eficiencia energética', /rehabilitaci[oó]n|eficiencia energ[eé]tica|\bpree\b|envolvente t[eé]rmica|ahorro energ[eé]tico|edificios? (de consumo|sostenible)/],
+  ['Renovables y autoconsumo', /autoconsumo|renovable|repotenciaci|fotovolt|almacenamiento (energ|detr)|hidr[oó]geno|biog[aá]s|biomasa|geot[eé]rmi|aerotermia|bombas? de calor/],
+  ['Vivienda y alquiler', /alquiler|bono (alquiler )?joven|vivienda|desahucio/],
+  ['Campo: PAC, ganadería y pesca', /\bpac\b|pepac|pagos directos|intervenciones? sectorial|agrari|agr[ií]col|ganad|agricult|pesca|acuicult|pesquer|desarrollo rural|leader|forestal|feader|feaga|femp|olivar|vi[ñn]edo|apicult|cosecha|regad[ií]o|cooperativas agro/],
+  ['Cine y audiovisual', /cine|cinematogr|audiovisual|largometraje|cortometraje|\bicaa\b|rodaje|series de (televisi|ficci)|videojueg|animaci[oó]n/],
+  ['Cultura, libros y artes', /cultur|libro|editorial|museo|teatro|m[uú]sica|artes esc[eé]nicas|patrimonio hist|festival|danza|exposici[oó]n|bibliotec|lectura|artist/],
+  ['Deporte', /deport|federaci[oó]n|\bclub\b|competici[oó]n|olimp/],
+  ['Universidades', /universi|\bull\b|\bulpgc\b|\buned\b/],
+  ['Becas y estudios', /\bbecas?\b|estudiante|alumn|matr[ií]cula|comedor escolar|libros de texto|material escolar|transporte escolar|ense[ñn]anza|centros? (docentes|educativ)|educaci[oó]n|escuela infantil|guarder[ií]a|0.?3 a[ñn]os/],
+  ['Investigación e innovación', /investigaci[oó]n|i\+d|innovaci[oó]n|ram[oó]n y cajal|doctora|cient[ií]fic|tecnol[oó]gic|proyectos? de generaci[oó]n de conocimiento|transferencia de conocimiento/],
+  ['Digitalización', /kit digital|digitaliz|ciberseguridad|conectividad|banda ancha|transformaci[oó]n digital|\b5g\b/],
+  ['Empleo y contratación', /empleo|contrataci[oó]n|trabajador(es|as)? aut[oó]nom|\baut[oó]nom[oa]s\b|cuota cero|tarifa plana|emprend|inserci[oó]n|formaci[oó]n (profesional|para el empleo)|desemplead|personas trabajadoras|centros especiales de empleo/],
+  ['Turismo y hostelería', /turis|hoster|camino de santiago|xacobeo/],
+  ['Industria, comercio y empresas', /industri|incentivos regionales|pyme|empresa|internacionaliz|exportaci|comercio|competitiv|artesan|perte|cadena de valor|reindustri|aceleraci[oó]n/],
+  ['Servicios sociales y cooperación', /social|natalidad|nacimiento|dependencia|discapacid|personas mayores|inclusi[oó]n|vulnerab|pobreza|familias?|infancia|menores|mujer|igualdad|violencia de g[eé]nero|cooperaci[oó]n (internacional|al desarrollo)|refugi|humanitari|emergencia|exclusi[oó]n|sin hogar|ingreso m[ií]nimo|renta (m[ií]nima|de inserci)/],
+  ['Sanidad', /sanid|salud|sanitari|hospital|m[eé]dic|farmac|enfermedad|adicci|drogodependen/],
+  ['Medio ambiente, agua y clima', /medio ?ambient|residuo|reciclaj|econom[ií]a circular|agua|depuraci|biodiversidad|incendio|cambio clim[aá]tico|descarboniz|espacios naturales|reforestaci/],
+  ['Ayuntamientos y obras', /ayuntamientos?|cooperaci[oó]n local|plan abierto de inversiones|entidades locales|municipi|corporaciones locales|obras|infraestructura|plan (de cooperaci[oó]n|provincial)|diputaci[oó]n|cabildo|financiaci[oó]n auton[oó]mica|ciudad de ceuta|ciudad de melilla|real decreto-ley/],
+  ['Asociaciones, fiestas y entidades', /asociaci[oó]n|vecinal|vecinos|fiesta|pe[ñn]a|cofrad|entidades sin [aá]nimo|fundaci[oó]n|juventud|j[oó]venes|tercer sector|voluntariado/],
+]
+const temaCache = new Map()
+function tema(id, titulo) {
+  if (temaCache.has(id)) return temaCache.get(id)
+  const t = String(titulo ?? '').toLowerCase().normalize('NFC')
+  const r = (TEMAS.find(([, re]) => re.test(t)) ?? ['Otros'])[0]
+  temaCache.set(id, r); return r
+}
 const suma = (o, k, imp) => { const v = (o[k] ??= [0, 0]); v[0]++; v[1] += imp }
 
 async function mes(y, m, finalidades) {
-  const ag = { n: 0, imp: 0, adm: {}, fin: {}, tipo: {}, inst: {}, org: {}, ben: {}, conv: {} }
+  const ag = { n: 0, imp: 0, adm: {}, fin: {}, tipo: {}, inst: {}, org: {}, ben: {}, conv: {}, tema: {} }
   const tot = await get(url(y, m, '', 0, 1))
   ag.total = tot.totalElements
   const ben = {}, conv = {}, vistos = new Set()
@@ -59,6 +92,7 @@ async function mes(y, m, finalidades) {
     ag.n++; ag.imp += imp
     suma(ag.adm, ADM[r.nivel1] ?? 'O', imp)
     suma(ag.fin, f.id, imp)
+    suma(ag.tema, tema(r.idConvocatoria, r.convocatoria), imp)
     const [tp, nif, nombre] = tipoNif(r.beneficiario)
     suma(ag.tipo, tp, imp)
     suma(ag.inst, String(r.instrumento ?? '').trim().toUpperCase() || '—', imp)
@@ -84,7 +118,7 @@ async function mes(y, m, finalidades) {
   for (const [k, v] of Object.entries(ben)) if (v[1] >= 250000) ag.ben[k] = [v[0], Math.round(v[1]), v[2]]
   for (const [k, v] of Object.entries(conv)) if (v[1] >= 1e6 && !(v[0] === 1 && v[6] > 0)) ag.conv[k] = [v[0], Math.round(v[1]), v[2].slice(0, 220), v[3], v[4], v[5]]
   for (const [k, v] of Object.entries(ag.org)) if (v[1] < 100000 && !k.startsWith('E|') && !k.startsWith('A|')) delete ag.org[k]
-  for (const o of [ag.adm, ag.fin, ag.tipo, ag.inst, ag.org]) for (const v of Object.values(o)) v[1] = Math.round(v[1])
+  for (const o of [ag.adm, ag.fin, ag.tipo, ag.inst, ag.org, ag.tema]) for (const v of Object.values(o)) v[1] = Math.round(v[1])
   ag.imp = Math.round(ag.imp)
   ag.hecho = new Date().toISOString()
   return ag
@@ -96,12 +130,14 @@ const finalidades = await get(`${B}/finalidades?vpd=GE`)
 // Paginar con un orden estable (por id); si la API no lo acepta, por fecha de concesión
 try { await get(url(2025, 1, '', 0, 1)) } catch { ORDEN = 'order=fechaConcesion&direccion=asc'; log.orden = ORDEN }
 estado.finalidades = Object.fromEntries(finalidades.map(f => [f.id, f.descripcion]))
+// Si cambia lo que se guarda de cada mes (versión), los meses viejos se vuelven a bajar poco a poco
+if (estado.version !== VERSION) { for (const v of Object.values(estado.meses)) v.viejo = true; estado.version = VERSION }
 
 // Orden: el mes en curso y los dos anteriores siempre (llegan concesiones con retraso); luego los que falten, del más reciente hacia atrás.
 const hoy = new Date(), lista = []
 for (let d = new Date(Date.UTC(hoy.getUTCFullYear(), hoy.getUTCMonth(), 1)); d.toISOString().slice(0, 7) >= INICIO; d.setUTCMonth(d.getUTCMonth() - 1)) lista.push(d.toISOString().slice(0, 7))
 const reciente = (k) => estado.meses[k] && Date.now() - Date.parse(estado.meses[k].hecho) < 20 * 3600e3
-const cola = [...lista.slice(0, 3).filter(k => !reciente(k)), ...lista.slice(3).filter(k => !estado.meses[k])]
+const cola = [...lista.slice(0, 3).filter(k => !reciente(k) || estado.meses[k]?.viejo), ...lista.slice(3).filter(k => !estado.meses[k] || estado.meses[k].viejo)]
 for (const k of cola) {
   if (k === undefined) continue
   if (Date.now() > FIN) { log.parada = 'presupuesto de tiempo agotado antes de ' + k; break }
@@ -118,16 +154,16 @@ for (const k of cola) {
 const meses = Object.keys(estado.meses).sort()
 const completo = (k) => k < hoy.toISOString().slice(0, 7)
 const juntar = (ks) => {
-  const r = { n: 0, imp: 0, adm: {}, fin: {}, tipo: {}, inst: {}, org: {}, ben: {}, conv: {} }
+  const r = { n: 0, imp: 0, adm: {}, fin: {}, tipo: {}, inst: {}, org: {}, ben: {}, conv: {}, tema: {} }
   for (const k of ks) {
     const a = estado.meses[k]; r.n += a.n; r.imp += a.imp
-    for (const c of ['adm', 'fin', 'tipo', 'inst', 'org']) for (const [x, v] of Object.entries(a[c])) { const t = (r[c][x] ??= [0, 0]); t[0] += v[0]; t[1] += v[1] }
+    for (const c of ['adm', 'fin', 'tipo', 'inst', 'org', 'tema']) for (const [x, v] of Object.entries(a[c] ?? {})) { const t = (r[c][x] ??= [0, 0]); t[0] += v[0]; t[1] += v[1] }
     for (const [x, v] of Object.entries(a.ben)) { const t = (r.ben[x] ??= [0, 0, v[2]]); t[0] += v[0]; t[1] += v[1] }
     for (const [x, v] of Object.entries(a.conv)) { const t = (r.conv[x] ??= [0, 0, ...v.slice(2)]); t[0] += v[0]; t[1] += v[1] }
   }
   const top = (o, n) => Object.entries(o).sort((a, b) => b[1][1] - a[1][1]).slice(0, n)
   r.ben = top(r.ben, 60).map(([nif, v]) => [nif, ...v])
-  r.conv = top(r.conv, 40).map(([id, v]) => [id, ...v])
+  r.conv = top(r.conv, 60).map(([id, v]) => [id, ...v, tema(id, v[2])])
   const org = Object.entries(r.org)
   r.org = Object.fromEntries([...org.filter(([k]) => k.startsWith('A|') || k.startsWith('E|')), ...org.filter(([k]) => k.startsWith('L|') || k.startsWith('O|')).sort((a, b) => b[1][1] - a[1][1]).slice(0, 60)])
   r.meses = ks

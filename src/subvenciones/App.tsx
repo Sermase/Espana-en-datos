@@ -12,8 +12,8 @@ import { Curiosidades } from '../Curiosidades'
 const ACC = '#e0a8ff'
 type Par = [number, number]
 type Agg = {
-  n: number; imp: number; adm: Record<string, Par>; fin: Record<string, Par>; tipo: Record<string, Par>; inst: Record<string, Par>; org: Record<string, Par>
-  ben: [string, number, number, string][]; conv: [string, number, number, string, string, string, string][]; meses: string[]
+  n: number; imp: number; tema?: Record<string, Par>; adm: Record<string, Par>; fin: Record<string, Par>; tipo: Record<string, Par>; inst: Record<string, Par>; org: Record<string, Par>
+  ben: [string, number, number, string][]; conv: [string, number, number, string, string, string, string, string?][]; meses: string[]
 }
 type Datos = { fecha: string; finalidades: Record<string, string>; serie: [string, number, number, number, number, number, number, number][]; años: Record<string, Agg>; u12: Agg | null }
 
@@ -110,6 +110,48 @@ function Quien({ a, k }: { a: Agg; k: string }) {
   </div>
 }
 
+const TEMA_COLOR = ['#3987e5', '#199e70', '#ffd166', '#d95926', '#9085e9', '#d55181', '#c6f25e', '#5fd3e8', '#f2b880', '#e0a8ff', '#9fc5ff', '#7fd4c8', '#ff8a95', '#b9b0ff', '#ffe29a', '#8fd18f', '#f6a6c1', '#a0e7e5', '#c9a46a', '#d7d1ff', '#8a9bb0', '#6b8f99']
+
+/** Una convocatoria que se despliega al tocarla: cuántas concesiones, ayuda media, quién la da y para qué. */
+function Conv({ c, d, i }: { c: Agg['conv'][number]; d: Datos; i: number }) {
+  const [open, setOpen] = useState(false)
+  return <motion.li initial={{ opacity: 0, x: -8 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: Math.min(i, 10) * 0.04 }} className={open ? 'is-open' : ''}>
+    <button className="cv-btn" onClick={() => setOpen(!open)} aria-expanded={open}>
+      <b>{eu(c[2])}</b>
+      <span className="cv-t">{c[3]}</span>
+      <span className="cv-o"><i style={{ background: ADM[c[4]]?.[2] }} />{capital(c[5])} · {c[7] ?? capital(d.finalidades[c[6]] ?? '')}</span>
+    </button>
+    {open && <motion.div className="cv-det" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }}>
+      <dl>
+        <div><dt>Concesiones</dt><dd>{nf(c[1])}</dd></div>
+        <div><dt>Ayuda media</dt><dd>{eu(c[2] / c[1])}</dd></div>
+        <div><dt>Quién la da</dt><dd>{ADM[c[4]]?.[0]} · {capital(c[5])}</dd></div>
+        <div><dt>Finalidad oficial</dt><dd>{capital(d.finalidades[c[6]] ?? '—')}</dd></div>
+        {c[7] && <div><dt>Tema</dt><dd>{c[7]}</dd></div>}
+      </dl>
+      <a href={`https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias/${c[0]}`} target="_blank" rel="noopener noreferrer">Abrir la convocatoria en la BDNS ↗</a>
+    </motion.div>}
+  </motion.li>
+}
+
+function Temas({ d, a }: { d: Datos; a: Agg }) {
+  const [sel, setSel] = useState<string | null>(null)
+  const ts = Object.entries(a.tema ?? {}).map(([k, v]) => ({ id: k, nombre: k, valor: v[1], n: v[0] })).sort((x, y) => y.valor - x.valor)
+  if (!ts.length) return <p className="note">El detalle por temas aparecerá cuando termine de volver a bajarse este periodo.</p>
+  const tot = ts.reduce((s, x) => s + x.valor, 0), col = new Map(ts.map((t, i) => [t.id, TEMA_COLOR[i % TEMA_COLOR.length]]))
+  const convs = sel ? a.conv.filter(c => c[7] === sel) : []
+  return <>
+    <div className="burbujas" role="img" aria-label="Ayudas por tema">
+      {ts.filter(t => t.valor / tot > 0.004).map((t, i) => { const r = 26 + Math.sqrt(t.valor / tot) * 150; return <motion.button key={t.id} className={`burbuja ${sel === t.id ? 'is-on' : ''}`} style={{ width: r, height: r, background: `color-mix(in oklab, ${col.get(t.id)} 32%, #07141d)`, borderColor: col.get(t.id) }}
+        initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ type: 'spring', stiffness: 160, damping: 14, delay: i * 0.05 }} onClick={() => setSel(sel === t.id ? null : t.id)} title={`${t.nombre}: ${eu(t.valor)}`}>
+        {r > 64 && <><b>{nf((t.valor / tot) * 100, 0)} %</b><span>{t.nombre}</span></>}
+      </motion.button> })}
+    </div>
+    <Barras titulo="Ayudas por tema" fmt={eu} limite={8} items={ts.map(t => ({ ...t, sub: `${nf(t.n)} concesiones`, color: col.get(t.id), destacado: sel === t.id, onClick: () => setSel(sel === t.id ? null : t.id) }))} />
+    {sel && <div className="detalle-tema"><h3>{sel}: las convocatorias más grandes</h3>{convs.length ? <ol className="convs">{convs.slice(0, 8).map((c, i) => <Conv key={c[0]} c={c} d={d} i={i} />)}</ol> : <p className="note">Ninguna de este tema entre las 60 mayores del periodo.</p>}</div>}
+  </>
+}
+
 function Para({ d, a }: { d: Datos; a: Agg }) {
   const fs = Object.entries(a.fin).map(([id, v], i) => ({ id, nombre: capital(d.finalidades[id] ?? id), valor: v[1], n: v[0], i })).sort((x, y) => y.valor - x.valor)
   const tot = fs.reduce((s, x) => s + x.valor, 0)
@@ -122,6 +164,9 @@ function Para({ d, a }: { d: Datos; a: Agg }) {
         </motion.div>)}
       </div>
       <Barras titulo="Ayudas por finalidad" fmt={eu} limite={8} items={fs.map((f, i) => ({ id: f.id, nombre: f.nombre, sub: `${nf(f.n)} concesiones`, valor: f.valor, color: FIN_COLOR[i % FIN_COLOR.length] }))} />
+    </Card>
+    <Card t="Con más detalle" wide lead={<>Agrupadas por lo que dice el título de cada convocatoria: coche eléctrico, cine, rehabilitación, becas… Es una clasificación aproximada, por palabras clave. Toca un tema para ver sus mayores convocatorias.</>} fuente={BDNS}>
+      <Temas d={d} a={a} />
     </Card>
     <Card t="Cómo se dan" wide lead={<>No todo es dinero a fondo perdido: también hay préstamos, garantías y ventajas fiscales. La cifra es el importe concedido.</>} fuente={BDNS}>
       <Barras titulo="Ayudas por instrumento" fmt={eu} items={inst.map(x => ({ ...x, color: ACC }))} />
@@ -156,15 +201,9 @@ function AQuien({ a }: { a: Agg }) {
 
 function Grandes({ d, a }: { d: Datos; a: Agg }) {
   return <div className="graficos">
-    <Card t="Las convocatorias con más dinero" wide lead={<>Lo concedido en el periodo en cada convocatoria. Toca una para abrirla en la BDNS.</>} fuente={BDNS}>
+    <Card t="Las convocatorias con más dinero" wide lead={<>Lo concedido en el periodo en cada convocatoria. Toca una para ver su detalle.</>} fuente={BDNS}>
       <ol className="convs">
-        {a.conv.slice(0, 25).map((c, i) => <motion.li key={c[0]} initial={{ opacity: 0, x: -8 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: Math.min(i, 10) * 0.04 }}>
-          <a href={`https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias/${c[0]}`} target="_blank" rel="noopener noreferrer">
-            <b>{eu(c[2])}</b>
-            <span className="cv-t">{c[3]}</span>
-            <span className="cv-o"><i style={{ background: ADM[c[4]]?.[2] }} />{capital(c[5])} · {capital(d.finalidades[c[6]] ?? '')} · {nf(c[1])} concesiones</span>
-          </a>
-        </motion.li>)}
+        {a.conv.slice(0, 25).map((c, i) => <Conv key={c[0]} c={c} d={d} i={i} />)}
       </ol>
     </Card>
   </div>
