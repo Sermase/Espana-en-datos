@@ -36,7 +36,7 @@ let IPV = 25171
 try {
   const ts = await get(`${INE}/TABLAS_OPERACION/IPV`)
   log._ipv_tablas = ts.slice(0, 40).map(t => `${t.Id}: ${t.Nombre}`).join(' | ')
-  const c = ts.filter(t => /comunidades/i.test(t.Nombre) && /general, vivienda nueva/i.test(t.Nombre)).sort((x, y) => y.Id - x.Id)[0]
+  const c = ts.filter(t => /CCAA|comunidades/i.test(t.Nombre) && /general, vivienda nueva/i.test(t.Nombre) && /trimestral/i.test(t.Nombre)).sort((x, y) => y.Id - x.Id)[0]
   if (c) IPV = c.Id
 } catch (e) { log._ipv_tablas = 'ERROR ' + e.message }
 const TABLAS = { ipv: IPV, compraventas: 6150, hipotecas: 3200, alquiler: 59060, alquiler_tam: 59057 }
