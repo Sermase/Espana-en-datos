@@ -30,6 +30,7 @@
   "53457": "Longitud de la red de suministro por habitante (metros/habitante) [] | Longitud de la red de alcantarillado por habitante (metros/habitante) [] | Pérdidas reales por km de red de suministro (m3/km/año) [] | Número de tanques de tormenta []",
   "53458": "Nacional. Alimentos. Índice. [] | Andalucía. Alimentos. Índice. [] | Aragón. Alimentos. Índice. [] | Asturias, Principado de. Alimentos. Índice. [] | Balears, Illes. Alimentos. Índice. [] | Canarias. Alimentos. Índice. [] | Cantabria. Alimentos. Índice. [] | Castilla y León. Alimentos. Índice. [] | Castilla - La Mancha. Alimentos. Índice. [] | Cataluña. Alimentos. Índice. [] | Comunitat Valenciana. Alimentos. Índice. [] | Extremadura. Alimentos. Índice. []",
   "53459": "Nacional. Alimentos. Índice. [] | Albacete. Alimentos. Índice. [] | Alicante/Alacant. Alimentos. Índice. [] | Almería. Alimentos. Índice. [] | Araba/Álava. Alimentos. Índice. [] | Asturias. Alimentos. Índice. [] | Ávila. Alimentos. Índice. [] | Badajoz. Alimentos. Índice. [] | Balears, Illes. Alimentos. Índice. [] | Barcelona. Alimentos. Índice. [] | Bizkaia. Alimentos. Índice. [] | Burgos. Alimentos. Índice. []",
+  "_serieCruda": "{\"Nombre\":\"España, Volumen de aguas residuales tratadas\",\"MetaData\":[{\"T3_Variable\":\"Total Nacional\",\"Nombre\":\"España\",\"Codigo\":\"00\"},{\"T3_Variable\":\"tipo de indicador\",\"Nombre\":\"Volumen de aguas residuales tratadas\",\"Codigo\":\"volumendeaguasresidualestratadas\"}],\"Data\":[{\"NombrePeriodo\":\"2024\",\"Valor\":17180033}]}",
   "_ok": "2024 (y 2022), 18 territorios"
  },
  "edar": {
@@ -38,6 +39,7 @@
   "emisor 1": "http://www.cert.fnmt.es/certs/ACRAIZSERVIDORESSEGUROSFNMTG2R.crt",
   "emisor 2": "sin CA Issuers",
   "cadena": "completada",
+  "descarga": "31192 bytes, empieza por \"<!DOCTYPE html PUBLIC \\\"-//W3C//DTD XHTML 1.0 Strict//EN\\\" \\\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\\\">\\n\\n<html lang=\\\"es\\\" xml:lang=\\\"es\\\" xmlns=\\\"http://www.w3.org/1999/xhtml\\\" xmlns:exsl=\\\"http://exslt.org/common\\\" xmlns:msxsl=\\\"urn:schemas-microsoft-com:xslt\\\" xmlns:xalan=\\\"http://xml.apache.org/xalan\"",
   "unzip": "Command failed: unzip -o -q /tmp/edar/edar.zip -d /tmp/edar\n[/tmp/edar/edar.zip]\n  End-of-central-directory signature not found.  Either this file is not\n  a zipfile, or it constitutes one disk of a m",
   "_ok": "sin shapefile: se conserva depuradoras.json si existía"
  },
