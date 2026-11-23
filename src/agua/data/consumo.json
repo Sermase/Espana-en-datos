@@ -26,10 +26,11 @@
   "sup": 53445,
   "sub": 53445
  },
+ "litrosCalculados": true,
  "national": {
   "n": "España",
-  "l": 128,
-  "v": null,
+  "l": 129,
+  "v": 0.9,
   "cost": 2.02,
   "supplied": 4266.7,
   "registered": 3283.1,
@@ -62,16 +63,16 @@
   "billSan": 3055590,
   "billSup": 3567883,
   "origin": {
-   "sup": 2062791,
-   "sub": 899119,
-   "otras": -2961810
+   "sup": 62.1,
+   "sub": 27.1,
+   "otras": 10.8
   }
  },
  "regions": [
   {
    "n": "Cantabria",
    "l": 186,
-   "v": -0.5,
+   "v": -0.6,
    "cost": 1.53,
    "supplied": 87.1,
    "registered": 55.8,
@@ -106,8 +107,8 @@
   },
   {
    "n": "Castilla-La Mancha",
-   "l": 172,
-   "v": 22.1,
+   "l": 174,
+   "v": 29.5,
    "cost": 1.62,
    "supplied": 258.2,
    "registered": 177.8,
@@ -141,45 +142,9 @@
    "billSup": 184760
   },
   {
-   "n": "Principado de Asturias",
-   "l": 161,
-   "v": 11.2,
-   "cost": 1.27,
-   "supplied": 122.7,
-   "registered": 82.7,
-   "lossReal": 26.3,
-   "lossApparent": 13.7,
-   "lossPct": 21.4,
-   "lossPctPrev": 24.4,
-   "households": 59.4,
-   "treated": 675459,
-   "reused": 104690,
-   "reusePct": 15.4,
-   "reusePctPrev": 0.1,
-   "dest": {
-    "Al mar": 27.3,
-    "A un cauce fluvial": 57.3,
-    "Agua reutilizada": 15.4,
-    "Infiltraciones al terreno": 0,
-    "Otros": 0
-   },
-   "usos": {
-    "Agricultura": 99.1,
-    "Industria": null,
-    "Jardines y zonas deportivas de ocio": 0,
-    "Limpieza de alcantarillado y baldeo de calles": 0,
-    "Otros usos": 0.9
-   },
-   "sewerKm": 4732,
-   "supplyKm": 8030,
-   "sludge": 20807,
-   "billSan": 55998,
-   "billSup": 48877
-  },
-  {
    "n": "Castilla y León",
-   "l": 161,
-   "v": 9.3,
+   "l": 162,
+   "v": 10.3,
    "cost": 1.29,
    "supplied": 286.7,
    "registered": 211.6,
@@ -213,9 +178,45 @@
    "billSup": 155764
   },
   {
+   "n": "Principado de Asturias",
+   "l": 161,
+   "v": 13.2,
+   "cost": 1.27,
+   "supplied": 122.7,
+   "registered": 82.7,
+   "lossReal": 26.3,
+   "lossApparent": 13.7,
+   "lossPct": 21.4,
+   "lossPctPrev": 24.4,
+   "households": 59.4,
+   "treated": 675459,
+   "reused": 104690,
+   "reusePct": 15.4,
+   "reusePctPrev": 0.1,
+   "dest": {
+    "Al mar": 27.3,
+    "A un cauce fluvial": 57.3,
+    "Agua reutilizada": 15.4,
+    "Infiltraciones al terreno": 0,
+    "Otros": 0
+   },
+   "usos": {
+    "Agricultura": 99.1,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 0,
+    "Limpieza de alcantarillado y baldeo de calles": 0,
+    "Otros usos": 0.9
+   },
+   "sewerKm": 4732,
+   "supplyKm": 8030,
+   "sludge": 20807,
+   "billSan": 55998,
+   "billSup": 48877
+  },
+  {
    "n": "Comunidad Foral de Navarra",
-   "l": 153,
-   "v": 15,
+   "l": 154,
+   "v": 19.9,
    "cost": 1.56,
    "supplied": 75.7,
    "registered": 61.4,
@@ -250,8 +251,8 @@
   },
   {
    "n": "Comunitat Valenciana",
-   "l": 151,
-   "v": 7.9,
+   "l": 152,
+   "v": 9.7,
    "cost": 2.63,
    "supplied": 542.7,
    "registered": 411.5,
@@ -287,7 +288,7 @@
   {
    "n": "Región de Murcia",
    "l": 141,
-   "v": 5.7,
+   "v": 7.6,
    "cost": 2.6,
    "supplied": 149.5,
    "registered": 120.4,
@@ -322,8 +323,8 @@
   },
   {
    "n": "Illes Balears",
-   "l": 136,
-   "v": 7.4,
+   "l": 138,
+   "v": 9.4,
    "cost": 2.8,
    "supplied": 123.2,
    "registered": 97.6,
@@ -359,7 +360,7 @@
   {
    "n": "Andalucía",
    "l": 130,
-   "v": -7.7,
+   "v": -7.2,
    "cost": 1.86,
    "supplied": 739.9,
    "registered": 566.6,
@@ -395,7 +396,7 @@
   {
    "n": "Ceuta y Melilla",
    "l": 129,
-   "v": -14,
+   "v": -11.8,
    "cost": 1.46,
    "supplied": 18.1,
    "registered": 10.9,
@@ -431,7 +432,7 @@
   {
    "n": "Comunidad de Madrid",
    "l": 128,
-   "v": 2.3,
+   "v": 2.8,
    "cost": 1.74,
    "supplied": 496.8,
    "registered": 453.2,
@@ -467,7 +468,7 @@
   {
    "n": "Aragón",
    "l": 125,
-   "v": 12,
+   "v": 14.1,
    "cost": 1.69,
    "supplied": 131.3,
    "registered": 96.3,
@@ -502,8 +503,8 @@
   },
   {
    "n": "Canarias",
-   "l": 119,
-   "v": 3.4,
+   "l": 120,
+   "v": 4.6,
    "cost": 2.27,
    "supplied": 186.2,
    "registered": 144.6,
@@ -539,7 +540,7 @@
   {
    "n": "Extremadura",
    "l": 118,
-   "v": -7.6,
+   "v": -7.5,
    "cost": 1.71,
    "supplied": 86.9,
    "registered": 59.2,
@@ -573,45 +574,9 @@
    "billSup": 76123
   },
   {
-   "n": "La Rioja",
-   "l": 116,
-   "v": -2.6,
-   "cost": 1.26,
-   "supplied": 39.4,
-   "registered": 25.6,
-   "lossReal": 8,
-   "lossApparent": 5.8,
-   "lossPct": 20.3,
-   "lossPctPrev": 58.6,
-   "households": 13.4,
-   "treated": 163346,
-   "reused": 0,
-   "reusePct": 0,
-   "reusePctPrev": 0,
-   "dest": {
-    "Al mar": 0,
-    "A un cauce fluvial": 100,
-    "Agua reutilizada": 0,
-    "Infiltraciones al terreno": 0,
-    "Otros": 0
-   },
-   "usos": {
-    "Agricultura": 0,
-    "Industria": null,
-    "Jardines y zonas deportivas de ocio": 0,
-    "Limpieza de alcantarillado y baldeo de calles": 0,
-    "Otros usos": 0
-   },
-   "sewerKm": 895,
-   "supplyKm": 1282,
-   "sludge": 5821,
-   "billSan": 15878,
-   "billSup": 16304
-  },
-  {
    "n": "Galicia",
    "l": 115,
-   "v": -11.3,
+   "v": -10.4,
    "cost": 1.29,
    "supplied": 250.3,
    "registered": 179,
@@ -645,9 +610,45 @@
    "billSup": 138106
   },
   {
+   "n": "La Rioja",
+   "l": 113,
+   "v": -3.9,
+   "cost": 1.26,
+   "supplied": 39.4,
+   "registered": 25.6,
+   "lossReal": 8,
+   "lossApparent": 5.8,
+   "lossPct": 20.3,
+   "lossPctPrev": 58.6,
+   "households": 13.4,
+   "treated": 163346,
+   "reused": 0,
+   "reusePct": 0,
+   "reusePctPrev": 0,
+   "dest": {
+    "Al mar": 0,
+    "A un cauce fluvial": 100,
+    "Agua reutilizada": 0,
+    "Infiltraciones al terreno": 0,
+    "Otros": 0
+   },
+   "usos": {
+    "Agricultura": 0,
+    "Industria": null,
+    "Jardines y zonas deportivas de ocio": 0,
+    "Limpieza de alcantarillado y baldeo de calles": 0,
+    "Otros usos": 0
+   },
+   "sewerKm": 895,
+   "supplyKm": 1282,
+   "sludge": 5821,
+   "billSan": 15878,
+   "billSup": 16304
+  },
+  {
    "n": "Cataluña",
    "l": 100,
-   "v": -13,
+   "v": -11.5,
    "cost": 2.72,
    "supplied": 538.5,
    "registered": 419.9,
@@ -683,7 +684,7 @@
   {
    "n": "País Vasco",
    "l": 79,
-   "v": -7.6,
+   "v": -6.5,
    "cost": 2.32,
    "supplied": 133.5,
    "registered": 108.9,

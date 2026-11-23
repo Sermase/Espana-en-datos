@@ -1,5 +1,15 @@
 {
  "ine": {
+  "53430": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
+  "53431": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
+  "53432": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
+  "53433": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
+  "53434": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
+  "53435": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
+  "53436": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
+  "53437": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
+  "53438": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
+  "53439": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
   "53440": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
   "53441": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
   "53442": "Número de establecimientos [] | Cifra de negocios [] | Distribución cifra de negocios (%) [] | Venta de productos [] | Valor  añadido [] | Distribución valor añadido (%) []",
@@ -20,12 +30,15 @@
   "53457": "Longitud de la red de suministro por habitante (metros/habitante) [] | Longitud de la red de alcantarillado por habitante (metros/habitante) [] | Pérdidas reales por km de red de suministro (m3/km/año) [] | Número de tanques de tormenta []",
   "53458": "Nacional. Alimentos. Índice. [] | Andalucía. Alimentos. Índice. [] | Aragón. Alimentos. Índice. [] | Asturias, Principado de. Alimentos. Índice. [] | Balears, Illes. Alimentos. Índice. [] | Canarias. Alimentos. Índice. [] | Cantabria. Alimentos. Índice. [] | Castilla y León. Alimentos. Índice. [] | Castilla - La Mancha. Alimentos. Índice. [] | Cataluña. Alimentos. Índice. [] | Comunitat Valenciana. Alimentos. Índice. [] | Extremadura. Alimentos. Índice. []",
   "53459": "Nacional. Alimentos. Índice. [] | Albacete. Alimentos. Índice. [] | Alicante/Alacant. Alimentos. Índice. [] | Almería. Alimentos. Índice. [] | Araba/Álava. Alimentos. Índice. [] | Asturias. Alimentos. Índice. [] | Ávila. Alimentos. Índice. [] | Badajoz. Alimentos. Índice. [] | Balears, Illes. Alimentos. Índice. [] | Barcelona. Alimentos. Índice. [] | Bizkaia. Alimentos. Índice. [] | Burgos. Alimentos. Índice. []",
-  "53460": "ERROR HTTP 404 <!DOCTYPE html>\r\n<html lang=\"es\">\r\n<head>\r\n<title>404</title>\r\n\r\n\r\n<meta http-equiv=\"X-UA-Compatible",
   "_ok": "2024 (y 2022), 18 territorios"
  },
  "edar": {
-  "curl https://www.mapa.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip": "Command failed: curl -sSfL --retry 3 -A Mozilla/5.0 espana-en-datos -o /tmp/edar/edar.zip https://www.mapa.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip\ncurl: (60) SSL certificate O",
-  "curl https://www.miteco.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip": "Command failed: curl -sSfL --retry 3 -A Mozilla/5.0 espana-en-datos -o /tmp/edar/edar.zip https://www.miteco.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip\ncurl: (22) The requested U",
+  "curl https://www.mapa.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip": "er and therefore could not\nestablish a secure connection to it. To learn more about this situation and\nhow to fix it, please visit the webpage mentioned above.\n",
+  "emisor 0": "http://www.cert.fnmt.es/certs/ACSS2G2R.crt",
+  "emisor 1": "http://www.cert.fnmt.es/certs/ACRAIZSERVIDORESSEGUROSFNMTG2R.crt",
+  "emisor 2": "sin CA Issuers",
+  "cadena": "completada",
+  "unzip": "Command failed: unzip -o -q /tmp/edar/edar.zip -d /tmp/edar\n[/tmp/edar/edar.zip]\n  End-of-central-directory signature not found.  Either this file is not\n  a zipfile, or it constitutes one disk of a m",
   "_ok": "sin shapefile: se conserva depuradoras.json si existía"
  },
  "conceptos": {
