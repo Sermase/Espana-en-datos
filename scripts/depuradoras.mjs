@@ -68,12 +68,13 @@ try {
     if (x == null || y == null || Math.abs(x) < 0.0001) continue
     const trat = si(p.uwwNRemoval) || si(p.uwwPRemoval) || si(p.uwwOtherTreatment) ? 3 : si(p.uwwSecondaryTreatment) ? 2 : si(p.uwwPrimaryTreatment) ? 1 : 0
     const extra = [si(p.uwwNRemoval) && 'N', si(p.uwwPRemoval) && 'P', si(p.uwwUV) && 'UV', si(p.uwwChlorination) && 'Cl', si(p.uwwOzonation) && 'O3', si(p.uwwSandFiltration) && 'arena', si(p.uwwMicroFiltration) && 'micro'].filter(Boolean)
-    const perf = ['uwwBOD5Perf', 'uwwCODPerf', 'uwwTSSPerf', 'uwwNTotPerf', 'uwwPTotPerf'].map(c => String(p[c] ?? '').trim()).filter(Boolean)
+    if (p.uwwCollectingSystem && p.uwwCollectingSystem !== 'ISCON') continue // solo depuradoras reales conectadas a un colector
+    // cumplimiento por parámetro: P = cumple, F = no cumple, NR = no se le exige
+    const perf = ['uwwBOD5Perf', 'uwwCODPerf', 'uwwTSSPerf', 'uwwNTotPerf', 'uwwPTotPerf'].map(c => String(p[c] ?? '').trim().toUpperCase()).filter(v => v === 'P' || v === 'F')
     const ag = (porPlanta.get(p.uwwCode) ?? []).map(([c, pct]) => { const a = AGG.get(c); return a ? { c: a.c, n: a.n, pe: a.pe, c1: a.c1, c2: a.c2, red: a.red, pct } : null }).filter(Boolean)
     out.push({
       c: p.uwwCode, n: (p.uwwName ?? '').trim(), x: +x.toFixed(4), y: +y.toFixed(4), cap: num(p.uwwCapacity), load: num(p.uwwLoadEnteringUWWTP), t: trat, e: extra,
-      ok: perf.length ? (perf.every(v => /^P$|pass/i.test(v)) ? 1 : perf.some(v => /^F$|fail/i.test(v)) ? 0 : null) : null,
-      reuse: si(p.uwwWasteWaterReuse) || null, nuts: p.uwwNUTS ?? null, ag,
+      ok: perf.length ? (perf.includes('F') ? 0 : 1) : null, vol: num(p.uwwWasteWaterTreated), nuts: p.uwwNUTS ?? null, ag,
     })
   }
   out.sort((a, b) => (b.cap ?? 0) - (a.cap ?? 0))
