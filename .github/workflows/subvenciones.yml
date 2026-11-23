@@ -1,0 +1,36 @@
+# Subvenciones (BDNS): descarga larga, mes a mes, en su propio flujo para que un despliegue no la corte.
+# Guarda los datos en el repositorio; la web se publica en el siguiente «Datos y despliegue».
+name: Subvenciones
+on:
+  schedule:
+    - cron: '29 2 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+  actions: write
+concurrency: { group: subvenciones, cancel-in-progress: false }
+jobs:
+  datos:
+    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[subvenciones]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Concesiones de la BDNS
+        continue-on-error: true
+        env: { PRESUPUESTO_MIN: "${{ github.event_name == 'schedule' && '25' || '55' }}" }
+        run: node scripts/subvenciones.mjs
+      - name: Guardar y publicar
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          git config user.name "datos-bot"
+          git config user.email "datos-bot@users.noreply.github.com"
+          git add public/subvenciones/data src/resumen.json fuentes/subvenciones-log.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Subvenciones del $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4; do git pull --rebase -q && git push && break; sleep 10; done
+          gh workflow run datos.yml
