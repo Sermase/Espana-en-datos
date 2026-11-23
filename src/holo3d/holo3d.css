@@ -1,0 +1,9 @@
+.h3d { position: relative; color: var(--h3) }
+.h3d svg { display: block; width: 100%; height: auto; overflow: visible }
+.h3d path { fill: none; stroke-linecap: round; stroke-linejoin: round }
+.h3d-base { stroke: var(--h3); stroke-opacity: .28; stroke-width: 1 }
+.h3d-tenue { stroke: var(--h3); stroke-opacity: .3; stroke-width: .8 }
+.h3d-glow { stroke: var(--h3); stroke-opacity: .18; stroke-width: 5 }
+.h3d-fuerte { stroke: color-mix(in oklab, var(--h3) 45%, white); stroke-width: 1.3 }
+.h3d-pts { stroke: color-mix(in oklab, var(--h3) 60%, white); stroke-width: 3.2; stroke-opacity: .8 }
+.h3d::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 4px) }

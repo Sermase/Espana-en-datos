@@ -39,18 +39,32 @@ async function paso(id, fn) {
 /** Une tramos (REE limita el rango de cada consulta). */
 async function tramos(ruta, años, trunc, extra) {
   const out = {}
+  const fallos = []
   for (const a of años) {
     const fin = a === HOY.getFullYear() ? `${iso(HOY)}T23:59` : `${a}-12-31T23:59`
-    const r = await ree(ruta, `${a}-01-01T00:00`, fin, trunc, extra)
+    let r
+    try { r = await ree(ruta, `${a}-01-01T00:00`, fin, trunc, extra) } catch (e) { fallos.push(a + ': ' + String(e.message).slice(0, 60)); continue }
     for (const [k, s] of Object.entries(r)) { out[k] ??= { ...s, v: [] }; out[k].v.push(...s.v) }
   }
+  if (!Object.keys(out).length) throw new Error(fallos.join(' | '))
+  if (fallos.length) log['_fallos_' + ruta] = fallos
   for (const s of Object.values(out)) { const m = new Map(s.v.map(x => [x[0], x])); s.v = [...m.values()].sort((a, b) => a[0].localeCompare(b[0])) }
   return out
 }
 const HOY = new Date()
 const iso = (d) => new Date(d.getTime() + 3600e3).toISOString().slice(0, 10) // día en España (aprox.)
 const ayer = new Date(HOY - 864e5), mañana = new Date(+HOY + 864e5)
-const AÑOS = Array.from({ length: HOY.getFullYear() - 2011 + 1 }, (_, i) => 2011 + i)
+const AÑOS = Array.from({ length: HOY.getFullYear() - 2007 + 1 }, (_, i) => 2007 + i)
+
+// ---------- sonda: generación en tiempo real (la web de seguimiento de la demanda de REE) ----------
+try {
+  const r = await fetch(`https://demanda.ree.es/WSvisionaMovilesPeninsulaRest/resources/demandaGeneracionPeninsula?callback=cb&curva=DEMANDA&fecha=${iso(HOY)}`, { headers: { Origin: 'https://sermase.github.io' } })
+  const txt = await r.text()
+  log._sonda_tr = { status: r.status, cors: r.headers.get('access-control-allow-origin'), inicio: txt.slice(0, 700) }
+} catch (e) { log._sonda_tr = 'ERROR ' + e.message }
+for (const [id, ruta] of [['_h_estructura', 'generacion/estructura-generacion'], ['_h_renovable', 'generacion/evolucion-renovable-no-renovable']]) {
+  try { const r = await ree(ruta, `${iso(HOY)}T00:00`, `${iso(HOY)}T23:59`, 'hour', { geo_trunc: 'electric_system', geo_limit: 'peninsular', geo_ids: '8741' }); log[id] = Object.keys(r).join(', ') + ' · ' + Object.values(r)[0]?.v.length } catch (e) { log[id] = 'ERROR ' + String(e.message).slice(0, 160) }
+}
 
 // ---------- hoy ----------
 const hoy = { fecha: HOY.toISOString() }
@@ -72,11 +86,11 @@ const H = [
   ['renovable_mes', 'generacion/evolucion-renovable-no-renovable', 'month'],
   ['demanda_mes', 'demanda/evolucion', 'month'],
   ['co2_mes', 'generacion/no-renovables-detalle-emisiones-CO2', 'month'],
-  ['precio_mes', 'mercados/precios-mercados-tiempo-real', 'month'],
-  ['intercambios_mes', 'intercambios/todas-fronteras-programados', 'month'],
+  ['intercambios_mes', 'intercambios/todas-fronteras-fisicos', 'month'],
 ]
 for (const [id, ruta, trunc] of H) historia[id] = (await paso(id, () => tramos(ruta, AÑOS, trunc))) ?? prev[id] ?? null
-historia.potencia = (await paso('potencia', () => tramos('generacion/potencia-instalada', AÑOS.filter(a => a % 1 === 0), 'month'))) ?? prev.potencia ?? null
+historia.precio_dia = (await paso('precio_dia', () => tramos('mercados/precios-mercados-tiempo-real', AÑOS.filter(a => a >= 2014), 'day'))) ?? prev.precio_dia ?? null
+historia.potencia = (await paso('potencia', () => tramos('generacion/potencia-instalada', AÑOS, 'year'))) ?? prev.potencia ?? null
 writeFileSync(DIR + 'historia.json', JSON.stringify(historia))
 writeFileSync(here('../fuentes/energia-log.json'), JSON.stringify(log, null, 1))
 
