@@ -11,7 +11,7 @@ import { PROVINCIAS } from './provincias'
 /** Une provincias en regiones (p. ej. comunidades) para pintar el dato al nivel al que existe, sin fronteras internas. */
 const topo = topology({ p: PROVINCIAS as never })
 const cacheGrupos = new Map<string, Feature<MultiPolygon, { id: string; n: string }>[]>()
-function unir(grupo: (cod: string) => string | null, clave: string) {
+export function unir(grupo: (cod: string) => string | null, clave: string) {
   if (cacheGrupos.has(clave)) return cacheGrupos.get(clave)!
   const geoms = (topo.objects.p as unknown as { geometries: { properties: { id: string } }[] }).geometries
   const ids = [...new Set(geoms.map(g => grupo(g.properties.id)).filter((x): x is string => !!x))]
@@ -66,6 +66,16 @@ export function MapaProvincias({ valor, fmt, titulo, color, divergente, sel, onS
               initial={{ opacity: 0 }} animate={{ opacity: seen ? 1 : 0 }} transition={{ duration: .5, delay: ((orden.get(cod) ?? 0) / Math.max(1, W)) * 0.8 }}
               onPointerMove={e => { const r = (e.currentTarget.ownerSVGElement as SVGSVGElement).getBoundingClientRect(); setTip({ x: e.clientX - r.left, y: e.clientY - r.top, cod }) }}
               onClick={() => onSel?.(sel === cod ? null : cod)} />
+          })}
+          {/* Ceuta y Melilla son tan pequeñas que no se ven: se marcan con un círculo que también se puede tocar */}
+          {feats.filter(f => /^(51|52)$/.test(f.properties.id) || ['Ceuta', 'Melilla'].includes(f.properties.id)).map(f => {
+            const cod = f.properties.id, v = valor(cod), [cx, cy] = path.centroid(f as never)
+            if (!isFinite(cx)) return null
+            return <g key={'ciudad' + cod} className={`mp-ciudad ${sel === cod ? 'is-sel' : ''}`} onClick={() => onSel?.(sel === cod ? null : cod)}
+              onPointerMove={e => { const r = (e.currentTarget.ownerSVGElement as SVGSVGElement).getBoundingClientRect(); setTip({ x: e.clientX - r.left, y: e.clientY - r.top, cod }) }}>
+              <circle cx={cx} cy={cy} r={Math.max(5, W / 110)} className="mp-prov has-v" style={relleno(v)} />
+              <text x={cx + Math.max(8, W / 80)} y={cy + 4} className="mp-ciudad-n">{f.properties.n}</text>
+            </g>
           })}
         </svg>}
         {tip && <div className="mp-tip" style={{ left: Math.min(W - 170, tip.x + 12), top: tip.y + 12 }} role="status"><strong>{nombre(tip.cod)}</strong><span>{valor(tip.cod) != null ? fmt(valor(tip.cod)!) : 'Sin dato'}</span></div>}

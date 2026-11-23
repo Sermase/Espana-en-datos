@@ -608,3 +608,41 @@ button { font: inherit; color: inherit; cursor: pointer }
 .rs-on line { stroke-dasharray: 3 3; animation: ci-fluye 1.2s linear infinite }
 .rs-edar { fill: #3df5b0 }
 @media (prefers-reduced-motion: reduce) { .rs-on line { animation: none } }
+
+/* Mapa de calles de Alcantarillado y Depuración */
+.mapa-calles { touch-action: auto }
+.mc-mapa { position: absolute; inset: 0; background: #0b0f12 }
+.mc-mapa .leaflet-control-attribution { background: rgba(3,9,15,.7); color: #86a9b5; font-size: 10px }
+.mc-mapa .leaflet-control-attribution a { color: #a9c6cf }
+.mc-zonas { position: absolute; z-index: 500; left: 16px; top: 112px; display: flex; flex-wrap: wrap; gap: 4px; max-width: 60% }
+.mc-zonas button, .mc-zoom button { padding: 6px 10px; border: 1px solid var(--line-hi, #3fe6ff55); border-radius: 4px; background: rgba(3, 16, 26, .85); color: #e6f6fb; font: 600 12.5px var(--display); backdrop-filter: blur(4px) }
+.mc-zonas button:hover, .mc-zoom button:hover { border-color: #3fe6ff; color: #fff }
+.mc-zoom { position: absolute; z-index: 500; right: 16px; bottom: 120px; display: grid; gap: 6px }
+.mc-zoom button { width: 40px; height: 40px; font-size: 20px; padding: 0 }
+.mc-estado { position: absolute; z-index: 500; left: 16px; top: 150px; margin: 0; font-size: 12.5px; color: #a9c6cf; background: rgba(3,16,26,.7); padding: 4px 8px; border-radius: 3px }
+.mc-tip { background: rgba(3, 12, 18, .95) !important; color: #e6f6fb !important; border: 1px solid #3fe6ff44 !important; font: 500 12.5px Barlow, sans-serif !important; box-shadow: 0 6px 20px rgba(0,0,0,.45) !important }
+.mc-tip::before { display: none }
+.mc-sel { animation: mc-pulso 1.6s ease-out infinite; transform-box: fill-box; transform-origin: center }
+@keyframes mc-pulso { 0% { stroke-opacity: 1 } 100% { stroke-opacity: .2 } }
+@media (prefers-reduced-motion: reduce) { .mc-sel { animation: none } }
+@media (max-width: 980px) { .mc-zonas { top: 132px; left: 10px; max-width: 92% } .mc-zonas button { padding: 5px 8px; font-size: 11.5px } .mc-estado { top: 170px; left: 10px } .mc-zoom { bottom: 150px; right: 10px } }
+.mc-et { pointer-events: none }
+.mc-et b, .mc-et span { position: absolute; left: 0; transform: translate(-50%, -50%); white-space: nowrap; text-align: center; paint-order: stroke; -webkit-text-stroke: 0; text-shadow: 0 0 4px #03090f, 0 0 2px #03090f, 0 1px 2px #03090f }
+.mc-et b { top: -6px; font: 700 18px var(--display); color: #fff }
+.mc-et span { top: 12px; font: 600 10.5px Barlow, sans-serif; color: #dfeff4 }
+.mc-ley { position: absolute; z-index: 500; left: 16px; bottom: 120px; display: grid; gap: 4px; max-width: 250px; padding: 10px 12px; border: 1px solid #3fe6ff33; border-radius: 6px; background: rgba(3, 16, 26, .88); backdrop-filter: blur(4px); font-size: 12.5px; color: #cfe3ea }
+.mc-ley b { font: 600 13px var(--display); color: #fff }
+.mc-ley span { display: flex; align-items: center; gap: 7px }
+.mc-ley span i { width: 10px; height: 10px; border-radius: 50%; flex: none }
+.mc-ley span i.no { background: transparent; border: 2px dashed #ff4d5e }
+.mc-ley small { color: #86a9b5; font-size: 11.5px }
+.mc-grad { display: block; height: 8px; border-radius: 4px }
+.mc-grad.depuracion { background: linear-gradient(90deg, rgb(20,52,74), rgb(61,245,176)) }
+.mc-grad.alcantarillado { background: linear-gradient(90deg, #ff4d5e, #3fe6ff) }
+.mc-ext { display: flex !important; justify-content: space-between }
+@media (max-width: 980px) { .mc-ley { left: 10px; bottom: 150px; max-width: 200px; padding: 8px 10px; font-size: 11.5px } .mc-et b { font-size: 14px } .mc-et span { font-size: 9.5px } }
+.mc-can { position: absolute; z-index: 500; left: 16px; bottom: 300px; padding: 0; border: 1px solid #3fe6ff33; border-radius: 6px; background: rgba(3, 16, 26, .88); cursor: pointer }
+.mc-can:hover { border-color: #3fe6ff }
+.mc-can svg { display: block }
+.mc-can-t { font: 600 11.5px var(--display); fill: #fff; paint-order: stroke; stroke: #03090f; stroke-width: 3px }
+@media (max-width: 980px) { .mc-can { left: auto; right: 10px; bottom: auto; top: 172px } .mc-can svg { width: 130px; height: 61px } }

@@ -6,7 +6,7 @@ export type Agg = { c: string; n: string; pe: number | null; c1: number | null; 
 export type Edar = { c: string; n: string; x: number; y: number; cap: number | null; load: number | null; t: number; e: string[]; ok: 0 | 1 | null; vol: number | null; nuts: string | null; ag: Agg[] }
 
 /** Aglomeración urbana con su posición y las depuradoras (índices) a las que va su agua. */
-export type AggPt = Agg & { x: number; y: number; sin: number | null; ed: number[] }
+export type AggPt = Agg & { x: number; y: number; sin: number | null; ed: number[]; nuts: string | null }
 let E: Edar[] | null = null
 let A: AggPt[] | null = null
 let pending: Promise<Edar[]> | null = null

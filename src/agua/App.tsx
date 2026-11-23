@@ -7,6 +7,7 @@ import { SelCard } from './SelCard'
 import { consumo, data, energyTotals, fechaLarga, fmt, fmtPct } from './data'
 import { useRivers } from './rivers'
 import { useEdar } from './edar'
+import { MapaCalles } from './MapaCalles'
 import { fromKey, randomSel, sameSel, selKey, useCollection, type Milestone, type Sel } from './sel'
 import { CountUp, Info } from './ui'
 import { A } from '../Fuentes'
@@ -117,7 +118,9 @@ export default function App() {
 
   return (
     <main className="game">
-      <Board layer={layer} sel={sel} onPick={s => pick(s)} seen={seen} onDice={() => pick(randomSel(layer, seen))} />
+      {layer === 'depuracion' || layer === 'alcantarillado'
+        ? <MapaCalles layer={layer} sel={sel} onPick={s => pick(s)} />
+        : <Board layer={layer} sel={sel} onPick={s => pick(s)} seen={seen} onDice={() => pick(randomSel(layer, seen))} />}
       <div className="vignette" aria-hidden />
 
       <header className="hud-top">

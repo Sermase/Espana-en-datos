@@ -11,3 +11,7 @@
 .mp-ley { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 6px; font-size: 12px; color: var(--muted, #86a9b5) }
 .mp-ley i { width: 160px; height: 8px; border-radius: 2px }
 .mp-ley small { flex-basis: 100% }
+.mp-ciudad { cursor: pointer }
+.mp-ciudad circle { stroke: #e6f6fb; stroke-width: 1.2 }
+.mp-ciudad.is-sel circle { stroke: #fff; stroke-width: 2.4 }
+.mp-ciudad-n { font: 600 11px Barlow, sans-serif; fill: #cfe3ea; paint-order: stroke; stroke: #03090f; stroke-width: 3px; pointer-events: none }
