@@ -1,95 +1,30 @@
 {
- "pib_anual": {
-  "EU27_2020": "123 datos, último 2026-Q3 = 1.5",
-  "ES": "123 datos, último 2026-Q3 = 2.7"
- },
- "pib_trim": {
-  "EU27_2020": "123 datos, último 2026-Q3 = 0.5",
-  "ES": "123 datos, último 2026-Q3 = 0.6"
- },
- "pib_nivel": {
-  "ES": "31 datos, último 2025 = 1690012"
- },
- "pib_pc_ppa": {
-  "EU27_2020": "26 datos, último 2025 = 100",
-  "BE": "26 datos, último 2025 = 113.9",
-  "CZ": "26 datos, último 2025 = 92.3",
-  "DK": "26 datos, último 2025 = 129.1",
-  "DE": "26 datos, último 2025 = 116.4",
-  "IE": "26 datos, último 2025 = 223.5",
-  "ES": "26 datos, último 2025 = 91.4",
-  "FR": "26 datos, último 2025 = 97.5",
-  "IT": "26 datos, último 2025 = 95.9",
-  "HU": "26 datos, último 2025 = 76.2",
-  "NL": "26 datos, último 2025 = 132",
-  "AT": "26 datos, último 2025 = 118.3",
-  "PL": "26 datos, último 2025 = 81.1",
-  "PT": "26 datos, último 2025 = 81.4",
-  "RO": "26 datos, último 2025 = 78",
-  "FI": "26 datos, último 2025 = 100.7",
-  "SE": "26 datos, último 2025 = 110.9"
- },
- "pib_pc_ccaa": {
-  "ES": "25 datos, último 2024 = 32600",
-  "ES11": "25 datos, último 2024 = 30200",
-  "ES12": "25 datos, último 2024 = 29700",
-  "ES13": "25 datos, último 2024 = 29900",
-  "ES21": "25 datos, último 2024 = 41000",
-  "ES22": "25 datos, último 2024 = 39100",
-  "ES23": "25 datos, último 2024 = 34100",
-  "ES24": "25 datos, último 2024 = 36700",
-  "ES30": "25 datos, último 2024 = 44700",
-  "ES41": "25 datos, último 2024 = 30900",
-  "ES42": "25 datos, último 2024 = 26300",
-  "ES43": "25 datos, último 2024 = 25200",
-  "ES51": "25 datos, último 2024 = 37500",
-  "ES52": "25 datos, último 2024 = 27600",
-  "ES53": "25 datos, último 2024 = 36100",
-  "ES61": "25 datos, último 2024 = 24500",
-  "ES62": "25 datos, último 2024 = 26900",
-  "ES63": "25 datos, último 2024 = 23100",
-  "ES64": "25 datos, último 2024 = 21100",
-  "ES70": "25 datos, último 2024 = 25900"
- },
- "ipc": {
-  "EU27_2020": "301 datos, último 2025-12 = 2.3",
-  "ES": "348 datos, último 2025-12 = 3"
- },
- "ipc_sub": {
-  "ES": "288 datos, último 2025-12 = 3"
- },
- "ipc_grupos": {
-  "CP01": "132 datos, último 2025-12 = 3",
-  "CP02": "132 datos, último 2025-12 = 4.4",
-  "CP03": "132 datos, último 2025-12 = 0.6",
-  "CP04": "132 datos, último 2025-12 = 5.6",
-  "CP045": "132 datos, último 2025-12 = 8.7",
-  "CP06": "132 datos, último 2025-12 = 2.2",
-  "CP07": "132 datos, último 2025-12 = 2.1",
-  "CP0722": "132 datos, último 2025-12 = -2.3",
-  "CP09": "132 datos, último 2025-12 = 0.8",
-  "CP11": "132 datos, último 2025-12 = 4.7",
-  "NRG": "132 datos, último 2025-12 = 3.2",
-  "SERV": "132 datos, último 2025-12 = 3.9"
- },
+ "pib_anual": "ERROR HTTP 200 <!DOCTYPE html>\n<html lang=\"en\" class=\"no-js\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <title>Server temporarily unava",
+ "pib_trim": "ERROR HTTP 200 <!DOCTYPE html>\n<html lang=\"en\" class=\"no-js\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <title>Server temporarily unava",
+ "pib_nivel": "ERROR HTTP 200 <!DOCTYPE html>\n<html lang=\"en\" class=\"no-js\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <title>Server temporarily unava",
+ "pib_pc_ppa": "ERROR HTTP 200 <!DOCTYPE html>\n<html lang=\"en\" class=\"no-js\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <title>Server temporarily unava",
+ "pib_pc_ccaa": "ERROR HTTP 200 <!DOCTYPE html>\n<html lang=\"en\" class=\"no-js\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <title>Server temporarily unava",
+ "ipc": "ERROR prc_hicp_manr: HTTP 200 <!DOCTYPE html>\n<html lang=\"en\" class=\"no-js\">\n  <head>\n    <meta chars | prc_hicp_minr: HTTP 200 <!DOCTYPE html>\n<html lang=\"en\" class=\"no-js\">\n  <head>\n    <meta chars | prc_hicp_mv12r: HTTP 200 <!DOCTYPE html>\n<html lang=\"en\" class=\"no-js\">\n  <head>\n    <meta chars",
+ "ipc_sub": "ERROR prc_hicp_manr: HTTP 200 <!DOCTYPE html>\n<html lang=\"en\" class=\"no-js\">\n  <head>\n    <meta chars | prc_hicp_minr: HTTP 200 <!DOCTYPE html>\n<html lang=\"en\" class=\"no-js\">\n  <head>\n    <meta chars | prc_hicp_mv12r: HTTP 200 <!DOCTYPE html>\n<html lang=\"en\" class=\"no-js\">\n  <head>\n    <meta chars",
+ "ipc_grupos": "ERROR prc_hicp_manr: HTTP 200 <!DOCTYPE html>\n<html lang=\"en\" class=\"no-js\">\n  <head>\n    <meta chars | prc_hicp_minr: HTTP 200 <!DOCTYPE html>\n<html lang=\"en\" class=\"no-js\">\n  <head>\n    <meta chars",
  "ipc_paises": {
-  "EU27_2020": "36 datos, último 2025-12 = 2.3",
-  "BE": "36 datos, último 2025-12 = 2.2",
-  "CZ": "36 datos, último 2025-12 = 1.8",
-  "DK": "36 datos, último 2025-12 = 1.9",
-  "DE": "36 datos, último 2025-12 = 2",
-  "IE": "36 datos, último 2025-12 = 2.7",
-  "ES": "36 datos, último 2025-12 = 3",
-  "FR": "36 datos, último 2025-12 = 0.7",
-  "IT": "36 datos, último 2025-12 = 1.2",
-  "HU": "36 datos, último 2025-12 = 3.3",
-  "NL": "36 datos, último 2025-12 = 2.7",
-  "AT": "36 datos, último 2025-12 = 3.8",
-  "PL": "36 datos, último 2025-12 = 2.5",
-  "PT": "36 datos, último 2025-12 = 2.4",
-  "RO": "36 datos, último 2025-12 = 8.6",
-  "FI": "36 datos, último 2025-12 = 1.7",
-  "SE": "36 datos, último 2025-12 = 2.1"
+  "EU27_2020": "36 datos, último 2025-12 = 2.5",
+  "BE": "36 datos, último 2025-12 = 3",
+  "CZ": "36 datos, último 2025-12 = 2.3",
+  "DK": "36 datos, último 2025-12 = 1.8",
+  "DE": "36 datos, último 2025-12 = 2.3",
+  "IE": "36 datos, último 2025-12 = 2.1",
+  "ES": "36 datos, último 2025-12 = 2.7",
+  "FR": "36 datos, último 2025-12 = 0.9",
+  "IT": "36 datos, último 2025-12 = 1.7",
+  "HU": "36 datos, último 2025-12 = 4.4",
+  "NL": "36 datos, último 2025-12 = 3",
+  "AT": "36 datos, último 2025-12 = 3.6",
+  "PL": "36 datos, último 2025-12 = 3.3",
+  "PT": "36 datos, último 2025-12 = 2.2",
+  "RO": "36 datos, último 2025-12 = 6.8",
+  "FI": "36 datos, último 2025-12 = 1.8",
+  "SE": "36 datos, último 2025-12 = 2.6"
  },
  "paro": {
   "EU27_2020": "321 datos, último 2026-09 = 6.2",
@@ -147,7 +82,10 @@
   "EU27_2020": "17 datos, último 2025 = 76.1",
   "ES": "17 datos, último 2025 = 72.4"
  },
- "temporal": "ERROR HTTP 404 { \"error\": [{\"status\": 404,\"id\": 100,\"label\": \"ERR_NOT_FOUND_4: LFSA_ETPGA (DATA_FLOW:ALL,1.0) is not available for dissemination.\"}]}",
+ "temporal": {
+  "EU27_2020": "143 datos, último 2025 = 12.6",
+  "ES": "130 datos, último 2025 = 15.4"
+ },
  "smi": {
   "BE": "54 datos, último 2026-S2 = 2234",
   "CZ": "54 datos, último 2026-S2 = 923",
@@ -195,12 +133,83 @@
  "euribor": {
   "EA": "334 datos, último 2026-10 = 3.239"
  },
- "propiedad": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
- "deuda": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
- "deficit": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
- "deuda_trim": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
- "gasto": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
- "riesgo_pobreza": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
- "gini": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON",
- "renta_mediana": "ERROR Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
+ "propiedad": "ERROR HTTP 400 { \"error\": [{\"status\": 400,\"id\": 150,\"label\": \"INVALID_QUERY_DIMENSION: Query is invalid as per its structure's definiti",
+ "deuda": {
+  "EU27_2020": "26 datos, último 2025 = 81.5",
+  "BE": "31 datos, último 2025 = 108.1",
+  "CZ": "31 datos, último 2025 = 44.2",
+  "DK": "26 datos, último 2025 = 27.2",
+  "DE": "31 datos, último 2025 = 62.8",
+  "IE": "31 datos, último 2025 = 34.8",
+  "ES": "31 datos, último 2025 = 100.5",
+  "FR": "31 datos, último 2025 = 115.7",
+  "IT": "31 datos, último 2025 = 136.7",
+  "HU": "31 datos, último 2025 = 74.4",
+  "NL": "31 datos, último 2025 = 44.7",
+  "AT": "31 datos, último 2025 = 80.7",
+  "PL": "31 datos, último 2025 = 59.6",
+  "PT": "31 datos, último 2025 = 89.2",
+  "RO": "31 datos, último 2025 = 58.9",
+  "FI": "31 datos, último 2025 = 88.4",
+  "SE": "31 datos, último 2025 = 35.1"
+ },
+ "deficit": {
+  "EU27_2020": "29 datos, último 2025 = -3.1",
+  "BE": "31 datos, último 2025 = -5.2",
+  "CZ": "31 datos, último 2025 = -2.2",
+  "DK": "31 datos, último 2025 = 2.9",
+  "DE": "31 datos, último 2025 = -2.9",
+  "IE": "31 datos, último 2025 = 1.8",
+  "ES": "31 datos, último 2025 = -2.4",
+  "FR": "31 datos, último 2025 = -5.1",
+  "IT": "31 datos, último 2025 = -3.1",
+  "HU": "31 datos, último 2025 = -4.7",
+  "NL": "31 datos, último 2025 = -1.6",
+  "AT": "31 datos, último 2025 = -4.1",
+  "PL": "31 datos, último 2025 = -7.2",
+  "PT": "31 datos, último 2025 = 0.7",
+  "RO": "31 datos, último 2025 = -7.8",
+  "FI": "31 datos, último 2025 = -3.8",
+  "SE": "31 datos, último 2025 = -1.6"
+ },
+ "deuda_trim": {
+  "EU27_2020": "106 datos, último 2026-Q2 = 82.9",
+  "ES": "106 datos, último 2026-Q2 = 101.4"
+ },
+ "gasto": {
+  "GF01": "15 datos, último 2024 = 5.8",
+  "GF02": "15 datos, último 2024 = 0.9",
+  "GF03": "15 datos, último 2024 = 1.8",
+  "GF04": "15 datos, último 2024 = 5.1",
+  "GF05": "15 datos, último 2024 = 1",
+  "GF06": "15 datos, último 2024 = 0.5",
+  "GF07": "15 datos, último 2024 = 6.5",
+  "GF08": "15 datos, último 2024 = 1.2",
+  "GF09": "15 datos, último 2024 = 4.1",
+  "GF10": "15 datos, último 2024 = 18.7"
+ },
+ "riesgo_pobreza": {
+  "EU27_2020": "11 datos, último 2025 = 20.9",
+  "ES": "11 datos, último 2025 = 25.7"
+ },
+ "gini": {
+  "EU27_2020": "32 datos, último 2025 = 28.6",
+  "BE": "42 datos, último 2025 = 20.6",
+  "CZ": "42 datos, último 2025 = 24.1",
+  "DK": "42 datos, último 2025 = 23.3",
+  "DE": "42 datos, último 2025 = 29.3",
+  "IE": "42 datos, último 2025 = 26.3",
+  "ES": "42 datos, último 2025 = 33.1",
+  "FR": "42 datos, último 2025 = 30.7",
+  "IT": "42 datos, último 2025 = 29.3",
+  "HU": "42 datos, último 2025 = 28.9",
+  "NL": "42 datos, último 2025 = 23.1",
+  "AT": "42 datos, último 2025 = 25.8",
+  "PL": "42 datos, último 2025 = 24.6",
+  "PT": "42 datos, último 2025 = 29.2",
+  "RO": "38 datos, último 2025 = 28.8",
+  "FI": "42 datos, último 2025 = 25.6",
+  "SE": "42 datos, último 2025 = 25.5"
+ },
+ "renta_mediana": "ERROR HTTP 400 { \"error\": [{\"status\": 400,\"id\": 150,\"label\": \"INVALID_QUERY_DIMENSION: Query is invalid as per its structure's definiti"
 }

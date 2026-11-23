@@ -1,0 +1,248 @@
+"                Persons at risk of poverty or social exclusion by NUTS 2 region"	"ilc_peps11n"	"dataset"	"20.10.2026"	"13.10.2026"	"2015"	"2025"	3407
+"                Housing cost overburden rate by NUTS 2 region"	"ilc_lvho07_r"	"dataset"	"20.10.2026"	"19.10.2026"	"2021"	"2025"	1600
+"                Income quintile share ratio S80/S20 by NUTS 2 region"	"ilc_di11_r"	"dataset"	"04.11.2026"	"14.10.2026"	"2003"	"2025"	4494
+"                Average number of rooms per person by NUTS 2 region"	"ilc_lvho04n"	"dataset"	"20.10.2026"	"08.07.2026"	"2003"	"2025"	4645
+"                Persons at risk of poverty or social exclusion by degree of urbanisation - EU 2020 strategy"	"ilc_peps13"	"dataset"	"06.10.2026"	"30.04.2026"	"2003"	"2025"	4634
+"                Persons at risk of poverty or social exclusion by degree of urbanisation"	"ilc_peps13n"	"dataset"	"06.10.2026"	"30.04.2026"	"2015"	"2025"	2335
+"                Mean and median income by degree of urbanisation"	"ilc_di17"	"dataset"	"26.10.2026"	"21.05.2026"	"2003"	"2025"	278604
+"                Distribution of population by degree of urbanisation, dwelling type and income group"	"ilc_lvho01"	"dataset"	"06.07.2026"	"21.05.2026"	"2003"	"2025"	74984
+"                Average number of rooms per person by degree of urbanization"	"ilc_lvho04d"	"dataset"	"06.07.2026"	"30.04.2026"	"2003"	"2025"	3104
+"                Overcrowding rate by degree of urbanisation - total population"	"ilc_lvho05d"	"dataset"	"06.07.2026"	"30.04.2026"	"2003"	"2025"	2337
+"                Housing cost overburden rate by degree of urbanisation"	"ilc_lvho07d"	"dataset"	"05.11.2026"	"30.04.2026"	"2003"	"2025"	3042
+"                Median of the housing cost burden distribution by degree of urbanisation"	"ilc_lvho08b"	"dataset"	"29.10.2026"	"30.04.2026"	"2003"	"2025"	2292
+"                    Temporary employees by educational attainment level, country of birth and degree of urbanisation"	"lfst_r_e2tgaedcu"	"dataset"	"30.10.2026"	"10.09.2026"	"1995"	"2025"	968992
+"                    Temporary employees by educational attainment level, citizenship and degree of urbanisation"	"lfst_r_e2tgaednu"	"dataset"	"30.10.2026"	"10.09.2026"	"1995"	"2025"	903304
+"                        Government deficit/surplus and debt - ENP-South countries"	"enps_gov_10dd"	"dataset"	"05.03.2026"	"05.03.2026"	"2005"	"2025"	173
+"                        Total economy deficit/surplus - ENP-South countries"	"enps_gov_10dde"	"dataset"	"05.03.2026"	"05.03.2026"	"2005"	"2025"	62
+"                            Income quintile share ratio - S80/S20 - ENP-South countries"	"enps_ilc_di11"	"dataset"	"05.03.2026"	"12.05.2025"	"2005"	"2023"	33
+"                            Gini coefficient - ENP-South countries"	"enps_ilc_di12"	"dataset"	"05.03.2026"	"02.06.2025"	"2005"	"2023"	40
+"                        Government deficit/surplus and debt - ENP-East countries"	"enpe_gov_10dd"	"dataset"	"03.02.2026"	"03.02.2026"	"2005"	"2025"	428
+"                            Income quintile share ratio - S80/S20 - ENP-East countries"	"enpe_ilc_di11"	"dataset"	"03.02.2026"	"03.02.2026"	"2005"	"2024"	109
+"                            Gini coefficient - ENP-East countries"	"enpe_ilc_di12"	"dataset"	"03.02.2026"	"03.02.2026"	"2005"	"2024"	89
+"                            Median equivalised net income - EUR per person - ENP-East countries"	"enpe_ilc_di03"	"dataset"	"03.02.2026"	"03.02.2026"	"2005"	"2024"	70
+"                Government deficit and debt"	"gov_10dd"	"folder"	" "	" "	" "	" "	
+"                    Structure of government debt"	"gov_10dd_sgd"	"folder"	" "	" "	" "	" "	
+"                        General government debt"	"gov_10dd_ggd"	"dataset"	"18.11.2026"	"05.06.2026"	"1995"	"2025"	727527
+"                        Debt by currency of issue"	"gov_10dd_dcur"	"dataset"	"18.11.2026"	"05.06.2026"	"1995"	"2025"	12362
+"                        Guarantees (contingent liabilities)"	"gov_10dd_guar"	"dataset"	"18.11.2026"	"17.11.2026"	"2006"	"2025"	4320
+"                        Apparent cost of general government gross debt"	"gov_10dd_acd"	"dataset"	"18.11.2026"	"17.11.2026"	"1995"	"2025"	420
+"                        Remaining maturity of general government gross debt"	"gov_10dd_rmd"	"dataset"	"18.11.2026"	"05.06.2026"	"1995"	"2025"	7130
+"                    Government deficit/surplus, debt and associated data"	"gov_10dd_edpt1"	"dataset"	"21.10.2026"	"22.04.2026"	"1995"	"2025"	56909
+"                    Transition from the working balance to the deficit/surplus"	"gov_10dd_edpt2"	"dataset"	"21.10.2026"	"22.04.2026"	"1995"	"2025"	46448
+"                    Transition from the deficit/surplus to the change in debt"	"gov_10dd_edpt3"	"dataset"	"21.10.2026"	"22.04.2026"	"1995"	"2025"	190803
+"                    Harmonised index of consumer prices (HICP) - ECOICOP ver.2 - indices and rates of change, monthly data"	"prc_hicp_minr"	"dataset"	"18.11.2026"	"04.11.2026"	"1996-01"	"2026-10"	22577512
+"                    HICP - monthly data (index) (1996-2025)"	"prc_hicp_midx"	"dataset"	"06.02.2026"	"07.01.2026"	"1996-01"	"2025-12"	7699058
+"                    HICP - monthly data (annual rate of change) (1997-2025)"	"prc_hicp_manr"	"dataset"	"06.02.2026"	"07.01.2026"	"1997-01"	"2025-12"	3511040
+"                    HICP - monthly data (monthly rate of change) (1996-2025)"	"prc_hicp_mmor"	"dataset"	"06.02.2026"	"07.01.2026"	"1996-02"	"2025-12"	3706469
+"                    HICP - monthly data (12-month average rate of change) (1997-2025)"	"prc_hicp_mv12r"	"dataset"	"06.02.2026"	"19.01.2026"	"1997-12"	"2025-12"	3315923
+"                Asylum and temporary protection indicators"	"migr_asyltpind"	"folder"	" "	" "	" "	" "	
+"                    Temporary protection indicators"	"migr_asytpind"	"folder"	" "	" "	" "	" "	
+"                        Beneficiaries of temporary protection by citizenship - per thousand persons"	"migr_asytpspop"	"dataset"	"10.11.2026"	"04.11.2026"	"2022-03"	"2026-09"	5220
+"                        Decisions granting temporary protection by citizenship - per thousand persons"	"migr_asytpfpop"	"dataset"	"16.11.2026"	"06.11.2026"	"2022-03"	"2026-09"	5241
+"                Temporary protection"	"migr_asytp"	"folder"	" "	" "	" "	" "	
+"                    Temporary protection of unaccompanied minors"	"migr_asyumtp"	"folder"	" "	" "	" "	" "	
+"                        Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - annual aggregated data"	"migr_asyumtpfa"	"dataset"	"10.11.2026"	"10.11.2026"	"2022"	"2025"	462296
+"                        Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - quarterly data"	"migr_asyumtpfq"	"dataset"	"10.11.2026"	"10.11.2026"	"2022-Q1"	"2026-Q3"	2211744
+"                        Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - monthly data"	"migr_asyumtpfm"	"dataset"	"18.11.2026"	"13.11.2026"	"2022-03"	"2026-10"	6380232
+"                        Unaccompanied minors benefiting from temporary protection at the end of the month by citizenship, age and sex - monthly data"	"migr_asyumtpsm"	"dataset"	"18.11.2026"	"13.11.2026"	"2022-03"	"2026-10"	6059726
+"                        Decisions withdrawing temporary protection to unaccompanied minors by citizenship and reason - quarterly data"	"migr_asyumtpwq"	"dataset"	"20.11.2026"	"09.10.2026"	"2022-Q1"	"2026-Q3"	590190
+"                    Decisions granting temporary protection by citizenship, age and sex - annual aggregated data"	"migr_asytpfa"	"dataset"	"26.10.2026"	"12.01.2026"	"2022"	"2025"	807342
+"                    Decisions granting temporary protection by citizenship, age and sex - quarterly data"	"migr_asytpfq"	"dataset"	"10.11.2026"	"04.11.2026"	"2022-Q1"	"2026-Q3"	3874270
+"                    Decisions granting temporary protection by citizenship, age and sex - monthly data"	"migr_asytpfm"	"dataset"	"18.11.2026"	"04.11.2026"	"2022-03"	"2026-10"	11234620
+"                    Beneficiaries of temporary protection at the end of the month by citizenship, age and sex - monthly data"	"migr_asytpsm"	"dataset"	"18.11.2026"	"04.11.2026"	"2022-03"	"2026-10"	11202940
+"                    Decisions withdrawing temporary protection by citizenship and reason - quarterly data"	"migr_asytpwq"	"dataset"	"20.11.2026"	"09.10.2026"	"2022-Q1"	"2026-Q3"	606670
+"                        Temporary employees by educational attainment level"	"lfsa_etgaed"	"dataset"	"30.10.2026"	"17.04.2026"	"1983"	"2025"	255104
+"                            Part-time employment and temporary contracts - annual data (1993–2020)"	"lfsi_pt_a_h"	"dataset"	"20.07.2026"	"08.01.2026"	"1993"	"2020"	71105
+"                            Part-time employment and temporary contracts - quarterly data (1992–2020)"	"lfsi_pt_q_h"	"dataset"	"20.07.2026"	"08.01.2026"	"1992-Q2"	"2020-Q4"	779935
+"                        Part-time employment and temporary contracts - annual data"	"lfsi_pt_a"	"dataset"	"06.11.2026"	"06.11.2026"	"2003"	"2025"	40729
+"                            Employees with temporary contracts - annual data"	"tps00073"	"table"	"06.11.2026"	"06.11.2026"	"2014"	"2025"	1601
+"                        Part-time employment and temporary contracts - quarterly data"	"lfsi_pt_q"	"dataset"	"06.11.2026"	"06.11.2026"	"2003-Q1"	"2026-Q2"	657020
+"                    Temporary employment"	"lfsq_emptemp"	"folder"	" "	" "	" "	" "	
+"                        Temporary employees by educational attainment level - quarterly data"	"lfsq_etgaed"	"dataset"	"11.09.2026"	"11.09.2026"	"1998-Q1"	"2026-Q2"	799258
+"                        Temporary employees by economic activity (NACE Rev. 2.1) - quarterly data"	"lfsq_etgan21"	"dataset"	"11.09.2026"	"11.09.2026"	"2026-Q1"	"2026-Q2"	41418
+"                        Temporary employees by economic activity (NACE Rev. 2) (2008-2026) - quarterly data"	"lfsq_etgan2"	"dataset"	"11.09.2026"	"11.09.2026"	"2008-Q1"	"2026-Q2"	1644448
+"                        Temporary employees by economic activity (NACE Rev. 1.1) (1998-2008) - quarterly data"	"lfsq_etgana"	"dataset"	"16.04.2026"	"07.01.2026"	"1998-Q1"	"2008-Q4"	968479
+"                        Temporary employees by occupation - quarterly data"	"lfsq_etgais"	"dataset"	"11.09.2026"	"11.09.2026"	"1998-Q1"	"2026-Q2"	1618880
+"                        Temporary employees by duration of the employment contract - quarterly data"	"lfsq_etgadc"	"dataset"	"11.09.2026"	"11.09.2026"	"1998-Q1"	"2026-Q2"	1500923
+"                        Temporary employees - % of total employees - quarterly data"	"lfsq_etpga"	"dataset"	"11.09.2026"	"11.09.2026"	"1998-Q1"	"2026-Q2"	253755
+"                    Temporary employment"	"lfsa_emptemp"	"folder"	" "	" "	" "	" "	
+"                        Temporary employees by educational attainment level"	"lfsa_etgaed"	"dataset"	"30.10.2026"	"17.04.2026"	"1983"	"2025"	255104
+"                        Temporary employees by economic activity (NACE Rev. 2) (2008-2026)"	"lfsa_etgan2"	"dataset"	"30.10.2026"	"17.04.2026"	"2008"	"2025"	512012
+"                        Temporary employees by economic activity (NACE Rev. 1.1) (1992-2008)"	"lfsa_etgana"	"dataset"	"16.04.2026"	"09.01.2026"	"1992"	"2008"	387249
+"                        Temporary employees by occupation"	"lfsa_etgais"	"dataset"	"30.10.2026"	"17.04.2026"	"1983"	"2025"	540420
+"                        Temporary employees by main reason"	"lfsa_etgar"	"dataset"	"30.10.2026"	"17.04.2026"	"1983"	"2025"	712992
+"                        Temporary employees by duration of the employment contract"	"lfsa_etgadc"	"dataset"	"30.10.2026"	"17.04.2026"	"1983"	"2025"	501046
+"                        Temporary employees by citizenship - % of total employees"	"lfsa_etpgan"	"dataset"	"30.10.2026"	"17.04.2026"	"1995"	"2025"	102471
+"                        Temporary employees by country of birth - % of total employees"	"lfsa_etpgacob"	"dataset"	"30.10.2026"	"17.04.2026"	"1995"	"2025"	109687
+"                        Temporary employment agency workers by NACE Rev. 1.1 activity (2006-2008)"	"lfsa_qoe_4a6r1"	"dataset"	"16.04.2026"	"09.01.2026"	"2006"	"2008"	2811
+"                        Temporary employment agency workers by NACE Rev. 2 activity (2008-2026)"	"lfsa_qoe_4a6r2"	"dataset"	"30.10.2026"	"17.04.2026"	"2008"	"2025"	20975
+"                                Percentage of adult temporary employees by number of children and age of youngest child"	"lfst_hhtemchi"	"dataset"	"10.09.2026"	"03.07.2026"	"2006"	"2025"	182421
+"                            Percentage of temporary employees by household composition"	"lfst_hhtemty"	"dataset"	"10.09.2026"	"03.07.2026"	"2006"	"2025"	136000
+"                            Temporary employees by educational attainment level, country of birth and degree of urbanisation"	"lfst_r_e2tgaedcu"	"dataset"	"30.10.2026"	"10.09.2026"	"1995"	"2025"	968992
+"                            Temporary employees by educational attainment level, citizenship and degree of urbanisation"	"lfst_r_e2tgaednu"	"dataset"	"30.10.2026"	"10.09.2026"	"1995"	"2025"	903304
+"                            Temporary employees by work experience while studying (2024)"	"lfso_24lmk06"	"dataset"	"11.06.2026"	"05.01.2026"	"2024"	"2024"	8007
+"                            Employees with involuntary temporary contracts by work experience while studying (2024)"	"lfso_24lmk07"	"dataset"	"11.06.2026"	"05.01.2026"	"2024"	"2024"	1557
+"                            Employees with involuntary temporary contracts by educational attainment level and work experience while studying - % of total employees with temporary contracts (2016)"	"lfso_16invtemp"	"dataset"	"03.02.2022"	"07.01.2026"	"2016"	"2016"	4279
+"                            Temporary employment agency workers by educational attainment level and work experience while studying - % of total employees (2016)"	"lfso_16agency"	"dataset"	"03.02.2022"	"07.01.2026"	"2016"	"2016"	2086
+"                        Temporary staff: labour cost, number of employees and number of hours worked by NACE Rev. 1.1 activity - LCS survey 2000"	"lc_n00temp"	"dataset"	"27.03.2009"	"14.10.2024"	"2000"	"2000"	1243
+"                    Main indicator - persons at risk of poverty or social exclusion"	"ilc_peps"	"folder"	" "	" "	" "	" "	
+"                        Persons at risk of poverty or social exclusion by age and sex"	"ilc_peps01n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	90372
+"                        Persons at risk of poverty or social exclusion by age, sex and most frequent activity status"	"ilc_peps02n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	271952
+"                        Persons at risk of poverty or social exclusion by income quantile and household composition"	"ilc_peps03n"	"dataset"	"20.10.2026"	"17.07.2026"	"2015"	"2025"	94392
+"                        Persons at risk of poverty or social exclusion by age, sex and educational attainment level"	"ilc_peps04n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	151772
+"                        Persons at risk of poverty or social exclusion by age, sex and group of citizenship"	"ilc_peps05n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	134638
+"                        Persons at risk of poverty or social exclusion by age, sex and group of country of birth"	"ilc_peps06n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	179841
+"                        Persons at risk of poverty or social exclusion by tenure status"	"ilc_peps07n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	4198
+"                        Persons at risk of poverty or social exclusion by NUTS 2 region"	"ilc_peps11n"	"dataset"	"20.10.2026"	"13.10.2026"	"2015"	"2025"	3407
+"                        Persons at risk of poverty or social exclusion by degree of urbanisation"	"ilc_peps13n"	"dataset"	"06.10.2026"	"30.04.2026"	"2015"	"2025"	2335
+"                        Children at risk of poverty or social exclusion by age and educational attainment level of their parents"	"ilc_peps60n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	5034
+"                        Children at risk of poverty or social exclusion by country of birth of their parents"	"ilc_peps61n"	"dataset"	"15.10.2026"	"15.10.2026"	"2015"	"2025"	1876
+"                    Persons at risk of poverty or social exclusion by age and sex - EU 2020 strategy"	"ilc_peps01"	"dataset"	"28.10.2025"	"03.01.2024"	"2003"	"2020"	133412
+"                    Persons at risk of poverty or social exclusion by most frequent activity status (population aged 18 and over) - EU 2020 strategy"	"ilc_peps02"	"dataset"	"28.10.2025"	"10.10.2025"	"2003"	"2020"	194388
+"                    Persons at risk of poverty or social exclusion by income quantile and household composition - EU 2020 strategy"	"ilc_peps03"	"dataset"	"28.10.2025"	"13.08.2026"	"2003"	"2020"	73273
+"                    Persons at risk of poverty or social exclusion by educational attainment level (population aged 18 and over) - EU 2020 strategy"	"ilc_peps04"	"dataset"	"28.10.2025"	"10.10.2025"	"2003"	"2020"	115943
+"                    Persons at risk of poverty or social exclusion by group of citizenship (population aged 18 and over) - EU 2020 strategy"	"ilc_peps05"	"dataset"	"28.10.2025"	"21.10.2025"	"2003"	"2020"	94092
+"                    Persons at risk of poverty or social exclusion by group of country of birth (population aged 18 and over) - EU 2020 strategy"	"ilc_peps06"	"dataset"	"28.10.2025"	"21.10.2025"	"2003"	"2020"	143128
+"                    Persons at risk of poverty or social exclusion by tenure status - EU 2020 strategy"	"ilc_peps07"	"dataset"	"28.10.2025"	"03.01.2024"	"2004"	"2020"	3048
+"                    Persons at risk of poverty or social exclusion by NUTS 2 region - EU 2020 strategy"	"ilc_peps11"	"dataset"	"14.10.2026"	"14.10.2026"	"2003"	"2020"	3606
+"                    Persons at risk of poverty or social exclusion by degree of urbanisation - EU 2020 strategy"	"ilc_peps13"	"dataset"	"06.10.2026"	"30.04.2026"	"2003"	"2025"	4634
+"                    Children at risk of poverty or social exclusion by educational attainment level of their parents (population aged 0 to 17 years) - EU 2020 strategy"	"ilc_peps60"	"dataset"	"28.10.2025"	"14.11.2024"	"2004"	"2020"	7705
+"                        Income quintile share ratio S80/S20 for disposable income by sex and age group"	"ilc_di11"	"dataset"	"20.10.2026"	"30.04.2026"	"2003"	"2025"	7524
+"                        Income quintile share ratio S80/S20 for gross market income by sex and age group"	"ilc_di11a"	"dataset"	"20.10.2026"	"30.04.2026"	"2007"	"2025"	6111
+"                        Income quintile share ratio S80/S20 for net market income by sex and age group"	"ilc_di11b"	"dataset"	"20.10.2026"	"30.04.2026"	"2007"	"2025"	6138
+"                        Income quintile share ratio S80/S20 for gross total disposable income by sex and age group"	"ilc_di11c"	"dataset"	"20.10.2026"	"30.04.2026"	"2007"	"2025"	6138
+"                        Income quintile share ratio S80/S20 by NUTS 2 region"	"ilc_di11_r"	"dataset"	"04.11.2026"	"14.10.2026"	"2003"	"2025"	4494
+"                        Income quintile share ratio S80/S50 for disposable income by sex and age group"	"ilc_di11d"	"dataset"	"20.10.2026"	"30.04.2026"	"2007"	"2025"	6138
+"                        Income quintile share ratio S50/S20 for disposable income by sex and age group"	"ilc_di11e"	"dataset"	"20.10.2026"	"30.04.2026"	"2007"	"2025"	6138
+"                        Income quintile share ratio S40/S100 for disposable income by sex and age group"	"ilc_di11f"	"dataset"	"20.10.2026"	"30.04.2026"	"2007"	"2025"	6138
+"                        Effect of taxes on income quintile share ratio S80/S20"	"ilc_di11g"	"dataset"	"20.10.2026"	"30.04.2026"	"2010"	"2025"	580
+"                        Effect of social transfers on income quintile share ratio S80/S20"	"ilc_di11h"	"dataset"	"20.10.2026"	"30.04.2026"	"2010"	"2025"	580
+"                        Effect of taxes and social transfers on income quintile share ratio S80/S20"	"ilc_di11i"	"dataset"	"20.10.2026"	"30.04.2026"	"2010"	"2025"	580
+"                        Gini coefficient of equivalised disposable income by age"	"ilc_di12"	"dataset"	"12.11.2026"	"05.11.2026"	"2003"	"2025"	1580
+"                        Gini coefficient of equivalised disposable income before social transfers (pensions included in social transfers)"	"ilc_di12b"	"dataset"	"20.10.2026"	"21.05.2026"	"2003"	"2025"	832
+"                        Gini coefficient of equivalised disposable income before social transfers (pensions excluded from social transfers)"	"ilc_di12c"	"dataset"	"20.10.2026"	"21.05.2026"	"2003"	"2025"	832
+"                        Mean and median income by age and sex"	"ilc_di03"	"dataset"	"20.10.2026"	"22.05.2026"	"1995"	"2025"	331404
+"                        Mean and median income by ability to make ends meet"	"ilc_di10"	"dataset"	"26.10.2026"	"21.05.2026"	"1995"	"2025"	38546
+"                        Mean and median income before social transfers (pensions included in social transfers) by age and sex"	"ilc_di13"	"dataset"	"20.10.2026"	"21.05.2026"	"2003"	"2025"	110640
+"                        Distribution of income before social transfers (pensions included in social transfers) by household composition"	"ilc_di13b"	"dataset"	"20.10.2026"	"21.05.2026"	"2003"	"2025"	27660
+"                        Mean and median income before social transfers (pensions excluded from social transfers) by age and sex"	"ilc_di14"	"dataset"	"20.10.2026"	"21.05.2026"	"2003"	"2025"	110640
+"                        Distribution of income before social transfers (pensions excluded from social transfers) by household composition"	"ilc_di14b"	"dataset"	"20.10.2026"	"21.05.2026"	"2003"	"2025"	27660
+"                        Mean and median income by group of citizenship (population aged 18 and over)"	"ilc_di15"	"dataset"	"26.10.2026"	"11.06.2026"	"2003"	"2025"	627554
+"                        Mean and median income by group of country of birth (population aged 18 and over)"	"ilc_di16"	"dataset"	"26.10.2026"	"21.05.2026"	"2003"	"2025"	752692
+"                        Mean and median income by degree of urbanisation"	"ilc_di17"	"dataset"	"26.10.2026"	"21.05.2026"	"2003"	"2025"	278604
+"                        Income in real terms (2010 SILC=100)"	"ilc_di18"	"dataset"	"05.10.2026"	"30.04.2026"	"2011"	"2025"	498
+"                        Labour transitions from temporary to permanent contracts by sex -3-year average"	"ilc_lvhl36"	"dataset"	"20.10.2026"	"30.04.2026"	"2008"	"2025"	1800
+"                            Overcrowding rate by age, sex and poverty status - total population"	"ilc_lvho05a"	"dataset"	"20.10.2026"	"11.06.2026"	"2003"	"2025"	120759
+"                            Overcrowding rate by household type - total population"	"ilc_lvho05b"	"dataset"	"20.10.2026"	"18.05.2026"	"2003"	"2025"	14940
+"                            Overcrowding rate by tenure status - total population"	"ilc_lvho05c"	"dataset"	"20.10.2026"	"30.04.2026"	"2003"	"2025"	3164
+"                            Overcrowding rate by degree of urbanisation - total population"	"ilc_lvho05d"	"dataset"	"06.07.2026"	"30.04.2026"	"2003"	"2025"	2337
+"                            Overcrowding rate by income quintile - total population"	"ilc_lvho05q"	"dataset"	"20.10.2026"	"17.07.2026"	"2003"	"2025"	4986
+"                            Overcrowding rate by age, sex and poverty status - population without single-person households"	"ilc_lvho06"	"dataset"	"20.10.2026"	"21.05.2026"	"2003"	"2025"	94718
+"                            Overcrowding rate by income quintile - population without single-person households"	"ilc_lvho06q"	"dataset"	"20.10.2026"	"17.07.2026"	"2003"	"2025"	4986
+"                            Housing cost overburden rate by age, sex and poverty status"	"ilc_lvho07a"	"dataset"	"29.10.2026"	"21.05.2026"	"2003"	"2025"	126859
+"                            Housing cost overburden rate by income quintile"	"ilc_lvho07b"	"dataset"	"29.10.2026"	"27.07.2026"	"2003"	"2025"	4966
+"                            Housing cost overburden rate by tenure status"	"ilc_lvho07c"	"dataset"	"29.10.2026"	"30.04.2026"	"2003"	"2025"	3931
+"                            Housing cost overburden rate by degree of urbanisation"	"ilc_lvho07d"	"dataset"	"05.11.2026"	"30.04.2026"	"2003"	"2025"	3042
+"                            Housing cost overburden rate by household type"	"ilc_lvho07e"	"dataset"	"05.11.2026"	"18.05.2026"	"2003"	"2025"	15544
+"                            Housing cost overburden rate by NUTS 2 region"	"ilc_lvho07_r"	"dataset"	"20.10.2026"	"19.10.2026"	"2021"	"2025"	1600
+"                            Median of the housing cost burden distribution by age, sex and poverty status"	"ilc_lvho08a"	"dataset"	"29.10.2026"	"21.05.2026"	"2003"	"2025"	29324
+"                            Median of the housing cost burden distribution by degree of urbanisation"	"ilc_lvho08b"	"dataset"	"29.10.2026"	"30.04.2026"	"2003"	"2025"	2292
+"                        Distribution of population by degree of urbanisation, dwelling type and income group"	"ilc_lvho01"	"dataset"	"06.07.2026"	"21.05.2026"	"2003"	"2025"	74984
+"                        Distribution of population by tenure status, type of household and income group"	"ilc_lvho02"	"dataset"	"20.10.2026"	"11.06.2026"	"2003"	"2025"	286671
+"                        Average number of rooms per person by tenure status and dwelling type from 2003 onwards"	"ilc_lvho03"	"dataset"	"20.10.2026"	"30.04.2026"	"2003"	"2025"	8917
+"                        Average number of rooms per person by tenure status and dwelling type until 2001"	"ilc_lvho03h"	"dataset"	"04.11.2009"	"21.12.2023"	"1994"	"2001"	1691
+"                        Average number of rooms per person by type of household and income group from 2003"	"ilc_lvho04"	"dataset"	"20.10.2026"	"21.05.2026"	"2003"	"2025"	42043
+"                        Average number of rooms per person by degree of urbanization"	"ilc_lvho04d"	"dataset"	"06.07.2026"	"30.04.2026"	"2003"	"2025"	3104
+"                        Average number of rooms per person by type of household and income group until 2001"	"ilc_lvho04h"	"dataset"	"04.11.2009"	"13.08.2026"	"1994"	"2001"	6667
+"                        Average number of rooms per person by NUTS 2 region"	"ilc_lvho04n"	"dataset"	"20.10.2026"	"08.07.2026"	"2003"	"2025"	4645
+"                        Persons having experienced housing difficulties in their lifetime by sex and type of temporary solution (effect)"	"ilc_lvhd02"	"dataset"	"24.04.2026"	"24.04.2026"	"2023"	"2023"	420
+"                    HICP - monthly data (index) (1996-2025)"	"prc_hicp_midx"	"dataset"	"06.02.2026"	"07.01.2026"	"1996-01"	"2025-12"	7699058
+"                    Harmonised index of consumer prices (HICP) - ECOICOP ver.2 - indices and rates of change, monthly data"	"prc_hicp_minr"	"dataset"	"18.11.2026"	"04.11.2026"	"1996-01"	"2026-10"	22577512
+"                    HICP - monthly data (index) (1996-2025)"	"prc_hicp_midx"	"dataset"	"06.02.2026"	"07.01.2026"	"1996-01"	"2025-12"	7699058
+"                    Harmonised index of consumer prices (HICP) - ECOICOP ver.2 - indices and rates of change, monthly data"	"prc_hicp_minr"	"dataset"	"18.11.2026"	"04.11.2026"	"1996-01"	"2026-10"	22577512
+"                Housing cost overburden rate by degree of urbanisation"	"ilc_lvho07d"	"dataset"	"05.11.2026"	"30.04.2026"	"2003"	"2025"	3042
+"                Persons at risk of poverty or social exclusion by NUTS 2 region"	"ilc_peps11n"	"dataset"	"20.10.2026"	"13.10.2026"	"2015"	"2025"	3407
+"                Housing cost overburden rate by NUTS 2 region"	"ilc_lvho07_r"	"dataset"	"20.10.2026"	"19.10.2026"	"2021"	"2025"	1600
+"                Persons at risk of poverty or social exclusion by degree of urbanisation"	"ilc_peps13n"	"dataset"	"06.10.2026"	"30.04.2026"	"2015"	"2025"	2335
+"                Housing cost overburden rate by degree of urbanisation"	"ilc_lvho07d"	"dataset"	"05.11.2026"	"30.04.2026"	"2003"	"2025"	3042
+"                Temporary employees as percentage of the total number of employees"	"tesem110"	"table"	"06.11.2026"	"06.11.2026"	"2005"	"2025"	615
+"                Involuntary temporary employment"	"tesem190"	"table"	"30.10.2026"	"17.04.2026"	"2005"	"2025"	913
+"                            Housing cost overburden rate by age, sex and poverty status"	"ilc_lvho07a"	"dataset"	"29.10.2026"	"21.05.2026"	"2003"	"2025"	126859
+"                            Housing cost overburden rate by income quintile"	"ilc_lvho07b"	"dataset"	"29.10.2026"	"27.07.2026"	"2003"	"2025"	4966
+"                            Overcrowding rate by age, sex and poverty status - total population"	"ilc_lvho05a"	"dataset"	"20.10.2026"	"11.06.2026"	"2003"	"2025"	120759
+"                    Labour transitions from temporary to permanent contracts by sex -3-year average"	"tepsr_wc230"	"table"	"20.10.2026"	"30.04.2026"	"2008"	"2025"	1620
+"                    Mean and median income by age and sex"	"ilc_di03"	"dataset"	"20.10.2026"	"22.05.2026"	"1995"	"2025"	331404
+"                    Income quintile share ratio S80/S20 for disposable income by sex and age group"	"ilc_di11"	"dataset"	"20.10.2026"	"30.04.2026"	"2003"	"2025"	7524
+"                        Overcrowding rate by age, sex and poverty status - total population"	"ilc_lvho05a"	"dataset"	"20.10.2026"	"11.06.2026"	"2003"	"2025"	120759
+"                        Housing cost overburden rate by tenure status"	"ilc_lvho07c"	"dataset"	"29.10.2026"	"30.04.2026"	"2003"	"2025"	3931
+"                    Temporary work"	"qol_act_qlt"	"folder"	" "	" "	" "	" "	
+"                        Part-time employment and temporary contracts - annual data"	"lfsi_pt_a"	"dataset"	"06.11.2026"	"06.11.2026"	"2003"	"2025"	40729
+"                        Temporary employees by main reason"	"lfsa_etgar"	"dataset"	"30.10.2026"	"17.04.2026"	"1983"	"2025"	712992
+"                        Mean and median income by group of citizenship (population aged 18 and over)"	"ilc_di15"	"dataset"	"26.10.2026"	"11.06.2026"	"2003"	"2025"	627554
+"                        Mean and median income by group of country of birth (population aged 18 and over)"	"ilc_di16"	"dataset"	"26.10.2026"	"21.05.2026"	"2003"	"2025"	752692
+"                        Persons at risk of poverty or social exclusion by age, sex and group of citizenship"	"ilc_peps05n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	134638
+"                        Persons at risk of poverty or social exclusion by group of citizenship (population aged 18 and over) - EU 2020 strategy"	"ilc_peps05"	"dataset"	"28.10.2025"	"21.10.2025"	"2003"	"2020"	94092
+"                        Persons at risk of poverty or social exclusion by age, sex and group of country of birth"	"ilc_peps06n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	179841
+"                        Persons at risk of poverty or social exclusion by group of country of birth (population aged 18 and over) - EU 2020 strategy"	"ilc_peps06"	"dataset"	"28.10.2025"	"21.10.2025"	"2003"	"2020"	143128
+"                        Temporary employees by citizenship - % of total employees"	"lfsa_etpgan"	"dataset"	"30.10.2026"	"17.04.2026"	"1995"	"2025"	102471
+"                        Temporary employees by country of birth - % of total employees"	"lfsa_etpgacob"	"dataset"	"30.10.2026"	"17.04.2026"	"1995"	"2025"	109687
+"                        Temporary employees by educational attainment level, country of birth and degree of urbanisation"	"lfst_r_e2tgaedcu"	"dataset"	"30.10.2026"	"10.09.2026"	"1995"	"2025"	968992
+"                        Temporary employees by educational attainment level, citizenship and degree of urbanisation"	"lfst_r_e2tgaednu"	"dataset"	"30.10.2026"	"10.09.2026"	"1995"	"2025"	903304
+"                Temporary protection statistics on children"	"mci_asytp"	"folder"	" "	" "	" "	" "	
+"                    Decisions granting temporary protection by citizenship, age and sex - annual aggregated data"	"migr_asytpfa"	"dataset"	"26.10.2026"	"12.01.2026"	"2022"	"2025"	807342
+"                    Decisions granting temporary protection by citizenship, age and sex - quarterly data"	"migr_asytpfq"	"dataset"	"10.11.2026"	"04.11.2026"	"2022-Q1"	"2026-Q3"	3874270
+"                    Decisions granting temporary protection by citizenship, age and sex - monthly data"	"migr_asytpfm"	"dataset"	"18.11.2026"	"04.11.2026"	"2022-03"	"2026-10"	11234620
+"                    Beneficiaries of temporary protection at the end of the month by citizenship, age and sex - monthly data"	"migr_asytpsm"	"dataset"	"18.11.2026"	"04.11.2026"	"2022-03"	"2026-10"	11202940
+"                Temporary protection statistics on unaccompanied minors"	"mci_asyumtp"	"folder"	" "	" "	" "	" "	
+"                    Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - annual aggregated data"	"migr_asyumtpfa"	"dataset"	"10.11.2026"	"10.11.2026"	"2022"	"2025"	462296
+"                    Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - quarterly data"	"migr_asyumtpfq"	"dataset"	"10.11.2026"	"10.11.2026"	"2022-Q1"	"2026-Q3"	2211744
+"                    Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - monthly data"	"migr_asyumtpfm"	"dataset"	"18.11.2026"	"13.11.2026"	"2022-03"	"2026-10"	6380232
+"                    Unaccompanied minors benefiting from temporary protection at the end of the month by citizenship, age and sex - monthly data"	"migr_asyumtpsm"	"dataset"	"18.11.2026"	"13.11.2026"	"2022-03"	"2026-10"	6059726
+"                    Persons at risk of poverty or social exclusion by age and sex"	"ilc_peps01n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	90372
+"                    Persons at risk of poverty or social exclusion by age, sex and group of country of birth"	"ilc_peps06n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	179841
+"                    Persons at risk of poverty or social exclusion by age, sex and group of citizenship"	"ilc_peps05n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	134638
+"                    Income quintile share ratio S80/S20 for gross total disposable income by sex and age group"	"ilc_di11c"	"dataset"	"20.10.2026"	"30.04.2026"	"2007"	"2025"	6138
+"                    Mean and median income by group of country of birth (population aged 18 and over)"	"ilc_di16"	"dataset"	"26.10.2026"	"21.05.2026"	"2003"	"2025"	752692
+"                    Mean and median income by group of citizenship (population aged 18 and over)"	"ilc_di15"	"dataset"	"26.10.2026"	"11.06.2026"	"2003"	"2025"	627554
+"                    Housing cost overburden rate by age, sex and poverty status"	"ilc_lvho07a"	"dataset"	"29.10.2026"	"21.05.2026"	"2003"	"2025"	126859
+"                    Temporary employees by main reason"	"lfsa_etgar"	"dataset"	"30.10.2026"	"17.04.2026"	"1983"	"2025"	712992
+"                    Temporary employees by citizenship - % of total employees"	"lfsa_etpgan"	"dataset"	"30.10.2026"	"17.04.2026"	"1995"	"2025"	102471
+"                    Temporary employees by country of birth - % of total employees"	"lfsa_etpgacob"	"dataset"	"30.10.2026"	"17.04.2026"	"1995"	"2025"	109687
+"                    Labour transitions from temporary to permanent contracts by sex -3-year average"	"tepsr_wc230"	"table"	"20.10.2026"	"30.04.2026"	"2008"	"2025"	1620
+"                Temporary employees by main reason"	"lfsa_etgar"	"dataset"	"30.10.2026"	"17.04.2026"	"1983"	"2025"	712992
+"                Temporary employees by citizenship - % of total employees"	"lfsa_etpgan"	"dataset"	"30.10.2026"	"17.04.2026"	"1995"	"2025"	102471
+"                Temporary employment agency workers by NACE Rev. 2 activity (2008-2026)"	"lfsa_qoe_4a6r2"	"dataset"	"30.10.2026"	"17.04.2026"	"2008"	"2025"	20975
+"                Temporary employment agency workers by NACE Rev. 1.1 activity (2006-2008)"	"lfsa_qoe_4a6r1"	"dataset"	"16.04.2026"	"09.01.2026"	"2006"	"2008"	2811
+"                    Temporary employment"	"sks_dimlf_te"	"folder"	" "	" "	" "	" "	
+"                        Temporary employees by main reason"	"lfsa_etgar"	"dataset"	"30.10.2026"	"17.04.2026"	"1983"	"2025"	712992
+"                        Temporary employees by citizenship - % of total employees"	"lfsa_etpgan"	"dataset"	"30.10.2026"	"17.04.2026"	"1995"	"2025"	102471
+"                        Temporary employees by country of birth - % of total employees"	"lfsa_etpgacob"	"dataset"	"30.10.2026"	"17.04.2026"	"1995"	"2025"	109687
+"                        Temporary employees by main reason"	"lfsa_etgar"	"dataset"	"30.10.2026"	"17.04.2026"	"1983"	"2025"	712992
+"                    Temporary employees by main reason"	"lfsa_etgar"	"dataset"	"30.10.2026"	"17.04.2026"	"1983"	"2025"	712992
+"                    Persons at risk of poverty or social exclusion by age and sex"	"ilc_peps01n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	90372
+"                    Persons at risk of poverty or social exclusion by age, sex and group of country of birth"	"ilc_peps06n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	179841
+"                    Housing cost overburden rate by age, sex and poverty status"	"ilc_lvho07a"	"dataset"	"29.10.2026"	"21.05.2026"	"2003"	"2025"	126859
+"                    Overcrowding rate by age, sex and poverty status - total population"	"ilc_lvho05a"	"dataset"	"20.10.2026"	"11.06.2026"	"2003"	"2025"	120759
+"                        Harmonised index of consumer prices (HICP) - ECOICOP ver.2 - indices and rates of change, monthly data"	"prc_hicp_minr"	"dataset"	"18.11.2026"	"04.11.2026"	"1996-01"	"2026-10"	22577512
+"                        Housing cost overburden rate by age, sex and poverty status"	"ilc_lvho07a"	"dataset"	"29.10.2026"	"21.05.2026"	"2003"	"2025"	126859
+"                        Housing cost overburden rate by income quintile"	"ilc_lvho07b"	"dataset"	"29.10.2026"	"27.07.2026"	"2003"	"2025"	4966
+"                        Housing cost overburden rate by tenure status"	"ilc_lvho07c"	"dataset"	"29.10.2026"	"30.04.2026"	"2003"	"2025"	3931
+"                        Housing cost overburden rate by degree of urbanisation"	"ilc_lvho07d"	"dataset"	"05.11.2026"	"30.04.2026"	"2003"	"2025"	3042
+"                        Housing cost overburden rate by household type"	"ilc_lvho07e"	"dataset"	"05.11.2026"	"18.05.2026"	"2003"	"2025"	15544
+"                        Housing cost overburden rate by NUTS 2 region"	"ilc_lvho07_r"	"dataset"	"20.10.2026"	"19.10.2026"	"2021"	"2025"	1600
+"                        Median of the housing cost burden distribution by age, sex and poverty status"	"ilc_lvho08a"	"dataset"	"29.10.2026"	"21.05.2026"	"2003"	"2025"	29324
+"                        Median of the housing cost burden distribution by degree of urbanisation"	"ilc_lvho08b"	"dataset"	"29.10.2026"	"30.04.2026"	"2003"	"2025"	2292
+"                        Distribution of population by degree of urbanisation, dwelling type and income group"	"ilc_lvho01"	"dataset"	"06.07.2026"	"21.05.2026"	"2003"	"2025"	74984
+"                        Distribution of population by tenure status, type of household and income group"	"ilc_lvho02"	"dataset"	"20.10.2026"	"11.06.2026"	"2003"	"2025"	286671
+"                        Average number of rooms per person by tenure status and dwelling type from 2003 onwards"	"ilc_lvho03"	"dataset"	"20.10.2026"	"30.04.2026"	"2003"	"2025"	8917
+"                        Average number of rooms per person by type of household and income group from 2003"	"ilc_lvho04"	"dataset"	"20.10.2026"	"21.05.2026"	"2003"	"2025"	42043
+"                        Average number of rooms per person by degree of urbanization"	"ilc_lvho04d"	"dataset"	"06.07.2026"	"30.04.2026"	"2003"	"2025"	3104
+"                        Average number of rooms per person by NUTS 2 region"	"ilc_lvho04n"	"dataset"	"20.10.2026"	"08.07.2026"	"2003"	"2025"	4645
+"                        Overcrowding rate by age, sex and poverty status - total population"	"ilc_lvho05a"	"dataset"	"20.10.2026"	"11.06.2026"	"2003"	"2025"	120759
+"                        Overcrowding rate by household type - total population"	"ilc_lvho05b"	"dataset"	"20.10.2026"	"18.05.2026"	"2003"	"2025"	14940
+"                        Overcrowding rate by tenure status - total population"	"ilc_lvho05c"	"dataset"	"20.10.2026"	"30.04.2026"	"2003"	"2025"	3164
+"                        Overcrowding rate by degree of urbanisation - total population"	"ilc_lvho05d"	"dataset"	"06.07.2026"	"30.04.2026"	"2003"	"2025"	2337
+"                        Overcrowding rate by income quintile - total population"	"ilc_lvho05q"	"dataset"	"20.10.2026"	"17.07.2026"	"2003"	"2025"	4986
+"                        Overcrowding rate by age, sex and poverty status - population without single-person households"	"ilc_lvho06"	"dataset"	"20.10.2026"	"21.05.2026"	"2003"	"2025"	94718
+"                        Overcrowding rate by income quintile - population without single-person households"	"ilc_lvho06q"	"dataset"	"20.10.2026"	"17.07.2026"	"2003"	"2025"	4986
+"                        Persons having experienced housing difficulties in their lifetime by sex and type of temporary solution (effect)"	"ilc_lvhd02"	"dataset"	"24.04.2026"	"24.04.2026"	"2023"	"2023"	420
