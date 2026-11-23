@@ -115,41 +115,21 @@ if (C.supplied && C.treated) {
 } else log.ine._ok = 'faltan conceptos: se conserva consumo.json'
 
 // ---------- MITECO: depuradoras ----------
+/** El área de descargas del MITECO sirve cada fichero tras un formulario (botón «Descargar fichero» con token): se hace lo mismo. */
+function descargaMiteco(f, dest) {
+  const jar = dest + '.cookies', base = 'https://gis.miteco.gob.es/descargas/app/DescargaFichero'
+  const h = execFileSync('curl', ['-sSfL', '-c', jar, '-A', 'Mozilla/5.0 espana-en-datos', `${base}?f=${f}`], { encoding: 'utf8', timeout: 120000 })
+  const tok = (h.match(/name="__RequestVerificationToken"[^>]*value="([^"]+)"/) ?? [])[1]
+  if (!tok) throw new Error('sin token en la página de descarga de ' + f)
+  execFileSync('curl', ['-sSfL', '-b', jar, '-c', jar, '-A', 'Mozilla/5.0 espana-en-datos', '-e', `${base}?f=${f}`, '--data-urlencode', `f=${f}`, '--data-urlencode', `__RequestVerificationToken=${tok}`, '-o', dest, `${base}?handler=Download`], { timeout: 600000 })
+  if (readFileSync(dest).subarray(0, 2).toString() !== 'PK') throw new Error(f + ': la descarga no es un zip')
+}
 const tmp = join(tmpdir(), 'edar'); rmSync(tmp, { recursive: true, force: true }); mkdirSync(tmp, { recursive: true })
-const G = 'https://gis.miteco.gob.es/descargas/app/DescargaFichero?f='
-const URLS = ['depuradorasq2023.zip', 'depuradoras-q2023.zip', 'edar-q2023.zip', 'depuradoras_q2023.zip'].map(f => G + f).concat(['https://www.mapa.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip'])
-// Algunos servidores del ministerio no envían el certificado intermedio: se completa la cadena con el que indica
-// el propio certificado (campo «CA Issuers») y se sigue verificando, nunca se desactiva la comprobación.
-const sh = (cmd) => execFileSync('bash', ['-c', cmd], { encoding: 'utf8', timeout: 120000 })
-function cadena(host) {
-  const bundle = join(tmp, 'cadena.pem')
-  sh(`cp /etc/ssl/certs/ca-certificates.crt ${bundle}`)
-  let pem = sh(`openssl s_client -connect ${host}:443 -servername ${host} -showcerts </dev/null 2>/dev/null | awk '/BEGIN CERT/,/END CERT/' | awk 'BEGIN{n=0} /BEGIN CERT/{n++} n==1'`)
-  for (let i = 0; i < 3 && pem.includes('BEGIN CERT'); i++) {
-    const f = join(tmp, `c${i}.pem`); writeFileSync(f, pem)
-    const aia = (sh(`openssl x509 -in ${f} -noout -text`).match(/CA Issuers - URI:(\S+)/) ?? [])[1]
-    log.edar['emisor ' + i] = aia ?? 'sin CA Issuers'
-    if (!aia) break
-    const d = join(tmp, `e${i}.crt`); sh(`curl -sSfL -o ${d} '${aia}'`)
-    pem = sh(`openssl x509 -in ${d} -inform DER 2>/dev/null || openssl x509 -in ${d}`)
-    sh(`cat >> ${bundle} <<'EOF'\n${pem}\nEOF`)
-  }
-  return bundle
-}
 let zip = null
-for (const u of URLS) {
-  const get = (extra = []) => execFileSync('curl', ['-sSfL', '--retry', '3', ...extra, '-A', 'Mozilla/5.0 espana-en-datos', '-o', join(tmp, 'edar.zip'), u], { timeout: 300000 })
-  const esZip = () => readFileSync(join(tmp, 'edar.zip')).subarray(0, 2).toString() === 'PK'
-  try { get(); if (esZip()) { zip = u; break } const h = readFileSync(join(tmp, 'edar.zip'), 'latin1'); log.edar['no es zip ' + u] = { texto: h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').slice(0, 700), enlaces: [...h.matchAll(/(?:href|action|src)="([^"]+)"/g)].map(m => m[1]).filter(x => !/\.(css|png|svg|ico|js)/.test(x)).slice(0, 30), formularios: [...h.matchAll(/<input[^>]+>/g)].map(m => m[0]).slice(0, 15) } }
-  catch (e) {
-    log.edar['curl ' + u] = String(e.message).slice(-160)
-    if (/\(60\)/.test(String(e.message))) { try { get(['--cacert', cadena(new URL(u).host)]); if (esZip()) { zip = u; log.edar.cadena = 'completada'; break } } catch (e2) { log.edar['curl con cadena ' + u] = String(e2.message).slice(-200) } }
-  }
-}
+try { descargaMiteco('depuradorasq2023.zip', join(tmp, 'edar.zip')); zip = 'https://gis.miteco.gob.es/descargas/app/DescargaFichero?f=depuradorasq2023.zip' } catch (e) { log.edar.descarga = String(e.message).slice(-300) }
 const shp = []
 if (zip) {
-  const ini = readFileSync(join(tmp, 'edar.zip'))
-  log.edar.descarga = `${ini.length} bytes, empieza por ${JSON.stringify(ini.subarray(0, 300).toString('latin1'))}`
+  log.edar.descarga = readFileSync(join(tmp, 'edar.zip')).length + ' bytes'
   try {
     execFileSync('unzip', ['-o', '-q', join(tmp, 'edar.zip'), '-d', tmp])
     const walk = (d) => { for (const f of readdirSync(d, { withFileTypes: true })) { const p = join(d, f.name); if (f.isDirectory()) walk(p); else if (/\.zip$/i.test(f.name) && p !== join(tmp, 'edar.zip')) { execFileSync('unzip', ['-o', '-q', p, '-d', d]); } } }
@@ -193,29 +173,14 @@ if (shp.length) {
   log.edar.guardadas = out.length
 } else log.edar._ok = 'sin shapefile: se conserva depuradoras.json si existía'
 
-// Página de descargas de agua del MITECO: enlaces a depuradoras y aglomeraciones
+// Aglomeraciones (para Alcantarillado): de momento solo se mira qué campos trae
 try {
-  const h = execFileSync('curl', ['-sSfL', 'https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/agua.html'], { encoding: 'utf8', timeout: 60000 })
-  log.paginaAgua = [...h.matchAll(/href="([^"]+)"/g)].map(m => m[1]).filter(x => /depur|aglom|edar|saneam|vertid|q2023|uwwt/i.test(x)).slice(0, 40)
-  for (const l of log.paginaAgua.filter(x => /\.html$/.test(x)).slice(0, 4)) {
-    const u = l.startsWith('http') ? l : 'https://www.miteco.gob.es' + l
-    const h2 = execFileSync('curl', ['-sSfL', u], { encoding: 'utf8', timeout: 60000 })
-    log['pagina ' + l] = [...h2.matchAll(/href="([^"]+)"/g)].map(m => m[1]).filter(x => /DescargaFichero|\.zip|gpkg/i.test(x)).slice(0, 30)
-  }
-} catch (e) { log.paginaAgua = String(e.message).slice(-200) }
-// Aglomeraciones (para Alcantarillado): de momento solo se mira qué trae
-for (const f of ['aglomeracionesq2023.zip', 'aglomeraciones-q2023.zip', 'aauu-q2023.zip', 'aglomeraciones_q2023.zip']) {
-  const z = join(tmp, 'agg.zip')
-  try {
-    execFileSync('curl', ['-sSfL', '-o', z, G + f], { timeout: 300000 })
-    if (readFileSync(z).subarray(0, 2).toString() !== 'PK') { log.agg = (log.agg ?? '') + f + ': no es zip · '; continue }
-    const d = join(tmp, 'agg'); mkdirSync(d, { recursive: true }); execFileSync('unzip', ['-o', '-q', z, '-d', d])
-    const lista = []; const w = (x) => { for (const e of readdirSync(x, { withFileTypes: true })) { const p = join(x, e.name); if (e.isDirectory()) w(p); else lista.push(p) } }; w(d)
-    log.agg = { f, archivos: lista.map(p => p.slice(d.length)) }
-    const sp = lista.find(p => /\.shp$/i.test(p))
-    if (sp) { const { open } = await import('shapefile'); const s = await open(sp, undefined, { encoding: 'utf-8' }); const r = await s.read(); log.agg.campos = Object.entries(r.value?.properties ?? {}).map(([k, v]) => `${k}=${String(v).slice(0, 40)}`); log.agg.geom = r.value?.geometry?.type }
-    break
-  } catch (e) { log.agg = (log.agg ?? '') + f + ': ' + String(e.message).slice(-80) + ' · ' }
-}
+  const z = join(tmp, 'agg.zip'), d = join(tmp, 'agg'); descargaMiteco('aauuq2023.zip', z)
+  mkdirSync(d, { recursive: true }); execFileSync('unzip', ['-o', '-q', z, '-d', d])
+  const lista = []; const w = (x) => { for (const e of readdirSync(x, { withFileTypes: true })) { const p = join(x, e.name); if (e.isDirectory()) w(p); else lista.push(p) } }; w(d)
+  log.agg = { archivos: lista.map(p => p.slice(d.length)) }
+  const sp = lista.find(p => /\.shp$/i.test(p))
+  if (sp) { const { open } = await import('shapefile'); const so = await open(sp, undefined, { encoding: 'utf-8' }); const r = await so.read(); log.agg.campos = Object.entries(r.value?.properties ?? {}).map(([k, v]) => `${k}=${String(v).slice(0, 40)}`); log.agg.geom = r.value?.geometry?.type }
+} catch (e) { log.agg = String(e.message).slice(-300) }
 writeFileSync(here('../fuentes/saneamiento-log.json'), JSON.stringify(log, null, 1))
 console.log(JSON.stringify(log, null, 1).slice(0, 4000))
