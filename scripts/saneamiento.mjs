@@ -116,7 +116,8 @@ if (C.supplied && C.treated) {
 
 // ---------- MITECO: depuradoras ----------
 const tmp = join(tmpdir(), 'edar'); rmSync(tmp, { recursive: true, force: true }); mkdirSync(tmp, { recursive: true })
-const URLS = ['https://www.mapa.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip', 'https://www.miteco.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip']
+const G = 'https://gis.miteco.gob.es/descargas/app/DescargaFichero?f='
+const URLS = ['depuradorasq2023.zip', 'depuradoras-q2023.zip', 'edar-q2023.zip', 'depuradoras_q2023.zip'].map(f => G + f).concat(['https://www.mapa.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip'])
 // Algunos servidores del ministerio no envían el certificado intermedio: se completa la cadena con el que indica
 // el propio certificado (campo «CA Issuers») y se sigue verificando, nunca se desactiva la comprobación.
 const sh = (cmd) => execFileSync('bash', ['-c', cmd], { encoding: 'utf8', timeout: 120000 })
@@ -138,10 +139,11 @@ function cadena(host) {
 let zip = null
 for (const u of URLS) {
   const get = (extra = []) => execFileSync('curl', ['-sSfL', '--retry', '3', ...extra, '-A', 'Mozilla/5.0 espana-en-datos', '-o', join(tmp, 'edar.zip'), u], { timeout: 300000 })
-  try { get(); zip = u; break }
+  const esZip = () => readFileSync(join(tmp, 'edar.zip')).subarray(0, 2).toString() === 'PK'
+  try { get(); if (esZip()) { zip = u; break } log.edar['no es zip ' + u] = readFileSync(join(tmp, 'edar.zip')).subarray(0, 120).toString('latin1') }
   catch (e) {
     log.edar['curl ' + u] = String(e.message).slice(-160)
-    if (/\(60\)/.test(String(e.message))) { try { get(['--cacert', cadena(new URL(u).host)]); zip = u; log.edar.cadena = 'completada'; break } catch (e2) { log.edar['curl con cadena ' + u] = String(e2.message).slice(-200) } }
+    if (/\(60\)/.test(String(e.message))) { try { get(['--cacert', cadena(new URL(u).host)]); if (esZip()) { zip = u; log.edar.cadena = 'completada'; break } } catch (e2) { log.edar['curl con cadena ' + u] = String(e2.message).slice(-200) } }
   }
 }
 const shp = []
@@ -191,5 +193,19 @@ if (shp.length) {
   log.edar.guardadas = out.length
 } else log.edar._ok = 'sin shapefile: se conserva depuradoras.json si existía'
 
+// Aglomeraciones (para Alcantarillado): de momento solo se mira qué trae
+for (const f of ['aglomeracionesq2023.zip', 'aglomeraciones-q2023.zip', 'aauu-q2023.zip', 'aglomeraciones_q2023.zip']) {
+  const z = join(tmp, 'agg.zip')
+  try {
+    execFileSync('curl', ['-sSfL', '-o', z, G + f], { timeout: 300000 })
+    if (readFileSync(z).subarray(0, 2).toString() !== 'PK') { log.agg = (log.agg ?? '') + f + ': no es zip · '; continue }
+    const d = join(tmp, 'agg'); mkdirSync(d, { recursive: true }); execFileSync('unzip', ['-o', '-q', z, '-d', d])
+    const lista = []; const w = (x) => { for (const e of readdirSync(x, { withFileTypes: true })) { const p = join(x, e.name); if (e.isDirectory()) w(p); else lista.push(p) } }; w(d)
+    log.agg = { f, archivos: lista.map(p => p.slice(d.length)) }
+    const sp = lista.find(p => /\.shp$/i.test(p))
+    if (sp) { const { open } = await import('shapefile'); const s = await open(sp, undefined, { encoding: 'utf-8' }); const r = await s.read(); log.agg.campos = Object.entries(r.value?.properties ?? {}).map(([k, v]) => `${k}=${String(v).slice(0, 40)}`); log.agg.geom = r.value?.geometry?.type }
+    break
+  } catch (e) { log.agg = (log.agg ?? '') + f + ': ' + String(e.message).slice(-80) + ' · ' }
+}
 writeFileSync(here('../fuentes/saneamiento-log.json'), JSON.stringify(log, null, 1))
 console.log(JSON.stringify(log, null, 1).slice(0, 4000))
