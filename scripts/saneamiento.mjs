@@ -28,7 +28,7 @@ const giro = (n) => { const m = n.match(/^(.*), (.*)$/); return m ? `${m[2]} ${m
 const REG = (n) => { const g = giro(n.trim()); return /^ceuta|^melilla/i.test(g) ? 'Ceuta y Melilla' : g === 'Total Nacional' || g === 'Total' ? 'España' : g }
 /** Todas las series de una tabla como { comunidad: { concepto: { año: valor } } }, más la unidad de cada concepto. */
 async function tabla(id) {
-  const j = await json(`${INE}/DATOS_TABLA/${id}?nult=6&tip=A`)
+  const j = await json(`${INE}/DATOS_TABLA/${id}?nult=6&tip=AM`)
   const out = {}, uds = {}
   for (const s of j) {
     const partes = s.Nombre.split(/,\s*(?=[A-Z0-9-]|\d\.)/).map(x => x.trim()).filter(Boolean)
@@ -37,7 +37,7 @@ async function tabla(id) {
     if (resto[0] && /^(Principado|Illes|Comunidad|Región|La)\b/.test(resto[0])) { terr = partes[0] + ', ' + resto[0]; resto = resto.slice(1) }
     const concepto = (resto.join(', ') || terr).replace(/^[-\d.\s]+/, '').trim()
     const t = resto.length ? REG(terr) : 'España'
-    uds[concepto] = s.Unidad?.Nombre ?? s.FK_Unidad ?? ''
+    uds[concepto] = UNI[s.FK_Unidad] ?? s.Unidad?.Nombre ?? s.FK_Unidad ?? ''
     // Ceuta y Melilla van juntas en el mapa: se suman los volúmenes y se promedian los porcentajes
     const media = /porcent|tanto|litro|euros? ?(\/|por)|€\/|por habitante/i.test(String(uds[concepto]) + ' ' + concepto)
     for (const d of s.Data ?? []) if (d.Valor != null) {
@@ -47,8 +47,10 @@ async function tabla(id) {
   }
   return { out, uds }
 }
+let UNI = {}
+try { UNI = Object.fromEntries((await json(`${INE}/UNIDADES`)).map(u => [u.Id, u.Nombre])) } catch (e) { log.ine._unidades = String(e.message) }
 const T = {}
-for (let id = 53440; id <= 53460; id++) {
+for (let id = 53430; id <= 53459; id++) {
   try { const r = await tabla(id); T[id] = r; log.ine[id] = Object.keys(Object.values(r.out)[0] ?? {}).slice(0, 12).map(c => `${c} [${r.uds[c]}]`).join(' | ') }
   catch (e) { log.ine[id] = 'ERROR ' + String(e.message).slice(0, 120) }
   await espera(400)
@@ -71,6 +73,14 @@ const DEST = ['Al mar', 'A un cauce fluvial', 'Agua reutilizada', 'Infiltracione
 const USOS = ['Agricultura', 'Industria', 'Jardines y zonas deportivas de ocio', 'Limpieza de alcantarillado y baldeo de calles', 'Otros usos'].map(c => [c, buscar(new RegExp('^' + c + '$', 'i'))])
 
 let previo = null; try { previo = JSON.parse(readFileSync(CONS, 'utf8')) } catch {}
+// Población por comunidad (padrón, de Población) para calcular los litros por habitante si el INE no da la tabla
+const POB = {}
+try {
+  const m = JSON.parse(readFileSync(here('../public/poblacion/data/municipios.json'), 'utf8'))
+  const PROV_CCAA = { '04': 'Andalucía', '11': 'Andalucía', '14': 'Andalucía', '18': 'Andalucía', '21': 'Andalucía', '23': 'Andalucía', '29': 'Andalucía', '41': 'Andalucía', '22': 'Aragón', '44': 'Aragón', '50': 'Aragón', '33': 'Principado de Asturias', '07': 'Illes Balears', '35': 'Canarias', '38': 'Canarias', '39': 'Cantabria', '05': 'Castilla y León', '09': 'Castilla y León', '24': 'Castilla y León', '34': 'Castilla y León', '37': 'Castilla y León', '40': 'Castilla y León', '42': 'Castilla y León', '47': 'Castilla y León', '49': 'Castilla y León', '02': 'Castilla-La Mancha', '13': 'Castilla-La Mancha', '16': 'Castilla-La Mancha', '19': 'Castilla-La Mancha', '45': 'Castilla-La Mancha', '08': 'Cataluña', '17': 'Cataluña', '25': 'Cataluña', '43': 'Cataluña', '03': 'Comunitat Valenciana', '12': 'Comunitat Valenciana', '46': 'Comunitat Valenciana', '06': 'Extremadura', '10': 'Extremadura', '15': 'Galicia', '27': 'Galicia', '32': 'Galicia', '36': 'Galicia', '28': 'Comunidad de Madrid', '30': 'Región de Murcia', '31': 'Comunidad Foral de Navarra', '01': 'País Vasco', '20': 'País Vasco', '48': 'País Vasco', '26': 'La Rioja', '51': 'Ceuta y Melilla', '52': 'Ceuta y Melilla' }
+  for (const [c, v] of Object.entries(m.m)) for (const [i, y] of m.years.entries()) { const r = PROV_CCAA[c.padStart(5, '0').slice(0, 2)]; if (!r) continue; const p = v[1][i] ?? 0; ((POB[r] ??= {})[y] = (POB[r][y] ?? 0) + p); ((POB['España'] ??= {})[y] = (POB['España'][y] ?? 0) + p) }
+} catch (e) { log.ine._poblacion = String(e.message) }
+const litros = (terr, y) => { const h = C.households?.val(terr, y), p = POB[terr]?.[y] ?? POB[terr]?.[+y + 1]; return h && p ? (h * 1e6) / p / 365 : null }
 if (C.supplied && C.treated) {
   const años = Object.keys(T[C.supplied.id].out['España'][C.supplied.c]).sort()
   const a = años.at(-1), b = años.at(-2)
@@ -82,7 +92,7 @@ if (C.supplied && C.treated) {
     const prevReg = previo?.regions?.find(x => x.n === terr)
     return {
       n: terr,
-      l: r1(g('l'), 0) ?? prevReg?.l ?? null, v: g('l') && g('l', b) ? r1((g('l') / g('l', b) - 1) * 100) : prevReg?.v ?? null, cost: r1(g('cost'), 2) ?? prevReg?.cost ?? null,
+      l: r1(g('l') ?? litros(terr, a), 0), v: (() => { const x = g('l') ?? litros(terr, a), y0 = g('l', b) ?? litros(terr, b); return x && y0 ? r1((x / y0 - 1) * 100) : null })(), cost: r1(g('cost'), 2) ?? prevReg?.cost ?? null,
       supplied: r1(g('supplied') / 1000), registered: r1(g('registered') / 1000), lossReal: r1(g('lossReal') / 1000), lossApparent: r1(g('lossApparent') / 1000),
       lossPct: r1(pctP(a)), lossPctPrev: r1(pctP(b)), households: r1(g('households') / 1000),
       treated: g('treated'), reused: g('reused'), reusePct: r1(reu(a)), reusePctPrev: r1(reu(b)),
@@ -95,7 +105,8 @@ if (C.supplied && C.treated) {
   const out = {
     year: +a, prevYear: +b, unidades: { treated: C.treated.u, reused: C.reused?.u, sewerKm: C.sewerKm?.u, sludge: C.sludge?.u, bill: C.billSan?.u },
     tablas: Object.fromEntries(Object.entries(C).filter(([, v]) => v).map(([k, v]) => [k, v.id])),
-    national: { ...N, l: N.l ?? previo?.national?.l, cost: N.cost ?? previo?.national?.cost, households: N.households ?? previo?.national?.households, origin: C.sup && C.sub ? { sup: r1(C.sup.val('España', a)), sub: r1(C.sub.val('España', a)), otras: r1(100 - C.sup.val('España', a) - C.sub.val('España', a)) } : previo?.national?.origin },
+    litrosCalculados: !C.l,
+    national: { ...N, cost: N.cost ?? previo?.national?.cost, households: N.households ?? previo?.national?.households, origin: (() => { const o = T[C.sup?.id]?.out['España'], y = a; if (!o) return previo?.national?.origin; const tot = o['Total']?.[y] ?? 0, su = o[C.sup.c]?.[y] ?? 0, sb = o[C.sub?.c]?.[y] ?? 0; return tot > 100 ? { sup: r1((su / tot) * 100), sub: r1((sb / tot) * 100), otras: r1(100 - ((su + sb) / tot) * 100) } : { sup: r1(su), sub: r1(sb), otras: r1(100 - su - sb) } })() },
     regions: terrs.map(fila).sort((x, y) => (y.l ?? 0) - (x.l ?? 0)),
   }
   writeFileSync(CONS, JSON.stringify(out, null, 1) + '\n')
@@ -105,10 +116,32 @@ if (C.supplied && C.treated) {
 // ---------- MITECO: depuradoras ----------
 const tmp = join(tmpdir(), 'edar'); rmSync(tmp, { recursive: true, force: true }); mkdirSync(tmp, { recursive: true })
 const URLS = ['https://www.mapa.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip', 'https://www.miteco.gob.es/app/descargas/descargafichero.aspx?f=depuradorasq2023.zip']
+// Algunos servidores del ministerio no envían el certificado intermedio: se completa la cadena con el que indica
+// el propio certificado (campo «CA Issuers») y se sigue verificando, nunca se desactiva la comprobación.
+const sh = (cmd) => execFileSync('bash', ['-c', cmd], { encoding: 'utf8', timeout: 120000 })
+function cadena(host) {
+  const bundle = join(tmp, 'cadena.pem')
+  sh(`cp /etc/ssl/certs/ca-certificates.crt ${bundle}`)
+  let pem = sh(`openssl s_client -connect ${host}:443 -servername ${host} -showcerts </dev/null 2>/dev/null | awk '/BEGIN CERT/,/END CERT/' | awk 'BEGIN{n=0} /BEGIN CERT/{n++} n==1'`)
+  for (let i = 0; i < 3 && pem.includes('BEGIN CERT'); i++) {
+    const f = join(tmp, `c${i}.pem`); writeFileSync(f, pem)
+    const aia = (sh(`openssl x509 -in ${f} -noout -text`).match(/CA Issuers - URI:(\S+)/) ?? [])[1]
+    log.edar['emisor ' + i] = aia ?? 'sin CA Issuers'
+    if (!aia) break
+    const d = join(tmp, `e${i}.crt`); sh(`curl -sSfL -o ${d} '${aia}'`)
+    pem = sh(`openssl x509 -in ${d} -inform DER 2>/dev/null || openssl x509 -in ${d}`)
+    sh(`cat >> ${bundle} <<'EOF'\n${pem}\nEOF`)
+  }
+  return bundle
+}
 let zip = null
 for (const u of URLS) {
-  try { execFileSync('curl', ['-sSfL', '--retry', '3', '-A', 'Mozilla/5.0 espana-en-datos', '-o', join(tmp, 'edar.zip'), u], { timeout: 180000 }); zip = u; break }
-  catch (e) { log.edar['curl ' + u] = String(e.message).slice(0, 200) }
+  const get = (extra = []) => execFileSync('curl', ['-sSfL', '--retry', '3', ...extra, '-A', 'Mozilla/5.0 espana-en-datos', '-o', join(tmp, 'edar.zip'), u], { timeout: 300000 })
+  try { get(); zip = u; break }
+  catch (e) {
+    log.edar['curl ' + u] = String(e.message).slice(-160)
+    if (/\(60\)/.test(String(e.message))) { try { get(['--cacert', cadena(new URL(u).host)]); zip = u; log.edar.cadena = 'completada'; break } catch (e2) { log.edar['curl con cadena ' + u] = String(e2.message).slice(-200) } }
+  }
 }
 const shp = []
 if (zip) {
