@@ -164,7 +164,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .modo button:disabled { opacity: .35; cursor: default }
 .detalle { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line) }
 .detalle h3 { margin: 0 0 8px; font: 600 15px Oxanium, sans-serif }
-.sala { grid-template-columns: 1fr } .sala-holo { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) }
+.sala { grid-template-columns: 1fr }
+@media (min-width: 901px) { .sala-holo { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) } }
 .cien { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 560px); gap: 22px; align-items: center }
 .cien-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; aspect-ratio: 1 }
 .cien-grid i { display: block; border-radius: 3px; transition: opacity .25s }

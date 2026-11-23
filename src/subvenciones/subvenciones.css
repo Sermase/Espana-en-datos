@@ -158,7 +158,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .resultados li span { color: var(--muted); text-align: right }
 
 /* Subvenciones */
-.sala { grid-template-columns: 1fr } .sala-holo { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) }
+.sala { grid-template-columns: 1fr }
+@media (min-width: 901px) { .sala-holo { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) } }
 .rango { flex-wrap: wrap }
 .pto { display: inline-block; width: 9px; height: 9px; border-radius: 2px }
 .aviso { margin: 0 0 12px; padding: 8px 12px; border-left: 3px solid var(--acc); background: rgba(224,168,255,.06); font-size: 14px; color: #dfeff4 }

@@ -68,7 +68,7 @@ function Resumen({ d, a, k, go }: { d: Datos; a: Agg; k: string; go: (s: Sec) =>
       </div>
     </section>
     <div className="kpis is-wide">
-      {ad.filter(x => x.v > 0).map(x => <button key={x.x} className="kpi" onClick={() => go('quien')}><span className="kpi-l"><i className="pto" style={{ background: ADM[x.x][2] }} />{ADM[x.x][0]}</span><span className="kpi-v"><CountUp value={x.v / 1e9} fmt={v => `${nf(v, 1)} mil M€`} /></span><span className="kpi-p">{nf(a.adm[x.x][0])} concesiones</span></button>)}
+      {ad.filter(x => x.v > 0).map(x => <button key={x.x} className="kpi" onClick={() => go('quien')}><span className="kpi-l"><i className="pto" style={{ background: ADM[x.x][2] }} />{ADM[x.x][0]}</span><span className="kpi-v"><CountUp value={x.v} fmt={eu} /></span><span className="kpi-p">{nf(a.adm[x.x][0])} concesiones</span></button>)}
       {pf && <button className="kpi" onClick={() => go('aquien')}><span className="kpi-l">A personas físicas</span><span className="kpi-v"><CountUp value={(pf[0] / a.n) * 100} fmt={v => `${nf(v, 0)} %`} /></span><span className="kpi-p">de las concesiones, {nf((pf[1] / tot) * 100, 0)} % del dinero</span></button>}
     </div>
     <Card t="Mes a mes" wide lead={(() => { const m = s.reduce((x, y) => (y[2] > x[2] ? y : x), s[0]); return m && <>Ayudas concedidas cada mes, por quién las da. El mes con más dinero fue <b>{per(m[0])}</b> ({eu(m[2])}). El mes en curso aún se está llenando: las administraciones registran las concesiones con días o semanas de retraso.</> })()} fuente={BDNS}>
