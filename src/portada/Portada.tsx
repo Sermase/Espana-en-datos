@@ -1,7 +1,9 @@
 import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import resumen from '../resumen.json'
-import { useState } from 'react'
+import { useState, type PointerEvent } from 'react'
+import { AnimatePresence, LayoutGroup } from 'motion/react'
+import { CountUp } from '../graficos/CountUp'
 import { AREAS, TEMAS, type AreaId, type Tema } from '../temas'
 import { A } from '../Fuentes'
 import { Hero, type Lectura } from './Hero'
@@ -107,17 +109,20 @@ function Mini({ t }: { t: Tema }) {
 }
 
 /** Los datos clave de cada tema, para verlos de un vistazo sin entrar. Salen de src/resumen.json, que escriben los robots. */
-function cifras(id: string): { v: string; l: string }[] {
+function cifras(id: string): { n: number; f: (v: number) => string; l: string }[] {
   const r = R[id] as Record<string, unknown> | undefined
   if (!r) return []
   const par = (k: string) => (r[k] as [string, number] | undefined)?.[1] ?? 0
+  const pct = (d = 1, signo = false) => (v: number) => `${signo && v > 0 ? '+' : ''}${es(v, d)} %`
+  const eur = (d = 3) => (v: number) => `${es(v, d)} €`
+  const ent = (v: number) => es(v, 0)
   switch (id) {
-    case 'agua': return [{ v: `${es(reserva, 1)} %`, l: 'llenos los embalses' }, { v: `${es(Number(r.a) / 1000, 1)} mil hm³`, l: 'de agua guardada' }]
-    case 'gasolineras': return [{ v: `${es(Number(r.g95), 3)} €`, l: 'gasolina 95, mediana' }, { v: `${es(Number(r.dsl), 3)} €`, l: 'diésel' }, { v: es(Number(r.n), 0), l: 'gasolineras' }]
-    case 'energia': return [{ v: `${Math.round(Number(r.ren))} %`, l: 'renovable ayer' }, { v: `${es(Number(r.pvpc), 3)} €`, l: 'kWh hoy, tarifa regulada' }]
-    case 'economia': return [{ v: `${par('pib') > 0 ? '+' : ''}${es(par('pib'), 1)} %`, l: 'crece el PIB' }, { v: `${es(par('ipc'), 1)} %`, l: 'inflación' }, { v: `${es(par('paro'), 1)} %`, l: 'paro' }]
-    case 'comercio': return [{ v: `${es(Number(r.exp), 0)}`, l: `mil M€ vendidos en ${r.año}` }, { v: `${es(Number(r.exp) - Number(r.imp), 1)}`, l: 'mil M€ de saldo' }]
-    case 'poblacion': return [{ v: `${es(Number(r.total) / 1e6, 2)} M`, l: `habitantes (${r.año})` }, { v: es(Number(r.municipios), 0), l: 'municipios' }]
+    case 'agua': return [{ n: reserva, f: pct(1), l: 'llenos los embalses' }, { n: Number(r.a) / 1000, f: v => `${es(v, 1)} mil hm³`, l: 'de agua guardada' }]
+    case 'gasolineras': return [{ n: Number(r.g95), f: eur(), l: 'gasolina 95, mediana' }, { n: Number(r.dsl), f: eur(), l: 'diésel' }, { n: Number(r.n), f: ent, l: 'gasolineras' }]
+    case 'energia': return [{ n: Number(r.ren), f: pct(0), l: 'renovable ayer' }, { n: Number(r.pvpc), f: eur(), l: 'kWh hoy, tarifa regulada' }]
+    case 'economia': return [{ n: par('pib'), f: pct(1, true), l: 'crece el PIB' }, { n: par('ipc'), f: pct(1), l: 'inflación' }, { n: par('paro'), f: pct(1), l: 'paro' }]
+    case 'comercio': return [{ n: Number(r.exp), f: ent, l: `mil M€ vendidos en ${r.año}` }, { n: Number(r.exp) - Number(r.imp), f: v => es(v, 1), l: 'mil M€ de saldo' }]
+    case 'poblacion': return [{ n: Number(r.total) / 1e6, f: v => `${es(v, 2)} M`, l: `habitantes (${r.año})` }, { n: Number(r.municipios), f: ent, l: 'municipios' }]
     default: return []
   }
 }
@@ -144,41 +149,55 @@ const TICKER = [
   ['Habitantes', `${es(Number(R.poblacion?.total ?? 0) / 1e6, 1)} M`, 'poblacion'], ['Exportaciones', `${es(Number(R.comercio?.exp ?? 0), 0)} mil M€`, 'comercio'],
 ] as const
 
-/** Los temas por áreas: chips para filtrar y, en cada área, las tarjetas con sus datos clave. */
+/** Foco de luz que sigue al puntero sobre la tarjeta (solo cambia dos variables CSS, sin repintar React). */
+const foco = (e: PointerEvent<HTMLElement>) => { const r = e.currentTarget.getBoundingClientRect(); e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`); e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`) }
+
+/** Los temas por áreas: chips para filtrar (con una píldora que se desliza) y, en cada área, las tarjetas con sus datos clave. */
 function Areas() {
   const [area, setArea] = useState<AreaId | null>(null)
   const abiertos = TEMAS.filter(t => t.ruta).length
-  return <>
+  const chips: { id: AreaId | null; nombre: string }[] = [{ id: null, nombre: 'Todo' }, ...AREAS]
+  return <LayoutGroup>
     <nav className="areas-nav" aria-label="Áreas">
-      <button className={!area ? 'is-on' : ''} onClick={() => setArea(null)}>Todo <small>{abiertos} abiertos de {TEMAS.length}</small></button>
-      {AREAS.map(a => <button key={a.id} className={area === a.id ? 'is-on' : ''} onClick={() => setArea(area === a.id ? null : a.id)}>{a.nombre}</button>)}
+      {chips.map(c => <button key={c.id ?? 'todo'} className={area === c.id ? 'is-on' : ''} onClick={() => setArea(area === c.id ? null : c.id)} aria-pressed={area === c.id}>
+        {area === c.id && <motion.i className="chip-pildora" layoutId="chip-pildora" transition={{ type: 'spring', stiffness: 420, damping: 34 }} />}
+        <span>{c.nombre}{c.id == null && <small>{abiertos} abiertos de {TEMAS.length}</small>}</span>
+      </button>)}
     </nav>
-    {AREAS.filter(a => !area || a.id === area).map(a => {
-      const temas = [...TEMAS.filter(t => t.area === a.id && t.ruta), ...TEMAS.filter(t => t.area === a.id && !t.ruta)]
-      return <section key={a.id} className="area">
-        <header><h2>{a.nombre}</h2><p>{a.lema}</p></header>
-        <ul className="temas">
-          {temas.map((t, i) => {
-            const abierto = !!t.ruta, cs = cifras(t.id)
-            const Card = abierto ? motion.a : motion.div
-            return (
-              <li key={t.id} className={abierto ? 'es-abierto' : 'es-plan'} style={{ '--c': t.color } as React.CSSProperties}>
-                <Card href={t.ruta} className="tema" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-40px' }} transition={{ delay: i * .07, duration: .45 }}>
-                  <div className="tema-txt">
-                    <h3>{t.nombre}{abierto && <ArrowUpRight size={18} />}</h3>
-                    <p>{abierto ? t.lema : t.plan ?? t.lema}</p>
-                    {cs.length > 0 && <dl className="cifras">{cs.map(c => <div key={c.l}><dt>{c.l}</dt><dd>{c.v}</dd></div>)}</dl>}
-                    <small>{abierto ? <><i className="vivo" /> {FUENTE[t.id] ?? 'Datos oficiales'}</> : 'En preparación'}</small>
-                  </div>
-                  {abierto && <Mini t={t} />}
-                </Card>
-              </li>
-            )
-          })}
-        </ul>
-      </section>
-    })}
-  </>
+    <AnimatePresence mode="popLayout" initial={false}>
+      {AREAS.filter(a => !area || a.id === area).map(a => {
+        const temas = [...TEMAS.filter(t => t.area === a.id && t.ruta), ...TEMAS.filter(t => t.area === a.id && !t.ruta)]
+        return <motion.section key={a.id} className="area" layout initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12, transition: { duration: .2 } }} transition={{ duration: .45, ease: [0.2, 0.8, 0.2, 1] }}>
+          <header>
+            <motion.h2 initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: .5 }}>{a.nombre}</motion.h2>
+            <p>{a.lema}</p>
+            <motion.i className="area-linea" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: .9, ease: [0.2, 0.8, 0.2, 1] }} />
+          </header>
+          <ul className="temas">
+            {temas.map((t, i) => {
+              const abierto = !!t.ruta, cs = cifras(t.id)
+              const Card = abierto ? motion.a : motion.div
+              return (
+                <motion.li layout key={t.id} className={abierto ? 'es-abierto' : 'es-plan'} style={{ '--c': t.color } as React.CSSProperties}
+                  initial={{ opacity: 0, y: 26, clipPath: 'inset(0 0 100% 0)' }} whileInView={{ opacity: 1, y: 0, clipPath: 'inset(0 0 0% 0)' }} viewport={{ once: true, margin: '-30px' }}
+                  transition={{ delay: i * .08, duration: .6, ease: [0.2, 0.8, 0.2, 1] }}>
+                  <Card href={t.ruta} className="tema" onPointerMove={foco} whileHover={abierto ? { y: -3 } : undefined} transition={{ type: 'spring', stiffness: 300, damping: 24 }}>
+                    <div className="tema-txt">
+                      <h3>{t.nombre}{abierto && <ArrowUpRight size={18} />}</h3>
+                      <p>{abierto ? t.lema : t.plan ?? t.lema}</p>
+                      {cs.length > 0 && <dl className="cifras">{cs.map((c, k) => <div key={c.l}><dt>{c.l}</dt><dd><CountUp value={c.n} fmt={c.f} delay={.25 + k * .12} duration={1.3} /></dd></div>)}</dl>}
+                      <small>{abierto ? <><i className="vivo" /> {FUENTE[t.id] ?? 'Datos oficiales'}</> : 'En preparación'}</small>
+                    </div>
+                    {abierto && <Mini t={t} />}
+                  </Card>
+                </motion.li>
+              )
+            })}
+          </ul>
+        </motion.section>
+      })}
+    </AnimatePresence>
+  </LayoutGroup>
 }
 
 export default function Portada() {

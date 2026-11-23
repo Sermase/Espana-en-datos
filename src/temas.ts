@@ -3,7 +3,7 @@
  * principal: no todos son mapas, cada dato se enseña en la forma que mejor le va. Un tema vive en un área,
  * aunque se enlace desde otras (el agua, por ejemplo, también cruza con Energía).
  */
-export type AreaId = 'gente' | 'dinero' | 'territorio' | 'movilidad' | 'ocio'
+export type AreaId = 'gente' | 'economia' | 'territorio' | 'movilidad' | 'ocio'
 export type Tema = {
   id: string
   nombre: string
@@ -20,7 +20,7 @@ export type Tema = {
 
 export const AREAS: { id: AreaId; nombre: string; lema: string }[] = [
   { id: 'gente', nombre: 'Gente', lema: 'Cuántos somos, cómo vivimos, de qué enfermamos y qué estudiamos.' },
-  { id: 'dinero', nombre: 'Dinero', lema: 'Lo que ganamos, lo que cuesta vivir y lo que vendemos al mundo.' },
+  { id: 'economia', nombre: 'Economía', lema: 'Lo que ganamos, lo que cuesta vivir, lo que reparte lo público y lo que vendemos al mundo.' },
   { id: 'territorio', nombre: 'Territorio', lema: 'El agua, el clima, las montañas y el campo.' },
   { id: 'movilidad', nombre: 'Energía y movilidad', lema: 'La luz, el combustible y cómo nos movemos.' },
   { id: 'ocio', nombre: 'Cultura y ocio', lema: 'Cine, museos, libros y deporte.' },
@@ -33,11 +33,12 @@ export const TEMAS: Tema[] = [
   { id: 'sanidad', area: 'gente', nombre: 'Sanidad', lema: 'Esperanza de vida, listas de espera y recursos de cada comunidad.', color: '#ff7b7b', vista: 'mapa', plan: 'Esperanza de vida por provincia, listas de espera por comunidad, médicos y camas por habitante.' },
   { id: 'educacion', area: 'gente', nombre: 'Educación', lema: 'Del colegio a la universidad: alumnos, abandono y titulados.', color: '#7cc8ff', vista: 'consola', plan: 'Abandono escolar, titulados universitarios, alumnos por profesor y comparación con Europa.' },
   // Dinero
-  { id: 'economia', area: 'dinero', nombre: 'Economía', lema: 'PIB, precios, empleo, salarios, vivienda, cuentas públicas y hogares, comparados con Europa.', color: '#3df5b0', vista: 'consola', ruta: './economia/index.html' },
-  { id: 'vivienda', area: 'dinero', nombre: 'Vivienda', lema: 'Cuánto cuesta comprar o alquilar, dónde y cuántos años de sueldo hacen falta.', color: '#ffd166', vista: 'mapa', plan: 'Precio por metro cuadrado por provincia y municipio, alquiler, compraventas y esfuerzo en años de sueldo.' },
-  { id: 'comercio', area: 'dinero', nombre: 'Comercio', lema: 'Lo que España vende y compra al mundo: países, productos y rutas, con diez años de historia.', color: '#c6f25e', vista: 'mapa', ruta: './comercio/index.html' },
-  { id: 'turismo', area: 'dinero', nombre: 'Turismo', lema: 'Quién nos visita, cuánto gasta y a dónde va.', color: '#ff9f43', vista: 'mapa', plan: 'Turistas por país de origen, gasto, pernoctaciones por provincia y destinos de moda.' },
-  { id: 'industria', area: 'dinero', nombre: 'Industria', lema: 'Empresas, sectores y lo que fabricamos.', color: '#9fb3c8', vista: 'consola', plan: 'Producción industrial, empresas por sector y tamaño, y exportación de coches.' },
+  { id: 'economia', area: 'economia', nombre: 'Macroeconomía', lema: 'PIB, precios, empleo, salarios, vivienda, cuentas públicas y hogares, comparados con Europa.', color: '#3df5b0', vista: 'consola', ruta: './economia/index.html' },
+  { id: 'vivienda', area: 'economia', nombre: 'Vivienda', lema: 'Cuánto cuesta comprar o alquilar, dónde y cuántos años de sueldo hacen falta.', color: '#ffd166', vista: 'mapa', plan: 'Precio por metro cuadrado por provincia y municipio, alquiler, compraventas y esfuerzo en años de sueldo.' },
+  { id: 'comercio', area: 'economia', nombre: 'Comercio', lema: 'Lo que España vende y compra al mundo: países, productos y rutas, con diez años de historia.', color: '#c6f25e', vista: 'mapa', ruta: './comercio/index.html' },
+  { id: 'turismo', area: 'economia', nombre: 'Turismo', lema: 'Quién nos visita, cuánto gasta y a dónde va.', color: '#ff9f43', vista: 'mapa', plan: 'Turistas por país de origen, gasto, pernoctaciones por provincia y destinos de moda.' },
+  { id: 'subvenciones', area: 'economia', nombre: 'Subvenciones', lema: 'Quién da ayudas públicas, a quién y para qué: Estado, comunidades y ayuntamientos.', color: '#e0a8ff', vista: 'consola', plan: 'Convocatorias y concesiones de la Base de Datos Nacional de Subvenciones: por administración, sector, comunidad y beneficiario.' },
+  { id: 'industria', area: 'economia', nombre: 'Industria', lema: 'Empresas, sectores y lo que fabricamos.', color: '#9fb3c8', vista: 'consola', plan: 'Producción industrial, empresas por sector y tamaño, y exportación de coches.' },
   // Territorio
   { id: 'agua', area: 'territorio', nombre: 'Agua', lema: 'Embalses, ríos, lluvia, consumo y energía hidroeléctrica, semana a semana.', color: '#3fe6ff', vista: 'mapa', ruta: './agua/index.html' },
   { id: 'clima', area: 'territorio', nombre: 'Clima', lema: 'Temperaturas, olas de calor y lluvia, y cómo están cambiando.', color: '#ff7a59', vista: 'mapa', plan: 'Temperatura de cada observatorio desde hace décadas, olas de calor, noches tropicales y sequía.' },

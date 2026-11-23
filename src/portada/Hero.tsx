@@ -85,12 +85,6 @@ export function Hero({ lecturas }: { lecturas: Lectura[] }) {
       if (montado && now - last < 33) { raf = requestAnimationFrame(frame); return } // ya montado: 30 imágenes por segundo bastan
       last = now
       ctx.clearRect(0, 0, size.w, size.h)
-      // barrido de escáner durante el montaje
-      if (t < DUR + 0.4) {
-        const sx = ease(t / (DUR + 0.4)) * size.w
-        const g = ctx.createLinearGradient(sx - 60, 0, sx, 0); g.addColorStop(0, 'rgba(120,230,255,0)'); g.addColorStop(1, 'rgba(120,230,255,.16)')
-        ctx.fillStyle = g; ctx.fillRect(sx - 60, 0, 60, size.h)
-      }
       for (const p of pts) {
         const k = ease((t - p.d) / (DUR - 0.9))
         let x = p.sx + (p.tx - p.sx) * k, y = p.sy + (p.ty - p.sy) * k

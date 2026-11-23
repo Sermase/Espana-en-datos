@@ -286,7 +286,7 @@ export default function App() {
       <header className="top">
         <div className="brand">
           <a className="home-link" href="../index.html">España en datos</a>
-          <h1>Economía</h1>
+          <h1>Macroeconomía</h1>
           <p>{compact(total)} series oficiales · actualizado el {new Date(d.fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'long' })}</p>
         </div>
         {sec !== 'resumen' && <div className="rango" role="radiogroup" aria-label="Periodo de los gráficos">

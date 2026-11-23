@@ -125,3 +125,17 @@ a.lectura:hover { border-color: var(--c); background: color-mix(in oklab, var(--
 .area .mini text { display: none }
 .area .mini { width: 110px; align-self: center }
 @media (max-width: 860px) { .area .mini { display: none } }
+/* Chips con píldora deslizante */
+.areas-nav button { position: relative; isolation: isolate; transition: color .2s, border-color .2s }
+.areas-nav button span { position: relative; z-index: 1 }
+.areas-nav button.is-on { background: transparent }
+.chip-pildora { position: absolute; inset: -1px; z-index: 0; border-radius: 3px; background: linear-gradient(90deg, rgba(159, 216, 232, .22), rgba(159, 216, 232, .08)); border: 1px solid #9fd8e8; box-shadow: 0 0 18px rgba(159, 216, 232, .18) }
+/* Línea del área que se dibuja */
+.area > header { position: relative; padding-bottom: 10px }
+.area-linea { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, rgba(159, 216, 232, .5), rgba(159, 216, 232, 0)); transform-origin: left }
+/* Foco que sigue al puntero */
+.tema { --mx: -200px; --my: -200px }
+.tema::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .3s; background: radial-gradient(260px circle at var(--mx) var(--my), color-mix(in oklab, var(--c) 16%, transparent), transparent 70%) }
+.tema:hover::after { opacity: 1 }
+a.tema:hover { box-shadow: 0 10px 30px -12px color-mix(in oklab, var(--c) 45%, transparent) }
+@media (prefers-reduced-motion: reduce) { .tema::after { display: none } }
