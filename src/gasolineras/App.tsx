@@ -222,9 +222,9 @@ export default function App() {
             <button className={modo === 'top' ? 'is-on' : ''} onClick={() => setModo('top')}>Más baratas por provincia</button>
             <button className={modo === 'precio' ? 'is-on' : ''} onClick={() => setModo('precio')}>Hasta un precio</button>
           </div>
-          {modo === 'top' && <label className="ctl">Las <b>{topN}</b> más baratas de cada provincia
+          {modo === 'top' && <label className="ctl"><span>Las <b>{topN}</b> más baratas de cada provincia</span>
             <input type="range" min={1} max={20} value={topN} onChange={e => setTopN(Number(e.target.value))} /></label>}
-          {modo === 'precio' && rango && <label className="ctl">Hasta <b>{eur(limite)} €/l</b>
+          {modo === 'precio' && rango && <label className="ctl"><span>Hasta <b>{eur(limite)} €/l</b></span>
             <input type="range" min={rango.lo} max={rango.hi} step={0.001} value={limite} onChange={e => setTope(Number(e.target.value))} /></label>}
           {destacadas && <small>{int(destacadas.size)} gasolineras resaltadas en verde</small>}
         </div>
