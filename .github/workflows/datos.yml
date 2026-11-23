@@ -67,7 +67,7 @@ jobs:
       - name: Sondas de fuentes futuras
         if: contains(github.event.head_commit.message, '[sonda]')
         continue-on-error: true
-        run: node scripts/sonda-impuestos.mjs
+        run: node scripts/sonda-uwwtd.mjs
       - name: Enlaces a las fuentes
         if: github.event.schedule == '43 15 * * 2' || contains(github.event.head_commit.message, '[enlaces]')
         continue-on-error: true
