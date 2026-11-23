@@ -75,7 +75,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .sala-holo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(170px, .8fr); gap: 12px; align-items: center }
 .sala-dato { display: grid; gap: 4px; font-size: 14px; color: #c7dde4; line-height: 1.45 }
 .sala-k { font-size: 13px; color: var(--muted) }
-.sala-dato b { font: 700 34px/1.1 Oxanium, sans-serif; color: #fff; font-variant-numeric: tabular-nums }
+.sala-dato > b { font: 700 34px/1.1 Oxanium, sans-serif; color: #fff; font-variant-numeric: tabular-nums }
 .sala-tecs { display: grid; gap: 4px; align-content: center }
 .sala-tecs button { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 8px 10px; border: 1px solid transparent; border-radius: 3px; text-align: left; font-size: 14.5px }
 .sala-tecs button i { width: 10px; height: 10px; border-radius: 2px; background: var(--c) }
@@ -125,3 +125,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .horas .h-u { display: none }
 }
 @media (max-width: 900px) { .horas li.is-ahora .h-h::after { content: '' } }
+.fronteras { display: grid; gap: 10px; align-content: center }
+.frontera { display: grid; grid-template-columns: 90px minmax(0, 1fr) 120px; gap: 10px; align-items: center; font-size: 14px }
+.fr-n { color: #dfeff4 }
+.fr-b { position: relative; height: 10px; display: flex; gap: 2px; background: rgba(160, 220, 240, .06); border-radius: 2px; overflow: hidden }
+.fr-b i { display: block; height: 100%; background: var(--c); transition: width .6s cubic-bezier(.2,.8,.2,1) }
+.fr-b .fr-imp { opacity: .45 }
+.fr-v { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; font-size: 13px }
+.sala-dato .modo { margin: 2px 0 6px }
+.sala .note { grid-column: 1 / -1; margin: 0 }
+@media (max-width: 900px) { .frontera { grid-template-columns: 80px minmax(0, 1fr) 105px } }
+.sala-dato span b { color: #fff }

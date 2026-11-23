@@ -128,3 +128,92 @@ export const red = (carga = 0.5): Modelo => t => {
   }
   return { fuerte, tenue, puntos } as Escena
 }
+
+// ---------------- Barcos, tuberías y el globo (gas, petróleo y comercio) ----------------
+/** Casco de barco: secciones a lo largo del eje x, con proa afilada. Devuelve la cubierta a la altura `yc`. */
+function casco(fuerte: Seg[], tenue: Seg[], L: number, B: number, yc: number, bob: number) {
+  const n = 10, sec: [number, number, number][][] = []
+  for (let i = 0; i <= n; i++) {
+    const x = -L / 2 + (i / n) * L, f = i / n
+    const ancho = B * (f > 0.8 ? Math.max(0.05, (1 - f) / 0.2) : f < 0.08 ? 0.75 + f * 3 : 1)
+    sec.push([[x, bob, -ancho * 0.7], [x, bob + yc, -ancho], [x, bob + yc, ancho], [x, bob, ancho * 0.7]])
+  }
+  for (let i = 0; i < n; i++) for (let k = 0; k < 4; k++) ((k === 1 || k === 2) ? fuerte : tenue).push([...sec[i][k], ...sec[i + 1][k]] as Seg)
+  for (let i = 0; i <= n; i += 2) for (let k = 0; k < 3; k++) tenue.push([...sec[i][k], ...sec[i][k + 1]] as Seg)
+}
+function olas(t: number, n = 26): [number, number, number][] {
+  const p: [number, number, number][] = []
+  for (let i = 0; i < n; i++) { const x = -0.85 + ((i * 0.37) % 1.7), z = -0.5 + ((i * 0.61) % 1), f = (t * 0.25 + i / n) % 1; p.push([x - f * 0.2, 0.01 + 0.015 * Math.sin(t * 2 + i), z]) }
+  return p
+}
+function esfera(out: Seg[], cx: number, cy: number, cz: number, r: number, lat = 4, lon = 8) {
+  for (let k = 1; k < lat; k++) { const a = -Math.PI / 2 + (k / lat) * Math.PI; anillo(out, Math.cos(a) * r, cy + Math.sin(a) * r, 18, cx, cz) }
+  for (let j = 0; j < lon; j++) {
+    const b = (j / lon) * TAU
+    for (let k = 0; k < 10; k++) { const a0 = -Math.PI / 2 + (k / 10) * Math.PI, a1 = -Math.PI / 2 + ((k + 1) / 10) * Math.PI; out.push([cx + Math.cos(a0) * Math.cos(b) * r, cy + Math.sin(a0) * r, cz + Math.cos(a0) * Math.sin(b) * r, cx + Math.cos(a1) * Math.cos(b) * r, cy + Math.sin(a1) * r, cz + Math.cos(a1) * Math.sin(b) * r]) }
+  }
+}
+
+/** Metanero: buque de gas natural licuado con sus tanques esféricos. */
+export const metanero = (): Modelo => t => {
+  const fuerte: Seg[] = [], tenue: Seg[] = [], bob = 0.04 + 0.015 * Math.sin(t * 1.3)
+  casco(fuerte, tenue, 1.5, 0.2, 0.14, bob)
+  for (let i = 0; i < 4; i++) esfera(i % 2 ? tenue : fuerte, -0.42 + i * 0.27, bob + 0.24, 0, 0.12, 4, 8)
+  caja(fuerte, -0.72, -0.6, bob + 0.14, bob + 0.36, -0.12, 0.12)
+  return { fuerte, tenue, puntos: olas(t) }
+}
+/** Petrolero: casco largo, tuberías en cubierta y el puente a popa. */
+export const petrolero = (): Modelo => t => {
+  const fuerte: Seg[] = [], tenue: Seg[] = [], bob = 0.04 + 0.012 * Math.sin(t * 1.1)
+  casco(fuerte, tenue, 1.55, 0.22, 0.15, bob)
+  for (const z of [-0.05, 0, 0.05]) tenue.push([-0.55, bob + 0.17, z, 0.6, bob + 0.17, z])
+  for (let i = 0; i < 6; i++) tenue.push([-0.45 + i * 0.2, bob + 0.15, -0.16, -0.45 + i * 0.2, bob + 0.15, 0.16])
+  caja(fuerte, -0.74, -0.58, bob + 0.15, bob + 0.42, -0.14, 0.14)
+  cilindro(fuerte, 0.025, 0.02, bob + 0.42, bob + 0.55, -0.66, 0, 6, 1)
+  return { fuerte, tenue, puntos: [...olas(t), ...humo(t, -0.66, bob + 0.56, 0, 6, 0.2, 0.08)] }
+}
+/** Gasoducto: tramo de tubería sobre soportes con el gas que corre por dentro. */
+export const gasoducto = (flujo = 0.5): Modelo => t => {
+  const fuerte: Seg[] = [], tenue: Seg[] = []
+  const y = 0.3, r = 0.06, L = 0.85
+  for (let i = 0; i < 12; i++) { const a = (i / 12) * TAU; (i % 3 ? tenue : fuerte).push([-L, y + Math.cos(a) * r, Math.sin(a) * r, L, y + Math.cos(a) * r, Math.sin(a) * r]) }
+  for (let k = 0; k <= 8; k++) { const x = -L + (k / 8) * 2 * L; for (let i = 0; i < 12; i++) { const a = (i / 12) * TAU, b = ((i + 1) / 12) * TAU; tenue.push([x, y + Math.cos(a) * r, Math.sin(a) * r, x, y + Math.cos(b) * r, Math.sin(b) * r]) } }
+  for (let k = 0; k < 4; k++) { const x = -0.65 + k * 0.43; fuerte.push([x, 0, -0.08, x, y - r, 0], [x, 0, 0.08, x, y - r, 0]) }
+  const puntos: [number, number, number][] = [], n = Math.round(10 + flujo * 20)
+  for (let i = 0; i < n; i++) { const f = (t * (0.15 + flujo * 0.35) + i / n) % 1; puntos.push([-L + f * 2 * L, y + 0.02 * Math.sin(i * 1.7), 0.02 * Math.cos(i * 2.3)]) }
+  return { fuerte, tenue, puntos }
+}
+/** Portacontenedores: casco y pilas de contenedores. */
+export const portacontenedores = (): Modelo => t => {
+  const fuerte: Seg[] = [], tenue: Seg[] = [], bob = 0.04 + 0.012 * Math.sin(t * 1.2)
+  casco(fuerte, tenue, 1.5, 0.22, 0.13, bob)
+  for (let i = 0; i < 7; i++) for (let k = 0; k < 2 + ((i * 5) % 3); k++) caja(k % 2 ? tenue : fuerte, -0.5 + i * 0.14, -0.38 + i * 0.14, bob + 0.13 + k * 0.06, bob + 0.19 + k * 0.06, -0.15, 0.15)
+  caja(fuerte, -0.74, -0.6, bob + 0.13, bob + 0.42, -0.14, 0.14)
+  return { fuerte, tenue, puntos: olas(t) }
+}
+/** Globo con rutas: arcos desde cada socio hasta España, con pulsos que viajan (peso 0–1 = grosor del flujo). */
+export type Ruta = { lat: number; lon: number; peso: number; sale?: boolean }
+export const globo = (rutas: Ruta[]): Modelo => t => {
+  const fuerte: Seg[] = [], tenue: Seg[] = [], R = 0.42, C: [number, number, number] = [0, 0.55, 0]
+  const P = (lat: number, lon: number, r = R): [number, number, number] => { const a = (lat * Math.PI) / 180, b = (-lon * Math.PI) / 180; return [C[0] + Math.cos(a) * Math.cos(b) * r, C[1] + Math.sin(a) * r, C[2] + Math.cos(a) * Math.sin(b) * r] }
+  for (let la = -60; la <= 60; la += 30) { let prev: [number, number, number] | null = null; for (let lo = -180; lo <= 180; lo += 12) { const p = P(la, lo); if (prev) (la === 0 ? fuerte : tenue).push([...prev, ...p] as Seg); prev = p } }
+  for (let lo = -180; lo < 180; lo += 30) { let prev: [number, number, number] | null = null; for (let la = -84; la <= 84; la += 12) { const p = P(la, lo); if (prev) tenue.push([...prev, ...p] as Seg); prev = p } }
+  const es = P(40.4, -3.7)
+  anillo(fuerte, 0.025, es[1], 10, es[0], es[2])
+  const puntos: [number, number, number][] = []
+  for (const [i, r] of rutas.entries()) {
+    // arco de círculo máximo, levantado sobre la esfera según la distancia
+    const a = P(r.lat, r.lon), b = es, arco: [number, number, number][] = []
+    const va = [a[0] - C[0], a[1] - C[1], a[2] - C[2]], vb = [b[0] - C[0], b[1] - C[1], b[2] - C[2]]
+    const ang = Math.acos(Math.max(-1, Math.min(1, (va[0] * vb[0] + va[1] * vb[1] + va[2] * vb[2]) / (R * R))))
+    for (let k = 0; k <= 16; k++) {
+      const f = k / 16, s = Math.sin(ang) || 1, wa = Math.sin((1 - f) * ang) / s, wb = Math.sin(f * ang) / s
+      const h = 1 + 0.25 * Math.sin(f * Math.PI) * Math.min(1, ang)
+      arco.push([C[0] + (va[0] * wa + vb[0] * wb) * h, C[1] + (va[1] * wa + vb[1] * wb) * h, C[2] + (va[2] * wa + vb[2] * wb) * h])
+    }
+    for (let k = 0; k < 16; k++) (r.peso > 0.5 ? fuerte : tenue).push([...arco[k], ...arco[k + 1]] as Seg)
+    const n = 1 + Math.round(r.peso * 3)
+    for (let j = 0; j < n; j++) { const f = (t * 0.35 + j / n + i * 0.13) % 1, idx = Math.min(15, Math.floor((r.sale ? 1 - f : f) * 16)); puntos.push(arco[idx]) }
+  }
+  return { fuerte, tenue, puntos }
+}

@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Columnas, LineChart, nf } from '../graficos'
 import { A } from '../Fuentes'
+import { PrecioDesglose, type Extra } from './Extra'
 import { dia, fDia, fMes, ree, tLocal, type Grupo, type Historia, type Hoy } from './datos'
 
 type Tarifa = 'pvpc' | 'mercado'
@@ -61,7 +62,7 @@ function Resumen({ titulo, horas, nota }: { titulo: string; horas: Horas; nota?:
   </div>
 }
 
-export function Precios({ hoy, hist }: { hoy: Hoy; hist: Historia | null }) {
+export function Precios({ hoy, hist, extra }: { hoy: Hoy; hist: Historia | null; extra: Extra | null }) {
   const [tarifa, setTarifa] = useState<Tarifa>('pvpc')
   const dHoy = dia(new Date()), dMañana = sumaDias(dHoy, 1)
   const ahora = Number(new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', hour: 'numeric', hourCycle: 'h23' }).format(new Date()))
@@ -125,6 +126,7 @@ export function Precios({ hoy, hist }: { hoy: Hoy; hist: Historia | null }) {
         : <><p className="lead">{largo(fecha)}{media(hDia) != null && <>: media de <b>{nf(media(hDia)!, 3)} €/kWh</b>.</>}</p><Rejilla horas={hDia} ahora={fecha === dHoy ? ahora : undefined} /></>}
     </section>
 
+    <PrecioDesglose e={extra} />
     {mensual.length > 1 && <section className="gcard is-wide">
       <h2>Mes a mes</h2>
       <p className="lead">Media de cada mes{caro && <>; el más caro de lo descargado fue {fMes(Date.parse(caro.k + '-15'))}, con <b>{nf(caro.v, 3)} €/kWh</b></>}. {pd && (pd['PVPC']?.v[0]?.[0] ?? '') > '2015' && 'El histórico se completa hacia atrás cada día, hasta 2014.'}</p>

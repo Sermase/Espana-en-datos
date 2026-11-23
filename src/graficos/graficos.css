@@ -81,3 +81,4 @@ button.g-bar:hover, button.g-bar:focus-visible { background: rgba(255, 255, 255,
 .g-legend-sel button:disabled { cursor: default }
 .g-legend-sel button.is-on { border-color: rgba(255, 255, 255, .35); color: #fff }
 .g-legend-sel i { width: 10px; border-radius: 2px }
+.g-colst.is-hover rect { filter: brightness(1.2) }

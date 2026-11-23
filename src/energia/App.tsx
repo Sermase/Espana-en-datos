@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { motion } from 'motion/react'
-import { Activity, ChevronLeft, ChevronRight, CloudFog, Euro, Factory, Gauge, Zap } from 'lucide-react'
+import { Activity, ArrowLeftRight, ChevronLeft, ChevronRight, CloudFog, Euro, Factory, Flame, Gauge, Zap } from 'lucide-react'
+import { Fronteras, GasPetroleo, Ire, Sectores, useExtra } from './Extra'
 import { Apiladas, Barras, Columnas, CountUp, LineChart, nf } from '../graficos'
 import { Holo3D } from '../holo3d/Holo3D'
 import { eolica, hidraulica, nuclear, red, solar, termica } from '../holo3d/modelos'
@@ -14,6 +15,8 @@ const SECCIONES = [
   { id: 'generacion', nombre: 'Generación', icon: Factory },
   { id: 'demanda', nombre: 'Demanda', icon: Activity },
   { id: 'precios', nombre: 'Precios', icon: Euro },
+  { id: 'fronteras', nombre: 'Fronteras', icon: ArrowLeftRight },
+  { id: 'gas', nombre: 'Gas y petróleo', icon: Flame },
   { id: 'emisiones', nombre: 'Emisiones', icon: CloudFog },
 ] as const
 type Sec = (typeof SECCIONES)[number]['id']
@@ -190,7 +193,7 @@ function Generacion({ hist, desde, hoy }: { hist: Historia; desde: number; hoy: 
   </div>
 }
 
-function Demanda({ hist, desde }: { hist: Historia; desde: number }) {
+function Demanda({ hist, desde, extra }: { hist: Historia; desde: number; extra: ReturnType<typeof useExtra> }) {
   const d = sv(hist.demanda_mes, 'Demanda')
   const años = [...new Set(d.map(p => p[0].slice(0, 4)))].filter(y => d.filter(p => p[0].startsWith(y)).length === 12)
   const anual = años.map(y => ({ y, v: d.filter(p => p[0].startsWith(y)).reduce((s, p) => s + p[1], 0) }))
@@ -202,6 +205,8 @@ function Demanda({ hist, desde }: { hist: Historia; desde: number }) {
     <Card t="Mes a mes" wide lead="El consumo sube en invierno y en verano: calefacción y aire acondicionado.">
       <LineChart titulo="Demanda mensual" series={[{ id: 'd', nombre: 'Demanda', datos: d.map(p => [tLocal(p[0]), p[1] / 1e3] as [number, number]).filter(p => p[0] >= desde), color: ACC, area: true }]} fx={fMes} fxEje={t => String(new Date(t).getUTCFullYear())} fy={v => `${nf(v)} GWh`} />
     </Card>
+    <Sectores e={extra} />
+    <Ire e={extra} desde={desde} />
   </div>
 }
 
@@ -223,6 +228,7 @@ function Emisiones({ hist, desde }: { hist: Historia; desde: number }) {
 
 export default function App() {
   const { hoy, hist, err, setHoy } = useEnergia()
+  const extra = useExtra()
   const vivo = useVivo(setHoy)
   const init = location.hash.slice(1) as Sec
   const [sec, setSec] = useState<Sec>(SECCIONES.some(x => x.id === init) ? init : 'ahora')
@@ -240,7 +246,7 @@ export default function App() {
           <h1>Energía</h1>
           <p>{vivo ? <><i className="vivo" /> En directo desde Red Eléctrica</> : 'Datos de Red Eléctrica'}</p>
         </div>
-        {sec !== 'ahora' && sec !== 'precios' && <div className="rango" role="radiogroup" aria-label="Periodo de los gráficos">
+        {['generacion', 'demanda', 'emisiones'].includes(sec) && <div className="rango" role="radiogroup" aria-label="Periodo de los gráficos">
           {([5, 10, 0] as const).map(r => <button key={r} role="radio" aria-checked={rango === r} className={rango === r ? 'is-on' : ''} onClick={() => setRango(r)}>{r ? `${r} años` : 'Desde 2007'}</button>)}
         </div>}
       </header>
@@ -249,10 +255,12 @@ export default function App() {
       </nav>
       <motion.div key={sec} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .3 }}>
         {sec === 'ahora' && <Ahora hoy={hoy} tec={tec} setTec={setTec} vivo={vivo} />}
-        {sec !== 'ahora' && sec !== 'precios' && !hist && <p className="note">Cargando el histórico…</p>}
+        {['generacion', 'demanda', 'emisiones'].includes(sec) && !hist && <p className="note">Cargando el histórico…</p>}
         {sec === 'generacion' && hist && <Generacion hist={hist} desde={desde} hoy={hoy} />}
-        {sec === 'demanda' && hist && <Demanda hist={hist} desde={desde} />}
-        {sec === 'precios' && <PreciosV2 hoy={hoy} hist={hist} />}
+        {sec === 'demanda' && hist && <Demanda hist={hist} desde={desde} extra={extra} />}
+        {sec === 'fronteras' && <Fronteras e={extra} hoy={hoy} />}
+        {sec === 'gas' && <GasPetroleo e={extra} />}
+        {sec === 'precios' && <PreciosV2 hoy={hoy} hist={hist} extra={extra} />}
         {sec === 'emisiones' && hist && <Emisiones hist={hist} desde={desde} />}
       </motion.div>
       <Fuentes ids={['ree', 'ree_generacion', 'ree_demanda', 'ree_mercados', 'ree_balance']} />
