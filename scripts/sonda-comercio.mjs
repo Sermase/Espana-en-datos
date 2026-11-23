@@ -50,5 +50,9 @@ await prueba('enagas', 'https://www.enagas.es/es/gestion-tecnica-sistema/energy-
 await prueba('datacomex', 'https://comercio.serviciosmin.gob.es/Datacomex/', t => t.slice(0, 200))
 // mapa del mundo (npm)
 await prueba('world-atlas', 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json', t => t.length + ' bytes')
+// Inventario de presas: qué campos trae (año de construcción, tipo, titular...)
+const ARC = 'https://services-eu1.arcgis.com/RvnYk1PBUJ9rrAuT/arcgis/rest/services'
+await prueba('presas:campos', `${ARC}/UP_Presas_y_embalses/FeatureServer/0?f=json`, t => { try { return JSON.parse(t).fields.map(f => f.name + ':' + (f.alias ?? '')).join(' | ') } catch { return t.slice(0, 300) } })
+await prueba('presas:ejemplo', `${ARC}/UP_Presas_y_embalses/FeatureServer/0/query?where=NOMBRE%20LIKE%20%27%25ALCANTARA%25%27&outFields=*&returnGeometry=false&f=json`, t => { try { return JSON.stringify(JSON.parse(t).features?.slice(0, 2).map(f => f.attributes)) } catch { return t.slice(0, 300) } })
 writeFileSync(here('../fuentes/sonda-comercio.json'), JSON.stringify(out, null, 1))
 console.log('Sonda comercio:', Object.entries(out).map(([k, v]) => k + ' ' + (v.status ?? 'ERR')).join(' · '))
