@@ -420,6 +420,7 @@ export function Board({ layer, sel, onPick, seen, onDice }: {
         </svg>
       </motion.div>
 
+      {holo && (it?.k === 'res' || it?.k === 'river') && <div className="holo-dim" style={{ '--hx': `${holo.x}px`, '--hy': `${holo.y}px`, '--hr': `${holoSize() / 2}px` } as React.CSSProperties} />}
       {/* bajo el holograma sobra el icono plano del embalse */}
       {holo && it?.k === 'res' && <style>{`.has-holo .node[data-res="${it.r.id}"]{opacity:0}`}</style>}
       {holo && it?.k === 'res' && (layer === 'agua' || layer === 'energia') && (

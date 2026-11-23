@@ -154,13 +154,14 @@ export const RiverHolo = memo(function RiverHolo({ v, plan, size, x, y }: { v: R
     const k = (R * 0.82) / far
     const pts = plan.map(([a, b]) => [(a - cx) * k, (b - cy) * k] as XY)
     const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]))
-    const total = cum[cum.length - 1] || 1, N = 150
+    const total = cum[cum.length - 1] || 1, N = 90
     const maxD = v.prof[v.prof.length - 1][0] || 1
     const zAt = (f: number) => {
       const d = f * maxD; let i = v.prof.findIndex(p => p[0] >= d); if (i <= 0) return v.prof[0][1]
       const [d0, z0] = v.prof[i - 1], [d1, z1] = v.prof[i]; return z0 + (z1 - z0) * ((d - d0) / (d1 - d0 || 1))
     }
-    const zScale = (S * 0.5) / 2600 // misma escala vertical para todos los ríos: el Genil se ve más alto que el Ebro
+    const zScale = (S * 0.5) / 2600
+    // menos puntos: la cortina se ve igual y cada fotograma cuesta la mitad // misma escala vertical para todos los ríos: el Genil se ve más alto que el Ebro
     const samples: [number, number, number][] = []
     let j = 0
     for (let n = 0; n <= N; n++) {
@@ -187,15 +188,19 @@ export const RiverHolo = memo(function RiverHolo({ v, plan, size, x, y }: { v: R
       return [R + xr, R + yr * ct - pz * st]
     }
     const f1 = (q: XY) => q[0].toFixed(1) + ' ' + q[1].toFixed(1)
+    let lastDraw = 0
     const draw = (now: number) => {
-      if (!reduce) a += ((now - last) / 1000) * ((Math.PI * 2) / 46)
+      if (!reduce && now - lastDraw < 32) { raf = requestAnimationFrame(draw); return }
+      lastDraw = now
+      if (!reduce) a += (Math.min(100, now - last) / 1000) * ((Math.PI * 2) / 46)
       last = now
       const c = Math.cos(a), s = Math.sin(a)
       const floor = samples.map(([px, py]) => P(px, py, 0, c, s))
       const top = samples.map(([px, py, pz]) => P(px, py, pz, c, s))
       const set = (k: string, attr: string, val: string) => refs.current[k]?.setAttribute(attr, val)
       set('floor', 'd', 'M' + floor.map(f1).join('L'))
-      set('top', 'd', 'M' + top.map(f1).join('L'))
+      const topD = 'M' + top.map(f1).join('L')
+      set('top', 'd', topD); set('glow', 'd', topD)
       set('fill', 'd', 'M' + top.map(f1).join('L') + 'L' + [...floor].reverse().map(f1).join('L') + 'Z')
       let ribs = ''
       for (let i = 0; i < samples.length; i += 3) ribs += 'M' + f1(floor[i]) + 'L' + f1(top[i])
@@ -236,9 +241,10 @@ export const RiverHolo = memo(function RiverHolo({ v, plan, size, x, y }: { v: R
         <path ref={reg('fill')} className="rh-fill" fill="url(#rh-curtain)" />
         <path ref={reg('ribs')} className="rh-ribs" />
         {model.res.map((m, i) => <path key={'l' + m.r.id} ref={reg('rl' + i)} className="rh-damline" />)}
+        <path ref={reg('glow')} className="rh-glow" />
         <path ref={reg('top')} className="rh-top" />
         {model.res.map((m, i) => <g key={m.r.id} ref={reg('r' + i)}><circle r={4} className={`rh-res st-${status(pct(m.r))}`} />{m.r.c > 150 && <text y={-8} className="rh-lbl">{m.r.n}</text>}</g>)}
-        <g ref={reg('drop')}><circle r={3.2} className="rh-drop" /></g>
+        <g ref={reg('drop')}><circle r={7} className="rh-drop-halo" /><circle r={3.2} className="rh-drop" /></g>
         <g ref={reg('src')}><circle r={3} className="rh-pin" /><text y={-9} className="rh-lbl rh-src">{fmt(model.top)} m</text></g>
         <g ref={reg('end')}><circle r={3} className="rh-pin" /><text y={-9} className="rh-lbl">{fmt(model.bottom)} m</text></g>
       </svg>

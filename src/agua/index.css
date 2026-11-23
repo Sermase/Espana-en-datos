@@ -432,7 +432,7 @@ button { font: inherit; color: inherit; cursor: pointer }
 .holo-stage { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(62deg) rotateZ(0deg); animation: holo-spin 30s linear infinite; will-change: transform }
 @keyframes holo-spin { to { transform: rotateX(62deg) rotateZ(360deg) } }
 .holo-layer { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transform: translateZ(var(--z, 0px)) }
-.holo-disc { filter: drop-shadow(0 0 6px rgba(63,230,255,.35)) }
+.holo-disc { }
 .holo-grid line { stroke: #7cefff; stroke-opacity: .1; stroke-width: .7 }
 .holo-rim { fill: none; stroke: #7cefff; stroke-width: 1.6; stroke-opacity: .9 }
 .holo-ring-soft { fill: none; stroke: #7cefff; stroke-opacity: .15 }
@@ -449,7 +449,7 @@ button { font: inherit; color: inherit; cursor: pointer }
 .holo-tag em .ghost-key { display: inline-block; width: 12px; border-top: 2px solid #ffd27a; vertical-align: middle; margin-right: 3px }
 .holo-cap path { fill: none; stroke: #bff7ff; stroke-opacity: .18; stroke-width: 1 }
 .holo.is-low .holo-water path { fill: #ff5d6c; stroke: #ff9aa4 }
-.holo.is-low .holo-water.is-top path { stroke: #ffd6da; filter: drop-shadow(0 0 4px #ff4d5e) }
+.holo.is-low .holo-water.is-top path { stroke: #ffd6da }
 .holo-dam { position: absolute; transform-origin: 50% 100%; border: 1px solid rgba(220,250,255,.7); background: linear-gradient(180deg, rgba(160,240,255,.05), rgba(160,240,255,.16)); box-shadow: 0 0 8px rgba(63,230,255,.35); overflow: hidden }
 .holo-dam .dam-ly { position: absolute; left: -3px; right: -3px; height: 0; border-top: 2px solid #ffd27a; box-shadow: 0 0 6px rgba(255,176,46,.8) }
 .holo-dam i { position: absolute; left: 0; right: 0; bottom: 0; background: linear-gradient(0deg, rgba(63,230,255,.65), rgba(63,230,255,.15)); border-top: 1.5px solid #e6fdff; transform-origin: bottom; animation: holo-fill 1.4s cubic-bezier(.2,.8,.2,1) .3s both }
@@ -479,18 +479,20 @@ button { font: inherit; color: inherit; cursor: pointer }
 .is-moving .bchips { opacity: .4 }
 /* Holograma del río */
 .holo-river .rh { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible }
-.rh-disc { fill: url(#rh-floor); stroke: #7cefff; stroke-opacity: .9; stroke-width: 1.5; filter: drop-shadow(0 0 6px rgba(63,230,255,.4)) }
+.rh-disc { fill: url(#rh-floor); stroke: #7cefff; stroke-opacity: .9; stroke-width: 1.5 }
 .rh-ring { fill: none; stroke: #7cefff; stroke-opacity: .15 }
 .rh-ticks { fill: none; stroke: #9ff3ff; stroke-opacity: .5; stroke-width: 3; stroke-dasharray: 1 7 }
 .rh-spokes { stroke: #7cefff; stroke-opacity: .12; stroke-width: .8 }
 .rh-floor { fill: none; stroke: #74c4ff; stroke-opacity: .45; stroke-width: 1.3 }
 .rh-fill { stroke: none }
 .rh-ribs { stroke: #7cefff; stroke-opacity: .28; stroke-width: .8 }
-.rh-top { fill: none; stroke: #e6fdff; stroke-width: 2; stroke-linejoin: round; filter: drop-shadow(0 0 5px #3fe6ff) }
+.rh-top { fill: none; stroke: #e6fdff; stroke-width: 2; stroke-linejoin: round }
+.rh-glow { fill: none; stroke: #3fe6ff; stroke-opacity: .25; stroke-width: 7; stroke-linejoin: round }
 .rh-damline { stroke: #ffd27a; stroke-opacity: .6; stroke-width: 1 }
-.rh-res { fill: #3fe6ff; stroke: #fff; stroke-width: 1.2; filter: drop-shadow(0 0 4px #3fe6ff) }
-.rh-res.st-low { fill: #ff4d5e; filter: drop-shadow(0 0 4px #ff4d5e) }
-.rh-drop { fill: #fff; filter: drop-shadow(0 0 6px #9ff3ff) drop-shadow(0 0 2px #fff) }
+.rh-res { fill: #3fe6ff; stroke: #fff; stroke-width: 1.2 }
+.rh-res.st-low { fill: #ff4d5e }
+.rh-drop { fill: #fff }
+.rh-drop-halo { fill: #9ff3ff; opacity: .35 }
 .rh-pin { fill: #9ff3ff }
 .rh-lbl { font: 600 10.5px Barlow, sans-serif; fill: #dff8ff; text-anchor: middle; paint-order: stroke; stroke: rgba(2,12,20,.85); stroke-width: 3px }
 .rh-src { fill: #ffd27a }
@@ -509,3 +511,11 @@ button { font: inherit; color: inherit; cursor: pointer }
 .home-link { display: inline-block; font-size: 12px; letter-spacing: .08em; color: #86a9b5; text-decoration: none; margin-bottom: 2px; pointer-events: auto }
 .home-link::before { content: '‹ '; }
 .home-link:hover { color: #3fe6ff }
+
+/* Con el holograma abierto: el mapa se oscurece detrás y se queda quieto, para que el holograma vaya fluido */
+.holo-dim { position: absolute; inset: 0; z-index: 3; pointer-events: none; background: radial-gradient(circle at var(--hx) var(--hy), rgba(2, 8, 13, .9) 0, rgba(2, 8, 13, .82) calc(var(--hr) * .7), rgba(2, 8, 13, .55) calc(var(--hr) * 1.5), rgba(2, 8, 13, .35) 100%); animation: dim-in .5s ease both }
+@keyframes dim-in { from { opacity: 0 } }
+.is-moving .holo-dim { opacity: 0; transition: opacity .12s }
+.has-holo .river, .has-holo .river-sel-flow, .has-holo .ret-pulse, .has-holo .lamina.is-sel, .has-holo .bolt { animation: none }
+.has-holo .river-sel-glow { filter: none }
+.holo { z-index: 4 }
