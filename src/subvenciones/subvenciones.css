@@ -192,7 +192,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .cv-det dl { margin: 0 0 8px; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 6px 14px }
 .cv-det dt { color: var(--muted); font-size: 12px }
 .cv-det dd { margin: 0; color: #fff }
-.cv-det a { color: var(--acc) }
+.convs .cv-det a { display: inline; padding: 0; border: 0; background: none; color: var(--acc); text-decoration: underline }
 .burbujas { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; margin: 4px 0 16px }
 .burbuja { display: grid; place-content: center; text-align: center; border-radius: 50%; border: 1.5px solid; padding: 6px; overflow: hidden; transition: box-shadow .2s }
 .burbuja b { font: 700 18px/1 Oxanium, sans-serif; color: #fff }
