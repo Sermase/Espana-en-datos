@@ -1,16 +1,16 @@
 {
- "_sonda_tr": {
-  "DEMANDAAU": "200 cb({\"valoresHorariosGeneracion\":[{\"ts\":\"2026-11-22 21:00\",\"dem\":29481,\"eol\":9654,\"nuc\":6097,\"gf\":0,\"car\":0,\"cc\":6033,\"hid\":6535,\"aut\":2197,\"inter\":-1220,\"icb\":-180,\"sol\":120,\"solFot\":84,\"solTer\":36,\"bio\":462,\"cogenResto\":1754,\"expAnd\":0,\"expMar\":-806,\"expPor\":-681,\"expFra\":0,\"expTot\":-1487,\"impFra\":315,\"impPor\":0,\"impMar\":0,\"impAnd\":47,\"impTot\":362,\"conb\":0,\"turb\":1129,\"gnhd\":4463,\"bat\":4,\"consBat",
-  "PENINSULA": "200 curva PENINSULA no valida",
-  "DEMANDA_PENINSULA": "200 curva DEMANDA_PENINSULA no valida",
-  "DEMANDAPEN": "200 curva DEMANDAPEN no valida"
+ "tiempo_real": {
+  "filas": 210,
+  "primera": "2026-11-22 21:00",
+  "ultima": "2026-11-23 14:25",
+  "claves": "ts,dem,eol,nuc,gf,car,cc,hid,aut,inter,icb,sol,solFot,solTer,bio,cogenResto,expAnd,expMar,expPor,expFra,expTot,impFra,impPor,impMar,impAnd,impTot,conb,turb,gnhd,bat,consBat,dif,vap"
  },
  "_cors": "*",
  "mix_hora": "ERROR HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error Interno\",\"detail\":\"Los datos solicitados no est\\u00e1n disponibles en este momento. Int\\u00e9ntelo de nuevo m\\u00e1s t",
  "demanda_tr": {
   "Prevista": "288 datos · 2026-11-23T00:00 → 2026-11-23T23:55 28284 0.342",
-  "Programada": "288 datos · 2026-11-23T00:00 → 2026-11-23T23:55 27183 0.329",
-  "Real": "166 datos · 2026-11-23T00:00 → 2026-11-23T13:45 36595 0.26",
+  "Programada": "288 datos · 2026-11-23T00:00 → 2026-11-23T23:55 27170 0.329",
+  "Real": "172 datos · 2026-11-23T00:00 → 2026-11-23T14:15 36284 0.255",
   "Programada total": "288 datos · 2026-11-23T00:00 → 2026-11-23T23:55 27183 0.329"
  },
  "precios_hora": {
@@ -113,18 +113,11 @@
   "saldo": "238 datos · 2007-01-01T00:00 → 2026-11-01T00:00 -14131.4 1"
  },
  "precio_dia": {
-  "pedidos": 60,
-  "fallos": [
-   "2021-12: HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error",
-   "2022-1: HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error",
-   "2022-2: HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error",
-   "2022-3: HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error",
-   "2022-4: HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error",
-   "2022-5: HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error",
-   "2022-6: HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error",
-   "2022-7: HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error"
-  ],
-  "series": {}
- },
- "potencia": "ERROR HTTP 500 <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"robots\" content=\"noindex,nofollow,noarchive\" />\n    <title>An Error Occurre"
+  "pedidos": 18,
+  "fallos": [],
+  "series": {
+   "PVPC": "541 días · 2025-06-01T00:00 → 2026-11-23T00:00",
+   "Precio mercado spot": "542 días · 2025-06-01T00:00 → 2026-11-24T00:00"
+  }
+ }
 }
