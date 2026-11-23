@@ -1,0 +1,61 @@
+/* Gráficos comunes de España en datos. Cada página define --acc (su color) y, si quiere, --surface. */
+.g-fig { margin: 6px 0 0; color: var(--acc, #3fe6ff); --g-ink: #e6f6fb; --g-ink2: #a9c6cf; --g-muted: #7fa6b3; --g-grid: rgba(160, 220, 240, .10); --g-surface: var(--surface, #07141d) }
+.g-plot { position: relative; width: 100% }
+.g-plot svg { display: block; overflow: visible }
+.g-grid { stroke: var(--g-grid); stroke-width: 1; shape-rendering: crispEdges }
+.g-ax { font: 500 11px Barlow, system-ui, sans-serif; fill: var(--g-muted); font-variant-numeric: tabular-nums }
+.g-line { fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round }
+.is-fondo .g-line { stroke-width: 1.5; opacity: .55 }
+.g-band { fill: rgba(160, 220, 240, .08) }
+.g-now { stroke: var(--g-ink2); stroke-width: 1; opacity: .5 }
+.g-end, .g-mark, .g-cross circle { stroke: var(--g-surface); stroke-width: 2 }
+.g-end { fill: currentColor }
+.g-mark { fill: var(--g-ink) }
+.g-mark.is-bajo { fill: #ff4d5e }
+.g-endlabel { font: 600 12.5px Barlow, system-ui, sans-serif; fill: var(--g-ink) }
+.g-mlabel { font: 600 11px Barlow, system-ui, sans-serif; fill: var(--g-ink2); paint-order: stroke; stroke: var(--g-surface); stroke-width: 3px }
+.g-cross line { stroke: var(--g-ink2); stroke-width: 1 }
+.g-cross circle { fill: currentColor }
+.g-hit { fill: transparent; cursor: crosshair; outline: none; touch-action: pan-y }
+.g-hit:focus-visible { stroke: var(--acc, #3fe6ff); stroke-width: 1 }
+.g-tip { position: absolute; top: -6px; width: 150px; pointer-events: none; background: rgba(3, 12, 18, .95); border: 1px solid rgba(160, 220, 240, .2); border-radius: 4px; padding: 7px 9px; box-shadow: 0 6px 20px rgba(0, 0, 0, .45); z-index: 5 }
+.g-tip p { margin: 0; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 12px; color: var(--g-ink2) }
+.g-tip p span { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.g-tip p span i { display: inline-block; width: 12px; height: 2px; border-radius: 1px; flex: none }
+.g-tip b { color: var(--g-ink); font-size: 13.5px; font-variant-numeric: tabular-nums }
+.g-tip .g-tip-x { color: var(--g-muted); font-size: 11.5px; margin-bottom: 3px }
+.g-legend { list-style: none; padding: 0; margin: 0 0 6px; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--g-ink2) }
+.g-legend li { display: inline-flex; align-items: center; gap: 6px }
+.g-legend i { width: 14px; height: 2px; border-radius: 1px; background: currentColor }
+.g-legend i.is-fondo { opacity: .55 }
+.g-legend i.is-banda { height: 8px; background: rgba(160, 220, 240, .16) }
+.g-cap { margin: 6px 0 0; font-size: 12.5px; color: var(--g-muted); line-height: 1.45 }
+.g-table { margin-top: 4px; font-size: 12px; color: var(--g-muted) }
+.g-table summary { cursor: pointer; width: max-content; padding: 2px 0 }
+.g-table summary:hover { color: var(--g-ink2) }
+.g-table table { width: 100%; border-collapse: collapse; margin-top: 6px; font-variant-numeric: tabular-nums }
+.g-table th, .g-table td { padding: 3px 6px; border-bottom: 1px solid var(--g-grid); text-align: right; font-weight: 500 }
+.g-table th[scope="row"], .g-table thead th:first-child { text-align: left; color: var(--g-ink2) }
+.g-table tbody { display: block; max-height: 220px; overflow-y: auto }
+.g-table thead, .g-table tbody tr { display: table; width: 100%; table-layout: fixed }
+
+/* Rankings en barras */
+.g-bars { list-style: none; padding: 0; margin: 0; display: grid; gap: 1px; color: var(--acc, #3fe6ff) }
+.g-bar { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) minmax(50px, 28%) 60px; gap: 10px; align-items: center; padding: 6px 4px; text-align: left; border-radius: 3px; color: var(--g-ink, #e6f6fb); background: none; border: 0; font: inherit }
+button.g-bar { cursor: pointer }
+button.g-bar:hover, button.g-bar:focus-visible { background: rgba(255, 255, 255, .045) }
+.g-bar-n { min-width: 0; font-size: 14.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: grid }
+.g-bar-n small { color: #86a9b5; font-size: 12px; overflow: hidden; text-overflow: ellipsis }
+.g-bar-t { height: 8px; display: flex; align-items: center }
+.g-bar-t i { display: block; height: 8px; border-radius: 0 4px 4px 0; background: currentColor }
+.g-bars li:not(.is-dest) .g-bar-t i { opacity: .85 }
+.g-bars li.is-dest .g-bar-n { color: #fff; font-weight: 600 }
+.g-bar b { text-align: right; font-size: 13.5px; font-weight: 600; font-variant-numeric: tabular-nums }
+.g-more { margin-top: 4px; background: none; border: 0; color: var(--acc, #3fe6ff); font: 600 13px Barlow, sans-serif; cursor: pointer; padding: 4px }
+
+/* Columnas */
+.g-col path { fill: currentColor; opacity: .75; transition: opacity .15s }
+.g-col.is-dest path, .g-col.is-hover path { opacity: 1 }
+.g-col .g-hit { cursor: default }
+
+@media (prefers-reduced-motion: reduce) { .g-fig *, .g-bars * { transition: none !important } }

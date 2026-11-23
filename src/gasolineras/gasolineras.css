@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Gasolineras: mismo chasis que el resto de España en datos, acento coral. */
-:root { --bg: #03090f; --panel: #07141d; --line: rgba(160, 220, 240, .12); --ink: #e6f6fb; --muted: #86a9b5; --acc: #ff5f7e; --cheap: #3df5b0; color-scheme: dark }
+:root { --surface: #07141d; --bg: #03090f; --panel: #07141d; --line: rgba(160, 220, 240, .12); --ink: #e6f6fb; --muted: #86a9b5; --acc: #ff5f7e; --cheap: #3df5b0; color-scheme: dark }
 * { box-sizing: border-box }
 html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: Barlow, system-ui, sans-serif }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer }

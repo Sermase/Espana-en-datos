@@ -7,7 +7,7 @@ TYPE: Oxanium para cifras y títulos, Barlow para leer. LAYOUT: tablero, barra d
 */
 @import "tailwindcss";
 
-:root {
+:root { --acc: #3fe6ff; --surface: #07141d;
   color-scheme: dark;
   --void: #02080d;
   --deep: #04111a;

@@ -3,9 +3,12 @@ import { createPortal } from 'react-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { fmt, INFO } from './data'
 import { MONTHS } from './history'
+import { LineChart, useInView, type Punto, type Serie } from '../graficos'
 
+/** Barra que crece hasta su valor la primera vez que se ve. */
 export function Bar({ value, max, tone = 'water' }: { value: number; max: number; tone?: string }) {
-  return <span className={`bar bar-${tone}`}><i style={{ width: `${Math.max(0, Math.min(100, (value / max) * 100))}%` }} /></span>
+  const [ref, seen] = useInView<HTMLSpanElement>()
+  return <span ref={ref} className={`bar bar-${tone}`}><motion.i initial={{ width: 0 }} animate={{ width: seen ? `${Math.max(0, Math.min(100, (value / max) * 100))}%` : 0 }} transition={{ duration: .8, ease: [0.2, 0.8, 0.2, 1] }} /></span>
 }
 
 /** Número que corre hasta su valor, como un marcador. */
@@ -91,65 +94,27 @@ export function Head({ children, info, right }: { children: ReactNode; info?: st
   return <h3 className="hd"><span>{children}</span>{info && <Info k={info} />}{right && <span className="hd-right">{right}</span>}</h3>
 }
 
-function useSize<T extends HTMLElement>() {
-  const ref = useRef<T>(null)
-  const [w, setW] = useState(320)
-  useEffect(() => {
-    const el = ref.current; if (!el) return
-    const ro = new ResizeObserver(() => setW(el.clientWidth || 320)); ro.observe(el)
-    return () => ro.disconnect()
-  }, [])
-  return [ref, w] as const
-}
-
-const pathOf = (pts: ([number, number] | null)[]) => {
-  let d = '', pen = false
-  for (const p of pts) {
-    if (!p) { pen = false; continue }
-    d += `${pen ? 'L' : 'M'}${p[0].toFixed(1)} ${p[1].toFixed(1)}`; pen = true
-  }
-  return d
-}
-
 export type YearLine = { key: string; label: string; vals: (number | null)[]; cls: string }
+
+const LINE_COLOR: Record<string, string> = {
+  'ln-cur': '#3fe6ff', 'ln-prev': '#d6e9ef', 'ln-old': '#8fa6ae', 'ln-avg': '#ffb02e',
+  // años extra: tonos categóricos validados para fondo oscuro
+  'ln-x0': '#3987e5', 'ln-x1': '#d55181', 'ln-x2': '#9085e9', 'ln-x3': '#199e70',
+}
+const colorOf = (cls: string) => LINE_COLOR[cls.split(' ').reverse().find(c => LINE_COLOR[c]) ?? 'ln-prev']
 
 /** Año hidrológico: semanas de octubre a septiembre, con varias líneas y la banda de mínimos y máximos. */
 export function HydroChart({ lines, band, now, height = 210 }: {
   lines: YearLine[]; band?: { lo: (number | null)[]; hi: (number | null)[] }; now?: { w: number; v: number }; height?: number
 }) {
-  const [ref, W] = useSize<HTMLDivElement>()
-  const [hover, setHover] = useState<number | null>(null)
-  const H = height, L = 30, R = 8, T = 10, B = 22
-  const x = (w: number) => L + (w / 52) * (W - L - R), y = (v: number) => T + (1 - v / 100) * (H - T - B)
-  const bandPath = band ? (() => {
-    const up: string[] = [], dn: string[] = []
-    band.hi.forEach((v, i) => { if (v != null && band.lo[i] != null) { up.push(`${x(i).toFixed(1)} ${y(v).toFixed(1)}`); dn.unshift(`${x(i).toFixed(1)} ${y(band.lo[i]!).toFixed(1)}`) } })
-    return up.length ? `M${up.join('L')}L${dn.join('L')}Z` : ''
-  })() : ''
-  const onMove = (e: React.PointerEvent) => {
-    const r = (e.currentTarget as SVGElement).getBoundingClientRect()
-    setHover(Math.max(0, Math.min(52, Math.round(((e.clientX - r.left - L) / (W - L - R)) * 52))))
-  }
-  const hv = hover ?? now?.w ?? null
+  const pts = (v: (number | null)[]): Punto[] => v.flatMap((y, i) => (y == null ? [] : [[i, y] as Punto]))
+  const series: Serie[] = lines.map(l => ({ id: l.key, nombre: l.label, datos: pts(l.vals), color: colorOf(l.cls), fondo: l.cls.includes('ln-old') || l.cls.includes('ln-x') || l.cls.includes('ln-prev'), area: l.cls.includes('ln-cur') })).filter(s => s.datos.length > 1)
+  const ticks = MONTHS.map((_, i) => i * 4.35 + 2)
   return (
-    <div className="chart" ref={ref}>
-      <svg width={W} height={H} onPointerMove={onMove} onPointerDown={onMove} onPointerLeave={() => setHover(null)} role="img" aria-label="Evolución semanal del agua embalsada por año hidrológico">
-        {[0, 25, 50, 75, 100].map(v => <g key={v}><line x1={L} x2={W - R} y1={y(v)} y2={y(v)} className="grid" /><text x={L - 6} y={y(v) + 4} className="axis" textAnchor="end">{v}</text></g>)}
-        {MONTHS.map((m, i) => (W > 340 || i % 2 === 0) && <text key={m} x={x(i * 4.35 + 2)} y={H - 6} className="axis" textAnchor="middle">{m}</text>)}
-        {bandPath && <path d={bandPath} className="band" />}
-        {lines.map(l => <path key={l.key} d={pathOf(l.vals.map((v, i) => (v == null ? null : [x(i), y(v)])))} className={`ln ${l.cls}`} pathLength={1} />)}
-        {now && <g className="now-dot" transform={`translate(${x(now.w)} ${y(now.v)})`}><circle r="9" className="halo" /><circle r="4" /></g>}
-        {hv != null && <line x1={x(hv)} x2={x(hv)} y1={T} y2={H - B} className="cross" />}
-      </svg>
-      <ul className="legend">
-        {lines.map(l => {
-          const v = hv != null ? l.vals[hv] : null
-          return <li key={l.key} className={l.cls}><i />{l.label}<b>{v != null ? `${fmt(v)} %` : '—'}</b></li>
-        })}
-        {band && <li className="band-key"><i />Rango 10 años<b>{hv != null && band.lo[hv] != null ? `${fmt(band.lo[hv]!)}–${fmt(band.hi[hv]!)} %` : '—'}</b></li>}
-      </ul>
-      {hv != null && <p className="chart-week">Semana {hv + 1} del año hidrológico · {MONTHS[Math.min(11, Math.floor(hv / 4.35))]}</p>}
-    </div>
+    <LineChart titulo="Evolución semanal del agua embalsada por año hidrológico" series={series} alto={height} yMin={0} yMax={100}
+      fx={v => `Semana ${Math.round(v) + 1} · ${MONTHS[Math.min(11, Math.floor(v / 4.35))]}`} fxEje={v => MONTHS[Math.min(11, Math.floor(v / 4.35))]} fy={v => `${fmt(v)} %`} ticksX={ticks}
+      banda={band ? { nombre: 'Rango 10 años', lo: pts(band.lo), hi: pts(band.hi) } : undefined} ahora={now?.w}
+      marcas={now && !series.some(s => s.id === 'cur') ? [{ x: now.w, y: now.v, texto: `ahora ${fmt(now.v)} %` }] : []} />
   )
 }
 
@@ -157,48 +122,14 @@ export function HydroChart({ lines, band, now, height = 210 }: {
 export function TimeChart({ pts, height = 170, marks = [], label }: {
   pts: { t: number; v: number | null }[]; height?: number; marks?: { t: number; v: number; label: string; cls: string }[]; label: string
 }) {
-  const [ref, W] = useSize<HTMLDivElement>()
-  const [hover, setHover] = useState<number | null>(null)
-  const gid = useId().replace(/:/g, '')
-  const H = height, L = 30, R = 8, T = 10, B = 22
-  const valid = pts.filter(p => p.v != null)
-  if (!valid.length) return null
-  const t0 = pts[0].t, t1 = pts[pts.length - 1].t
-  const x = (t: number) => L + ((t - t0) / (t1 - t0)) * (W - L - R), y = (v: number) => T + (1 - v / 100) * (H - T - B)
-  const line = pathOf(pts.map(p => (p.v == null ? null : [x(p.t), y(p.v)])))
-  const area = (() => {
-    let d = '', open: number | null = null, last = 0
-    pts.forEach(p => {
-      if (p.v == null) { if (open != null) { d += `L${x(last).toFixed(1)} ${y(0)}Z`; open = null } return }
-      if (open == null) { d += `M${x(p.t).toFixed(1)} ${y(0)}L${x(p.t).toFixed(1)} ${y(p.v).toFixed(1)}`; open = p.t } else d += `L${x(p.t).toFixed(1)} ${y(p.v).toFixed(1)}`
-      last = p.t
-    })
-    if (open != null) d += `L${x(last).toFixed(1)} ${y(0)}Z`
-    return d
-  })()
-  const y0 = new Date(t0).getFullYear(), y1 = new Date(t1).getFullYear()
-  const step = Math.max(1, Math.ceil((y1 - y0) / (W < 400 ? 4 : 8)))
-  const years = Array.from({ length: y1 - y0 + 1 }, (_, i) => y0 + i).filter(yy => (yy - y0) % step === 0 && yy > y0)
-  const onMove = (e: React.PointerEvent) => {
-    const r = (e.currentTarget as SVGElement).getBoundingClientRect()
-    const t = t0 + ((e.clientX - r.left - L) / (W - L - R)) * (t1 - t0)
-    let bi = 0, bd = Infinity
-    pts.forEach((p, i) => { if (p.v != null && Math.abs(p.t - t) < bd) { bd = Math.abs(p.t - t); bi = i } })
-    setHover(bi)
-  }
-  const hp = hover != null ? pts[hover] : null
+  const datos = pts.flatMap(p => (p.v == null ? [] : [[p.t, p.v] as Punto]))
+  if (datos.length < 2) return null
+  const d = (t: number) => new Date(t).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })
   return (
-    <div className="chart" ref={ref}>
-      <svg width={W} height={H} onPointerMove={onMove} onPointerDown={onMove} onPointerLeave={() => setHover(null)} role="img" aria-label={label}>
-        <defs><linearGradient id={gid} x1="0" x2="0" y1="0" y2="1"><stop offset="0" className="ar-top" /><stop offset="1" className="ar-bot" /></linearGradient></defs>
-        {[0, 50, 100].map(v => <g key={v}><line x1={L} x2={W - R} y1={y(v)} y2={y(v)} className="grid" /><text x={L - 6} y={y(v) + 4} className="axis" textAnchor="end">{v}</text></g>)}
-        {years.map(yy => <text key={yy} x={x(new Date(yy, 0, 1).getTime())} y={H - 6} className="axis" textAnchor="middle">{yy}</text>)}
-        <path d={area} fill={`url(#${gid})`} />
-        <path d={line} className="ln ln-main" pathLength={1} />
-        {marks.map(m => <g key={m.label} className={`mark ${m.cls}`} transform={`translate(${x(m.t)} ${y(m.v)})`}><circle r="4.5" /></g>)}
-        {hp && hp.v != null && <g><line x1={x(hp.t)} x2={x(hp.t)} y1={T} y2={H - B} className="cross" /><circle cx={x(hp.t)} cy={y(hp.v)} r="4" className="cross-dot" /></g>}
-      </svg>
-      <p className="chart-read">{hp && hp.v != null ? <><b>{fmt(hp.v)} %</b> el {new Date(hp.t).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</> : 'Desliza sobre el gráfico para leer cada semana'}</p>
-    </div>
+    <LineChart titulo={label} series={[{ id: 'v', nombre: label, datos, color: '#3fe6ff', area: true }]} alto={height} yMin={0} yMax={100}
+      fx={v => (Math.abs(v - datos[0][0]) > 2e9 && new Date(v).getMonth() === 0 && new Date(v).getDate() < 8 ? String(new Date(v).getFullYear()) : d(v))}
+      ticksX={(() => { const y0 = new Date(datos[0][0]).getFullYear() + 1, y1 = new Date(datos[datos.length - 1][0]).getFullYear(); const st = Math.max(1, Math.ceil((y1 - y0) / 6)); const out: number[] = []; for (let y = y0; y <= y1; y += st) out.push(new Date(y, 0, 1).getTime()); return out })()}
+      fy={v => `${fmt(v)} %`} etiquetasFinal={!marks.some(m => m.cls === 'mk-now')}
+      marcas={marks.map(m => ({ x: m.t, y: m.v, texto: m.cls === 'mk-min' ? `mín. ${fmt(m.v)} %` : m.cls === 'mk-max' ? `máx. ${fmt(m.v)} %` : `${fmt(m.v)} %`, tono: m.cls === 'mk-min' ? 'bajo' as const : 'alto' as const }))} />
   )
 }

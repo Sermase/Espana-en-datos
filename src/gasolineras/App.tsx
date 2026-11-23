@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { Clock, Crosshair, Fuel as FuelIcon, MapPin, Navigation, Palmtree, X } from 'lucide-react'
 import { FUEL_NAME, FUEL_SHORT, cents, eur, fechaLarga, int, km, priceColor, useDatos, type Datos, type Fuel, type Station } from './datos'
 import { Mapa, type MapaApi } from './Mapa'
+import { Barras, Columnas, LineChart, CountUp } from '../graficos'
 
 type Sel = { k: 'st'; id: number } | { k: 'prov'; id: string } | null
 const LITROS = 50
@@ -16,18 +17,23 @@ const readHash = (): Sel => {
 const priced = (d: Datos, f: Fuel) => d.st.filter(s => !s.restr && s.p[f] != null)
 
 function Price({ v, big }: { v: number | null; big?: boolean }) {
-  return <span className={big ? 'price price-big' : 'price'}>{eur(v)}<small> €/l</small></span>
+  return <span className={big ? 'price price-big' : 'price'}>{v == null ? '—' : <CountUp value={v} fmt={x => eur(x)} duration={.8} />}<small> €/l</small></span>
 }
 
-function Row({ name, sub, v, max, min, onClick, color }: { name: string; sub?: string; v: number; min: number; max: number; onClick?: () => void; color?: string }) {
-  const w = max > min ? 12 + ((v - min) / (max - min)) * 88 : 50
-  return (
-    <li><button onClick={onClick} disabled={!onClick}>
-      <span className="row-name">{name}{sub && <small>{sub}</small>}</span>
-      <span className="row-bar"><i style={{ width: `${w}%`, background: color }} /></span>
-      <b>{eur(v)}</b>
-    </button></li>
-  )
+const p3 = (v: number) => eur(v)
+const floor2 = (v: number) => Math.floor(v * 100 - 1) / 100
+
+/** Cuántas gasolineras hay en cada céntimo de precio; resalta el tramo de `marca`. */
+function Reparto({ precios, marca, titulo }: { precios: number[]; marca?: number | null; titulo: string }) {
+  if (precios.length < 5) return null
+  const so = [...precios].sort((a, b) => a - b)
+  const lo = so[Math.floor(so.length * 0.01)], hi = so[Math.floor(so.length * 0.99)]
+  const step = Math.max(0.01, Math.ceil(((hi - lo) / 28) * 100) / 100)
+  const bins: { x: string; valor: number; lo: number }[] = []
+  for (let b = Math.floor(lo * 100) / 100; b <= hi; b = Math.round((b + step) * 100) / 100) bins.push({ x: eur(b, 2), valor: 0, lo: b })
+  for (const v of so) { const i = Math.min(bins.length - 1, Math.max(0, Math.floor((v - bins[0].lo) / step + 1e-9))); bins[i].valor++ }
+  const mi = marca == null ? -1 : Math.min(bins.length - 1, Math.max(0, Math.floor((marca - bins[0].lo) / step + 1e-9)))
+  return <Columnas titulo={titulo} items={bins.map((b, i) => ({ x: b.x, valor: b.valor, destacado: i === mi, color: i === mi ? '#ffffff' : undefined }))} fmt={v => int(Math.round(v))} cadaX={Math.ceil(bins.length / 5)} etiqueta={() => 'esta'} alto={140} />
 }
 
 function StationCard({ d, s, fuel, onProv, near }: { d: Datos; s: Station; fuel: Fuel; onProv: (id: string) => void; near: { lat: number; lon: number } | null }) {
@@ -47,8 +53,13 @@ function StationCard({ d, s, fuel, onProv, near }: { d: Datos; s: Station; fuel:
       {rank > 0 && <li><b>{rank}ª</b> más barata de {int(inProv.length)} en {prov.n}</li>}
       <li>Llenar {LITROS} litros: <b>{(v * LITROS).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</b>, {v <= med ? 'ahorras' : 'pagas'} <b>{Math.abs((v - med) * LITROS).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</b> {v <= med ? 'frente a' : 'más que'} la gasolinera típica de la provincia</li>
     </ul>}
+    {v != null && <>
+      <h3>Dónde cae entre las de {prov?.n}</h3>
+      <Reparto titulo={`Gasolineras de ${prov?.n} por precio de ${FUEL_NAME[fuel].toLowerCase()}`} precios={inProv.map(x => x.p[fuel]!)} marca={v} />
+      <p className="note">Cada columna cuenta las gasolineras de la provincia en ese tramo de precio; la blanca es esta.</p>
+    </>}
     <h3>Todos sus precios</h3>
-    <ul className="rows">{fuels.map(f => <Row key={f} name={FUEL_NAME[f]} sub={d.hoy.provincias[s.prov]?.[f] != null ? `mediana ${eur(d.hoy.provincias[s.prov][f]!)}` : undefined} v={s.p[f]!} min={0} max={Math.max(...fuels.map(x => s.p[x]!))} color={priceColor(s.p[f]! - (d.hoy.provincias[s.prov]?.[f] ?? s.p[f]!))} />)}</ul>
+    <Barras titulo="Precios de esta gasolinera" fmt={p3} items={fuels.map(f => ({ id: f, nombre: FUEL_NAME[f], sub: d.hoy.provincias[s.prov]?.[f] != null ? `mediana de la provincia ${eur(d.hoy.provincias[s.prov][f]!)}` : undefined, valor: s.p[f]!, color: priceColor(s.p[f]! - (d.hoy.provincias[s.prov]?.[f] ?? s.p[f]!)), destacado: f === fuel }))} />
     <a className="btn" href={`https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lon}`} target="_blank" rel="noreferrer"><Navigation size={16} /> Cómo llegar</a>
   </>)
 }
@@ -70,8 +81,11 @@ function ProvCard({ d, id, fuel, onSt }: { d: Datos; id: string; fuel: Fuel; onS
       {p[fuel] != null && es != null && <p className="hero-diff" style={{ color: priceColor((p[fuel]! - es) * 1.6) }}>{cents(p[fuel]! - es)}<small>que la de España</small></p>}
     </div>
     {lo && hi && <p className="note">Entre la más barata y la más cara de {p.n} hay {cents(hi.p[fuel]! - lo.p[fuel]!).replace('+', '')}: {((hi.p[fuel]! - lo.p[fuel]!) * LITROS).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })} en un depósito de {LITROS} litros.</p>}
+    <h3>Cómo se reparten los precios</h3>
+    <Reparto titulo={`Gasolineras de ${p.n} por precio`} precios={list.map(x => x.p[fuel]!)} marca={p[fuel]} />
+    <p className="note">La columna blanca es la gasolinera típica (la mediana).</p>
     <h3>Las más baratas</h3>
-    <ul className="rows">{list.slice(0, 8).map(s => <Row key={s.id} name={s.marca} sub={`${s.mun} · ${s.dir}`} v={s.p[fuel]!} min={lo.p[fuel]!} max={list[Math.min(7, list.length - 1)].p[fuel]!} onClick={() => onSt(s)} color={priceColor(s.p[fuel]! - (p[fuel] ?? 0))} />)}</ul>
+    {lo && <Barras titulo={`Las más baratas de ${p.n}`} fmt={p3} desde={floor2(lo.p[fuel]!)} limite={8} items={list.slice(0, 30).map(s => ({ id: s.id, nombre: s.marca, sub: `${s.mun} · ${s.dir}`, valor: s.p[fuel]!, color: priceColor(s.p[fuel]! - (p[fuel] ?? 0)), onClick: () => onSt(s) }))} />}
   </>)
 }
 
@@ -93,13 +107,17 @@ function Resumen({ d, fuel, onSt, onProv }: { d: Datos; fuel: Fuel; onSt: (s: St
       <p className="hero-diff">{int(list.length)}<small>gasolineras al público con este combustible</small></p>
     </div>
     {cheap && dear && <p className="note">Llenar {LITROS} litros cuesta {((dear[1][fuel]! - cheap[1][fuel]!) * LITROS).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })} más en {dear[1].n} que en {cheap[1].n}, mirando la gasolinera típica de cada una.</p>}
+    <h3>Cómo se reparten los precios en España</h3>
+    <Reparto titulo="Gasolineras de España por precio" precios={list.map(x => x.p[fuel]!)} marca={es} />
+    <p className="note">Cada columna cuenta las gasolineras en ese tramo de precio; la blanca es la típica de España.</p>
     <h3>Las más baratas de España</h3>
-    <ul className="rows">{list.slice(0, 10).map(s => <Row key={s.id} name={s.marca} sub={`${s.mun} (${d.hoy.provincias[s.prov]?.n})`} v={s.p[fuel]!} min={list[0].p[fuel]!} max={list[9]?.p[fuel] ?? list[0].p[fuel]!} onClick={() => onSt(s)} color="#3df5b0" />)}</ul>
+    {list.length > 0 && <Barras titulo="Las más baratas de España" fmt={p3} desde={floor2(list[0].p[fuel]!)} limite={10} items={list.slice(0, 40).map(s => ({ id: s.id, nombre: s.marca, sub: `${s.mun} (${d.hoy.provincias[s.prov]?.n})`, valor: s.p[fuel]!, color: '#3df5b0', onClick: () => onSt(s) }))} />}
     <h3>Provincias, de más barata a más cara</h3>
-    <ul className="rows">{provs.map(([id, v]) => <Row key={id} name={v.n} v={v[fuel]!} min={cheap[1][fuel]!} max={dear[1][fuel]!} onClick={() => onProv(id)} color={priceColor((v[fuel]! - (es ?? 0)) * 1.6)} />)}</ul>
+    {cheap && <Barras titulo="Provincias por precio mediano" fmt={p3} desde={floor2(cheap[1][fuel]!)} limite={12} items={provs.map(([id, v]) => ({ id, nombre: v.n, valor: v[fuel]!, color: priceColor((v[fuel]! - (es ?? 0)) * 1.6), onClick: () => onProv(id) }))} />}
+    <p className="note">Las barras miden cuánto más cuesta cada una que la primera de la lista.</p>
     {brands.length > 0 && <>
       <h3>Marcas con 40 gasolineras o más</h3>
-      <ul className="rows">{brands.slice(0, 14).map(b => <Row key={b.n} name={b.n} sub={`${int(b.c)} gasolineras`} v={b.v} min={brands[0].v} max={brands[brands.length - 1].v} color={priceColor((b.v - (es ?? 0)) * 1.6)} />)}</ul>
+      <Barras titulo="Marcas por precio mediano" fmt={p3} desde={floor2(brands[0].v)} limite={10} items={brands.map(b => ({ id: b.n, nombre: b.n, sub: `${int(b.c)} gasolineras`, valor: b.v, color: priceColor((b.v - (es ?? 0)) * 1.6) }))} />
       <p className="note">Precio mediano de cada marca en toda España.</p>
     </>}
     <h3>Curiosidades</h3>
@@ -110,15 +128,9 @@ function Resumen({ d, fuel, onSt, onProv }: { d: Datos; fuel: Fuel; onSt: (s: St
     </ul>
     <h3>Evolución</h3>
     {hist.length > 1
-      ? <Spark pts={hist.map(x => x.es[fuel]!)} labels={[hist[0].d, hist[hist.length - 1].d]} />
+      ? <LineChart titulo={`Mediana de España de ${FUEL_NAME[fuel].toLowerCase()}, día a día`} series={[{ id: 'es', nombre: 'España', datos: hist.map(x => [Date.parse(x.d), x.es[fuel]!]), area: true }]} fx={v => new Date(v).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })} fy={v => eur(v)} alto={170} />
       : <p className="note">La serie diaria empieza hoy: cada día que pasa se guarda la mediana de España y de cada provincia, y aquí se dibujará cómo cambia.</p>}
   </>)
-}
-
-function Spark({ pts, labels }: { pts: number[]; labels: [string, string] }) {
-  const W = 340, H = 90, lo = Math.min(...pts), hi = Math.max(...pts), r = hi - lo || 0.01
-  const d = pts.map((v, i) => `${i ? 'L' : 'M'}${(i / (pts.length - 1)) * W} ${H - 8 - ((v - lo) / r) * (H - 20)}`).join('')
-  return <figure className="spark"><svg viewBox={`0 0 ${W} ${H}`}><path d={d} /></svg><figcaption><span>{labels[0]}</span><span>{eur(lo)} – {eur(hi)} €/l</span><span>{labels[1]}</span></figcaption></figure>
 }
 
 export default function App() {
@@ -207,7 +219,7 @@ export default function App() {
         </section>}
         {nearList.length > 0 && <section className="card">
           <h3>Las más baratas a menos de 10 km</h3>
-          <ul className="rows">{nearList.map(({ s, dk }) => <Row key={s.id} name={s.marca} sub={`${dk.toLocaleString('es-ES', { maximumFractionDigits: 1 })} km · ${s.dir}`} v={s.p[fuel]!} min={nearList[0].s.p[fuel]!} max={nearList[nearList.length - 1].s.p[fuel]!} onClick={() => onSt(s)} color="#3df5b0" />)}</ul>
+          <Barras titulo="Las más baratas cerca" fmt={p3} desde={floor2(nearList[0].s.p[fuel]!)} items={nearList.map(({ s, dk }) => ({ id: s.id, nombre: s.marca, sub: `${dk.toLocaleString('es-ES', { maximumFractionDigits: 1 })} km · ${s.dir}`, valor: s.p[fuel]!, color: '#3df5b0', onClick: () => onSt(s) }))} />
         </section>}
         <section className="card"><Resumen d={d} fuel={fuel} onSt={onSt} onProv={onProv} /></section>
         <footer className="src">Fuente: Ministerio para la Transición Ecológica, precios que comunica cada gasolinera; se descargan dos veces al día. Mapa: IGN. Las de «solo socios» (cooperativas) no entran en medianas ni rankings.</footer>
