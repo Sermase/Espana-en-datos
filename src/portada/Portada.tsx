@@ -1,7 +1,8 @@
 import { motion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import resumen from '../resumen.json'
-import { TEMAS, type Tema } from '../temas'
+import { useState } from 'react'
+import { AREAS, TEMAS, type AreaId, type Tema } from '../temas'
 import { A } from '../Fuentes'
 import { Hero, type Lectura } from './Hero'
 
@@ -105,7 +106,23 @@ function Mini({ t }: { t: Tema }) {
   )
 }
 
-const VISTA = { mapa: 'Se explora en un mapa', consola: 'Se explora en paneles y series', 'pirámide': 'Se explora en pirámides y flujos', relieve: 'Se explora en relieve 3D' }
+/** Los datos clave de cada tema, para verlos de un vistazo sin entrar. Salen de src/resumen.json, que escriben los robots. */
+function cifras(id: string): { v: string; l: string }[] {
+  const r = R[id] as Record<string, unknown> | undefined
+  if (!r) return []
+  const par = (k: string) => (r[k] as [string, number] | undefined)?.[1] ?? 0
+  switch (id) {
+    case 'agua': return [{ v: `${es(reserva, 1)} %`, l: 'llenos los embalses' }, { v: `${es(Number(r.a) / 1000, 1)} mil hm³`, l: 'de agua guardada' }]
+    case 'gasolineras': return [{ v: `${es(Number(r.g95), 3)} €`, l: 'gasolina 95, mediana' }, { v: `${es(Number(r.dsl), 3)} €`, l: 'diésel' }, { v: es(Number(r.n), 0), l: 'gasolineras' }]
+    case 'energia': return [{ v: `${Math.round(Number(r.ren))} %`, l: 'renovable ayer' }, { v: `${es(Number(r.pvpc), 3)} €`, l: 'kWh hoy, tarifa regulada' }]
+    case 'economia': return [{ v: `${par('pib') > 0 ? '+' : ''}${es(par('pib'), 1)} %`, l: 'crece el PIB' }, { v: `${es(par('ipc'), 1)} %`, l: 'inflación' }, { v: `${es(par('paro'), 1)} %`, l: 'paro' }]
+    case 'comercio': return [{ v: `${es(Number(r.exp), 0)}`, l: `mil M€ vendidos en ${r.año}` }, { v: `${es(Number(r.exp) - Number(r.imp), 1)}`, l: 'mil M€ de saldo' }]
+    case 'poblacion': return [{ v: `${es(Number(r.total) / 1e6, 2)} M`, l: `habitantes (${r.año})` }, { v: es(Number(r.municipios), 0), l: 'municipios' }]
+    default: return []
+  }
+}
+const FUENTE: Record<string, string> = { agua: `Datos del ${fecha}`, poblacion: 'Padrón del INE', economia: 'Eurostat, cada día', energia: 'En directo, Red Eléctrica', comercio: 'Eurostat, cada semana', gasolineras: 'Datos de hoy' }
+
 
 const R = resumen as unknown as Record<string, Record<string, unknown>>
 const color = (id: string) => TEMAS.find(t => t.id === id)?.color ?? '#9fd8e8'
@@ -127,6 +144,43 @@ const TICKER = [
   ['Habitantes', `${es(Number(R.poblacion?.total ?? 0) / 1e6, 1)} M`, 'poblacion'], ['Exportaciones', `${es(Number(R.comercio?.exp ?? 0), 0)} mil M€`, 'comercio'],
 ] as const
 
+/** Los temas por áreas: chips para filtrar y, en cada área, las tarjetas con sus datos clave. */
+function Areas() {
+  const [area, setArea] = useState<AreaId | null>(null)
+  const abiertos = TEMAS.filter(t => t.ruta).length
+  return <>
+    <nav className="areas-nav" aria-label="Áreas">
+      <button className={!area ? 'is-on' : ''} onClick={() => setArea(null)}>Todo <small>{abiertos} abiertos de {TEMAS.length}</small></button>
+      {AREAS.map(a => <button key={a.id} className={area === a.id ? 'is-on' : ''} onClick={() => setArea(area === a.id ? null : a.id)}>{a.nombre}</button>)}
+    </nav>
+    {AREAS.filter(a => !area || a.id === area).map(a => {
+      const temas = [...TEMAS.filter(t => t.area === a.id && t.ruta), ...TEMAS.filter(t => t.area === a.id && !t.ruta)]
+      return <section key={a.id} className="area">
+        <header><h2>{a.nombre}</h2><p>{a.lema}</p></header>
+        <ul className="temas">
+          {temas.map((t, i) => {
+            const abierto = !!t.ruta, cs = cifras(t.id)
+            const Card = abierto ? motion.a : motion.div
+            return (
+              <li key={t.id} className={abierto ? 'es-abierto' : 'es-plan'} style={{ '--c': t.color } as React.CSSProperties}>
+                <Card href={t.ruta} className="tema" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-40px' }} transition={{ delay: i * .07, duration: .45 }}>
+                  <div className="tema-txt">
+                    <h3>{t.nombre}{abierto && <ArrowUpRight size={18} />}</h3>
+                    <p>{abierto ? t.lema : t.plan ?? t.lema}</p>
+                    {cs.length > 0 && <dl className="cifras">{cs.map(c => <div key={c.l}><dt>{c.l}</dt><dd>{c.v}</dd></div>)}</dl>}
+                    <small>{abierto ? <><i className="vivo" /> {FUENTE[t.id] ?? 'Datos oficiales'}</> : 'En preparación'}</small>
+                  </div>
+                  {abierto && <Mini t={t} />}
+                </Card>
+              </li>
+            )
+          })}
+        </ul>
+      </section>
+    })}
+  </>
+}
+
 export default function Portada() {
   return (
     <main className="portada">
@@ -141,24 +195,7 @@ export default function Portada() {
       <div className="ticker" aria-label="Datos de hoy">
         <div className="ticker-pista">{[0, 1].map(k => <span key={k} aria-hidden={k === 1}>{TICKER.map(([n, v, id]) => <a key={n} href={ruta(id)} style={{ ['--c' as string]: color(id) }}><i />{n} <b>{v}</b></a>)}</span>)}</div>
       </div>
-      <ul className="temas">
-        {TEMAS.map((t, i) => {
-          const abierto = !!t.ruta
-          const Card = abierto ? motion.a : motion.div
-          return (
-            <li key={t.id} className={`${abierto ? 'es-abierto' : ''} ${i === 0 ? 'es-grande' : ''}`} style={{ '--c': t.color } as React.CSSProperties}>
-              <Card href={t.ruta} className="tema" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .15 + i * .09, duration: .5 }}>
-                <div className="tema-txt">
-                  <h2>{t.nombre}{abierto && <ArrowUpRight size={20} />}</h2>
-                  <p>{t.lema}</p>
-                  <small>{abierto ? <><i className="vivo" /> {t.id === 'agua' ? `Datos del ${fecha}` : t.id === 'poblacion' ? 'Padrón y series del INE' : t.id === 'economia' ? 'Eurostat, cada día' : t.id === 'energia' ? 'En directo, Red Eléctrica' : t.id === 'comercio' ? 'Eurostat, cada semana' : 'Datos de hoy'}</> : 'En preparación'} · {VISTA[t.vista]}</small>
-                </div>
-                <Mini t={t} />
-              </Card>
-            </li>
-          )
-        })}
-      </ul>
+      <Areas />
       <footer className="pie">Fuentes oficiales, enlazadas en cada tema: <A id="boletin">MITECO</A>, <A id="siane">IGN</A>, <A id="ine_padron">INE</A>, <A id="eurostat">Eurostat</A>, <A id="ree">REE</A>, <A id="aemet">AEMET</A>. Sin registro, sin anuncios.</footer>
     </main>
   )
