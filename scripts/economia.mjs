@@ -91,8 +91,8 @@ const desde = (y) => ({ sinceTimePeriod: String(y) })
 await serie('pib', 'pib_anual', 'PIB, variación anual', '%', 'T', () => eurostat('namq_10_gdp', { unit: 'CLV_PCH_SM', s_adj: 'SCA', na_item: 'B1GQ', geo: ['ES', UE], ...desde(1996) }))
 await serie('pib', 'pib_trim', 'PIB, variación trimestral', '%', 'T', () => eurostat('namq_10_gdp', { unit: 'CLV_PCH_PRE', s_adj: 'SCA', na_item: 'B1GQ', geo: ['ES', UE], ...desde(1996) }))
 await serie('pib', 'pib_nivel', 'PIB a precios corrientes', 'M€', 'A', () => eurostat('nama_10_gdp', { unit: 'CP_MEUR', na_item: 'B1GQ', geo: 'ES', ...desde(1995) }))
-await serie('pib', 'pib_pc_ppa', 'PIB por habitante en poder de compra (UE = 100)', 'índice', 'A', () => eurostat('nama_10_pc', { unit: 'PC_EU27_2020_HAB_MPPS_CP', na_item: 'B1GQ', geo: PAISES, ...desde(2000) }))
-await serie('pib', 'pib_pc_ccaa', 'PIB por habitante', '€', 'A', () => eurostat('nama_10r_2gdp', { unit: 'EUR_HAB', geo: [...Object.keys(NUTS2), 'ES'], ...desde(2000) }))
+await serie('pib', 'pib_pc_ppa', 'PIB por habitante en poder de compra (UE = 100)', 'índice', 'A', () => eurostat('nama_10_pc', { unit: 'PC_EU27_2020_HAB_MPPS_CP', na_item: 'B1GQ', geo: PAISES, ...desde(1995) }))
+await serie('pib', 'pib_pc_ccaa', 'PIB por habitante', '€', 'A', () => eurostat('nama_10r_2gdp', { unit: 'EUR_HAB', geo: [...Object.keys(NUTS2), 'ES'], ...desde(1995) }))
 
 // --- Precios ---
 // IPCA: Eurostat congeló prc_hicp_manr en dic-2025 y sigue en prc_hicp_minr (ECOICOP v2, dimensión coicop18).
@@ -121,34 +121,35 @@ await serie('precios', 'ipc_grupos', 'Inflación por grupos', '%', 'M', () => hi
 await serie('precios', 'ipc_paises', 'Inflación en la UE', '%', 'M', () => hicp(['CP00'], PAISES, 2023))
 
 // --- Empleo ---
-await serie('empleo', 'paro', 'Tasa de paro', '%', 'M', () => eurostat('une_rt_m', { s_adj: 'SA', age: 'TOTAL', sex: 'T', unit: 'PC_ACT', geo: ['ES', UE], ...desde(2000) }))
-await serie('empleo', 'paro_joven', 'Paro de menores de 25 años', '%', 'M', () => eurostat('une_rt_m', { s_adj: 'SA', age: 'Y_LT25', sex: 'T', unit: 'PC_ACT', geo: ['ES', UE], ...desde(2000) }))
-await serie('empleo', 'paro_sexo', 'Tasa de paro por sexo', '%', 'M', () => eurostat('une_rt_m', { s_adj: 'SA', age: 'TOTAL', sex: ['M', 'F'], unit: 'PC_ACT', geo: 'ES', ...desde(2000) }, 'sex'))
+await serie('empleo', 'paro', 'Tasa de paro', '%', 'M', () => eurostat('une_rt_m', { s_adj: 'SA', age: 'TOTAL', sex: 'T', unit: 'PC_ACT', geo: ['ES', UE], ...desde(1986) }))
+await serie('empleo', 'paro_joven', 'Paro de menores de 25 años', '%', 'M', () => eurostat('une_rt_m', { s_adj: 'SA', age: 'Y_LT25', sex: 'T', unit: 'PC_ACT', geo: ['ES', UE], ...desde(1986) }))
+await serie('empleo', 'paro_sexo', 'Tasa de paro por sexo', '%', 'M', () => eurostat('une_rt_m', { s_adj: 'SA', age: 'TOTAL', sex: ['M', 'F'], unit: 'PC_ACT', geo: 'ES', ...desde(1986) }, 'sex'))
 await serie('empleo', 'paro_paises', 'Tasa de paro en la UE', '%', 'M', () => eurostat('une_rt_m', { s_adj: 'SA', age: 'TOTAL', sex: 'T', unit: 'PC_ACT', geo: PAISES, ...desde(2023) }))
-await serie('empleo', 'paro_ccaa', 'Tasa de paro por comunidad', '%', 'A', () => eurostat('lfst_r_lfu3rt', { sex: 'T', age: 'Y15-74', isced11: 'TOTAL', unit: 'PC', geo: Object.keys(NUTS2), ...desde(2000) }))
-await serie('empleo', 'empleo_tasa', 'Tasa de empleo (20-64 años)', '%', 'A', () => eurostat('lfsi_emp_a', { indic_em: 'EMP_LFS', sex: 'T', age: 'Y20-64', unit: 'PC_POP', geo: ['ES', UE], ...desde(2000) }))
-await serie('empleo', 'temporal', 'Asalariados con contrato temporal', '%', 'A', () => mejor(['lfsa_etpgan', 'lfsa_etpga', 'lfsi_pt_a'], { sex: 'T', age: 'Y15-64', unit: 'PC', geo: ['ES', UE], ...desde(2000) }))
+await serie('empleo', 'paro_ccaa', 'Tasa de paro por comunidad', '%', 'A', () => eurostat('lfst_r_lfu3rt', { sex: 'T', age: 'Y15-74', isced11: 'TOTAL', unit: 'PC', geo: Object.keys(NUTS2), ...desde(1999) }))
+await serie('empleo', 'empleo_tasa', 'Tasa de empleo (20-64 años)', '%', 'A', () => eurostat('lfsi_emp_a', { indic_em: 'EMP_LFS', sex: 'T', age: 'Y20-64', unit: 'PC_POP', geo: ['ES', UE], ...desde(1995) }))
+await serie('empleo', 'temporal', 'Asalariados con contrato temporal', '%', 'A', () => mejor(['lfsa_etpgan', 'lfsa_etpga', 'lfsi_pt_a'], { sex: 'T', age: 'Y15-64', unit: 'PC', geo: ['ES', UE], ...desde(1987) }))
 
 // --- Salarios ---
 await serie('salarios', 'smi', 'Salario mínimo mensual', '€', 'S', () => eurostat('earn_mw_cur', { currency: 'EUR', geo: PAISES.filter(g => !['SE', 'AT', 'DK', 'FI', 'IT', UE].includes(g)), ...desde(2000) }))
-await serie('salarios', 'coste_laboral', 'Coste laboral por hora, variación anual', '%', 'T', () => eurostat('lc_lci_r2_q', { nace_r2: 'B-S', unit: 'PCH_SM', s_adj: 'SCA', lcstruct: 'D1_D4_MD5', geo: ['ES', UE], ...desde(2005) }))
-await serie('salarios', 'salario_medio', 'Salario medio anual a tiempo completo', '€', 'A', () => eurostat('nama_10_fte', { unit: 'EUR', geo: PAISES, ...desde(2000) }))
+await serie('salarios', 'coste_laboral', 'Coste laboral por hora, variación anual', '%', 'T', () => eurostat('lc_lci_r2_q', { nace_r2: 'B-S', unit: 'PCH_SM', s_adj: 'SCA', lcstruct: 'D1_D4_MD5', geo: ['ES', UE], ...desde(2000) }))
+await serie('salarios', 'salario_medio', 'Salario medio anual a tiempo completo', '€', 'A', () => eurostat('nama_10_fte', { unit: 'EUR', geo: PAISES, ...desde(1995) }))
 
 // --- Vivienda ---
-await serie('vivienda', 'vivienda_var', 'Precio de la vivienda, variación anual', '%', 'T', () => eurostat('prc_hpi_q', { purchase: 'TOTAL', unit: 'RCH_A', geo: ['ES', UE], ...desde(2008) }))
+await serie('vivienda', 'vivienda_var', 'Precio de la vivienda, variación anual', '%', 'T', () => eurostat('prc_hpi_q', { purchase: 'TOTAL', unit: 'RCH_A', geo: ['ES', UE], ...desde(2005) }))
 await serie('vivienda', 'vivienda_ind', 'Precio de la vivienda (2015 = 100)', 'índice', 'T', () => eurostat('prc_hpi_q', { purchase: ['TOTAL', 'DW_NEW', 'DW_EXST'], unit: 'I15_Q', geo: 'ES', ...desde(2007) }, 'purchase'))
 await serie('vivienda', 'euribor', 'Euríbor a 12 meses', '%', 'M', () => eurostat('irt_st_m', { int_rt: 'IRT_M12', geo: 'EA', ...desde(1999) }))
-await serie('vivienda', 'propiedad', 'Hogares en vivienda en propiedad', '%', 'A', () => eurostat('ilc_lvho02', { tenure: 'OWN', hhcomp: 'TOTAL', rskpovth: 'TOTAL', unit: 'PC', geo: PAISES, ...desde(2010) }))
+await serie('vivienda', 'propiedad', 'Hogares en vivienda en propiedad', '%', 'A', () => eurostat('ilc_lvho02', { tenure: 'OWN', hhcomp: 'TOTAL', rskpovth: 'TOTAL', unit: 'PC', geo: PAISES, ...desde(2003) }))
 
 // --- Cuentas públicas ---
 await serie('publico', 'deuda', 'Deuda pública', '% del PIB', 'A', () => eurostat('gov_10dd_edpt1', { unit: 'PC_GDP', sector: 'S13', na_item: 'GD', geo: PAISES, ...desde(1995) }))
 await serie('publico', 'deficit', 'Déficit o superávit público', '% del PIB', 'A', () => eurostat('gov_10dd_edpt1', { unit: 'PC_GDP', sector: 'S13', na_item: 'B9', geo: PAISES, ...desde(1995) }))
 await serie('publico', 'deuda_trim', 'Deuda pública trimestral', '% del PIB', 'T', () => eurostat('gov_10q_ggdebt', { unit: 'PC_GDP', sector: 'S13', na_item: 'GD', geo: ['ES', UE], ...desde(2000) }))
-await serie('publico', 'gasto', 'Gasto público por funciones', '% del PIB', 'A', () => eurostat('gov_10a_exp', { unit: 'PC_GDP', sector: 'S13', na_item: 'TE', cofog99: ['GF01', 'GF02', 'GF03', 'GF04', 'GF05', 'GF06', 'GF07', 'GF08', 'GF09', 'GF10'], geo: 'ES', ...desde(2010) }, 'cofog99'))
+await serie('publico', 'gasto', 'Gasto público por funciones', '% del PIB', 'A', () => eurostat('gov_10a_exp', { unit: 'PC_GDP', sector: 'S13', na_item: 'TE', cofog99: ['GF01', 'GF02', 'GF03', 'GF04', 'GF05', 'GF06', 'GF07', 'GF08', 'GF09', 'GF10'], geo: 'ES', ...desde(1995) }, 'cofog99'))
 
 // --- Bolsillos: renta y pobreza ---
 await serie('hogares', 'riesgo_pobreza', 'En riesgo de pobreza o exclusión social', '%', 'A', () => eurostat('ilc_peps01n', { unit: 'PC', age: 'TOTAL', sex: 'T', geo: ['ES', UE], ...desde(2015) }))
-await serie('hogares', 'gini', 'Desigualdad (índice de Gini)', 'índice', 'A', () => eurostat('ilc_di12', { geo: PAISES, ...desde(2005) }))
+await serie('hogares', 'riesgo_pobreza_ant', 'En riesgo de pobreza o exclusión (definición anterior, hasta 2019)', '%', 'A', () => eurostat('ilc_peps01', { unit: 'PC', age: 'TOTAL', sex: 'T', geo: ['ES', UE], ...desde(2004) }))
+await serie('hogares', 'gini', 'Desigualdad (índice de Gini)', 'índice', 'A', () => eurostat('ilc_di12', { geo: PAISES, ...desde(2003) }))
 await serie('hogares', 'renta_mediana', 'Renta mediana por persona', '€', 'A', () => eurostat('ilc_di03', { statinfo: 'MED_EI', age: 'TOTAL', sex: 'T', unit: 'EUR', geo: PAISES, ...desde(2005) }))
 
 const NOMBRES = {

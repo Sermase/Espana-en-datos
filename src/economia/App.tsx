@@ -6,7 +6,9 @@ import { fechaDe, periodo, toT, useDatos, type Datos, type Serie } from './datos
 
 const ES = '#3df5b0', UE = '#9fb6bf'
 const CAT = ['#3987e5', '#d95926', '#d55181', '#9085e9'] // huecos categóricos validados para fondo oscuro
-type Rango = 5 | 10 | 25 | 0
+type Rango = 5 | 10 | 2000 | 0
+/** Primer instante que entra en el periodo elegido. */
+const t0de = (r: Rango) => r === 2000 ? Date.UTC(2000, 0, 1) : r ? Date.now() - r * 365.25 * 864e5 : -Infinity
 
 const SECCIONES = [
   { id: 'resumen', nombre: 'Resumen', icon: Gauge },
@@ -38,7 +40,7 @@ function useD(d: Datos) {
 /** Serie del pipeline → serie del gráfico, recortada al rango elegido. */
 function ls(x: Serie | null, nombre: string, rango: Rango, extra: Partial<LSerie> = {}): LSerie | null {
   if (!x) return null
-  const t0 = rango ? Date.now() - rango * 365.25 * 864e5 : -Infinity
+  const t0 = t0de(rango)
   const datos = x.d.map(([p, v]) => [toT(p), v] as [number, number]).filter(p => p[0] >= t0)
   return datos.length > 1 ? { id: nombre, nombre, datos, ...extra } : null
 }
@@ -128,7 +130,7 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
         <Linea titulo="Crecimiento anual del PIB" series={cmp('pib', 'pib_anual', 'PIB')} fy={v => pct(v)} frec="T" cero />
       </Card>}
       {t && <Card t="Trimestre a trimestre" lead="Cuánto crece cada trimestre sobre el anterior. Las barras rojas son trimestres en que la economía se encogió.">
-        <Columnas titulo="Crecimiento trimestral del PIB" items={t.d.filter(x => !rango || toT(x[0]) > Date.now() - rango * 365.25 * 864e5).map(([p, v]) => ({ x: p.replace('-Q', 'T'), valor: v, color: v < 0 ? '#ff4d5e' : ES }))} fmt={v => pct(v)} cadaX={8} />
+        <Columnas titulo="Crecimiento trimestral del PIB" items={t.d.filter(x => toT(x[0]) >= t0de(rango)).map(([p, v]) => ({ x: p.replace('-Q', 'T'), valor: v, color: v < 0 ? '#ff4d5e' : ES }))} fmt={v => pct(v)} cadaX={8} />
       </Card>}
       {niv && <Card t="El tamaño de la economía" lead={<>España produce <b>{nf(niv.d.at(-1)![1] / 1e6, 2)} billones de euros</b> al año ({niv.d.at(-1)![0]}), a precios de cada año.</>}>
         <Columnas titulo="PIB a precios corrientes" items={niv.d.map(([p, v]) => ({ x: p, valor: v / 1e6 }))} fmt={v => `${nf(v, 2)} bill. €`} cadaX={5} />
@@ -235,7 +237,7 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
         <Linea titulo="Deuda pública" series={cmp('publico', 'deuda', 'deuda')} fy={x => `${nf(x)} %`} frec="A" />
       </Card>}
       {def && <Card t="Déficit" lead={<>Cada año se gasta más de lo que se ingresa: en {def.d.at(-1)![0]} la diferencia fue del {nf(Math.abs(def.d.at(-1)![1]), 1)} % del PIB. Por encima de cero, superávit.</>}>
-        <Columnas titulo="Déficit o superávit público" items={def.d.filter(x => !rango || Number(x[0]) > new Date().getFullYear() - rango).map(([p, x]) => ({ x: p, valor: x, color: x < 0 ? '#ff4d5e' : ES }))} fmt={x => `${nf(x, 1)} %`} cadaX={4} />
+        <Columnas titulo="Déficit o superávit público" items={def.d.filter(x => toT(x[0]) >= t0de(rango)).map(([p, x]) => ({ x: p, valor: x, color: x < 0 ? '#ff4d5e' : ES }))} fmt={x => `${nf(x, 1)} %`} cadaX={4} />
       </Card>}
       {gl.length > 0 && <Card t="¿En qué se gasta?" lead={<>El gasto público es el <b>{nf(tot, 1)} % del PIB</b>; casi {nf((gl[0].v[1] / tot) * 100, 0)} de cada 100 euros van a {nombre('cofog99', gl[0].k).toLowerCase()}.</>}>
         <Barras titulo="Gasto público por funciones" fmt={x => `${nf(x, 1)} % PIB`} limite={10} items={gl.map(x => ({ id: x.k, nombre: nombre('cofog99', x.k), valor: x.v[1], color: ES }))} />
@@ -249,8 +251,8 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
   // hogares
   const rp = last(s('hogares', 'riesgo_pobreza:ES'))
   return <div className="graficos">
-    {rp && <Card t="Riesgo de pobreza o exclusión" wide lead={<>El <b>{pct(rp[1])}</b> de la población está en riesgo de pobreza o exclusión social ({rp[0]}), {pp(vsUE('hogares', 'riesgo_pobreza') ?? 0)} frente a la UE.</>} fuente="Eurostat · encuesta de condiciones de vida (indicador AROPE)">
-      <Linea titulo="Población en riesgo de pobreza o exclusión" series={cmp('hogares', 'riesgo_pobreza', 'riesgo')} fy={x => pct(x)} frec="A" />
+    {rp && <Card t="Riesgo de pobreza o exclusión" wide lead={<>El <b>{pct(rp[1])}</b> de la población está en riesgo de pobreza o exclusión social ({rp[0]}), {pp(vsUE('hogares', 'riesgo_pobreza') ?? 0)} frente a la UE. Hasta 2019 se medía con otra definición: la línea azul no se puede empalmar con la verde.</>} fuente="Eurostat · encuesta de condiciones de vida (indicador AROPE)">
+      <Linea titulo="Población en riesgo de pobreza o exclusión" series={[...cmp('hogares', 'riesgo_pobreza', 'riesgo'), ls(s('hogares', 'riesgo_pobreza_ant:ES'), 'España, definición anterior', rango, { color: CAT[0], fondo: true })]} fy={x => pct(x)} frec="A" />
     </Card>}
     <Card si={hay(grupo('hogares', 'gini'))} t="Desigualdad" lead="Índice de Gini: 0 sería que todos ingresan lo mismo y 100 que una persona se lo lleva todo.">
       <Ranking g={grupo('hogares', 'gini')} nombre={geo} fmt={x => nf(x, 1)} titulo="Índice de Gini por países" />
@@ -281,7 +283,7 @@ export default function App() {
           <p>{compact(total)} series oficiales · actualizado el {new Date(d.fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'long' })}</p>
         </div>
         {sec !== 'resumen' && <div className="rango" role="radiogroup" aria-label="Periodo de los gráficos">
-          {([5, 10, 25, 0] as Rango[]).map(r => <button key={r} role="radio" aria-checked={rango === r} className={rango === r ? 'is-on' : ''} onClick={() => setRango(r)}>{r ? `${r} años` : 'Todo'}</button>)}
+          {([5, 10, 2000, 0] as Rango[]).map(r => <button key={r} role="radio" aria-checked={rango === r} className={rango === r ? 'is-on' : ''} onClick={() => setRango(r)}>{r === 2000 ? 'Desde 2000' : r ? `${r} años` : 'Toda la serie'}</button>)}
         </div>}
       </header>
       <nav className="menu" aria-label="Secciones">
