@@ -30,6 +30,7 @@ const REG = (n) => { const g = giro(n.trim()); return /^ceuta|^melilla/i.test(g)
 async function tabla(id) {
   const j = await json(`${INE}/DATOS_TABLA/${id}?nult=6&tip=AM`)
   const out = {}, uds = {}
+  if (id === 53450) log.ine._serieCruda = JSON.stringify({ ...j[0], Data: j[0]?.Data?.slice(0, 1) }).slice(0, 900)
   for (const s of j) {
     const partes = s.Nombre.split(/,\s*(?=[A-Z0-9-]|\d\.)/).map(x => x.trim()).filter(Boolean)
     // el primer trozo (o los dos primeros, si la comunidad lleva coma) es el territorio
@@ -145,6 +146,8 @@ for (const u of URLS) {
 }
 const shp = []
 if (zip) {
+  const ini = readFileSync(join(tmp, 'edar.zip'))
+  log.edar.descarga = `${ini.length} bytes, empieza por ${JSON.stringify(ini.subarray(0, 300).toString('latin1'))}`
   try {
     execFileSync('unzip', ['-o', '-q', join(tmp, 'edar.zip'), '-d', tmp])
     const walk = (d) => { for (const f of readdirSync(d, { withFileTypes: true })) { const p = join(d, f.name); if (f.isDirectory()) walk(p); else if (/\.zip$/i.test(f.name) && p !== join(tmp, 'edar.zip')) { execFileSync('unzip', ['-o', '-q', p, '-d', d]); } } }
