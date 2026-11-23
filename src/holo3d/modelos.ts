@@ -282,3 +282,27 @@ export const monedas = (partes: number[]): Modelo => t => {
   if (f > 0.85) for (let i = 0; i < 10; i++) { const a = (i / 10) * TAU, e = (f - 0.85) * 3; puntos.push([x + Math.cos(a) * (r + e * 0.4), top + 0.02, Math.sin(a) * (r + e * 0.4)]) }
   return { fuerte, tenue, puntos }
 }
+
+/** Embudo de recaudación: entran monedas de todas partes y salen por abajo en tantos chorros como `partes` (0–1 cada uno). */
+export const embudo = (partes: number[]): Modelo => t => {
+  const fuerte: Seg[] = [], tenue: Seg[] = []
+  const yTop = 0.95, yCuello = 0.42, rTop = 0.5, rCuello = 0.07
+  anillo(fuerte, rTop, yTop, 40); anillo(tenue, rTop * 0.72, yTop - 0.15, 32); anillo(tenue, rTop * 0.45, yTop - 0.33, 28); anillo(fuerte, rCuello, yCuello, 16)
+  for (let i = 0; i < 12; i++) { const a = (i / 12) * TAU; (i % 3 ? tenue : fuerte).push([Math.cos(a) * rTop, yTop, Math.sin(a) * rTop, Math.cos(a) * rCuello, yCuello, Math.sin(a) * rCuello]) }
+  cilindro(tenue, rCuello, rCuello, yCuello - 0.1, yCuello, 0, 0, 8, 1)
+  const puntos: [number, number, number][] = []
+  // monedas que caen en espiral dentro del embudo
+  for (let i = 0; i < 26; i++) {
+    const f = (t * 0.22 + i / 26) % 1, a = i * 2.4 + f * 7, r = rTop * (1 - f) * 0.92 + rCuello * f
+    puntos.push([Math.cos(a) * r, yTop + 0.08 - f * (yTop + 0.08 - yCuello), Math.sin(a) * r])
+  }
+  // chorros de salida, uno por administración, más denso cuanto mayor su parte
+  const n = partes.length
+  partes.forEach((p, k) => {
+    const ang = -Math.PI / 2 + ((k + 0.5) / n - 0.5) * 1.8, dx = Math.sin(ang), dz = Math.cos(ang) * 0.3
+    const m = Math.max(2, Math.round(p * 16))
+    for (let i = 0; i < m; i++) { const f = (t * 0.5 + i / m) % 1; puntos.push([dx * f * 0.62, yCuello - 0.1 - f * 0.3, dz * f * 0.62]) }
+    tenue.push([0, yCuello - 0.1, 0, dx * 0.62, yCuello - 0.4, dz * 0.62])
+  })
+  return { fuerte, tenue, puntos }
+}

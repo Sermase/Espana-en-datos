@@ -60,6 +60,10 @@ jobs:
         if: github.event.schedule == '43 15 * * 2' || github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[datos]') || contains(github.event.head_commit.message, '[saneamiento]')
         continue-on-error: true
         run: node scripts/saneamiento.mjs
+      - name: Impuestos (Agencia Tributaria), los martes
+        if: github.event.schedule == '43 15 * * 2' || github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[datos]') || contains(github.event.head_commit.message, '[impuestos]')
+        continue-on-error: true
+        run: node scripts/impuestos.mjs
       - name: Sondas de fuentes futuras
         if: contains(github.event.head_commit.message, '[sonda]')
         continue-on-error: true
@@ -69,11 +73,11 @@ jobs:
         continue-on-error: true
         run: node scripts/enlaces.mjs
       - name: Guardar datos nuevos
-        if: github.event_name != 'push' || contains(github.event.head_commit.message, '[datos]') || contains(github.event.head_commit.message, '[agua]') || contains(github.event.head_commit.message, '[gasolineras]') || contains(github.event.head_commit.message, '[poblacion]') || contains(github.event.head_commit.message, '[economia]') || contains(github.event.head_commit.message, '[energia]') || contains(github.event.head_commit.message, '[comercio]') || contains(github.event.head_commit.message, '[vivienda]') || contains(github.event.head_commit.message, '[cuentas]') || contains(github.event.head_commit.message, '[saneamiento]') || contains(github.event.head_commit.message, '[sonda]') || contains(github.event.head_commit.message, '[enlaces]')
+        if: github.event_name != 'push' || contains(github.event.head_commit.message, '[datos]') || contains(github.event.head_commit.message, '[agua]') || contains(github.event.head_commit.message, '[gasolineras]') || contains(github.event.head_commit.message, '[poblacion]') || contains(github.event.head_commit.message, '[economia]') || contains(github.event.head_commit.message, '[energia]') || contains(github.event.head_commit.message, '[comercio]') || contains(github.event.head_commit.message, '[vivienda]') || contains(github.event.head_commit.message, '[cuentas]') || contains(github.event.head_commit.message, '[saneamiento]') || contains(github.event.head_commit.message, '[impuestos]') || contains(github.event.head_commit.message, '[sonda]') || contains(github.event.head_commit.message, '[enlaces]')
         run: |
           git config user.name "datos-bot"
           git config user.email "datos-bot@users.noreply.github.com"
-          git add src/agua/data/snapshot.json src/agua/data/consumo.json src/resumen.json public/agua/data public/gasolineras/data public/poblacion/data public/economia/data public/energia/data public/comercio/data public/vivienda/data public/cuentas/data fuentes
+          git add src/agua/data/snapshot.json src/agua/data/consumo.json src/resumen.json public/agua/data public/gasolineras/data public/poblacion/data public/economia/data public/energia/data public/comercio/data public/vivienda/data public/cuentas/data public/impuestos/data fuentes
           git diff --cached --quiet || git commit -m "Datos del $(date -u +%Y-%m-%d)"
           for i in 1 2 3 4; do git pull --rebase -q && git push && break; sleep 10; done
       - run: npm run build
