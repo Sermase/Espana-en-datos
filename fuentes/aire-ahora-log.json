@@ -1,0 +1,26 @@
+{
+ "avisos": [],
+ "descarga": "200 1586799",
+ "filas": 60428,
+ "ultimaHora": "2026-11-24T06:00:00.000Z",
+ "metadatos": [
+  {
+   "u": "https://discomap.eea.europa.eu/map/fme/metadata/PanEuropean_metadata.csv",
+   "filas": 8,
+   "cabecera": [
+    "<html>"
+   ],
+   "estaciones": 0
+  },
+  {
+   "u": "https://discomap.eea.europa.eu/App/AQViewer/download?fqn=Airquality_Dissem.b2g.SamplingPoints&f=csv",
+   "filas": 8,
+   "cabecera": [
+    "<html>"
+   ],
+   "estaciones": 0
+  }
+ ],
+ "estaciones": 528,
+ "sinCoordenadas": 0
+}
