@@ -30,15 +30,12 @@ for (const j of js) {
   const i = t.indexOf('backend.ica.miteco.es')
   out.alrededor = t.slice(Math.max(0, i - 1500), i + 2500)
   out.rutas = [...new Set([...t.matchAll(/["'`](\/?[a-zA-Z][\w-]*(?:\/[\w{}:$.-]+)+\/?)["'`]/g)].map(m => m[1]).filter(r => !/^(\.\/|assets|http)/.test(r) && r.length < 80))].slice(0, 200)
+  // solo las rutas GET del API (las que el visor pide con queryGet); las consultas SQL por POST no se tocan
+  out.queryGet = [...new Set([...t.matchAll(/queryGet\(\s*([`"'])([^`"']+)\1([^)]{0,200})/g)].map(m => m[2] + ' ' + m[3].slice(0, 200)))].slice(0, 60)
   out.palabras = [...new Set([...t.matchAll(/["'`]([a-z][a-zA-Z]*(?:Ica|ica|Estacion|estacion|Indice|indice|Medida|medida|Contaminante|contaminante|Prevision|prevision)[a-zA-Z]*)["'`]/g)].map(m => m[1]))].slice(0, 100)
 }
-// 2. Candidatas típicas
-const B = 'https://backend.ica.miteco.es/sgca/'
-for (const p of ['', 'api', 'api/estaciones', 'estaciones', 'api/ica', 'ica', 'api/ica/estaciones', 'api/v1/estaciones', 'swagger-ui.html', 'v3/api-docs', 'v2/api-docs', 'actuator', 'api/indice', 'indice/estaciones'])
-  out['ica ' + p] = sin(get(B + p, { cabeza: 800 }))
-// 3. Agencia Europea: datos E2a casi en directo
-for (const u of ['https://discomap.eea.europa.eu/map/fme/latest/ES_NO2.csv', 'https://discomap.eea.europa.eu/map/fme/latest/ES_PM10.csv'])
-  out['eea ' + u] = sin(get(u, { cabeza: 800 }))
-out.eeaApi = sin(get('https://eeadmz1-downloads-api-appservice.azurewebsites.net/ParquetFile/urls', { metodo: 'POST', datos: JSON.stringify({ countries: ['ES'], cities: [], pollutants: ['NO2'], dataset: 1, source: 'Api', dateTimeStart: new Date(Date.now() - 86400e3).toISOString().slice(0, 19) + 'Z', dateTimeEnd: new Date().toISOString().slice(0, 19) + 'Z', aggregationType: 'hour' }), cabeza: 1500 }))
+// 2. Las rutas GET que usa el visor, tal cual (sin parámetros de más)
+for (const r of (out.queryGet ?? []).map(x => x.split(' ')[0]).filter(r => !r.includes('$')).slice(0, 12))
+  out['ica ' + r] = sin(get('https://backend.ica.miteco.es/sgca/' + r, { cabeza: 1500 }))
 writeFileSync(here('../fuentes/sonda-temas.json'), JSON.stringify(out, null, 1))
 console.log(Object.entries(out).map(([k, v]) => `${k}: ${v?.code ?? ''} ${v?.size ?? ''}`).join('\n'))
