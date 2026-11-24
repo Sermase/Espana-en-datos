@@ -81,7 +81,9 @@ jobs:
       - name: Igualdad (INE y Eurostat)
         if: github.event.schedule == '43 15 * * 2' || contains(github.event.head_commit.message, '[igualdad]')
         continue-on-error: true
-        run: node scripts/igualdad.mjs
+        run: |
+          command -v pdftotext >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils)
+          node scripts/igualdad.mjs
       - name: Coches (DGT y Eurostat)
         if: github.event.schedule == '43 15 * * 2' || contains(github.event.head_commit.message, '[coches]')
         continue-on-error: true

@@ -59,6 +59,72 @@ await eurostat('gini', 'ilc_di12', `${pa()}&age=TOTAL&sinceTimePeriod=2008`)
 await eurostat('parlamento', 'sdg_05_50', `${pa()}&sinceTimePeriod=2008`)
 await eurostat('directivas', 'sdg_05_60', `${pa()}&sinceTimePeriod=2008`)
 
+// 3. Violencia contra las mujeres
+// 3a. Víctimas mortales por violencia de género (Delegación del Gobierno): una ficha en PDF por año desde 2003
+const { execFileSync } = await import('node:child_process')
+const sh = (c) => execFileSync('bash', ['-c', c], { encoding: 'utf8', maxBuffer: 64e6 })
+datos.violencia = { mortales: {} }
+try {
+  const base = 'https://violenciagenero.igualdad.gob.es'
+  const h = sh(`curl -sSL --max-time 60 -A 'Mozilla/5.0' '${base}/fichaMujeres/home.htm'`)
+  const pdfs = [...new Set([...h.matchAll(/href="([^"]+\.pdf)"/gi)].map(m => m[1]))].map(u => u.startsWith('http') ? u : base + (u.startsWith('/') ? '' : '/') + u)
+  log.fichas = pdfs.slice(0, 40)
+  mkdirSync('/tmp/fichas', { recursive: true })
+  for (const u of pdfs) {
+    const año = (u.match(/(20\d\d)/g) ?? []).map(Number).find(y => y >= 2003 && y <= 2030); if (!año || datos.violencia.mortales[año]) continue
+    try {
+      sh(`curl -sSL --max-time 60 -A 'Mozilla/5.0' -o /tmp/fichas/${año}.pdf '${u}'`)
+      const t = sh(`pdftotext -layout /tmp/fichas/${año}.pdf - 2>/dev/null`)
+      datos.violencia.mortales[año] = { texto: t.slice(0, 20000) } // se interpreta abajo; el texto se borra antes de guardar
+      if (!log.fichaMuestra) log.fichaMuestra = t.slice(0, 9000)
+    } catch (e) { log.avisos.push(`ficha ${año}: ${String(e.message).slice(-120)}`) }
+  }
+} catch (e) { log.avisos.push('víctimas mortales: ' + String(e.message).slice(-200)) }
+// 3b. INE, Estadística de Violencia Doméstica y Violencia de Género (víctimas con orden de protección)
+try {
+  const ops = await get(`${INE}/OPERACIONES_DISPONIBLES`)
+  const op = ops.find(o => /violencia dom.stica y violencia de g.nero/i.test(o.Nombre))
+  log.evdvg = op ? [op.Id, op.Codigo, op.Nombre] : 'no encontrada'
+  if (op) {
+    const tablas = await get(`${INE}/TABLAS_OPERACION/${op.Id}`)
+    log.evdvgTablas = tablas.map(t => `${t.Id} · ${t.Nombre}`)
+    datos.ine.violencia = {}
+    for (const t of tablas.filter(t => /v[ií]ctimas/i.test(t.Nombre)).slice(0, 14)) {
+      try {
+        const j = await get(`${INE}/DATOS_TABLA/${t.Id}?nult=15`)
+        datos.ine.violencia[t.Id] = { n: t.Nombre, s: j.map(s => ({ p: s.Nombre.split('. ').map(x => x.replace(/\.\s*$/, '').trim()).filter(Boolean), d: Object.fromEntries((s.Data ?? []).filter(x => x.Valor != null).map(x => [x.Anyo, x.Valor])) })) }
+        log['evdvg' + t.Id] = j.slice(0, 6).map(s => s.Nombre)
+      } catch (e) { log.avisos.push(`EVDVG ${t.Id}: ${e.message}`) }
+    }
+  }
+} catch (e) { log.avisos.push('EVDVG: ' + e.message) }
+// 3c. Eurostat: víctimas de homicidio por sexo y relación con el agresor
+await eurostat('homicidios', 'crim_hom_vrel', `${pa()}&sinceTimePeriod=2008`)
+// 3d. Delitos contra la libertad sexual (Ministerio del Interior), de la descarga de Seguridad
+try {
+  const sg = JSON.parse(readFileSync(here('../public/seguridad/data/seguridad.json'), 'utf8'))
+  log.seguridadTipos = Object.entries(sg.tipos ?? {}).map(([k, v]) => `${k}=${v.n ?? v}`).slice(0, 60)
+  datos.violencia.sexual = { años: sg.años, tipos: Object.fromEntries(Object.entries(sg.tipos ?? {}).filter(([, v]) => /sexual|violaci|agresi.n sexual|abuso/i.test(v.n ?? v))), prov: Object.fromEntries(Object.entries(sg.prov ?? {}).map(([p, o]) => [p, Object.fromEntries(Object.entries(o).filter(([k]) => /^s3/.test(k)))])), pob: sg.pob }
+} catch (e) { log.avisos.push('sexual: ' + e.message) }
+
+// interpretar las fichas: total, edad, país de nacimiento, denuncias previas y comunidad
+for (const [a, o] of Object.entries(datos.violencia.mortales)) {
+  const t = o.texto; delete o.texto
+  const num = (re) => { const m = t.match(re); return m ? Number(m[1]) : null }
+  o.total = num(/TOTAL\s+v[ií]ctimas por violencia de g[ée]nero\s+(\d+)/i) ?? num(/Total V[ÍI]CTIMAS\s+(\d+)/i) ?? num(/TOTAL\s+(\d+)\s+100[.,]0/)
+  o.sinDenuncia = num(/Sin denuncias? previas?\s+(\d+)/i)
+  o.conDenuncia = num(/Con una o m[aá]s denuncias previas\s+(\d+)/i) ?? num(/Hab[ií]an denunciado\s+(\d+)/i)
+  const pais = t.match(/Espa[ñn]a\s+(\d+)\s+[\d.,]+\s+(\d+)[\s\S]{0,80}?Otro pa[ií]s\s+(\d+)\s+[\d.,]+\s+(\d+)/)
+  if (pais) o.pais = { victimaEsp: +pais[1], agresorEsp: +pais[2], victimaOtro: +pais[3], agresorOtro: +pais[4] }
+  const edades = {}
+  for (const m of t.matchAll(/^\s*(Menos de \d+|Menor de \d+|De? ?\d+\s*(?:a|-)\s*\d+(?: años)?|\d+\s*-\s*\d+|\d+ (?:y|o) m[aá]s(?: años)?|M[aá]s de \d+(?: años)?)\s+(\d+)\s+[\d.,]+\s+(\d+)/gim)) edades[m[1].replace(/\s+/g, ' ')] = [+m[2], +m[3]]
+  if (Object.keys(edades).length) o.edad = edades
+  const ccaa = {}
+  for (const m of t.matchAll(/^\s*(Andaluc[ií]a|Arag[oó]n|Asturias[^\d\n]*|Balears[^\d\n]*|Illes Balears|Canarias|Cantabria|Castilla y Le[oó]n|Castilla[- ]La Mancha|Catalu[ñn]a|Comunitat Valenciana|Comunidad Valenciana|Extremadura|Galicia|Madrid[^\d\n]*|Comunidad de Madrid|Murcia[^\d\n]*|Regi[oó]n de Murcia|Navarra[^\d\n]*|Comunidad Foral de Navarra|Pa[ií]s Vasco|La Rioja|Rioja[^\d\n]*|Ceuta|Melilla)\s+(\d+)\s+[\d.,]+/gim)) ccaa[m[1].trim()] = +m[2]
+  if (Object.keys(ccaa).length) o.ccaa = ccaa
+}
+log.mortales = Object.fromEntries(Object.entries(datos.violencia.mortales).map(([a, o]) => [a, JSON.stringify(o).slice(0, 300)]))
+
 writeFileSync(`${OUT}/igualdad.json`, JSON.stringify(datos))
 try {
   const s = datos.est.brecha?.series ?? {}, k = Object.keys(s).find(x => x.split('|').includes('ES')), o = k ? s[k] : {}, a = Object.keys(o).sort().at(-1)
