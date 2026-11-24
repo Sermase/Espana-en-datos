@@ -35,10 +35,22 @@ function clase(prop, cat) {
   if (prop === '7' || prop === '8' || prop === 'A') return 'gas'
   return 'otros'
 }
+// Modelo comercial: la DGT guarda el nombre de la ficha técnica («FRONTERA GS 1.2 T XHT»); nos quedamos con la primera
+// palabra, o las dos primeras cuando la primera sola no dice nada («MODEL Y», «CLASE A», «SERIE 3», «YARIS CROSS»).
+const DOS = new Set(['MODEL', 'CLASE', 'CLASS', 'SERIE', 'SERIES', 'GRAND', 'RANGE', 'SANTA', 'NEW', 'NUEVO', 'NUEVA', 'LAND', 'ID.', 'EQ', 'DS', 'ALFA', 'TOYOTA', 'NISSAN', 'MERCEDES', 'CITROEN', 'PEUGEOT', 'KIA', 'BMW'])
+const SEGUNDA = new Set(['CROSS', 'ROVER', 'FE', 'SPORT', 'EVOQUE', 'VELAR', 'ELECTRIC', 'TOURER', 'ALLSPACE', 'COUPE', 'ACTIVE'])
+function modeloDe(raw, marca) {
+  const t = raw.toUpperCase().replace(/[^A-Z0-9.\- ]/g, ' ').split(/\s+/).filter(Boolean)
+  while (t.length > 1 && marca.toUpperCase().split(/\s+/).includes(t[0])) t.shift() // «TOYOTA YARIS» → «YARIS»
+  if (!t.length) return null
+  let m = t[0]
+  if (t[1] && (DOS.has(t[0]) || (t[0].length <= 2 && !/\d/.test(t[0])) || SEGUNDA.has(t[1]))) m += ' ' + t[1]
+  return m
+}
 const fecha = (s) => s.length === 8 ? new Date(Date.UTC(+s.slice(4), +s.slice(2, 4) - 1, +s.slice(0, 2))) : null
 
 function agrega(fich) {
-  const buf = readFileSync(fich), m = { n: 0, u: 0, comb: {}, combU: {}, marcas: {}, prov: {}, co2: [0, 0], kw: [0, 0], renting: 0, empresa: 0, edadU: [0, 0] }
+  const buf = readFileSync(fich), mods = {}, m = { n: 0, u: 0, comb: {}, combU: {}, marcas: {}, prov: {}, co2: [0, 0], kw: [0, 0], renting: 0, empresa: 0, edadU: [0, 0] }
   let ini = 0
   for (let i = 0; i <= buf.length; i++) {
     if (i < buf.length && buf[i] !== 10) continue
@@ -57,6 +69,7 @@ function agrega(fich) {
     }
     m.n++; m.comb[c] = (m.comb[c] ?? 0) + 1
     const marca = campo(l, 'marca').replace(/\s+/g, ' '); if (marca) m.marcas[marca] = (m.marcas[marca] ?? 0) + 1
+    const mo = marca && modeloDe(campo(l, 'modelo'), marca); if (mo) { const k = `${marca}|${mo}`, x = (mods[k] ??= [0, 0]); x[0]++; if (c === 'electrico' || c === 'enchufable') x[1]++ }
     const mu = campo(l, 'muniIne'), pv = /^\d{5}$/.test(mu) ? mu.slice(0, 2) : null
     if (pv) { const p = (m.prov[pv] ??= {}); p[c] = (p[c] ?? 0) + 1 }
     const co2 = +campo(l, 'co2'); if (co2 > 0 && co2 < 600) { m.co2[0] += co2; m.co2[1]++ }
@@ -67,14 +80,16 @@ function agrega(fich) {
   // marcas pequeñas, juntas
   const marcas = {}, resto = Object.entries(m.marcas).reduce((t, [k, v]) => { if (v >= 10) marcas[k] = v; else t += v; return t }, 0)
   if (resto) marcas['(otras)'] = resto
+  m.modelos = Object.fromEntries(Object.entries(mods).filter(([, v]) => v[0] >= 3))
   return { ...m, marcas, co2: m.co2[1] ? +(m.co2[0] / m.co2[1]).toFixed(1) : null, kw: m.kw[1] ? +(m.kw[0] / m.kw[1]).toFixed(1) : null, edadU: m.edadU[1] ? +(m.edadU[0] / m.edadU[1]).toFixed(2) : null }
 }
 
 // 1. Meses que faltan (del más reciente al más antiguo) y los dos últimos
 const hoy = new Date(), todos = []
 for (const d = new Date(Date.UTC(hoy.getUTCFullYear(), hoy.getUTCMonth() - 1, 1)); d >= Date.UTC(2014, 11, 1); d.setUTCMonth(d.getUTCMonth() - 1)) todos.push(`${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`)
+const FM = `${OUT}/modelos.json`, modelos = existsSync(FM) ? JSON.parse(readFileSync(FM, 'utf8')).meses : {}
 const recientes = Object.keys(prev.meses).sort().slice(-2)
-const cola = [...new Set([...todos.filter(k => !prev.meses[k]), ...recientes])].sort().reverse().slice(0, MAX)
+const cola = [...new Set([...todos.filter(k => !prev.meses[k] || !modelos[k]), ...recientes])].sort().reverse().slice(0, MAX)
 let hechos = 0
 for (const k of cola) {
   const [y, mo] = k.split('-'), u = `https://www.dgt.es/microdatos/salida/${y}/${+mo}/vehiculos/matriculaciones/export_mensual_mat_${y}${mo}.zip`, z = `${tmp}/m.zip`, d = `${tmp}/m`
@@ -85,7 +100,7 @@ for (const k of cola) {
     execFileSync('unzip', ['-o', '-q', z, '-d', d])
     // algunos zips traen el fichero dentro de una carpeta: se busca en todo el árbol
     const fs = execFileSync('find', [d, '-type', 'f'], { encoding: 'utf8' }).split('\n').filter(Boolean), f = fs.find(n => /\.txt$/i.test(n)) ?? fs.sort((x, y) => statSync(y).size - statSync(x).size)[0]
-    prev.meses[k] = agrega(f); hechos++
+    const { modelos: mo, ...resto } = agrega(f); prev.meses[k] = resto; modelos[k] = mo; hechos++
     log.meses.push(`${k}: ${prev.meses[k].n} nuevos, ${prev.meses[k].u} usados importados`)
   } catch (e) { log.avisos.push(`${k}: ${String(e.message).slice(-200)}`) }
 }
@@ -116,6 +131,9 @@ for (const [k, ds, q] of [
 
 const meses = Object.fromEntries(Object.entries(prev.meses).sort(([a], [b]) => a.localeCompare(b)))
 writeFileSync(F, JSON.stringify({ fecha: new Date().toISOString().slice(0, 10), meses }))
+writeFileSync(FM, JSON.stringify({ fecha: new Date().toISOString().slice(0, 10), meses: Object.fromEntries(Object.entries(modelos).sort(([a], [b]) => a.localeCompare(b))) }))
+// para revisar la normalización: los 40 modelos que más venden en todo el periodo
+{ const t = {}; for (const mm of Object.values(modelos)) for (const [k, v] of Object.entries(mm)) t[k] = (t[k] ?? 0) + v[0]; log.topModelos = Object.entries(t).sort((a, b) => b[1] - a[1]).slice(0, 60).map(([k, v]) => `${k} ${v}`) }
 writeFileSync(`${OUT}/parque.json`, JSON.stringify({ fecha: new Date().toISOString().slice(0, 10), ...parque }))
 // resumen para la portada: últimos 12 meses completos
 try {

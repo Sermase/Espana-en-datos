@@ -1,6 +1,7 @@
 import { useMemo, useState, type KeyboardEvent, type PointerEvent } from 'react'
 import { motion } from 'motion/react'
 import { niceTicks, useInView, useWidth } from './util'
+import { Leyenda, useOcultas } from './Leyenda'
 
 export type Capa = { id: string; nombre: string; color: string; v: number[] }
 
@@ -9,13 +10,15 @@ export type Capa = { id: string; nombre: string; color: string; v: number[] }
  * desde abajo al aparecer, separadas por un filo del color del fondo; cruz con el
  * desglose de ese instante, y en «%» cada columna suma 100.
  */
-export function Apiladas({ xs, capas, titulo, fx, fxEje, ticksX, fy, alto = 240, pct = false, sel, onSel }: {
+export function Apiladas({ xs, capas: todas, titulo, fx, fxEje, ticksX, fy, alto = 240, pct = false, sel, onSel }: {
   xs: number[]; capas: Capa[]; titulo: string; fx: (t: number) => string; fxEje?: (t: number) => string; ticksX?: number[]
   fy: (v: number) => string; alto?: number; pct?: boolean; sel?: string | null; onSel?: (id: string) => void
 }) {
   const [wrap, W] = useWidth<HTMLDivElement>()
   const [view, seen] = useInView<HTMLDivElement>()
   const [hi, setHi] = useState<number | null>(null)
+  const { off, setOff } = useOcultas()
+  const capas = useMemo(() => (onSel ? todas : todas.filter(c => !off.has(c.id))), [todas, off, onSel])
   const H = alto, L = 46, R = 10, T = 10, B = 24
   const tot = useMemo(() => xs.map((_, i) => capas.reduce((s, c) => s + Math.max(0, c.v[i] ?? 0), 0)), [xs, capas])
   const val = (c: Capa, i: number) => { const v = Math.max(0, c.v[i] ?? 0); return pct ? (tot[i] ? (v / tot[i]) * 100 : 0) : v }
@@ -46,9 +49,9 @@ export function Apiladas({ xs, capas, titulo, fx, fxEje, ticksX, fy, alto = 240,
   const fmtV = (c: Capa, i: number) => pct ? `${val(c, i).toLocaleString('es-ES', { maximumFractionDigits: 1 })} %` : fy(c.v[i] ?? 0)
   return (
     <figure className="g-fig" ref={view}>
-      <ul className="g-legend g-legend-sel">{capas.map(c => <li key={c.id}>
-        <button className={sel === c.id ? 'is-on' : ''} onClick={() => onSel?.(c.id)} disabled={!onSel} aria-pressed={sel === c.id}><i style={{ background: c.color, height: 8 }} />{c.nombre}</button>
-      </li>)}</ul>
+      {onSel ? <ul className="g-legend g-legend-sel">{todas.map(c => <li key={c.id}>
+        <button className={sel === c.id ? 'is-on' : ''} onClick={() => onSel(c.id)} aria-pressed={sel === c.id}><i style={{ background: c.color, height: 8 }} />{c.nombre}</button>
+      </li>)}</ul> : <Leyenda items={todas.map(c => ({ id: c.id, nombre: c.nombre, color: c.color }))} off={off} setOff={setOff} />}
       <div className="g-plot" ref={wrap} style={{ height: H }}>
         {W > 0 && <svg width={W} height={H} role="img" aria-label={titulo}>
           {ticks.map(v => <g key={v}><line className="g-grid" x1={L} x2={W - R} y1={py(v)} y2={py(v)} /><text className="g-ax" x={L - 6} y={py(v) + 3.5} textAnchor="end">{pct ? `${v} %` : fy(v)}</text></g>)}

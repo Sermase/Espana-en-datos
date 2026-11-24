@@ -2,6 +2,7 @@ import { useId, useMemo, useState, type KeyboardEvent, type PointerEvent, type R
 import { motion } from 'motion/react'
 import { CountUp } from './CountUp'
 import { niceTicks, useInView, useWidth } from './util'
+import { Leyenda, useOcultas } from './Leyenda'
 
 export type Punto = [number, number]
 export type Serie = {
@@ -45,10 +46,12 @@ type Props = {
  * con cruz que sigue al dedo o al ratón (también con las flechas del teclado),
  * leyenda si hay varias series y la tabla de datos debajo.
  */
-export function LineChart({ series, alto = 200, titulo, fx, fy, fxEje, ticksX, yMin, yMax, banda, marcas = [], ahora, etiquetasFinal = true, pie }: Props) {
+export function LineChart({ series: todas, alto = 200, titulo, fx, fy, fxEje, ticksX, yMin, yMax, banda, marcas = [], ahora, etiquetasFinal = true, pie }: Props) {
   const [wrap, W] = useWidth<HTMLDivElement>()
   const [view, seen] = useInView<HTMLDivElement>()
   const [hx, setHx] = useState<number | null>(null)
+  const { off, setOff } = useOcultas()
+  const series = useMemo(() => todas.filter(s => !off.has(s.id)), [todas, off])
   const id = useId()
   const H = alto, L = 44, R = etiquetasFinal ? 58 : 12, T = 12, B = 24
 
@@ -81,7 +84,8 @@ export function LineChart({ series, alto = 200, titulo, fx, fy, fxEje, ticksX, y
 
   return (
     <figure className="g-fig" ref={view}>
-      {series.length > 1 && <ul className="g-legend" aria-hidden>{series.map(s => <li key={s.id}><i className={s.fondo ? 'is-fondo' : ''} style={{ background: s.color }} />{s.nombre}</li>)}{banda && <li><i className="is-banda" />{banda.nombre}</li>}</ul>}
+      {todas.length > 1 && <Leyenda linea items={todas.map(s => ({ id: s.id, nombre: s.nombre, color: s.color, fondo: s.fondo }))} off={off} setOff={setOff} />}
+      {banda && <ul className="g-legend" aria-hidden><li><i className="is-banda" />{banda.nombre}</li></ul>}
       <div className="g-plot" ref={wrap} style={{ height: H }}>
         {W > 0 && <svg width={W} height={H} role="img" aria-label={titulo}>
           <defs><linearGradient id={`${id}a`} x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="currentColor" stopOpacity=".22" /><stop offset="1" stopColor="currentColor" stopOpacity="0" /></linearGradient></defs>

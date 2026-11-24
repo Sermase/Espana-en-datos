@@ -104,29 +104,58 @@ function Ventas({ m }: { m: M }) {
   </div>
 }
 
+type Mods = Record<string, Record<string, [number, number]>>
+/** Modelos de un año (o de varios meses): «MARCA|MODELO» → [turismos, de ellos eléctricos o enchufables]. */
+function modelosDe(mods: Mods, filtro: (k: string) => boolean) {
+  const o: Record<string, [number, number]> = {}
+  for (const [k, mm] of Object.entries(mods)) if (filtro(k)) for (const [x, [n, e]] of Object.entries(mm)) { const t = (o[x] ??= [0, 0]); t[0] += n; t[1] += e }
+  return Object.entries(o).sort((x, y) => y[1][0] - x[1][0])
+}
+const nombreModelo = (k: string) => { const [ma, mo] = k.split('|'); return { marca: marca(ma), modelo: mo.split(' ').map(w => (/\d/.test(w) || w.length <= 3 ? w : w.charAt(0) + w.slice(1).toLowerCase())).join(' ') } }
+const COL6 = ['#3987e5', '#d95926', '#199e70', '#c98500', '#d55181', '#9085e9']
+
 function Marcas({ m }: { m: M }) {
   const A = porAño(m), años = Object.keys(A).sort().filter(a => A[a].meses === 12)
-  const [a, setA] = useState(años.at(-1)!)
-  const ant = String(+a - 1)
-  const top = Object.entries(A[a].marcas).filter(([k]) => k !== '(otras)').sort((x, y) => y[1] - x[1]).slice(0, 15)
-  const tot = A[a].n
-  // las ocho marcas que más venden en el último año, su cuota año a año
-  const ocho = Object.entries(A[años.at(-1)!].marcas).filter(([k]) => k !== '(otras)').sort((x, y) => y[1] - x[1]).slice(0, 6).map(([k]) => k)
-  const COL = ['#3987e5', '#d95926', '#199e70', '#c98500', '#d55181', '#9085e9']
-  const sube = Object.entries(A[a].marcas).filter(([k, v]) => k !== '(otras)' && v >= 1000 && A[ant]?.marcas[k]).map(([k, v]) => ({ k, v: pct(v, A[ant].marcas[k]) })).sort((x, y) => y.v - x.v)
+  const [a, setA] = useState(años.at(-1)!), [sel, setSel] = useState<string | null>(null), [mods, setMods] = useState<Mods | null>(null), [q, setQ] = useState('')
+  useEffect(() => { fetch('./data/modelos.json').then(r => (r.ok ? r.json() : null)).then(j => setMods(j?.meses ?? {}), () => setMods({})) }, [])
+  const ant = String(+a - 1), tot = A[a].n
+  const todas = Object.entries(A[a].marcas).filter(([k]) => k !== '(otras)').sort((x, y) => y[1] - x[1])
+  const top = todas
+  const sube = todas.filter(([k, v]) => v >= 1000 && A[ant]?.marcas[k]).map(([k, v]) => ({ k, v: pct(v, A[ant].marcas[k]) })).sort((x, y) => y.v - x.v)
+  // cuota año a año: las seis primeras del último año, más la marca elegida
+  const ultimo = años.at(-1)!
+  const seis = Object.entries(A[ultimo].marcas).filter(([k]) => k !== '(otras)').sort((x, y) => y[1] - x[1]).slice(0, 6).map(([k]) => k)
+  const enLinea = sel && !seis.includes(sel) ? [...seis, sel] : seis
+  const modsAño = mods ? modelosDe(mods, k => k.startsWith(a)) : []
+  const deMarca = sel ? modsAño.filter(([k]) => k.startsWith(sel + '|')) : []
+  const buscadas = q.length >= 2 ? Object.keys(A[ultimo].marcas).concat(Object.keys(A[a].marcas)).filter((k, i, arr) => arr.indexOf(k) === i && k !== '(otras)' && marca(k).toLowerCase().includes(q.toLowerCase())).slice(0, 8) : []
+  const eligeMarca = (k: string) => { setSel(sel === k ? null : k); setQ('') }
   return <div className="graficos">
-    <Card wide t={`Las más vendidas en ${a}`} lead={top[0] ? <><b>{marca(top[0][0])}</b> fue la marca más matriculada, con {nf(top[0][1], 0)} turismos nuevos ({nf((top[0][1] / tot) * 100, 1)} %). Las diez primeras se llevan el {nf((top.slice(0, 10).reduce((t, x) => t + x[1], 0) / tot) * 100, 0)} % del mercado.</> : null} fuente={DGT}>
+    <Card wide t={`Las marcas más vendidas en ${a}`} lead={top[0] ? <><b>{marca(top[0][0])}</b> fue la marca más matriculada, con {nf(top[0][1], 0)} turismos nuevos ({nf((top[0][1] / tot) * 100, 1)} %). Las diez primeras se llevan el {nf((top.slice(0, 10).reduce((t, x) => t + x[1], 0) / tot) * 100, 0)} % del mercado; en total se vendieron {todas.length} marcas. Toca una para ver sus modelos.</> : null} fuente={DGT}>
       <div className="modo" role="radiogroup" aria-label="Año">{años.map(y => <button key={y} role="radio" aria-checked={a === y} className={a === y ? 'is-on' : ''} onClick={() => setA(y)}>{y}</button>)}</div>
-      <Barras titulo={`Turismos nuevos por marca, ${a}`} limite={15} fmt={v => nf(v, 0)} items={top.map(([k, v]) => ({ id: k, nombre: marca(k), sub: A[ant]?.marcas[k] ? signo(pct(v, A[ant].marcas[k])) + ` que en ${ant}` : undefined, valor: v, color: ACC }))} />
+      <div className="buscar-marca"><input type="search" value={q} onChange={e => setQ(e.target.value)} placeholder="Buscar una marca…" aria-label="Buscar una marca" />
+        {buscadas.length > 0 && <ul>{buscadas.map(k => <li key={k}><button onClick={() => eligeMarca(k)}>{marca(k)}</button></li>)}</ul>}</div>
+      <Barras titulo={`Turismos nuevos por marca, ${a}`} limite={15} fmt={v => nf(v, 0)} items={top.map(([k, v]) => ({ id: k, nombre: marca(k), sub: A[ant]?.marcas[k] ? signo(pct(v, A[ant].marcas[k])) + ` que en ${ant}` : 'nueva', valor: v, color: ACC, destacado: k === sel, onClick: () => eligeMarca(k) }))} />
+    </Card>
+    {sel && <Card wide t={`${marca(sel)}`} lead={<>{A[a].marcas[sel] ? <>En {a} vendió {nf(A[a].marcas[sel], 0)} turismos nuevos, el {nf((A[a].marcas[sel] / tot) * 100, 1)} % del mercado (puesto {todas.findIndex(([k]) => k === sel) + 1}).</> : <>En {a} no vendió turismos nuevos.</>}{deMarca.length ? <> El {nf((deMarca.reduce((t, [, v]) => t + v[1], 0) / Math.max(1, deMarca.reduce((t, [, v]) => t + v[0], 0))) * 100, 0)} % de sus ventas fueron eléctricos o enchufables.</> : null}</>}>
+      <button className="cerrar-marca" onClick={() => setSel(null)}>Cerrar</button>
+      <div className="mapa-dos">
+        <LineChart titulo={`Turismos nuevos de ${marca(sel)} por año`} alto={220} fx={x => String(x)} fy={v => nf(v, 0)} series={[{ id: sel, nombre: marca(sel), color: ACC, area: true, datos: años.map(y => [+y, A[y].marcas[sel] ?? 0] as [number, number]) }]} />
+        {mods == null ? <p className="note">Cargando modelos…</p> : deMarca.length ? <Barras titulo={`Modelos de ${marca(sel)} en ${a}`} limite={10} fmt={v => nf(v, 0)} items={deMarca.map(([k, [n, e]]) => ({ id: k, nombre: nombreModelo(k).modelo, sub: e ? `${nf((e / n) * 100, 0)} % eléctrico o enchufable` : undefined, valor: n, color: e / n > 0.5 ? '#3987e5' : ACC }))} /> : <p className="note">Sin modelos con ventas ese año.</p>}
+      </div>
+    </Card>}
+    <Card wide t={`Los modelos más vendidos en ${a}`} lead={modsAño[0] ? <>El <b>{nombreModelo(modsAño[0][0]).marca} {nombreModelo(modsAño[0][0]).modelo}</b> fue el turismo más vendido, con {nf(modsAño[0][1][0], 0)} unidades. En azul, los que venden más de la mitad en versión eléctrica o enchufable.</> : mods == null ? 'Cargando modelos…' : 'Aún no hay modelos para este año.'} fuente={DGT}>
+      {modsAño.length > 0 && <Barras titulo={`Modelos más vendidos, ${a}`} limite={20} fmt={v => nf(v, 0)} items={modsAño.slice(0, 100).map(([k, [n, e]]) => { const x = nombreModelo(k); return { id: k, nombre: `${x.marca} ${x.modelo}`, sub: e ? `${nf((e / n) * 100, 0)} % enchufable` : undefined, valor: n, color: e / n > 0.5 ? '#3987e5' : ACC, onClick: () => eligeMarca(k.split('|')[0]) } })} />}
+      <p className="note">Modelo según el nombre de la ficha técnica que registra la DGT; algunas variantes pueden salir aparte.</p>
     </Card>
     {sube.length > 3 && <Card t={`Las que más crecen en ${a}`} lead={`Marcas con más de 1.000 turismos vendidos, frente a ${ant}.`}>
-      <Barras titulo={`Cambio de ventas por marca, ${a} frente a ${ant}`} limite={8} fmt={v => signo(v)} items={sube.slice(0, 8).map(x => ({ id: x.k, nombre: marca(x.k), valor: x.v, color: x.v >= 0 ? '#3df5b0' : '#ff8a95' }))} />
+      <Barras titulo={`Cambio de ventas por marca, ${a} frente a ${ant}`} limite={8} fmt={v => signo(v)} items={sube.map(x => ({ id: x.k, nombre: marca(x.k), valor: x.v, color: x.v >= 0 ? '#3df5b0' : '#ff8a95', onClick: () => eligeMarca(x.k) }))} />
     </Card>}
-    {sube.length > 3 && <Card t={`Las que más caen en ${a}`} lead={`Mismas marcas, las de peor año.`}>
-      <Barras titulo={`Caída de ventas por marca, ${a} frente a ${ant}`} limite={8} fmt={v => signo(v)} items={sube.slice(-8).reverse().map(x => ({ id: x.k, nombre: marca(x.k), valor: x.v, color: x.v >= 0 ? '#3df5b0' : '#ff8a95' }))} />
+    {sube.length > 3 && <Card t={`Las que más caen en ${a}`} lead="Mismas marcas, las de peor año.">
+      <Barras titulo={`Caída de ventas por marca, ${a} frente a ${ant}`} limite={8} fmt={v => signo(v)} items={[...sube].reverse().map(x => ({ id: x.k, nombre: marca(x.k), valor: x.v, color: x.v >= 0 ? '#3df5b0' : '#ff8a95', onClick: () => eligeMarca(x.k) }))} />
     </Card>}
-    <Card wide t="Cuota de mercado, año a año" lead={`Las seis marcas que más vendieron en ${años.at(-1)}, en porcentaje de los turismos nuevos de cada año.`}>
-      <LineChart titulo="Cuota de mercado por marca" alto={260} fx={x => String(x)} fy={v => `${nf(v, 1)} %`} series={ocho.map((k, i) => ({ id: k, nombre: marca(k), color: COL[i], datos: años.map(y => [+y, ((A[y].marcas[k] ?? 0) / A[y].n) * 100] as [number, number]) }))} />
+    <Card wide t="Cuota de mercado, año a año" lead={<>Las seis marcas que más vendieron en {ultimo}{sel && !seis.includes(sel) ? <> y {marca(sel)}</> : null}. Toca una etiqueta para ocultarla; doble toque para ver solo esa.</>}>
+      <LineChart titulo="Cuota de mercado por marca" alto={260} fx={x => String(x)} fy={v => `${nf(v, 1)} %`} series={enLinea.map((k, i) => ({ id: k, nombre: marca(k), color: i < 6 ? COL6[i] : ACC, datos: años.map(y => [+y, ((A[y].marcas[k] ?? 0) / A[y].n) * 100] as [number, number]) }))} />
     </Card>
   </div>
 }

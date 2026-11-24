@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
 import { niceTicks, useInView, useWidth } from './util'
+import { Leyenda, useOcultas } from './Leyenda'
 
 export type Tramo = { id: string; nombre: string; color: string; v: number[] }
 
@@ -9,10 +10,12 @@ export type Tramo = { id: string; nombre: string; color: string; v: number[] }
  * cada tramo crece desde la base, con un filo del color del fondo entre tramos; admite valores negativos
  * (se apilan hacia abajo) y muestra el desglose de la columna al pasar por encima.
  */
-export function ColApiladas({ xs, tramos, titulo, fy, alto = 220, cadaX = 1, total = true }: { xs: string[]; tramos: Tramo[]; titulo: string; fy: (v: number) => string; alto?: number; cadaX?: number; total?: boolean }) {
+export function ColApiladas({ xs, tramos: todos, titulo, fy, alto = 220, cadaX = 1, total = true }: { xs: string[]; tramos: Tramo[]; titulo: string; fy: (v: number) => string; alto?: number; cadaX?: number; total?: boolean }) {
   const [wrap, W] = useWidth<HTMLDivElement>()
   const [view, seen] = useInView<HTMLDivElement>()
   const [hi, setHi] = useState<number | null>(null)
+  const { off, setOff } = useOcultas()
+  const tramos = todos.filter(t => !off.has(t.id))
   const H = alto, L = 52, R = 8, T = 10, B = 22
   const pos = xs.map((_, i) => tramos.reduce((s, t) => s + Math.max(0, t.v[i] ?? 0), 0))
   const neg = xs.map((_, i) => tramos.reduce((s, t) => s + Math.min(0, t.v[i] ?? 0), 0))
@@ -23,7 +26,7 @@ export function ColApiladas({ xs, tramos, titulo, fy, alto = 220, cadaX = 1, tot
   const paso = Math.max(cadaX, Math.ceil((Math.max(...xs.map(x => x.length)) * 6.4 + 10) / Math.max(1, band)))
   return (
     <figure className="g-fig" ref={view}>
-      <ul className="g-legend">{tramos.map(t => <li key={t.id}><i style={{ background: t.color, height: 8 }} />{t.nombre}</li>)}</ul>
+      {todos.length > 1 && <Leyenda items={todos.map(t => ({ id: t.id, nombre: t.nombre, color: t.color }))} off={off} setOff={setOff} />}
       <div className="g-plot" ref={wrap} style={{ height: H }}>
         {W > 0 && <svg width={W} height={H} role="img" aria-label={titulo}>
           {ticks.map(v => <g key={v}><line className="g-grid" x1={L} x2={W - R} y1={py(v)} y2={py(v)} /><text className="g-ax" x={L - 6} y={py(v) + 3.5} textAnchor="end">{fy(v)}</text></g>)}

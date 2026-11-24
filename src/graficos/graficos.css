@@ -96,3 +96,10 @@ button.g-bar:hover, button.g-bar:focus-visible { background: rgba(255, 255, 255,
 @media (prefers-reduced-motion: reduce) { .sk-hilo { animation: none; stroke-dasharray: none; opacity: .12 !important } }
 @media (max-width: 620px) { .sk-lab { font-size: 11.5px } .sk-v { font-size: 10.5px } }
 .sk-guia { fill: none; stroke: var(--g-muted); stroke-width: 1; opacity: .7 }
+
+/* leyendas que ocultan y enseñan series */
+.g-legend-tog button { transition: opacity .2s, border-color .2s }
+.g-legend-tog button:hover { border-color: rgba(255, 255, 255, .25) }
+.g-legend-tog button.is-off { opacity: .4; text-decoration: line-through }
+.g-legend-tog button.is-off i { background: transparent !important; outline: 1px solid currentColor }
+.g-legend-todas { color: var(--g-ink2); text-decoration: underline; text-underline-offset: 2px }

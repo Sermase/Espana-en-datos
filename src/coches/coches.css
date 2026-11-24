@@ -166,3 +166,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .mapa-dos { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 22px; align-items: start }
 @media (max-width: 860px) { .mapa-dos { grid-template-columns: 1fr } }
 .modo { flex-wrap: wrap }
+.buscar-marca { position: relative; max-width: 320px; margin: 4px 0 12px }
+.buscar-marca input { width: 100%; padding: 8px 11px; border: 1px solid var(--line); border-radius: 4px; background: rgba(160, 220, 240, .04); color: var(--ink); font: inherit; font-size: 14px }
+.buscar-marca input:focus { outline: none; border-color: var(--acc) }
+.buscar-marca ul { position: absolute; z-index: 5; inset: calc(100% + 4px) 0 auto; margin: 0; padding: 4px; list-style: none; border: 1px solid var(--line); border-radius: 4px; background: #07141d }
+.buscar-marca button { width: 100%; padding: 6px 8px; text-align: left; border-radius: 3px; color: var(--ink) }
+.buscar-marca button:hover { background: rgba(160, 220, 240, .08) }
+.cerrar-marca { float: right; margin-top: -40px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 14px; font-size: 13px; color: var(--muted) }
+.cerrar-marca:hover { color: var(--ink); border-color: var(--acc) }
