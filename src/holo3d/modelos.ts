@@ -306,3 +306,26 @@ export const embudo = (partes: number[]): Modelo => t => {
   })
   return { fuerte, tenue, puntos }
 }
+
+/**
+ * Radar de seguridad: un disco con anillos y una aguja que barre; alrededor, una columna por tipo de delito
+ * con su peso (`partes`, 0–1). La columna se enciende cuando la aguja pasa por encima y deja un eco en el disco.
+ */
+export const radar = (partes: number[]): Modelo => t => {
+  const fuerte: Seg[] = [], tenue: Seg[] = [], puntos: [number, number, number][] = []
+  const R = 0.62, n = partes.length
+  for (const r of [0.2, 0.4, R]) anillo(r === R ? fuerte : tenue, r, 0, 48)
+  for (let i = 0; i < 8; i++) { const a = (i / 8) * TAU; tenue.push([0, 0, 0, Math.cos(a) * R, 0, Math.sin(a) * R]) }
+  const barrido = (t * 0.9) % TAU
+  // la aguja y su estela
+  fuerte.push([0, 0.005, 0, Math.cos(barrido) * R, 0.005, Math.sin(barrido) * R])
+  for (let k = 1; k <= 6; k++) { const a = barrido - k * 0.07; tenue.push([0, 0.004, 0, Math.cos(a) * R * (1 - k * 0.04), 0.004, Math.sin(a) * R * (1 - k * 0.04)]) }
+  partes.forEach((p, i) => {
+    const a = (i / n) * TAU + 0.3, r = 0.28 + (i % 2) * 0.2, x = Math.cos(a) * r, z = Math.sin(a) * r
+    const h = 0.06 + Math.sqrt(Math.max(0, p)) * 0.85, w = 0.035
+    const d = ((barrido - a) % TAU + TAU) % TAU, vivo = d < 0.9
+    caja(vivo ? fuerte : tenue, x - w, x + w, 0, h, z - w, z + w)
+    if (vivo) { const e = d / 0.9; anillo(tenue, 0.04 + e * 0.12, 0.002, 14, x, z); for (let j = 0; j < 3; j++) puntos.push([x, h + 0.04 + j * 0.05 + e * 0.1, z]) }
+  })
+  return { fuerte, tenue, puntos }
+}

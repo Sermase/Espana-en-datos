@@ -31,6 +31,7 @@ export const TEMAS: Tema[] = [
   // Gente
   { id: 'poblacion', area: 'gente', nombre: 'Población', lema: 'Los 8.000 municipios en un mapa, y gráficos e históricos desde 1971: cuántos somos, dónde vivimos y cómo envejecemos.', color: '#c49bff', vista: 'pirámide', ruta: './poblacion/index.html' },
   { id: 'sociedad', area: 'gente', nombre: 'Sociedad', lema: 'Hogares, familias, desigualdad y cómo usamos el tiempo.', color: '#ff9ecf', vista: 'consola', plan: 'Tamaño de los hogares, personas que viven solas, renta por hogar y desigualdad por provincia.' },
+  { id: 'seguridad', area: 'gente', nombre: 'Seguridad', lema: 'Los delitos que conoce la policía en cada provincia desde 2010 y en tu ciudad: qué sube, qué baja y dónde.', color: '#7b86ff', vista: 'mapa', ruta: './seguridad/index.html' },
   { id: 'sanidad', area: 'gente', nombre: 'Sanidad', lema: 'Esperanza de vida, listas de espera y recursos de cada comunidad.', color: '#ff7b7b', vista: 'mapa', plan: 'Esperanza de vida por provincia, listas de espera por comunidad, médicos y camas por habitante.' },
   { id: 'educacion', area: 'gente', nombre: 'Educación', lema: 'Del colegio a la universidad: alumnos, abandono y titulados.', color: '#7cc8ff', vista: 'consola', plan: 'Abandono escolar, titulados universitarios, alumnos por profesor y comparación con Europa.' },
   // Dinero
