@@ -1,7 +1,4 @@
 {
- "meses": {
-  "2024-02": "54368 de 54368 concesiones (100.0 %), 1880 M€, 73 s",
-  "2024-01": "91063 de 91063 concesiones (100.0 %), 5200 M€, 91 s"
- },
+ "meses": {},
  "orden": "order=fechaConcesion&direccion=asc"
 }
