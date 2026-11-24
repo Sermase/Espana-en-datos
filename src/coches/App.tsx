@@ -111,7 +111,7 @@ function modelosDe(mods: Mods, filtro: (k: string) => boolean) {
   for (const [k, mm] of Object.entries(mods)) if (filtro(k)) for (const [x, [n, e]] of Object.entries(mm)) { const t = (o[x] ??= [0, 0]); t[0] += n; t[1] += e }
   return Object.entries(o).sort((x, y) => y[1][0] - x[1][0])
 }
-const nombreModelo = (k: string) => { const [ma, mo] = k.split('|'); return { marca: marca(ma), modelo: mo.split(' ').map(w => w.split('-').map(x => (/\d/.test(x) || x.length <= 3 ? x : x.charAt(0) + x.slice(1).toLowerCase())).join('-')).join(' ') } }
+const nombreModelo = (k: string) => { const [ma, mo] = k.split('|'); return { marca: marca(ma), modelo: mo.split(' ').map(w => w.split('-').map((x, _, ps) => (/\d/.test(x) || x.length <= (ps.length > 1 ? 2 : 3) ? x : x.charAt(0) + x.slice(1).toLowerCase())).join('-')).join(' ') } }
 const COL6 = ['#3987e5', '#d95926', '#199e70', '#c98500', '#d55181', '#9085e9']
 
 function Marcas({ m }: { m: M }) {
