@@ -355,3 +355,35 @@ export const cupula = (densidad = 0.5): Modelo => t => {
   for (let i = 0; i < n; i++) { const f = (t * 0.05 + i / n) % 1, a = i * 2.4; const r = Math.sqrt((i * 0.618) % 1) * R * 0.85; puntos.push([Math.cos(a) * r, 0.02 + f * Math.sqrt(Math.max(0, R * R - r * r)) * 0.9, Math.sin(a) * r]) }
   return { fuerte, tenue, puntos }
 }
+
+/**
+ * Casa del gasto: una casa de alambre cuyos pisos son las partes del presupuesto de un hogar (de abajo arriba, de más
+ * a menos). Un plano de luz recorre los pisos y enciende el que atraviesa; por la chimenea sale lo que se ahorra.
+ */
+export const casa = (partes: number[], ahorro = 0.1): Modelo => t => {
+  const fuerte: Seg[] = [], tenue: Seg[] = []
+  const X = 0.42, Z = 0.32, H = 0.62, TECHO = 0.95
+  caja(fuerte, -X, X, 0, H, -Z, Z)
+  // tejado a dos aguas
+  for (const z of [-Z, Z]) { fuerte.push([-X, H, z, 0, TECHO, z]); fuerte.push([X, H, z, 0, TECHO, z]) }
+  fuerte.push([0, TECHO, -Z, 0, TECHO, Z])
+  // chimenea
+  caja(tenue, 0.2, 0.28, 0.78, 1.02, -0.05, 0.03)
+  // pisos: una losa por parte, alturas proporcionales
+  const tot = partes.reduce((a, b) => a + b, 0) || 1, scan = ((t * 0.18) % 1) * H
+  let y = 0
+  partes.forEach(p => {
+    const h = (p / tot) * H, y1 = y + h, vivo = scan >= y && scan < y1
+    const out = vivo ? fuerte : tenue, m = 0.03
+    if (y1 < H - 0.001) { out.push([-X, y1, -Z, X, y1, -Z]); out.push([X, y1, -Z, X, y1, Z]); out.push([X, y1, Z, -X, y1, Z]); out.push([-X, y1, Z, -X, y1, -Z]) }
+    if (vivo) { // la habitación encendida: un marco interior
+      caja(tenue, -X + m, X - m, y + 0.01, y1 - 0.01, -Z + m, Z - m)
+    }
+    y = y1
+  })
+  // ventanas y puerta
+  caja(tenue, -0.08, 0.08, 0, 0.2, Z, Z)
+  for (const x of [-0.28, 0.16]) caja(tenue, x, x + 0.12, 0.38, 0.5, Z, Z)
+  const puntos = humo(t, 0.24, 1.03, -0.01, Math.round(6 + ahorro * 60), 0.45, 0.1)
+  return { fuerte, tenue, puntos }
+}

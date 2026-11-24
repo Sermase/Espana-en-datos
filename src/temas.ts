@@ -38,6 +38,7 @@ export const TEMAS: Tema[] = [
   { id: 'economia', area: 'economia', nombre: 'Macroeconomía', lema: 'PIB, precios, empleo, salarios, vivienda, cuentas públicas y hogares, comparados con Europa.', color: '#3df5b0', vista: 'consola', ruta: './economia/index.html' },
   { id: 'vivienda', area: 'economia', nombre: 'Vivienda', lema: 'Cuánto sube la vivienda, dónde se vende, cuánto se hipoteca y cuánto sube el alquiler en tu municipio.', color: '#ffd166', vista: 'mapa', ruta: './vivienda/index.html' },
   { id: 'comercio', area: 'economia', nombre: 'Comercio', lema: 'Lo que España vende y compra al mundo: países, productos y rutas, con diez años de historia.', color: '#c6f25e', vista: 'mapa', ruta: './comercio/index.html' },
+  { id: 'hogares', area: 'economia', nombre: 'Hogares', lema: 'En qué gastan las familias según su edad, su renta y su comunidad, cuánto ahorran, dónde guardan el dinero y cuántas no llegan a fin de mes.', color: '#ff9b85', vista: 'consola', ruta: './hogares/index.html' },
   { id: 'turismo', area: 'economia', nombre: 'Turismo', lema: 'Quién nos visita, cuánto gasta y a dónde va.', color: '#ff9f43', vista: 'mapa', plan: 'Turistas por país de origen, gasto, pernoctaciones por provincia y destinos de moda.' },
   { id: 'industria', area: 'economia', nombre: 'Industria', lema: 'Empresas, sectores y lo que fabricamos.', color: '#9fb3c8', vista: 'consola', plan: 'Producción industrial, empresas por sector y tamaño, y exportación de coches.' },
   // Sector público

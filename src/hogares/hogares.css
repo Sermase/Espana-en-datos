@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+/* Seguridad: acento índigo. */
+:root { --surface: #07141d; --bg: #03090f; --panel: #07141d; --line: rgba(160, 220, 240, .12); --ink: #e6f6fb; --muted: #86a9b5; --acc: #ff9b85; color-scheme: dark }
+* { box-sizing: border-box }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: Barlow, system-ui, sans-serif }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer }
+:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px }
+.boot { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--muted) }
+.boot svg { color: var(--acc) }
+
+.eco { max-width: 1280px; margin: 0 auto; padding: 22px 24px 40px }
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px }
+.home-link { font-size: 12px; letter-spacing: .08em; color: var(--muted); text-decoration: none }
+.home-link::before { content: '‹ ' }
+.home-link:hover { color: var(--acc) }
+.brand h1 { font-family: Oxanium, sans-serif; font-weight: 700; font-size: 38px; letter-spacing: .14em; text-transform: uppercase; margin: 0; line-height: 1.05 }
+.brand p { margin: 2px 0 0; color: var(--acc); font-size: 14px }
+.rango { display: flex; gap: 4px }
+.rango button { padding: 6px 11px; border: 1px solid var(--line); border-radius: 3px; font-size: 13px; font-weight: 600; color: var(--muted) }
+.rango button.is-on { border-color: var(--acc); color: var(--ink); background: color-mix(in oklab, var(--acc) 12%, transparent) }
+
+.menu { position: sticky; top: 0; z-index: 10; display: flex; gap: 4px; margin: 18px -24px 16px; padding: 8px 24px; overflow-x: auto; background: linear-gradient(#03090f 80%, rgba(3, 9, 15, 0)); scrollbar-width: none }
+.menu button { flex: none; display: inline-flex; align-items: center; gap: 7px; padding: 9px 14px; border: 1px solid var(--line); border-radius: 3px; font-weight: 600; font-size: 14.5px; background: var(--panel); transition: border-color .2s, background .2s }
+.menu button svg { color: var(--muted) }
+.menu button:hover { border-color: color-mix(in oklab, var(--acc) 50%, transparent) }
+.menu button.is-on { border-color: var(--acc); background: color-mix(in oklab, var(--acc) 14%, var(--panel)) }
+.menu button.is-on svg { color: var(--acc) }
+.intro { color: #c7dde4; font-size: 15.5px; margin: 0 0 14px; max-width: 70ch }
+
+.kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px }
+.kpi { position: relative; display: grid; gap: 2px; text-align: left; padding: 16px 16px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; transition: border-color .2s, transform .2s }
+.kpi:hover { border-color: var(--acc); transform: translateY(-2px) }
+.kpi-l { font-size: 13.5px; color: var(--muted) }
+.kpi-v { font: 700 32px/1.1 Oxanium, sans-serif; font-variant-numeric: tabular-nums }
+.kpi-d { font-size: 12.5px; color: var(--muted) }
+.kpi-d.is-good { color: #3df5b0 }
+.kpi-d.is-bad { color: #ff8a95 }
+.kpi svg { width: 100%; height: 30px; margin-top: 8px }
+.kpi svg path { fill: none; stroke: var(--acc); stroke-width: 1.6; vector-effect: non-scaling-stroke }
+.kpi-p { font-size: 11.5px; color: var(--muted) }
+
+.graficos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start }
+.gcard { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 18px 18px 14px; min-width: 0 }
+.gcard.is-wide { grid-column: 1 / -1 }
+.gcard h2 { margin: 0; font-family: Oxanium, sans-serif; font-size: 20px; font-weight: 600 }
+.gcard .lead { margin: 6px 0 12px; color: #c7dde4; font-size: 15px; line-height: 1.45; max-width: 72ch }
+.gcard .lead b { color: #fff }
+.note, .fuente { color: var(--muted); font-size: 12.5px; margin: 6px 0 0 }
+.src { color: var(--muted); font-size: 12px; margin-top: 24px }
+@media (max-width: 900px) {
+  .eco { padding: 14px 12px 30px }
+  .brand h1 { font-size: 28px }
+  .menu { margin: 12px -12px 12px; padding: 8px 12px }
+  .graficos { grid-template-columns: 1fr }
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px }
+  .kpi { padding: 12px }
+  .kpi-v { font-size: 24px }
+}
+.fuente a, .fuentes a { color: var(--ink); text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--acc) 60%, transparent); text-underline-offset: 2px }
+.fuente a:hover, .fuentes a:hover { color: var(--acc) }
+
+.kpis { margin-bottom: 16px }
+.kpi { cursor: default }
+.kpi:hover { transform: none; border-color: var(--line) }
+.kpi-l { display: flex; align-items: center; justify-content: flex-start; gap: 6px; text-align: left }
+.kpi-l svg { flex: none }
+.kpi-l svg { color: var(--acc) }
+.vivo { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--acc); margin-right: 4px; box-shadow: 0 0 0 0 rgba(123,134,255,.6); animation: vivo 2s infinite }
+@keyframes vivo { 70% { box-shadow: 0 0 0 8px rgba(123,134,255,0) } 100% { box-shadow: 0 0 0 0 rgba(123,134,255,0) } }
+@media (prefers-reduced-motion: reduce) { .vivo { animation: none } }
+
+/* La sala: holograma de la tecnología + selector */
+.sala { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px; background: radial-gradient(ellipse at 30% 80%, rgba(255,155,133,.07), transparent 60%), var(--panel) }
+.sala-holo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(170px, .8fr); gap: 12px; align-items: center }
+.sala-dato { display: grid; gap: 4px; font-size: 14px; color: #c7dde4; line-height: 1.45 }
+.sala-k { font-size: 13px; color: var(--muted) }
+.sala-dato > b { font: 700 34px/1.1 Oxanium, sans-serif; color: #fff; font-variant-numeric: tabular-nums }
+.sala-tecs { display: grid; gap: 4px; align-content: center }
+.sala-tecs button { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 8px 10px; border: 1px solid transparent; border-radius: 3px; text-align: left; font-size: 14.5px }
+.sala-tecs button i { width: 10px; height: 10px; border-radius: 2px; background: var(--c) }
+.sala-tecs button small { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 13px }
+.sala-tecs button:hover { background: rgba(255,255,255,.04) }
+.sala-tecs button.is-on { border-color: var(--c); background: color-mix(in oklab, var(--c) 12%, transparent) }
+.sala-tecs button.is-on small { color: #fff }
+.modo { display: flex; gap: 4px; margin-bottom: 6px }
+.modo button { padding: 4px 10px; border: 1px solid var(--line); border-radius: 3px; font-size: 13px; color: var(--muted) }
+.modo button.is-on { border-color: var(--acc); color: var(--ink) }
+@media (max-width: 900px) {
+  .sala { grid-template-columns: 1fr }
+  .sala-holo { grid-template-columns: 1fr }
+  .sala-tecs { grid-template-columns: 1fr 1fr }
+}
+.sub { font: 600 15px Oxanium, sans-serif; margin: 18px 0 8px; color: #dfeff4 }
+.buscar { display: flex; align-items: center; gap: 8px; padding: 0 12px; height: 42px; border: 1px solid var(--line); border-radius: 3px; background: #03090f; color: var(--muted) }
+.buscar input { flex: 1; background: none; border: 0; color: var(--ink); font: 15px Barlow, sans-serif; outline: none }
+.buscar { margin: 10px 0 6px }
+.buscar button { display: grid; place-items: center; color: var(--muted) }
+
+/* Tipos de delito: fichas con su color fijo */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 10px }
+.chips button { display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px; border: 1px solid var(--line); border-radius: 16px; font-size: 13.5px; color: #c7dde4; transition: border-color .2s, background .2s }
+.chips button i { width: 9px; height: 9px; border-radius: 50%; background: var(--c); opacity: .5 }
+.chips button:hover { border-color: color-mix(in oklab, var(--c) 60%, transparent) }
+.chips button.is-on { border-color: var(--c); background: color-mix(in oklab, var(--c) 14%, transparent); color: #fff }
+.chips button.is-on i { opacity: 1; box-shadow: 0 0 8px var(--c) }
+
+/* El reloj del delito */
+.reloj { display: grid; align-content: center; gap: 10px }
+.reloj-cuenta { margin: 0; font-size: 14.5px; color: #c7dde4; line-height: 1.4 }
+.reloj-cuenta b { font: 700 26px/1 Oxanium, sans-serif; color: #fff; font-variant-numeric: tabular-nums; margin-right: 6px }
+.reloj-cuenta small { color: var(--muted) }
+.reloj ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 14px }
+.reloj li { display: flex; align-items: center; gap: 9px; font-size: 13.5px; color: #c7dde4; line-height: 1.25 }
+.reloj li b { color: #fff; font-weight: 600 }
+.reloj svg { flex: none; width: 26px; height: 26px; transform: rotate(-90deg) }
+.r-fondo { fill: none; stroke: rgba(160, 220, 240, .1); stroke-width: 3.5 }
+.r-arco { fill: none; stroke: var(--c); stroke-width: 3.5; stroke-dasharray: 100; stroke-dashoffset: 30; stroke-linecap: round }
+.reloj svg.gira .r-arco { animation: llena var(--dur) linear infinite }
+@keyframes llena { from { stroke-dashoffset: 100 } to { stroke-dashoffset: 0 } }
+
+/* Años del mapa */
+.anios { display: flex; align-items: center; gap: 10px; margin: 0 0 8px }
+.anios input { flex: 1; accent-color: var(--acc) }
+.anios b { font: 700 20px Oxanium, sans-serif; font-variant-numeric: tabular-nums; min-width: 3.2em; text-align: right }
+.play { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--acc); border-radius: 50%; color: var(--acc) }
+.play:hover { background: color-mix(in oklab, var(--acc) 14%, transparent) }
+
+/* Lista de municipios */
+.munis { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 2px }
+.munis button { width: 100%; display: grid; grid-template-columns: 2.2em minmax(0, 1.4fr) minmax(60px, 1fr) 4.2em 4.4em; align-items: center; gap: 10px; padding: 7px 8px; border: 1px solid transparent; border-radius: 3px; text-align: left; font-size: 14.5px }
+.munis button:hover { background: rgba(255, 255, 255, .03) }
+.munis button.is-on { border-color: var(--acc); background: color-mix(in oklab, var(--acc) 8%, transparent) }
+.mu-pos { color: var(--muted); font-size: 12.5px; font-variant-numeric: tabular-nums; text-align: right }
+.mu-n { min-width: 0; overflow: hidden; text-overflow: ellipsis }
+.mu-n small { display: block; color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.mu-b { height: 6px; border-radius: 3px; background: rgba(160, 220, 240, .06); overflow: hidden }
+.mu-b i { display: block; height: 100%; border-radius: 3px }
+.munis b { font: 600 15px Oxanium, sans-serif; text-align: right; font-variant-numeric: tabular-nums }
+.munis small.is-bad { color: #ff8a95; text-align: right; font-size: 12.5px }
+.munis small.is-good { color: #3df5b0; text-align: right; font-size: 12.5px }
+@media (max-width: 900px) {
+  .reloj ul { grid-template-columns: 1fr }
+  .munis button { grid-template-columns: 1.8em minmax(0, 1fr) 3.8em 3.8em; gap: 8px; font-size: 14px }
+  .mu-b { display: none }
+}
+@media (prefers-reduced-motion: reduce) { .reloj svg.gira .r-arco { animation: none } }
+@media (max-width: 900px) {
+  /* en el móvil, los tipos en una sola fila que se desliza */
+  .chips { flex-wrap: nowrap; overflow-x: auto; margin-left: -18px; margin-right: -18px; padding: 0 18px 4px; scrollbar-width: none }
+  .chips button { flex: none }
+}
+.is-wide-wrap { grid-column: 1 / -1; scroll-margin-top: 70px }
+
+/* ── Hogares ─────────────────────────────────────── */
+.sala-lista { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; align-content: center }
+.sala-lista li { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; column-gap: 10px; row-gap: 5px; align-items: center; font-size: 14px; color: #c7dde4 }
+.sala-lista i { width: 10px; height: 10px; border-radius: 50%; background: var(--c) }
+.sala-lista b { color: var(--ink); font-variant-numeric: tabular-nums }
+.sala-lista em { grid-column: 2 / 4; display: block; height: 4px; min-width: 2px; border-radius: 2px; background: var(--c); opacity: .85; transform-origin: left; animation: sl-crece .9s cubic-bezier(.2, .7, .2, 1) both }
+.sala-lista li.is-cero { opacity: .45 }
+.sala-lista li.is-cero em { display: none }
+@keyframes sl-crece { from { transform: scaleX(0) } }
+@media (prefers-reduced-motion: reduce) { .sala-lista em { animation: none } }
+
+.sala-lista-13 { gap: 7px }
+.sala-lista-13 li { font-size: 13.5px; row-gap: 3px }
+.sala-lista-13 em { height: 3px }
+.sala-solo { align-content: center; padding: 6px 4px }
+.kpis3 { display: grid; gap: 14px; align-content: center }
+.kpis3 > div { display: grid; gap: 2px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 4px }
+.kpis3 small { color: var(--muted); font-size: 13px }
+.kpis3 b { font: 700 24px/1.15 Oxanium, sans-serif; color: #fff; font-variant-numeric: tabular-nums }
+.kpis3 span { color: #c7dde4; font-size: 13px }
+.reparto-f { margin: 6px 0 0 }
+.rp-ley { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0 0 12px; padding: 0; list-style: none; font-size: 13px; color: #c7dde4 }
+.rp-ley li { display: inline-flex; align-items: center; gap: 6px; cursor: default; transition: opacity .2s }
+.rp-ley i { width: 10px; height: 10px; border-radius: 2px }
+.rp-ley li.is-off { opacity: .4 }
+.rp-fila { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 12px; align-items: center; margin: 0 0 8px }
+.rp-n { display: grid; font-size: 14px; color: var(--ink) }
+.rp-n small { color: var(--muted); font-size: 12px }
+.rp-barra { display: flex; gap: 2px; height: 26px }
+.rp-barra i { font-style: normal; display: grid; place-items: center; min-width: 2px; border-radius: 2px; transition: opacity .2s }
+.rp-barra i:first-child { border-radius: 4px 2px 2px 4px }
+.rp-barra i:last-child { border-radius: 2px 4px 4px 2px }
+.rp-barra i.is-off { opacity: .3 }
+.rp-barra b { font-size: 11.5px; font-weight: 600; color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .55); font-variant-numeric: tabular-nums }
+.rp-tabla { margin-top: 8px; font-size: 13px; color: var(--muted) }
+.rp-tabla summary { cursor: pointer }
+.rp-tabla table { width: 100%; margin-top: 6px; border-collapse: collapse; font-variant-numeric: tabular-nums; display: block; overflow-x: auto }
+.rp-tabla th, .rp-tabla td { padding: 4px 8px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap }
+.rp-tabla th:first-child { text-align: left }
+@media (max-width: 860px) {
+  .rp-fila { grid-template-columns: 1fr; gap: 4px }
+  .rp-n { grid-auto-flow: column; justify-content: space-between; align-items: baseline }
+}
