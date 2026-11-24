@@ -95,7 +95,11 @@ function codMuni(nombre, prov) {
   MUNIS ??= Object.entries(PADRON.m).map(([c, [n]]) => ({ c: c.padStart(5, '0'), n: normM(n), partes: n.split('/').map(normM) }))
   const x = normM(nombre)
   const cand = MUNIS.filter(m => !prov || m.c.startsWith(prov))
-  return (cand.find(m => m.n === x || m.partes.includes(x)) ?? cand.find(m => m.n.startsWith(x + ' ') || x.startsWith(m.n + ' ')))?.c ?? null
+  const en = (lista) => (lista.find(m => m.n === x || m.partes.includes(x)) ?? lista.find(m => m.n.startsWith(x + ' ') || x.startsWith(m.n + ' ')))?.c ?? null
+  if (prov) return en(cand)
+  // sin provincia, solo si el nombre es único en España
+  const todos = MUNIS.filter(m => m.n === x || m.partes.includes(x))
+  return todos.length === 1 ? todos[0].c : null
 }
 
 // ---------- 2. Balances trimestrales: el último publicado y los cuartos trimestres para los municipios ----------
@@ -109,12 +113,12 @@ const fila3 = (t) => tabla(t)
 function claveBalance(t) {
   const x = norm(t)
   const R = [
-    ['total', /total infracciones|delitos y faltas/], ['conv', /criminalidad convencional/], ['ciber', /cibercriminalidad/],
+    ['total', /total infracciones|delitos y faltas/], ['restoConv', /resto criminalidad convencional/], ['conv', /criminalidad convencional/], ['ciber', /cibercriminalidad/],
     ['homicidio', /homicidios dolosos.*consumad/], ['tentativa', /tentativa/], ['lesiones', /lesiones/], ['secuestro', /secuestro/],
-    ['penetracion', /penetracion/], ['sexual', /sexual/], ['violencia', /robos? con violencia/],
+    ['penetracion', /penetracion/], ['restoSexual', /resto .*sexual/], ['sexual', /sexual/], ['violencia', /robos? con violencia/],
     ['domicilios', /fuerza en domicilios$/], ['fuerza', /robos con fuerza/], ['hurtos', /hurtos/], ['vehiculos', /sustraccion/],
     ['drogas', /trafico drogas/], ['estafas', /estafas informaticas/], ['otrosCiber', /otros ciberdelitos/], ['danos', /danos/],
-    ['restoConv', /resto criminalidad convencional/], ['resto', /resto infracciones/],
+    ['resto', /resto infracciones/],
   ]
   for (const [k, re] of R) if (re.test(x)) return k
   return 'x_' + x.replace(/ /g, '_').slice(0, 18)
@@ -138,7 +142,8 @@ function balance({ a, q, ts }) {
   for (const [lugar, tip, per, v] of M.filas) {
     if (/variaci/i.test(per)) continue
     const l = lugar.trim()
-    if (/^provincia de/i.test(l)) { provActual = codProv(l); continue }
+    // «Provincia de X» o, en las comunidades de una sola provincia, la propia comunidad («PRINCIPADO DE ASTURIAS»)
+    if (!/municipio|^\d{5}\s|^isla/i.test(l)) { provActual = codProv(l); continue }
     let cod = l.match(/^(\d{5})\s/)?.[1] ?? null
     if (!cod && /municipio de/i.test(l)) cod = codMuni(l.replace(/^-?\s*municipio de\s*/i, ''), provActual)
     if (!cod) { if (/municipio/i.test(l)) sinMuni.add(l); continue }
