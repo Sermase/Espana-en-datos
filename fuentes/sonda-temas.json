@@ -1,11 +1,343 @@
 {
- "AQMobile_2025": {
-  "error": "Command failed: curl -sSL --max-time 60 -A Mozilla/5.0 (espana-en-datos; GitHub Actions) https://air.discomap.eea.europa.eu/arcgis/rest/services/AQMobile_2025?f=pjson\ncurl: (28) Connection timed out after 60002 milliseconds\n"
+ "urls NO2": "200 text/csv 49514",
+ "n NO2": 538,
+ "ejemplosUrl": [
+  "https://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_01022001_8_8.parquet",
+  "https://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_01059008_8_8.parquet",
+  "https://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_01059012_8_8.parquet",
+  "https://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_03009006_8_8.parquet",
+  "https://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_03014008_8_8.parquet"
+ ],
+ "parquet SP_01022001_8_8.parquet": {
+  "bytes": 119620,
+  "filas": 7768,
+  "columnas": [
+   "root",
+   "Samplingpoint",
+   "Pollutant",
+   "Start",
+   "End",
+   "Value",
+   "Unit",
+   "AggType",
+   "Validity",
+   "Verification",
+   "ResultTime",
+   "DataCapture",
+   "FkObservationLog"
+  ],
+  "primeras": [
+   {
+    "Samplingpoint": "ES/SP_01022001_8_8",
+    "Pollutant": 8,
+    "Start": "2026-01-01T01:00:00.000Z",
+    "End": "2026-01-01T02:00:00.000Z",
+    "Value": 13,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": 1,
+    "Verification": 3,
+    "ResultTime": "2026-01-02T13:36:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "fd17cac7-88e7-44a4-b5c2-f782a764051a"
+   },
+   {
+    "Samplingpoint": "ES/SP_01022001_8_8",
+    "Pollutant": 8,
+    "Start": "2026-01-01T02:00:00.000Z",
+    "End": "2026-01-01T03:00:00.000Z",
+    "Value": -999,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": -1,
+    "Verification": 3,
+    "ResultTime": "2026-01-02T13:36:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "fd17cac7-88e7-44a4-b5c2-f782a764051a"
+   },
+   {
+    "Samplingpoint": "ES/SP_01022001_8_8",
+    "Pollutant": 8,
+    "Start": "2026-01-01T03:00:00.000Z",
+    "End": "2026-01-01T04:00:00.000Z",
+    "Value": -999,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": -1,
+    "Verification": 3,
+    "ResultTime": "2026-01-02T13:36:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "fd17cac7-88e7-44a4-b5c2-f782a764051a"
+   }
+  ],
+  "ultimas": [
+   {
+    "Samplingpoint": "ES/SP_01022001_8_8",
+    "Pollutant": 8,
+    "Start": "2026-11-24T05:00:00.000Z",
+    "End": "2026-11-24T06:00:00.000Z",
+    "Value": 10,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": 1,
+    "Verification": 3,
+    "ResultTime": "2026-11-24T08:39:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "f2d84bc2-4fa6-4840-aef9-2b75ad4922bf"
+   },
+   {
+    "Samplingpoint": "ES/SP_01022001_8_8",
+    "Pollutant": 8,
+    "Start": "2026-11-24T06:00:00.000Z",
+    "End": "2026-11-24T07:00:00.000Z",
+    "Value": 8,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": 1,
+    "Verification": 3,
+    "ResultTime": "2026-11-24T08:39:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "f2d84bc2-4fa6-4840-aef9-2b75ad4922bf"
+   },
+   {
+    "Samplingpoint": "ES/SP_01022001_8_8",
+    "Pollutant": 8,
+    "Start": "2026-11-24T07:00:00.000Z",
+    "End": "2026-11-24T08:00:00.000Z",
+    "Value": -999,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": -1,
+    "Verification": 3,
+    "ResultTime": "2026-11-24T08:39:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "f2d84bc2-4fa6-4840-aef9-2b75ad4922bf"
+   }
+  ]
  },
- "AQMobile": {
-  "error": "Command failed: curl -sSL --max-time 60 -A Mozilla/5.0 (espana-en-datos; GitHub Actions) https://air.discomap.eea.europa.eu/arcgis/rest/services/AQMobile?f=pjson\ncurl: (28) Connection timed out after 60002 milliseconds\n"
+ "parquet SP_01059008_8_8.parquet": {
+  "bytes": 124603,
+  "filas": 7840,
+  "columnas": [
+   "root",
+   "Samplingpoint",
+   "Pollutant",
+   "Start",
+   "End",
+   "Value",
+   "Unit",
+   "AggType",
+   "Validity",
+   "Verification",
+   "ResultTime",
+   "DataCapture",
+   "FkObservationLog"
+  ],
+  "primeras": [
+   {
+    "Samplingpoint": "ES/SP_01059008_8_8",
+    "Pollutant": 8,
+    "Start": "2026-01-01T01:00:00.000Z",
+    "End": "2026-01-01T02:00:00.000Z",
+    "Value": 43,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": 1,
+    "Verification": 3,
+    "ResultTime": "2026-01-02T13:36:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "c9613d59-3eb2-46f7-a0de-26d104d5efd1"
+   },
+   {
+    "Samplingpoint": "ES/SP_01059008_8_8",
+    "Pollutant": 8,
+    "Start": "2026-01-01T02:00:00.000Z",
+    "End": "2026-01-01T03:00:00.000Z",
+    "Value": 31,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": 1,
+    "Verification": 3,
+    "ResultTime": "2026-01-02T13:36:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "c9613d59-3eb2-46f7-a0de-26d104d5efd1"
+   },
+   {
+    "Samplingpoint": "ES/SP_01059008_8_8",
+    "Pollutant": 8,
+    "Start": "2026-01-01T03:00:00.000Z",
+    "End": "2026-01-01T04:00:00.000Z",
+    "Value": 39,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": 1,
+    "Verification": 3,
+    "ResultTime": "2026-01-02T13:36:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "c9613d59-3eb2-46f7-a0de-26d104d5efd1"
+   }
+  ],
+  "ultimas": [
+   {
+    "Samplingpoint": "ES/SP_01059008_8_8",
+    "Pollutant": 8,
+    "Start": "2026-11-24T05:00:00.000Z",
+    "End": "2026-11-24T06:00:00.000Z",
+    "Value": 44,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": 1,
+    "Verification": 3,
+    "ResultTime": "2026-11-24T08:41:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "f12ec7b9-7846-49c3-b8c7-d5bb20818d2d"
+   },
+   {
+    "Samplingpoint": "ES/SP_01059008_8_8",
+    "Pollutant": 8,
+    "Start": "2026-11-24T06:00:00.000Z",
+    "End": "2026-11-24T07:00:00.000Z",
+    "Value": 33,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": 1,
+    "Verification": 3,
+    "ResultTime": "2026-11-24T08:41:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "f12ec7b9-7846-49c3-b8c7-d5bb20818d2d"
+   },
+   {
+    "Samplingpoint": "ES/SP_01059008_8_8",
+    "Pollutant": 8,
+    "Start": "2026-11-24T07:00:00.000Z",
+    "End": "2026-11-24T08:00:00.000Z",
+    "Value": -999,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": -1,
+    "Verification": 3,
+    "ResultTime": "2026-11-24T08:41:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "f12ec7b9-7846-49c3-b8c7-d5bb20818d2d"
+   }
+  ]
  },
- "Air": {
-  "error": "Command failed: curl -sSL --max-time 60 -A Mozilla/5.0 (espana-en-datos; GitHub Actions) https://air.discomap.eea.europa.eu/arcgis/rest/services/Air?f=pjson\ncurl: (28) Connection timed out after 60002 milliseconds\n"
- }
+ "parquet SP_01059012_8_8.parquet": {
+  "bytes": 123711,
+  "filas": 7767,
+  "columnas": [
+   "root",
+   "Samplingpoint",
+   "Pollutant",
+   "Start",
+   "End",
+   "Value",
+   "Unit",
+   "AggType",
+   "Validity",
+   "Verification",
+   "ResultTime",
+   "DataCapture",
+   "FkObservationLog"
+  ],
+  "primeras": [
+   {
+    "Samplingpoint": "ES/SP_01059012_8_8",
+    "Pollutant": 8,
+    "Start": "2026-01-01T01:00:00.000Z",
+    "End": "2026-01-01T02:00:00.000Z",
+    "Value": 35,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": 1,
+    "Verification": 3,
+    "ResultTime": "2026-01-02T13:36:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "5080bd4f-dc7d-4bbf-89b8-af67324fdd8d"
+   },
+   {
+    "Samplingpoint": "ES/SP_01059012_8_8",
+    "Pollutant": 8,
+    "Start": "2026-01-01T02:00:00.000Z",
+    "End": "2026-01-01T03:00:00.000Z",
+    "Value": 38,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": 1,
+    "Verification": 3,
+    "ResultTime": "2026-01-02T13:36:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "5080bd4f-dc7d-4bbf-89b8-af67324fdd8d"
+   },
+   {
+    "Samplingpoint": "ES/SP_01059012_8_8",
+    "Pollutant": 8,
+    "Start": "2026-01-01T03:00:00.000Z",
+    "End": "2026-01-01T04:00:00.000Z",
+    "Value": 29,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": 1,
+    "Verification": 3,
+    "ResultTime": "2026-01-02T13:36:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "5080bd4f-dc7d-4bbf-89b8-af67324fdd8d"
+   }
+  ],
+  "ultimas": [
+   {
+    "Samplingpoint": "ES/SP_01059012_8_8",
+    "Pollutant": 8,
+    "Start": "2026-11-24T05:00:00.000Z",
+    "End": "2026-11-24T06:00:00.000Z",
+    "Value": 29,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": 1,
+    "Verification": 3,
+    "ResultTime": "2026-11-24T08:38:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "f3217655-080c-4057-8990-60c707c47529"
+   },
+   {
+    "Samplingpoint": "ES/SP_01059012_8_8",
+    "Pollutant": 8,
+    "Start": "2026-11-24T06:00:00.000Z",
+    "End": "2026-11-24T07:00:00.000Z",
+    "Value": 37,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": 1,
+    "Verification": 3,
+    "ResultTime": "2026-11-24T08:38:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "f3217655-080c-4057-8990-60c707c47529"
+   },
+   {
+    "Samplingpoint": "ES/SP_01059012_8_8",
+    "Pollutant": 8,
+    "Start": "2026-11-24T07:00:00.000Z",
+    "End": "2026-11-24T08:00:00.000Z",
+    "Value": -999,
+    "Unit": "ug.m-3",
+    "AggType": "hour",
+    "Validity": -1,
+    "Verification": 3,
+    "ResultTime": "2026-11-24T08:38:00.000Z",
+    "DataCapture": null,
+    "FkObservationLog": "f3217655-080c-4057-8990-60c707c47529"
+   }
+  ]
+ },
+ "urls O3": "200 text/csv 40752",
+ "n O3": 438,
+ "urls PM10": "200 text/csv 39139",
+ "n PM10": 417,
+ "urls PM2.5": "200 text/csv 25428",
+ "n PM2.5": 274,
+ "urls todos": "200 text/csv 330796",
+ "n todos": 3563,
+ "zip": "200 application/zip 304440",
+ "zipLista": "  Length      Date    Time    Name\n---------  ---------- -----   ----\n   397206  2026-11-24 07:48   E2a/data.parquet\n---------                     -------\n   397206                     1 file\n6\n",
+ "estaciones": "502 183"
 }
