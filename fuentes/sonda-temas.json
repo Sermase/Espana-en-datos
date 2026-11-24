@@ -1,11 +1,11 @@
 {
  "AQMobile_2025": {
-  "error": "fetch failed"
+  "error": "Command failed: curl -sSL --max-time 60 -A Mozilla/5.0 (espana-en-datos; GitHub Actions) https://air.discomap.eea.europa.eu/arcgis/rest/services/AQMobile_2025?f=pjson\ncurl: (28) Connection timed out after 60002 milliseconds\n"
  },
  "AQMobile": {
-  "error": "fetch failed"
+  "error": "Command failed: curl -sSL --max-time 60 -A Mozilla/5.0 (espana-en-datos; GitHub Actions) https://air.discomap.eea.europa.eu/arcgis/rest/services/AQMobile?f=pjson\ncurl: (28) Connection timed out after 60002 milliseconds\n"
  },
  "Air": {
-  "error": "fetch failed"
+  "error": "Command failed: curl -sSL --max-time 60 -A Mozilla/5.0 (espana-en-datos; GitHub Actions) https://air.discomap.eea.europa.eu/arcgis/rest/services/Air?f=pjson\ncurl: (28) Connection timed out after 60002 milliseconds\n"
  }
 }
