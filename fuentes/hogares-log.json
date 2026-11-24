@@ -1,0 +1,287 @@
+{
+ "avisos": [],
+ "tabla73991": {
+  "series": 3360,
+  "muestra": [
+   "Total Nacional. Dato base. Gasto medio por hogar. Índice general. ",
+   "Total Nacional. Dato base. Gasto medio por hogar. Alimentos y bebidas no alcohólicas. ",
+   "Total Nacional. Dato base. Gasto medio por hogar. Bebidas alcohólicas, tabaco y estupefacientes. ",
+   "Total Nacional. Dato base. Gasto medio por hogar. Vestido y calzado. ",
+   "Total Nacional. Dato base. Gasto medio por hogar. Vivienda, agua, electricidad, gas y otros combustibles. ",
+   "Total Nacional. Dato base. Gasto medio por hogar. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. ",
+   "Melilla. Variación respecto al año base. Distribución porcentual. Restaurantes y servicios de alojamiento. ",
+   "Melilla. Variación respecto al año base. Distribución porcentual. Seguros y servicios financieros. ",
+   "Melilla. Variación respecto al año base. Distribución porcentual. Cuidado personal, protección social, y bienes y servicios diversos. "
+  ]
+ },
+ "epfRegiones": [
+  "España",
+  "Andalucía",
+  "Aragón",
+  "Asturias",
+  "Illes Balears",
+  "Canarias",
+  "Cantabria",
+  "Castilla y León",
+  "Castilla-La Mancha",
+  "Cataluña",
+  "C. Valenciana",
+  "Extremadura",
+  "Galicia",
+  "Madrid",
+  "Murcia",
+  "Navarra",
+  "País Vasco",
+  "La Rioja",
+  "Ceuta",
+  "Melilla"
+ ],
+ "epfGrupos": [
+  "total",
+  "alimentos",
+  "alcohol",
+  "ropa",
+  "vivienda",
+  "muebles",
+  "sanidad",
+  "transporte",
+  "comunicaciones",
+  "ocio",
+  "educacion",
+  "restaurantes",
+  "seguros",
+  "otros"
+ ],
+ "tabla73801": {
+  "series": 630,
+  "muestra": [
+   "Total. Todas las edades. Gasto medio por hogar. Índice general. Dato base. ",
+   "Total. Todas las edades. Gasto medio por hogar. Alimentos y bebidas no alcohólicas. Dato base. ",
+   "Total. Todas las edades. Gasto medio por hogar. Bebidas alcohólicas, tabaco y estupefacientes. Dato base. ",
+   "Total. Todas las edades. Gasto medio por hogar. Vestido y calzado. Dato base. ",
+   "Total. Todas las edades. Gasto medio por hogar. Vivienda, agua, electricidad, gas y otros combustibles. Dato base. ",
+   "Total. Todas las edades. Gasto medio por hogar. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Dato base. ",
+   "Mujer. 65 y más años. Distribución porcentual. Restaurantes y servicios de alojamiento. Dato base. ",
+   "Mujer. 65 y más años. Distribución porcentual. Seguros y servicios financieros. Dato base. ",
+   "Mujer. 65 y más años. Distribución porcentual. Cuidado personal, protección social, y bienes y servicios diversos. Dato base. "
+  ]
+ },
+ "edadCortes": [
+  "Todas las edades",
+  "De 16 a 29 años",
+  "De 30 a 44 años",
+  "De 45 a 64 años",
+  "65 y más años"
+ ],
+ "tabla73828": {
+  "series": 336,
+  "muestra": [
+   "Gasto medio por hogar. Total. Índice general. Dato base. ",
+   "Gasto medio por hogar. Total. Alimentos y bebidas no alcohólicas. Dato base. ",
+   "Gasto medio por hogar. Total. Bebidas alcohólicas, tabaco y estupefacientes. Dato base. ",
+   "Gasto medio por hogar. Total. Vestido y calzado. Dato base. ",
+   "Gasto medio por hogar. Total. Vivienda, agua, electricidad, gas y otros combustibles. Dato base. ",
+   "Gasto medio por hogar. Total. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Dato base. ",
+   "Distribución (porcentajes horizontales). Quintil 5. Restaurantes y servicios de alojamiento. Dato base. ",
+   "Distribución (porcentajes horizontales). Quintil 5. Seguros y servicios financieros. Dato base. ",
+   "Distribución (porcentajes horizontales). Quintil 5. Cuidado personal, protección social, y bienes y servicios diversos. Dato base. "
+  ]
+ },
+ "quintilCortes": [
+  "Total",
+  "Quintil 1",
+  "Quintil 2",
+  "Quintil 3",
+  "Quintil 4",
+  "Quintil 5"
+ ],
+ "tabla73809": {
+  "series": 378,
+  "muestra": [
+   "Total. Gasto medio por hogar. Índice general. Dato base. ",
+   "Total. Gasto medio por hogar. Alimentos y bebidas no alcohólicas. Dato base. ",
+   "Total. Gasto medio por hogar. Bebidas alcohólicas, tabaco y estupefacientes. Dato base. ",
+   "Total. Gasto medio por hogar. Vestido y calzado. Dato base. ",
+   "Total. Gasto medio por hogar. Vivienda, agua, electricidad, gas y otros combustibles. Dato base. ",
+   "Total. Gasto medio por hogar. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Dato base. ",
+   "5.000 euros o más. Distribución porcentual. Restaurantes y servicios de alojamiento. Dato base. ",
+   "5.000 euros o más. Distribución porcentual. Seguros y servicios financieros. Dato base. ",
+   "5.000 euros o más. Distribución porcentual. Cuidado personal, protección social, y bienes y servicios diversos. Dato base. "
+  ]
+ },
+ "ingresosCortes": [
+  "Total",
+  "Hasta 499 euros",
+  "De 500 a 999 euros",
+  "De 1.000 a 1.499 euros",
+  "De 1.500 a 1.999 euros",
+  "De 2.000 a 2.499 euros",
+  "De 2.500 a 2.999 euros",
+  "De 3.000 a 4.999 euros",
+  "5.000 euros o más"
+ ],
+ "tabla73806": {
+  "series": 252,
+  "muestra": [
+   "Total. Gasto medio por hogar. Índice general. Dato base. ",
+   "Total. Gasto medio por hogar. Alimentos y bebidas no alcohólicas. Dato base. ",
+   "Total. Gasto medio por hogar. Bebidas alcohólicas, tabaco y estupefacientes. Dato base. ",
+   "Total. Gasto medio por hogar. Vestido y calzado. Dato base. ",
+   "Total. Gasto medio por hogar. Vivienda, agua, electricidad, gas y otros combustibles. Dato base. ",
+   "Total. Gasto medio por hogar. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Dato base. ",
+   "5 o más miembros. Distribución porcentual. Restaurantes y servicios de alojamiento. Dato base. ",
+   "5 o más miembros. Distribución porcentual. Seguros y servicios financieros. Dato base. ",
+   "5 o más miembros. Distribución porcentual. Cuidado personal, protección social, y bienes y servicios diversos. Dato base. "
+  ]
+ },
+ "tamanoCortes": [
+  "Total",
+  "1 miembro",
+  "2 miembros",
+  "3 miembros",
+  "4 miembros",
+  "5 o más miembros"
+ ],
+ "tabla9967": {
+  "series": 216,
+  "muestra": [
+   "Ambos sexos. Total. No puede permitirse ir de vacaciones al menos una semana al año. Personas. Total Nacional. ",
+   "Ambos sexos. Total. No puede permitirse una comida de carne, pollo o pescado al menos cada dos días. Personas. Total Nacional. ",
+   "Ambos sexos. Total. No puede permitirse mantener la vivienda con una temperatura adecuada. Personas. Total Nacional. ",
+   "Ambos sexos. Total. No tiene capacidad para afrontar gastos imprevistos. Personas. Total Nacional. ",
+   "Ambos sexos. Total. Ha tenido retrasos en el pago de gastos relacionados con la vivienda principal (hipoteca o alquiler, recibos de gas, comunidad...) en los últimos 12 meses. Personas. Total Nacional. ",
+   "Ambos sexos. Total. Ha tenido retrasos en el pago de gastos relacionados con la vivienda principal (hipoteca o alquiler, recibos de gas, comunidad...) o en compras a plazos en los últimos 12 meses. Personas. Total Nacional. ",
+   "Mujeres. De 18 a 64 años. No puede permitirse disponer de un automóvil. Personas. Total Nacional. ",
+   "Mujeres. De 18 a 64 años. No puede permitirse disponer de un ordenador personal. Personas. Total Nacional. ",
+   "Mujeres. De 18 a 64 años. No puede sustituir los muebles estropeados o viejos. Personas. Total Nacional. "
+  ]
+ },
+ "carenciasItems": {
+  "No puede permitirse ir de vacaciones al menos una semana al año": [
+   "Total",
+   "Menores de 16 años",
+   "De 16 a 29 años",
+   "De 30 a 44 años",
+   "De 45 a 64 años",
+   "65 y más años",
+   "Menos de 18 años",
+   "De 18 a 64 años"
+  ],
+  "No puede permitirse una comida de carne, pollo o pescado al menos cada dos días": [
+   "Total",
+   "Menores de 16 años",
+   "De 16 a 29 años",
+   "De 30 a 44 años",
+   "De 45 a 64 años",
+   "65 y más años",
+   "Menos de 18 años",
+   "De 18 a 64 años"
+  ],
+  "No tiene capacidad para afrontar gastos imprevistos": [
+   "Total",
+   "Menores de 16 años",
+   "De 16 a 29 años",
+   "De 30 a 44 años",
+   "De 45 a 64 años",
+   "65 y más años",
+   "Menos de 18 años",
+   "De 18 a 64 años"
+  ],
+  "Ha tenido retrasos en el pago de gastos relacionados con la vivienda principal (hipoteca o alquiler, recibos de gas, comunidad...) en los últimos 12 meses": [
+   "Total",
+   "Menores de 16 años",
+   "De 16 a 29 años",
+   "De 30 a 44 años",
+   "De 45 a 64 años",
+   "65 y más años",
+   "Menos de 18 años",
+   "De 18 a 64 años"
+  ],
+  "Ha tenido retrasos en el pago de gastos relacionados con la vivienda principal (hipoteca o alquiler, recibos de gas, comunidad...) o en compras a plazos en los últimos 12 meses": [
+   "Total",
+   "Menores de 16 años",
+   "De 16 a 29 años",
+   "De 30 a 44 años",
+   "De 45 a 64 años",
+   "65 y más años",
+   "Menos de 18 años",
+   "De 18 a 64 años"
+  ]
+ },
+ "tabla9985": {
+  "series": 168,
+  "muestra": [
+   "Ambos sexos. Total. Total Nacional. Con mucha dificultad. Personas. ",
+   "Ambos sexos. Total. Total Nacional. Con dificultad. Personas. ",
+   "Ambos sexos. Total. Total Nacional. Con cierta dificultad. Personas. ",
+   "Ambos sexos. Total. Total Nacional. Con cierta facilidad. Personas. ",
+   "Ambos sexos. Total. Total Nacional. Con facilidad. Personas. ",
+   "Ambos sexos. Total. Total Nacional. Con mucha facilidad. Personas. ",
+   "Mujeres. De 18 a 64 años. Total Nacional. Con facilidad. Personas. ",
+   "Mujeres. De 18 a 64 años. Total Nacional. Con mucha facilidad. Personas. ",
+   "Mujeres. De 18 a 64 años. Total Nacional. No consta. Personas. "
+  ]
+ },
+ "finDeMesItems": {
+  "Con mucha dificultad": [
+   "Total",
+   "Menores de 16 años",
+   "De 16 a 29 años",
+   "De 30 a 44 años",
+   "De 45 a 64 años",
+   "65 y más años",
+   "Menos de 18 años",
+   "De 18 a 64 años"
+  ],
+  "Con dificultad": [
+   "Total",
+   "Menores de 16 años",
+   "De 16 a 29 años",
+   "De 30 a 44 años",
+   "De 45 a 64 años",
+   "65 y más años",
+   "Menos de 18 años",
+   "De 18 a 64 años"
+  ],
+  "Con cierta dificultad": [
+   "Total",
+   "Menores de 16 años",
+   "De 16 a 29 años",
+   "De 30 a 44 años",
+   "De 45 a 64 años",
+   "65 y más años",
+   "Menos de 18 años",
+   "De 18 a 64 años"
+  ],
+  "Con cierta facilidad": [
+   "Total",
+   "Menores de 16 años",
+   "De 16 a 29 años",
+   "De 30 a 44 años",
+   "De 45 a 64 años",
+   "65 y más años",
+   "Menos de 18 años",
+   "De 18 a 64 años"
+  ],
+  "Con facilidad": [
+   "Total",
+   "Menores de 16 años",
+   "De 16 a 29 años",
+   "De 30 a 44 años",
+   "De 45 a 64 años",
+   "65 y más años",
+   "Menos de 18 años",
+   "De 18 a 64 años"
+  ],
+  "Con mucha facilidad": [
+   "Total",
+   "Menores de 16 años",
+   "De 16 a 29 años",
+   "De 30 a 44 años",
+   "De 45 a 64 años",
+   "65 y más años",
+   "Menos de 18 años",
+   "De 18 a 64 años"
+  ]
+ }
+}
