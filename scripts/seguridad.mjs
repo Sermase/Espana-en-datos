@@ -22,7 +22,8 @@ function curl(url, max = 120) {
   }
   throw new Error('vacío: ' + url)
 }
-const latin = (b) => new TextDecoder('iso-8859-15').decode(b).replace(/^﻿|^ï»¿/, '')
+// Interior dice ISO-8859-15 en la cabecera, pero los CSV vienen en UTF-8 con BOM
+const latin = (b) => (b[0] === 0xef && b[1] === 0xbb ? new TextDecoder('utf-8').decode(b.subarray(3)) : new TextDecoder('iso-8859-15').decode(b))
 /** JaxiPx guarda en la sesión la carpeta abierta: primero el índice, luego la tabla, luego la descarga. */
 function indice(path) {
   const html = latin(curl(`${MIR}/sec/dynPx/inebase/index.htm?type=pcaxis&path=${path}&file=pcaxis`))
@@ -71,32 +72,79 @@ const TIPOS = tiposS.map(t => ({ k: clave(t), n: limpia(t), nivel: (t.match(/^([
 const prov = {}
 for (const [c, d] of Object.entries(datos)) { prov[c] = {}; for (const [i, t] of tiposS.entries()) prov[c][TIPOS[i].k] = AÑOS.map(a => d[t]?.[a] ?? null) }
 
+// ---------- Población por provincia y año: el padrón municipal que descarga scripts/poblacion.mjs (INE) ----------
+const pob = {}
+let PADRON = null
+try {
+  PADRON = JSON.parse(readFileSync(here('../public/poblacion/data/municipios.json'), 'utf8'))
+  const col = (a) => PADRON.years.indexOf(a)
+  for (const [cod, [, serie]] of Object.entries(PADRON.m)) {
+    const c = cod.padStart(5, '0').slice(0, 2)
+    pob[c] ??= AÑOS.map(() => 0)
+    AÑOS.forEach((a, i) => { const j = col(a); if (j >= 0 && serie[j] != null) pob[c][i] += serie[j] })
+  }
+  pob['00'] = AÑOS.map((_, i) => Object.values(pob).reduce((s, v) => s + v[i], 0))
+  for (const v of Object.values(pob)) v.forEach((x, i) => { if (!x) v[i] = null })
+  log.poblacion = Object.keys(pob).length
+} catch (e) { log.avisos.push('población: ' + String(e.message).slice(0, 200)) }
+// nombre de municipio → código INE, buscándolo en el padrón dentro de su provincia
+const normM = (s) => norm(s.replace(/^(.*?)\s*\((el|la|los|las|l'|els|les|o|a|as|os|s')\)$/i, '$2 $1').replace(/^(.*?),\s*(el|la|los|las|l'|els|les|o|a|as|os)$/i, '$2 $1')).replace(/\//g, ' ')
+let MUNIS = null
+function codMuni(nombre, prov) {
+  if (!PADRON) return null
+  MUNIS ??= Object.entries(PADRON.m).map(([c, [n]]) => ({ c: c.padStart(5, '0'), n: normM(n), partes: n.split('/').map(normM) }))
+  const x = normM(nombre)
+  const cand = MUNIS.filter(m => !prov || m.c.startsWith(prov))
+  return (cand.find(m => m.n === x || m.partes.includes(x)) ?? cand.find(m => m.n.startsWith(x + ' ') || x.startsWith(m.n + ' ')))?.c ?? null
+}
+
 // ---------- 2. Balances trimestrales: el último publicado y los cuartos trimestres para los municipios ----------
 const hoy = new Date(), ultimos = []
 for (let a = hoy.getFullYear(); a >= hoy.getFullYear() - 1 && !ultimos.length; a--) for (let q = 4; q >= 1; q--) {
   const ts = indice(`/DatosBalanceAnt/${a}${q}/`)
   if (ts.length >= 3) { ultimos.push({ a, q, ts }); break }
 }
-const fila3 = (t) => { const r = tabla(t); return r }
+const fila3 = (t) => tabla(t)
+/** Clave estable de cada indicador del balance, por su nombre: la numeración y los nombres cambiaron en 2016, 2019 y 2022. */
+function claveBalance(t) {
+  const x = norm(t)
+  const R = [
+    ['total', /total infracciones|delitos y faltas/], ['conv', /criminalidad convencional/], ['ciber', /cibercriminalidad/],
+    ['homicidio', /homicidios dolosos.*consumad/], ['tentativa', /tentativa/], ['lesiones', /lesiones/], ['secuestro', /secuestro/],
+    ['penetracion', /penetracion/], ['sexual', /sexual/], ['violencia', /robos? con violencia/],
+    ['domicilios', /fuerza en domicilios$/], ['fuerza', /robos con fuerza/], ['hurtos', /hurtos/], ['vehiculos', /sustraccion/],
+    ['drogas', /trafico drogas/], ['estafas', /estafas informaticas/], ['otrosCiber', /otros ciberdelitos/], ['danos', /danos/],
+    ['restoConv', /resto criminalidad convencional/], ['resto', /resto infracciones/],
+  ]
+  for (const [k, re] of R) if (re.test(x)) return k
+  return 'x_' + x.replace(/ /g, '_').slice(0, 18)
+}
 function balance({ a, q, ts }) {
   // Tablas: comunidades, provincias, municipios. Columnas: lugar; tipología; periodo; valor
   const [, tp, tm] = ts
   const P = fila3(tp), M = fila3(tm)
   const periodos = [...new Set(P.filas.map(f => f[2]).filter(p => !/variaci/i.test(p)))]
   const tipos = [...new Set(P.filas.map(f => f[1].trim()))]
-  const k2 = (t) => { const m = t.match(/^([IVX]+)\.|^([\d.]+)[.\-]/); return m ? 'b' + (m[1] ?? m[2]).replace(/\.$/, '').replace(/\./g, '_') : 'b_' + norm(t).replace(/ /g, '_').slice(0, 16) }
+  const k2 = claveBalance
   const prov = {}, sinC = new Set()
   for (const [lugar, tip, per, v] of P.filas) {
     if (/variaci/i.test(per)) continue
     const c = codProv(lugar); if (!c) { sinC.add(lugar); continue }
     ((prov[c] ??= {})[k2(tip.trim())] ??= [null, null])[periodos.indexOf(per)] = num(v)
   }
-  // municipios: el nombre trae la provincia entre paréntesis o la tabla va agrupada; se guarda tal cual y se resuelve en la web
-  const muni = {}
+  // municipios: desde 2024 traen el código INE delante («04013 Almería»); antes, «- Municipio de Almería» bajo «Provincia de ALMERÍA»
+  const muni = {}, sinMuni = new Set()
+  let provActual = null
   for (const [lugar, tip, per, v] of M.filas) {
     if (/variaci/i.test(per)) continue
-    ((muni[lugar.trim()] ??= {})[k2(tip.trim())] ??= [null, null])[periodos.indexOf(per)] = num(v)
+    const l = lugar.trim()
+    if (/^provincia de/i.test(l)) { provActual = codProv(l); continue }
+    let cod = l.match(/^(\d{5})\s/)?.[1] ?? null
+    if (!cod && /municipio de/i.test(l)) cod = codMuni(l.replace(/^-?\s*municipio de\s*/i, ''), provActual)
+    if (!cod) { if (/municipio/i.test(l)) sinMuni.add(l); continue }
+    ((muni[cod] ??= {})[k2(tip.trim())] ??= [null, null])[periodos.indexOf(per)] = num(v)
   }
+  log['sinMunicipio ' + a + q] = [...sinMuni].slice(0, 40)
   log['balance ' + a + q] = { periodos, tipos, provinciasSinCodigo: [...sinC], municipiosEjemplo: Object.keys(muni).slice(0, 60), municipios: Object.keys(muni).length }
   return { a, q, periodos, tipos: tipos.map(t => ({ k: k2(t), n: limpia(t) })), prov, muni }
 }
@@ -115,24 +163,16 @@ for (let a = (ult?.q === 4 ? ult.a : (ult?.a ?? hoy.getFullYear()) - 1); a >= 20
   } catch (e) { log.avisos.push(`Q4 ${a}: ${String(e.message).slice(0, 200)}`) }
 }
 
-// ---------- 3. Población por provincia y año (padrón, INE) ----------
-const pob = {}
-try {
-  const j = JSON.parse(execFileSync('curl', ['-sSL', '--max-time', '120', 'https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/2852?tip=AM&nult=20'], { encoding: 'utf8', maxBuffer: 64e6 }))
-  for (const s of j) {
-    const nom = s.Nombre, partes = nom.split('.').map(x => x.trim())
-    if (!/total/i.test(partes[1] ?? '')) continue
-    const c = /^\d{2}\s/.test(partes[0]) ? partes[0].slice(0, 2) : codProv(partes[0]); if (!c) continue
-    pob[c] = AÑOS.map(a => s.Data.find(d => (d.Anyo ?? new Date(d.Fecha).getFullYear()) === a)?.Valor ?? null)
-  }
-  log.poblacion = Object.keys(pob).length
-} catch (e) { log.avisos.push('población: ' + String(e.message).slice(0, 200)) }
-if (!pob['00'] && Object.keys(pob).length >= 52) pob['00'] = AÑOS.map((_, i) => Object.entries(pob).reduce((s, [, v]) => s + (v[i] ?? 0), 0))
-
 // ---------- Salida ----------
 const fecha = new Date().toISOString().slice(0, 10)
 writeFileSync(`${OUT}/seguridad.json`, JSON.stringify({ fecha, años: AÑOS, tipos: TIPOS, prov, pob, balance: ult && { año: ult.a, trimestre: ult.q, periodos: ult.periodos, tipos: ult.tipos, prov: ult.prov } }))
-writeFileSync(`${OUT}/municipios.json`, JSON.stringify({ fecha, balance: ult && { año: ult.a, trimestre: ult.q, periodos: ult.periodos, muni: ult.muni }, historia: muniHist }))
+const MA = [...new Set(Object.values(muniHist).flatMap(d => Object.values(d).flatMap(s => Object.keys(s).map(Number))))].sort()
+const mOut = {}
+for (const [c, d] of Object.entries(muniHist)) {
+  const p = PADRON?.m[c] ?? PADRON?.m[String(+c)]
+  mOut[c] = { n: p?.[0] ?? c, pob: MA.map(a => p?.[1][PADRON.years.indexOf(a)] ?? null), d: Object.fromEntries(Object.entries(d).map(([k, s]) => [k, MA.map(a => s[a] ?? null)])) }
+}
+writeFileSync(`${OUT}/municipios.json`, JSON.stringify({ fecha, años: MA, balance: ult && { año: ult.a, trimestre: ult.q, periodos: ult.periodos, muni: ult.muni }, muni: mOut }))
 const RES = here('../src/resumen.json'), res = JSON.parse(readFileSync(RES, 'utf8'))
 const tot = prov['00']?.total ?? prov['00']?.[TIPOS[0].k], i = AÑOS.length - 1
 if (tot) res.seguridad = { año: AÑOS[i], total: tot[i], var: tot[i - 1] ? ((tot[i] - tot[i - 1]) / tot[i - 1]) * 100 : null, tasa: pob['00']?.[i] ? (tot[i] / pob['00'][i]) * 1000 : null }
