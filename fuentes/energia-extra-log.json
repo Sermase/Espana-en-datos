@@ -1,25 +1,19 @@
 {
- "_fallos_mercados/componentes-precio-energia-cierre-desglose": [
-  "2014: HTTP 503 <html style=\"height:100%\"><head><META NAME=\"ROBOTS\"",
-  "2015: HTTP 503 <html style=\"height:100%\"><head><META NAME=\"ROBOTS\"",
-  "2016: HTTP 503 <html style=\"height:100%\"><head><META NAME=\"ROBOTS\"",
-  "2017: HTTP 503 <html style=\"height:100%\"><head><META NAME=\"ROBOTS\""
- ],
  "precio_componentes": {
-  "Mercados/Mercado diario": "106 · 2018-01 → 2026-10 168.45",
-  "Mercados/Mercado intradiario (subastas MIBEL y continuo)": "106 · 2018-01 → 2026-10 -0.35",
-  "Servicios-ajuste/Restricciones técnicas PDBF": "106 · 2018-01 → 2026-10 18.23",
-  "Servicios-ajuste/Banda de regulación secundaria": "106 · 2018-01 → 2026-10 4.84",
-  "Servicios-ajuste/Restricciones técnicas en tiempo real": "106 · 2018-01 → 2026-10 3.03",
-  "Servicios-ajuste/Incumplimiento de energía de balance": "106 · 2018-01 → 2026-10 -0.89",
-  "Servicios-ajuste/Coste desvíos": "106 · 2018-01 → 2026-10 0.66",
-  "Servicios-ajuste/Saldo desvíos": "106 · 2018-01 → 2026-10 -0.69",
-  "Servicios-ajuste/Control del factor de potencia": "106 · 2018-01 → 2026-10 -0.01",
-  "Servicios-ajuste/Saldo PO 14.6": "106 · 2018-01 → 2026-10 0.12",
-  "Servicios-ajuste/Servicios de ajuste": "106 · 2018-01 → 2026-10 25.29",
-  "Servicios-pagos/Pagos por capacidad": "106 · 2018-01 → 2026-10 0.13",
-  "Precio total/Precio total (€/MWh)": "106 · 2018-01 → 2026-10 192",
-  "Energia/Energía de cierre (MWh)": "106 · 2018-01 → 2026-10 19171580.81"
+  "Mercados/Mercado diario": "154 · 2014-01 → 2026-10 168.45",
+  "Mercados/Mercado intradiario (subastas MIBEL y continuo)": "154 · 2014-01 → 2026-10 -0.35",
+  "Servicios-ajuste/Restricciones técnicas PDBF": "154 · 2014-01 → 2026-10 18.23",
+  "Servicios-ajuste/Banda de regulación secundaria": "154 · 2014-01 → 2026-10 4.84",
+  "Servicios-ajuste/Restricciones técnicas en tiempo real": "154 · 2014-01 → 2026-10 3.03",
+  "Servicios-ajuste/Incumplimiento de energía de balance": "143 · 2014-06 → 2026-10 -0.89",
+  "Servicios-ajuste/Coste desvíos": "154 · 2014-01 → 2026-10 0.66",
+  "Servicios-ajuste/Saldo desvíos": "154 · 2014-01 → 2026-10 -0.69",
+  "Servicios-ajuste/Control del factor de potencia": "154 · 2014-01 → 2026-10 -0.01",
+  "Servicios-ajuste/Saldo PO 14.6": "154 · 2014-01 → 2026-10 0.12",
+  "Servicios-ajuste/Servicios de ajuste": "154 · 2014-01 → 2026-10 25.29",
+  "Servicios-pagos/Pagos por capacidad": "154 · 2014-01 → 2026-10 0.13",
+  "Precio total/Precio total (€/MWh)": "154 · 2014-01 → 2026-10 192",
+  "Energia/Energía de cierre (MWh)": "154 · 2014-01 → 2026-10 19171580.81"
  },
  "_fallos_intercambios/todas-fronteras-programados": [
   "2010: HTTP 502 {\"errors\":[{\"status\":\"502\",\"title\":\"Error Interno\",",
