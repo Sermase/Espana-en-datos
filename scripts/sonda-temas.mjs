@@ -1,41 +1,28 @@
-// Sonda: Índice de Calidad del Aire del ministerio (qué API usa su visor) y los datos casi en directo de la Agencia Europea.
-// Escribe fuentes/sonda-temas.json.
-import { writeFileSync, mkdirSync, readFileSync, statSync } from 'node:fs'
-import { execFileSync } from 'node:child_process'
+// Sonda: servicios ArcGIS públicos de la Agencia Europea de Medio Ambiente que alimentan el Índice Europeo de Calidad del Aire
+// (carpetas AQMobile y Air). Para cada servicio: capas, campos y dos registros de ejemplo. Escribe fuentes/sonda-temas.json.
+import { writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
-const tmp = '/tmp/sonda-temas'; mkdirSync(tmp, { recursive: true })
 const out = {}
-let n = 0
-function get(url, { max = 90, cabeza = 1500, metodo, datos, tipo } = {}) {
-  const f = `${tmp}/${++n}`
-  try {
-    const args = ['-sSL', '--max-time', String(max), '-A', 'Mozilla/5.0 (espana-en-datos; GitHub Actions)', '-H', 'Accept: application/json, text/plain, */*', '-H', 'Origin: https://ica.miteco.es', '-H', 'Referer: https://ica.miteco.es/', '-o', f, '-w', '%{http_code} %{content_type}']
-    if (metodo) args.push('-X', metodo)
-    if (datos) args.push('-H', `Content-Type: ${tipo ?? 'application/json'}`, '--data', datos)
-    const meta = execFileSync('curl', [...args, url], { encoding: 'utf8', timeout: (max + 10) * 1000 })
-    const [code, ct] = meta.split(' ')
-    const txt = readFileSync(f, 'utf8')
-    return { code: +code, ct, size: statSync(f).size, cabeza: txt.slice(0, cabeza), txt }
-  } catch (e) { return { error: String(e.message).slice(-300) } }
+const B = 'https://air.discomap.eea.europa.eu/arcgis/rest/services'
+async function j(url) {
+  try { const r = await fetch(url, { headers: { 'User-Agent': 'espana-en-datos (GitHub Actions)' }, signal: AbortSignal.timeout(60000) }); const t = await r.text(); try { return JSON.parse(t) } catch { return { error: `HTTP ${r.status}`, cabeza: t.slice(0, 300) } } } catch (e) { return { error: e.message } }
 }
-const sin = ({ txt, ...r }) => r
-
-// 1. El JS del visor: todas las cadenas que parecen rutas del API
-const html = get('https://ica.miteco.es/').txt ?? ''
-const js = [...html.matchAll(/src="([^"]*main[^"]*\.js)"/g)].map(m => m[1])
-out.js = js
-for (const j of js) {
-  const t = get('https://ica.miteco.es/' + j.replace(/^\.?\//, ''), { cabeza: 0 }).txt ?? ''
-  const i = t.indexOf('backend.ica.miteco.es')
-  out.alrededor = t.slice(Math.max(0, i - 1500), i + 2500)
-  out.rutas = [...new Set([...t.matchAll(/["'`](\/?[a-zA-Z][\w-]*(?:\/[\w{}:$.-]+)+\/?)["'`]/g)].map(m => m[1]).filter(r => !/^(\.\/|assets|http)/.test(r) && r.length < 80))].slice(0, 200)
-  // solo las rutas GET del API (las que el visor pide con queryGet); las consultas SQL por POST no se tocan
-  out.queryGet = [...new Set([...t.matchAll(/queryGet\(\s*([`"'])([^`"']+)\1([^)]{0,200})/g)].map(m => m[2] + ' ' + m[3].slice(0, 200)))].slice(0, 60)
-  out.palabras = [...new Set([...t.matchAll(/["'`]([a-z][a-zA-Z]*(?:Ica|ica|Estacion|estacion|Indice|indice|Medida|medida|Contaminante|contaminante|Prevision|prevision)[a-zA-Z]*)["'`]/g)].map(m => m[1]))].slice(0, 100)
+for (const carpeta of ['AQMobile_2025', 'AQMobile', 'Air']) {
+  const c = await j(`${B}/${carpeta}?f=pjson`)
+  out[carpeta] = c.services ?? c
+  for (const s of (c.services ?? []).slice(0, 12)) {
+    const url = `${B}/${s.name}/${s.type}`
+    const info = await j(`${url}?f=pjson`)
+    const capas = [...(info.layers ?? []), ...(info.tables ?? [])].slice(0, 8)
+    out[`${s.name} (${s.type})`] = { descr: (info.serviceDescription ?? info.description ?? '').slice(0, 300), capas: capas.map(l => `${l.id} ${l.name}`) }
+    for (const l of capas.slice(0, 4)) {
+      const li = await j(`${url}/${l.id}?f=pjson`)
+      const q = await j(`${url}/${l.id}/query?where=1%3D1&outFields=*&resultRecordCount=2&returnGeometry=true&f=json`)
+      const qe = await j(`${url}/${l.id}/query?where=1%3D1&returnCountOnly=true&f=json`)
+      out[`${s.name} capa ${l.id}`] = { nombre: l.name, campos: (li.fields ?? []).map(f => f.name).slice(0, 60), n: qe.count, ejemplo: (q.features ?? []).map(f => ({ ...f.attributes, geo: f.geometry })), error: q.error ?? li.error }
+    }
+  }
 }
-// 2. Las rutas GET que usa el visor, tal cual (sin parámetros de más)
-for (const r of (out.queryGet ?? []).map(x => x.split(' ')[0]).filter(r => !r.includes('$')).slice(0, 12))
-  out['ica ' + r] = sin(get('https://backend.ica.miteco.es/sgca/' + r, { cabeza: 1500 }))
 writeFileSync(here('../fuentes/sonda-temas.json'), JSON.stringify(out, null, 1))
-console.log(Object.entries(out).map(([k, v]) => `${k}: ${v?.code ?? ''} ${v?.size ?? ''}`).join('\n'))
+console.log(Object.keys(out).join('\n'))
