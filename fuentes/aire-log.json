@@ -309,5 +309,18 @@
   "NFR_TOT_NAT National total for the entire territory (based on fuel sold)",
   "NFR_TOT_NAT_C National total for compliance assessment"
  ],
+ "gases": [
+  "GHG Greenhouse gases (CO2, N2O in CO2 equivalent, CH4 in CO2 equivalent, HFC in CO2 equivalent, PFC in CO2 equivalent, SF6 in CO2 equivalent, NF3 in CO2 equivalent)",
+  "CO2 Carbon dioxide",
+  "CH4 Methane",
+  "CH4_CO2E Methane (CO2 equivalent)",
+  "N2O Nitrous oxide",
+  "N2O_CO2E Nitrous oxide (CO2 equivalent)",
+  "HFC_CO2E Hydrofluorocarbones (CO2 equivalent)",
+  "PFC_CO2E Perfluorocarbones (CO2 equivalent)",
+  "HFC_PFC_NSP_CO2E Hydrofluorocarbones and perfluorocarbones - not specified mix (CO2 equivalent)",
+  "SF6_CO2E Sulphur hexafluoride (CO2 equivalent)",
+  "NF3_CO2E Nitrogen trifluoride (CO2 equivalent)"
+ ],
  "estaciones": "200 3385 text/html; charset=utf-8"
 }
