@@ -111,7 +111,7 @@ function modelosDe(mods: Mods, filtro: (k: string) => boolean) {
   for (const [k, mm] of Object.entries(mods)) if (filtro(k)) for (const [x, [n, e]] of Object.entries(mm)) { const t = (o[x] ??= [0, 0]); t[0] += n; t[1] += e }
   return Object.entries(o).sort((x, y) => y[1][0] - x[1][0])
 }
-const nombreModelo = (k: string) => { const [ma, mo] = k.split('|'); return { marca: marca(ma), modelo: mo.split(' ').map(w => (/\d/.test(w) || w.length <= 3 ? w : w.charAt(0) + w.slice(1).toLowerCase())).join(' ') } }
+const nombreModelo = (k: string) => { const [ma, mo] = k.split('|'); return { marca: marca(ma), modelo: mo.split(' ').map(w => w.split('-').map(x => (/\d/.test(x) || x.length <= 3 ? x : x.charAt(0) + x.slice(1).toLowerCase())).join('-')).join(' ') } }
 const COL6 = ['#3987e5', '#d95926', '#199e70', '#c98500', '#d55181', '#9085e9']
 
 function Marcas({ m }: { m: M }) {
@@ -141,11 +141,11 @@ function Marcas({ m }: { m: M }) {
       <button className="cerrar-marca" onClick={() => setSel(null)}>Cerrar</button>
       <div className="mapa-dos">
         <LineChart titulo={`Turismos nuevos de ${marca(sel)} por año`} alto={220} fx={x => String(x)} fy={v => nf(v, 0)} series={[{ id: sel, nombre: marca(sel), color: ACC, area: true, datos: años.map(y => [+y, A[y].marcas[sel] ?? 0] as [number, number]) }]} />
-        {mods == null ? <p className="note">Cargando modelos…</p> : deMarca.length ? <Barras titulo={`Modelos de ${marca(sel)} en ${a}`} limite={10} fmt={v => nf(v, 0)} items={deMarca.map(([k, [n, e]]) => ({ id: k, nombre: nombreModelo(k).modelo, sub: e ? `${nf((e / n) * 100, 0)} % eléctrico o enchufable` : undefined, valor: n, color: e / n > 0.5 ? '#3987e5' : ACC }))} /> : <p className="note">Sin modelos con ventas ese año.</p>}
+        {mods == null ? <p className="note">Cargando modelos…</p> : deMarca.length ? <Barras titulo={`Modelos de ${marca(sel)} en ${a}`} limite={10} fmt={v => nf(v, 0)} items={deMarca.map(([k, [n, e]]) => ({ id: k, nombre: nombreModelo(k).modelo, sub: e / n >= 0.01 ? `${nf((e / n) * 100, 0)} % eléctrico o enchufable` : undefined, valor: n, color: e / n > 0.5 ? '#3987e5' : ACC }))} /> : <p className="note">Sin modelos con ventas ese año.</p>}
       </div>
     </Card>}
     <Card wide t={`Los modelos más vendidos en ${a}`} lead={modsAño[0] ? <>El <b>{nombreModelo(modsAño[0][0]).marca} {nombreModelo(modsAño[0][0]).modelo}</b> fue el turismo más vendido, con {nf(modsAño[0][1][0], 0)} unidades. En azul, los que venden más de la mitad en versión eléctrica o enchufable.</> : mods == null ? 'Cargando modelos…' : 'Aún no hay modelos para este año.'} fuente={DGT}>
-      {modsAño.length > 0 && <Barras titulo={`Modelos más vendidos, ${a}`} limite={20} fmt={v => nf(v, 0)} items={modsAño.slice(0, 100).map(([k, [n, e]]) => { const x = nombreModelo(k); return { id: k, nombre: `${x.marca} ${x.modelo}`, sub: e ? `${nf((e / n) * 100, 0)} % enchufable` : undefined, valor: n, color: e / n > 0.5 ? '#3987e5' : ACC, onClick: () => eligeMarca(k.split('|')[0]) } })} />}
+      {modsAño.length > 0 && <Barras titulo={`Modelos más vendidos, ${a}`} limite={20} fmt={v => nf(v, 0)} items={modsAño.slice(0, 100).map(([k, [n, e]]) => { const x = nombreModelo(k); return { id: k, nombre: `${x.marca} ${x.modelo}`, sub: e / n >= 0.01 ? `${nf((e / n) * 100, 0)} % eléctrico o enchufable` : undefined, valor: n, color: e / n > 0.5 ? '#3987e5' : ACC, onClick: () => eligeMarca(k.split('|')[0]) } })} />}
       <p className="note">Modelo según el nombre de la ficha técnica que registra la DGT; algunas variantes pueden salir aparte.</p>
     </Card>
     {sube.length > 3 && <Card t={`Las que más crecen en ${a}`} lead={`Marcas con más de 1.000 turismos vendidos, frente a ${ant}.`}>

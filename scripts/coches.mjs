@@ -40,8 +40,9 @@ function clase(prop, cat) {
 const DOS = new Set(['MODEL', 'CLASE', 'CLASS', 'SERIE', 'SERIES', 'GRAND', 'RANGE', 'SANTA', 'LAND', 'ID.', 'EQ', 'DS', 'ALFA', 'TOYOTA', 'NISSAN', 'MERCEDES', 'CITROEN', 'PEUGEOT', 'KIA', 'BMW'])
 const SEGUNDA = new Set(['CROSS', 'ROVER', 'FE', 'SPORT', 'EVOQUE', 'VELAR', 'ELECTRIC', 'TOURER', 'ALLSPACE', 'COUPE', 'ACTIVE'])
 function modeloDe(raw, marca) {
-  const t = raw.toUpperCase().replace(/[^A-Z0-9.\- ]/g, ' ').split(/\s+/).filter(Boolean)
-  while (t.length > 1 && (marca.toUpperCase().split(/\s+/).includes(t[0]) || /^(NEW|NUEVO|NUEVA|THE)$/.test(t[0]))) t.shift() // «TOYOTA YARIS», «NUEVO C3» → «YARIS», «C3»
+  const t = raw.normalize('NFD').replace(/\p{Diacritic}/gu, '').toUpperCase().replace(/[^A-Z0-9.\- ]/g, ' ').split(/\s+/).filter(Boolean)
+  const M = marca.normalize('NFD').replace(/\p{Diacritic}/gu, '').toUpperCase()
+  while (t.length > 1 && (M.split(/[\s-]+/).includes(t[0]) || (t[0].length >= 4 && M.startsWith(t[0])) || /^(NEW|NUEVO|NUEVA|THE)$/.test(t[0]))) t.shift() // «TOYOTA YARIS», «NUEVO C3» → «YARIS», «C3»
   if (t.length > 1 && /^[A-Z]$/.test(t[0]) && /^\d+[A-Z]?$/.test(t[1])) t.splice(0, 2, t[0] + t[1]) // «I 30» → «I30»
   if (!t.length) return null
   let m = t[0]
@@ -88,7 +89,7 @@ function agrega(fich) {
 // 1. Meses que faltan (del más reciente al más antiguo) y los dos últimos
 const hoy = new Date(), todos = []
 for (const d = new Date(Date.UTC(hoy.getUTCFullYear(), hoy.getUTCMonth() - 1, 1)); d >= Date.UTC(2014, 11, 1); d.setUTCMonth(d.getUTCMonth() - 1)) todos.push(`${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`)
-const FM = `${OUT}/modelos.json`, modelos = existsSync(FM) ? JSON.parse(readFileSync(FM, 'utf8')).meses : {}
+const FM = `${OUT}/modelos.json`, VMOD = 2, previoM = existsSync(FM) ? JSON.parse(readFileSync(FM, 'utf8')) : {}, modelos = previoM.v === VMOD ? previoM.meses : {}
 const recientes = Object.keys(prev.meses).sort().slice(-2)
 const cola = [...new Set([...todos.filter(k => !prev.meses[k] || !modelos[k]), ...recientes])].sort().reverse().slice(0, MAX)
 let hechos = 0
@@ -138,7 +139,7 @@ for (const [k, mm] of Object.entries(modelos)) {
   for (const [x, [n, e]] of Object.entries(mm)) { const [ma, mo] = x.split('|'), y = `${ma}|${modeloDe(mo, ma) ?? mo}`, t = (o[y] ??= [0, 0]); t[0] += n; t[1] += e }
   modelos[k] = o
 }
-writeFileSync(FM, JSON.stringify({ fecha: new Date().toISOString().slice(0, 10), meses: Object.fromEntries(Object.entries(modelos).sort(([a], [b]) => a.localeCompare(b))) }))
+writeFileSync(FM, JSON.stringify({ v: VMOD, fecha: new Date().toISOString().slice(0, 10), meses: Object.fromEntries(Object.entries(modelos).sort(([a], [b]) => a.localeCompare(b))) }))
 // para revisar la normalización: los 40 modelos que más venden en todo el periodo
 { const t = {}; for (const mm of Object.values(modelos)) for (const [k, v] of Object.entries(mm)) t[k] = (t[k] ?? 0) + v[0]; log.topModelos = Object.entries(t).sort((a, b) => b[1] - a[1]).slice(0, 60).map(([k, v]) => `${k} ${v}`) }
 writeFileSync(`${OUT}/parque.json`, JSON.stringify({ fecha: new Date().toISOString().slice(0, 10), ...parque }))
