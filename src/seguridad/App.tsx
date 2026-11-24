@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { Building2, Gauge, LineChart as LineIcon, Map as MapIcon, Pause, Play, Search, ShieldAlert, X } from 'lucide-react'
-import { Barras, CountUp, LineChart, nf, type Serie } from '../graficos'
+import { Barras, Carrera, CountUp, LineChart, nf, type Fotograma, type Serie } from '../graficos'
 import { Holo3D } from '../holo3d/Holo3D'
 import { radar } from '../holo3d/modelos'
 import { MapaProvincias, colorEscala } from '../geo/MapaProvincias'
@@ -161,6 +161,18 @@ function Evolucion({ d }: { d: Datos }) {
   </div>
 }
 
+/** Carrera de provincias: delitos por cada 1.000 habitantes, año a año, para el tipo elegido. */
+function CarreraProv({ d }: { d: Datos }) {
+  const [t, setT] = useState('total')
+  const T = tipo(t)
+  const fot = useMemo<Fotograma[]>(() => d.años.map((a, j) => { const { f } = porHab(d, T.s, d.años.length - 1); return { t: String(a), items: Object.keys(PROV).flatMap(c => { const x = f(c, j); return x == null ? [] : [{ id: c, nombre: PROV[c], valor: x }] }) } }).filter(x => x.items.length > 20), [d, T.s])
+  const { por } = porHab(d, T.s, d.años.length - 1)
+  return <Card wide t="La carrera de las provincias" lead={<>{T.n} por cada {por === 1000 ? 'mil' : 'cien mil'} habitantes, año a año. Elige el tipo de delito y mira quién sube y quién baja.</>} fuente={MIR}>
+    <Chips sel={[t]} set={setT} />
+    <Carrera key={t} titulo={`Provincias con más ${T.n.toLowerCase()} por habitante`} fotogramas={fot} top={12} ms={1100} fmt={x => nf(x, x < 10 ? 2 : 1)} colores={Object.fromEntries(Object.keys(PROV).map(c => [c, T.c]))} />
+  </Card>
+}
+
 function Mapa({ d }: { d: Datos }) {
   const [t, setT] = useState('total'), [i, setI] = useState(d.años.length - 1), [play, setPlay] = useState(false), [sel, setSel] = useState<string | null>(null)
   const reduce = useReducedMotion()
@@ -190,6 +202,7 @@ function Mapa({ d }: { d: Datos }) {
         series={[{ id: 'es', nombre: 'España', fondo: true, datos: d.años.flatMap((a, j) => { const x = f('00', j); return x == null ? [] : [[a, x]] }) as [number, number][] },
           { id: sel, nombre: PROV[sel], color: ACC, datos: d.años.flatMap((a, j) => { const x = f(sel, j); return x == null ? [] : [[a, x]] }) as [number, number][] }]} />}
     </Card>
+    <CarreraProv d={d} />
   </div>
 }
 
