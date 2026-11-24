@@ -1,61 +1,11 @@
 {
- "js": [
-  "main.97aee4a477c52b19.js"
- ],
- "alrededor": "ancias semejantes que hagan imposible el acceso a la App.\"),w(),R(254,\"h4\"),T(255,\"9. Otros pactos\"),w(),R(256,\"p\"),T(257,\"En caso de que alguna cl\\xe1usula de la Licencia sea nula, inv\\xe1lida o no tenga efecto entre las partes por cualquier motivo, las dem\\xe1s cl\\xe1usulas seguir\\xe1n siendo v\\xe1lidas y exigibles, a menos que las prestaciones o contraprestaciones objeto de la cl\\xe1usula nula, inv\\xe1lida o ineficaz hayan sido determinantes para la oferta o aceptaci\\xf3n de la Licencia. En tal caso, si dichas prestaciones o contraprestaciones son esenciales para que una o ambas partes celebren la Licencia, \\xe9sta no tendr\\xe1 efecto.\"),w(),R(258,\"h4\"),T(259,\"10. Legislaci\\xf3n aplicable y jurisdicci\\xf3n competente\"),w(),R(260,\"p\"),T(261,\"La Licencia se somete a la legislaci\\xf3n espa\\xf1ola.\"),w(),R(262,\"p\"),T(263,\"Las partes acuerdan que todo litigio, discrepancia, cuesti\\xf3n o reclamaci\\xf3n resultante de la ejecuci\\xf3n o interpretaci\\xf3n de la Licencia o relacionada con ella, directa o indirectamente, se resolver\\xe1 definitivamente ante la jurisdicci\\xf3n de los Juzgados y Tribunales de Madrid.\"),w()()()),2&i&&(c0(7),r0(\"tipoFicha\",2))},dependencies:[Wa],styles:[\"#gis-lib-logotipo[_ngcontent-%COMP%]{max-width:200px;margin-right:20px}#gis-lib-navbar-style[_ngcontent-%COMP%]{padding:.7rem 1rem;background-color:#1271b4}#gis-lib-botonera[_ngcontent-%COMP%]{width:15vw;height:54px;display:grid;text-align:left;margin-top:-18px}\"]})}return n})();const Kp_urlApi=\"https://backend.ica.miteco.es/sgca/\";var Jp=I(7586);I(4127);class no{constructor(e){void 0===e||!1===e?(this.date=Jp(),this.date.tz(\"Europe/Madrid\")):this.date=Jp()}clone(){let e=new no;return e.setFecha(this.getFullYear(),this.getMonth(),this.getDate(),this.getHours()),e}log(){console.log(this.date.format(\"DD MM YYYY, h:mm:ss a\"))}setHours(e){return this.date.hour(e),this}setMinute(e){return this.date.minute(e),this}setSecond(e){return this.date.second(e),this}getHours(){return this.date.hour()}setDate(e){return this.date.date(e),this}getDate(){return this.date.date()}setMonth(e){return this.date.month(e),this}getMonth(){return this.date.month()+1}setYear(e){return this.date.year(e),this}getFullYear(){return this.date.year()}setFecha(e,t,i,o){return this.date=Jp([e,t-1,i,o,0,0,0]),this}setFechaString(e){return this.date=Jp(e,\"DD/MM/YYYY HH:mm\"),this}getFecha(){return this.date}isHorarioVerano(){return this.date.isDST()}getUTC_Madrid(){return Jp().tz(\"Europe/Madrid\").utcOffset()/60}pad(e,t){let i=e+\"\";for(;i.length<t;)i=\"0\"+i;return i}formatFechaUTC(){let e=this.date.clone().utc(),t=e.year(),i=e.month()+1,o=e.date(),s=e.hour();return this.pad(t,2)+this.pad(i,2)+this.pad(o,2)+\" \"+this.pad(s,2)+\":00\"}formatFechaUTCSinHora(){let e=this.date.clone().utc(),t=e.year(),i=e.month()+1,o=e.date();return e.hour(),this.pad(t,2)+this.pad(i,2)+this.pad(o,2)}formatFecha(){let e=this.date.year(),t=this.date.month()+1,i=this.date.date(),o=this.date.hour();return o>=0?this.pad(e,2)+this.pad(t,2)+this.pad(i,2)+\" \"+this.pad(o,2)+\":00\":this.pad(e,2)+this.pad(t,2)+this.pad(i,2)}getDiffHorasUTCString(e,t,i,o){let s=this.clone();return s.setFecha(e,t,i,o),String(i).padStart(2,\"0\")+\"/\"+String(t).padStart(2,\"0\")+\"/\"+String(e).padStart(2,\"0\")+\"  \"+String(o).padStart(2,\"0\")+\":00 UTC\"+(s.getDiffHorasUTC()>0?\"+\":\"\")+(0==s.getDiffHorasUTC()?\"\":s.getDiffHorasUTC())}getDiffHorasUTC(){return this.date.utcOffset()/60}}let df=(()=>{class n{query(t){var i=this;return Ve(function*(){const o=(new ni).set(\"Content-Type\",\"application/x-www-form-urlencoded\"),s=\"sql=\"+encodeURIComponent(t);return yield i.http.post(Kp_urlApi,s,{headers:o}).toPromise()})()}queryGet(t,i={}){var o=this;return Ve(function*(){const s=(new ni).set(\"Content-Type\",\"application/json\");try{return yield o.http.get(`${Kp_urlApi}${t}`,{headers:s,params:i}).toPromise()}catch(r){throw new Error(\"Error en la petici\\xf3n API: \"+r)}})()}convertirFecha(t){const[i,o]=t.split(\" \"),[s,r,a]=i.split(\"/\"),[c,l,d]=o.split(\":\");return{anno:+a,mes:+r,",
- "rutas": [
-  "text/html",
-  "M/d/yy",
-  "text/plain",
-  "application/json",
-  "application/x-www-form-urlencoded",
-  "Europe/Madrid",
-  "ol/style/Style",
-  "ol/style/Style.js",
-  "ol/Collection",
-  "version/15.4",
-  "application/xml",
-  "DD/MM/YYYY",
-  "D/M/YYYY",
-  "MM/DD/YYYY",
-  "MM/D/YYYY",
-  "YYYY/MM/DD",
-  "DD/M/YYYY",
-  "YYYY/M/D"
- ],
- "queryGet": [
-  "getMensaje ,{idioma:t,tipo:\"web\"}",
-  "getIcaAlertas ",
-  "getProvCom ",
-  "getProvinciasByFilter ,c"
- ],
- "palabras": [
-  "getIcaAlertas",
-  "tipoEstacion",
-  "politicas"
- ],
- "ica getMensaje": {
-  "code": 200,
-  "ct": "application/json;",
-  "size": 15759,
-  "cabeza": "[{\"clave\":\"cabecera\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"<strong>Índice de Calidad del Aire</strong>\"},{\"clave\":\"cabeceraPobGeneral\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"<strong>Población general</strong>\"},{\"clave\":\"cabeceraPobRiesgo\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"<strong>Grupos de riesgo y personas sensibles</strong>\"},{\"clave\":\"cabeceraPrevisto\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"<strong> previsto</strong>\"},{\"clave\":\"cabeceraSalud\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"<strong>Recomendaciones para la salud</strong>\"},{\"clave\":\"calidad1\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"Calidad del aire satisfactoria.\"},{\"clave\":\"calidad2\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"Calidad del aire aceptable.\"},{\"clave\":\"calidad3\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"La calidad del aire probablemente no afecte a la población general pero puede presentar un <strong>riesgo moderado</strong> para los grupos de riesgo.\"},{\"clave\":\"calidad4\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"Toda la población puede experimentar <strong>efectos negativos sobre la salud</strong> y los grupos de riesgo efectos mucho más serios.\"},{\"clave\":\"calidad5\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"Condiciones de <strong>emergencia para la salud pública</strong>, la población entera puede verse seriamente afectada.\"},{\"clave\":\"calidad6\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"Condiciones de <strong>emergencia para la salud pública</strong>, la población entera puede verse <strong>gravemente</strong> afectada."
+ "AQMobile_2025": {
+  "error": "fetch failed"
  },
- "ica getIcaAlertas": {
-  "code": 200,
-  "ct": "application/json;",
-  "size": 2,
-  "cabeza": "[]"
+ "AQMobile": {
+  "error": "fetch failed"
  },
- "ica getProvCom": {
-  "code": 200,
-  "ct": "application/json;",
-  "size": 68219,
-  "cabeza": "[{\"cod_estacion\":28079055,\"nprovincia\":\"MADRID\",\"provincia\":28,\"ncomunidad\":\"MADRID\",\"comunidad\":13},{\"cod_estacion\":21005002,\"nprovincia\":\"HUELVA\",\"provincia\":21,\"ncomunidad\":\"ANDALUCÍA\",\"comunidad\":1},{\"cod_estacion\":8121013,\"nprovincia\":\"BARCELONA\",\"provincia\":8,\"ncomunidad\":\"CATALUÑA\",\"comunidad\":9},{\"cod_estacion\":43171001,\"nprovincia\":\"TARRAGONA\",\"provincia\":43,\"ncomunidad\":\"CATALUÑA\",\"comunidad\":9},{\"cod_estacion\":35022002,\"nprovincia\":\"PALMAS (LAS)\",\"provincia\":35,\"ncomunidad\":\"CANARIAS\",\"comunidad\":5},{\"cod_estacion\":20080001,\"nprovincia\":\"GUIPÚZCOA\",\"provincia\":20,\"ncomunidad\":\"PAÍS VASCO\",\"comunidad\":16},{\"cod_estacion\":28092005,\"nprovincia\":\"MADRID\",\"provincia\":28,\"ncomunidad\":\"MADRID\",\"comunidad\":13},{\"cod_estacion\":7032002,\"nprovincia\":\"BALEARS (ILLES)\",\"provincia\":7,\"ncomunidad\":\"BALEARES (ISLAS)\",\"comunidad\":4},{\"cod_estacion\":35016015,\"nprovincia\":\"PALMAS (LAS)\",\"provincia\":35,\"ncomunidad\":\"CANARIAS\",\"comunidad\":5},{\"cod_estacion\":21064002,\"nprovincia\":\"HUELVA\",\"provincia\":21,\"ncomunidad\":\"ANDALUCÍA\",\"comunidad\":1},{\"cod_estacion\":2003001,\"nprovincia\":\"ALBACETE\",\"provincia\":2,\"ncomunidad\":\"CASTILLA-LA MANCHA\",\"comunidad\":7},{\"cod_estacion\":35019002,\"nprovincia\":\"PALMAS (LAS)\",\"provincia\":35,\"ncomunidad\":\"CANARIAS\",\"comunidad\":5},{\"cod_estacion\":45165003,\"nprovincia\":\"TOLEDO\",\"provincia\":45,\"ncomunidad\":\"CASTILLA-LA MANCHA\",\"comunidad\":7},{\"cod_estacion\":19046001,\"nprovincia\":\"GUADALAJARA\",\"provincia\":19,\"ncomunidad\":\"CASTILLA-LA MANCHA\",\"comunidad\":7},{\"cod_e"
- },
- "ica getProvinciasByFilter": {
-  "code": 400,
-  "ct": "text/html;",
-  "size": 108,
-  "cabeza": "Se requieren los parámetros tipo (nprovincia, ncomunidad, provincia o comunidad) y filtro (valor a buscar)."
+ "Air": {
+  "error": "fetch failed"
  }
 }
