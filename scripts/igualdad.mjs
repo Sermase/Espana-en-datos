@@ -75,8 +75,9 @@ try {
     try {
       sh(`curl -sSL --max-time 60 -A 'Mozilla/5.0' -o /tmp/fichas/${año}.pdf '${u}'`)
       const t = sh(`pdftotext -layout /tmp/fichas/${año}.pdf - 2>/dev/null`)
-      datos.violencia.mortales[año] = { texto: t.slice(0, 20000) } // se interpreta abajo; el texto se borra antes de guardar
-      if (!log.fichaMuestra) log.fichaMuestra = t.slice(0, 9000)
+      const r = sh(`pdftotext -raw /tmp/fichas/${año}.pdf - 2>/dev/null`)
+      datos.violencia.mortales[año] = { texto: t.slice(0, 20000), raw: r.slice(0, 20000) } // se interpretan abajo y se borran antes de guardar
+      if (!log.fichaMuestra) { log.fichaMuestra = t.slice(0, 3000); log.fichaRaw = r.slice(0, 7000) }
     } catch (e) { log.avisos.push(`ficha ${año}: ${String(e.message).slice(-120)}`) }
   }
 } catch (e) { log.avisos.push('víctimas mortales: ' + String(e.message).slice(-200)) }
@@ -109,16 +110,19 @@ try {
 
 // interpretar las fichas: total, edad, país de nacimiento, denuncias previas y comunidad
 for (const [a, o] of Object.entries(datos.violencia.mortales)) {
-  const t = o.texto; delete o.texto
+  const t = o.texto, r = o.raw ?? ''; delete o.texto; delete o.raw
   const num = (re) => { const m = t.match(re); return m ? Number(m[1]) : null }
   o.total = num(/TOTAL\s+v[ií]ctimas por violencia de g[ée]nero\s+(\d+)/i) ?? num(/Total V[ÍI]CTIMAS\s+(\d+)/i) ?? num(/TOTAL\s+(\d+)\s+100[.,]0/)
   o.sinDenuncia = num(/Sin denuncias? previas?\s+(\d+)/i)
   o.conDenuncia = num(/Con una o m[aá]s denuncias previas\s+(\d+)/i) ?? num(/Hab[ií]an denunciado\s+(\d+)/i)
-  const pais = t.match(/Espa[ñn]a\s+(\d+)\s+[\d.,]+\s+(\d+)[\s\S]{0,80}?Otro pa[ií]s\s+(\d+)\s+[\d.,]+\s+(\d+)/)
+  const pais = r.match(/Espa[ñn]a\s+(\d+)\s+[\d.,]+\s+(\d+)\s+[\d.,]+\s+Otro pa[ií]s\s+(\d+)\s+[\d.,]+\s+(\d+)/)
   if (pais) o.pais = { victimaEsp: +pais[1], agresorEsp: +pais[2], victimaOtro: +pais[3], agresorOtro: +pais[4] }
   const edades = {}
-  for (const m of t.matchAll(/^\s*(Menos de \d+|Menor de \d+|De? ?\d+\s*(?:a|-)\s*\d+(?: años)?|\d+\s*-\s*\d+|\d+ (?:y|o) m[aá]s(?: años)?|M[aá]s de \d+(?: años)?)\s+(\d+)\s+[\d.,]+\s+(\d+)/gim)) edades[m[1].replace(/\s+/g, ' ')] = [+m[2], +m[3]]
+  for (const m of r.matchAll(/(Menos de \d+ años|De \d+ a \d+ años|M[aá]s de \d+ años|\d+ y m[aá]s años|No consta)\s+(\d+)\s+[\d.,]+\s+(\d+)\s+[\d.,]+/g)) if (!edades[m[1]]) edades[m[1]] = [+m[2], +m[3]]
   if (Object.keys(edades).length) o.edad = edades
+  o.huerfanos = num(/hu[ée]rfan[ao]s\/?o?s?[^\d]{0,80}?(\d+)/i) ?? (r.match(/hu[ée]rfan[\s\S]{0,60}?(\d+)/i)?.[1] ? +r.match(/hu[ée]rfan[\s\S]{0,60}?(\d+)/i)[1] : null)
+  const serie = r.match(/A[ñn]os 2003 a (20\d\d)\.?([\s\S]{0,900})/)
+  if (serie) { const ns = [...serie[2].matchAll(/\b(\d{2,3})\b/g)].map(m => +m[1]).filter(n => n >= 20 && n <= 120); if (ns.length >= +serie[1] - 2003) o.serie = ns.slice(0, +serie[1] - 2002) }
   const ccaa = {}
   for (const m of t.matchAll(/^\s*(Andaluc[ií]a|Arag[oó]n|Asturias[^\d\n]*|Balears[^\d\n]*|Illes Balears|Canarias|Cantabria|Castilla y Le[oó]n|Castilla[- ]La Mancha|Catalu[ñn]a|Comunitat Valenciana|Comunidad Valenciana|Extremadura|Galicia|Madrid[^\d\n]*|Comunidad de Madrid|Murcia[^\d\n]*|Regi[oó]n de Murcia|Navarra[^\d\n]*|Comunidad Foral de Navarra|Pa[ií]s Vasco|La Rioja|Rioja[^\d\n]*|Ceuta|Melilla)\s+(\d+)\s+[\d.,]+/gim)) ccaa[m[1].trim()] = +m[2]
   if (Object.keys(ccaa).length) o.ccaa = ccaa
