@@ -65,7 +65,12 @@ for (const [id, x] of sp) {
 }
 // 4. Coordenadas: metadatos de la Agencia Europea (se prueban varias direcciones); si ninguna responde, el centro del municipio
 const coords = new Map(), nombres = new Map(), tipos = new Map()
-const META = process.env.AIRE_FILAS ? [] : [
+// primero, la capa de estaciones del MITECO que guarda scripts/aire.mjs
+try {
+  for (const [cod, [lon, lat, n, t]] of Object.entries(JSON.parse(readFileSync(`${OUT}/estaciones.json`, 'utf8')))) { coords.set(cod, [lon, lat]); if (n) nombres.set(cod, n); if (t) tipos.set(cod, t) }
+  log.miteco = coords.size
+} catch { log.miteco = 0 }
+const META = process.env.AIRE_FILAS || coords.size ? [] : [
   'https://discomap.eea.europa.eu/map/fme/metadata/PanEuropean_metadata.csv',
   'https://discomap.eea.europa.eu/App/AQViewer/download?fqn=Airquality_Dissem.b2g.SamplingPoints&f=csv',
 ]
