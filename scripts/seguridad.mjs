@@ -93,12 +93,12 @@ let MUNIS = null
 function codMuni(nombre, prov) {
   if (!PADRON) return null
   MUNIS ??= Object.entries(PADRON.m).map(([c, [n]]) => ({ c: c.padStart(5, '0'), n: normM(n), partes: n.split('/').map(normM) }))
-  const x = normM(nombre)
+  const x = normM(nombre), xs = nombre.split('/').map(normM)
   const cand = MUNIS.filter(m => !prov || m.c.startsWith(prov))
-  const en = (lista) => (lista.find(m => m.n === x || m.partes.includes(x)) ?? lista.find(m => m.n.startsWith(x + ' ') || x.startsWith(m.n + ' ')))?.c ?? null
+  const en = (lista) => (lista.find(m => m.n === x || xs.some(p => m.partes.includes(p))) ?? lista.find(m => m.n.startsWith(x + ' ') || x.startsWith(m.n + ' ')))?.c ?? null
   if (prov) return en(cand)
   // sin provincia, solo si el nombre es único en España
-  const todos = MUNIS.filter(m => m.n === x || m.partes.includes(x))
+  const todos = MUNIS.filter(m => m.n === x || xs.some(p => m.partes.includes(p)))
   return todos.length === 1 ? todos[0].c : null
 }
 
@@ -134,7 +134,9 @@ function balance({ a, q, ts }) {
   for (const [lugar, tip, per, v] of P.filas) {
     if (/variaci/i.test(per)) continue
     const c = codProv(lugar); if (!c) { sinC.add(lugar); continue }
-    ((prov[c] ??= {})[k2(tip.trim())] ??= [null, null])[periodos.indexOf(per)] = num(v)
+    // el balance de 2022 trae tres periodos (2019, 2021 y 2022): se queda con los dos últimos
+    const j = periodos.indexOf(per) - (periodos.length - 2); if (j < 0) continue
+    ((prov[c] ??= {})[k2(tip.trim())] ??= [null, null])[j] = num(v)
   }
   // municipios: desde 2024 traen el código INE delante («04013 Almería»); antes, «- Municipio de Almería» bajo «Provincia de ALMERÍA»
   const muni = {}, sinMuni = new Set()
@@ -147,7 +149,8 @@ function balance({ a, q, ts }) {
     let cod = l.match(/^(\d{5})\s/)?.[1] ?? null
     if (!cod && /municipio de/i.test(l)) cod = codMuni(l.replace(/^-?\s*municipio de\s*/i, ''), provActual)
     if (!cod) { if (/municipio/i.test(l)) sinMuni.add(l); continue }
-    ((muni[cod] ??= {})[k2(tip.trim())] ??= [null, null])[periodos.indexOf(per)] = num(v)
+    const año = +(per.match(/(\d{4})\s*$/)?.[1] ?? 0); if (!año) continue
+    ((muni[cod] ??= {})[k2(tip.trim())] ??= {})[año] = num(v)
   }
   log['sinMunicipio ' + a + q] = [...sinMuni].slice(0, 40)
   log['balance ' + a + q] = { periodos, tipos, provinciasSinCodigo: [...sinC], municipiosEjemplo: Object.keys(muni).slice(0, 60), municipios: Object.keys(muni).length }
@@ -160,24 +163,24 @@ for (let a = (ult?.q === 4 ? ult.a : (ult?.a ?? hoy.getFullYear()) - 1); a >= 20
   try {
     const ts = indice(`/DatosBalanceAnt/${a}4/`); if (ts.length < 3) continue
     const b = a === ult?.a && ult.q === 4 ? ult : balance({ a, q: 4, ts })
-    for (const [m, d] of Object.entries(b.muni)) for (const [k, [ant, act]] of Object.entries(d)) {
+    // se recorre del más reciente al más antiguo: lo ya puesto (la cifra más revisada) no se pisa
+    for (const [m, d] of Object.entries(b.muni)) for (const [k, porAño] of Object.entries(d)) {
       const s = ((muniHist[m] ??= {})[k] ??= {})
-      if (act != null) s[a] = act
-      if (ant != null && s[a - 1] == null) s[a - 1] = ant
+      for (const [y, x] of Object.entries(porAño)) if (x != null && s[y] == null) s[y] = x
     }
   } catch (e) { log.avisos.push(`Q4 ${a}: ${String(e.message).slice(0, 200)}`) }
 }
 
 // ---------- Salida ----------
 const fecha = new Date().toISOString().slice(0, 10)
-writeFileSync(`${OUT}/seguridad.json`, JSON.stringify({ fecha, años: AÑOS, tipos: TIPOS, prov, pob, balance: ult && { año: ult.a, trimestre: ult.q, periodos: ult.periodos, tipos: ult.tipos, prov: ult.prov } }))
+writeFileSync(`${OUT}/seguridad.json`, JSON.stringify({ fecha, años: AÑOS, tipos: TIPOS, prov, pob, balance: ult && { año: ult.a, trimestre: ult.q, periodos: ult.periodos.slice(-2), tipos: ult.tipos, prov: ult.prov } }))
 const MA = [...new Set(Object.values(muniHist).flatMap(d => Object.values(d).flatMap(s => Object.keys(s).map(Number))))].sort()
 const mOut = {}
 for (const [c, d] of Object.entries(muniHist)) {
   const p = PADRON?.m[c] ?? PADRON?.m[String(+c)]
   mOut[c] = { n: p?.[0] ?? c, pob: MA.map(a => p?.[1][PADRON.years.indexOf(a)] ?? null), d: Object.fromEntries(Object.entries(d).map(([k, s]) => [k, MA.map(a => s[a] ?? null)])) }
 }
-writeFileSync(`${OUT}/municipios.json`, JSON.stringify({ fecha, años: MA, balance: ult && { año: ult.a, trimestre: ult.q, periodos: ult.periodos, muni: ult.muni }, muni: mOut }))
+writeFileSync(`${OUT}/municipios.json`, JSON.stringify({ fecha, años: MA, muni: mOut }))
 const RES = here('../src/resumen.json'), res = JSON.parse(readFileSync(RES, 'utf8'))
 const tot = prov['00']?.total ?? prov['00']?.[TIPOS[0].k], i = AÑOS.length - 1
 if (tot) res.seguridad = { año: AÑOS[i], total: tot[i], var: tot[i - 1] ? ((tot[i] - tot[i - 1]) / tot[i - 1]) * 100 : null, tasa: pob['00']?.[i] ? (tot[i] / pob['00'][i]) * 1000 : null }
