@@ -1,16 +1,16 @@
 {
  "tiempo_real": {
-  "filas": 60,
+  "filas": 88,
   "primera": "2026-11-23 21:00",
-  "ultima": "2026-11-24 01:55",
+  "ultima": "2026-11-24 04:15",
   "claves": "ts,dem,eol,nuc,gf,car,cc,hid,aut,inter,icb,sol,solFot,solTer,bio,cogenResto,expAnd,expMar,expPor,expFra,expTot,impFra,impPor,impMar,impAnd,impTot,conb,turb,gnhd,bat,consBat,dif,vap"
  },
  "_cors": "*",
  "mix_hora": "ERROR HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error Interno\",\"detail\":\"Los datos solicitados no est\\u00e1n disponibles en este momento. Int\\u00e9ntelo de nuevo m\\u00e1s t",
  "demanda_tr": {
-  "Prevista": "288 datos · 2026-11-24T00:00 → 2026-11-24T23:55 28555 0.332",
+  "Prevista": "288 datos · 2026-11-24T00:00 → 2026-11-24T23:55 28506 0.331",
   "Programada": "288 datos · 2026-11-24T00:00 → 2026-11-24T23:55 28783 0.334",
-  "Real": "21 datos · 2026-11-24T00:00 → 2026-11-24T01:40 25077 0.249",
+  "Real": "51 datos · 2026-11-24T00:00 → 2026-11-24T04:10 23847 0.25",
   "Programada total": "288 datos · 2026-11-24T00:00 → 2026-11-24T23:55 28783 0.334"
  },
  "precios_hora": {
@@ -117,7 +117,7 @@
   "fallos": [],
   "series": {
    "PVPC": "2003 días · 2021-06-01T00:00 → 2026-11-24T00:00",
-   "Precio mercado spot": "2003 días · 2021-06-01T00:00 → 2026-11-24T00:00"
+   "Precio mercado spot": "2489 días · 2020-02-01T00:00 → 2026-11-24T00:00"
   }
  }
 }

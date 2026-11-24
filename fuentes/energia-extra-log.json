@@ -22,16 +22,16 @@
   "2013: HTTP 502 {\"errors\":[{\"status\":\"502\",\"title\":\"Error Interno\","
  ],
  "intercambios": {
-  "francia/Exportación": "155 · 2014-01 → 2026-11 -706191.27",
+  "francia/Exportación": "155 · 2014-01 → 2026-11 -706268.47",
   "francia/Importación": "155 · 2014-01 → 2026-11 357283.08",
-  "francia/saldo": "155 · 2014-01 → 2026-11 -348908.2",
-  "portugal/Exportación": "155 · 2014-01 → 2026-11 -1081142.85",
-  "portugal/Importación": "155 · 2014-01 → 2026-11 316261.3",
-  "portugal/saldo": "155 · 2014-01 → 2026-11 -764881.55",
+  "francia/saldo": "155 · 2014-01 → 2026-11 -348985.4",
+  "portugal/Exportación": "155 · 2014-01 → 2026-11 -1081142.7",
+  "portugal/Importación": "155 · 2014-01 → 2026-11 316251.22",
+  "portugal/saldo": "155 · 2014-01 → 2026-11 -764891.47",
   "marruecos/Exportación": "155 · 2014-01 → 2026-11 -388273.17",
   "marruecos/saldo": "155 · 2014-01 → 2026-11 -387849.77",
-  "andorra/Exportación": "152 · 2014-01 → 2026-11 -23192.87",
-  "andorra/saldo": "152 · 2014-01 → 2026-11 -23192.87",
+  "andorra/Exportación": "152 · 2014-01 → 2026-11 -23181.1",
+  "andorra/saldo": "152 · 2014-01 → 2026-11 -23181.1",
   "marruecos/Importación": "98 · 2015-07 → 2026-11 423.4"
  },
  "ire": {
