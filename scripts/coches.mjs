@@ -37,11 +37,12 @@ function clase(prop, cat) {
 }
 // Modelo comercial: la DGT guarda el nombre de la ficha técnica («FRONTERA GS 1.2 T XHT»); nos quedamos con la primera
 // palabra, o las dos primeras cuando la primera sola no dice nada («MODEL Y», «CLASE A», «SERIE 3», «YARIS CROSS»).
-const DOS = new Set(['MODEL', 'CLASE', 'CLASS', 'SERIE', 'SERIES', 'GRAND', 'RANGE', 'SANTA', 'NEW', 'NUEVO', 'NUEVA', 'LAND', 'ID.', 'EQ', 'DS', 'ALFA', 'TOYOTA', 'NISSAN', 'MERCEDES', 'CITROEN', 'PEUGEOT', 'KIA', 'BMW'])
+const DOS = new Set(['MODEL', 'CLASE', 'CLASS', 'SERIE', 'SERIES', 'GRAND', 'RANGE', 'SANTA', 'LAND', 'ID.', 'EQ', 'DS', 'ALFA', 'TOYOTA', 'NISSAN', 'MERCEDES', 'CITROEN', 'PEUGEOT', 'KIA', 'BMW'])
 const SEGUNDA = new Set(['CROSS', 'ROVER', 'FE', 'SPORT', 'EVOQUE', 'VELAR', 'ELECTRIC', 'TOURER', 'ALLSPACE', 'COUPE', 'ACTIVE'])
 function modeloDe(raw, marca) {
   const t = raw.toUpperCase().replace(/[^A-Z0-9.\- ]/g, ' ').split(/\s+/).filter(Boolean)
-  while (t.length > 1 && marca.toUpperCase().split(/\s+/).includes(t[0])) t.shift() // «TOYOTA YARIS» → «YARIS»
+  while (t.length > 1 && (marca.toUpperCase().split(/\s+/).includes(t[0]) || /^(NEW|NUEVO|NUEVA|THE)$/.test(t[0]))) t.shift() // «TOYOTA YARIS», «NUEVO C3» → «YARIS», «C3»
+  if (t.length > 1 && /^[A-Z]$/.test(t[0]) && /^\d+[A-Z]?$/.test(t[1])) t.splice(0, 2, t[0] + t[1]) // «I 30» → «I30»
   if (!t.length) return null
   let m = t[0]
   if (t[1] && (DOS.has(t[0]) || (t[0].length <= 2 && !/\d/.test(t[0])) || SEGUNDA.has(t[1]))) m += ' ' + t[1]
@@ -131,6 +132,12 @@ for (const [k, ds, q] of [
 
 const meses = Object.fromEntries(Object.entries(prev.meses).sort(([a], [b]) => a.localeCompare(b)))
 writeFileSync(F, JSON.stringify({ fecha: new Date().toISOString().slice(0, 10), meses }))
+// los meses ya guardados pasan por la misma limpieza (cambios de nombre sin volver a bajar los ficheros)
+for (const [k, mm] of Object.entries(modelos)) {
+  const o = {}
+  for (const [x, [n, e]] of Object.entries(mm)) { const [ma, mo] = x.split('|'), y = `${ma}|${modeloDe(mo, ma) ?? mo}`, t = (o[y] ??= [0, 0]); t[0] += n; t[1] += e }
+  modelos[k] = o
+}
 writeFileSync(FM, JSON.stringify({ fecha: new Date().toISOString().slice(0, 10), meses: Object.fromEntries(Object.entries(modelos).sort(([a], [b]) => a.localeCompare(b))) }))
 // para revisar la normalización: los 40 modelos que más venden en todo el periodo
 { const t = {}; for (const mm of Object.values(modelos)) for (const [k, v] of Object.entries(mm)) t[k] = (t[k] ?? 0) + v[0]; log.topModelos = Object.entries(t).sort((a, b) => b[1] - a[1]).slice(0, 60).map(([k, v]) => `${k} ${v}`) }
