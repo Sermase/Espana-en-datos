@@ -103,3 +103,18 @@ button.g-bar:hover, button.g-bar:focus-visible { background: rgba(255, 255, 255,
 .g-legend-tog button.is-off { opacity: .4; text-decoration: line-through }
 .g-legend-tog button.is-off i { background: transparent !important; outline: 1px solid currentColor }
 .g-legend-todas { color: var(--g-ink2); text-decoration: underline; text-underline-offset: 2px }
+
+/* carrera de barras */
+.carrera { margin: 4px 0 0 }
+.cr-ctl { display: flex; align-items: center; gap: 12px; margin-bottom: 12px }
+.cr-ctl button { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--g-line, rgba(255,255,255,.15)); border-radius: 50%; color: var(--g-ink, #fff) }
+.cr-ctl input { flex: 1; accent-color: var(--acc, #7fe3ff) }
+.cr-ctl span { font: 700 18px/1 Oxanium, sans-serif; min-width: 56px; text-align: right; font-variant-numeric: tabular-nums }
+.cr-pista { position: relative; overflow: hidden }
+.cr-marca { position: absolute; right: 8px; bottom: -6px; font: 800 clamp(48px, 10vw, 110px)/1 Oxanium, sans-serif; color: rgba(255, 255, 255, .06); pointer-events: none; font-variant-numeric: tabular-nums }
+.cr-fila { position: absolute; left: 0; right: 0; top: 0; display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: center }
+.cr-pos { color: var(--g-ink2, #9fb3c8); font-size: 12px; text-align: right; font-variant-numeric: tabular-nums }
+.cr-barra-wrap { display: flex; align-items: center; gap: 8px; height: 100%; min-width: 0; padding-right: 70px; position: relative }
+.cr-barra { height: 100%; border-radius: 0 4px 4px 0; display: flex; align-items: center; min-width: 2px; overflow: visible; white-space: nowrap }
+.cr-n { padding-left: 8px; font-size: 13px; font-weight: 600; color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .6) }
+.cr-v { flex: none; font-size: 12.5px; color: var(--g-ink, #fff); font-variant-numeric: tabular-nums }

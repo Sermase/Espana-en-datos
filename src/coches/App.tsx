@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react'
 import { motion } from 'motion/react'
 import { BatteryCharging, Car, Gauge, Map as MapIcon, Trophy } from 'lucide-react'
-import { Apiladas, Barras, ColApiladas, CountUp, LineChart, nf, type Capa } from '../graficos'
+import { Apiladas, Barras, Carrera, ColApiladas, CountUp, LineChart, nf, type Capa, type Fotograma } from '../graficos'
 import { Holo3D } from '../holo3d/Holo3D'
 import { coche } from '../holo3d/modelos'
 import { MapaProvincias } from '../geo/MapaProvincias'
@@ -118,6 +118,15 @@ function Marcas({ m }: { m: M }) {
   const A = porAño(m), años = Object.keys(A).sort().filter(a => A[a].meses === 12)
   const [a, setA] = useState(años.at(-1)!), [sel, setSel] = useState<string | null>(null), [mods, setMods] = useState<Mods | null>(null), [q, setQ] = useState('')
   useEffect(() => { fetch('./data/modelos.json').then(r => (r.ok ? r.json() : null)).then(j => setMods(j?.meses ?? {}), () => setMods({})) }, [])
+  const carrera = useMemo<Fotograma[]>(() => {
+    const ks = Object.keys(m.meses).sort(), acc: Record<string, number> = {}, out: Fotograma[] = []
+    ks.forEach((k, j) => {
+      for (const [x, v] of Object.entries(m.meses[k].marcas)) acc[x] = (acc[x] ?? 0) + v
+      if (j >= 12) for (const [x, v] of Object.entries(m.meses[ks[j - 12]].marcas)) acc[x] -= v
+      if (j >= 11) out.push({ t: `${MESES[+k.slice(5) - 1].slice(0, 3)} ${k.slice(0, 4)}`, items: Object.entries(acc).filter(([x, v]) => x !== '(otras)' && v > 0).map(([x, v]) => ({ id: x, nombre: marca(x), valor: v })) })
+    })
+    return out
+  }, [m])
   const ant = String(+a - 1), tot = A[a].n
   const todas = Object.entries(A[a].marcas).filter(([k]) => k !== '(otras)').sort((x, y) => y[1] - x[1])
   const top = todas
@@ -131,6 +140,9 @@ function Marcas({ m }: { m: M }) {
   const buscadas = q.length >= 2 ? Object.keys(A[ultimo].marcas).concat(Object.keys(A[a].marcas)).filter((k, i, arr) => arr.indexOf(k) === i && k !== '(otras)' && marca(k).toLowerCase().includes(q.toLowerCase())).slice(0, 8) : []
   const eligeMarca = (k: string) => { setSel(sel === k ? null : k); setQ('') }
   return <div className="graficos">
+    <Card wide t="La carrera de las marcas" lead="Turismos nuevos de los últimos 12 meses, mes a mes desde 2015. Dale al botón para volver a verla o arrastra la barra de tiempo." fuente={DGT}>
+      <Carrera titulo="Ranking de marcas por turismos nuevos en 12 meses" fotogramas={carrera} top={10} ms={260} fmt={v => nf(v, 0)} />
+    </Card>
     <Card wide t={`Las marcas más vendidas en ${a}`} lead={top[0] ? <><b>{marca(top[0][0])}</b> fue la marca más matriculada, con {nf(top[0][1], 0)} turismos nuevos ({nf((top[0][1] / tot) * 100, 1)} %). Las diez primeras se llevan el {nf((top.slice(0, 10).reduce((t, x) => t + x[1], 0) / tot) * 100, 0)} % del mercado; en total se vendieron {todas.length} marcas. Toca una para ver sus modelos.</> : null} fuente={DGT}>
       <div className="modo" role="radiogroup" aria-label="Año">{años.map(y => <button key={y} role="radio" aria-checked={a === y} className={a === y ? 'is-on' : ''} onClick={() => setA(y)}>{y}</button>)}</div>
       <div className="buscar-marca"><input type="search" value={q} onChange={e => setQ(e.target.value)} placeholder="Buscar una marca…" aria-label="Buscar una marca" />

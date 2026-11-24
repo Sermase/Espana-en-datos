@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { motion } from 'motion/react'
 import { CloudFog, Factory, Thermometer, Wind } from 'lucide-react'
-import { Apiladas, Barras, CountUp, LineChart, nf, type Capa } from '../graficos'
+import { Apiladas, Barras, CountUp, LineChart, Sankey, nf, type Capa } from '../graficos'
 import { Holo3D } from '../holo3d/Holo3D'
 import { cupula } from '../holo3d/modelos'
 import { Fuentes } from '../Fuentes'
@@ -15,6 +15,7 @@ type Emis = {
   gei: { es: Record<string, S>; ue: Record<string, S> }; crf: Record<string, string>
   cont: { es: Record<string, Record<string, S>>; ue: Record<string, S> }; nfr: Record<string, string>
   pob: { es: S; ue: S }
+  gases?: Record<string, S>
 }
 const SECCIONES = [
   { id: 'ahora', nombre: 'Ahora', icon: Wind },
@@ -88,6 +89,15 @@ function Clima({ e }: { e: Emis }) {
       </div>
       <ul className="sala-lista" aria-label={`Reparto por sector en ${A}`}>{ordenA.map(c => { const f = (c.v[i] ?? 0) / (tot[i] ?? 1); return <li key={c.id} style={{ '--c': c.c } as React.CSSProperties}><i /><span>{c.n}</span><b>{nf(f * 100, 0)} %</b><em style={{ width: `${(f / ((ordenA[0].v[i] ?? 1) / (tot[i] ?? 1))) * 100}%` }} /></li> })}</ul>
     </section>
+    {e.gases?.CO2 && (() => {
+      const g = (k: string) => e.gases?.[k]?.[i] ?? 0, T = tot[i] ?? 0
+      const co2 = g('CO2'), ch4 = g('CH4_CO2E') || g('CH4'), n2o = g('N2O_CO2E') || g('N2O'), fl = Math.max(0, T - co2 - ch4 - n2o)
+      const der = [{ id: 'co2', nombre: 'Dióxido de carbono (CO₂)', corto: 'CO₂', valor: co2 / 1000, color: '#9fb3c8' }, { id: 'ch4', nombre: 'Metano', corto: 'Metano', valor: ch4 / 1000, color: '#8fd16a' }, { id: 'n2o', nombre: 'Óxido nitroso', corto: 'N₂O', valor: n2o / 1000, color: '#ffd166' }, { id: 'fl', nombre: 'Gases fluorados', corto: 'Fluorados', valor: fl / 1000, color: '#b8a6ff' }]
+      return <Card wide t="De dónde sale y qué gas es" lead={<>En {A}, el <b>{nf((co2 / T) * 100, 0)} %</b> de lo emitido fue CO₂, sobre todo de quemar combustibles; el metano ({nf((ch4 / T) * 100, 0)} %) sale del ganado y los vertederos, y el óxido nitroso ({nf((n2o / T) * 100, 0)} %), de los abonos. Toca una cinta para seguirla.</>} fuente={EUROSTAT}>
+        <Sankey izq={ordenA.map(c => ({ id: c.id, nombre: c.n, corto: c.n.split(/[ ,]/)[0], valor: (c.v[i] ?? 0) / 1000, color: c.c }))} der={der} centro="ATMÓSFERA" fmt={v => `${nf(v, 1)} Mt`} titulo={`Emisiones de gases de efecto invernadero por sector y por gas, ${A}`} alto={400} />
+        <p className="note">Millones de toneladas de CO₂ equivalente. A la izquierda, quién emite; a la derecha, qué gas (el metano y el óxido nitroso pesan según cuánto calientan).</p>
+      </Card>
+    })()}
     <Card wide t="De dónde salen" lead={<>El transporte {capas[0].v[i]! > capas[0].v[i90]! ? 'emite más' : 'emite menos'} que en 1990; la electricidad, un {nf(Math.abs(pct(capas[2].v[i] ?? 0, capas[2].v[i90] ?? 1)), 0)} % {(capas[2].v[i] ?? 0) < (capas[2].v[i90] ?? 0) ? 'menos' : 'más'}, sobre todo por el cierre del carbón y las renovables.</>} fuente={EUROSTAT}>
       <Apiladas xs={e.años.slice(0, i + 1)} capas={ap.map(c => ({ ...c, v: c.v.slice(0, i + 1) }))} titulo="Gases de efecto invernadero por sector" fx={a => String(a)} fy={v => `${nf(v, 0)} Mt`} alto={300} />
       <p className="note">Millones de toneladas de CO₂ equivalente (el metano y el óxido nitroso se convierten según cuánto calientan). No incluye lo que absorben los bosques{bosque != null && bosque < 0 ? `, unos ${nf(-bosque / 1000, 0)} Mt en ${A}` : ''}, ni los vuelos y barcos internacionales.</p>

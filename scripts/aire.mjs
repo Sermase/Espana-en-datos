@@ -58,6 +58,14 @@ const datos = {
   nfr: LNFR,
   pob: { es: serie(POB.ES), ue: serie(POB.EU27_2020) },
 }
+// 3b. Qué gases: total nacional por gas (CO2, metano, óxido nitroso, fluorados), en CO2 equivalente
+try {
+  const gas = await eurostat('env_air_gge', 'geo=ES&unit=THS_T&src_crf=TOTX4_MEMO')
+  const GA = tabla(gas, ['airpol'])
+  datos.gases = Object.fromEntries(Object.entries(GA).map(([k, v]) => [k, serie(v)]))
+  datos.gasesEtiquetas = etiquetas(gas, 'airpol')
+  log.gases = Object.entries(datos.gasesEtiquetas).map(([k, v]) => `${k} ${v}`)
+} catch (e) { log.avisos.push('gases: ' + e.message) }
 writeFileSync(`${OUT}/emisiones.json`, JSON.stringify(datos))
 // resumen para la portada: emisiones totales del último año frente a 1990
 const tot = datos.gei.es.TOTX4_MEMONIA ?? datos.gei.es.TOTX4_MEMO ?? Object.values(datos.gei.es)[0]
