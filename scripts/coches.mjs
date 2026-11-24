@@ -3,7 +3,7 @@
 // combustible y por edad (Eurostat). Los meses ya agregados se guardan en public/coches/data/matriculaciones.json y
 // solo se bajan los que faltan (como mucho MAX por ejecución) y los dos últimos, que la DGT aún corrige.
 // No se guarda nada que identifique a nadie: solo recuentos.
-import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync, rmSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
@@ -83,7 +83,8 @@ for (const k of cola) {
     if (!st.startsWith('200') || readFileSync(z).subarray(0, 2).toString() !== 'PK') { log.meses.push(`${k}: ${st}`); continue }
     rmSync(d, { recursive: true, force: true }); mkdirSync(d)
     execFileSync('unzip', ['-o', '-q', z, '-d', d])
-    const f = readdirSync(d).map(n => `${d}/${n}`).find(n => statSync(n).isFile() && /\.txt$/i.test(n)) ?? readdirSync(d).map(n => `${d}/${n}`)[0]
+    // algunos zips traen el fichero dentro de una carpeta: se busca en todo el árbol
+    const fs = execFileSync('find', [d, '-type', 'f'], { encoding: 'utf8' }).split('\n').filter(Boolean), f = fs.find(n => /\.txt$/i.test(n)) ?? fs.sort((x, y) => statSync(y).size - statSync(x).size)[0]
     prev.meses[k] = agrega(f); hechos++
     log.meses.push(`${k}: ${prev.meses[k].n} nuevos, ${prev.meses[k].u} usados importados`)
   } catch (e) { log.avisos.push(`${k}: ${String(e.message).slice(-200)}`) }

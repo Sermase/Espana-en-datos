@@ -56,6 +56,7 @@ export const TEMAS: Tema[] = [
   // Energía y movilidad
   { id: 'energia', area: 'movilidad', nombre: 'Energía', lema: 'De dónde sale la electricidad, cuánto cuesta cada hora, de dónde viene el gas y cuánto CO₂ emite. En directo.', color: '#ffb02e', vista: 'consola', ruta: './energia/index.html' },
   { id: 'gasolineras', area: 'movilidad', nombre: 'Gasolineras', lema: 'El precio de hoy en las 12.000 gasolineras: la más barata cerca de ti, por provincia y por marca.', color: '#ff5f7e', vista: 'mapa', ruta: './gasolineras/index.html' },
+  { id: 'coches', area: 'movilidad', nombre: 'Coches', lema: 'Los turismos que se matriculan cada mes por combustible, marca y provincia, y lo viejo que está el parque.', color: '#5df0d0', vista: 'mapa', ruta: './coches/index.html' },
   { id: 'trenes', area: 'movilidad', nombre: 'Trenes', lema: 'Todos los trenes de Renfe moviéndose por el mapa, con sus horarios y retrasos.', color: '#8fb4ff', vista: 'mapa', plan: 'Los trenes circulando según su horario, líneas de alta velocidad y viajeros.' },
   { id: 'aeropuertos', area: 'movilidad', nombre: 'Aeropuertos', lema: 'Pasajeros, rutas y los aeropuertos que más crecen.', color: '#b8a6ff', vista: 'mapa', plan: 'Pasajeros de cada aeropuerto mes a mes, rutas internacionales y mercancías.' },
   { id: 'carreteras', area: 'movilidad', nombre: 'Carreteras', lema: 'Tráfico, accidentes y obras en la red de carreteras.', color: '#ff8a5c', vista: 'mapa', plan: 'Incidencias en directo, intensidad de tráfico y siniestralidad por provincia.' },

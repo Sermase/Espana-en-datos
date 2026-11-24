@@ -387,3 +387,31 @@ export const casa = (partes: number[], ahorro = 0.1): Modelo => t => {
   const puntos = humo(t, 0.24, 1.03, -0.01, Math.round(6 + ahorro * 60), 0.45, 0.1)
   return { fuerte, tenue, puntos }
 }
+
+/**
+ * Coche de alambre que rueda sobre una carretera: `enchufe` (0–1, la parte de eléctricos y enchufables) decide cuánto
+ * humo sale del tubo de escape y cuántas chispas recorren el cable de carga.
+ */
+export const coche = (enchufe = 0.1): Modelo => t => {
+  const fuerte: Seg[] = [], tenue: Seg[] = [], puntos: [number, number, number][] = []
+  const L = 0.62, W = 0.26, y0 = 0.14, y1 = 0.34, techo = 0.52
+  // carrocería: bajos, capó y maletero, y la cabina con el parabrisas inclinado
+  caja(fuerte, -L, L, y0, y1, -W, W)
+  const P: [number, number][] = [[-0.36, y1], [-0.2, techo], [0.22, techo], [0.42, y1]]
+  for (const z of [-W * 0.92, W * 0.92]) for (let i = 0; i < 3; i++) fuerte.push([P[i][0], P[i][1], z, P[i + 1][0], P[i + 1][1], z])
+  for (const [x, y] of P) tenue.push([x, y, -W * 0.92, x, y, W * 0.92])
+  // ruedas que giran
+  const r = 0.12, giro = -t * 4
+  for (const [cx, cz] of [[-0.4, -W], [0.4, -W], [-0.4, W], [0.4, W]] as [number, number][]) {
+    for (let i = 0; i < 16; i++) { const a = (i / 16) * TAU, b = ((i + 1) / 16) * TAU; fuerte.push([cx + Math.cos(a) * r, r + Math.sin(a) * r, cz, cx + Math.cos(b) * r, r + Math.sin(b) * r, cz]) }
+    for (let k = 0; k < 3; k++) { const a = giro + (k / 3) * TAU; tenue.push([cx, r, cz, cx + Math.cos(a) * r, r + Math.sin(a) * r, cz]) }
+  }
+  // carretera que corre bajo el coche
+  for (const z of [-0.5, 0.5]) tenue.push([-1, 0, z, 1, 0, z])
+  for (let i = 0; i < 6; i++) { const x = ((i / 6 - (t * 0.5) % (1 / 6)) * 2) - 1 + 1 / 6; tenue.push([x, 0, 0, x + 0.12, 0, 0]) }
+  // humo por detrás y chispas por el cable de carga, según cuánto enchufe hay
+  puntos.push(...humo(t, -L - 0.04, 0.18, -0.12, Math.round(4 + (1 - enchufe) * 22), 0.35, 0.25).map(([x, y, z]) => [x - (y - 0.18) * 0.9, y, z] as [number, number, number]))
+  const n = Math.round(2 + enchufe * 14)
+  for (let i = 0; i < n; i++) { const f = ((t * 0.6 + i / n) % 1); puntos.push([L * 0.7 + f * 0.25, y1 - f * (y1 - 0.02), W + 0.05]) }
+  return { fuerte, tenue, puntos }
+}
