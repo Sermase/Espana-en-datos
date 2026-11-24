@@ -333,17 +333,7 @@
   ],
   "municipios": 422
  },
- "sinMunicipio 20234": [
-  "-Municipio de Alcoy/Alcoi",
-  "-Municipio de Alicante/Alacant",
-  "-Municipio de Elche/Elx",
-  "-Municipio de Jávea/Xàbia",
-  "-Municipio de San Vicente del Raspeig/Sant Vicent del Raspeig",
-  "-Municipio de Villajoyosa/Vila Joiosa (la)",
-  "-Municipio de Almazora/Almassora",
-  "-Municipio de Castellón de la Plana/Castelló de la Plana",
-  "-Municipio de Sagunto/Sagunt"
- ],
+ "sinMunicipio 20234": [],
  "balance 20234": {
   "periodos": [
    "enero-diciembre 2022",
@@ -391,8 +381,10 @@
    "11031",
    "11032",
    "11033",
+   "12009",
    "12027",
    "12032",
+   "12040",
    "12084",
    "12126",
    "12135",
@@ -431,22 +423,11 @@
    "17152",
    "17155",
    "17160",
-   "18017",
-   "18021",
-   "18022"
+   "18017"
   ],
-  "municipios": 412
+  "municipios": 421
  },
- "sinMunicipio 20224": [
-  "-Municipio de Alcoy/Alcoi",
-  "-Municipio de Alicante/Alacant",
-  "-Municipio de Elche/Elx",
-  "-Municipio de Jávea/Xàbia",
-  "-Municipio de San Vicente del Raspeig/Sant Vicent del Raspeig",
-  "-Municipio de Villajoyosa/Vila Joiosa (la)",
-  "-Municipio de Castellón de la Plana/Castelló de la Plana",
-  "-Municipio de Sagunto/Sagunt"
- ],
+ "sinMunicipio 20224": [],
  "balance 20224": {
   "periodos": [
    "Enero-diciembre 2019",
@@ -498,6 +479,7 @@
    "12009",
    "12027",
    "12032",
+   "12040",
    "12084",
    "12126",
    "12135",
@@ -536,21 +518,11 @@
    "17155",
    "17160",
    "18017",
-   "18021",
-   "18023"
+   "18021"
   ],
-  "municipios": 403
+  "municipios": 411
  },
  "sinMunicipio 20214": [
-  "-Municipio de Alcoy/Alcoi",
-  "-Municipio de Alicante/Alacant",
-  "-Municipio de Elche/Elx",
-  "-Municipio de Jávea/Xàbia",
-  "-Municipio de San Vicente del Raspeig/Sant Vicent del Raspeig",
-  "-Municipio de Villajoyosa/Vila Joiosa (la)",
-  "-Municipio de Almazora/Almassora",
-  "-Municipio de Castellón de la Plana/Castelló de la Plana",
-  "-Municipio de Sagunto/Sagunt",
   "-Municipio de Egüés"
  ],
  "balance 20214": {
@@ -596,8 +568,10 @@
    "11031",
    "11032",
    "11033",
+   "12009",
    "12027",
    "12032",
+   "12040",
    "12084",
    "12126",
    "12135",
@@ -636,21 +610,12 @@
    "17155",
    "17160",
    "18017",
-   "18021",
-   "18023",
-   "18087"
+   "18021"
   ],
-  "municipios": 403
+  "municipios": 412
  },
  "sinMunicipio 20204": [
-  "- Municipio de Santa Eulalia del Río",
-  "- Municipio de Alcoy/Alcoi",
-  "- Municipio de Alicante/Alacant",
-  "- Municipio de Elche/Elx",
-  "- Municipio de San Vicente del Raspeig/Sant Vicent del Raspeig",
-  "- Municipio de Villajoyosa/Vila Joiosa (la)",
-  "- Municipio de Castellón de la Plana/Castelló de la Plana",
-  "- Municipio de Sagunto/Sagunt"
+  "- Municipio de Santa Eulalia del Río"
  ],
  "balance 20204": {
   "periodos": [
@@ -692,6 +657,7 @@
    "11032",
    "11033",
    "12032",
+   "12040",
    "12126",
    "12135",
    "13005",
@@ -736,20 +702,12 @@
    "24142",
    "25120",
    "26089",
-   "27028",
-   "28005"
+   "27028"
   ],
-  "municipios": 245
+  "municipios": 252
  },
  "sinMunicipio 20194": [
-  "- Municipio de Santa Eulalia del Río",
-  "- Municipio de Alcoy/Alcoi",
-  "- Municipio de Alicante/Alacant",
-  "- Municipio de Elche/Elx",
-  "- Municipio de San Vicente del Raspeig/Sant Vicent del Raspeig",
-  "- Municipio de Villajoyosa/Vila Joiosa (la)",
-  "- Municipio de Castellón de la Plana/Castelló de la Plana",
-  "- Municipio de Sagunto/Sagunt"
+  "- Municipio de Santa Eulalia del Río"
  ],
  "balance 20194": {
   "periodos": [
@@ -791,6 +749,7 @@
    "11032",
    "11033",
    "12032",
+   "12040",
    "12126",
    "12135",
    "13005",
@@ -835,20 +794,12 @@
    "24142",
    "25120",
    "26089",
-   "27028",
-   "28005"
+   "27028"
   ],
-  "municipios": 245
+  "municipios": 252
  },
  "sinMunicipio 20184": [
-  "- Municipio de Santa Eulalia del Río",
-  "- Municipio de Alcoy/Alcoi",
-  "- Municipio de Alicante/Alacant",
-  "- Municipio de Elche/Elx",
-  "- Municipio de San Vicente del Raspeig/Sant Vicent del Raspeig",
-  "- Municipio de Villajoyosa/Vila Joiosa (la)",
-  "- Municipio de Castellón de la Plana/Castelló de la Plana",
-  "- Municipio de Sagunto/Sagunt"
+  "- Municipio de Santa Eulalia del Río"
  ],
  "balance 20184": {
   "periodos": [
@@ -889,6 +840,7 @@
    "11031",
    "11032",
    "12032",
+   "12040",
    "12126",
    "12135",
    "13005",
@@ -934,20 +886,12 @@
    "27028",
    "28005",
    "28006",
-   "28007",
-   "28013"
+   "28007"
   ],
-  "municipios": 240
+  "municipios": 247
  },
  "sinMunicipio 20174": [
-  "- Municipio de Santa Eulalia del Río",
-  "- Municipio de Alcoy/Alcoi",
-  "- Municipio de Alicante/Alacant",
-  "- Municipio de Elche/Elx",
-  "- Municipio de San Vicente del Raspeig/Sant Vicent del Raspeig",
-  "- Municipio de Villajoyosa/Vila Joiosa (la)",
-  "- Municipio de Castellón de la Plana/Castelló de la Plana",
-  "- Municipio de Sagunto/Sagunt"
+  "- Municipio de Santa Eulalia del Río"
  ],
  "balance 20174": {
   "periodos": [
@@ -987,6 +931,7 @@
    "11031",
    "11032",
    "12032",
+   "12040",
    "12126",
    "12135",
    "13005",
@@ -1032,19 +977,11 @@
    "27028",
    "28005",
    "28006",
-   "28007",
-   "28013"
+   "28007"
   ],
-  "municipios": 240
+  "municipios": 247
  },
- "sinMunicipio 20164": [
-  "- Municipio de Alcoy/Alcoi",
-  "- Municipio de Alicante/Alacant",
-  "- Municipio de Elche/Elx",
-  "- Municipio de San Vicente del Raspeig/Sant Vicent del Raspeig",
-  "- Municipio de Castellón de la Plana/Castelló de la Plana",
-  "- Municipio de Sagunto/Sagunt"
- ],
+ "sinMunicipio 20164": [],
  "balance 20164": {
   "periodos": [
    "Enero-Diciembre 2015",
@@ -1073,6 +1010,7 @@
    "11027",
    "11031",
    "11032",
+   "12040",
    "12135",
    "13034",
    "13071",
@@ -1122,9 +1060,8 @@
    "29067",
    "29069",
    "29070",
-   "29094",
-   "29901"
+   "29094"
   ],
-  "municipios": 140
+  "municipios": 146
  }
 }
