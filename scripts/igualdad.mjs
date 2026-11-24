@@ -68,12 +68,15 @@ try {
   const base = 'https://violenciagenero.igualdad.gob.es'
   const h = sh(`curl -sSL --max-time 60 -A 'Mozilla/5.0' '${base}/fichaMujeres/home.htm'`)
   const pdfs = [...new Set([...h.matchAll(/href="([^"]+\.pdf)"/gi)].map(m => m[1]))].map(u => u.startsWith('http') ? u : base + (u.startsWith('/') ? '' : '/') + u)
+  // las fichas de 2003 a 2011 no siempre están enlazadas: se prueba su nombre habitual (fecha de la última revisión)
+  const rev = [...h.matchAll(/act_(\d\d_\d\d_20\d\d)/g)].map(m => m[1])[0] ?? '15_10_2025'
+  for (let y = 2003; y <= 2011; y++) pdfs.push(`${base}/wp-content/uploads/VMujeres_${y}_act_${rev}.pdf`)
   log.fichas = pdfs.slice(0, 40)
   mkdirSync('/tmp/fichas', { recursive: true })
   for (const u of pdfs) {
     const año = (u.match(/(20\d\d)/g) ?? []).map(Number).find(y => y >= 2003 && y <= 2030); if (!año || datos.violencia.mortales[año]) continue
     try {
-      sh(`curl -sSL --max-time 60 -A 'Mozilla/5.0' -o /tmp/fichas/${año}.pdf '${u}'`)
+      const st = sh(`curl -sSL --max-time 60 -A 'Mozilla/5.0' -o /tmp/fichas/${año}.pdf -w '%{http_code}' '${u}'`); if (!st.startsWith('2')) continue
       const t = sh(`pdftotext -layout /tmp/fichas/${año}.pdf - 2>/dev/null`)
       const r = sh(`pdftotext -raw /tmp/fichas/${año}.pdf - 2>/dev/null`)
       datos.violencia.mortales[año] = { texto: t.slice(0, 20000), raw: r.slice(0, 20000) } // se interpretan abajo y se borran antes de guardar
@@ -90,7 +93,7 @@ try {
     const tablas = await get(`${INE}/TABLAS_OPERACION/${op.Id}`)
     log.evdvgTablas = tablas.map(t => `${t.Id} · ${t.Nombre}`)
     datos.ine.violencia = {}
-    for (const t of tablas.filter(t => /v[ií]ctimas/i.test(t.Nombre)).slice(0, 14)) {
+    for (const t of tablas.filter(t => /v[ií]ctimas/i.test(t.Nombre) && !/sentencia/i.test(t.Nombre)).slice(0, 22)) {
       try {
         const j = await get(`${INE}/DATOS_TABLA/${t.Id}?nult=15`)
         datos.ine.violencia[t.Id] = { n: t.Nombre, s: j.map(s => ({ p: s.Nombre.split('. ').map(x => x.replace(/\.\s*$/, '').trim()).filter(Boolean), d: Object.fromEntries((s.Data ?? []).filter(x => x.Valor != null).map(x => [x.Anyo, x.Valor])) })) }
@@ -101,6 +104,9 @@ try {
 } catch (e) { log.avisos.push('EVDVG: ' + e.message) }
 // 3c. Eurostat: víctimas de homicidio por sexo y relación con el agresor
 await eurostat('homicidios', 'crim_hom_vrel', `${pa()}&sinceTimePeriod=2008`)
+// todas las víctimas de homicidio doloso por sexo, para comparar con las de pareja
+await eurostat('homicidiosTotal', 'crim_hom_vage', `${pa()}&age=TOTAL&unit=NR&sinceTimePeriod=2008`)
+if (!datos.est.homicidiosTotal) await eurostat('homicidiosTotal', 'crim_hom_soff', `${pa()}&unit=NR&sinceTimePeriod=2008`)
 // 3d. Delitos contra la libertad sexual (Ministerio del Interior), de la descarga de Seguridad
 try {
   const sg = JSON.parse(readFileSync(here('../public/seguridad/data/seguridad.json'), 'utf8'))
@@ -115,11 +121,13 @@ for (const [a, o] of Object.entries(datos.violencia.mortales)) {
   o.total = num(/TOTAL\s+v[ií]ctimas por violencia de g[ée]nero\s+(\d+)/i) ?? num(/Total V[ÍI]CTIMAS\s+(\d+)/i) ?? num(/TOTAL\s+(\d+)\s+100[.,]0/)
   o.sinDenuncia = num(/Sin denuncias? previas?\s+(\d+)/i)
   o.conDenuncia = num(/Con una o m[aá]s denuncias previas\s+(\d+)/i) ?? num(/Hab[ií]an denunciado\s+(\d+)/i)
+  o.totalHistorico = num(/TOTAL MUJERES V[ÍI]CTIMAS MORTALES 2003\s*-\s*20\d\d:\s*(\d+)/i)
   const pais = r.match(/Espa[ñn]a\s+(\d+)\s+[\d.,]+\s+(\d+)\s+[\d.,]+\s+Otro pa[ií]s\s+(\d+)\s+[\d.,]+\s+(\d+)/)
   if (pais) o.pais = { victimaEsp: +pais[1], agresorEsp: +pais[2], victimaOtro: +pais[3], agresorOtro: +pais[4] }
   const edades = {}
   for (const m of r.matchAll(/(Menos de \d+ años|De \d+ a \d+ años|M[aá]s de \d+ años|\d+ y m[aá]s años|No consta)\s+(\d+)\s+[\d.,]+\s+(\d+)\s+[\d.,]+/g)) if (!edades[m[1]]) edades[m[1]] = [+m[2], +m[3]]
   if (Object.keys(edades).length) o.edad = edades
+  o.pareja = num(/\bPareja\s+(\d+)\s+[\d.,]+/); o.expareja = num(/Expareja[^\d]*?(\d+)\s+[\d.,]+/)
   o.huerfanos = num(/hu[ée]rfan[ao]s\/?o?s?[^\d]{0,80}?(\d+)/i) ?? (r.match(/hu[ée]rfan[\s\S]{0,60}?(\d+)/i)?.[1] ? +r.match(/hu[ée]rfan[\s\S]{0,60}?(\d+)/i)[1] : null)
   const serie = r.match(/A[ñn]os 2003 a (20\d\d)\.?([\s\S]{0,900})/)
   if (serie) { const ns = [...serie[2].matchAll(/\b(\d{2,3})\b/g)].map(m => +m[1]).filter(n => n >= 20 && n <= 120); if (ns.length >= +serie[1] - 2003) o.serie = ns.slice(0, +serie[1] - 2002) }

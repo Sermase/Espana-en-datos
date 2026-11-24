@@ -167,3 +167,49 @@ export function Pesas({ filas, fmt, titulo }: { filas: { id: string; nombre: str
     </tbody></table></details>
   </figure>
 }
+
+/**
+ * Memorial: una luz por cada mujer asesinada por su pareja o expareja, una fila por año. Las filas se encienden una tras
+ * otra al llegar a la pantalla (de golpe si se pide menos movimiento). Al pasar por una fila se lee su año y su cifra.
+ */
+export function Memorial({ años, titulo }: { años: { año: number; n: number; parcial?: boolean }[]; titulo: string }) {
+  const [wref, w] = useWidth<HTMLDivElement>()
+  const [ref, visto] = useInView<HTMLDivElement>()
+  const reduce = useReducedMotion()
+  const [hover, setHover] = useState<number | null>(null)
+  const max = Math.max(...años.map(a => a.n)), lab = 46, num = 34
+  const paso = w ? Math.max(4, Math.min(11, (w - lab - num - 8) / max)) : 8, r = paso * 0.32, fila = Math.max(11, paso + 3)
+  const H = años.length * fila + 6
+  return <figure className="memorial" ref={ref} aria-label={titulo}>
+    <div ref={wref}>{w > 0 && <svg width={w} height={H} role="img" aria-label={`${titulo}: ${años.map(a => `${a.año}, ${a.n}`).join('; ')}`} onPointerLeave={() => setHover(null)}>
+      {años.map((a, i) => {
+        const y = i * fila + fila / 2 + 2, on = hover == null || hover === a.año
+        return <g key={a.año} onPointerEnter={() => setHover(a.año)} opacity={on ? 1 : 0.35} style={{ transition: 'opacity .2s' }}>
+          <rect x={0} y={y - fila / 2} width={w} height={fila} fill="transparent" />
+          <text x={lab - 8} y={y + 3.5} textAnchor="end" className="mm-a">{a.año}</text>
+          {Array.from({ length: a.n }, (_, k) => (
+            <motion.circle key={k} cx={lab + k * paso + paso / 2} cy={y} r={r} className="mm-luz"
+              initial={{ opacity: 0, scale: 0.2 }} animate={visto ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: reduce ? 0 : i * 0.09 + k * 0.004, duration: reduce ? 0 : 0.35 }} />
+          ))}
+          <motion.text x={lab + a.n * paso + 6} y={y + 3.5} className="mm-n" initial={{ opacity: 0 }} animate={visto ? { opacity: 1 } : {}} transition={{ delay: reduce ? 0 : i * 0.09 + 0.3 }}>{a.n}{a.parcial ? '*' : ''}</motion.text>
+        </g>
+      })}
+    </svg>}</div>
+  </figure>
+}
+
+/** Cuadrícula de 100: se van encendiendo las casillas del grupo destacado. */
+export function Cien({ pct, color, etiqueta, resto }: { pct: number; color: string; etiqueta: string; resto: string }) {
+  const [ref, visto] = useInView<HTMLDivElement>()
+  const reduce = useReducedMotion()
+  const n = Math.round(pct)
+  return <div className="cien" ref={ref}>
+    <svg viewBox="0 0 110 110" width="100%" style={{ maxWidth: 220, aspectRatio: '1' }} role="img" aria-label={`${n} de cada 100 ${etiqueta}`}>
+      {Array.from({ length: 100 }, (_, i) => { const x = (i % 10) * 11 + 1, y = Math.floor(i / 10) * 11 + 1, on = i < n
+        return <motion.rect key={i} x={x} y={y} width={9} height={9} rx={2} fill={on ? color : 'rgba(255,255,255,.08)'}
+          initial={{ opacity: on ? 0 : 1 }} animate={visto ? { opacity: 1 } : {}} transition={{ delay: reduce || !on ? 0 : i * 0.012, duration: 0.2 }} /> })}
+    </svg>
+    <p><b style={{ color }}>{n} de cada 100</b> {etiqueta}<br /><small>{resto}</small></p>
+  </div>
+}
