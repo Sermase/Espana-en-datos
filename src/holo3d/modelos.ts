@@ -329,3 +329,29 @@ export const radar = (partes: number[]): Modelo => t => {
   })
   return { fuerte, tenue, puntos }
 }
+
+/**
+ * Cúpula de aire: una semiesfera de alambre sobre una ciudad de bloques; desde las chimeneas y los coches
+ * suben partículas. `densidad` (0–1) marca cuántas: el aire de ahora o las emisiones del año frente al máximo.
+ */
+export const cupula = (densidad = 0.5): Modelo => t => {
+  const fuerte: Seg[] = [], tenue: Seg[] = [], puntos: [number, number, number][] = []
+  const R = 0.62
+  // meridianos y paralelos de la cúpula
+  for (let k = 0; k < 10; k++) {
+    const a = (k / 10) * TAU
+    for (let j = 0; j < 8; j++) { const b0 = (j / 8) * (Math.PI / 2), b1 = ((j + 1) / 8) * (Math.PI / 2); tenue.push([Math.cos(a) * Math.cos(b0) * R, Math.sin(b0) * R, Math.sin(a) * Math.cos(b0) * R, Math.cos(a) * Math.cos(b1) * R, Math.sin(b1) * R, Math.sin(a) * Math.cos(b1) * R]) }
+  }
+  for (const b of [0.35, 0.75, 1.15]) anillo(tenue, Math.cos(b) * R, Math.sin(b) * R, 32)
+  anillo(fuerte, R, 0, 48)
+  // la ciudad: bloques y dos chimeneas
+  const bloques: [number, number, number, number][] = [[-0.25, -0.1, 0.16, 0.08], [-0.05, 0.12, 0.24, 0.07], [0.15, -0.15, 0.12, 0.09], [0.28, 0.1, 0.2, 0.07], [-0.32, 0.18, 0.1, 0.06], [0.02, -0.3, 0.14, 0.07]]
+  for (const [x, z, h, w] of bloques) caja(tenue, x - w, x + w, 0, h, z - w, z + w)
+  const chimeneas: [number, number][] = [[0.38, -0.2], [-0.15, 0.32]]
+  for (const [x, z] of chimeneas) cilindro(fuerte, 0.025, 0.02, 0, 0.32, x, z, 6, 1)
+  // partículas: más cuanto más densidad; suben y se abren hasta chocar con la cúpula
+  const n = Math.round(6 + densidad * 40)
+  chimeneas.forEach(([x, z], c) => puntos.push(...humo(t + c * 1.7, x, 0.33, z, Math.round(n / 2), 0.32, 0.1)))
+  for (let i = 0; i < n; i++) { const f = (t * 0.05 + i / n) % 1, a = i * 2.4; const r = Math.sqrt((i * 0.618) % 1) * R * 0.85; puntos.push([Math.cos(a) * r, 0.02 + f * Math.sqrt(Math.max(0, R * R - r * r)) * 0.9, Math.sin(a) * r]) }
+  return { fuerte, tenue, puntos }
+}

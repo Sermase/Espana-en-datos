@@ -48,6 +48,7 @@ export const TEMAS: Tema[] = [
   { id: 'contratos', area: 'publico', nombre: 'Contratos públicos', lema: 'Qué compra la administración, a quién y por cuánto.', color: '#c8b6ff', vista: 'consola', plan: 'Licitaciones y adjudicaciones de la Plataforma de Contratación del Sector Público: por órgano, sector e importe.' },
   // Territorio
   { id: 'agua', area: 'territorio', nombre: 'Agua', lema: 'Embalses, ríos, lluvia, consumo y energía hidroeléctrica, semana a semana.', color: '#3fe6ff', vista: 'mapa', ruta: './agua/index.html' },
+  { id: 'aire', area: 'territorio', nombre: 'Aire', lema: 'Cómo está el aire ahora en cada estación de medición, y lo que emitimos desde 1990: gases de efecto invernadero y contaminantes, sector a sector.', color: '#a6f2d8', vista: 'mapa', ruta: './aire/index.html' },
   { id: 'clima', area: 'territorio', nombre: 'Clima', lema: 'Temperaturas, olas de calor y lluvia, y cómo están cambiando.', color: '#ff7a59', vista: 'mapa', plan: 'Temperatura de cada observatorio desde hace décadas, olas de calor, noches tropicales y sequía.' },
   { id: 'montana', area: 'territorio', nombre: 'Montaña y nieve', lema: 'Cumbres, espesor de nieve y temporada de esquí.', color: '#d6ecff', vista: 'relieve', plan: 'Relieve en 3D, nieve acumulada, estaciones de esquí abiertas y las cumbres más altas.' },
   { id: 'agricultura', area: 'territorio', nombre: 'Campo', lema: 'Agricultura, ganadería y lo que sale de cada tierra.', color: '#8fd16a', vista: 'mapa', plan: 'Cultivos por provincia, aceite de oliva, vino, ganadería y precios en origen.' },

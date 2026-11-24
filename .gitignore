@@ -2,3 +2,4 @@ node_modules
 dist
 *.tsbuildinfo
 .tmp/
+public/aire/data/ahora.json
