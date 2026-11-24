@@ -1,12 +1,14 @@
 // Sonda: servicios ArcGIS públicos de la Agencia Europea de Medio Ambiente que alimentan el Índice Europeo de Calidad del Aire
 // (carpetas AQMobile y Air). Para cada servicio: capas, campos y dos registros de ejemplo. Escribe fuentes/sonda-temas.json.
 import { writeFileSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
 const out = {}
 const B = 'https://air.discomap.eea.europa.eu/arcgis/rest/services'
 async function j(url) {
-  try { const r = await fetch(url, { headers: { 'User-Agent': 'espana-en-datos (GitHub Actions)' }, signal: AbortSignal.timeout(60000) }); const t = await r.text(); try { return JSON.parse(t) } catch { return { error: `HTTP ${r.status}`, cabeza: t.slice(0, 300) } } } catch (e) { return { error: e.message } }
+  // curl y no fetch: con fetch de Node este servidor corta la conexión
+  try { const t = execFileSync('curl', ['-sSL', '--max-time', '60', '-A', 'Mozilla/5.0 (espana-en-datos; GitHub Actions)', url], { encoding: 'utf8', maxBuffer: 64e6 }); try { return JSON.parse(t) } catch { return { error: 'no es JSON', cabeza: t.slice(0, 300) } } } catch (e) { return { error: String(e.message).slice(-300) } }
 }
 for (const carpeta of ['AQMobile_2025', 'AQMobile', 'Air']) {
   const c = await j(`${B}/${carpeta}?f=pjson`)
