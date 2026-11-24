@@ -1,30 +1,37 @@
-// Sonda: servicios ArcGIS públicos de la Agencia Europea de Medio Ambiente que alimentan el Índice Europeo de Calidad del Aire
-// (carpetas AQMobile y Air). Para cada servicio: capas, campos y dos registros de ejemplo. Escribe fuentes/sonda-temas.json.
-import { writeFileSync } from 'node:fs'
+// Sonda: servicio de descarga de la Agencia Europea de Medio Ambiente (datos E2a, casi en directo) para España.
+// Pide la lista de ficheros Parquet de las últimas 48 horas, baja unos pocos y cuenta filas, columnas y fechas.
+import { writeFileSync, mkdirSync, statSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
+import { asyncBufferFromFile, parquetReadObjects, parquetMetadataAsync } from 'hyparquet'
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
+const tmp = '/tmp/sonda-aire'; mkdirSync(tmp, { recursive: true })
 const out = {}
-const B = 'https://air.discomap.eea.europa.eu/arcgis/rest/services'
-async function j(url) {
-  // curl y no fetch: con fetch de Node este servidor corta la conexión
-  try { const t = execFileSync('curl', ['-sSL', '--max-time', '60', '-A', 'Mozilla/5.0 (espana-en-datos; GitHub Actions)', url], { encoding: 'utf8', maxBuffer: 64e6 }); try { return JSON.parse(t) } catch { return { error: 'no es JSON', cabeza: t.slice(0, 300) } } } catch (e) { return { error: String(e.message).slice(-300) } }
-}
-for (const carpeta of ['AQMobile_2025', 'AQMobile', 'Air']) {
-  const c = await j(`${B}/${carpeta}?f=pjson`)
-  out[carpeta] = c.services ?? c
-  for (const s of (c.services ?? []).slice(0, 12)) {
-    const url = `${B}/${s.name}/${s.type}`
-    const info = await j(`${url}?f=pjson`)
-    const capas = [...(info.layers ?? []), ...(info.tables ?? [])].slice(0, 8)
-    out[`${s.name} (${s.type})`] = { descr: (info.serviceDescription ?? info.description ?? '').slice(0, 300), capas: capas.map(l => `${l.id} ${l.name}`) }
-    for (const l of capas.slice(0, 4)) {
-      const li = await j(`${url}/${l.id}?f=pjson`)
-      const q = await j(`${url}/${l.id}/query?where=1%3D1&outFields=*&resultRecordCount=2&returnGeometry=true&f=json`)
-      const qe = await j(`${url}/${l.id}/query?where=1%3D1&returnCountOnly=true&f=json`)
-      out[`${s.name} capa ${l.id}`] = { nombre: l.name, campos: (li.fields ?? []).map(f => f.name).slice(0, 60), n: qe.count, ejemplo: (q.features ?? []).map(f => ({ ...f.attributes, geo: f.geometry })), error: q.error ?? li.error }
+const API = 'https://eeadmz1-downloads-api-appservice.azurewebsites.net'
+const iso = (t) => new Date(t).toISOString().slice(0, 19) + 'Z'
+const cuerpo = (pol) => JSON.stringify({ countries: ['ES'], cities: [], pollutants: pol, dataset: 1, source: 'Api', dateTimeStart: iso(Date.now() - 48 * 3600e3), dateTimeEnd: iso(Date.now()), aggregationType: 'hour' })
+const post = (ruta, body, f) => execFileSync('curl', ['-sSL', '--max-time', '300', '-X', 'POST', '-H', 'Content-Type: application/json', '--data', body, '-o', f, '-w', '%{http_code} %{content_type} %{size_download}', API + ruta], { encoding: 'utf8' })
+try {
+  for (const pol of [['NO2'], ['O3'], ['PM10'], ['PM2.5'], []]) {
+    const f = `${tmp}/urls-${pol.join('') || 'todos'}.csv`
+    out['urls ' + (pol.join() || 'todos')] = post('/ParquetFile/urls', cuerpo(pol), f)
+    const urls = (await import('node:fs')).readFileSync(f, 'utf8').split(/\r?\n/).slice(1).filter(Boolean)
+    out['n ' + (pol.join() || 'todos')] = urls.length
+    if (pol[0] === 'NO2') out.ejemplosUrl = urls.slice(0, 5)
+    if (pol[0] === 'NO2') for (const u of urls.slice(0, 3)) {
+      const g = `${tmp}/${u.split('/').pop()}`
+      execFileSync('curl', ['-sSL', '--max-time', '120', '-o', g, u])
+      const buf = await asyncBufferFromFile(g), meta = await parquetMetadataAsync(buf)
+      const filas = await parquetReadObjects({ file: buf })
+      out['parquet ' + u.split('/').pop()] = { bytes: statSync(g).size, filas: Number(meta.num_rows), columnas: meta.schema.map(s => s.name), primeras: filas.slice(0, 3), ultimas: filas.slice(-3) }
     }
   }
-}
-writeFileSync(here('../fuentes/sonda-temas.json'), JSON.stringify(out, null, 1))
-console.log(Object.keys(out).join('\n'))
+  // la descarga de todo junto en un zip
+  const z = `${tmp}/todo.zip`
+  out.zip = post('/ParquetFile', cuerpo(['NO2']), z)
+  out.zipLista = execFileSync('bash', ['-c', `unzip -l ${z} | tail -5; unzip -l ${z} | wc -l`], { encoding: 'utf8' })
+} catch (e) { out.error = String(e.message).slice(-500) }
+// metadatos de las estaciones (coordenadas y tipo)
+try { out.estaciones = execFileSync('curl', ['-sSL', '--max-time', '120', '-o', `${tmp}/meta.csv`, '-w', '%{http_code} %{size_download}', 'https://discomap.eea.europa.eu/App/AQViewer/download?fqn=Airquality_Dissem.b2g.measurements&f=csv'], { encoding: 'utf8' }) } catch (e) { out.estacionesError = String(e.message).slice(-200) }
+writeFileSync(here('../fuentes/sonda-temas.json'), JSON.stringify(out, (k, v) => typeof v === 'bigint' ? Number(v) : v, 1))
+console.log(JSON.stringify(out, (k, v) => typeof v === 'bigint' ? Number(v) : v).slice(0, 3000))

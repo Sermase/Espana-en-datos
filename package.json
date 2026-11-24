@@ -37,6 +37,7 @@
     "@types/topojson-client": "^3.1.5",
     "@types/topojson-server": "^3.0.4",
     "@vitejs/plugin-react": "^6.1.2",
+    "hyparquet": "^1.33.1",
     "i18n-iso-countries": "^7.14.0",
     "mapshaper": "^0.8.6",
     "oxlint": "^1.90.0",
