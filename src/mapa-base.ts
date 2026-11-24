@@ -1,4 +1,8 @@
 import L from 'leaflet'
+import { topology } from 'topojson-server'
+import { merge } from 'topojson-client'
+import type { MultiPolygon } from 'geojson'
+import provRaw from './provincias.json'
 
 /**
  * Fondo de calles y carreteras común a los mapas de la web: el gris oscuro de Esri (sin clave)
@@ -28,4 +32,28 @@ export function cuandoVisible(m: L.Map, fn: () => void) {
   const el = m.getContainer()
   const ro = new ResizeObserver(() => { if (el.clientWidth > 0 && el.clientHeight > 0) { ro.disconnect(); m.invalidateSize({ pan: false }); fn() } })
   ro.observe(el)
+}
+
+/**
+ * Silueta de España: tapa con el color de fondo todo lo que no es España (mar, Portugal, Francia, África)
+ * y deja ver las calles y carreteras solo dentro. Las provincias son simplificadas (~1 km), así que al
+ * acercarse la máscara se desvanece para no comerse la costa.
+ */
+export function silueta(m: L.Map, color = '#03090f') {
+  m.createPane('mascara')
+  const p = m.getPane('mascara')!
+  p.style.zIndex = '660'; p.style.pointerEvents = 'none'
+  const topo = topology({ p: provRaw as never })
+  const es = merge(topo as never, (topo.objects.p as unknown as { geometries: never[] }).geometries) as MultiPolygon
+  const huecos = es.coordinates.map(pol => pol[0].map(([x, y]) => [y, x] as L.LatLngTuple))
+  const mundo: L.LatLngTuple[] = [[-85, -180], [-85, 180], [85, 180], [85, -180]]
+  const renderer = L.svg({ pane: 'mascara', padding: 0.5 })
+  const fuera = L.polygon([mundo, ...huecos], { renderer, pane: 'mascara', interactive: false, stroke: false, fillColor: color, fillOpacity: 0.95, fillRule: 'evenodd' }).addTo(m)
+  const borde = L.polygon(huecos, { renderer, pane: 'mascara', interactive: false, fill: false, color: '#9fd8ea', weight: 1, opacity: 0.35 }).addTo(m)
+  const ajusta = () => {
+    const z = m.getZoom(), k = z <= 8 ? 1 : z >= 10 ? 0 : (10 - z) / 2
+    fuera.setStyle({ fillOpacity: 0.95 * k }); borde.setStyle({ opacity: 0.35 * k })
+  }
+  m.on('zoomend', ajusta); ajusta()
+  m.setMaxBounds([[25.5, -21], [46, 7]])
 }

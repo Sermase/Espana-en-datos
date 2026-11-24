@@ -15,3 +15,9 @@
 .mp-ciudad circle { stroke: #e6f6fb; stroke-width: 1.2 }
 .mp-ciudad.is-sel circle { stroke: #fff; stroke-width: 2.4 }
 .mp-ciudad-n { font: 600 11px Barlow, sans-serif; fill: #cfe3ea; paint-order: stroke; stroke: #03090f; stroke-width: 3px; pointer-events: none }
+
+/* Entrada de oeste a este. Sin la clase is-seen, oculto; con ella, visible siempre: la animación solo añade el fundido. */
+.mp:not(.is-seen) .mp-area { opacity: 0 }
+.mp.is-seen .mp-area { animation: mp-in .5s ease-out backwards }
+@keyframes mp-in { from { opacity: 0 } }
+@media (prefers-reduced-motion: reduce) { .mp .mp-area { opacity: 1; animation: none } }

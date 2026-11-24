@@ -1,7 +1,7 @@
 import { useEffect, useImperativeHandle, useRef, type Ref } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { cuandoVisible, fondo } from '../mapa-base'
+import { cuandoVisible, fondo, silueta } from '../mapa-base'
 import { type Datos, type Muni } from './datos'
 import { METRICAS, colorDe, type Metrica } from './metricas'
 
@@ -38,6 +38,7 @@ export function Mapa({ d, metrica, selId, onMuni, onEmpty, api }: { d: Datos; me
     m.setView([40.2, -3.7], 6)
     cuandoVisible(m, () => m.fitBounds(PENINSULA, { padding: [10, 10] }))
     fondo(m)
+    silueta(m)
     m.attributionControl.addAttribution('IGN · INE')
     const renderer = L.canvas({ tolerance: isPhone() ? 6 : 2 })
     polys.current = L.geoJSON(d.geo, {

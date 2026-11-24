@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { motion } from 'motion/react'
 import { geoConicConformalSpain } from 'd3-composite-projections'
 import { geoPath } from 'd3-geo'
 import { useInView, useWidth } from '../graficos/util'
@@ -30,7 +29,8 @@ import './mapa-provincias.css'
 
 /**
  * Mapa de provincias en SVG (sin teselas): cada provincia se pinta según su valor con una sola tinta (de tenue a intensa)
- * o, si `divergente`, con dos tintas alrededor de cero. Las provincias aparecen una tras otra de oeste a este.
+ * o, si `divergente`, con dos tintas alrededor de cero. Las provincias aparecen una tras otra de oeste a este
+ * con una animación CSS (si no puede correr, el mapa se ve igual: la animación solo parte de transparente).
  */
 export function MapaProvincias({ valor, fmt, titulo, color, divergente, sel, onSel, nota, grupo, claveGrupo = 'g', escala }: {
   valor: (cod: string) => number | null; fmt: (v: number) => string; titulo: string; color: string; divergente?: [string, string]
@@ -57,13 +57,13 @@ export function MapaProvincias({ valor, fmt, titulo, color, divergente, sel, onS
   const orden = useMemo(() => new Map(feats.map(f => [f.properties.id, path.centroid(f as never)[0]] as const)), [path, feats])
   const nombre = (cod: string) => feats.find(f => f.properties.id === cod)?.properties.n ?? cod
   return (
-    <figure className="mp" ref={view}>
+    <figure className={`mp ${seen ? 'is-seen' : ''}`} ref={view}>
       <div className="mp-plot" ref={wrap} style={{ height: H }} onPointerLeave={() => setTip(null)}>
         {W > 0 && <svg width={W} height={H} role="img" aria-label={titulo}>
           {feats.map(f => {
             const cod = f.properties.id, v = valor(cod)
-            return <motion.path key={cod} d={path(f as never) ?? ''} className={`mp-prov ${sel === cod ? 'is-sel' : ''} ${v != null ? 'has-v' : ''}`} style={relleno(v)}
-              initial={{ opacity: 0 }} animate={{ opacity: seen ? 1 : 0 }} transition={{ duration: .5, delay: ((orden.get(cod) ?? 0) / Math.max(1, W)) * 0.8 }}
+            return <path key={cod} d={path(f as never) ?? ''} className={`mp-prov mp-area ${sel === cod ? 'is-sel' : ''} ${v != null ? 'has-v' : ''}`}
+              style={{ ...relleno(v), animationDelay: `${(((orden.get(cod) ?? 0) / Math.max(1, W)) * 0.8).toFixed(2)}s` }}
               onPointerMove={e => { const r = (e.currentTarget.ownerSVGElement as SVGSVGElement).getBoundingClientRect(); setTip({ x: e.clientX - r.left, y: e.clientY - r.top, cod }) }}
               onClick={() => onSel?.(sel === cod ? null : cod)} />
           })}

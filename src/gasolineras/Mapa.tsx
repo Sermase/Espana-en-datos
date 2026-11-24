@@ -1,7 +1,7 @@
 import { useEffect, useImperativeHandle, useRef, type Ref } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { cuandoVisible, fondo } from '../mapa-base'
+import { cuandoVisible, fondo, silueta } from '../mapa-base'
 import provRaw from '../provincias.json'
 import { priceColor, provColor, type Datos, type Fuel, type Station } from './datos'
 
@@ -70,6 +70,7 @@ export function Mapa({ datos, fuel, selId, selProv, near, destacadas, onStation,
     m.setView([40.2, -3.7], 6)
     cuandoVisible(m, () => m.fitBounds(PENINSULA, { padding: [10, 10] }))
     fondo(m)
+    silueta(m)
     m.attributionControl.addAttribution('IGN · MITECO')
     const renderer = L.canvas({ tolerance: isPhone() ? 10 : 4 })
     provLayer.current = L.geoJSON(PROVS, {

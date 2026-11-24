@@ -123,7 +123,7 @@ function Gasto({ d }: { d: D }) {
     <Card t="Por comunidad" lead={<>{orden[0] && orden.at(-1) ? <>Un hogar de {orden[0].k} gasta {nombreG} {eur(orden[0].v)} al año; uno de {orden.at(-1)!.k}, {eur(orden.at(-1)!.v)}: un {nf(pct(orden[0].v, orden.at(-1)!.v), 0)} % más.</> : null}</>}>
       <div className="chips" role="radiogroup" aria-label="Grupo de gasto">{CH.map(([k, n]) => <button key={k} role="radio" aria-checked={g === k} className={g === k ? 'is-on' : ''} style={{ '--c': k === 'total' ? ACC : macroDe(k).c } as CSSProperties} onClick={() => setG(k)}><i />{n}</button>)}</div>
       <MapaProvincias grupo={c => CCAA_DE_PROV[c] ?? null} claveGrupo="ccaa" valor={val} fmt={eur} titulo={`Gasto medio por hogar ${nombreG}, ${A}`} color={g === 'total' ? ACC : macroDe(g).c} sel={sel} onSel={setSel}
-        nota={sel ? `${sel}: ${eur(val(sel) ?? 0)} por hogar; ${eur(E.reg[sel]?.gmp.total?.[i] ?? 0)} por persona en total` : 'Cuanto más intenso, más gasto por hogar. Toca una comunidad para ver su dato.'} />
+        nota={sel ? `${sel}, ${nombreG}: ${eur(val(sel) ?? 0)} por hogar y ${eur(E.reg[sel]?.gmp[g]?.[i] ?? 0)} por persona al año` : 'Cuanto más intenso, más gasto por hogar. Toca una comunidad para ver su dato.'} />
     </Card>
   </div>
 }
