@@ -1,0 +1,5 @@
+/* En el móvil, mantener el dedo sobre un gráfico no debe seleccionar números (ni abrir la búsqueda de Google). */
+figure, svg, canvas, .leaflet-container, .carrera, .mp, .g-fig, .g-bars, .sala, .chips, .tabs, nav, button {
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
+}
+figure table, figure details { -webkit-user-select: text; user-select: text }

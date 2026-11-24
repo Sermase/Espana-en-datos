@@ -25,8 +25,11 @@ export function Carrera({ fotogramas, top = 10, fmt, titulo, colores, ms = 1300,
     const t = setTimeout(() => setI(i + 1), ms); return () => clearTimeout(t)
   }, [play, i, fotogramas.length, ms])
   const color = useMemo(() => {
-    const ids = [...new Set(fotogramas.flatMap(f => [...f.items].sort((a, b) => b.valor - a.valor).slice(0, top).map(x => x.id)))]
-    return Object.fromEntries(ids.map((id, k) => [id, colores?.[id] ?? PALETA[k % PALETA.length]]))
+    // Los 8 que más tiempo pasan en cabeza llevan cada uno su color; el resto, gris (el nombre va en la barra).
+    const peso = new Map<string, number>()
+    for (const f of fotogramas) [...f.items].sort((a, b) => b.valor - a.valor).slice(0, top).forEach((x, k) => peso.set(x.id, (peso.get(x.id) ?? 0) + top - k))
+    const ids = [...peso.keys()].sort((a, b) => peso.get(b)! - peso.get(a)!)
+    return Object.fromEntries(ids.map((id, k) => [id, colores?.[id] ?? PALETA[k] ?? '#5b6b74']))
   }, [fotogramas, top, colores])
   const f = fotogramas[i], filas = [...f.items].sort((a, b) => b.valor - a.valor).slice(0, top), max = filas[0]?.valor || 1
   const dur = reduce ? 0 : (ms / 1000) * 0.85

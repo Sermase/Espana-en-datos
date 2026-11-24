@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { MotionConfig } from 'motion/react'
 import './economia.css'
 import App from './App'
+import '../tactil.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
