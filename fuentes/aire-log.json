@@ -1,5 +1,7 @@
 {
- "avisos": [],
+ "avisos": [
+  "estaciones MITECO: no es un zip: <!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"utf-8\" />\r\n    <meta name=\"viewport\" content=\"width=device"
+ ],
  "crf": [
   "TOTXMEMO Total (excluding memo items)",
   "TOTX4_MEMO Total (excluding LULUCF and memo items)",
@@ -306,5 +308,6 @@
   "NFR11C Other natural emissions",
   "NFR_TOT_NAT National total for the entire territory (based on fuel sold)",
   "NFR_TOT_NAT_C National total for compliance assessment"
- ]
+ ],
+ "estaciones": "200 3385 text/html; charset=utf-8"
 }

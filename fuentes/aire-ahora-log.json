@@ -1,8 +1,9 @@
 {
  "avisos": [],
- "descarga": "200 1586799",
- "filas": 60428,
+ "descarga": "200 1515727",
+ "filas": 58439,
  "ultimaHora": "2026-11-24T06:00:00.000Z",
+ "miteco": 0,
  "metadatos": [
   {
    "u": "https://discomap.eea.europa.eu/map/fme/metadata/PanEuropean_metadata.csv",
