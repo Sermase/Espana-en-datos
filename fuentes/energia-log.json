@@ -1,44 +1,44 @@
 {
  "tiempo_real": {
-  "filas": 88,
+  "filas": 203,
   "primera": "2026-11-23 21:00",
-  "ultima": "2026-11-24 04:15",
+  "ultima": "2026-11-24 13:50",
   "claves": "ts,dem,eol,nuc,gf,car,cc,hid,aut,inter,icb,sol,solFot,solTer,bio,cogenResto,expAnd,expMar,expPor,expFra,expTot,impFra,impPor,impMar,impAnd,impTot,conb,turb,gnhd,bat,consBat,dif,vap"
  },
  "_cors": "*",
  "mix_hora": "ERROR HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error Interno\",\"detail\":\"Los datos solicitados no est\\u00e1n disponibles en este momento. Int\\u00e9ntelo de nuevo m\\u00e1s t",
  "demanda_tr": {
-  "Prevista": "288 datos · 2026-11-24T00:00 → 2026-11-24T23:55 28506 0.331",
-  "Programada": "288 datos · 2026-11-24T00:00 → 2026-11-24T23:55 28783 0.334",
-  "Real": "51 datos · 2026-11-24T00:00 → 2026-11-24T04:10 23847 0.25",
-  "Programada total": "288 datos · 2026-11-24T00:00 → 2026-11-24T23:55 28783 0.334"
+  "Prevista": "288 datos · 2026-11-24T00:00 → 2026-11-24T23:55 28577 0.332",
+  "Programada": "288 datos · 2026-11-24T00:00 → 2026-11-24T23:55 28715 0.334",
+  "Real": "165 datos · 2026-11-24T00:00 → 2026-11-24T13:40 37872 0.254",
+  "Programada total": "288 datos · 2026-11-24T00:00 → 2026-11-24T23:55 28715 0.334"
  },
  "precios_hora": {
   "PVPC": "48 datos · 2026-11-23T00:00 → 2026-11-24T23:00 190.01 0.503",
-  "Precio mercado spot": "192 datos · 2026-11-23T00:00 → 2026-11-24T23:45 155.07 1"
+  "Precio mercado spot": "288 datos · 2026-11-23T00:00 → 2026-11-25T23:45 181.4 1"
  },
  "balance_dia": {
-  "Hidráulica": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 122492.7 0.302",
-  "Eólica": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 114776.15 0.283",
-  "Solar fotovoltaica": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 149084.28 0.368",
-  "Solar térmica": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 5787.2 0.014",
-  "Otras renovables": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 11968.78 0.03",
+  "Hidráulica": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 119342.8 0.302",
+  "Eólica": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 112630.92 0.285",
+  "Solar fotovoltaica": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 144509.24 0.366",
+  "Solar térmica": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 5811.9 0.015",
+  "Otras renovables": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 11225.18 0.028",
   "Residuos renovables": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 1504.59 0.004",
-  "Generación renovable": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 405613.7 1",
-  "Nuclear": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 145841.9 0.417",
-  "Ciclo combinado": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 142475.91 0.407",
-  "Carbón": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 2547.2 0.007",
-  "Motores diésel": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 6460.81 0.018",
-  "Turbina de gas": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 1344.42 0.004",
-  "Turbina de vapor": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 11157.93 0.032",
-  "Cogeneración": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 37569.12 0.107",
-  "Residuos no renovables": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 2433.09 0.007",
-  "Generación no renovable": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 349830.38 1",
-  "Turbinación bombeo": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 13461.2 0.584",
-  "Consumo bombeo": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 -9595.4 0.416",
-  "Saldo almacenamiento": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 3865.8 1",
-  "Saldo I. internacionales": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 -44997 0.056",
-  "Demanda en b.c.": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 713868.38 1"
+  "Generación renovable": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 395024.63 1",
+  "Nuclear": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 145842.2 0.397",
+  "Ciclo combinado": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 161358.81 0.439",
+  "Carbón": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 1886 0.005",
+  "Motores diésel": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 6502.96 0.018",
+  "Turbina de gas": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 1324.92 0.004",
+  "Turbina de vapor": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 11281.36 0.031",
+  "Cogeneración": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 37535.72 0.102",
+  "Residuos no renovables": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 2066.69 0.006",
+  "Generación no renovable": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 367798.66 1",
+  "Turbinación bombeo": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 13653.2 0.565",
+  "Consumo bombeo": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 -10509.4 0.435",
+  "Saldo almacenamiento": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 3143.8 1",
+  "Saldo I. internacionales": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 -45440.2 0.056",
+  "Demanda en b.c.": "1 datos · 2026-11-23T00:00 → 2026-11-23T00:00 720526.91 1"
  },
  "co2_dia": {
   "Carbón": "30 datos · 2026-10-25T00:00 → 2026-11-23T00:00 2511.55 0.029",
@@ -117,7 +117,7 @@
   "fallos": [],
   "series": {
    "PVPC": "2003 días · 2021-06-01T00:00 → 2026-11-24T00:00",
-   "Precio mercado spot": "2489 días · 2020-02-01T00:00 → 2026-11-24T00:00"
+   "Precio mercado spot": "2978 días · 2018-10-01T00:00 → 2026-11-25T00:00"
   }
  }
 }
