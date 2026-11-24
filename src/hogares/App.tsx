@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react'
 import { motion } from 'motion/react'
 import { PiggyBank, ShoppingBasket, Users, Wallet } from 'lucide-react'
-import { Apiladas, Barras, Columnas, CountUp, LineChart, nf, type Capa } from '../graficos'
+import { Apiladas, Barras, Columnas, CountUp, LineChart, Sankey, nf, type Capa } from '../graficos'
 import { Holo3D } from '../holo3d/Holo3D'
 import { casa, monedas } from '../holo3d/modelos'
 import { MapaProvincias } from '../geo/MapaProvincias'
@@ -104,6 +104,15 @@ function Gasto({ d }: { d: D }) {
       </div>
       <ul className="sala-lista sala-lista-13" aria-label={`Gasto medio por hogar en ${A}, por grupo`}>{lista.map(({ g, v }) => <li key={g} style={{ '--c': macroDe(g).c } as CSSProperties}><i /><span>{d.grupos[g]}</span><b>{eur(v)}</b><em style={{ width: `${(v / lista[0].v) * 100}%` }} /></li>)}</ul>
     </section>
+    {(() => {
+      const ka = d.ahorro.geo.ES.findLastIndex(v => v != null), tasa = d.ahorro.geo.ES[ka] ?? 0, gastoTot = macroUlt.reduce((t, m) => t + m.v, 0) || 1
+      const der = [...macroUlt].sort((a, b) => b.v - a.v).map(m => ({ id: m.id, nombre: m.n, corto: m.n.split(/[ ,]/)[0], valor: (m.v / gastoTot) * (100 - tasa), color: m.c }))
+      der.push({ id: 'ahorro', nombre: 'Ahorro', corto: 'Ahorro', valor: tasa, color: ACC })
+      return <Card wide t="A dónde va cada 100 € que entran en casa" lead={<>De cada 100 € de renta disponible, los hogares ahorran unos <b>{nf(tasa, 0)}</b> y gastan el resto: {nf(der[0].valor, 0)} € en {minus(der[0].nombre)}, {nf(der[1].valor, 0)} € en {minus(der[1].nombre)}… Toca una cinta para resaltarla.</>} fuente={<>{EPF} y Eurostat (tasa de ahorro de {d.ahorro.años[ka]})</>}>
+        <Sankey izq={[{ id: 'renta', nombre: 'Renta disponible', corto: 'Renta', valor: 100, color: ACC }]} der={der} centro="EL HOGAR" fmt={v => `${nf(v, 1)} €`} titulo="Reparto de 100 € de renta disponible de un hogar" alto={420} />
+        <p className="note">Aproximado: el ahorro es la tasa de ahorro de Eurostat y el gasto se reparte según la Encuesta de Presupuestos Familiares de {A} (con el alquiler imputado dentro de vivienda).</p>
+      </Card>
+    })()}
     <Card wide t="La cesta, año a año" lead={<>El gasto que más ha crecido desde {A0} es {minus(d.grupos[cambios[0].g])} ({signo(cambios[0].v, 0)}); el que menos, {minus(d.grupos[cambios.at(-1)!.g])} ({signo(cambios.at(-1)!.v, 0)}). {E.años.includes(2020) ? <>En 2020, con el confinamiento, el gasto cayó un {nf(Math.abs(pct(tot[E.años.indexOf(2020)]!, tot[E.años.indexOf(2019)]!)), 0)} %.</> : null}</>} fuente={EPF}>
       <Apiladas xs={E.años} capas={capas} titulo="Gasto medio por hogar por grupo" fx={a => String(a)} fy={v => eur(v)} alto={300} />
       <p className="note">Euros corrientes por hogar y año. «Vivienda» incluye el alquiler imputado: lo que pagarían de alquiler quienes viven en una casa propia o cedida, que el INE cuenta como gasto aunque no salga de la cuenta.</p>
