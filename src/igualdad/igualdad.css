@@ -198,3 +198,5 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .ayuda { display: flex; gap: 14px; align-items: center; padding: 14px 16px; border: 1px solid rgba(201, 140, 255, .45); border-radius: 6px; background: rgba(201, 140, 255, .07) }
 .ayuda b { font: 700 30px/1 Oxanium, sans-serif; color: #fff }
 .ayuda span { color: #c7dde4; font-size: 14px }
+.mapa-dos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; align-items: start }
+@media (max-width: 860px) { .mapa-dos { grid-template-columns: 1fr } }

@@ -1,17 +1,19 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { motion } from 'motion/react'
-import { Baby, Building2, Globe2, Scale } from 'lucide-react'
+import { Baby, Building2, Globe2, HeartCrack, Scale } from 'lucide-react'
 import { Barras, LineChart, nf } from '../graficos'
 import { Fuentes } from '../Fuentes'
 import { Curiosidades } from '../Curiosidades'
-import { EdificioCristal, Monedas, Pesas, RelojBrecha, type Piso } from './Animados'
+import { Cien, EdificioCristal, Memorial, Monedas, Pesas, RelojBrecha, type Piso } from './Animados'
 
 const ACC = '#c98cff', MUJ = '#c98cff', HOM = '#5fb8ff'
 type Ser = { p: string[]; d: Record<string, number> }
 type Est = { dims: string[]; series: Record<string, Record<string, number>>; labels: Record<string, Record<string, string>> }
-type D = { fecha: string; ine: Record<string, Ser[]>; est: Record<string, Est> }
+type Ficha = { total?: number; sinDenuncia?: number; conDenuncia?: number; pais?: { victimaEsp: number; victimaOtro: number; agresorEsp: number; agresorOtro: number }; edad?: Record<string, [number, number]>; ccaa?: Record<string, number>; huerfanos?: number; totalHistorico?: number; pareja?: number; expareja?: number }
+type D = { fecha: string; ine: Record<string, Ser[]> & { violencia?: Record<string, { n: string; s: Ser[] }> }; est: Record<string, Est>; violencia?: { mortales: Record<string, Ficha>; sexual?: { años: number[]; tipos: Record<string, { k: string; n: string }>; prov: Record<string, Record<string, number[]>> } } }
 const SECCIONES = [
   { id: 'brecha', nombre: 'Brecha salarial', icon: Scale },
+  { id: 'violencia', nombre: 'Violencia', icon: HeartCrack },
   { id: 'techo', nombre: 'Techo de cristal', icon: Building2 },
   { id: 'edad', nombre: 'Edad', icon: Baby },
   { id: 'origen', nombre: 'Origen y renta', icon: Globe2 },
@@ -110,6 +112,80 @@ function Brecha({ d }: { d: D }) {
 }
 
 const ISCO = [['OC9', 'Ocupaciones elementales'], ['OC8', 'Operadores de máquinas'], ['OC7', 'Oficios cualificados'], ['OC6', 'Agricultura y pesca'], ['OC5', 'Servicios y comercio'], ['OC4', 'Administrativos'], ['OC3', 'Técnicos de apoyo'], ['OC2', 'Profesionales'], ['OC1', 'Dirección y gerencia']] as const
+
+const CCAA_N: Record<string, string> = { 'Asturias, Principado de': 'Asturias', 'Balears, Illes': 'Illes Balears', 'Madrid, Comunidad de': 'Madrid', 'Murcia, Región de': 'Murcia', 'Navarra, Comunidad Foral de': 'Navarra', 'Rioja, La': 'La Rioja', 'Comunitat Valenciana': 'C. Valenciana' }
+const MESES_N = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+
+function Violencia({ d }: { d: D }) {
+  const M = d.violencia?.mortales ?? {}, años = Object.keys(M).map(Number).filter(a => M[a].total).sort((a, b) => a - b)
+  if (!años.length) return <p className="note">Sin datos de violencia.</p>
+  const ult = años.at(-1)!, hoy = new Date(d.fecha), parcial = ult === hoy.getFullYear()
+  const completos = años.filter(a => !(parcial && a === ult))
+  const hist = M[ult].totalHistorico ?? años.reduce((t, a) => t + (M[a].total ?? 0), 0)
+  const sumar = (f: (o: Ficha) => number | undefined, as = completos.slice(-10)) => as.reduce((t, a) => t + (f(M[a]) ?? 0), 0)
+  const tot10 = sumar(o => o.total), sinD = sumar(o => o.sinDenuncia), otro = sumar(o => o.pais?.victimaOtro), tot10p = sumar(o => (o.pais ? o.total : 0))
+  const ccaa: Record<string, number> = {}; for (const a of completos.slice(-10)) for (const [k, v] of Object.entries(M[a].ccaa ?? {})) ccaa[CCAA_N[k] ?? k] = (ccaa[CCAA_N[k] ?? k] ?? 0) + v
+  const edad: Record<string, number> = {}; for (const a of completos.slice(-10)) for (const [k, v] of Object.entries(M[a].edad ?? {})) edad[k] = (edad[k] ?? 0) + v[0]
+  // Eurostat: homicidios por pareja y totales, por sexo de la víctima
+  const H = d.est.homicidios, HT = d.est.homicidiosTotal
+  const hp = (sex: string, geo = 'ES') => est(H, 'IPTN', sex, 'NR', geo), ht = (sex: string, geo = 'ES') => est(HT, sex, 'NR', geo)
+  const aH = Object.keys(hp('F') ?? {}).filter(a => hp('M')?.[a] != null).sort().at(-1)
+  const pF = aH ? hp('F')![aH] : null, pM = aH ? hp('M')![aH] : null
+  const aT = Object.keys(ht('F') ?? {}).filter(a => ht('M')?.[a] != null).sort().at(-1)
+  const tF = aT ? ht('F')![aT] : null, tM = aT ? ht('M')![aT] : null
+  // INE: víctimas con orden de protección o medidas cautelares
+  const V = d.ine.violencia ?? {}
+  const tabla = (re: RegExp) => Object.values(V).find(t => re.test(t.n))?.s
+  const vg = ine(tabla(/^Asuntos incoados\. V[ií]ctimas, Personas/), 'Violencia de genero', 'Víctimas', 'Dato base')
+  const vgMen = ine(tabla(/^Asuntos incoados\. V[ií]ctimas, Personas/), 'Violencia de genero', 'Víctimas menores', 'Dato base')
+  const dom = (sx: string) => ine(tabla(/^Asuntos incoados\. V[ií]ctimas y Personas/), 'Violencia doméstica', 'Víctimas', 'Dato base', sx)
+  const uVg = ulA(vg), uDomM = ulA(dom('Mujeres')), uDomH = ulA(dom('Hombres'))
+  const rel = tabla(/seg[uú]n tipo de relaci[oó]n con el denunciado$/)
+  const relaciones = rel ? rel.filter(s => s.p[0] === 'Total Nacional' && s.p.includes('Dato base') && s.p.includes('Violencia de genero') && s.p.length === 6 && !s.p.includes('Total')).map(s => ({ n: s.p.at(-1)!, v: ulA(s.d)?.[1] ?? 0 })).filter(x => x.v > 0).sort((a, b) => b.v - a.v) : []
+  const edadOP = tabla(/seg[uú]n grupo de edad$/)
+  const edades = edadOP ? edadOP.filter(s => s.p[0] === 'Total Nacional' && s.p.includes('Dato base') && s.p.includes('Violencia de genero') && s.p.length === 6 && !s.p.includes('Todas las edades')).map(s => ({ n: s.p.at(-1)!, v: ulA(s.d)?.[1] ?? 0 })) : []
+  // Interior: delitos contra la libertad sexual (suma de provincias)
+  const SX = d.violencia?.sexual
+  const sx = (k: string) => SX ? SX.años.map((a, i) => [a, Object.values(SX.prov).reduce((t, o) => t + (o[k]?.[i] ?? 0), 0)] as [number, number]) : []
+  const viol = sx('s3_2'), agr = sx('s3_1'), totSx = sx('s3')
+  const fin = (s: [number, number][]) => s.filter(x => x[1] > 0).at(-1)
+  return <div className="graficos">
+    <section className="gcard is-wide">
+      <h2>{nf(hist, 0)} mujeres asesinadas por su pareja o expareja desde 2003</h2>
+      <p className="lead">Una luz por cada mujer. En {ult}{parcial ? `, hasta el ${hoy.getDate()} de ${MESES_N[hoy.getMonth()]}` : ''}, van <b>{M[ult].total}</b>{M[ult].huerfanos ? <>, y {M[ult].huerfanos} menores se han quedado huérfanos</> : null}. Pasa por una fila para verla.</p>
+      <Memorial titulo="Mujeres víctimas mortales por violencia de género, por año" años={años.map(a => ({ año: a, n: M[a].total!, parcial: parcial && a === ult }))} />
+      <p className="note">{parcial ? `* ${ult}, datos provisionales hasta la última actualización. ` : ''}Delegación del Gobierno contra la Violencia de Género: asesinatos de mujeres a manos de su pareja o expareja confirmados como violencia de género.{años[0] > 2003 ? ` Faltan las fichas de 2003 a ${años[0] - 1}; el total desde 2003 sí las incluye.` : ''}</p>
+      <div className="ayuda" role="note"><b>016</b><span>Atención a víctimas de violencia contra las mujeres, gratis las 24 horas. No aparece en la factura del teléfono (bórrala del historial de llamadas). En peligro: 112.</span></div>
+    </section>
+    <Card t={`Lo que dicen los casos (${completos.slice(-10)[0]}–${completos.at(-1)})`} lead={`Últimos diez años completos: ${nf(tot10, 0)} mujeres.`} fuente={<a href="https://violenciagenero.igualdad.gob.es/violenciaEnCifras/victimasMortales/fichaMujeres/home.htm" target="_blank" rel="noopener noreferrer">Delegación del Gobierno contra la Violencia de Género, fichas de víctimas mortales</a>}>
+      <Cien pct={(sinD / tot10) * 100} color="#ff8a95" etiqueta="no había denunciado a su agresor" resto="Por eso la denuncia sola no basta para proteger: la mayoría nunca llega a pedir ayuda formal." />
+      {tot10p > 0 && <p className="note" style={{ marginTop: 14 }}>El {nf((otro / tot10p) * 100, 0)} % de las víctimas había nacido fuera de España.</p>}
+    </Card>
+    <Card t="Por comunidad y por edad" lead="Víctimas mortales de los últimos diez años completos.">
+      <Barras titulo="Víctimas mortales por comunidad" limite={8} fmt={v => nf(v, 0)} items={Object.entries(ccaa).sort((a, b) => b[1] - a[1]).map(([k, v]) => ({ id: k, nombre: k, valor: v, color: '#ffb36b' }))} />
+      <Barras titulo="Víctimas mortales por edad" fmt={v => nf(v, 0)} items={Object.entries(edad).filter(([, v]) => v > 0).map(([k, v]) => ({ id: k, nombre: k.replace('De ', '').replace(' años', ''), valor: v, color: '#ff8a95' }))} />
+    </Card>
+    {pF != null && pM != null && <Card wide t="Mujeres y hombres asesinados por su pareja" lead={<>En {aH}, según Eurostat, en España murieron a manos de su pareja o expareja <b>{nf(pF, 0)} mujeres</b> y <b>{nf(pM, 0)} hombres</b>: de cada 100 víctimas de su pareja, {nf((pF / (pF + pM)) * 100, 0)} son mujeres. {tF != null && tM != null ? <>Entre todas las víctimas de homicidio doloso ({aT}) es al revés: {nf(tF, 0)} mujeres y {nf(tM, 0)} hombres; los hombres mueren sobre todo fuera de la pareja.</> : null}</>} fuente={EUROSTAT('crim_hom_vrel', 'víctimas de homicidio por relación con el agresor')}>
+      <div className="mapa-dos">
+        <LineChart titulo="Víctimas de homicidio a manos de su pareja o expareja" alto={230} fx={x => String(x)} fy={v => nf(v, 0)} series={[{ id: 'f', nombre: 'Mujeres', color: MUJ, datos: puntos(hp('F')) }, { id: 'm', nombre: 'Hombres', color: HOM, datos: puntos(hp('M')) }]} />
+        {tF != null && <LineChart titulo="Todas las víctimas de homicidio doloso" alto={230} fx={x => String(x)} fy={v => nf(v, 0)} series={[{ id: 'f', nombre: 'Mujeres', color: MUJ, datos: puntos(ht('F')) }, { id: 'm', nombre: 'Hombres', color: HOM, datos: puntos(ht('M')) }]} />}
+      </div>
+      <p className="note">Eurostat no dice el sexo de quien mata: entre los hombres asesinados por su pareja entran también los asesinados por otro hombre. Sus cifras de mujeres pueden no coincidir del todo con las de la Delegación del Gobierno, que solo cuenta casos confirmados como violencia de género.</p>
+    </Card>}
+    {uVg && <Card wide t="Las que denuncian" lead={<>En {uVg[0]}, {nf(uVg[1], 0)} mujeres fueron víctimas de violencia de género con orden de protección o medidas cautelares{ulA(vgMen) ? <>, y {nf(ulA(vgMen)![1], 0)} de ellas eran menores</> : null}. En violencia doméstica (la familia, y la pareja cuando la víctima es un hombre) hubo {nf(uDomM?.[1] ?? 0, 0)} mujeres y {nf(uDomH?.[1] ?? 0, 0)} hombres con esas medidas.</>} fuente={<a href="https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176866&menu=ultiDatos&idp=1254735573206" target="_blank" rel="noopener noreferrer">INE, Estadística de Violencia Doméstica y Violencia de Género</a>}>
+      <div className="mapa-dos">
+        <LineChart titulo="Víctimas con orden de protección o medidas cautelares" alto={230} fx={x => String(x)} fy={v => nf(v, 0)} series={[{ id: 'vg', nombre: 'Violencia de género (mujeres)', color: MUJ, datos: puntos(vg) }, { id: 'dm', nombre: 'Doméstica: mujeres', color: '#8c6aa8', datos: puntos(dom('Mujeres')) }, { id: 'dh', nombre: 'Doméstica: hombres', color: HOM, datos: puntos(dom('Hombres')) }]} />
+        {relaciones.length > 0 && <Barras titulo="Quién era el agresor (violencia de género)" fmt={v => nf(v, 0)} items={relaciones.map(x => ({ id: x.n, nombre: x.n, valor: x.v, color: MUJ }))} />}
+      </div>
+      {edades.length > 0 && <Barras titulo="Víctimas de violencia de género por edad" fmt={v => nf(v, 0)} items={edades.map(x => ({ id: x.n, nombre: x.n, valor: x.v, color: '#ff8a95' }))} />}
+    </Card>}
+    {totSx.length > 0 && <Card wide t="Violencia sexual denunciada" lead={<>En {fin(totSx)?.[0]}, la policía conoció {nf(fin(totSx)?.[1] ?? 0, 0)} delitos contra la libertad sexual, {nf(fin(viol)?.[1] ?? 0, 0)} de ellos agresiones con penetración: {masVeces(viol)}. Que suban también refleja que se denuncia más.</>} fuente={<a href="https://estadisticasdecriminalidad.ses.mir.es/" target="_blank" rel="noopener noreferrer">Ministerio del Interior, balance de criminalidad</a>}>
+      <LineChart titulo="Delitos contra la libertad sexual conocidos" alto={240} fx={x => String(x)} fy={v => nf(v, 0)} series={[{ id: 't', nombre: 'Todos los delitos sexuales', color: MUJ, datos: totSx }, { id: 'a', nombre: 'Agresión sexual', color: '#ffb36b', datos: agr }, { id: 'p', nombre: 'Con penetración', color: '#ff6b7a', datos: viol }]} />
+      <p className="note">Delitos que conocen las policías, según el Ministerio del Interior. No distingue el sexo de la víctima, aunque la gran mayoría son mujeres y niñas.</p>
+    </Card>}
+  </div>
+}
+const masVeces = (s: [number, number][]) => { const v = s.filter(x => x[1] > 0); if (v.length < 2) return ''; const r = v.at(-1)![1] / v[0][1]; return r >= 1.5 ? `${nf(r, 1)} veces más que en ${v[0][0]}` : `${r >= 1 ? 'un ' + nf((r - 1) * 100, 0) + ' % más' : 'un ' + nf((1 - r) * 100, 0) + ' % menos'} que en ${v[0][0]}` }
 
 function Techo({ d }: { d: D }) {
   const O = d.est.ocupacion
@@ -220,6 +296,7 @@ export default function App() {
       </nav>
       <motion.div key={sec} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .3 }}>
         {sec === 'brecha' && <Brecha d={d} />}
+        {sec === 'violencia' && <Violencia d={d} />}
         {sec === 'techo' && <Techo d={d} />}
         {sec === 'edad' && <Edad d={d} />}
         {sec === 'origen' && <Origen d={d} />}

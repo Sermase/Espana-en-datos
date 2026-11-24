@@ -128,7 +128,7 @@ for (const [a, o] of Object.entries(datos.violencia.mortales)) {
   for (const m of r.matchAll(/(Menos de \d+ años|De \d+ a \d+ años|M[aá]s de \d+ años|\d+ y m[aá]s años|No consta)\s+(\d+)\s+[\d.,]+\s+(\d+)\s+[\d.,]+/g)) if (!edades[m[1]]) edades[m[1]] = [+m[2], +m[3]]
   if (Object.keys(edades).length) o.edad = edades
   o.pareja = num(/\bPareja\s+(\d+)\s+[\d.,]+/); o.expareja = num(/Expareja[^\d]*?(\d+)\s+[\d.,]+/)
-  o.huerfanos = num(/hu[ée]rfan[ao]s\/?o?s?[^\d]{0,80}?(\d+)/i) ?? (r.match(/hu[ée]rfan[\s\S]{0,60}?(\d+)/i)?.[1] ? +r.match(/hu[ée]rfan[\s\S]{0,60}?(\d+)/i)[1] : null)
+  o.huerfanos = (() => { const m = r.match(/hu[ée]rfan[\s\S]{0,40}?menores de 18 a[ñn]os:?\s*(\d+)/i); return m ? +m[1] : null })()
   const serie = r.match(/A[ñn]os 2003 a (20\d\d)\.?([\s\S]{0,900})/)
   if (serie) { const ns = [...serie[2].matchAll(/\b(\d{2,3})\b/g)].map(m => +m[1]).filter(n => n >= 20 && n <= 120); if (ns.length >= +serie[1] - 2003) o.serie = ns.slice(0, +serie[1] - 2002) }
   const ccaa = {}

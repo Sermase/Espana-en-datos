@@ -178,7 +178,7 @@ export function Memorial({ años, titulo }: { años: { año: number; n: number; 
   const reduce = useReducedMotion()
   const [hover, setHover] = useState<number | null>(null)
   const max = Math.max(...años.map(a => a.n)), lab = 46, num = 34
-  const paso = w ? Math.max(4, Math.min(11, (w - lab - num - 8) / max)) : 8, r = paso * 0.32, fila = Math.max(11, paso + 3)
+  const paso = w ? Math.max(2.4, Math.min(11, (w - lab - num - 8) / max)) : 8, r = paso * 0.32, fila = Math.max(11, paso + 3)
   const H = años.length * fila + 6
   return <figure className="memorial" ref={ref} aria-label={titulo}>
     <div ref={wref}>{w > 0 && <svg width={w} height={H} role="img" aria-label={`${titulo}: ${años.map(a => `${a.año}, ${a.n}`).join('; ')}`} onPointerLeave={() => setHover(null)}>
