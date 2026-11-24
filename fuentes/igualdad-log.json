@@ -1,0 +1,278 @@
+{
+ "avisos": [
+  "Eurostat brechaEdad: https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/earn_gr_gpgr2ag?format=JSON&lang=en&geo=ES&geo=EU27_2020&unit=PC&nace_r2=B-S_X_O: HTTP 400",
+  "Eurostat directivas: https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/sdg_05_60?format=JSON&lang=en&geo=ES&geo=EU27_2020&geo=DE&geo=FR&geo=IT&geo=PT&geo=SE&geo=NL: HTTP 404"
+ ],
+ "edad": {
+  "series": 36,
+  "muestra": [
+   "Ambos sexos. Todas las edades. Dato base. Total Nacional. Salario medio bruto. ",
+   "Mujeres. Todas las edades. Dato base. Total Nacional. Salario medio bruto. ",
+   "Hombres. Todas las edades. Dato base. Total Nacional. Salario medio bruto. ",
+   "Ambos sexos. Menos de 20 años. Dato base. Total Nacional. Salario medio bruto. ",
+   "Mujeres. Menos de 20 años. Dato base. Total Nacional. Salario medio bruto. ",
+   "Hombres. Menos de 20 años. Dato base. Total Nacional. Salario medio bruto. ",
+   "Ambos sexos. De 20 a 24 años. Dato base. Total Nacional. Salario medio bruto. ",
+   "Mujeres. De 20 a 24 años. Dato base. Total Nacional. Salario medio bruto. "
+  ]
+ },
+ "nacionalidad": {
+  "series": 27,
+  "muestra": [
+   "Ambos sexos. Total. Dato base. Total Nacional. Salario medio bruto. ",
+   "Mujeres. Total. Dato base. Total Nacional. Salario medio bruto. ",
+   "Hombres. Total. Dato base. Total Nacional. Salario medio bruto. ",
+   "Ambos sexos. Española. Dato base. Total Nacional. Salario medio bruto. ",
+   "Mujeres. Española. Dato base. Total Nacional. Salario medio bruto. ",
+   "Hombres. Española. Dato base. Total Nacional. Salario medio bruto. ",
+   "Ambos sexos. País de la UE28 sin España. Dato base. Total Nacional. Salario medio bruto. ",
+   "Mujeres. País de la UE28 sin España. Dato base. Total Nacional. Salario medio bruto. "
+  ]
+ },
+ "ocupacion": {
+  "ds": "lfsa_egais",
+  "dims": [
+   "unit",
+   "sex",
+   "age",
+   "wstatus",
+   "isco08",
+   "geo"
+  ],
+  "series": 46,
+  "años": [
+   "2023",
+   "2024",
+   "2025"
+  ]
+ },
+ "actividad": {
+  "series": 57,
+  "muestra": [
+   "Ambos sexos. Todas las secciones. Dato base. Total Nacional. Salario medio bruto. ",
+   "Mujeres. Todas las secciones. Dato base. Total Nacional. Salario medio bruto. ",
+   "Hombres. Todas las secciones. Dato base. Total Nacional. Salario medio bruto. ",
+   "Ambos sexos. Industrias extractivas. Dato base. Total Nacional. Salario medio bruto. ",
+   "Mujeres. Industrias extractivas. Dato base. Total Nacional. Salario medio bruto. ",
+   "Hombres. Industrias extractivas. Dato base. Total Nacional. Salario medio bruto. ",
+   "Ambos sexos. Industria manufacturera. Dato base. Total Nacional. Salario medio bruto. ",
+   "Mujeres. Industria manufacturera. Dato base. Total Nacional. Salario medio bruto. "
+  ]
+ },
+ "ccaa": {
+  "series": 324,
+  "muestra": [
+   "Ambos sexos. Total Nacional. Dato base. Media. ",
+   "Ambos sexos. Total Nacional. Dato base. Percentil 10. ",
+   "Ambos sexos. Total Nacional. Dato base. Cuartil inferior. ",
+   "Ambos sexos. Total Nacional. Dato base. Mediana. ",
+   "Ambos sexos. Total Nacional. Dato base. Cuartil superior. ",
+   "Ambos sexos. Total Nacional. Dato base. Percentil 90. ",
+   "Ambos sexos. Andalucía. Dato base. Media. ",
+   "Ambos sexos. Andalucía. Dato base. Percentil 10. "
+  ]
+ },
+ "jornada": {
+  "series": 9,
+  "muestra": [
+   "Ambos sexos. Total. Dato base. Total Nacional. Salario medio bruto. ",
+   "Mujeres. Total. Dato base. Total Nacional. Salario medio bruto. ",
+   "Hombres. Total. Dato base. Total Nacional. Salario medio bruto. ",
+   "Ambos sexos. Jornada a tiempo completo. Dato base. Total Nacional. Salario medio bruto. ",
+   "Mujeres. Jornada a tiempo completo. Dato base. Total Nacional. Salario medio bruto. ",
+   "Hombres. Jornada a tiempo completo. Dato base. Total Nacional. Salario medio bruto. ",
+   "Ambos sexos. Jornada a tiempo parcial. Dato base. Total Nacional. Salario medio bruto. ",
+   "Mujeres. Jornada a tiempo parcial. Dato base. Total Nacional. Salario medio bruto. "
+  ]
+ },
+ "contrato": {
+  "series": 9,
+  "muestra": [
+   "Ambos sexos. Total. Dato base. Salario medio bruto. Total Nacional. ",
+   "Mujeres. Total. Dato base. Salario medio bruto. Total Nacional. ",
+   "Hombres. Total. Dato base. Salario medio bruto. Total Nacional. ",
+   "Ambos sexos. Indefinido. Dato base. Salario medio bruto. Total Nacional. ",
+   "Mujeres. Indefinido. Dato base. Salario medio bruto. Total Nacional. ",
+   "Hombres. Indefinido. Dato base. Salario medio bruto. Total Nacional. ",
+   "Ambos sexos. Temporal. Dato base. Salario medio bruto. Total Nacional. ",
+   "Mujeres. Temporal. Dato base. Salario medio bruto. Total Nacional. "
+  ]
+ },
+ "desigualdad": {
+  "series": 6,
+  "muestra": [
+   "Índice de Gini. Total Nacional. Dato base. ",
+   "Proporción (%) de trabajadores con ganancia baja (Low pay rate)(1). Total Nacional. Dato base. ",
+   "Proporción (%) de mujeres en el total de asalariados con ganancia baja. Total Nacional. Dato base. ",
+   "D9/D5 (9ª decila (2) dividida por la mediana de la ganancia por hora). Total Nacional. Dato base. ",
+   "D5/D1 (La mediana (3) dividida por la 1ª decila de la ganancia por hora). Total Nacional. Dato base. ",
+   "D9/D1 (9ª decila dividida por la 1ª decila de la ganancia por hora). Total Nacional. Dato base. "
+  ]
+ },
+ "smi": {
+  "series": 60,
+  "muestra": [
+   "Ambos sexos. Total. Porcentaje respecto al total de trabajadores. Total de trabajadores. Total Nacional. ",
+   "Mujeres. Total. Porcentaje respecto al total de trabajadores. Total de trabajadores. Total Nacional. ",
+   "Hombres. Total. Porcentaje respecto al total de trabajadores. Total de trabajadores. Total Nacional. ",
+   "Ambos sexos. Total. Porcentaje respecto al total de trabajadores. De 0 a 1 SMI. Total Nacional. ",
+   "Mujeres. Total. Porcentaje respecto al total de trabajadores. De 0 a 1 SMI. Total Nacional. ",
+   "Hombres. Total. Porcentaje respecto al total de trabajadores. De 0 a 1 SMI. Total Nacional. ",
+   "Ambos sexos. Total. Porcentaje respecto al total de trabajadores. De 1 a 2 SMI. Total Nacional. ",
+   "Mujeres. Total. Porcentaje respecto al total de trabajadores. De 1 a 2 SMI. Total Nacional. "
+  ]
+ },
+ "brecha": {
+  "ds": "sdg_05_20",
+  "dims": [
+   "unit",
+   "nace_r2",
+   "geo"
+  ],
+  "series": 8,
+  "años": [
+   "2022",
+   "2023",
+   "2024"
+  ]
+ },
+ "brechaPension": {
+  "ds": "ilc_pnp13",
+  "dims": [
+   "age",
+   "unit",
+   "statinfo",
+   "geo"
+  ],
+  "series": 8,
+  "años": [
+   "2023",
+   "2024",
+   "2025"
+  ]
+ },
+ "empleo": {
+  "ds": "lfsi_emp_a",
+  "dims": [
+   "indic_em",
+   "sex",
+   "age",
+   "unit",
+   "geo"
+  ],
+  "series": 16,
+  "años": [
+   "2023",
+   "2024",
+   "2025"
+  ]
+ },
+ "parcial": {
+  "ds": "lfsa_eppga",
+  "dims": [
+   "unit",
+   "sex",
+   "age",
+   "geo"
+  ],
+  "series": 4,
+  "años": [
+   "2023",
+   "2024",
+   "2025"
+  ]
+ },
+ "paro": {
+  "ds": "une_rt_a",
+  "dims": [
+   "age",
+   "unit",
+   "sex",
+   "geo"
+  ],
+  "series": 18,
+  "años": [
+   "2023",
+   "2024",
+   "2025"
+  ]
+ },
+ "paroOrigen": {
+  "ds": "lfsa_urgan",
+  "dims": [
+   "unit",
+   "sex",
+   "age",
+   "citizen",
+   "geo"
+  ],
+  "series": 6,
+  "años": [
+   "2023",
+   "2024",
+   "2025"
+  ]
+ },
+ "pobreza": {
+  "ds": "ilc_li02",
+  "dims": [
+   "statinfo",
+   "unit",
+   "rskpovth",
+   "sex",
+   "age",
+   "geo"
+  ],
+  "series": 48,
+  "años": [
+   "2023",
+   "2024",
+   "2025"
+  ]
+ },
+ "pobrezaOrigen": {
+  "ds": "ilc_li31",
+  "dims": [
+   "citizen",
+   "age",
+   "sex",
+   "unit",
+   "geo"
+  ],
+  "series": 6,
+  "años": [
+   "2023",
+   "2024",
+   "2025"
+  ]
+ },
+ "gini": {
+  "ds": "ilc_di12",
+  "dims": [
+   "age",
+   "statinfo",
+   "geo"
+  ],
+  "series": 8,
+  "años": [
+   "2023",
+   "2024",
+   "2025"
+  ]
+ },
+ "parlamento": {
+  "ds": "sdg_05_50",
+  "dims": [
+   "org_inst",
+   "sex",
+   "unit",
+   "geo"
+  ],
+  "series": 16,
+  "años": [
+   "2023",
+   "2024",
+   "2025"
+  ]
+ }
+}
