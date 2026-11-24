@@ -23,111 +23,39 @@
   "DD/M/YYYY",
   "YYYY/M/D"
  ],
+ "queryGet": [
+  "getMensaje ,{idioma:t,tipo:\"web\"}",
+  "getIcaAlertas ",
+  "getProvCom ",
+  "getProvinciasByFilter ,c"
+ ],
  "palabras": [
   "getIcaAlertas",
   "tipoEstacion",
   "politicas"
  ],
- "ica ": {
-  "code": 404,
-  "ct": "text/html;",
-  "size": 144,
-  "cabeza": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /sgca/</pre>\n</body>\n</html>\n"
- },
- "ica api": {
-  "code": 404,
-  "ct": "text/html;",
-  "size": 147,
-  "cabeza": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /sgca/api</pre>\n</body>\n</html>\n"
- },
- "ica api/estaciones": {
-  "code": 404,
-  "ct": "text/html;",
-  "size": 158,
-  "cabeza": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /sgca/api/estaciones</pre>\n</body>\n</html>\n"
- },
- "ica estaciones": {
-  "code": 404,
-  "ct": "text/html;",
-  "size": 154,
-  "cabeza": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /sgca/estaciones</pre>\n</body>\n</html>\n"
- },
- "ica api/ica": {
-  "code": 404,
-  "ct": "text/html;",
-  "size": 151,
-  "cabeza": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /sgca/api/ica</pre>\n</body>\n</html>\n"
- },
- "ica ica": {
-  "code": 404,
-  "ct": "text/html;",
-  "size": 147,
-  "cabeza": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /sgca/ica</pre>\n</body>\n</html>\n"
- },
- "ica api/ica/estaciones": {
-  "code": 404,
-  "ct": "text/html;",
-  "size": 162,
-  "cabeza": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /sgca/api/ica/estaciones</pre>\n</body>\n</html>\n"
- },
- "ica api/v1/estaciones": {
-  "code": 404,
-  "ct": "text/html;",
-  "size": 161,
-  "cabeza": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /sgca/api/v1/estaciones</pre>\n</body>\n</html>\n"
- },
- "ica swagger-ui.html": {
-  "code": 404,
-  "ct": "text/html;",
-  "size": 159,
-  "cabeza": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /sgca/swagger-ui.html</pre>\n</body>\n</html>\n"
- },
- "ica v3/api-docs": {
-  "code": 404,
-  "ct": "text/html;",
-  "size": 155,
-  "cabeza": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /sgca/v3/api-docs</pre>\n</body>\n</html>\n"
- },
- "ica v2/api-docs": {
-  "code": 404,
-  "ct": "text/html;",
-  "size": 155,
-  "cabeza": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /sgca/v2/api-docs</pre>\n</body>\n</html>\n"
- },
- "ica actuator": {
-  "code": 404,
-  "ct": "text/html;",
-  "size": 152,
-  "cabeza": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /sgca/actuator</pre>\n</body>\n</html>\n"
- },
- "ica api/indice": {
-  "code": 404,
-  "ct": "text/html;",
-  "size": 154,
-  "cabeza": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /sgca/api/indice</pre>\n</body>\n</html>\n"
- },
- "ica indice/estaciones": {
-  "code": 404,
-  "ct": "text/html;",
-  "size": 161,
-  "cabeza": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /sgca/indice/estaciones</pre>\n</body>\n</html>\n"
- },
- "eea https://discomap.eea.europa.eu/map/fme/latest/ES_NO2.csv": {
-  "code": 502,
-  "ct": "text/html",
-  "size": 183,
-  "cabeza": "<html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>Microsoft-Azure-Application-Gateway/v2</center>\r\n</body>\r\n</html>\r\n"
- },
- "eea https://discomap.eea.europa.eu/map/fme/latest/ES_PM10.csv": {
-  "code": 502,
-  "ct": "text/html",
-  "size": 183,
-  "cabeza": "<html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>Microsoft-Azure-Application-Gateway/v2</center>\r\n</body>\r\n</html>\r\n"
- },
- "eeaApi": {
+ "ica getMensaje": {
   "code": 200,
-  "ct": "text/csv",
-  "size": 49514,
-  "cabeza": "﻿ParquetFileUrl\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_01036004_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_01051001_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_01055001_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_01059009_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_02003002_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_03014006_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_03099002_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_03140001_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_04024001_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_04066003_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_04066007_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_06015001_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_06016999_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_06083001_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_06158001_8_8.parquet\nhttps://eeadmz1batchservice02.blob.core.windows.net/airquality-p/ES/SP_07003001_8_8.parquet\nhttps://eead"
+  "ct": "application/json;",
+  "size": 15759,
+  "cabeza": "[{\"clave\":\"cabecera\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"<strong>Índice de Calidad del Aire</strong>\"},{\"clave\":\"cabeceraPobGeneral\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"<strong>Población general</strong>\"},{\"clave\":\"cabeceraPobRiesgo\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"<strong>Grupos de riesgo y personas sensibles</strong>\"},{\"clave\":\"cabeceraPrevisto\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"<strong> previsto</strong>\"},{\"clave\":\"cabeceraSalud\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"<strong>Recomendaciones para la salud</strong>\"},{\"clave\":\"calidad1\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"Calidad del aire satisfactoria.\"},{\"clave\":\"calidad2\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"Calidad del aire aceptable.\"},{\"clave\":\"calidad3\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"La calidad del aire probablemente no afecte a la población general pero puede presentar un <strong>riesgo moderado</strong> para los grupos de riesgo.\"},{\"clave\":\"calidad4\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"Toda la población puede experimentar <strong>efectos negativos sobre la salud</strong> y los grupos de riesgo efectos mucho más serios.\"},{\"clave\":\"calidad5\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"Condiciones de <strong>emergencia para la salud pública</strong>, la población entera puede verse seriamente afectada.\"},{\"clave\":\"calidad6\",\"tipo\":\"web\",\"idioma\":\"ES\",\"mensaje\":\"Condiciones de <strong>emergencia para la salud pública</strong>, la población entera puede verse <strong>gravemente</strong> afectada."
+ },
+ "ica getIcaAlertas": {
+  "code": 200,
+  "ct": "application/json;",
+  "size": 2,
+  "cabeza": "[]"
+ },
+ "ica getProvCom": {
+  "code": 200,
+  "ct": "application/json;",
+  "size": 68219,
+  "cabeza": "[{\"cod_estacion\":28079055,\"nprovincia\":\"MADRID\",\"provincia\":28,\"ncomunidad\":\"MADRID\",\"comunidad\":13},{\"cod_estacion\":21005002,\"nprovincia\":\"HUELVA\",\"provincia\":21,\"ncomunidad\":\"ANDALUCÍA\",\"comunidad\":1},{\"cod_estacion\":8121013,\"nprovincia\":\"BARCELONA\",\"provincia\":8,\"ncomunidad\":\"CATALUÑA\",\"comunidad\":9},{\"cod_estacion\":43171001,\"nprovincia\":\"TARRAGONA\",\"provincia\":43,\"ncomunidad\":\"CATALUÑA\",\"comunidad\":9},{\"cod_estacion\":35022002,\"nprovincia\":\"PALMAS (LAS)\",\"provincia\":35,\"ncomunidad\":\"CANARIAS\",\"comunidad\":5},{\"cod_estacion\":20080001,\"nprovincia\":\"GUIPÚZCOA\",\"provincia\":20,\"ncomunidad\":\"PAÍS VASCO\",\"comunidad\":16},{\"cod_estacion\":28092005,\"nprovincia\":\"MADRID\",\"provincia\":28,\"ncomunidad\":\"MADRID\",\"comunidad\":13},{\"cod_estacion\":7032002,\"nprovincia\":\"BALEARS (ILLES)\",\"provincia\":7,\"ncomunidad\":\"BALEARES (ISLAS)\",\"comunidad\":4},{\"cod_estacion\":35016015,\"nprovincia\":\"PALMAS (LAS)\",\"provincia\":35,\"ncomunidad\":\"CANARIAS\",\"comunidad\":5},{\"cod_estacion\":21064002,\"nprovincia\":\"HUELVA\",\"provincia\":21,\"ncomunidad\":\"ANDALUCÍA\",\"comunidad\":1},{\"cod_estacion\":2003001,\"nprovincia\":\"ALBACETE\",\"provincia\":2,\"ncomunidad\":\"CASTILLA-LA MANCHA\",\"comunidad\":7},{\"cod_estacion\":35019002,\"nprovincia\":\"PALMAS (LAS)\",\"provincia\":35,\"ncomunidad\":\"CANARIAS\",\"comunidad\":5},{\"cod_estacion\":45165003,\"nprovincia\":\"TOLEDO\",\"provincia\":45,\"ncomunidad\":\"CASTILLA-LA MANCHA\",\"comunidad\":7},{\"cod_estacion\":19046001,\"nprovincia\":\"GUADALAJARA\",\"provincia\":19,\"ncomunidad\":\"CASTILLA-LA MANCHA\",\"comunidad\":7},{\"cod_e"
+ },
+ "ica getProvinciasByFilter": {
+  "code": 400,
+  "ct": "text/html;",
+  "size": 108,
+  "cabeza": "Se requieren los parámetros tipo (nprovincia, ncomunidad, provincia o comunidad) y filtro (valor a buscar)."
  }
 }
