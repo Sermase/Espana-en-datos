@@ -169,7 +169,7 @@ function Donde({ d, hasta }: { d: D; hasta: string }) {
   const rk = Object.keys(PROV).map(c => ({ c, v: I.f(c) })).filter((x): x is { c: string; v: number } => x.v != null).sort((a, b) => b.v - a.v)
   const nac = ind === 'hab' ? (Object.values(Pv.tot).reduce((t, s) => t + (s[j] ?? 0), 0) / (Object.values(pob).reduce((a, b) => a + b, 0) || 1)) : ind === 'ocup' ? d.ocupacion['00']?.ocup : ind === 'viv' ? d.viviendas['00']?.pct : ind === 'ext' ? (Object.values(Pv.ext).reduce((t, s) => t + (s[j] ?? 0), 0) / (Object.values(Pv.tot).reduce((t, s) => t + (s[j] ?? 0), 0) || 1)) * 100 : null
   const v = sel ? I.f(sel) : null
-  const pts = d.puntos.lista.slice(0, 15)
+  const pts = d.puntos.lista.filter(p => !/establecimientos|^total/i.test(p.n)).slice(0, 15)
   const cc = Object.entries(d.ccaa).filter(([k]) => k !== 'Total').map(([k, s]) => ({ k, v: doce(s.turistas, hasta) })).filter((x): x is { k: string; v: number } => x.v != null).sort((a, b) => b.v - a.v)
   const ccT = doce(d.ccaa.Total?.turistas, hasta) ?? 1
   const per = d.viviendas['00']?.per

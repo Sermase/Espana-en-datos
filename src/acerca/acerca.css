@@ -1,0 +1,52 @@
+:root { --bg: #03090f; --panel: #07141d; --line: rgba(160, 220, 240, .12); --ink: #e6f6fb; --muted: #86a9b5; --acc: #3fe6ff; color-scheme: dark }
+* { box-sizing: border-box }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: Barlow, system-ui, sans-serif }
+body { min-height: 100vh; background: radial-gradient(1000px 600px at 90% -10%, rgba(63, 230, 255, .07), transparent 60%), var(--bg) }
+a { color: inherit }
+:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px }
+
+.acerca { max-width: 820px; margin: 0 auto; padding: 40px 24px 56px }
+.home-link { font-size: 13px; letter-spacing: .08em; color: var(--muted); text-decoration: none }
+.home-link::before { content: '‹ ' }
+.home-link:hover { color: var(--acc) }
+.ac-cab h1 { font: 700 clamp(36px, 7vw, 56px)/1 Oxanium, sans-serif; letter-spacing: .06em; text-transform: uppercase; margin: 10px 0 0 }
+.ac-lema { font-size: 19px; line-height: 1.5; color: #c7dde4; margin: 18px 0 0; max-width: 46ch }
+
+.ac-bloque { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line) }
+.ac-bloque h2 { font: 600 22px Oxanium, sans-serif; margin: 0 0 12px; color: var(--acc) }
+.ac-bloque p, .ac-lista li { font-size: 16.5px; line-height: 1.6; color: #c7dde4; margin: 0 0 12px; max-width: 66ch }
+.ac-bloque b { color: #fff }
+.ac-lista { margin: 0; padding-left: 1.1em }
+.ac-lista li { margin-bottom: 8px }
+.ac-lista li::marker { color: var(--acc) }
+
+.ac-temas { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px }
+.ac-temas li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 12px; align-items: baseline }
+.ac-area { font: 600 14px Oxanium, sans-serif; color: var(--muted); letter-spacing: .04em }
+.ac-chips { display: flex; flex-wrap: wrap; gap: 6px }
+.ac-chips a { display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px; border: 1px solid color-mix(in oklab, var(--c) 35%, transparent); border-radius: 16px; font-size: 14px; text-decoration: none; color: #dfeff4; transition: background .2s, border-color .2s }
+.ac-chips a i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); box-shadow: 0 0 6px var(--c) }
+.ac-chips a:hover { border-color: var(--c); background: color-mix(in oklab, var(--c) 12%, transparent) }
+
+.ac-org { list-style: none; margin: 4px 0 0; padding: 0; columns: 2; column-gap: 28px }
+.ac-org li { break-inside: avoid; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 15px }
+.ac-org a { text-decoration: none; color: #dfeff4 }
+.ac-org a:hover { color: var(--acc) }
+
+.ac-istari { background: linear-gradient(180deg, rgba(63, 230, 255, .05), transparent 70%); border: 1px solid var(--line); border-radius: 6px; padding: 24px }
+.ac-enlaces { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 16px }
+.ac-enlaces a { display: grid; gap: 3px; padding: 14px 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; text-decoration: none; transition: border-color .2s, transform .2s }
+.ac-enlaces a:hover { border-color: var(--acc); transform: translateY(-2px) }
+.ac-enlaces b { font: 600 16px Oxanium, sans-serif; color: #fff }
+.ac-enlaces span { font-size: 13.5px; color: var(--muted); overflow-wrap: anywhere }
+.ac-pie { margin-top: 36px; font-size: 14px }
+.ac-pie a { color: var(--muted); text-decoration: none }
+.ac-pie a:hover { color: var(--acc) }
+
+@media (max-width: 640px) {
+  .acerca { padding: 28px 18px 44px }
+  .ac-temas li { grid-template-columns: 1fr; gap: 6px }
+  .ac-org { columns: 1 }
+  .ac-enlaces { grid-template-columns: 1fr }
+}
+@media (prefers-reduced-motion: reduce) { .ac-enlaces a { transition: none } .ac-enlaces a:hover { transform: none } }

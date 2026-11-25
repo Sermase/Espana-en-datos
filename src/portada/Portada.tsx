@@ -225,7 +225,7 @@ export default function Portada() {
         <div className="ticker-pista">{[0, 1].map(k => <span key={k} aria-hidden={k === 1}>{TICKER.map(([n, v, id]) => <a key={n} href={ruta(id)} style={{ ['--c' as string]: color(id) }}><i />{n} <b>{v}</b></a>)}</span>)}</div>
       </div>
       <Areas />
-      <footer className="pie">Fuentes oficiales, enlazadas en cada tema: <A id="boletin">MITECO</A>, <A id="siane">IGN</A>, <A id="ine_padron">INE</A>, <A id="eurostat">Eurostat</A>, <A id="ree">REE</A>, <A id="aemet">AEMET</A>. Sin registro, sin anuncios.</footer>
+      <footer className="pie">Fuentes oficiales, enlazadas en cada tema: <A id="boletin">MITECO</A>, <A id="siane">IGN</A>, <A id="ine_padron">INE</A>, <A id="eurostat">Eurostat</A>, <A id="ree">REE</A>, <A id="aemet">AEMET</A>. Sin registro, sin anuncios. <a className="pie-acerca" href="./acerca/index.html">Acerca de España en datos · hecho por Istari Core</a></footer>
     </main>
   )
 }
