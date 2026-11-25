@@ -1,0 +1,738 @@
+{
+ "avisos": [],
+ "tabla10822": {
+  "series": 64,
+  "muestra": [
+   "Total. Turista. Dato base. Total Nacional. ",
+   "Total. Turista. Tasa de variación anual. Total Nacional. ",
+   "Total. Turista. Total Nacional. Acumulado en lo que va de año. ",
+   "Total. Turista. Total Nacional. Tasa de variación acumulada. ",
+   "Alemania. Turista. Dato base. Total Nacional. ",
+   "Alemania. Turista. Tasa de variación anual. Total Nacional. ",
+   "Alemania. Turista. Total Nacional. Acumulado en lo que va de año. ",
+   "Alemania. Turista. Total Nacional. Tasa de variación acumulada. ",
+   "Resto del Mundo. Turista. Dato base. Total Nacional. ",
+   "Resto del Mundo. Turista. Tasa de variación anual. Total Nacional. ",
+   "Resto del Mundo. Turista. Total Nacional. Acumulado en lo que va de año. ",
+   "Resto del Mundo. Turista. Total Nacional. Tasa de variación acumulada. "
+  ],
+  "periodos": [
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   12,
+   11,
+   10
+  ]
+ },
+ "tabla23984": {
+  "series": 62,
+  "muestra": [
+   "Total. Turista. Total Nacional. Dato base. ",
+   "Total. Turista. Total Nacional. Tasa de variación anual. ",
+   "Alemania. Turista. Total Nacional. Dato base. ",
+   "Alemania. Turista. Total Nacional. Tasa de variación anual. ",
+   "Bélgica. Turista. Total Nacional. Dato base. ",
+   "Bélgica. Turista. Total Nacional. Tasa de variación anual. ",
+   "Francia. Turista. Total Nacional. Dato base. ",
+   "Francia. Turista. Total Nacional. Tasa de variación anual. ",
+   "Venezuela. Turista. Total Nacional. Dato base. ",
+   "Venezuela. Turista. Total Nacional. Tasa de variación anual. ",
+   "Canadá. Turista. Total Nacional. Dato base. ",
+   "Canadá. Turista. Total Nacional. Tasa de variación anual. "
+  ],
+  "periodos": [
+   28
+  ]
+ },
+ "tabla75719": {
+  "series": 64,
+  "muestra": [
+   "Total. Turista. Dato base. Total Nacional. ",
+   "Total. Turista. Tasa de variación anual. Total Nacional. ",
+   "Total. Turista. Total Nacional. Acumulado en lo que va de año. ",
+   "Total. Turista. Total Nacional. Tasa de variación acumulada. ",
+   "Alemania. Turista. Dato base. Total Nacional. ",
+   "Alemania. Turista. Tasa de variación anual. Total Nacional. ",
+   "Alemania. Turista. Total Nacional. Acumulado en lo que va de año. ",
+   "Alemania. Turista. Total Nacional. Tasa de variación acumulada. ",
+   "Resto del Mundo. Turista. Dato base. Total Nacional. ",
+   "Resto del Mundo. Turista. Tasa de variación anual. Total Nacional. ",
+   "Resto del Mundo. Turista. Total Nacional. Acumulado en lo que va de año. ",
+   "Resto del Mundo. Turista. Total Nacional. Tasa de variación acumulada. "
+  ],
+  "periodos": [
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   12,
+   11,
+   10
+  ]
+ },
+ "paises": [
+  "Total",
+  "Alemania",
+  "Bélgica",
+  "Francia",
+  "Irlanda",
+  "Italia",
+  "Países Bajos",
+  "Países Nórdicos",
+  "Portugal",
+  "Reino Unido",
+  "Rusia",
+  "Suiza",
+  "Resto de Europa",
+  "Estados Unidos de América",
+  "Resto América",
+  "Resto del Mundo",
+  "Europa menos UE28",
+  "Japón",
+  "China",
+  "Corea",
+  "Turquía",
+  "Israel",
+  "India",
+  "Arabia Saudí",
+  "Filipinas",
+  "Emiratos Árabes Unidos",
+  "Argentina",
+  "Brasil",
+  "Chile",
+  "México",
+  "Venezuela",
+  "Canadá"
+ ],
+ "tabla10823": {
+  "series": 32,
+  "muestra": [
+   "Turista. Total Nacional. Dato base. ",
+   "Turista. Total Nacional. Tasa de variación anual. ",
+   "Turista. Total Nacional. Acumulado en lo que va de año. ",
+   "Turista. Total Nacional. Tasa de variación acumulada. ",
+   "Andalucía. Turista. Dato base. ",
+   "Andalucía. Turista. Tasa de variación anual. ",
+   "Andalucía. Turista. Acumulado en lo que va de año. ",
+   "Andalucía. Turista. Tasa de variación acumulada. ",
+   "Otras Comunidades Autónomas. Turista. Dato base. ",
+   "Otras Comunidades Autónomas. Turista. Tasa de variación anual. ",
+   "Otras Comunidades Autónomas. Turista. Acumulado en lo que va de año. ",
+   "Otras Comunidades Autónomas. Turista. Tasa de variación acumulada. "
+  ],
+  "periodos": [
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   12,
+   11,
+   10
+  ]
+ },
+ "tabla23988": {
+  "series": 40,
+  "muestra": [
+   "Turista. Total Nacional. Dato base. ",
+   "Turista. Total Nacional. Tasa de variación anual. ",
+   "Andalucía. Turista. Dato base. ",
+   "Andalucía. Turista. Tasa de variación anual. ",
+   "Aragón. Turista. Dato base. ",
+   "Aragón. Turista. Tasa de variación anual. ",
+   "Asturias, Principado de. Turista. Dato base. ",
+   "Asturias, Principado de. Turista. Tasa de variación anual. ",
+   "Ceuta. Turista. Dato base. ",
+   "Ceuta. Turista. Tasa de variación anual. ",
+   "Melilla. Turista. Dato base. ",
+   "Melilla. Turista. Tasa de variación anual. "
+  ],
+  "periodos": [
+   28
+  ]
+ },
+ "tabla75720": {
+  "series": 32,
+  "muestra": [
+   "Turista. Total Nacional. Dato base. ",
+   "Turista. Total Nacional. Tasa de variación anual. ",
+   "Turista. Total Nacional. Acumulado en lo que va de año. ",
+   "Turista. Total Nacional. Tasa de variación acumulada. ",
+   "Andalucía. Turista. Dato base. ",
+   "Andalucía. Turista. Tasa de variación anual. ",
+   "Andalucía. Turista. Acumulado en lo que va de año. ",
+   "Andalucía. Turista. Tasa de variación acumulada. ",
+   "Otras Comunidades Autónomas. Turista. Dato base. ",
+   "Otras Comunidades Autónomas. Turista. Tasa de variación anual. ",
+   "Otras Comunidades Autónomas. Turista. Acumulado en lo que va de año. ",
+   "Otras Comunidades Autónomas. Turista. Tasa de variación acumulada. "
+  ],
+  "periodos": [
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   12,
+   11,
+   10
+  ]
+ },
+ "ccaa": [
+  "Total",
+  "Andalucía",
+  "Illes Balears",
+  "Canarias",
+  "Cataluña",
+  "C. Valenciana",
+  "Madrid",
+  "Aragón",
+  "Asturias",
+  "Cantabria",
+  "Castilla y León",
+  "Castilla-La Mancha",
+  "Extremadura",
+  "Galicia",
+  "Murcia",
+  "Navarra",
+  "País Vasco",
+  "La Rioja",
+  "Ceuta",
+  "Melilla"
+ ],
+ "tabla10838": {
+  "series": 112,
+  "muestra": [
+   "Total. Turista. Gasto total. Total Nacional. Dato base. ",
+   "Total. Turista. Gasto total. Total Nacional. Tasa de variación anual. ",
+   "Total. Turista. Gasto total. Total Nacional. Acumulado en lo que va de año. ",
+   "Total. Turista. Gasto total. Total Nacional. Tasa de variación acumulada. ",
+   "Total. Turista. Gasto medio por persona. Total Nacional. Dato base. ",
+   "Total. Turista. Gasto medio por persona. Total Nacional. Tasa de variación anual. ",
+   "Total. Turista. Gasto medio por persona. Total Nacional. Acumulado en lo que va de año. ",
+   "Total. Turista. Gasto medio por persona. Total Nacional. Tasa de variación acumulada. ",
+   "Italia. Turista. Duración media de los viajes. Total Nacional. Dato base. ",
+   "Italia. Turista. Duración media de los viajes. Total Nacional. Tasa de variación anual. ",
+   "Italia. Turista. Duración media de los viajes. Total Nacional. Acumulado en lo que va de año. ",
+   "Italia. Turista. Duración media de los viajes. Total Nacional. Tasa de variación acumulada. "
+  ],
+  "periodos": [
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   12,
+   11,
+   10
+  ]
+ },
+ "tabla23994": {
+  "series": 128,
+  "muestra": [
+   "Total. Turista. Gasto total. Total Nacional. Dato base. ",
+   "Total. Turista. Gasto total. Total Nacional. Tasa de variación anual. ",
+   "Total. Turista. Gasto medio por persona. Total Nacional. Dato base. ",
+   "Total. Turista. Gasto medio por persona. Total Nacional. Tasa de variación anual. ",
+   "Total. Turista. Gasto medio diario por persona. Total Nacional. Dato base. ",
+   "Total. Turista. Gasto medio diario por persona. Total Nacional. Tasa de variación anual. ",
+   "Total. Turista. Duración media de los viajes. Total Nacional. Dato base. ",
+   "Total. Turista. Duración media de los viajes. Total Nacional. Tasa de variación anual. ",
+   "Resto del Mundo. Turista. Gasto medio diario por persona. Total Nacional. Dato base. ",
+   "Resto del Mundo. Turista. Gasto medio diario por persona. Total Nacional. Tasa de variación anual. ",
+   "Resto del Mundo. Turista. Duración media de los viajes. Total Nacional. Dato base. ",
+   "Resto del Mundo. Turista. Duración media de los viajes. Total Nacional. Tasa de variación anual. "
+  ],
+  "periodos": [
+   28
+  ]
+ },
+ "tabla75715": {
+  "series": 112,
+  "muestra": [
+   "Total. Turista. Gasto total. Total Nacional. Dato base. ",
+   "Total. Turista. Gasto total. Total Nacional. Tasa de variación anual. ",
+   "Total. Turista. Gasto total. Total Nacional. Acumulado en lo que va de año. ",
+   "Total. Turista. Gasto total. Total Nacional. Tasa de variación acumulada. ",
+   "Total. Turista. Gasto medio por persona. Total Nacional. Dato base. ",
+   "Total. Turista. Gasto medio por persona. Total Nacional. Tasa de variación anual. ",
+   "Total. Turista. Gasto medio por persona. Total Nacional. Acumulado en lo que va de año. ",
+   "Total. Turista. Gasto medio por persona. Total Nacional. Tasa de variación acumulada. ",
+   "Italia. Turista. Duración media de los viajes. Total Nacional. Dato base. ",
+   "Italia. Turista. Duración media de los viajes. Total Nacional. Tasa de variación anual. ",
+   "Italia. Turista. Duración media de los viajes. Total Nacional. Acumulado en lo que va de año. ",
+   "Italia. Turista. Duración media de los viajes. Total Nacional. Tasa de variación acumulada. "
+  ],
+  "periodos": [
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   12,
+   11,
+   10
+  ]
+ },
+ "gastoPais": [
+  "Total",
+  "Reino Unido",
+  "Países Nórdicos",
+  "Resto del Mundo",
+  "Alemania",
+  "Francia",
+  "Italia",
+  "Bélgica",
+  "Irlanda",
+  "Países Bajos",
+  "Portugal",
+  "Rusia",
+  "Suiza",
+  "Resto de Europa",
+  "Estados Unidos de América",
+  "Resto América"
+ ],
+ "tabla10839": {
+  "series": 128,
+  "muestra": [
+   "Gasto total. Total Nacional. Turista. Dato base. ",
+   "Gasto total. Total Nacional. Turista. Tasa de variación anual. ",
+   "Turista. Gasto total. Total Nacional. Acumulado en lo que va de año. ",
+   "Turista. Gasto total. Total Nacional. Tasa de variación acumulada. ",
+   "Gasto medio por persona. Total Nacional. Turista. Dato base. ",
+   "Gasto medio por persona. Total Nacional. Turista. Tasa de variación anual. ",
+   "Total Nacional. Turista. Gasto medio por persona. Acumulado en lo que va de año. ",
+   "Total Nacional. Turista. Gasto medio por persona. Tasa de variación acumulada. ",
+   "Otras Comunidades Autónomas. Turista. Duración media de los viajes. Dato base. ",
+   "Otras Comunidades Autónomas. Turista. Duración media de los viajes. Tasa de variación anual. ",
+   "Otras Comunidades Autónomas. Turista. Duración media de los viajes. Acumulado en lo que va de año. ",
+   "Otras Comunidades Autónomas. Turista. Duración media de los viajes. Tasa de variación acumulada. "
+  ],
+  "periodos": [
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   12,
+   11,
+   10
+  ]
+ },
+ "tabla23998": {
+  "series": 160,
+  "muestra": [
+   "Total Nacional. Turista. Gasto total. Dato base. ",
+   "Total Nacional. Turista. Gasto total. Tasa de variación anual. ",
+   "Total Nacional. Turista. Gasto medio por persona. Dato base. ",
+   "Total Nacional. Turista. Gasto medio por persona. Tasa de variación anual. ",
+   "Total Nacional. Turista. Gasto medio diario por persona. Dato base. ",
+   "Total Nacional. Turista. Gasto medio diario por persona. Tasa de variación anual. ",
+   "Total Nacional. Turista. Duración media de los viajes. Dato base. ",
+   "Total Nacional. Turista. Duración media de los viajes. Tasa de variación anual. ",
+   "Melilla. Turista. Gasto medio diario por persona. Dato base. ",
+   "Melilla. Turista. Gasto medio diario por persona. Tasa de variación anual. ",
+   "Melilla. Turista. Duración media de los viajes. Dato base. ",
+   "Melilla. Turista. Duración media de los viajes. Tasa de variación anual. "
+  ],
+  "periodos": [
+   28
+  ]
+ },
+ "tabla75714": {
+  "series": 128,
+  "muestra": [
+   "Gasto total. Total Nacional. Turista. Dato base. ",
+   "Gasto total. Total Nacional. Turista. Tasa de variación anual. ",
+   "Turista. Gasto total. Total Nacional. Acumulado en lo que va de año. ",
+   "Turista. Gasto total. Total Nacional. Tasa de variación acumulada. ",
+   "Gasto medio por persona. Total Nacional. Turista. Dato base. ",
+   "Gasto medio por persona. Total Nacional. Turista. Tasa de variación anual. ",
+   "Total Nacional. Turista. Gasto medio por persona. Acumulado en lo que va de año. ",
+   "Total Nacional. Turista. Gasto medio por persona. Tasa de variación acumulada. ",
+   "Otras Comunidades Autónomas. Turista. Duración media de los viajes. Dato base. ",
+   "Otras Comunidades Autónomas. Turista. Duración media de los viajes. Tasa de variación anual. ",
+   "Otras Comunidades Autónomas. Turista. Duración media de los viajes. Acumulado en lo que va de año. ",
+   "Otras Comunidades Autónomas. Turista. Duración media de los viajes. Tasa de variación acumulada. "
+  ],
+  "periodos": [
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   12,
+   11,
+   10
+  ]
+ },
+ "gastoCcaa": [
+  "Total",
+  "Andalucía",
+  "Illes Balears",
+  "Canarias",
+  "Cataluña",
+  "C. Valenciana",
+  "Madrid",
+  "Aragón",
+  "Asturias",
+  "Cantabria",
+  "Castilla y León",
+  "Castilla-La Mancha",
+  "Extremadura",
+  "Galicia",
+  "Murcia",
+  "Navarra",
+  "País Vasco",
+  "La Rioja",
+  "Ceuta",
+  "Melilla"
+ ],
+ "tabla13938": {
+  "series": 32,
+  "muestra": [
+   "Gasto total. Total Nacional. Turista. Dato base. ",
+   "Gasto total. Total Nacional. Turista. Tasa de variación anual. ",
+   "Turista. Gasto total. Total Nacional. Acumulado en lo que va de año. ",
+   "Turista. Gasto total. Total Nacional. Tasa de variación acumulada. ",
+   "Turista. Gasto en paquete turístico. Total Nacional. Dato base. ",
+   "Turista. Gasto en paquete turístico. Total Nacional. Tasa de variación anual. ",
+   "Turista. Gasto en paquete turístico. Total Nacional. Acumulado en lo que va de año. ",
+   "Turista. Gasto en paquete turístico. Total Nacional. Tasa de variación acumulada. ",
+   "Turista. Otros gastos. Total Nacional. Dato base. ",
+   "Turista. Otros gastos. Total Nacional. Tasa de variación anual. ",
+   "Turista. Otros gastos. Total Nacional. Acumulado en lo que va de año. ",
+   "Turista. Otros gastos. Total Nacional. Tasa de variación acumulada. "
+  ],
+  "periodos": [
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   12,
+   11,
+   10
+  ]
+ },
+ "tabla23997": {
+  "series": 16,
+  "muestra": [
+   "Total Nacional. Turista. Gasto total. Dato base. ",
+   "Total Nacional. Turista. Gasto total. Tasa de variación anual. ",
+   "Turista. Gasto en paquete turístico. Total Nacional. Dato base. ",
+   "Turista. Gasto en paquete turístico. Total Nacional. Tasa de variación anual. ",
+   "Turista. Gasto no incluido en paquete turístico. Total Nacional. Dato base. ",
+   "Turista. Gasto no incluido en paquete turístico. Total Nacional. Tasa de variación anual. ",
+   "Turista. Gasto en transporte internacional. Total Nacional. Dato base. ",
+   "Turista. Gasto en transporte internacional. Total Nacional. Tasa de variación anual. ",
+   "Turista. Gasto en actividades. Total Nacional. Dato base. ",
+   "Turista. Gasto en actividades. Total Nacional. Tasa de variación anual. ",
+   "Turista. Otros gastos. Total Nacional. Dato base. ",
+   "Turista. Otros gastos. Total Nacional. Tasa de variación anual. "
+  ],
+  "periodos": [
+   28
+  ]
+ },
+ "tabla75717": {
+  "series": 32,
+  "muestra": [
+   "Gasto total. Total Nacional. Turista. Dato base. ",
+   "Gasto total. Total Nacional. Turista. Tasa de variación anual. ",
+   "Turista. Gasto total. Total Nacional. Acumulado en lo que va de año. ",
+   "Turista. Gasto total. Total Nacional. Tasa de variación acumulada. ",
+   "Turista. Gasto en paquete turístico. Total Nacional. Dato base. ",
+   "Turista. Gasto en paquete turístico. Total Nacional. Tasa de variación anual. ",
+   "Turista. Gasto en paquete turístico. Total Nacional. Acumulado en lo que va de año. ",
+   "Turista. Gasto en paquete turístico. Total Nacional. Tasa de variación acumulada. ",
+   "Turista. Otros gastos. Total Nacional. Dato base. ",
+   "Turista. Otros gastos. Total Nacional. Tasa de variación anual. ",
+   "Turista. Otros gastos. Total Nacional. Acumulado en lo que va de año. ",
+   "Turista. Otros gastos. Total Nacional. Tasa de variación acumulada. "
+  ],
+  "periodos": [
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   12,
+   11,
+   10
+  ]
+ },
+ "partidas": [
+  "Turista",
+  "Turista · Otros gastos"
+ ],
+ "tabla2074": {
+  "series": 420,
+  "muestra": [
+   "Nacional. Viajeros. Total categorías. Total.",
+   "Nacional. Viajeros. Total categorías. Residentes en España.",
+   "Nacional. Viajeros. Total categorías. Residentes en el extranjero.",
+   "Nacional. Pernoctaciones. Total categorías. Total.",
+   "Nacional. Pernoctaciones. Total categorías. Residentes en España.",
+   "Nacional. Pernoctaciones. Total categorías. Residentes en el extranjero.",
+   "Andalucía. Viajeros. Total.",
+   "Andalucía. Viajeros. Residentes en España.",
+   "Melilla. Viajeros. Residentes en el extranjero.",
+   "Melilla. Pernoctaciones. Total.",
+   "Melilla. Pernoctaciones. Residentes en España.",
+   "Melilla. Pernoctaciones. Residentes en el extranjero."
+  ],
+  "periodos": [
+   10,
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   12,
+   11
+  ]
+ },
+ "provinciasSinCodigo": [],
+ "hotel": {
+  "meses": 334,
+  "primero": "1999-01",
+  "ultimo": "2026-10",
+  "provincias": 52
+ },
+ "tabla2066": {
+  "series": 441,
+  "muestra": [
+   "Nacional. Número de establecimientos abiertos estimados.",
+   "Total Nacional. Número de habitaciones estimadas. Total categorías. Dato. ",
+   "Nacional. Número de plazas estimadas.",
+   "Nacional. Grado de ocupación por plazas.",
+   "Nacional. Grado de ocupación por plazas en fin de semana.",
+   "Nacional. Grado de ocupación por habitaciones.",
+   "Nacional. Personal empleado.",
+   "Andalucía. Número de establecimientos abiertos estimados.",
+   "Melilla. Grado de ocupación por plazas.",
+   "Melilla. Grado de ocupación por plazas en fin de semana.",
+   "Melilla. Grado de ocupación por habitaciones.",
+   "Melilla. Personal empleado."
+  ],
+  "periodos": [
+   10,
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   12,
+   11
+  ]
+ },
+ "ocupacion": 53,
+ "tabla2078": {
+  "series": 552,
+  "muestra": [
+   "Nacional. Viajeros. Vitoria-Gastéiz. Residentes en España.",
+   "Nacional. Viajeros. Vitoria-Gastéiz. Residentes en el extranjero.",
+   "Nacional. Pernoctaciones. Vitoria-Gastéiz. Residentes en España.",
+   "Nacional. Pernoctaciones. Vitoria-Gastéiz. Residentes en el extranjero.",
+   "Altea. Viajero. Total categorías. Residentes en España. Dato. ",
+   "Altea. Viajero. Total categorías. Residentes en el Extranjero. Dato. ",
+   "Altea. Pernoctaciones. Total categorías. Residentes en España. Dato. ",
+   "Altea. Pernoctaciones. Total categorías. Residentes en el Extranjero. Dato. ",
+   "Chiclana de la Frontera. Viajero. Total categorías. Residentes en España. Dato. ",
+   "Chiclana de la Frontera. Viajero. Total categorías. Residentes en el Extranjero. Dato. ",
+   "Chiclana de la Frontera. Pernoctaciones. Total categorías. Residentes en España. Dato. ",
+   "Chiclana de la Frontera. Pernoctaciones. Total categorías. Residentes en el Extranjero. Dato. "
+  ],
+  "periodos": [
+   10,
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   12,
+   11
+  ]
+ },
+ "tabla75197": {
+  "series": 552,
+  "muestra": [
+   "Nacional. Viajeros. Vitoria-Gastéiz. Residentes en España.",
+   "Nacional. Viajeros. Vitoria-Gastéiz. Residentes en el extranjero.",
+   "Nacional. Pernoctaciones. Vitoria-Gastéiz. Residentes en España.",
+   "Nacional. Pernoctaciones. Vitoria-Gastéiz. Residentes en el extranjero.",
+   "Altea. Viajero. Total categorías. Residentes en España. Dato. ",
+   "Altea. Viajero. Total categorías. Residentes en el Extranjero. Dato. ",
+   "Altea. Pernoctaciones. Total categorías. Residentes en España. Dato. ",
+   "Altea. Pernoctaciones. Total categorías. Residentes en el Extranjero. Dato. ",
+   "Chiclana de la Frontera. Viajero. Total categorías. Residentes en España. Dato. ",
+   "Chiclana de la Frontera. Viajero. Total categorías. Residentes en el Extranjero. Dato. ",
+   "Chiclana de la Frontera. Pernoctaciones. Total categorías. Residentes en España. Dato. ",
+   "Chiclana de la Frontera. Pernoctaciones. Total categorías. Residentes en el Extranjero. Dato. "
+  ],
+  "periodos": [
+   10,
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1,
+   12,
+   11
+  ]
+ },
+ "puntos": [
+  {
+   "n": "Barcelona",
+   "tot": 22129486,
+   "ext": 19203096
+  },
+  {
+   "n": "Madrid",
+   "tot": 21713274,
+   "ext": 14392301
+  },
+  {
+   "n": "San Bartolomé De Tirajana",
+   "tot": 13160164,
+   "ext": 11722309
+  },
+  {
+   "n": "Benidorm",
+   "tot": 11366096,
+   "ext": 7257652
+  },
+  {
+   "n": "Adeje",
+   "tot": 10977381,
+   "ext": 10402725
+  },
+  {
+   "n": "Palma De Mallorca",
+   "tot": 10316941,
+   "ext": 9488034
+  },
+  {
+   "n": "Calviá",
+   "tot": 9849093,
+   "ext": 9235304
+  },
+  {
+   "n": "Pajara",
+   "tot": 8175364,
+   "ext": 7183009
+  }
+ ],
+ "tabla46141": {
+  "series": 288,
+  "muestra": [
+   "Total Nacional. Viviendas turísticas. Dato base. ",
+   "Total Nacional. Plazas. Dato base. ",
+   "Total Nacional. Plazas por vivienda turística. Dato base. ",
+   "Total Nacional. Porcentaje de viviendas turísticas sobre el total de viviendas censadas. Dato base. ",
+   "Andalucía. Viviendas turísticas. Dato base. ",
+   "Andalucía. Plazas. Dato base. ",
+   "Andalucía. Plazas por vivienda turística. Dato base. ",
+   "Andalucía. Porcentaje de viviendas turísticas sobre el total de viviendas censadas. Dato base. ",
+   "Melilla. Viviendas turísticas. Dato base. ",
+   "Melilla. Plazas. Dato base. ",
+   "Melilla. Plazas por vivienda turística. Dato base. ",
+   "Melilla. Porcentaje de viviendas turísticas sobre el total de viviendas censadas. Dato base. "
+  ],
+  "periodos": [
+   5,
+   11,
+   8,
+   2
+  ]
+ },
+ "viviendas": {
+  "n": 53,
+  "nac": {
+   "viv": 341001,
+   "per": "2026-05",
+   "plazas": 1714702,
+   "pct": 1.28
+  }
+ },
+ "europa": [
+  "ES",
+  "IT",
+  "TR",
+  "FR",
+  "EL",
+  "AT",
+  "HR",
+  "DE",
+  "NL",
+  "PT",
+  "CH",
+  "CZ"
+ ],
+ "resumen": {
+  "año": 2025,
+  "turistas": 96803893,
+  "gasto": 134743.32
+ }
+}
