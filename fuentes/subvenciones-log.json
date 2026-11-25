@@ -1,4 +1,8 @@
 {
- "meses": {},
+ "meses": {
+  "2026-11": "76783 de 76783 concesiones (100.0 %), 988 M€, 82 s",
+  "2026-10": "392864 de 392864 concesiones (100.0 %), 2932 M€, 112 s",
+  "2026-09": "1426954 de 1426954 concesiones (100.0 %), 2414 M€, 308 s"
+ },
  "orden": "order=fechaConcesion&direccion=asc"
 }
