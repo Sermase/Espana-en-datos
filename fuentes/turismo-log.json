@@ -507,8 +507,14 @@
   ]
  },
  "partidas": [
-  "Turista",
-  "Turista · Otros gastos"
+  "Total",
+  "Paquete turístico",
+  "Fuera del paquete: paquete turístico",
+  "Transporte internacional",
+  "Alojamiento",
+  "Manutención",
+  "Actividades",
+  "Otros gastos"
  ],
  "tabla2074": {
   "series": 420,
