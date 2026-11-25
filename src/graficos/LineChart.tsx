@@ -2,6 +2,7 @@ import { useId, useMemo, useState, type KeyboardEvent, type PointerEvent, type R
 import { motion } from 'motion/react'
 import { CountUp } from './CountUp'
 import { niceTicks, useInView, useWidth } from './util'
+import { sitioTip } from './tip'
 import { Leyenda, useOcultas } from './Leyenda'
 
 export type Punto = [number, number]
@@ -120,9 +121,9 @@ export function LineChart({ series: entrada, alto = 200, titulo, fx, fy, fxEje, 
           <rect className="g-hit" x={L} y={0} width={Math.max(0, W - L - R)} height={H} tabIndex={0} aria-label={`${titulo}: usa las flechas para recorrer los datos`}
             onPointerMove={onMove} onPointerDown={onMove} onPointerLeave={e => e.pointerType !== 'touch' && setHx(null)} onKeyDown={onKey} onBlur={() => setHx(null)} />
         </svg>}
-        {hx != null && tip.length > 0 && W > 0 && <div className="g-tip" style={{ left: Math.min(W - 150, Math.max(0, px(hx) - 75)) }} role="status">
+        {hx != null && tip.length > 0 && W > 0 && <div className="g-tip" style={sitioTip(W, H, px(hx), tip.map(({ p }) => py(p[1])), T, B)} role="status">
           <p className="g-tip-x">{fx(hx)}</p>
-          {tip.map(({ s, p }) => <p key={s.id}><b>{fy(p[1])}</b><span><i style={{ background: s.color }} />{s.nombre}</span></p>)}
+          {tip.map(({ s, p }) => <p key={s.id}><b>{fy(p[1])}</b>{series.length > 1 && <span><i style={{ background: s.color }} />{s.nombre}</span>}</p>)}
         </div>}
       </div>
       {pie && <figcaption className="g-cap">{pie}</figcaption>}

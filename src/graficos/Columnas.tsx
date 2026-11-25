@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { useState } from 'react'
 import { niceTicks, useInView, useWidth } from './util'
+import { sitioTip } from './tip'
 
 export type Columna = { x: string; valor: number; color?: string; destacado?: boolean }
 
@@ -43,7 +44,7 @@ export function Columnas({ items, fmt, titulo, alto = 170, cadaX = 1, etiqueta }
             </g>
           })}
         </svg>}
-        {hover != null && W > 0 && <div className="g-tip" style={{ left: Math.min(W - 140, Math.max(0, L + hover * band - 60)) }} role="status">
+        {hover != null && W > 0 && <div className="g-tip" style={sitioTip(W, H, L + (hover + .5) * band, [py(items[hover].valor)], T, B, band / 2 + 8)} role="status">
           <p className="g-tip-x">{items[hover].x}</p><p><b>{fmt(items[hover].valor)}</b></p>
         </div>}
       </div>

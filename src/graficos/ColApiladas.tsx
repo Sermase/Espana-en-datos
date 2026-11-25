@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
 import { niceTicks, useInView, useWidth } from './util'
+import { sitioTip } from './tip'
 import { Leyenda, useOcultas } from './Leyenda'
 
 export type Tramo = { id: string; nombre: string; color: string; v: number[] }
@@ -47,7 +48,7 @@ export function ColApiladas({ xs, tramos: todos, titulo, fy, alto = 220, cadaX =
           })}
           <line className="g-grid" x1={L} x2={W - R} y1={py(0)} y2={py(0)} style={{ stroke: 'rgba(160,220,240,.35)' }} />
         </svg>}
-        {hi != null && W > 0 && <div className="g-tip g-tip-wide" style={{ left: Math.min(W - 190, Math.max(0, L + hi * band - 90)) }} role="status">
+        {hi != null && W > 0 && <div className="g-tip g-tip-wide" style={sitioTip(W, H, L + (hi + .5) * band, [py(pos[hi])], T, B, band / 2 + 8)} role="status">
           <p className="g-tip-x">{xs[hi]}{total && <> · total {fy(pos[hi] + neg[hi])}</>}</p>
           {[...tramos].reverse().filter(t => t.v[hi]).map(t => <p key={t.id}><b>{fy(t.v[hi])}</b><span><i style={{ background: t.color, height: 8 }} />{t.nombre}</span></p>)}
         </div>}

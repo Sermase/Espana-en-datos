@@ -18,11 +18,11 @@
 .g-cross circle { fill: currentColor }
 .g-hit { fill: transparent; cursor: crosshair; outline: none; touch-action: pan-y }
 .g-hit:focus-visible { stroke: var(--acc, #3fe6ff); stroke-width: 1 }
-.g-tip { position: absolute; top: -6px; width: 150px; pointer-events: none; background: rgba(3, 12, 18, .95); border: 1px solid rgba(160, 220, 240, .2); border-radius: 4px; padding: 7px 9px; box-shadow: 0 6px 20px rgba(0, 0, 0, .45); z-index: 5 }
+.g-tip { position: absolute; top: -6px; width: max-content; min-width: 92px; pointer-events: none; background: rgba(3, 12, 18, .95); border: 1px solid rgba(160, 220, 240, .2); border-radius: 4px; padding: 7px 9px; box-shadow: 0 6px 20px rgba(0, 0, 0, .45); z-index: 5 }
 .g-tip p { margin: 0; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 12px; color: var(--g-ink2) }
-.g-tip p span { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.g-tip p span { min-width: 0; display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
 .g-tip p span i { display: inline-block; width: 12px; height: 2px; border-radius: 1px; flex: none }
-.g-tip b { color: var(--g-ink); font-size: 13.5px; font-variant-numeric: tabular-nums }
+.g-tip b { white-space: nowrap; color: var(--g-ink); font-size: 13.5px; font-variant-numeric: tabular-nums }
 .g-tip .g-tip-x { color: var(--g-muted); font-size: 11.5px; margin-bottom: 3px }
 .g-legend { list-style: none; padding: 0; margin: 0 0 6px; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--g-ink2) }
 .g-legend li { display: inline-flex; align-items: center; gap: 6px }
@@ -77,7 +77,7 @@ button.g-bar:hover, button.g-bar:focus-visible { background: rgba(255, 255, 255,
 /* Áreas apiladas */
 .g-capa { stroke: var(--g-surface); stroke-width: 1; transition: opacity .2s; cursor: pointer }
 .g-cross-l { stroke: #fff; stroke-opacity: .7; stroke-width: 1 }
-.g-tip-wide { width: 190px }
+.g-tip-wide { min-width: 170px }
 .g-legend-sel button { display: inline-flex; align-items: center; gap: 6px; background: none; border: 1px solid transparent; border-radius: 3px; padding: 2px 5px; color: inherit; font: inherit; cursor: pointer }
 .g-legend-sel button:disabled { cursor: default }
 .g-legend-sel button.is-on { border-color: rgba(255, 255, 255, .35); color: #fff }

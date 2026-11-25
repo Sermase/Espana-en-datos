@@ -1,6 +1,7 @@
 import { useMemo, useState, type KeyboardEvent, type PointerEvent } from 'react'
 import { motion } from 'motion/react'
 import { niceTicks, useInView, useWidth } from './util'
+import { sitioTip } from './tip'
 import { Leyenda, useOcultas } from './Leyenda'
 
 export type Capa = { id: string; nombre: string; color: string; v: number[] }
@@ -63,7 +64,7 @@ export function Apiladas({ xs, capas: todas, titulo, fx, fxEje, ticksX, fy, alto
           <rect className="g-hit" x={L} y={0} width={Math.max(0, W - L - R)} height={H} tabIndex={0} aria-label={`${titulo}: usa las flechas para recorrer los datos`}
             onPointerMove={onMove} onPointerDown={onMove} onPointerLeave={e => e.pointerType !== 'touch' && setHi(null)} onKeyDown={onKey} onBlur={() => setHi(null)} />
         </svg>}
-        {hi != null && W > 0 && <div className="g-tip g-tip-wide" style={{ left: px(xs[hi]) > W / 2 ? Math.max(0, px(xs[hi]) - 200) : Math.min(W - 190, px(xs[hi]) + 12) }} role="status">
+        {hi != null && W > 0 && <div className="g-tip g-tip-wide" style={sitioTip(W, H, px(xs[hi]), [py(pct ? 100 : tot[hi])], T, B)} role="status">
           <p className="g-tip-x">{fx(xs[hi])}{!pct && <> · total {fy(tot[hi])}</>}</p>
           {[...capas].reverse().filter(c => (c.v[hi] ?? 0) > 0).map(c => <p key={c.id}><b>{fmtV(c, hi)}</b><span><i style={{ background: c.color, height: 8 }} />{c.nombre}</span></p>)}
         </div>}
