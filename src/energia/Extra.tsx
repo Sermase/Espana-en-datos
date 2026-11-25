@@ -81,7 +81,7 @@ export function Ire({ e, desde }: { e: Extra | null; desde: number }) {
   const ind = r['Índice industria corregido'].at(-1)!, ser = r['Índice servicios corregido']?.at(-1)
   return <Card t="Las empresas que más consumen, mes a mes" lead={<>Índice del consumo de los grandes consumidores (base 100). La industria está en <b>{nf(ind[1], 1)}</b>{ser && <> y los servicios en <b>{nf(ser[1], 1)}</b></>} ({fMes(tMes(ind[0]))}), ya corregidos de calendario y temperatura.</>}
     fuente={<A id="ree_demanda">REE, índice de Red Eléctrica (IRE)</A>}>
-    <LineChart titulo="Índice de consumo eléctrico de grandes consumidores" series={[{ id: 'i', nombre: 'Industria', datos: s('Índice industria corregido'), color: '#d95926' }, { id: 's', nombre: 'Servicios', datos: s('Índice servicios corregido'), color: '#3987e5' }]} fx={fMes} fxEje={t => String(new Date(t).getUTCFullYear())} fy={v => nf(v, 0)} />
+    <LineChart unidad="Índice, base 100" titulo="Índice de consumo eléctrico de grandes consumidores" series={[{ id: 'i', nombre: 'Industria', datos: s('Índice industria corregido'), color: '#d95926' }, { id: 's', nombre: 'Servicios', datos: s('Índice servicios corregido'), color: '#3987e5' }]} fx={fMes} fxEje={t => String(new Date(t).getUTCFullYear())} fy={v => nf(v, 0)} />
   </Card>
 }
 
@@ -174,7 +174,7 @@ export function GasPetroleo({ e }: { e: Extra | null }) {
       {sel && s && <LineChart titulo={`Importaciones desde ${nombrePais(sel)}`} series={[{ id: sel, nombre: nombrePais(sel), datos: s, color, area: true }]} fx={fMes} fxEje={t => String(new Date(t).getUTCFullYear())} fy={v => que === 'gas' ? `${nf(v, 0)} Mm³` : `${nf(v, 0)} kt`} alto={180} />}
     </Card>
     <Card t="Ranking de proveedores" lead={`Últimos 12 meses, en ${que === 'gas' ? 'miles de millones de m³' : 'millones de toneladas'}.`}>
-      <Barras titulo="Proveedores" fmt={u} limite={10} items={o.paises.map(p => ({ id: p.pais, nombre: nombrePais(p.pais), sub: `${nf((p.valor / o.total) * 100, 1)} %`, valor: p.valor, color, destacado: p.pais === sel, onClick: () => setSel(p.pais) }))} />
+      <Barras suma titulo="Proveedores" fmt={u} limite={10} items={o.paises.map(p => ({ id: p.pais, nombre: nombrePais(p.pais), sub: `${nf((p.valor / o.total) * 100, 1)} %`, valor: p.valor, color, destacado: p.pais === sel, onClick: () => setSel(p.pais) }))} />
     </Card>
   </div>
 }

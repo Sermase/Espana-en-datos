@@ -88,7 +88,7 @@ export function Ahora({ d }: { d: Live }) {
             <p className="note">{e.mu && e.n ? `${e.mu} · ` : ''}{PROV[e.c.slice(0, 2)]}{e.ti ? ` · estación ${TIPO[e.ti.toLowerCase()] ?? e.ti}` : ''}</p>
             <p className="am-ica"><i style={{ background: ICA[e.ica - 1].c }} />{ICA[e.ica - 1].n}</p>
             <ul>{Object.entries(e.m).map(([k, [c, v]]) => <li key={k}><i style={{ background: ICA[c - 1].c }} />{POL[k].n}<b>{nf(v, v < 10 ? 1 : 0)}</b><small>{POL[k].u}</small></li>)}</ul>
-            {e.s.length > 3 && <LineChart titulo={`${POL[e.manda].n} en las últimas 24 horas`} alto={150} fx={h => (h === 0 ? 'última hora' : `hace ${-h} h`)} fy={v => nf(v)} etiquetasFinal={false} series={[{ id: 's', nombre: POL[e.manda].n, color: ICA[e.ica - 1].c, area: true, datos: e.s }]} />}
+            {e.s.length > 3 && <LineChart unidad="µg/m³" titulo={`${POL[e.manda].n} en las últimas 24 horas`} alto={150} fx={h => (h === 0 ? 'última hora' : `hace ${-h} h`)} fy={v => nf(v)} etiquetasFinal={false} series={[{ id: 's', nombre: POL[e.manda].n, color: ICA[e.ica - 1].c, area: true, datos: e.s }]} />}
             {e.aprox && <p className="note">Situada en el centro de su municipio: los metadatos europeos con su posición exacta no respondían.</p>}
           </div> : <>
             <h3>Las peores ahora</h3>

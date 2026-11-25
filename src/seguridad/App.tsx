@@ -146,12 +146,12 @@ function Evolucion({ d }: { d: Datos }) {
   const h0 = v(d, '00', hur.s, base), h1 = v(d, '00', hur.s, i)
   return <div className="graficos">
     <Card wide t="Del bolsillo a la pantalla" lead={<>{h0 && e0 && h1 && e1 ? <>En 2016 había <b>{nf(h0 / e0, 0)}</b> hurtos por cada estafa por internet; en {d.años[i]}, <b>{nf(h1 / e1, 1)}</b>. </> : null}El robo que antes se hacía en la calle ahora llega por el móvil.</>} fuente={MIR}>
-      <LineChart alto={260} titulo="Hurtos y estafas por internet" fx={a => String(a)} fy={x => nf(x)} series={[{ id: 'hurtos', nombre: hur.n, color: hur.c, datos: serieDe(hur) }, { id: 'estafas', nombre: est.n, color: est.c, area: true, datos: serieDe(est) }]} />
+      <LineChart unidad="Delitos conocidos al año" alto={260} titulo="Hurtos y estafas por internet" fx={a => String(a)} fy={x => nf(x)} series={[{ id: 'hurtos', nombre: hur.n, color: hur.c, datos: serieDe(hur) }, { id: 'estafas', nombre: est.n, color: est.c, area: true, datos: serieDe(est) }]} />
     </Card>
     <Card wide t="Lo que sube y lo que baja" lead={<>{e0 && e1 ? <>Desde 2016, las estafas por internet se han multiplicado por <b>{nf(e1 / e0, 1)}</b></> : null}{v0 && v1 ? <>; los robos en viviendas {v1 < v0 ? 'han bajado' : 'han subido'} un <b>{nf(Math.abs(pct(v1, v0)), 0)} %</b></> : null}. Elige qué comparar (hasta cinco).</>} fuente={MIR}>
       <Chips sel={sel} set={toggle} multi />
       <div className="modo" role="radiogroup" aria-label="Escala">{([['indice', '2016 = 100'], ['numero', 'Número de casos']] as const).map(([m, n]) => <button key={m} role="radio" aria-checked={modo === m} className={modo === m ? 'is-on' : ''} onClick={() => setModo(m)}>{n}</button>)}</div>
-      <LineChart series={series} alto={300} titulo="Evolución de los delitos conocidos" fx={a => String(a)} fy={x => modo === 'numero' ? nf(x) : nf(x, 0)}
+      <LineChart unidad={modo === 'numero' ? 'Delitos conocidos al año' : 'Índice, 2016 = 100'} series={series} alto={300} titulo="Evolución de los delitos conocidos" fx={a => String(a)} fy={x => modo === 'numero' ? nf(x) : nf(x, 0)}
         marcas={modo === 'numero' ? MARCAS(d, a => series[0]?.datos.find(p => p[0] === a)?.[1] ?? null) : []} ahora={undefined} />
       <p className="note">{modo === 'indice' ? 'Índice: cada serie vale 100 en 2016, para comparar cuánto ha crecido cada una aunque sean de tamaños muy distintos. Empieza en 2016 porque la reforma del Código Penal de 2015 cambió cómo se cuentan muchos delitos.' : 'En 2015 desaparecieron las faltas: parte pasó a ser delito leve y parte dejó de contarse, por eso algunas series dan un salto ese año.'}</p>
     </Card>
@@ -169,7 +169,7 @@ function CarreraProv({ d }: { d: Datos }) {
   const { por } = porHab(d, T.s, d.años.length - 1)
   return <Card wide t="La carrera de las provincias" lead={<>{T.n} por cada {por === 1000 ? 'mil' : 'cien mil'} habitantes, año a año. Elige el tipo de delito y mira quién sube y quién baja.</>} fuente={MIR}>
     <Chips sel={[t]} set={setT} />
-    <Carrera key={t} titulo={`Provincias con más ${T.n.toLowerCase()} por habitante`} fotogramas={fot} top={12} ms={1100} fmt={x => nf(x, x < 10 ? 2 : 1)} colores={Object.fromEntries(Object.keys(PROV).map(c => [c, T.c]))} />
+    <Carrera unidad={`${T.n} por cada ${por === 1000 ? '1.000' : '100.000'} habitantes`} key={t} titulo={`Provincias con más ${T.n.toLowerCase()} por habitante`} fotogramas={fot} top={12} ms={1100} fmt={x => nf(x, x < 10 ? 2 : 1)} colores={Object.fromEntries(Object.keys(PROV).map(c => [c, T.c]))} />
   </Card>
 }
 
@@ -195,10 +195,10 @@ function Mapa({ d }: { d: Datos }) {
         nota="Población empadronada: donde hay mucho turismo la tasa sube, porque los visitantes también sufren y cometen delitos y no cuentan como habitantes." />
     </Card>
     <Card t="Ranking" lead={<>{T.n.toLowerCase()} {ud}, {A}.</>}>
-      <Barras titulo="Ranking de provincias" fmt={x => nf(x, x < 10 ? 2 : 1)} limite={12} items={rk.map(x => ({ id: x.c, nombre: PROV[x.c], valor: x.v, destacado: sel === x.c, onClick: () => setSel(x.c), color: colorEscala(ESC.slice(1), (x.v - lo) / ((hi - lo) || 1)) }))} />
+      <Barras unidad={`${T.n} ${ud}`} titulo="Ranking de provincias" fmt={x => nf(x, x < 10 ? 2 : 1)} limite={12} items={rk.map(x => ({ id: x.c, nombre: PROV[x.c], valor: x.v, destacado: sel === x.c, onClick: () => setSel(x.c), color: colorEscala(ESC.slice(1), (x.v - lo) / ((hi - lo) || 1)) }))} />
     </Card>
     <Card t={sel ? PROV[sel] : 'Elige una provincia'} lead={sel ? <>{T.n} {ud}, comparado con España.</> : 'Toca una provincia en el mapa o en el ranking para ver su evolución.'}>
-      {sel && <LineChart titulo={`${T.n} en ${PROV[sel]} y en España`} alto={220} fx={a => String(a)} fy={x => nf(x, x < 10 ? 2 : 1)}
+      {sel && <LineChart unidad={`${T.n} ${ud}`} titulo={`${T.n} en ${PROV[sel]} y en España`} alto={220} fx={a => String(a)} fy={x => nf(x, x < 10 ? 2 : 1)}
         series={[{ id: 'es', nombre: 'España', fondo: true, datos: d.años.flatMap((a, j) => { const x = f('00', j); return x == null ? [] : [[a, x]] }) as [number, number][] },
           { id: sel, nombre: PROV[sel], color: ACC, datos: d.años.flatMap((a, j) => { const x = f(sel, j); return x == null ? [] : [[a, x]] }) as [number, number][] }]} />}
     </Card>
@@ -227,7 +227,7 @@ function Ciudades({ d }: { d: Datos }) {
   const xs = lista.find(x => x.c === sel), iN = d.años.indexOf(A), nN = iN >= 0 ? porHab(d, T.s, iN) : null, nac = nN && nN.por === 1000 ? nN.f('00') : null
   return <div className="graficos">
     {u && sel && <div id="ciudad-sel" className="is-wide-wrap"><Card wide t={bonito(u.n)} lead={<>Casos conocidos de {T.n.toLowerCase()} cada año{u.pob[j] ? `; ${nf(u.pob[j]!)} habitantes en ${A}` : ''}.{xs && nac ? <> Con <b>{nf(xs.tasa, 1)}</b> por 1.000 habitantes, {xs.tasa >= nac ? <>está <b>{nf(xs.tasa / nac, 1)} veces</b> por encima</> : <>está un <b>{nf(Math.abs(pct(xs.tasa, nac)), 0)} %</b> por debajo</>} de la media de España ({nf(nac, 1)}).</> : null}</>}>
-      <LineChart titulo={`${T.n} en ${u.n}`} alto={220} fx={a => String(a)} ticksX={m.años.filter(a => u.d[T.b!]?.[m.años.indexOf(a)] != null).filter((_, k, l) => innerWidth > 600 || k % 2 === (l.length - 1) % 2)} fy={x => nf(x)} series={[{ id: sel, nombre: bonito(u.n), color: T.c, area: true, datos: m.años.flatMap((a, k) => { const x = u.d[T.b!]?.[k]; return x == null ? [] : [[a, x]] }) as [number, number][] }]} />
+      <LineChart unidad="Delitos conocidos al año" titulo={`${T.n} en ${u.n}`} alto={220} fx={a => String(a)} ticksX={m.años.filter(a => u.d[T.b!]?.[m.años.indexOf(a)] != null).filter((_, k, l) => innerWidth > 600 || k % 2 === (l.length - 1) % 2)} fy={x => nf(x)} series={[{ id: sel, nombre: bonito(u.n), color: T.c, area: true, datos: m.años.flatMap((a, k) => { const x = u.d[T.b!]?.[k]; return x == null ? [] : [[a, x]] }) as [number, number][] }]} />
       <p className="note">Interior publica cada municipio desde que supera el umbral (30.000 habitantes hasta 2020, 20.000 desde 2021); por eso algunas series empiezan tarde. Los delitos por internet se cuentan aparte desde 2019.</p>
     </Card></div>}
     <Card wide t={`${lista.length} municipios grandes`} lead={<>{T.n} por cada 1.000 habitantes en {A}, en los municipios de más de 20.000 habitantes (y alguno más pequeño que Interior publica). La mitad está por debajo de <b>{nf(med, 1)}</b>. Busca el tuyo.</>} fuente={MIR}>

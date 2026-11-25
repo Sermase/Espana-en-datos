@@ -9,7 +9,7 @@ export type Columna = { x: string; valor: number; color?: string; destacado?: bo
  * Columnas verticales (años, tramos de precio…): suben desde la base al aparecer,
  * con el valor de cada una al pasar por encima y la columna destacada etiquetada.
  */
-export function Columnas({ items, fmt, titulo, alto = 170, cadaX = 1, etiqueta }: { items: Columna[]; fmt: (v: number) => string; titulo: string; alto?: number; cadaX?: number; etiqueta?: (c: Columna) => string }) {
+export function Columnas({ items, fmt, titulo, alto = 170, cadaX = 1, etiqueta, unidad }: { items: Columna[]; fmt: (v: number) => string; titulo: string; alto?: number; cadaX?: number; etiqueta?: (c: Columna) => string; unidad?: string }) {
   const [wrap, W] = useWidth<HTMLDivElement>()
   const [view, seen] = useInView<HTMLDivElement>()
   const [hover, setHover] = useState<number | null>(null)
@@ -25,6 +25,7 @@ export function Columnas({ items, fmt, titulo, alto = 170, cadaX = 1, etiqueta }
   const bw = Math.min(24, Math.max(2, band - 2))
   return (
     <figure className="g-fig" ref={view}>
+      {unidad && <p className="g-unidad">{unidad}</p>}
       <div className="g-plot" ref={wrap} style={{ height: H }}>
         {W > 0 && <svg width={W} height={H} role="img" aria-label={titulo} onPointerMove={e => { const i = Math.floor((e.clientX - e.currentTarget.getBoundingClientRect().left - L) / band); if (i >= 0 && i < items.length) setHover(i) }}>
           {ticks.map(v => <g key={v}><line className="g-grid" x1={L} x2={W - R} y1={py(v)} y2={py(v)} /><text className="g-ax" x={L - 6} y={py(v) + 3.5} textAnchor="end">{fmt(v)}</text></g>)}

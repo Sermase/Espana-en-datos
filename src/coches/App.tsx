@@ -95,10 +95,10 @@ function Ventas({ m }: { m: M }) {
       <ul className="sala-lista" aria-label="Turismos nuevos por combustible, últimos 12 meses">{lista.map(c => <li key={c.id} style={{ '--c': c.c } as CSSProperties}><i /><span>{c.n}</span><b>{nf((c.v / a12.n) * 100, 1)} %</b><em style={{ width: `${(c.v / lista[0].v) * 100}%` }} /></li>)}</ul>
     </section>
     <Card wide t="Del diésel al enchufe" lead={<>En {dieselMax}, el diésel se llevó el <b>{nf(((A[dieselMax].comb.diesel ?? 0) / A[dieselMax].n) * 100, 0)} %</b> de los turismos nuevos; en {ultCompleto}, el {nf(((A[ultCompleto].comb.diesel ?? 0) / A[ultCompleto].n) * 100, 0)} %. Hoy el más vendido es el {minus(lista[0].n)} ({nf((lista[0].v / a12.n) * 100, 0)} % en los últimos 12 meses).{(A[ultCompleto].comb.electrico ?? 0) > (A[ultCompleto].comb.diesel ?? 0) ? ` En ${ultCompleto} ya se vendieron más eléctricos que diésel.` : ''}</>} fuente={DGT}>
-      <Apiladas xs={xs} capas={capas} pct titulo="Turismos nuevos por combustible, cada mes" fx={x => nombreMes(`${Math.floor(x)}-${String(Math.round((x % 1) * 12) + 1).padStart(2, '0')}`)} fxEje={x => String(Math.floor(x))} ticksX={años.map(Number)} fy={v => `${nf(v, 0)} %`} alto={300} />
+      <Apiladas unidad="% de los turismos nuevos de cada mes" xs={xs} capas={capas} pct titulo="Turismos nuevos por combustible, cada mes" fx={x => nombreMes(`${Math.floor(x)}-${String(Math.round((x % 1) * 12) + 1).padStart(2, '0')}`)} fxEje={x => String(Math.floor(x))} ticksX={años.map(Number)} fy={v => `${nf(v, 0)} %`} alto={300} />
     </Card>
     <Card wide t="Cuántos se venden" lead={<>En {ultCompleto} se matricularon {nf(A[ultCompleto].n, 0)} turismos nuevos{A['2019'] ? <>, un {masMenos(pct(A[ultCompleto].n, A['2019'].n))} que en 2019, antes de la pandemia</> : null}.{A[ultC].meses < 12 ? ` ${ultC}: hasta ${MESES[A[ultC].meses - 1]}.` : ''}</>}>
-      <ColApiladas xs={años.map(a => (A[a].meses < 12 ? `${a}*` : a))} tramos={COMB.map(c => ({ id: c.id, nombre: c.n, color: c.c, v: años.map(a => A[a].comb[c.id] ?? 0) }))} titulo="Turismos nuevos por año y combustible" fy={v => nf(v, 0)} alto={240} />
+      <ColApiladas unidad="Turismos matriculados" xs={años.map(a => (A[a].meses < 12 ? `${a}*` : a))} tramos={COMB.map(c => ({ id: c.id, nombre: c.n, color: c.c, v: años.map(a => A[a].comb[c.id] ?? 0) }))} titulo="Turismos nuevos por año y combustible" fy={v => nf(v, 0)} alto={240} />
       <p className="note">Turismos (categoría M1) matriculados nuevos en España. No incluye los usados importados{años.length ? `: en ${ultCompleto}, otros ${nf(A[ultCompleto].u, 0)}` : ''}.</p>
     </Card>
   </div>
@@ -141,33 +141,33 @@ function Marcas({ m }: { m: M }) {
   const eligeMarca = (k: string) => { setSel(sel === k ? null : k); setQ('') }
   return <div className="graficos">
     <Card wide t="La carrera de las marcas" lead="Turismos nuevos de los últimos 12 meses, mes a mes desde 2015. Dale al botón para volver a verla o arrastra la barra de tiempo." fuente={DGT}>
-      <Carrera titulo="Ranking de marcas por turismos nuevos en 12 meses" fotogramas={carrera} top={10} ms={260} fmt={v => nf(v, 0)} />
+      <Carrera unidad="Turismos nuevos en los últimos 12 meses" titulo="Ranking de marcas por turismos nuevos en 12 meses" fotogramas={carrera} top={10} ms={260} fmt={v => nf(v, 0)} />
     </Card>
     <Card wide t={`Las marcas más vendidas en ${a}`} lead={top[0] ? <><b>{marca(top[0][0])}</b> fue la marca más matriculada, con {nf(top[0][1], 0)} turismos nuevos ({nf((top[0][1] / tot) * 100, 1)} %). Las diez primeras se llevan el {nf((top.slice(0, 10).reduce((t, x) => t + x[1], 0) / tot) * 100, 0)} % del mercado; en total se vendieron {todas.length} marcas. Toca una para ver sus modelos.</> : null} fuente={DGT}>
       <div className="modo" role="radiogroup" aria-label="Año">{años.map(y => <button key={y} role="radio" aria-checked={a === y} className={a === y ? 'is-on' : ''} onClick={() => setA(y)}>{y}</button>)}</div>
       <div className="buscar-marca"><input type="search" value={q} onChange={e => setQ(e.target.value)} placeholder="Buscar una marca…" aria-label="Buscar una marca" />
         {buscadas.length > 0 && <ul>{buscadas.map(k => <li key={k}><button onClick={() => eligeMarca(k)}>{marca(k)}</button></li>)}</ul>}</div>
-      <Barras titulo={`Turismos nuevos por marca, ${a}`} limite={15} fmt={v => nf(v, 0)} items={top.map(([k, v]) => ({ id: k, nombre: marca(k), sub: A[ant]?.marcas[k] ? signo(pct(v, A[ant].marcas[k])) + ` que en ${ant}` : 'nueva', valor: v, color: ACC, destacado: k === sel, onClick: () => eligeMarca(k) }))} />
+      <Barras unidad="Turismos matriculados" suma titulo={`Turismos nuevos por marca, ${a}`} limite={15} fmt={v => nf(v, 0)} items={top.map(([k, v]) => ({ id: k, nombre: marca(k), sub: A[ant]?.marcas[k] ? signo(pct(v, A[ant].marcas[k])) + ` que en ${ant}` : 'nueva', valor: v, color: ACC, destacado: k === sel, onClick: () => eligeMarca(k) }))} />
     </Card>
     {sel && <Card wide t={`${marca(sel)}`} lead={<>{A[a].marcas[sel] ? <>En {a} vendió {nf(A[a].marcas[sel], 0)} turismos nuevos, el {nf((A[a].marcas[sel] / tot) * 100, 1)} % del mercado (puesto {todas.findIndex(([k]) => k === sel) + 1}).</> : <>En {a} no vendió turismos nuevos.</>}{deMarca.length ? <> El {nf((deMarca.reduce((t, [, v]) => t + v[1], 0) / Math.max(1, deMarca.reduce((t, [, v]) => t + v[0], 0))) * 100, 0)} % de sus ventas fueron eléctricos o enchufables.</> : null}</>}>
       <button className="cerrar-marca" onClick={() => setSel(null)}>Cerrar</button>
       <div className="mapa-dos">
-        <LineChart titulo={`Turismos nuevos de ${marca(sel)} por año`} alto={220} fx={x => String(x)} fy={v => nf(v, 0)} series={[{ id: sel, nombre: marca(sel), color: ACC, area: true, datos: años.map(y => [+y, A[y].marcas[sel] ?? 0] as [number, number]) }]} />
-        {mods == null ? <p className="note">Cargando modelos…</p> : deMarca.length ? <Barras titulo={`Modelos de ${marca(sel)} en ${a}`} limite={10} fmt={v => nf(v, 0)} items={deMarca.map(([k, [n, e]]) => ({ id: k, nombre: nombreModelo(k).modelo, sub: e / n >= 0.01 ? `${nf((e / n) * 100, 0)} % eléctrico o enchufable` : undefined, valor: n, color: e / n > 0.5 ? '#3987e5' : ACC }))} /> : <p className="note">Sin modelos con ventas ese año.</p>}
+        <LineChart unidad="Turismos matriculados al año" titulo={`Turismos nuevos de ${marca(sel)} por año`} alto={220} fx={x => String(x)} fy={v => nf(v, 0)} series={[{ id: sel, nombre: marca(sel), color: ACC, area: true, datos: años.map(y => [+y, A[y].marcas[sel] ?? 0] as [number, number]) }]} />
+        {mods == null ? <p className="note">Cargando modelos…</p> : deMarca.length ? <Barras unidad="Turismos matriculados" suma titulo={`Modelos de ${marca(sel)} en ${a}`} limite={10} fmt={v => nf(v, 0)} items={deMarca.map(([k, [n, e]]) => ({ id: k, nombre: nombreModelo(k).modelo, sub: e / n >= 0.01 ? `${nf((e / n) * 100, 0)} % eléctrico o enchufable` : undefined, valor: n, color: e / n > 0.5 ? '#3987e5' : ACC }))} /> : <p className="note">Sin modelos con ventas ese año.</p>}
       </div>
     </Card>}
     <Card wide t={`Los modelos más vendidos en ${a}`} lead={modsAño[0] ? <>El <b>{nombreModelo(modsAño[0][0]).marca} {nombreModelo(modsAño[0][0]).modelo}</b> fue el turismo más vendido, con {nf(modsAño[0][1][0], 0)} unidades. En azul, los que venden más de la mitad en versión eléctrica o enchufable.</> : mods == null ? 'Cargando modelos…' : 'Aún no hay modelos para este año.'} fuente={DGT}>
-      {modsAño.length > 0 && <Barras titulo={`Modelos más vendidos, ${a}`} limite={20} fmt={v => nf(v, 0)} items={modsAño.slice(0, 100).map(([k, [n, e]]) => { const x = nombreModelo(k); return { id: k, nombre: `${x.marca} ${x.modelo}`, sub: e / n >= 0.01 ? `${nf((e / n) * 100, 0)} % eléctrico o enchufable` : undefined, valor: n, color: e / n > 0.5 ? '#3987e5' : ACC, onClick: () => eligeMarca(k.split('|')[0]) } })} />}
+      {modsAño.length > 0 && <Barras unidad="Turismos matriculados" suma titulo={`Modelos más vendidos, ${a}`} limite={20} fmt={v => nf(v, 0)} items={modsAño.slice(0, 100).map(([k, [n, e]]) => { const x = nombreModelo(k); return { id: k, nombre: `${x.marca} ${x.modelo}`, sub: e / n >= 0.01 ? `${nf((e / n) * 100, 0)} % eléctrico o enchufable` : undefined, valor: n, color: e / n > 0.5 ? '#3987e5' : ACC, onClick: () => eligeMarca(k.split('|')[0]) } })} />}
       <p className="note">Modelo según el nombre de la ficha técnica que registra la DGT; algunas variantes pueden salir aparte.</p>
     </Card>
     {sube.length > 3 && <Card t={`Las que más crecen en ${a}`} lead={`Marcas con más de 1.000 turismos vendidos, frente a ${ant}.`}>
-      <Barras titulo={`Cambio de ventas por marca, ${a} frente a ${ant}`} limite={8} fmt={v => signo(v)} items={sube.map(x => ({ id: x.k, nombre: marca(x.k), valor: x.v, color: x.v >= 0 ? '#3df5b0' : '#ff8a95', onClick: () => eligeMarca(x.k) }))} />
+      <Barras unidad="Cambio de las ventas, en %" titulo={`Cambio de ventas por marca, ${a} frente a ${ant}`} limite={8} fmt={v => signo(v)} items={sube.map(x => ({ id: x.k, nombre: marca(x.k), valor: x.v, color: x.v >= 0 ? '#3df5b0' : '#ff8a95', onClick: () => eligeMarca(x.k) }))} />
     </Card>}
     {sube.length > 3 && <Card t={`Las que más caen en ${a}`} lead="Mismas marcas, las de peor año.">
-      <Barras titulo={`Caída de ventas por marca, ${a} frente a ${ant}`} limite={8} fmt={v => signo(v)} items={[...sube].reverse().map(x => ({ id: x.k, nombre: marca(x.k), valor: x.v, color: x.v >= 0 ? '#3df5b0' : '#ff8a95', onClick: () => eligeMarca(x.k) }))} />
+      <Barras unidad="Cambio de las ventas, en %" titulo={`Caída de ventas por marca, ${a} frente a ${ant}`} limite={8} fmt={v => signo(v)} items={[...sube].reverse().map(x => ({ id: x.k, nombre: marca(x.k), valor: x.v, color: x.v >= 0 ? '#3df5b0' : '#ff8a95', onClick: () => eligeMarca(x.k) }))} />
     </Card>}
     <Card wide t="Cuota de mercado, año a año" lead={<>Las seis marcas que más vendieron en {ultimo}{sel && !seis.includes(sel) ? <> y {marca(sel)}</> : null}. Toca una etiqueta para ocultarla; doble toque para ver solo esa.</>}>
-      <LineChart titulo="Cuota de mercado por marca" alto={260} fx={x => String(x)} fy={v => `${nf(v, 1)} %`} series={enLinea.map((k, i) => ({ id: k, nombre: marca(k), color: i < 6 ? COL6[i] : ACC, datos: años.map(y => [+y, ((A[y].marcas[k] ?? 0) / A[y].n) * 100] as [number, number]) }))} />
+      <LineChart unidad="% de los turismos nuevos" titulo="Cuota de mercado por marca" alto={260} fx={x => String(x)} fy={v => `${nf(v, 1)} %`} series={enLinea.map((k, i) => ({ id: k, nombre: marca(k), color: i < 6 ? COL6[i] : ACC, datos: años.map(y => [+y, ((A[y].marcas[k] ?? 0) / A[y].n) * 100] as [number, number]) }))} />
     </Card>
   </div>
 }
@@ -210,18 +210,18 @@ function Parque({ p, m }: { p: P; m: M }) {
   const usados = ks.slice(-12).reduce((t, k) => t + m.meses[k].u, 0)
   return <div className="graficos">
     {A && <Card wide t={`Los ${nf(s('TOTAL', A) / 1e6, 1)} millones de turismos, ${A}`} lead={<>Todos los turismos en circulación. Eléctricos y enchufables son el {nf(((capasC(A).electrico + capasC(A).enchufable) / s('TOTAL', A)) * 100, 1)} % del parque; el diésel, el {nf((capasC(A).diesel / s('TOTAL', A)) * 100, 0)} %.</>} fuente={EUROSTAT}>
-      <Apiladas xs={años.map(Number)} capas={[...COMB.slice(0, 6).map(c => ({ id: c.id, nombre: c.n, color: c.c, v: años.map(a => (capasC(a) as Record<string, number>)[c.id] / 1e6) })), { id: 'otros', nombre: COMB[6].n, color: COMB[6].c, v: años.map(a => otros(a) / 1e6) }]} titulo="Parque de turismos por combustible" fx={a => String(a)} fy={v => `${nf(v, 1)} M`} alto={260} />
+      <Apiladas unidad="Millones de turismos" xs={años.map(Number)} capas={[...COMB.slice(0, 6).map(c => ({ id: c.id, nombre: c.n, color: c.c, v: años.map(a => (capasC(a) as Record<string, number>)[c.id] / 1e6) })), { id: 'otros', nombre: COMB[6].n, color: COMB[6].c, v: años.map(a => otros(a) / 1e6) }]} titulo="Parque de turismos por combustible" fx={a => String(a)} fy={v => `${nf(v, 1)} M`} alto={260} />
       <p className="note">Eurostat no separa los híbridos en todos los años; cuando no lo hace, van con su combustible.</p>
     </Card>}
     {AE && <Card wide t="Cada vez más viejos" lead={<>En {AE}, el <b>{nf(viejos(E, AE) ?? 0, 0)} %</b> de los turismos españoles tiene más de 20 años (en {añosE[0]}, el {nf(viejos(E, añosE[0]) ?? 0, 0)} %). La edad media ronda los {nf(media(E, AE) ?? 0, 0)} años.</>} fuente={<a href="https://ec.europa.eu/eurostat/databrowser/view/road_eqs_carage/default/table" target="_blank" rel="noopener noreferrer">Eurostat, turismos por edad</a>}>
-      <Apiladas xs={añosE.map(Number)} capas={EDADES.map(([k, n], i) => ({ id: k, nombre: n, color: ['#3987e5', '#199e70', '#c98500', '#d95926', '#d55181'][i], v: añosE.map(a => E[k]?.[a] ?? 0) }))} pct titulo="Turismos por antigüedad" fx={a => String(a)} fy={v => `${nf(v, 0)} %`} alto={240} />
+      <Apiladas unidad="% del parque de turismos" xs={añosE.map(Number)} capas={EDADES.map(([k, n], i) => ({ id: k, nombre: n, color: ['#3987e5', '#199e70', '#c98500', '#d95926', '#d55181'][i], v: añosE.map(a => E[k]?.[a] ?? 0) }))} pct titulo="Turismos por antigüedad" fx={a => String(a)} fy={v => `${nf(v, 0)} %`} alto={240} />
       <p className="note">Edad media aproximada, calculada con el punto medio de cada tramo (25 años para los de más de 20).</p>
     </Card>}
     {AE && <Card t="Frente a Europa" lead="Porcentaje de turismos con más de 20 años.">
-      <Barras titulo={`Turismos con más de 20 años, ${AE}`} fmt={v => `${nf(v, 0)} %`} items={Object.keys(PAIS).map(g => ({ id: g, nombre: PAIS[g], valor: viejos(p.edad?.[g], AE) ?? 0, color: g === 'ES' ? ACC : '#5f7480', destacado: g === 'ES' })).filter(x => x.valor > 0).sort((x, y) => y.valor - x.valor)} />
+      <Barras unidad="% del parque de turismos" titulo={`Turismos con más de 20 años, ${AE}`} fmt={v => `${nf(v, 0)} %`} items={Object.keys(PAIS).map(g => ({ id: g, nombre: PAIS[g], valor: viejos(p.edad?.[g], AE) ?? 0, color: g === 'ES' ? ACC : '#5f7480', destacado: g === 'ES' })).filter(x => x.valor > 0).sort((x, y) => y.valor - x.valor)} />
     </Card>}
     {Object.keys(H).length > 0 && <Card t="Coches por cada 1.000 habitantes" lead="Turismos en circulación por cada mil personas.">
-      <Barras titulo="Turismos por cada 1.000 habitantes" fmt={v => nf(v, 0)} items={Object.keys(PAIS).map(g => { const o = H[g]?.total ?? {}, y = Object.keys(o).sort().at(-1); return { id: g, nombre: `${PAIS[g]}${y ? ` (${y})` : ''}`, valor: y ? o[y] : 0, color: g === 'ES' ? ACC : '#5f7480', destacado: g === 'ES' } }).filter(x => x.valor > 0).sort((x, y) => y.valor - x.valor)} />
+      <Barras unidad="Turismos por cada 1.000 habitantes" titulo="Turismos por cada 1.000 habitantes" fmt={v => nf(v, 0)} items={Object.keys(PAIS).map(g => { const o = H[g]?.total ?? {}, y = Object.keys(o).sort().at(-1); return { id: g, nombre: `${PAIS[g]}${y ? ` (${y})` : ''}`, valor: y ? o[y] : 0, color: g === 'ES' ? ACC : '#5f7480', destacado: g === 'ES' } }).filter(x => x.valor > 0).sort((x, y) => y.valor - x.valor)} />
     </Card>}
     {usados > 0 && <Card wide t="Los usados que llegan de fuera" lead={<>En los últimos 12 meses se matricularon {nf(usados, 0)} turismos usados importados{edadU.length ? <>, con una edad media de <b>{nf(edadU.reduce((x, y) => x + y, 0) / edadU.length, 1)} años</b></> : null}.</>} fuente={DGT}>
       <p className="note">Coches que ya habían circulado en otro país y se matriculan por primera vez en España.</p>

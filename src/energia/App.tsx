@@ -127,7 +127,7 @@ function Ahora({ hoy, tec, setTec, vivo }: { hoy: Hoy; tec: Tec | null; setTec: 
         ]} fx={t => `${fDia(t)} ${fHora(t)}`} fxEje={t => dias.length > 1 && fHora(t) === '00:00' ? fDia(t) : fHora(t)} fy={v => `${nf(v, 2)} €`} alto={220} ahora={tLocal(new Date(Date.now()).toLocaleString('sv-SE', { timeZone: 'Europe/Madrid' }).replace(' ', 'T'))} />
       </Card>}
       {bal.length > 0 && <Card t="De dónde salió la luz ayer" lead={<>Ayer la primera fuente fue la <b>{bal[0].t.nombre.toLowerCase()}</b>, con el {pct(bal[0].v / btot)} de la generación.</>} fuente={<A id="ree_balance">REE, balance eléctrico</A>}>
-        <Barras titulo="Generación de ayer por tecnología" fmt={v => gwh(v)} items={bal.map(x => ({ id: x.t.id, nombre: x.t.nombre, sub: pct(x.v / btot, 1), valor: x.v, color: x.t.color, destacado: x.t.id === tec, onClick: () => setTec(x.t.id) }))} />
+        <Barras suma titulo="Generación de ayer por tecnología" fmt={v => gwh(v)} items={bal.map(x => ({ id: x.t.id, nombre: x.t.nombre, sub: pct(x.v / btot, 1), valor: x.v, color: x.t.color, destacado: x.t.id === tec, onClick: () => setTec(x.t.id) }))} />
       </Card>}
       {ag && <Card t="Los últimos 30 días" wide lead="Toca una tecnología para verla en el holograma." fuente={<A id="ree_generacion">REE, estructura de la generación</A>}>
         <Apiladas xs={ag.xs} capas={ag.capas} titulo="Generación diaria por tecnología" fx={fDia} fy={v => gwh(v)} alto={230} sel={tec} onSel={id => setTec(id as Tec)} />

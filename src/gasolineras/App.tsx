@@ -35,7 +35,7 @@ function Reparto({ precios, marca, titulo }: { precios: number[]; marca?: number
   for (let b = Math.floor(lo * 100) / 100; b <= hi; b = Math.round((b + step) * 100) / 100) bins.push({ x: eur(b, 2), valor: 0, lo: b })
   for (const v of so) { const i = Math.min(bins.length - 1, Math.max(0, Math.floor((v - bins[0].lo) / step + 1e-9))); bins[i].valor++ }
   const mi = marca == null ? -1 : Math.min(bins.length - 1, Math.max(0, Math.floor((marca - bins[0].lo) / step + 1e-9)))
-  return <Columnas titulo={titulo} items={bins.map((b, i) => ({ x: b.x, valor: b.valor, destacado: i === mi, color: i === mi ? '#ffffff' : undefined }))} fmt={v => int(Math.round(v))} cadaX={Math.ceil(bins.length / 5)} etiqueta={() => 'esta'} alto={140} />
+  return <Columnas unidad="Gasolineras en cada tramo de precio (€/litro)" titulo={titulo} items={bins.map((b, i) => ({ x: b.x, valor: b.valor, destacado: i === mi, color: i === mi ? '#ffffff' : undefined }))} fmt={v => int(Math.round(v))} cadaX={Math.ceil(bins.length / 5)} etiqueta={() => 'esta'} alto={140} />
 }
 
 function StationCard({ d, s, fuel, onProv, near }: { d: Datos; s: Station; fuel: Fuel; onProv: (id: string) => void; near: { lat: number; lon: number } | null }) {

@@ -57,7 +57,7 @@ function Card({ t, lead, children, wide, fuente, si = true, de }: { t: string; l
   </section>
 }
 
-function Linea({ series, fy, frec, alto = 200, titulo, cero }: { series: (LSerie | null)[]; fy: (v: number) => string; frec: Serie['frec']; alto?: number; titulo: string; cero?: boolean }) {
+function Linea({ series, fy, frec, alto = 200, titulo, cero, unidad }: { series: (LSerie | null)[]; fy: (v: number) => string; frec: Serie['frec']; alto?: number; titulo: string; cero?: boolean; unidad?: string }) {
   const ok = series.filter((x): x is LSerie => !!x)
   if (!ok.length) return <p className="note">Sin datos todavía para este gráfico.</p>
   const ys = ok.flatMap(s => s.datos.map(p => p[1])), ts = ok.flatMap(s => s.datos.map(p => p[0]))
@@ -66,18 +66,18 @@ function Linea({ series, fy, frec, alto = 200, titulo, cero }: { series: (LSerie
   const max = typeof innerWidth === 'number' && innerWidth < 640 ? 4 : 9
   const paso = [1, 2, 5, 10].find(p => (a1 - a0) / p <= max) ?? 10
   const ticksX: number[] = []; for (let a = Math.ceil(a0 / paso) * paso; a <= a1; a += paso) ticksX.push(Date.UTC(a, 0, 1))
-  return <LineChart titulo={titulo} series={ok} fx={t => fechaDe(t, frec)} fxEje={t => String(new Date(t).getUTCFullYear())} ticksX={ticksX} fy={fy} alto={alto} yMin={cero ? Math.min(0, ...ys) : undefined} />
+  return <LineChart unidad={unidad} titulo={titulo} series={ok} fx={t => fechaDe(t, frec)} fxEje={t => String(new Date(t).getUTCFullYear())} ticksX={ticksX} fy={fy} alto={alto} yMin={cero ? Math.min(0, ...ys) : undefined} />
 }
 
 /** Último valor de cada país o comunidad, con España resaltada. */
-function Ranking({ g, nombre, fmt, titulo, orden = 'desc', limite = 12 }: { g: Record<string, Serie>; nombre: (k: string) => string; fmt: (v: number) => string; titulo: string; orden?: 'asc' | 'desc'; limite?: number }) {
+function Ranking({ g, nombre, fmt, titulo, orden = 'desc', limite = 12, unidad }: { g: Record<string, Serie>; nombre: (k: string) => string; fmt: (v: number) => string; titulo: string; orden?: 'asc' | 'desc'; limite?: number; unidad?: string }) {
   const items = Object.entries(g).map(([k, s]) => ({ k, p: s.d.at(-1)! })).filter(x => x.p)
   if (!items.length) return null
   const año = items.map(x => x.p[0]).sort().at(-1)!
   const rows = items.filter(x => x.p[0] === año || items.length < 6).sort((a, b) => (orden === 'desc' ? b.p[1] - a.p[1] : a.p[1] - b.p[1]))
   const iEs = rows.findIndex(x => x.k === 'ES')
   return <>
-    <Barras titulo={titulo} fmt={fmt} limite={Math.max(limite, iEs + 1)} items={rows.map(x => ({ id: x.k, nombre: nombre(x.k), valor: x.p[1], destacado: x.k === 'ES', color: x.k === 'ES' ? ES : x.k === 'EU27_2020' ? UE : '#3987e5' }))} />
+    <Barras unidad={unidad} titulo={titulo} fmt={fmt} limite={Math.max(limite, iEs + 1)} items={rows.map(x => ({ id: x.k, nombre: nombre(x.k), valor: x.p[1], destacado: x.k === 'ES', color: x.k === 'ES' ? ES : x.k === 'EU27_2020' ? UE : '#3987e5' }))} />
     <p className="note">Dato de {periodo(año)}.</p>
   </>
 }
@@ -143,7 +143,7 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
         <Columnas titulo="PIB a precios corrientes" items={niv.d.map(([p, v]) => ({ x: p, valor: v / 1e6 }))} fmt={v => `${nf(v, 2)} bill. €`} cadaX={5} />
       </Card>}
       {ppa && <Card de="pib/pib_pc_ppa" si={hay(grupo('pib', 'pib_pc_ppa'))} t="Riqueza por habitante en Europa" lead={<>Corrigiendo por lo que cuestan las cosas en cada país, el PIB por habitante de España es <b>{nf(ppa[1])}</b> sobre una media europea de 100.</>}>
-        <Ranking g={grupo('pib', 'pib_pc_ppa')} nombre={geo} fmt={v => nf(v)} titulo="PIB por habitante en poder de compra" />
+        <Ranking g={grupo('pib', 'pib_pc_ppa')} nombre={geo} fmt={v => nf(v)} titulo="PIB por habitante en poder de compra" unidad="Índice, media de la UE = 100" />
       </Card>}
       <Card de="pib/pib_pc_ccaa" t="Por comunidades" lead="PIB por habitante en euros, último año publicado.">
         <Ranking g={Object.fromEntries(Object.entries(grupo('pib', 'pib_pc_ccaa')).filter(([k]) => k !== 'ES'))} nombre={geo} fmt={v => `${nf(v)} €`} titulo="PIB por habitante por comunidad" limite={19} />
@@ -224,7 +224,7 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
         <Linea titulo="Precio de la vivienda, variación anual" series={cmp('vivienda', 'vivienda_var', 'vivienda')} fy={x => pct(x)} frec="T" cero />
       </Card>}
       <Card de="vivienda/vivienda_ind" t="Nueva y usada" lead="Índice de precios: 2015 = 100.">
-        <Linea titulo="Índice de precios de vivienda nueva y usada" series={[ls(s('vivienda', 'vivienda_ind:DW_NEW'), 'Nueva', rango, { color: CAT[0] }), ls(s('vivienda', 'vivienda_ind:DW_EXST'), 'Usada', rango, { color: CAT[1] })]} fy={x => nf(x)} frec="T" />
+        <Linea unidad="Índice, 2015 = 100" titulo="Índice de precios de vivienda nueva y usada" series={[ls(s('vivienda', 'vivienda_ind:DW_NEW'), 'Nueva', rango, { color: CAT[0] }), ls(s('vivienda', 'vivienda_ind:DW_EXST'), 'Usada', rango, { color: CAT[1] })]} fy={x => nf(x)} frec="T" />
       </Card>
       {e && <Card de="vivienda/euribor" t="Euríbor" lead={<>El euríbor a 12 meses, que marca la cuota de la mayoría de hipotecas variables, está en <b>{pct(e[1], 2)}</b>{emax && <>; su pico desde 2010 fue {pct(emax[1], 2)} en {periodo(emax[0])}</>}.</>}>
         <Linea titulo="Euríbor a 12 meses" series={[ls(eu, 'Euríbor 12 meses', rango, { color: ES, area: true })]} fy={x => pct(x, 1)} frec="M" cero />
@@ -262,7 +262,7 @@ function Seccion({ id, d, rango, go }: { id: Sec; d: Datos; rango: Rango; go: (s
       <Linea titulo="Población en riesgo de pobreza o exclusión" series={[...cmp('hogares', 'riesgo_pobreza', 'riesgo'), ls(s('hogares', 'riesgo_pobreza_ant:ES'), 'España, definición anterior', rango, { color: CAT[0], fondo: true })]} fy={x => pct(x)} frec="A" />
     </Card>}
     <Card de="hogares/gini" si={hay(grupo('hogares', 'gini'))} t="Desigualdad" lead="Índice de Gini: 0 sería que todos ingresan lo mismo y 100 que una persona se lo lleva todo.">
-      <Ranking g={grupo('hogares', 'gini')} nombre={geo} fmt={x => nf(x, 1)} titulo="Índice de Gini por países" />
+      <Ranking g={grupo('hogares', 'gini')} nombre={geo} fmt={x => nf(x, 1)} titulo="Índice de Gini por países" unidad="Índice de Gini: 0 si todos tuvieran la misma renta, 100 si uno se lo llevara todo" />
     </Card>
     <Card de="hogares/renta_mediana" si={hay(grupo('hogares', 'renta_mediana'))} t="Renta mediana" lead="La renta anual de la persona que está justo en el medio, ni rica ni pobre.">
       <Ranking g={grupo('hogares', 'renta_mediana')} nombre={geo} fmt={x => `${nf(x)} €`} titulo="Renta mediana por países" />

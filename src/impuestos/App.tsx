@@ -131,7 +131,7 @@ function PorImpuesto({ d, pob }: { d: Datos; pob: number | null }) {
   const tot = s12(d.series.total)
   return <div className="graficos">
     <Card t="Cuánto deja cada impuesto" lead={<>Últimos 12 meses{pob ? ', y lo que supone por habitante' : ''}.</>} fuente={AEAT}>
-      <Barras titulo="Recaudación por impuesto" fmt={v => `${mm(v)}${pob ? ` · ${nf((v * 1e6) / pob, 0)} €/hab.` : ''}`} limite={6} items={[...GRANDES.map(g => ({ id: g.k, nombre: g.n, valor: s12(d.series[g.k]), color: g.c }))].sort((a, b) => b.valor - a.valor)} />
+      <Barras suma titulo="Recaudación por impuesto" fmt={v => `${mm(v)}${pob ? ` · ${nf((v * 1e6) / pob, 0)} €/hab.` : ''}`} limite={6} items={[...GRANDES.map(g => ({ id: g.k, nombre: g.n, valor: s12(d.series[g.k]), color: g.c }))].sort((a, b) => b.valor - a.valor)} />
       <p className="note">IRPF, IVA y Sociedades suman {nf(((s12(d.series.irpf) + s12(d.series.iva) + s12(d.series.soc)) / tot) * 100, 0)} de cada 100 euros.</p>
     </Card>
     <Card t="Qué sube y qué baja" lead={<>Cambio de los últimos 12 meses frente a los 12 anteriores. Más sube: <b>{cambios[0]?.nombre.toLowerCase()}</b> ({nf(cambios[0]?.valor ?? 0, 0)} %).</>} fuente={AEAT}>
@@ -149,16 +149,16 @@ function Irpf({ d }: { d: Datos }) {
   const socT = s12(d.series.soc)
   return <div className="graficos">
     <Card t="El IRPF se paga sobre todo en la nómina" lead={<>De cada 100 euros del IRPF, <b>{nf((ret / irpf) * 100, 0)}</b> llegan por las retenciones mes a mes. La declaración de la renta deja {mm(s12(d.series.irpf_decl))} netos: lo que se paga menos lo que se devuelve.</>} fuente={AEAT}>
-      <Barras titulo="Partes del IRPF, últimos 12 meses" fmt={mm} items={partes.sort((a, b) => b.valor - a.valor)} />
+      <Barras suma titulo="Partes del IRPF, últimos 12 meses" fmt={mm} items={partes.sort((a, b) => b.valor - a.valor)} />
     </Card>
     <Card t="Quién retiene" lead={<>Las retenciones de trabajo según quién paga la nómina.</>} fuente={AEAT}>
-      <Barras titulo="Retenciones del trabajo por pagador" fmt={mm} items={quien.sort((a, b) => b.valor - a.valor)} />
+      <Barras suma titulo="Retenciones del trabajo por pagador" fmt={mm} items={quien.sort((a, b) => b.valor - a.valor)} />
     </Card>
     <Card t="Mes a mes" wide lead={(() => { const m = ult24.reduce((a, b) => ((b[1] ?? 0) > (a[1] ?? 0) ? b : a)); return <>IRPF neto de cada mes. Destaca {per(m[0])} ({mm(m[1] ?? 0)}): los meses de pago de trimestres y de la declaración suben; los de devoluciones de la campaña, bajan.</> })()} fuente={AEAT}>
       <Columnas titulo="IRPF neto mensual" fmt={mm} cadaX={3} items={ult24.map(x => ({ x: per(x[0]), valor: x[1] ?? 0, color: (x[1] ?? 0) < 0 ? '#ff8a95' : '#3987e5' }))} />
     </Card>
     <Card t="Sociedades: lo pagan los grandes" lead={<>De los pagos a cuenta del impuesto sobre sociedades, los grupos consolidados aportan {nf((soc[0].valor / Math.max(1, soc.reduce((t, x) => t + x.valor, 0))) * 100, 0)} de cada 100 euros. En total, el impuesto dejó {mm(socT)} en 12 meses.</>} fuente={AEAT}>
-      <Barras titulo="Pagos fraccionados de sociedades" fmt={mm} items={soc} />
+      <Barras suma titulo="Pagos fraccionados de sociedades" fmt={mm} items={soc} />
     </Card>
   </div>
 }
@@ -176,10 +176,10 @@ function Consumo({ d, pob }: { d: Datos; pob: number | null }) {
       </div>
     </Card>
     <Card t="Impuestos especiales" lead={<>Gravan productos concretos. Los carburantes dejan {mm(hid)}{pob ? <>: unos {nf((hid * 1e6) / pob, 0)} € por habitante al año</> : null}; el tabaco, {mm(tab)}{pob ? <> ({nf((tab * 1e6) / pob / 365, 2)} € por habitante y día)</> : null}.</>} fuente={AEAT}>
-      <Barras titulo="Impuestos especiales, últimos 12 meses" fmt={mm} items={esp.map(x => ({ ...x, color: '#ffd166' }))} />
+      <Barras suma titulo="Impuestos especiales, últimos 12 meses" fmt={mm} items={esp.map(x => ({ ...x, color: '#ffd166' }))} />
     </Card>
     <Card t="Los impuestos pequeños" lead={<>Aranceles, seguros, banca, medio ambiente, tasas… Juntos dejan {mm(s12(d.series.resto))}.</>} fuente={AEAT}>
-      <Barras titulo="Resto de impuestos" fmt={mm} items={OTROS.map(([k, n]) => ({ id: k, nombre: n, valor: s12(d.series[k]), color: '#8a9bb0' })).filter(x => x.valor > 0).sort((a, b) => b.valor - a.valor)} />
+      <Barras suma titulo="Resto de impuestos" fmt={mm} items={OTROS.map(([k, n]) => ({ id: k, nombre: n, valor: s12(d.series[k]), color: '#8a9bb0' })).filter(x => x.valor > 0).sort((a, b) => b.valor - a.valor)} />
     </Card>
   </div>
 }
@@ -210,7 +210,7 @@ function Mapa({ d, pobProv }: { d: Datos; pobProv: Map<string, number> | null })
       {pobProv ? <MapaProvincias valor={val} fmt={v => `${nf(v)} €/hab.`} titulo="Recaudación por habitante en cada provincia" color={ACC} escala={['#24343b', '#5a3b2a', '#a8653a', '#f2b880', '#fff1e0']} sel={sel} onSel={setSel} nota="Se cuenta donde tiene el domicilio fiscal quien paga: las grandes empresas con sede en Madrid ingresan allí lo de toda España. País Vasco y Navarra, en gris: tienen hacienda propia." /> : <p className="note">Cargando población…</p>}
     </Card>
     <Card t="Ranking">
-      <Barras titulo="Recaudación por habitante" fmt={v => `${nf(v)} €`} limite={12} items={rk.map(x => ({ id: x.c, nombre: PROV[x.c], valor: x.v, destacado: sel === x.c, onClick: () => setSel(x.c), color: colorEscala(['#5a3b2a', '#a8653a', '#f2b880', '#fff1e0'], (x.v - lo) / ((hi - lo) || 1)) }))} />
+      <Barras unidad="Euros por habitante en los últimos 12 meses" titulo="Recaudación por habitante" fmt={v => `${nf(v)} €`} limite={12} items={rk.map(x => ({ id: x.c, nombre: PROV[x.c], valor: x.v, destacado: sel === x.c, onClick: () => setSel(x.c), color: colorEscala(['#5a3b2a', '#a8653a', '#f2b880', '#fff1e0'], (x.v - lo) / ((hi - lo) || 1)) }))} />
     </Card>
   </div>
 }

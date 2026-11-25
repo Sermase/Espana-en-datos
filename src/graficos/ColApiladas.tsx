@@ -11,7 +11,7 @@ export type Tramo = { id: string; nombre: string; color: string; v: number[] }
  * cada tramo crece desde la base, con un filo del color del fondo entre tramos; admite valores negativos
  * (se apilan hacia abajo) y muestra el desglose de la columna al pasar por encima.
  */
-export function ColApiladas({ xs, tramos: todos, titulo, fy, alto = 220, cadaX = 1, total = true }: { xs: string[]; tramos: Tramo[]; titulo: string; fy: (v: number) => string; alto?: number; cadaX?: number; total?: boolean }) {
+export function ColApiladas({ xs, tramos: todos, titulo, fy, alto = 220, cadaX = 1, total = true, unidad }: { xs: string[]; tramos: Tramo[]; titulo: string; fy: (v: number) => string; alto?: number; cadaX?: number; total?: boolean; unidad?: string }) {
   const [wrap, W] = useWidth<HTMLDivElement>()
   const [view, seen] = useInView<HTMLDivElement>()
   const [hi, setHi] = useState<number | null>(null)
@@ -27,6 +27,7 @@ export function ColApiladas({ xs, tramos: todos, titulo, fy, alto = 220, cadaX =
   const paso = Math.max(cadaX, Math.ceil((Math.max(...xs.map(x => x.length)) * 6.4 + 10) / Math.max(1, band)))
   return (
     <figure className="g-fig" ref={view}>
+      {unidad && <p className="g-unidad">{unidad}</p>}
       {todos.length > 1 && <Leyenda items={todos.map(t => ({ id: t.id, nombre: t.nombre, color: t.color }))} off={off} setOff={setOff} />}
       <div className="g-plot" ref={wrap} style={{ height: H }}>
         {W > 0 && <svg width={W} height={H} role="img" aria-label={titulo} onPointerMove={e => { const i = Math.floor((e.clientX - e.currentTarget.getBoundingClientRect().left - L) / band); if (i >= 0 && i < xs.length) setHi(i) }}>

@@ -72,10 +72,10 @@ function Resumen({ d, go }: { d: Datos; go: (s: Sec) => void }) {
       <LineChart titulo="Exportaciones e importaciones de bienes" series={[{ id: 'e', nombre: 'Exportaciones', datos: serie('exp'), color: EXP, area: true }, { id: 'i', nombre: 'Importaciones', datos: serie('imp'), color: IMP }]} fx={t => String(new Date(t).getUTCFullYear())} ticksX={años.map(y => Date.UTC(+y, 6, 1)).filter((_, i, l) => l.length < 8 || i % 2 === (l.length - 1) % 2)} fy={v => `${nf(v, 0)} mil M€`} yMin={0} />
     </Card>
     <Card t="Qué vende España" lead="Exportaciones por grandes familias de productos.">
-      <Barras titulo="Exportaciones por familia" fmt={meur} items={famTop.map(([f, v]) => ({ id: f, nombre: FAMILIAS[f as Familia].nombre, valor: v, color: FAMILIAS[f as Familia].color, sub: `${nf((v / w.exp) * 100, 0)} %` }))} />
+      <Barras suma titulo="Exportaciones por familia" fmt={meur} items={famTop.map(([f, v]) => ({ id: f, nombre: FAMILIAS[f as Familia].nombre, valor: v, color: FAMILIAS[f as Familia].color, sub: `${nf((v / w.exp) * 100, 0)} %` }))} />
     </Card>
     <Card t="A quién vende" lead="Primeros diez clientes.">
-      <Barras titulo="Principales destinos" fmt={meur} items={socios.slice(0, 10).map(s => ({ id: s.k, nombre: nombrePais(s.k), valor: s.v.exp, color: EXP, sub: `${nf((s.v.exp / w.exp) * 100, 1)} %` }))} />
+      <Barras suma titulo="Principales destinos" fmt={meur} items={socios.slice(0, 10).map(s => ({ id: s.k, nombre: nombrePais(s.k), valor: s.v.exp, color: EXP, sub: `${nf((s.v.exp / w.exp) * 100, 1)} %` }))} />
     </Card>
   </div>
 }
@@ -114,7 +114,7 @@ function Paises({ d }: { d: Datos }) {
       <button className="cerrar" onClick={() => setSel(null)}>Quitar selección</button>
     </Card>}
     <Card t="Ranking" lead={`${f === 'exp' ? 'Clientes' : 'Proveedores'} de ${a}, de más a menos.`}>
-      <Barras titulo="Ranking de países" fmt={meur} limite={15} items={datos.map(x => ({ id: x.pais, nombre: nombrePais(x.pais), valor: x.valor, color, sub: `${nf((x.valor / tot) * 100, 1)} %`, destacado: x.pais === clave, onClick: () => setSel(x.pais) }))} />
+      <Barras suma titulo="Ranking de países" fmt={meur} limite={15} items={datos.map(x => ({ id: x.pais, nombre: nombrePais(x.pais), valor: x.valor, color, sub: `${nf((x.valor / tot) * 100, 1)} %`, destacado: x.pais === clave, onClick: () => setSel(x.pais) }))} />
     </Card>
   </div>
 }
@@ -142,7 +142,7 @@ function Productos({ d }: { d: Datos }) {
       </button>)}</div>
     </Card>
     <Card t={fam ? FAMILIAS[fam].nombre : 'Los productos, uno a uno'} wide lead={fam ? 'Toca otra vez la familia para quitar el filtro.' : 'Capítulos del arancel, de más a menos. Entre paréntesis, el cambio frente al año anterior.'}>
-      <Barras titulo="Productos" fmt={meur} limite={20} items={items.map(x => ({ id: x.c, nombre: hs2(x.c).n, valor: x.v, color: FAMILIAS[hs2(x.c).f].color, sub: x.antes ? `${x.v >= x.antes ? '+' : '−'}${nf(Math.abs(x.v / x.antes - 1) * 100, 0)} % sobre ${años[años.indexOf(a) - 1]}` : undefined }))} />
+      <Barras suma titulo="Productos" fmt={meur} limite={20} items={items.map(x => ({ id: x.c, nombre: hs2(x.c).n, valor: x.v, color: FAMILIAS[hs2(x.c).f].color, sub: x.antes ? `${x.v >= x.antes ? '+' : '−'}${nf(Math.abs(x.v / x.antes - 1) * 100, 0)} % sobre ${años[años.indexOf(a) - 1]}` : undefined }))} />
     </Card>
   </div>
 }

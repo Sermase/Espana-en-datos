@@ -138,3 +138,7 @@ button.g-bar:hover, button.g-bar:focus-visible { background: rgba(255, 255, 255,
 .g-toque b { color: #fff }
 .ed-g, .ps-g { cursor: pointer; transition: opacity .2s } .ed-g.is-off, .ps-g.is-off { opacity: .4 }
 .ed-piso.is-sel { stroke: #fff; stroke-opacity: .6 }
+
+/* Qué mide el gráfico, encima: «Muertes al año», «Médicos por cada 100.000 habitantes»… */
+.g-unidad { margin: 0 0 6px; font-size: 12.5px; color: var(--g-muted, #86a9b5); letter-spacing: .01em }
+.carrera > .g-unidad { margin-bottom: 4px }

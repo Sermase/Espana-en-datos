@@ -63,8 +63,8 @@ function Chips<T extends string>({ items, v, set }: { items: { id: T; n: string;
   return <div className="chips" role="group">{items.map(x => <button key={x.id} className={v === x.id ? 'is-on' : ''} style={{ '--c': x.c ?? ACC } as CSSProperties} onClick={() => set(x.id)} aria-pressed={v === x.id}><i />{x.n}</button>)}</div>
 }
 /** Ranking europeo con España resaltada y la media de la UE en el texto. */
-function Europa({ e, fmt, titulo, limite = 27 }: { e: Europa; fmt: (v: number) => string; titulo: string; limite?: number }) {
-  return <Barras titulo={titulo} fmt={fmt} limite={limite} items={e.paises.map(p => ({ id: p.id, nombre: nombrePais(p.id), valor: p.v, destacado: p.id === 'ES', color: p.id === 'ES' ? ACC : GRIS }))} />
+function Europa({ e, fmt, titulo, limite = 27, unidad }: { e: Europa; fmt: (v: number) => string; titulo: string; limite?: number; unidad?: string }) {
+  return <Barras unidad={unidad} titulo={titulo} fmt={fmt} limite={limite} items={e.paises.map(p => ({ id: p.id, nombre: nombrePais(p.id), valor: p.v, destacado: p.id === 'ES', color: p.id === 'ES' ? ACC : GRIS }))} />
 }
 const puesto = (e: Europa) => e.paises.findIndex(p => p.id === 'ES') + 1
 
@@ -99,7 +99,7 @@ function Vida({ d }: { d: D }) {
       </div>
     </section>
     <Card wide t={`Años de vida desde ${V.años[j0]}`} lead={<>Esperanza de vida al nacer cada año. La línea gris es la media de la Unión Europea.</>} fuente={L_VIDA}>
-      <LineChart titulo="Esperanza de vida al nacer en España" alto={240} fx={v => String(v)} fy={v => `${nf(v, 0)}`} series={[
+      <LineChart unidad="Años de vida al nacer" titulo="Esperanza de vida al nacer en España" alto={240} fx={v => String(v)} fy={v => `${nf(v, 0)}`} series={[
         { id: 'F', nombre: 'Mujeres', color: MUJ, datos: pts(V.años, V.F) },
         { id: 'T', nombre: 'Total', color: ACC, datos: pts(V.años, V.T), area: true },
         { id: 'M', nombre: 'Hombres', color: HOM, datos: pts(V.años, V.M) },
@@ -111,7 +111,7 @@ function Vida({ d }: { d: D }) {
       <MapaProvincias grupo={c => CCAA_DE_PROV[c] ?? null} claveGrupo="ccaa" valor={n => vc(n)} fmt={v => `${nf(v, 1)} años`} titulo={`Esperanza de vida al nacer por comunidad, ${C.años[ic]}`} color={ACC} escala={escalaAcc} sel={sel} onSel={setSel} nota="Cuanto más claro, más años de vida. Toca una comunidad." />
     </Card>
     <Card wide t={`España en Europa, ${u.año}`} lead={<>Esperanza de vida al nacer en los países de la Unión Europea.</>} fuente={L_VIDA}>
-      <Europa e={u} fmt={v => `${nf(v, 1)} años`} titulo={`Esperanza de vida al nacer en la UE, ${u.año}`} limite={10} />
+      <Europa unidad="Años de vida al nacer" e={u} fmt={v => `${nf(v, 1)} años`} titulo={`Esperanza de vida al nacer en la UE, ${u.año}`} limite={10} />
     </Card>
   </div>
 }
@@ -139,20 +139,20 @@ function Causas({ d }: { d: D }) {
   const totTop = sx === 'T' ? (tot.T[C.años.indexOf(top?.año ?? '')] ?? null) : null
   return <div className="graficos">
     <Card wide t="La carrera de las causas de muerte" lead={<>Muertes al año por grandes grupos de causas, desde {C.años[0]} hasta {A}. {cruce ? <>Mira cómo los tumores adelantan al corazón en <b>{cruce}</b>, y cómo irrumpe la covid en 2020.</> : null} Dale al botón para verla otra vez o arrastra la barra de tiempo. Toca una causa para seguirla. «Causas externas» son accidentes, caídas, suicidios y agresiones.</>} fuente={L_CAUSAS}>
-      <Carrera fotogramas={fot} top={10} fmt={v => nf(v, 0)} titulo="Muertes al año por grupo de causas" colores={COLOR} ms={700} />
+      <Carrera unidad="Muertes al año" fotogramas={fot} top={10} fmt={v => nf(v, 0)} titulo="Muertes al año por grupo de causas" colores={COLOR} ms={700} />
     </Card>
     <Card t={`De cada 100 muertes, ${A}`} lead={ultimoA[0] && <>El grupo que más mata: <b>{(CORTO[ultimoA[0].id] ?? ultimoA[0].nombre).toLowerCase()}</b>, {nf((ultimoA[0].valor / totA) * 100, 0)} de cada 100 muertes. Detrás, {(CORTO[ultimoA[1]?.id] ?? '').toLowerCase()} ({nf(((ultimoA[1]?.valor ?? 0) / totA) * 100, 0)}).</>} fuente={L_CAUSAS}>
-      <Barras titulo={`Muertes por grupo de causas, ${A}`} fmt={v => nf(v, 0)} items={ultimoA.map(x => ({ id: x.id, nombre: CORTO[x.id] ?? x.nombre, sub: `${nf((x.valor / totA) * 100, 1)} % del total`, valor: x.valor, color: COLOR[x.id] ?? GRIS }))} limite={8} />
+      <Barras unidad="Muertes al año" suma titulo={`Muertes por grupo de causas, ${A}`} fmt={v => nf(v, 0)} items={ultimoA.map(x => ({ id: x.id, nombre: CORTO[x.id] ?? x.nombre, sub: `${nf((x.valor / totA) * 100, 1)} % del total`, valor: x.valor, color: COLOR[x.id] ?? GRIS }))} limite={8} />
     </Card>
     <Card t="Tumores contra corazón" lead={cruce ? <>Hasta {+cruce - 1}, el corazón y la circulación mataban más que el cáncer. Desde {cruce}, los tumores van por delante.</> : <>Muertes al año por tumores y por enfermedades del corazón y la circulación.</>} fuente={L_CAUSAS}>
-      <LineChart titulo="Muertes al año por tumores y por enfermedades circulatorias" alto={230} fx={v => String(v)} fy={v => `${nf(v / 1000, 0)} mil`} series={[
+      <LineChart unidad="Muertes al año" titulo="Muertes al año por tumores y por enfermedades circulatorias" alto={230} fx={v => String(v)} fy={v => `${nf(v / 1000, 0)} mil`} series={[
         { id: 'tum', nombre: 'Tumores', color: COLOR.II, datos: pts(C.años, tum.T) },
         { id: 'cor', nombre: 'Corazón y circulación', color: COLOR.IX, datos: pts(C.años, cor.T) },
       ]} marcas={cruce ? [{ x: +cruce, y: tum.T[C.años.indexOf(cruce)]!, texto: cruce }] : []} />
     </Card>
     {top && lista.length > 0 && <Card wide t={`Las causas concretas, ${top.año}`} lead={<>Dentro de cada grupo, las enfermedades que más matan. La primera, <b>{lista[0].n.toLowerCase()}</b>: {nf(lista[0].v, 0)} muertes{totTop ? <>, {nf((lista[0].v / totTop) * 100, 1)} de cada 100</> : null}. Toca una barra para compararla con las demás.</>} fuente={L_TOP}>
       <Chips items={SEXOS} v={sx} set={setSx} />
-      <Barras titulo={`Muertes por causa, ${top.año}`} fmt={v => nf(v, 0)} items={lista.map(x => ({ id: x.n, nombre: x.n, valor: x.v, color: sx === 'T' ? ACC : sx === 'F' ? MUJ : HOM }))} limite={15} />
+      <Barras unidad="Muertes al año" suma titulo={`Muertes por causa, ${top.año}`} fmt={v => nf(v, 0)} items={lista.map(x => ({ id: x.n, nombre: x.n, valor: x.v, color: sx === 'T' ? ACC : sx === 'F' ? MUJ : HOM }))} limite={15} />
     </Card>}
   </div>
 }
@@ -179,7 +179,7 @@ function Semanas({ d }: { d: D }) {
       <Monitor semanas={lat} acento={ACC} />
     </Card>
     <Card wide t={`${yA} frente a lo normal`} lead={<>Muertes de cada semana del año. La franja va del mínimo al máximo de 2015 a 2019, antes de la covid. La semana más dura desde 2010 fue la de {semanaLarga(pico.s)}: <b>{nf(pico.v, 0)} muertes</b>, {nf(pico.v / pico.media, 1)} veces lo normal.</>} fuente={L_SEM}>
-      <LineChart titulo="Muertes por semana del año" alto={250} fx={v => `Semana ${v}`} fxEje={v => String(v)} fy={v => nf(v, 0)} yMin={0} etiquetasFinal={false}
+      <LineChart unidad="Muertes por semana" titulo="Muertes por semana del año" alto={250} fx={v => `Semana ${v}`} fxEje={v => `sem. ${v}`} fy={v => nf(v, 0)} yMin={0} etiquetasFinal={false}
         banda={{ nombre: 'Entre el mínimo y el máximo de 2015-2019', lo, hi }} series={[
           { id: 'a', nombre: String(yA), color: ACC, datos: porAño(yA) },
           { id: 'b', nombre: String(yA - 1), color: '#c7a3ff', datos: porAño(yA - 1) },
@@ -187,16 +187,16 @@ function Semanas({ d }: { d: D }) {
         ]} />
     </Card>
     <Card t="Exceso de mortalidad" lead={ie >= 0 ? <>Cuántas muertes de más hay cada mes frente a la media de 2016 a 2019, en porcentaje. En {mesLargo(E.meses[ie])}, en España, un <b>{masMenos(E.ES[ie]!, 1)}</b>{E.ue[ie] != null && <>; en la UE, un {masMenos(E.ue[ie]!, 1)}</>}. El peor mes de 2020 llegó a un {nf(ex20, 0)} % más.</> : null} fuente={L_EXC}>
-      <LineChart titulo="Exceso de mortalidad mensual" alto={230} fx={t => { const m = new Date(t).toISOString().slice(0, 7); return mesLargo(m) }} fxEje={t => String(new Date(t).getUTCFullYear())} fy={v => `${nf(v, 0)} %`} etiquetasFinal={false} series={[
+      <LineChart unidad="Muertes por encima (+) o por debajo (−) de la media de 2016-2019, en %" titulo="Exceso de mortalidad mensual" alto={230} fx={t => { const m = new Date(t).toISOString().slice(0, 7); return mesLargo(m) }} fxEje={t => String(new Date(t).getUTCFullYear())} fy={v => `${nf(v, 0)} %`} etiquetasFinal={false} series={[
         { id: 'es', nombre: 'España', color: ACC, datos: xs.flatMap((x, i) => (E.ES[i] != null ? [[x, E.ES[i]!] as [number, number]] : [])) },
         { id: 'ue', nombre: 'UE', datos: xs.flatMap((x, i) => (E.ue[i] != null ? [[x, E.ue[i]!] as [number, number]] : [])), fondo: true },
       ]} ticksX={xs.filter((_, i) => E.meses[i].endsWith('-01'))} />
     </Card>
     <Card t="Muertes al año" lead={<>Desde {cols[0]?.x}. Somos más y más mayores, así que mueren más personas aunque se viva más. 2020, resaltado.</>} fuente={L_CAUSAS}>
-      <Columnas titulo="Muertes al año en España" fmt={v => nf(v, 0)} items={cols.map(c => ({ ...c, color: c.destacado ? ACC : '#7f939c' }))} alto={230} cadaX={5} />
+      <Columnas unidad="Muertes al año" titulo="Muertes al año en España" fmt={v => nf(v, 0)} items={cols.map(c => ({ ...c, color: c.destacado ? ACC : '#7f939c' }))} alto={230} cadaX={5} />
     </Card>
     <Card wide t={`Europa, ${mesLargo(E.europa.año)}`} lead={<>Exceso de mortalidad de cada país en el último mes con datos de casi todos.</>} fuente={L_EXC}>
-      <Europa e={E.europa} fmt={v => `${v >= 0 ? '+' : ''}${nf(v, 1)} %`} titulo={`Exceso de mortalidad, ${mesLargo(E.europa.año)}`} limite={10} />
+      <Europa unidad="Muertes por encima (+) o por debajo (−) de la media de 2016-2019, en %" e={E.europa} fmt={v => `${v >= 0 ? '+' : ''}${nf(v, 1)} %`} titulo={`Exceso de mortalidad, ${mesLargo(E.europa.año)}`} limite={10} />
     </Card>
   </div>
 }
@@ -215,26 +215,26 @@ function Sistema({ d }: { d: D }) {
         nota={ind === 'medicos' ? 'Médicos colegiados que ejercen, públicos y privados. Las comunidades con grandes hospitales de referencia atienden también a pacientes de fuera.' : 'Camas disponibles en hospitales públicos y privados.'} />
     </Card>
     <Card wide t={`${ind === 'medicos' ? 'Médicos' : 'Camas'} en Europa, ${R.europa.año}`} lead={<>España es el país <b>{puesto(R.europa)}.º</b> de los {R.europa.paises.length} con datos.</>} fuente={ind === 'medicos' ? L_MED : L_CAM}>
-      <Europa e={R.europa} fmt={v => nf(v, 0)} titulo={`${nombre} por 100.000 habitantes en la UE, ${R.europa.año}`} limite={10} />
+      <Europa unidad={`${ind === 'medicos' ? 'Médicos' : 'Camas de hospital'} por cada 100.000 habitantes`} e={R.europa} fmt={v => nf(v, 0)} titulo={`${nombre} por 100.000 habitantes en la UE, ${R.europa.año}`} limite={10} />
     </Card>
     <Card t={`Quién paga la sanidad, ${gA}`} lead={<>En {gA} se gastaron <b>{nf(G.hab[ig] ?? 0, 0)} € por habitante</b> en sanidad, el {nf(G.pib[ig] ?? 0, 1)} % del PIB. De cada 100 €, {nf(G.publico[ig] ?? 0, 0)} los pone lo público, {nf(G.seguros[ig] ?? 0, 0)} los seguros privados y {nf(G.bolsillo[ig] ?? 0, 0)} salen del bolsillo{G.ue.bolsillo[ig] != null && <> (en la UE, {nf(G.ue.bolsillo[ig]!, 0)})</>}.</>} fuente={L_GAS}>
-      <Apiladas xs={G.años.slice(0, ig + 1).map(a => Date.UTC(+a, 6, 1))} pct fx={t => String(new Date(t).getUTCFullYear())} fy={v => `${nf(v, 0)} %`} titulo="Gasto sanitario por quién lo paga" alto={230} capas={[
+      <Apiladas unidad="% del gasto sanitario" xs={G.años.slice(0, ig + 1).map(a => Date.UTC(+a, 6, 1))} pct fx={t => String(new Date(t).getUTCFullYear())} fy={v => `${nf(v, 0)} %`} titulo="Gasto sanitario por quién lo paga" alto={230} capas={[
         { id: 'pub', nombre: 'Público y Seguridad Social', color: '#3987e5', v: G.publico.slice(0, ig + 1).map(v => v ?? 0) },
         { id: 'seg', nombre: 'Seguros privados', color: '#9085e9', v: G.seguros.slice(0, ig + 1).map(v => v ?? 0) },
         { id: 'bol', nombre: 'Del bolsillo', color: ACC, v: G.bolsillo.slice(0, ig + 1).map(v => v ?? 0) },
       ]} />
     </Card>
     <Card t={`Gasto por habitante en Europa, ${G.europa.año}`} lead={<>En euros de igual poder de compra, para comparar países con precios distintos. España es la <b>{pg}.ª</b>{G.europa.ue != null && <>; la media de la UE, {nf(G.europa.ue, 0)}</>}.</>} fuente={L_GAS}>
-      <Europa e={G.europa} fmt={v => nf(v, 0)} titulo={`Gasto sanitario por habitante en paridad de poder de compra, ${G.europa.año}`} limite={10} />
+      <Europa unidad="Euros por habitante al año, en paridad de poder de compra" e={G.europa} fmt={v => nf(v, 0)} titulo={`Gasto sanitario por habitante en paridad de poder de compra, ${G.europa.año}`} limite={10} />
     </Card>
     <Card t="Sin consulta por la lista de espera" lead={iw >= 0 ? <>En {W.años[iw]}, el <b>{nf(W.ES[iw]!, 1)} %</b> de los adultos dijo que necesitó ir al médico y no fue por la lista de espera{W.ue[iw] != null && <> (en la UE, {nf(W.ue[iw]!, 1)} %)</>}. Por lo caro, solo el {nf(W.caro[iw] ?? 0, 1)} %.</> : null} fuente={L_ESP}>
-      <LineChart titulo="Personas que no fueron al médico por la lista de espera" alto={220} fx={v => String(v)} fy={v => `${nf(v, 1)} %`} yMin={0} series={[
+      <LineChart unidad="% de los mayores de 16 años" titulo="Personas que no fueron al médico por la lista de espera" alto={220} fx={v => String(v)} fy={v => `${nf(v, 1)} %`} yMin={0} series={[
         { id: 'es', nombre: 'España', color: ACC, datos: pts(W.años, W.ES) },
         { id: 'ue', nombre: 'UE', datos: pts(W.años, W.ue), fondo: true },
       ]} />
     </Card>
     <Card t={`Por nivel de ingresos, ${W.quintiles.año}`} lead={q[0] != null && q[4] != null ? <>Entre el 20 % que menos ingresa, el {nf(q[0]!, 1)} %; entre el 20 % que más, el {nf(q[4]!, 1)} %. {pw > 0 && <>De los {W.europa.paises.length} países de la UE, España es el {pw}.º con más gente sin consulta por la lista de espera.</>}</> : null} fuente={L_ESP}>
-      <Columnas titulo="Personas sin consulta por lista de espera, por quintil de ingresos" fmt={v => `${nf(v, 1)} %`} items={['20 % más pobre', 'Segundo', 'Tercero', 'Cuarto', '20 % más rico'].map((x, k) => ({ x, valor: q[k] ?? 0, color: ACC }))} alto={200} />
+      <Columnas unidad="% de los mayores de 16 años" titulo="Personas sin consulta por lista de espera, por quintil de ingresos" fmt={v => `${nf(v, 1)} %`} items={['20 % más pobre', 'Segundo', 'Tercero', 'Cuarto', '20 % más rico'].map((x, k) => ({ x, valor: q[k] ?? 0, color: ACC }))} alto={200} />
     </Card>
   </div>
 }

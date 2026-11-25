@@ -99,14 +99,14 @@ function Clima({ e }: { e: Emis }) {
       </Card>
     })()}
     <Card wide t="De dónde salen" lead={<>El transporte {capas[0].v[i]! > capas[0].v[i90]! ? 'emite más' : 'emite menos'} que en 1990; la electricidad, un {nf(Math.abs(pct(capas[2].v[i] ?? 0, capas[2].v[i90] ?? 1)), 0)} % {(capas[2].v[i] ?? 0) < (capas[2].v[i90] ?? 0) ? 'menos' : 'más'}, sobre todo por el cierre del carbón y las renovables.</>} fuente={EUROSTAT}>
-      <Apiladas xs={e.años.slice(0, i + 1)} capas={ap.map(c => ({ ...c, v: c.v.slice(0, i + 1) }))} titulo="Gases de efecto invernadero por sector" fx={a => String(a)} fy={v => `${nf(v, 0)} Mt`} alto={300} />
+      <Apiladas unidad="Millones de toneladas de CO₂ equivalente" xs={e.años.slice(0, i + 1)} capas={ap.map(c => ({ ...c, v: c.v.slice(0, i + 1) }))} titulo="Gases de efecto invernadero por sector" fx={a => String(a)} fy={v => `${nf(v, 0)} Mt`} alto={300} />
       <p className="note">Millones de toneladas de CO₂ equivalente (el metano y el óxido nitroso se convierten según cuánto calientan). No incluye lo que absorben los bosques{bosque != null && bosque < 0 ? `, unos ${nf(-bosque / 1000, 0)} Mt en ${A}` : ''}, ni los vuelos y barcos internacionales.</p>
     </Card>
     <Card t={`Cambio desde 1990`} lead="Por sector, en porcentaje.">
-      <Barras titulo="Cambio por sector desde 1990" fmt={v => signo(v)} items={cambios.map(x => ({ id: x.c.id, nombre: x.c.n, valor: x.v, color: x.v > 0 ? '#ff8a95' : '#3df5b0' }))} />
+      <Barras unidad="Cambio desde 1990, en %" titulo="Cambio por sector desde 1990" fmt={v => signo(v)} items={cambios.map(x => ({ id: x.c.id, nombre: x.c.n, valor: x.v, color: x.v > 0 ? '#ff8a95' : '#3df5b0' }))} />
     </Card>
     <Card t="Por habitante, España y la UE" lead="Toneladas de CO₂ equivalente por persona y año.">
-      <LineChart titulo="Emisiones por habitante" alto={230} fx={a => String(a)} fy={v => `${nf(v, 1)} t`} series={[
+      <LineChart unidad="Toneladas de CO₂ equivalente por habitante" titulo="Emisiones por habitante" alto={230} fx={a => String(a)} fy={v => `${nf(v, 1)} t`} series={[
         { id: 'ue', nombre: 'UE', fondo: true, datos: e.años.flatMap((a, k) => { const v = hab(ue, e.pob.ue, k); return v == null ? [] : [[a, v]] }) as [number, number][] },
         { id: 'es', nombre: 'España', color: ACC, datos: e.años.flatMap((a, k) => { const v = hab(tot, e.pob.es, k); return v == null ? [] : [[a, v]] }) as [number, number][] }]} />
     </Card>
@@ -124,14 +124,14 @@ function Contaminantes({ e }: { e: Emis }) {
   const idx = (s: S) => { const b = s[i90]; return e.años.flatMap((a, k) => (b && s[k] != null ? [[a, (s[k]! / b) * 100]] : [])) as [number, number][] }
   return <div className="graficos">
     <Card wide t="Lo que respiramos, desde 1990" lead={<>De los seis contaminantes principales, el que más ha bajado es el <b>{caidas[0]?.c.n.toLowerCase()}</b> ({signo(caidas[0]?.v ?? 0)}); el que menos, el {caidas.at(-1)?.c.n.toLowerCase()} ({signo(caidas.at(-1)?.v ?? 0)}).</>} fuente={EUROSTAT_C}>
-      <Barras titulo="Cambio de cada contaminante desde 1990" fmt={v => signo(v)} items={caidas.map(x => ({ id: x.c.id, nombre: x.c.n, valor: x.v, color: x.c.c, destacado: x.c.id === p, onClick: () => setP(x.c.id) }))} />
+      <Barras unidad="Cambio desde 1990, en %" titulo="Cambio de cada contaminante desde 1990" fmt={v => signo(v)} items={caidas.map(x => ({ id: x.c.id, nombre: x.c.n, valor: x.v, color: x.c.c, destacado: x.c.id === p, onClick: () => setP(x.c.id) }))} />
     </Card>
     <Card wide t={info.n} lead={<>{info.que} En {A}, {nf((tot[i] ?? 0) / 1000, 0)} mil toneladas; sale sobre todo de <b>{ordenA[0]?.nombre.toLowerCase()}</b> ({nf(((ordenA[0]?.v[i] ?? 0) * 1000 / (tot[i] ?? 1)) * 100, 0)} %).</>}>
       <div className="chips" role="radiogroup" aria-label="Contaminante">{CONTAMINANTES.map(c => <button key={c.id} role="radio" aria-checked={p === c.id} className={p === c.id ? 'is-on' : ''} style={{ '--c': c.c } as React.CSSProperties} onClick={() => setP(c.id)}><i />{c.n}</button>)}</div>
-      <Apiladas xs={e.años.slice(0, i + 1)} capas={capas} titulo={`${info.n} por sector`} fx={a => String(a)} fy={v => `${nf(v, 0)} mil t`} alto={280} />
+      <Apiladas unidad="Miles de toneladas al año" xs={e.años.slice(0, i + 1)} capas={capas} titulo={`${info.n} por sector`} fx={a => String(a)} fy={v => `${nf(v, 0)} mil t`} alto={280} />
     </Card>
     <Card wide t="España y la UE" lead="Índice: 1990 = 100.">
-      <LineChart titulo={`${info.n}: España y la UE`} alto={230} fx={a => String(a)} fy={v => nf(v, 0)} series={[{ id: 'ue', nombre: 'UE', fondo: true, datos: idx(ue) }, { id: 'es', nombre: 'España', color: info.c, datos: idx(tot) }]} />
+      <LineChart unidad="Índice, 1990 = 100" titulo={`${info.n}: España y la UE`} alto={230} fx={a => String(a)} fy={v => nf(v, 0)} series={[{ id: 'ue', nombre: 'UE', fondo: true, datos: idx(ue) }, { id: 'es', nombre: 'España', color: info.c, datos: idx(tot) }]} />
     </Card>
   </div>
 }

@@ -12,8 +12,8 @@ const PALETA = ['#3987e5', '#d95926', '#199e70', '#c98500', '#d55181', '#0ca30c'
  * parar, volver a empezar o mover con la barra de tiempo. Tocar una barra la «sigue»: se queda iluminada y se
  * cuenta su puesto en cada periodo, aunque salga del ranking.
  */
-export function Carrera({ fotogramas, top = 10, fmt, titulo, colores, ms = 1300, alto = 30 }: {
-  fotogramas: Fotograma[]; top?: number; fmt: (v: number) => string; titulo: string; colores?: Record<string, string>; ms?: number; alto?: number
+export function Carrera({ fotogramas, top = 10, fmt, titulo, colores, ms = 1300, alto = 30, unidad }: {
+  fotogramas: Fotograma[]; top?: number; fmt: (v: number) => string; titulo: string; colores?: Record<string, string>; ms?: number; alto?: number; unidad?: string
 }) {
   const reduce = useReducedMotion()
   const [ref, visto] = useInView<HTMLDivElement>()
@@ -37,6 +37,7 @@ export function Carrera({ fotogramas, top = 10, fmt, titulo, colores, ms = 1300,
   const todos = [...f.items].sort((a, b) => b.valor - a.valor), ks = sigue ? todos.findIndex(x => x.id === sigue) : -1, xs = ks >= 0 ? todos[ks] : null
   const nombreSigue = sigue ? fotogramas.flatMap(g => g.items).find(x => x.id === sigue)?.nombre : null
   return <figure className="carrera" ref={ref} aria-label={titulo}>
+    {unidad && <p className="g-unidad">{unidad}</p>}
     <div className="cr-ctl">
       <button onClick={() => { if (i >= fotogramas.length - 1) setI(0); setPlay(!play) }} aria-label={play ? 'Pausar' : 'Reproducir'}>{play ? <Pause size={15} /> : i >= fotogramas.length - 1 ? <RotateCcw size={15} /> : <Play size={15} />}</button>
       <input type="range" min={0} max={fotogramas.length - 1} value={i} onChange={e => { setPlay(false); setI(+e.target.value) }} aria-label="Periodo" />

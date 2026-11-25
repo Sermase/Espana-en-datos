@@ -77,7 +77,7 @@ function Resumen({ d, euribor, go }: { d: Datos; euribor: Ser | null; go: (s: Se
       {eu && <div className="kpi"><span className="kpi-l">Euríbor a 12 meses</span><span className="kpi-v"><CountUp value={eu[1]} fmt={v => `${nf(v, 2)} %`} /></span><span className="kpi-p">{per(eu[0])}</span></div>}
     </div>
     {cv?.total && <Card t="La vivienda en España, desde 2007" wide lead={<>Compraventas de viviendas cada mes. {boom && suelo && <>Tras la burbuja, se pasó de {nf(boom[1])} ventas en {per(boom[0])} a solo {nf(suelo[1])} en {per(suelo[0])}. </>}{pico && pico[0] > '2014' && <>Desde entonces, el mes con más ventas fue {per(pico[0])}, con {nf(pico[1])}.</>}</>} fuente={ineUrl(d.tablas.compraventas)}>
-      <Apiladas xs={cv.total.map(x => toT(x[0]))} capas={[{ id: 'u', nombre: 'Segunda mano', color: USADA, v: (cv.usada ?? []).map(x => x[1]) }, { id: 'n', nombre: 'Nueva', color: NUEVA, v: (cv.nueva ?? []).map(x => x[1]) }]} titulo="Compraventas de viviendas al mes" fx={t => per(new Date(t).toISOString().slice(0, 7))} fxEje={anio} fy={v => nf(v)} alto={240} />
+      <Apiladas unidad="Viviendas vendidas al mes" xs={cv.total.map(x => toT(x[0]))} capas={[{ id: 'u', nombre: 'Segunda mano', color: USADA, v: (cv.usada ?? []).map(x => x[1]) }, { id: 'n', nombre: 'Nueva', color: NUEVA, v: (cv.nueva ?? []).map(x => x[1]) }]} titulo="Compraventas de viviendas al mes" fx={t => per(new Date(t).toISOString().slice(0, 7))} fxEje={anio} fy={v => nf(v)} alto={240} />
     </Card>}
   </div>
 }
@@ -94,7 +94,7 @@ function Precios({ d }: { d: Datos }) {
   const base = (() => { const m = new Map<string, number[]>(); for (const [p, v] of e?.gi ?? []) m.set(p.slice(0, 4), [...(m.get(p.slice(0, 4)) ?? []), v]); return [...m].map(([y, vs]) => [y, Math.abs(vs.reduce((a, b) => a + b, 0) / vs.length - 100)] as const).sort((a, b) => a[1] - b[1])[0]?.[0] })()
   return <div className="graficos">
     <Card t="¿Cuánto sube la vivienda?" wide lead={<>{ult && <>En el {per(ult[0])} el precio subía un <b>{pct(ult[1])}</b> en un año. </>}{max07 && gi && <>El índice está en {nf(gi[1], 0)}, {gi[1] > max07[1] ? <>ya por encima del máximo de la burbuja ({nf(max07[1], 0)} en {per(max07[0])})</> : <>todavía por debajo del máximo de la burbuja ({nf(max07[1], 0)} en {per(max07[0])})</>}. {(() => { const y15 = e?.gi?.filter(x => x[0].startsWith('2015')); const v15 = y15?.length ? y15.reduce((a, b) => a + b[1], 0) / y15.length : null; return <> Cómo leerlo: {base} vale 100{v15 && base !== '2015' ? <>, y 2015 vale {nf(v15, 0)}: una casa que en {base} costaba 100.000 € costaba unos {nf(v15 * 1000, 0)} € en 2015</> : ''}.</> })()}</>}</>} fuente={<>{ineUrl(d.tablas.ipv)} · índice de precios de vivienda, base {base} = 100</>}>
-      <LineChart titulo="Índice de precios de vivienda" series={[{ id: 'g', nombre: 'General', datos: pts(e?.gi), color: ACC, area: true }, { id: 'n', nombre: 'Nueva', datos: pts(e?.ni), color: NUEVA }, { id: 'u', nombre: 'Segunda mano', datos: pts(e?.ui), color: USADA }]} fx={t => per(new Date(t).toISOString().slice(0, 7).replace(/-(\d\d)$/, (_, m) => `-T${Math.ceil(+m / 3)}`))} fxEje={anio} fy={v => nf(v, 0)} />
+      <LineChart unidad="Índice, 2015 = 100" titulo="Índice de precios de vivienda" series={[{ id: 'g', nombre: 'General', datos: pts(e?.gi), color: ACC, area: true }, { id: 'n', nombre: 'Nueva', datos: pts(e?.ni), color: NUEVA }, { id: 'u', nombre: 'Segunda mano', datos: pts(e?.ui), color: USADA }]} fx={t => per(new Date(t).toISOString().slice(0, 7).replace(/-(\d\d)$/, (_, m) => `-T${Math.ceil(+m / 3)}`))} fxEje={anio} fy={v => nf(v, 0)} />
     </Card>
     <Card t="Por comunidades" lead={<>Variación anual del precio. Donde más sube: <b>{ccaa[0]?.n}</b> ({pct(ccaa[0]?.a ?? 0)}); donde menos, {ccaa.at(-1)?.n} ({pct(ccaa.at(-1)?.a ?? 0)}). Toca el mapa.</>}>
       <MapaProvincias grupo={c => CCAA_DE_PROV[c] ?? null} claveGrupo="ccaa" valor={r => porCcaa.get(r) ?? null} fmt={v => pct(v)} titulo="Subida del precio de la vivienda por comunidad" color={ACC} escala={ESCALA_CALOR} sel={sel} onSel={setSel} nota="Cuanto más sube, más oscuro y rojo. El INE da este dato por comunidad, no por provincia." />
@@ -121,7 +121,7 @@ function Compraventas({ d }: { d: Datos }) {
       <MapaProvincias valor={modo === 'vol' ? vol : cambio} fmt={modo === 'vol' ? (v => nf(v)) : (v => pct(v, 0))} titulo="Compraventas de viviendas por provincia" color={ACC} divergente={modo === 'cambio' ? ['#3987e5', '#ffd166'] : undefined} sel={sel} onSel={setSel} />
     </Card>
     {sel && s?.total && <Card t={nombre(sel)} lead={<>{nf(suma12(s.total))} viviendas vendidas en 12 meses{cambio(sel) != null && <> ({pct(cambio(sel)!, 0)} sobre el año anterior)</>}.</>}>
-      <LineChart titulo={`Compraventas en ${nombre(sel)}`} series={[{ id: 't', nombre: 'Total', datos: pts(s.total), color: ACC, area: true }]} fx={t => per(new Date(t).toISOString().slice(0, 7))} fxEje={anio} fy={v => nf(v)} alto={190} />
+      <LineChart unidad="Viviendas vendidas al mes" titulo={`Compraventas en ${nombre(sel)}`} series={[{ id: 't', nombre: 'Total', datos: pts(s.total), color: ACC, area: true }]} fx={t => per(new Date(t).toISOString().slice(0, 7))} fxEje={anio} fy={v => nf(v)} alto={190} />
     </Card>}
     <Card t="Ranking de provincias">
       <Barras titulo="Provincias por compraventas" fmt={modo === 'vol' ? (v => nf(v)) : (v => pct(v, 0))} limite={12} items={rk.map(x => ({ id: x.c, nombre: nombre(x.c), valor: x.v!, color: ACC, destacado: x.c === sel, onClick: () => setSel(x.c) }))} />
@@ -140,7 +140,7 @@ function Hipotecas({ d, euribor }: { d: Datos; euribor: Ser | null }) {
   const nombre = (c: string) => Object.keys(d.hipotecas).find(n => codigoProvincia(n) === c) ?? c
   return <div className="graficos">
     <Card t="Hipotecas sobre viviendas" wide lead={<>Cuántas se firman cada mes y de cuánto son de media. En los últimos 12 meses, la hipoteca media fue de <b>{mediaEs ? eur(mediaEs) : '—'}</b>.</>} fuente={ineUrl(d.tablas.hipotecas)}>
-      <LineChart titulo="Hipotecas sobre viviendas al mes" series={[{ id: 'n', nombre: 'Hipotecas firmadas', datos: pts(e?.num), color: ACC, area: true }]} fx={t => per(new Date(t).toISOString().slice(0, 7))} fxEje={anio} fy={v => nf(v)} alto={200} />
+      <LineChart unidad="Hipotecas sobre viviendas al mes" titulo="Hipotecas sobre viviendas al mes" series={[{ id: 'n', nombre: 'Hipotecas firmadas', datos: pts(e?.num), color: ACC, area: true }]} fx={t => per(new Date(t).toISOString().slice(0, 7))} fxEje={anio} fy={v => nf(v)} alto={200} />
       <LineChart titulo="Importe medio de la hipoteca" series={[{ id: 'm', nombre: 'Importe medio', datos: serieMedia, color: NUEVA }]} fx={t => per(new Date(t).toISOString().slice(0, 7))} fxEje={anio} fy={v => `${nf(v / 1000, 0)} mil €`} alto={180} />
     </Card>
     {euribor && <Card t="Euríbor" lead="El tipo al que se revisan la mayoría de hipotecas variables.">
@@ -162,7 +162,7 @@ function Alquiler({ d }: { d: Datos }) {
   const busca = q.length >= 2 ? munis.filter(m => m.k.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').includes(qn)).slice(0, 8) : []
   return <div className="graficos">
     <Card t="Lo que sube el alquiler" wide lead={<>Índice de precios de vivienda en alquiler del INE, sacado de las declaraciones de la renta. En {año}, los alquileres subieron un <b>{pct(e?.a?.at(-1)?.[1] ?? 0)}</b> en España. Es un dato anual que se publica con retraso: refleja contratos vivos, no solo los nuevos.</>} fuente={<>{ineUrl(d.tablas.alquiler)} · índice de precios de vivienda en alquiler (2015 = 100)</>}>
-      <LineChart titulo="Índice de alquiler en España" series={[{ id: 'i', nombre: 'Índice', datos: pts(e?.i), color: ACC, area: true }]} fx={anio} fy={v => nf(v, 0)} alto={190} />
+      <LineChart unidad="Índice, 2015 = 100" titulo="Índice de alquiler en España" series={[{ id: 'i', nombre: 'Índice', datos: pts(e?.i), color: ACC, area: true }]} fx={anio} fy={v => nf(v, 0)} alto={190} />
     </Card>
     <Card t="Busca tu municipio" lead={`Los ${nf(munis.length)} municipios con dato del INE.`}>
       <label className="buscar"><Search size={16} /><input value={q} onChange={e => setQ(e.target.value)} placeholder="Escribe un municipio…" aria-label="Buscar municipio" /></label>

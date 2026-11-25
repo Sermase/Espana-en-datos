@@ -61,10 +61,10 @@ function MuniCard({ d, m, onMuni }: { d: Datos; m: Muni; onMuni: (m: Muni) => vo
     </ul>
     <Curiosidades items={curiosidades(d, m)} />
     <h3>Su población desde {Y[0]}</h3>
-    <LineChart titulo={`Población de ${m.n} desde ${Y[0]}`} series={[{ id: 'p', nombre: m.n, datos: pts, area: true }]} fx={v => String(v)} fy={v => (v >= 1e4 ? compact(v) : nf(v))} alto={160}
+    <LineChart unidad="Habitantes" titulo={`Población de ${m.n} desde ${Y[0]}`} series={[{ id: 'p', nombre: m.n, datos: pts, area: true }]} fx={v => String(v)} fy={v => (v >= 1e4 ? compact(v) : nf(v))} alto={160}
       marcas={i2000 >= 0 && m.pop[i2000] != null ? [{ x: 2000, y: m.pop[i2000]!, texto: '2000' }] : []} />
     <h3>Sus vecinos de tamaño en {provName(m.prov)}</h3>
-    <Barras titulo="Municipios de tamaño parecido en la provincia" fmt={v => nf(v)} items={neighbors.map(x => ({ id: x.id, nombre: x.n, valor: popNow(x), destacado: x.id === m.id, onClick: x.id === m.id ? undefined : () => onMuni(x) }))} />
+    <Barras unidad="Habitantes" titulo="Municipios de tamaño parecido en la provincia" fmt={v => nf(v)} items={neighbors.map(x => ({ id: x.id, nombre: x.n, valor: popNow(x), destacado: x.id === m.id, onClick: x.id === m.id ? undefined : () => onMuni(x) }))} />
   </>)
 }
 
@@ -73,7 +73,7 @@ function Ranking({ d, metrica, onMuni }: { d: Datos; metrica: Metrica; onMuni: (
   const list = useMemo(() => d.munis.map(m => ({ m, v: valorDe(metrica, m) })).filter((x): x is { m: Muni; v: number } => x.v != null && (metrica === 'hab' || (metrica === 'cambio' ? (x.m.pop[Math.max(0, d.years.indexOf(2000))] ?? 0) >= 1000 : popNow(x.m) >= 1000))).sort((a, b) => b.v - a.v), [d, metrica])
   if (metrica === 'pico') {
     const groups = [[1996, 2000], [2001, 2008], [2009, 2012], [2013, 2019], [2020, 2023], [2024, 2030]]
-    return <Barras titulo="Municipios según el año con más vecinos" fmt={v => nf(v)} items={groups.map(([a, b]) => ({ id: a, nombre: a === 2024 ? 'Siguen creciendo' : a === 1996 ? `Antes de ${b + 1}` : `${a}–${b}`, valor: d.munis.filter(m => { const p = valorDe('pico', m); return p != null && p >= a && p <= b }).length, color: def.colores[groups.findIndex(g => g[0] === a)] }))} />
+    return <Barras unidad="Número de municipios" suma titulo="Municipios según el año con más vecinos" fmt={v => nf(v)} items={groups.map(([a, b]) => ({ id: a, nombre: a === 2024 ? 'Siguen creciendo' : a === 1996 ? `Antes de ${b + 1}` : `${a}–${b}`, valor: d.munis.filter(m => { const p = valorDe('pico', m); return p != null && p >= a && p <= b }).length, color: def.colores[groups.findIndex(g => g[0] === a)] }))} />
   }
   return <>
     <Barras titulo={`Municipios con más ${def.nombre.toLowerCase()}`} fmt={def.fmt} limite={10} items={list.slice(0, 40).map(({ m, v }) => ({ id: m.id, nombre: m.n, sub: provName(m.prov), valor: v, color: metrica === 'hab' ? undefined : colorDe(metrica, m), onClick: () => onMuni(m) }))} />

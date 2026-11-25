@@ -79,11 +79,11 @@ export function Graficos({ d, onMuni }: { d: Datos; onMuni: (m: Muni) => void })
       </Card>}
 
       {veg && <Card t="Saldo vegetativo" lead="Nacimientos menos defunciones, por mil habitantes. Por debajo de cero, el país solo crece si llega gente de fuera.">
-        <Columnas titulo="Saldo vegetativo por mil habitantes" items={veg.d.map(([x, v]) => ({ x: String(x), valor: v, color: v < 0 ? '#d95926' : '#3987e5', destacado: x === vegNeg?.[0] }))} fmt={v => nf(v, 1)} cadaX={10} etiqueta={c => `primer año negativo: ${c.x}`} />
+        <Columnas unidad="Nacimientos menos muertes, por cada 1.000 habitantes" titulo="Saldo vegetativo por mil habitantes" items={veg.d.map(([x, v]) => ({ x: String(x), valor: v, color: v < 0 ? '#d95926' : '#3987e5', destacado: x === vegNeg?.[0] }))} fmt={v => nf(v, 1)} cadaX={10} etiqueta={c => `primer año negativo: ${c.x}`} />
       </Card>}
 
       {fec && <Card t="Hijos por mujer" lead={<>Hacen falta unos 2,1 para que una generación se reemplace. España está en <b>{nf(last(fec.d)[1], 2)}</b> ({last(fec.d)[0]}){fecEl != null && fecXl != null ? <>: {nf(fecEl, 2)} las madres españolas y {nf(fecXl, 2)} las extranjeras.</> : '.'}</>}>
-        <LineChart titulo="Indicador coyuntural de fecundidad" series={[{ id: 't', nombre: 'Todas', datos: toPts(fec), color: '#c49bff' }, ...(fecE ? [{ id: 'e', nombre: 'Madre española', datos: toPts(fecE), color: '#3987e5', fondo: true }] : []), ...(fecX ? [{ id: 'x', nombre: 'Madre extranjera', datos: toPts(fecX), color: '#d95926', fondo: true }] : [])] as LSerie[]} fx={year} fy={v => nf(v, 2)} alto={190} />
+        <LineChart unidad="Hijos por mujer" titulo="Indicador coyuntural de fecundidad" series={[{ id: 't', nombre: 'Todas', datos: toPts(fec), color: '#c49bff' }, ...(fecE ? [{ id: 'e', nombre: 'Madre española', datos: toPts(fecE), color: '#3987e5', fondo: true }] : []), ...(fecX ? [{ id: 'x', nombre: 'Madre extranjera', datos: toPts(fecX), color: '#d95926', fondo: true }] : [])] as LSerie[]} fx={year} fy={v => nf(v, 2)} alto={190} />
       </Card>}
 
       {mat && <Card t="Edad de las madres" lead={<>La edad media al tener un hijo ha pasado de {nf(mat.d[0][1], 1)} años en {mat.d[0][0]} a <b>{nf(last(mat.d)[1], 1)}</b>.</>}>
@@ -96,7 +96,7 @@ export function Graficos({ d, onMuni }: { d: Datos; onMuni: (m: Muni) => void })
 
       {edad && <Card t="Un país que envejece" lead={<>La edad media ha subido de {nf(edad.d[0][1], 1)} a <b>{nf(last(edad.d)[1], 1)} años</b>.{env ? <> Ya hay {nf(last(env.d)[1], 0)} mayores de 64 por cada 100 menores de 16.</> : null}</>}>
         <LineChart titulo="Edad media de la población" series={[{ id: 'e', nombre: 'Edad media', datos: toPts(edad), area: true }]} fx={year} fy={v => `${nf(v, 1)} años`} alto={170} />
-        {env && <LineChart titulo="Índice de envejecimiento" series={[{ id: 'i', nombre: 'Mayores por cada 100 jóvenes', datos: toPts(env), color: '#c49bff' }]} fx={year} fy={v => nf(v)} alto={150} pie="Mayores de 64 por cada 100 menores de 16." />}
+        {env && <LineChart unidad="Mayores de 64 años por cada 100 menores de 16" titulo="Índice de envejecimiento" series={[{ id: 'i', nombre: 'Mayores por cada 100 jóvenes', datos: toPts(env), color: '#c49bff' }]} fx={year} fy={v => nf(v)} alto={150} pie="Mayores de 64 por cada 100 menores de 16." />}
       </Card>}
 
       {fuera && <Card t="Nacidos en el extranjero" lead={<>Hoy son el <b>{nf(last(fuera.d)[1], 1)} %</b> de los vecinos, frente al {nf(fuera.d[0][1], 1)} % de {fuera.d[0][0]}.</>}>
@@ -104,7 +104,7 @@ export function Graficos({ d, onMuni }: { d: Datos; onMuni: (m: Muni) => void })
       </Card>}
 
       {mig.length > 1 && <Card t="Migración con el extranjero" lead={<>Llegadas menos salidas, por mil habitantes. {migNeg.length ? <>Se marchó más gente de la que llegó en {migNeg.length === 1 ? migNeg[0] : `${migNeg[0]}–${last(migNeg)}`}.</> : 'Llega más gente de la que se va todos los años de la serie.'}</>}>
-        <Columnas titulo="Tasa de migración neta con el extranjero" items={mig.map(([x, v]) => ({ x: String(x), valor: v, color: v < 0 ? '#d95926' : '#3987e5' }))} fmt={v => nf(v, 1)} cadaX={3} />
+        <Columnas unidad="Personas que llegan menos las que se van, por cada 1.000 habitantes" titulo="Tasa de migración neta con el extranjero" items={mig.map(([x, v]) => ({ x: String(x), valor: v, color: v < 0 ? '#d95926' : '#3987e5' }))} fmt={v => nf(v, 1)} cadaX={3} />
       </Card>}
 
       <Card t="Comunidades: quién crece y quién se vacía" lead={<>Cambio de población entre {Y[0]} y {yl}. España en conjunto: {ESL(((total(Y.length - 1) - total(0)) / total(0)) * 100)}.</>}>
@@ -112,7 +112,7 @@ export function Graficos({ d, onMuni }: { d: Datos; onMuni: (m: Muni) => void })
       </Card>
 
       <Card t="La España vaciada en un gráfico" lead={<><b>{nf(shrinking)}</b> de {nf(d.munis.length)} municipios tienen hoy menos gente que en 2000. El {nf(smallPct, 0)} % de los municipios tiene menos de 500 vecinos, pero entre todos suman solo el {nf(sizes[0].share + sizes[1].share, 1)} % de la población.</>}>
-        <Columnas titulo="Número de municipios por tamaño" items={sizes.map(s => ({ x: s.x, valor: s.n }))} fmt={v => nf(v)} alto={160} />
+        <Columnas unidad="Número de municipios" titulo="Número de municipios por tamaño" items={sizes.map(s => ({ x: s.x, valor: s.n }))} fmt={v => nf(v)} alto={160} />
         <Columnas titulo="Porcentaje de la población que vive en cada tamaño de municipio" items={sizes.map(s => ({ x: s.x, valor: s.share, color: '#3987e5' }))} fmt={v => `${nf(v, 1)} %`} alto={160} />
         <p className="note">Arriba, cuántos municipios hay de cada tamaño; abajo, qué parte de la población vive en ellos.</p>
       </Card>

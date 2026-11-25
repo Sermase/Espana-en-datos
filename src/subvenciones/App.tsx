@@ -102,10 +102,10 @@ function Quien({ a, k }: { a: Agg; k: string }) {
       <Barras titulo="Ayudas autonómicas por habitante" fmt={v => `${nf(v)} €/hab.`} limite={19} items={rk.map(x => ({ id: x.c, nombre: x.c, sub: eu(x.t), valor: x.v, destacado: sel === x.c, onClick: () => setSel(x.c), color: colorEscala(['#6b4f86', '#a76fd0', '#e0a8ff', '#f6e3ff'], (x.v - lo) / ((hi - lo) || 1)) }))} />
     </Card>
     <Card t="Ministerios y organismos del Estado" fuente={BDNS}>
-      <Barras titulo="Ayudas del Estado por ministerio" fmt={eu} limite={10} items={min.map(x => ({ ...x, color: ADM.E[2] }))} />
+      <Barras suma titulo="Ayudas del Estado por ministerio" fmt={eu} limite={10} items={min.map(x => ({ ...x, color: ADM.E[2] }))} />
     </Card>
     <Card t="Diputaciones, ayuntamientos y otros" lead={<>Los que más conceden entre entidades locales, universidades y otros organismos.</>} fuente={BDNS}>
-      <Barras titulo="Ayudas de entidades locales y otros" fmt={eu} limite={10} items={loc} />
+      <Barras suma titulo="Ayudas de entidades locales y otros" fmt={eu} limite={10} items={loc} />
     </Card>
   </div>
 }
@@ -147,7 +147,7 @@ function Temas({ d, a }: { d: Datos; a: Agg }) {
         {r > 64 && <><b>{nf((t.valor / tot) * 100, 0)} %</b><span>{t.nombre}</span></>}
       </motion.button> })}
     </div>
-    <Barras titulo="Ayudas por tema" fmt={eu} limite={8} items={ts.map(t => ({ ...t, sub: `${nf(t.n)} concesiones`, color: col.get(t.id), destacado: sel === t.id, onClick: () => setSel(sel === t.id ? null : t.id) }))} />
+    <Barras suma titulo="Ayudas por tema" fmt={eu} limite={8} items={ts.map(t => ({ ...t, sub: `${nf(t.n)} concesiones`, color: col.get(t.id), destacado: sel === t.id, onClick: () => setSel(sel === t.id ? null : t.id) }))} />
     {sel && <div className="detalle-tema"><h3>{sel}: las convocatorias más grandes</h3>{convs.length ? <ol className="convs">{convs.slice(0, 8).map((c, i) => <Conv key={c[0]} c={c} d={d} i={i} />)}</ol> : <p className="note">Ninguna de este tema entre las 60 mayores del periodo.</p>}</div>}
   </>
 }
@@ -163,13 +163,13 @@ function Para({ d, a }: { d: Datos; a: Agg }) {
           {f.valor / tot > 0.035 && <><b>{nf((f.valor / tot) * 100, 0)} %</b><span>{f.nombre}</span></>}
         </motion.div>)}
       </div>
-      <Barras titulo="Ayudas por finalidad" fmt={eu} limite={8} items={fs.map((f, i) => ({ id: f.id, nombre: f.nombre, sub: `${nf(f.n)} concesiones`, valor: f.valor, color: FIN_COLOR[i % FIN_COLOR.length] }))} />
+      <Barras suma titulo="Ayudas por finalidad" fmt={eu} limite={8} items={fs.map((f, i) => ({ id: f.id, nombre: f.nombre, sub: `${nf(f.n)} concesiones`, valor: f.valor, color: FIN_COLOR[i % FIN_COLOR.length] }))} />
     </Card>
     <Card t="Con más detalle" wide lead={<>Agrupadas por lo que dice el título de cada convocatoria: coche eléctrico, cine, rehabilitación, becas… Es una clasificación aproximada, por palabras clave. Toca un tema para ver sus mayores convocatorias.</>} fuente={BDNS}>
       <Temas d={d} a={a} />
     </Card>
     <Card t="Cómo se dan" wide lead={<>No todo es dinero a fondo perdido: también hay préstamos, garantías y ventajas fiscales. La cifra es el importe concedido.</>} fuente={BDNS}>
-      <Barras titulo="Ayudas por instrumento" fmt={eu} items={inst.map(x => ({ ...x, color: ACC }))} />
+      <Barras suma titulo="Ayudas por instrumento" fmt={eu} items={inst.map(x => ({ ...x, color: ACC }))} />
     </Card>
   </div>
 }
@@ -189,11 +189,11 @@ function AQuien({ a }: { a: Agg }) {
         </div>)}
         <ul className="g-legend">{grupos.map(x => <li key={x.g}><i style={{ background: GRUPO[x.g][1], height: 8 }} />{GRUPO[x.g][0]}</li>)}</ul>
       </div>
-      <Barras titulo="Ayudas por tipo de beneficiario" fmt={eu} limite={8} items={tipos} />
+      <Barras suma titulo="Ayudas por tipo de beneficiario" fmt={eu} limite={8} items={tipos} />
     </Card>
     <Card t="Los que más reciben" wide lead={<>Empresas, entidades y organismos con más ayudas en el periodo. No se muestran personas físicas.</>} fuente={BDNS}>
       <label className="buscar"><Search size={16} /><input value={q} onChange={e => setQ(e.target.value)} placeholder="Busca una empresa, entidad o NIF" /></label>
-      <Barras titulo="Mayores beneficiarios" fmt={eu} limite={15} items={ben.map(b => ({ id: b[0], nombre: capital(b[3]), sub: `${b[0]} · ${NIF[b[0][0]] ?? ''} · ${nf(b[1])} concesiones`, valor: b[2], color: GRUPO[grupo(b[0][0])][1] }))} />
+      <Barras suma titulo="Mayores beneficiarios" fmt={eu} limite={15} items={ben.map(b => ({ id: b[0], nombre: capital(b[3]), sub: `${b[0]} · ${NIF[b[0][0]] ?? ''} · ${nf(b[1])} concesiones`, valor: b[2], color: GRUPO[grupo(b[0][0])][1] }))} />
       {!ben.length && <p className="note">No está entre los mayores beneficiarios del periodo.</p>}
     </Card>
   </div>

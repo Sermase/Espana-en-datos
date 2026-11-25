@@ -144,8 +144,8 @@ function Flujo({ d }: { d: Datos }) {
         </div>
       </div>
       <Sankey izq={izq} der={der} centro="CAJA COMÚN" fmt={mm} titulo={`Ingresos y gastos públicos en ${a}`} sel={sel} onSel={setSel} alto={500} />
-      {sub && sub.length > 0 && <div className="detalle"><h3>{FUNCION[sel!][0]}: en qué exactamente</h3><Barras titulo="Subfunciones" fmt={mm} limite={10} items={sub.map(x => ({ ...x, color: FUNCION[sel!][2] }))} /></div>}
-      {impDet && <div className="detalle"><h3>{INGRESO[sel!][0]}: de qué impuestos</h3><Barras titulo="Detalle" fmt={mm} items={impDet.map(([k, n]) => ({ id: k, nombre: n, valor: d.imp[k]?.[a] ?? 0, color: INGRESO[sel!][2] })).filter(x => x.valor > 0)} /></div>}
+      {sub && sub.length > 0 && <div className="detalle"><h3>{FUNCION[sel!][0]}: en qué exactamente</h3><Barras suma titulo="Subfunciones" fmt={mm} limite={10} items={sub.map(x => ({ ...x, color: FUNCION[sel!][2] }))} /></div>}
+      {impDet && <div className="detalle"><h3>{INGRESO[sel!][0]}: de qué impuestos</h3><Barras suma titulo="Detalle" fmt={mm} items={impDet.map(([k, n]) => ({ id: k, nombre: n, valor: d.imp[k]?.[a] ?? 0, color: INGRESO[sel!][2] })).filter(x => x.valor > 0)} /></div>}
     </Card>
   </div>
 }
@@ -183,7 +183,7 @@ function Tipo({ d }: { d: Datos }) {
       <Apiladas xs={xs.map(toT)} capas={ks.map(k => ({ id: k, nombre: GASTO_TIPO[k][1], color: GASTO_TIPO[k][2], v: ts.map(o => o[k] ?? 0) }))} titulo="Gasto público por tipo" fx={anio} fy={v => mm(v)} alto={280} />
     </Card>
     <Card t={`Por habitante, en ${a}`}>
-      <Barras titulo="Gasto por habitante y tipo" fmt={eur} items={t.map(x => ({ id: x.k, nombre: GASTO_TIPO[x.k][0], valor: (x.v * 1e6) / pob, color: GASTO_TIPO[x.k][2] })).sort((x, y) => y.valor - x.valor)} />
+      <Barras unidad="Euros por habitante al año" titulo="Gasto por habitante y tipo" fmt={eur} items={t.map(x => ({ id: x.k, nombre: GASTO_TIPO[x.k][0], valor: (x.v * 1e6) / pob, color: GASTO_TIPO[x.k][2] })).sort((x, y) => y.valor - x.valor)} />
     </Card>
     {int && <Card t="Los intereses de la deuda" lead={(() => { const m = años(int).reduce((x, y) => (int[y] > int[x] ? y : x)); return <>Llegaron a su máximo en <b>{m}</b> ({mm(int[m])}). En {a}: {mm(int[a])}{i0 >= 0 ? <>, {int[a] > int['2015'] ? 'más' : 'menos'} que en 2015 ({mm(int['2015'])})</> : ''}.</> })()} fuente={es('gov_10a_main')}>
       <Columnas titulo="Intereses pagados cada año" fmt={mm} cadaX={5} items={años(int).map(y => ({ x: y, valor: int[y], color: '#d55181', destacado: y === a }))} />
@@ -201,7 +201,7 @@ function Impuestos({ d }: { d: Datos }) {
       <Apiladas xs={xs.map(toT)} capas={ks.map(k => ({ id: k, nombre: INGRESO[k][1], color: INGRESO[k][2], v: vs.map(o => o[k] ?? 0) }))} titulo="Ingresos públicos por tipo" fx={anio} fy={v => mm(v)} alto={280} />
     </Card>
     <Card t={`Impuesto a impuesto, en ${a}`} wide>
-      <Barras titulo="Recaudación por impuesto" fmt={v => `${mm(v)} · ${eur((v * 1e6) / pob)}/hab.`} items={det.map((x, i) => ({ ...x, color: ['#d95926', '#9085e9', '#3987e5', '#5fa8f0', '#f2b880', '#c6f25e', '#ffd166', '#8a9bb0'][i % 8] }))} />
+      <Barras suma titulo="Recaudación por impuesto" fmt={v => `${mm(v)} · ${eur((v * 1e6) / pob)}/hab.`} items={det.map((x, i) => ({ ...x, color: ['#d95926', '#9085e9', '#3987e5', '#5fa8f0', '#f2b880', '#c6f25e', '#ffd166', '#8a9bb0'][i % 8] }))} />
       <p className="note">Recaudación de todas las administraciones, en contabilidad nacional (Eurostat). La recaudación mensual de la Agencia Tributaria irá en el tema Impuestos.</p>
     </Card>
   </div>
@@ -222,7 +222,7 @@ function Deuda({ d }: { d: Datos }) {
       <LineChart titulo="Deuda pública en % del PIB" series={[{ id: 'd', nombre: 'Deuda', datos: deu, color: ACC, area: true }]} fx={anio} fy={v => pct(v, 0)} />
     </Card>
     <Card t={`De quién es la deuda, en ${aD}`} lead={<>Lo que debe cada administración (sin descontar lo que se deben entre ellas).</>} fuente={es('gov_10dd_edpt1')}>
-      <Barras titulo="Deuda por administración" fmt={v => `${mm(v)} · ${pct((v / d.pib[aD]) * 100, 0)} PIB`} items={Object.keys(SECTOR).map(s => ({ id: s, nombre: SECTOR[s][0], valor: d.deuda[s]?.[aD] ?? 0, color: SECTOR[s][2] })).filter(x => x.valor > 0).sort((x, y) => y.valor - x.valor)} />
+      <Barras suma titulo="Deuda por administración" fmt={v => `${mm(v)} · ${pct((v / d.pib[aD]) * 100, 0)} PIB`} items={Object.keys(SECTOR).map(s => ({ id: s, nombre: SECTOR[s][0], valor: d.deuda[s]?.[aD] ?? 0, color: SECTOR[s][2] })).filter(x => x.valor > 0).sort((x, y) => y.valor - x.valor)} />
       <p className="note">Saldo de cada administración en {a}: {Object.keys(SECTOR).map((s, i) => <span key={s}>{i ? ' · ' : ''}{SECTOR[s][1]} {pct(((d.eco[s]?.B9?.[a] ?? 0) / d.pib[a]) * 100)}</span>)}.</p>
     </Card>
   </div>

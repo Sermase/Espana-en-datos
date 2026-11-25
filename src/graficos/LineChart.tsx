@@ -40,6 +40,8 @@ type Props = {
   /** etiqueta al final de cada serie principal */
   etiquetasFinal?: boolean
   pie?: ReactNode
+  /** qué se mide en el eje vertical (p. ej. «Muertes por semana») */
+  unidad?: string
 }
 
 /**
@@ -47,7 +49,7 @@ type Props = {
  * con cruz que sigue al dedo o al ratón (también con las flechas del teclado),
  * leyenda si hay varias series y la tabla de datos debajo.
  */
-export function LineChart({ series: entrada, alto = 200, titulo, fx, fy, fxEje, ticksX, yMin, yMax, banda, marcas = [], ahora, etiquetasFinal = true, pie }: Props) {
+export function LineChart({ series: entrada, alto = 200, titulo, fx, fy, fxEje, ticksX, yMin, yMax, banda, marcas = [], ahora, etiquetasFinal = true, pie, unidad }: Props) {
   // las series de fondo (comparación) van en gris si no traen color propio; si no, heredarían el acento de la página
   const todas = entrada.map(s => (s.color || !s.fondo ? s : { ...s, color: '#7f939c' }))
   const [wrap, W] = useWidth<HTMLDivElement>()
@@ -87,6 +89,7 @@ export function LineChart({ series: entrada, alto = 200, titulo, fx, fy, fxEje, 
 
   return (
     <figure className="g-fig" ref={view}>
+      {unidad && <p className="g-unidad">{unidad}</p>}
       {todas.length > 1 && <Leyenda linea items={todas.map(s => ({ id: s.id, nombre: s.nombre, color: s.color, fondo: s.fondo }))} off={off} setOff={setOff} />}
       {banda && <ul className="g-legend" aria-hidden><li><i className="is-banda" />{banda.nombre}</li></ul>}
       <div className="g-plot" ref={wrap} style={{ height: H }}>

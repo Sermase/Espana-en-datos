@@ -11,9 +11,9 @@ export type Capa = { id: string; nombre: string; color: string; v: number[] }
  * desde abajo al aparecer, separadas por un filo del color del fondo; cruz con el
  * desglose de ese instante, y en «%» cada columna suma 100.
  */
-export function Apiladas({ xs, capas: todas, titulo, fx, fxEje, ticksX, fy, alto = 240, pct = false, sel, onSel }: {
+export function Apiladas({ xs, capas: todas, titulo, fx, fxEje, ticksX, fy, alto = 240, pct = false, sel, onSel, unidad }: {
   xs: number[]; capas: Capa[]; titulo: string; fx: (t: number) => string; fxEje?: (t: number) => string; ticksX?: number[]
-  fy: (v: number) => string; alto?: number; pct?: boolean; sel?: string | null; onSel?: (id: string) => void
+  fy: (v: number) => string; alto?: number; pct?: boolean; sel?: string | null; onSel?: (id: string) => void; unidad?: string
 }) {
   const [wrap, W] = useWidth<HTMLDivElement>()
   const [view, seen] = useInView<HTMLDivElement>()
@@ -50,6 +50,7 @@ export function Apiladas({ xs, capas: todas, titulo, fx, fxEje, ticksX, fy, alto
   const fmtV = (c: Capa, i: number) => pct ? `${val(c, i).toLocaleString('es-ES', { maximumFractionDigits: 1 })} %` : fy(c.v[i] ?? 0)
   return (
     <figure className="g-fig" ref={view}>
+      {unidad && <p className="g-unidad">{unidad}</p>}
       {onSel ? <ul className="g-legend g-legend-sel">{todas.map(c => <li key={c.id}>
         <button className={sel === c.id ? 'is-on' : ''} onClick={() => onSel(c.id)} aria-pressed={sel === c.id}><i style={{ background: c.color, height: 8 }} />{c.nombre}</button>
       </li>)}</ul> : <Leyenda items={todas.map(c => ({ id: c.id, nombre: c.nombre, color: c.color }))} off={off} setOff={setOff} />}

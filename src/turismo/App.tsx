@@ -107,16 +107,16 @@ function Quien({ d, hasta }: { d: D; hasta: string }) {
       <ul className="sala-lista" aria-label="Turistas por país en los últimos 12 meses">{lista.slice(0, 10).map(x => <li key={x.p} style={{ '--c': ACC } as CSSProperties}><i /><span>{corto(x.p)}</span><b>{millones(x.v, 1)}</b><em style={{ width: `${(x.v / (top?.v || 1)) * 100}%` }} /></li>)}</ul>
     </section>
     <Card wide t="La carrera de los países" lead={<>Turistas de los últimos 12 meses, mes a mes desde {fot[0]?.t}. Mira cómo se hunde todo en 2020 y quién vuelve antes. Dale al botón para volver a verla o arrastra la barra de tiempo.</>} fuente={FRONTUR}>
-      <Carrera fotogramas={fot} top={10} fmt={v => millones(v, 2)} titulo="Turistas internacionales por país de residencia, últimos 12 meses" ms={520} />
+      <Carrera unidad="Turistas en los últimos 12 meses" fotogramas={fot} top={10} fmt={v => millones(v, 2)} titulo="Turistas internacionales por país de residencia, últimos 12 meses" ms={520} />
     </Card>
     <Card wide t={`De dónde vienen, ${añoMapa}`} lead={selN ? <>{corto(selN)}: <b>{nf(P[selN].turistas[añoMapa], 0)}</b> turistas en {añoMapa}.</> : <>Cuanto más intenso el país, más turistas manda. Los arcos salen de los diez primeros. Los países nórdicos y los «resto» van en grupo, así que no salen en el mapa. Toca un país.</>} fuente={FRONTUR}>
       <MapaMundo datos={mapa} color={ACC} fmt={v => millones(v, 2)} titulo={`Turistas internacionales por país de residencia, ${añoMapa}`} sentido="entra" sel={sel} onSel={setSel} rutas={10} />
     </Card>
     <Card t={`El turismo en Europa, ${eu.ultimo}`} lead={<>Noches de no residentes en hoteles, apartamentos y campings. {esPos === 1 ? <>España es <b>el país de Europa</b> con más noches de turistas extranjeros.</> : esPos > 0 ? <>España es la <b>{esPos}.ª</b>.</> : null}</>} fuente={EST}>
-      <Barras titulo={`Noches de no residentes en alojamientos turísticos, ${eu.ultimo}`} fmt={v => millones(v, 0)} items={euL.map(x => ({ id: x.id, nombre: nombrePais(x.id), valor: x.v, destacado: x.id === 'ES', color: x.id === 'ES' ? ACC : '#5b6b74' }))} limite={12} />
+      <Barras unidad="Noches de turistas extranjeros al año" titulo={`Noches de no residentes en alojamientos turísticos, ${eu.ultimo}`} fmt={v => millones(v, 0)} items={euL.map(x => ({ id: x.id, nombre: nombrePais(x.id), valor: x.v, destacado: x.id === 'ES', color: x.id === 'ES' ? ACC : '#5b6b74' }))} limite={12} />
     </Card>
     <Card t="Quién gasta más" lead={(() => { const g = gastoPorPais(d, hasta); const a = g[0], z = g.at(-1); return a && z ? <>En los últimos 12 meses, quien más gasta por viaje viene de <b>{corto(a.p)}</b> ({nf(a.persona, 0)} €); quien menos, de {corto(z.p)} ({nf(z.persona, 0)} €).</> : null })()} fuente={EGATUR}>
-      <Barras titulo="Gasto medio por turista y viaje, últimos 12 meses" fmt={v => `${nf(v, 0)} €`} items={gastoPorPais(d, hasta).map(x => ({ id: x.p, nombre: corto(x.p), sub: `${nf(x.diario, 0)} € al día · ${nf(x.dias, 1)} días`, valor: x.persona, color: ACC }))} limite={10} />
+      <Barras unidad="Euros por turista y viaje" titulo="Gasto medio por turista y viaje, últimos 12 meses" fmt={v => `${nf(v, 0)} €`} items={gastoPorPais(d, hasta).map(x => ({ id: x.p, nombre: corto(x.p), sub: `${nf(x.diario, 0)} € al día · ${nf(x.dias, 1)} días`, valor: x.persona, color: ACC }))} limite={10} />
     </Card>
   </div>
 }
@@ -182,10 +182,10 @@ function Donde({ d, hasta }: { d: D; hasta: string }) {
       <Barras titulo={I.t} fmt={I.fmt} limite={12} items={rk.map(x => ({ id: x.c, nombre: PROV[x.c], valor: x.v, destacado: sel === x.c, onClick: () => setSel(x.c), color: ACC }))} />
     </Card>
     <Card t="Las ciudades con más noches de hotel" lead={pts[0] && <>En los 12 meses hasta {mesLargo(d.puntos.hasta)}, <b>{bonito(pts[0].n)}</b> sumó {millones(pts[0].tot, 1)} de noches de hotel, el {nf((pts[0].ext / pts[0].tot) * 100, 0)} % de extranjeros.</>} fuente={EOH}>
-      <Barras titulo="Noches de hotel por punto turístico, últimos 12 meses" fmt={v => millones(v, 1)} limite={10} items={pts.map(p => ({ id: p.n, nombre: bonito(p.n), sub: `${nf((p.ext / p.tot) * 100, 0)} % extranjeros`, valor: p.tot, color: ACC }))} />
+      <Barras unidad="Noches de hotel en los últimos 12 meses" suma titulo="Noches de hotel por punto turístico, últimos 12 meses" fmt={v => millones(v, 1)} limite={10} items={pts.map(p => ({ id: p.n, nombre: bonito(p.n), sub: `${nf((p.ext / p.tot) * 100, 0)} % extranjeros`, valor: p.tot, color: ACC }))} />
     </Card>
     <Card t="A qué comunidad van" lead={cc[0] && <>De los turistas internacionales de los últimos 12 meses, {nf((cc[0].v / ccT) * 100, 0)} de cada 100 fueron sobre todo a <b>{cc[0].k}</b>.</>} fuente={FRONTUR}>
-      <Barras titulo="Turistas internacionales por comunidad de destino principal, últimos 12 meses" fmt={v => millones(v, 1)} items={cc.map(x => ({ id: x.k, nombre: x.k, valor: x.v, color: ACC }))} limite={8} />
+      <Barras unidad="Turistas en los últimos 12 meses" suma titulo="Turistas internacionales por comunidad de destino principal, últimos 12 meses" fmt={v => millones(v, 1)} items={cc.map(x => ({ id: x.k, nombre: x.k, valor: x.v, color: ACC }))} limite={8} />
     </Card>
   </div>
 }
@@ -215,7 +215,7 @@ function Gasto({ d }: { d: D }) {
       <LineChart titulo="Gasto medio diario por turista" series={[{ id: 'd', nombre: 'Euros al día', datos: dia.map(m => [Date.UTC(+m.slice(0, 4), +m.slice(5) - 1, 15), G.Total!.diario![m]] as [number, number]), color: ACC }]} fx={t => mesCorto(new Date(t).toISOString().slice(0, 7))} fxEje={t => String(new Date(t).getUTCFullYear())} ticksX={dia.filter(m => m.endsWith('-01') && +m.slice(0, 4) % 3 === 0).map(m => Date.UTC(+m.slice(0, 4), 0, 15))} fy={v => `${nf(v, 0)} €`} alto={200} etiquetasFinal={false} />
     </Card>
     <Card t={`Gasto por comunidad, ${año}`} lead={cc[0] && <>{cc[0].k} se lleva {nf((cc[0].v / (tot || 1)) * 100, 0)} de cada 100 € que gastan los turistas internacionales.</>} fuente={EGATUR}>
-      <Barras titulo={`Gasto de los turistas internacionales por comunidad de destino principal, ${año}`} fmt={meur} items={cc.map(x => ({ id: x.k, nombre: x.k, valor: x.v, color: ACC }))} limite={8} />
+      <Barras suma titulo={`Gasto de los turistas internacionales por comunidad de destino principal, ${año}`} fmt={meur} items={cc.map(x => ({ id: x.k, nombre: x.k, valor: x.v, color: ACC }))} limite={8} />
     </Card>
   </div>
 }
