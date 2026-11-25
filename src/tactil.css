@@ -3,3 +3,5 @@ figure, svg, canvas, .leaflet-container, .carrera, .mp, .g-fig, .g-bars, .sala, 
   -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
 }
 figure table, figure details { -webkit-user-select: text; user-select: text }
+/* arrastrar en horizontal recorre el gráfico; en vertical, la página */
+figure svg, .g-bars, .mp-plot, .mm-plot, .amapa, .carrera .cr-pista { touch-action: pan-y }

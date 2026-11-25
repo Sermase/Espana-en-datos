@@ -62,7 +62,7 @@ export function Sankey({ izq, der, centro, fmt, titulo, sel, onSel, alto = 460 }
           <g clipPath="url(#sk-clip)">
             {[...g.ci, ...g.co].map(({ o, d, c, h }) => {
               const on = !activo || activo === o.n.id
-              return <g key={o.n.id + d.slice(0, 12)} className="sk-cinta" onPointerEnter={() => setHover(o.n.id)} onPointerLeave={() => setHover(null)} onClick={() => onSel?.(sel === o.n.id ? null : o.n.id)}>
+              return <g key={o.n.id + d.slice(0, 12)} className="sk-cinta" onPointerEnter={() => setHover(o.n.id)} onPointerLeave={e => e.pointerType !== 'touch' && setHover(null)} onClick={() => onSel?.(sel === o.n.id ? null : o.n.id)}>
                 <path d={d} fill={o.n.rayado ? 'url(#sk-raya)' : o.n.color} opacity={on ? 0.42 : 0.1} style={{ transition: 'opacity .25s' }} />
                 {h > 3 && <path d={c} className="sk-hilo" style={{ strokeWidth: Math.min(2.5, h / 5), animationDuration: `${2 + (o.n.id.length % 3) * 0.4}s`, opacity: on ? 0.75 : 0.15 }} />}
               </g>
@@ -72,7 +72,7 @@ export function Sankey({ izq, der, centro, fmt, titulo, sel, onSel, alto = 460 }
           <text x={g.xc + g.tw / 2} y={g.yC - 8} textAnchor="middle" className="sk-centro">{centro}</text>
           {[...g.L.map(o => ['l', o] as const), ...g.R.map(o => ['r', o] as const)].map(([lado, o], i) => (
             <g key={lado + o.n.id} className="sk-nodo" tabIndex={0} role="button" aria-pressed={sel === o.n.id} aria-label={`${o.n.nombre}: ${fmt(o.n.valor)}`}
-              onPointerEnter={() => setHover(o.n.id)} onPointerLeave={() => setHover(null)} onFocus={() => setHover(o.n.id)} onBlur={() => setHover(null)}
+              onPointerEnter={() => setHover(o.n.id)} onPointerLeave={e => e.pointerType !== 'touch' && setHover(null)} onFocus={() => setHover(o.n.id)} onBlur={() => setHover(null)}
               onClick={() => onSel?.(sel === o.n.id ? null : o.n.id)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSel?.(sel === o.n.id ? null : o.n.id) } }}>
               <motion.rect x={lado === 'l' ? g.xl : g.xr} width={g.nw} rx={2} fill={o.n.rayado ? 'url(#sk-raya)' : o.n.color} stroke={sel === o.n.id ? '#fff' : 'none'}
                 initial={{ y: o.y + o.h / 2, height: 0 }} animate={visto ? { y: o.y, height: o.h } : {}} transition={{ delay: (lado === 'l' ? 0 : 0.7) + i * 0.03, duration: 0.5 }} />

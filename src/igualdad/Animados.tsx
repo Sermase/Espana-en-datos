@@ -181,7 +181,7 @@ export function Memorial({ años, titulo }: { años: { año: number; n: number; 
   const paso = w ? Math.max(2.4, Math.min(11, (w - lab - num - 8) / max)) : 8, r = paso * 0.32, fila = Math.max(11, paso + 3)
   const H = años.length * fila + 6
   return <figure className="memorial" ref={ref} aria-label={titulo}>
-    <div ref={wref}>{w > 0 && <svg width={w} height={H} role="img" aria-label={`${titulo}: ${años.map(a => `${a.año}, ${a.n}`).join('; ')}`} onPointerLeave={() => setHover(null)}>
+    <div ref={wref}>{w > 0 && <svg width={w} height={H} role="img" aria-label={`${titulo}: ${años.map(a => `${a.año}, ${a.n}`).join('; ')}`} onPointerLeave={e => e.pointerType !== 'touch' && setHover(null)}>
       {años.map((a, i) => {
         const y = i * fila + fila / 2 + 2, on = hover == null || hover === a.año
         return <g key={a.año} onPointerEnter={() => setHover(a.año)} opacity={on ? 1 : 0.35} style={{ transition: 'opacity .2s' }}>

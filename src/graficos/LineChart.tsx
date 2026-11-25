@@ -116,7 +116,7 @@ export function LineChart({ series: todas, alto = 200, titulo, fx, fy, fxEje, ti
             {tip.map(({ s, p }) => <circle key={s.id} cx={px(p[0])} cy={py(p[1])} r={4.5} style={{ fill: s.color }} />)}
           </g>}
           <rect className="g-hit" x={L} y={0} width={Math.max(0, W - L - R)} height={H} tabIndex={0} aria-label={`${titulo}: usa las flechas para recorrer los datos`}
-            onPointerMove={onMove} onPointerDown={onMove} onPointerLeave={() => setHx(null)} onKeyDown={onKey} onBlur={() => setHx(null)} />
+            onPointerMove={onMove} onPointerDown={onMove} onPointerLeave={e => e.pointerType !== 'touch' && setHx(null)} onKeyDown={onKey} onBlur={() => setHx(null)} />
         </svg>}
         {hx != null && tip.length > 0 && W > 0 && <div className="g-tip" style={{ left: Math.min(W - 150, Math.max(0, px(hx) - 75)) }} role="status">
           <p className="g-tip-x">{fx(hx)}</p>

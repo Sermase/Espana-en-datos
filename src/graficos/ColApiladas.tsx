@@ -28,7 +28,7 @@ export function ColApiladas({ xs, tramos: todos, titulo, fy, alto = 220, cadaX =
     <figure className="g-fig" ref={view}>
       {todos.length > 1 && <Leyenda items={todos.map(t => ({ id: t.id, nombre: t.nombre, color: t.color }))} off={off} setOff={setOff} />}
       <div className="g-plot" ref={wrap} style={{ height: H }}>
-        {W > 0 && <svg width={W} height={H} role="img" aria-label={titulo}>
+        {W > 0 && <svg width={W} height={H} role="img" aria-label={titulo} onPointerMove={e => { const i = Math.floor((e.clientX - e.currentTarget.getBoundingClientRect().left - L) / band); if (i >= 0 && i < xs.length) setHi(i) }}>
           {ticks.map(v => <g key={v}><line className="g-grid" x1={L} x2={W - R} y1={py(v)} y2={py(v)} /><text className="g-ax" x={L - 6} y={py(v) + 3.5} textAnchor="end">{fy(v)}</text></g>)}
           {xs.map((x, i) => {
             let up = 0, dn = 0
@@ -42,7 +42,7 @@ export function ColApiladas({ xs, tramos: todos, titulo, fy, alto = 220, cadaX =
                 })}
               </motion.g>
               {i % paso === 0 && <text className="g-ax" x={cx + bw / 2} y={H - 6} textAnchor="middle">{x}</text>}
-              <rect className="g-hit" x={L + i * band} y={T} width={band} height={H - T - B} onPointerEnter={() => setHi(i)} onPointerLeave={() => setHi(null)} onPointerDown={() => setHi(i)} />
+              <rect className="g-hit" x={L + i * band} y={T} width={band} height={H - T - B} onPointerEnter={() => setHi(i)} onPointerLeave={e => e.pointerType !== 'touch' && setHi(null)} onPointerDown={() => setHi(i)} />
             </g>
           })}
           <line className="g-grid" x1={L} x2={W - R} y1={py(0)} y2={py(0)} style={{ stroke: 'rgba(160,220,240,.35)' }} />

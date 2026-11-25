@@ -40,7 +40,7 @@ export function MapaMundo({ datos, color, fmt, titulo, rutas = 10, sentido = 'en
   const centro = useMemo(() => new Map((geo?.features ?? []).map(f => [f.properties.a2, geoCentroid(f as Feature)])), [geo])
   return (
     <figure className="mm" ref={view}>
-      <div className="mm-plot" ref={wrap} style={{ height: H }} onPointerLeave={() => setTip(null)}>
+      <div className="mm-plot" ref={wrap} style={{ height: H }} onPointerLeave={e => e.pointerType !== 'touch' && setTip(null)}>
         {W > 0 && geo && <svg width={W} height={H} role="img" aria-label={titulo}>
           <path className="mm-sphere" d={path({ type: 'Sphere' } as never) ?? ''} />
           {geo.features.map((f, i) => {

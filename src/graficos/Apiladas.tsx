@@ -61,7 +61,7 @@ export function Apiladas({ xs, capas: todas, titulo, fx, fxEje, ticksX, fy, alto
           </motion.g>
           {hi != null && <line className="g-cross-l" x1={px(xs[hi])} x2={px(xs[hi])} y1={T} y2={H - B} />}
           <rect className="g-hit" x={L} y={0} width={Math.max(0, W - L - R)} height={H} tabIndex={0} aria-label={`${titulo}: usa las flechas para recorrer los datos`}
-            onPointerMove={onMove} onPointerDown={onMove} onPointerLeave={() => setHi(null)} onKeyDown={onKey} onBlur={() => setHi(null)} />
+            onPointerMove={onMove} onPointerDown={onMove} onPointerLeave={e => e.pointerType !== 'touch' && setHi(null)} onKeyDown={onKey} onBlur={() => setHi(null)} />
         </svg>}
         {hi != null && W > 0 && <div className="g-tip g-tip-wide" style={{ left: px(xs[hi]) > W / 2 ? Math.max(0, px(xs[hi]) - 200) : Math.min(W - 190, px(xs[hi]) + 12) }} role="status">
           <p className="g-tip-x">{fx(xs[hi])}{!pct && <> · total {fy(tot[hi])}</>}</p>

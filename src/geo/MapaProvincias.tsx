@@ -58,7 +58,7 @@ export function MapaProvincias({ valor, fmt, titulo, color, divergente, sel, onS
   const nombre = (cod: string) => feats.find(f => f.properties.id === cod)?.properties.n ?? cod
   return (
     <figure className={`mp ${seen ? 'is-seen' : ''}`} ref={view}>
-      <div className="mp-plot" ref={wrap} style={{ height: H }} onPointerLeave={() => setTip(null)}>
+      <div className="mp-plot" ref={wrap} style={{ height: H }} onPointerLeave={e => e.pointerType !== 'touch' && setTip(null)}>
         {W > 0 && <svg width={W} height={H} role="img" aria-label={titulo}>
           {feats.map(f => {
             const cod = f.properties.id, v = valor(cod)

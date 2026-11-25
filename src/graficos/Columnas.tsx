@@ -25,7 +25,7 @@ export function Columnas({ items, fmt, titulo, alto = 170, cadaX = 1, etiqueta }
   return (
     <figure className="g-fig" ref={view}>
       <div className="g-plot" ref={wrap} style={{ height: H }}>
-        {W > 0 && <svg width={W} height={H} role="img" aria-label={titulo}>
+        {W > 0 && <svg width={W} height={H} role="img" aria-label={titulo} onPointerMove={e => { const i = Math.floor((e.clientX - e.currentTarget.getBoundingClientRect().left - L) / band); if (i >= 0 && i < items.length) setHover(i) }}>
           {ticks.map(v => <g key={v}><line className="g-grid" x1={L} x2={W - R} y1={py(v)} y2={py(v)} /><text className="g-ax" x={L - 6} y={py(v) + 3.5} textAnchor="end">{fmt(v)}</text></g>)}
           {items.map((c, i) => {
             const x = L + i * band + (band - bw) / 2, top = py(Math.max(0, c.valor)), base = py(0), h = Math.abs(base - py(c.valor))
@@ -39,7 +39,7 @@ export function Columnas({ items, fmt, titulo, alto = 170, cadaX = 1, etiqueta }
               <motion.path d={d} style={{ fill: c.color, originY: `${base}px` }} initial={{ scaleY: 0 }} animate={{ scaleY: seen ? 1 : 0 }} transition={{ duration: .7, delay: Math.min(.9, i * (0.9 / items.length)), ease: [0.2, 0.8, 0.2, 1] }} />
               {(i % paso === 0 || (c.destacado && paso === cadaX)) && <text className="g-ax" x={x + bw / 2} y={H - 6} textAnchor="middle">{c.x}</text>}
               {c.destacado && etiqueta && <text className="g-mlabel" x={x + bw / 2} y={(neg ? base + h + 12 : top - 5)} textAnchor="middle">{etiqueta(c)}</text>}
-              <rect className="g-hit" x={L + i * band} y={T} width={band} height={H - T - B} tabIndex={-1} onPointerEnter={() => setHover(i)} onPointerLeave={() => setHover(null)} />
+              <rect className="g-hit" x={L + i * band} y={T} width={band} height={H - T - B} tabIndex={-1} onPointerEnter={() => setHover(i)} onPointerLeave={e => e.pointerType !== 'touch' && setHover(null)} />
             </g>
           })}
         </svg>}

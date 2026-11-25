@@ -34,7 +34,7 @@ function Mapa({ d, filtro, sel, onSel }: { d: Live; filtro: string; sel: string 
   const [tip, setTip] = useState<{ x: number; y: number; e: Estacion } | null>(null)
   const r = W < 500 ? 3.2 : 4.2
   const pts = d.estaciones.map(e => { const xy = proj(e.xy); const v = filtro === 'ica' ? e.ica : e.m[filtro]?.[0] ?? 0; return xy && v ? { e, x: xy[0], y: xy[1], v } : null }).filter((p): p is { e: Estacion; x: number; y: number; v: number } => !!p).sort((a, b) => a.v - b.v)
-  return <div className="amapa" ref={wrap} onPointerLeave={() => setTip(null)}>
+  return <div className="amapa" ref={wrap} onPointerLeave={e => e.pointerType !== 'touch' && setTip(null)}>
     {W > 0 && <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Mapa de ${pts.length} estaciones de calidad del aire coloreadas según su índice`}>
       <g className="am-prov">{PROVINCIAS.features.map(f => <path key={f.properties.id} d={path(f as never) ?? ''} />)}</g>
       <path d={(proj as unknown as { getCompositionBorders: () => string }).getCompositionBorders()} className="am-borde" />
