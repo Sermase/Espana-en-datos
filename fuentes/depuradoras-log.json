@@ -1,4 +1,4 @@
 {
- "error": "d to connect to sdi.eea.europa.eu port 443 after 132985 ms: Could not connect to server\ncurl: (28) Failed to connect to sdi.eea.europa.eu port 443 after 134166 ms: Could not connect to server\ncurl: (28) Failed to connect to sdi.eea.europa.eu port 443 after 133165 ms: Could not connect to server\ncurl: (28) Failed to connect to sdi.eea.europa.eu port 443 after 135260 ms: Could not connect to server\n",
+ "error": "d to connect to sdi.eea.europa.eu port 443 after 134047 ms: Could not connect to server\ncurl: (28) Failed to connect to sdi.eea.europa.eu port 443 after 134163 ms: Could not connect to server\ncurl: (28) Failed to connect to sdi.eea.europa.eu port 443 after 133162 ms: Could not connect to server\ncurl: (28) Failed to connect to sdi.eea.europa.eu port 443 after 135257 ms: Could not connect to server\n",
  "conserva": "se conserva depuradoras.json anterior"
 }
