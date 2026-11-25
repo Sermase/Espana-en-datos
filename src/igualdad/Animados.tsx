@@ -102,6 +102,7 @@ export function EdificioCristal({ pisos, media, titulo }: { pisos: Piso[]; media
   const H = techo + pisos.length * (alto + gap) + 10, W0 = lab + 10, W1 = w - 12, ancho = W1 - W0, mid = W0 + ancho / 2
   const orden = [...pisos].reverse() // dirección arriba
   const puntos = useMemo(() => Array.from({ length: 18 }, (_, i) => ({ x: 0.08 + ((i * 37) % 84) / 100, d: 2.6 + (i % 5) * 0.55, r: (i % 7) * 0.4 })), [])
+  const [sel, setSel] = useState<string | null>(null), ps = pisos.find(p => p.id === sel)
   return <figure className="edificio" ref={ref} aria-label={titulo}>
     <div ref={wref}>
       {w > 0 && <svg width={w} height={H} role="img" aria-label={`${titulo}: ${pisos.map(p => `${p.nombre}, ${nf((p.mujeres / p.total) * 100, 0)} % mujeres`).join('; ')}`}>
@@ -116,8 +117,8 @@ export function EdificioCristal({ pisos, media, titulo }: { pisos: Piso[]; media
         {orden.map((p, i) => {
           const y = techo + i * (alto + gap), f = p.mujeres / p.total, xm = W0 + ancho * f
           const retraso = reduce ? 0 : (orden.length - 1 - i) * 0.14
-          return <g key={p.id}>
-            <rect x={W0} y={y} width={ancho} height={alto} className="ed-piso" />
+          return <g key={p.id} className={`ed-g ${sel && sel !== p.id ? 'is-off' : ''}`} onClick={() => setSel(sel === p.id ? null : p.id)}>
+            <rect x={W0} y={y} width={ancho} height={alto} className={`ed-piso ${sel === p.id ? 'is-sel' : ''}`} />
             <motion.rect y={y + top} height={alto - top - 4} fill={MUJ} rx={2} initial={{ x: mid, width: 0 }} animate={visto ? { x: W0, width: xm - W0 - 1 } : {}} transition={{ delay: retraso, duration: reduce ? 0 : 0.8, ease: [0.2, 0.8, 0.2, 1] }} />
             <motion.rect y={y + top} height={alto - top - 4} fill={HOM} rx={2} initial={{ x: mid, width: 0 }} animate={visto ? { x: xm + 1, width: W1 - xm - 1 } : {}} transition={{ delay: retraso, duration: reduce ? 0 : 0.8, ease: [0.2, 0.8, 0.2, 1] }} />
             <text x={W0 + 8} y={y + (alto + top) / 2 + 2} className="ed-pct">{nf(f * 100, 0)} %</text>
@@ -133,6 +134,7 @@ export function EdificioCristal({ pisos, media, titulo }: { pisos: Piso[]; media
         ))}</g>}
       </svg>}
     </div>
+    <p className="g-toque" role="status">{ps ? <><b>{ps.nombre}</b>: {nf((ps.mujeres / ps.total) * 100, 0)} de cada 100 son mujeres, {nf(Math.abs(ps.mujeres / ps.total - media) * 100, 0)} puntos {ps.mujeres / ps.total < media ? 'por debajo' : 'por encima'} de su peso en el empleo.</> : 'Toca un piso para ver su dato.'}</p>
     <ul className="g-legend"><li><i style={{ background: MUJ, height: 8 }} />Mujeres</li><li><i style={{ background: HOM, height: 8 }} />Hombres</li></ul>
   </figure>
 }
@@ -148,11 +150,13 @@ export function Pesas({ filas, fmt, titulo }: { filas: { id: string; nombre: str
   const estrecho = w < 600, lab = estrecho ? 0 : 220, fila = estrecho ? 46 : 34
   const max = Math.max(...filas.flatMap(f => [f.m, f.h])) * 1.05, x = (v: number) => lab + 12 + (v / max) * (w - lab - 70)
   const H = filas.length * fila + 8
+  const [sel, setSel] = useState<string | null>(null), fs = filas.find(f => f.id === sel)
   return <figure className="pesas" ref={ref} aria-label={titulo}>
     <div ref={wref}>{w > 0 && <svg width={w} height={H} role="img" aria-label={`${titulo}: ${filas.map(f => `${f.nombre}, mujeres ${fmt(f.m)}, hombres ${fmt(f.h)}`).join('; ')}`}>
       {filas.map((f, i) => {
         const y = i * fila + (estrecho ? 30 : fila / 2 + 2), d = reduce ? 0 : 0.25 + i * 0.07, b = ((f.h - f.m) / f.h) * 100
-        return <g key={f.id}>
+        return <g key={f.id} className={`ps-g ${sel && sel !== f.id ? 'is-off' : ''}`} onClick={() => setSel(sel === f.id ? null : f.id)}>
+          <rect x={0} y={y - fila / 2 - (estrecho ? 8 : 0)} width={w} height={fila} fill="transparent" />
           <text x={estrecho ? 0 : lab} y={estrecho ? y - 14 : y + 4} textAnchor={estrecho ? 'start' : 'end'} className="ps-n">{f.nombre}<tspan className="ps-b" dx={6}>{b > 0 ? `−${nf(b, 0)} %` : `+${nf(-b, 0)} %`}</tspan></text>
           <line x1={x(0)} x2={w - 50} y1={y} y2={y} className="ps-guia" />
           <motion.line y1={y} y2={y} stroke={b > 0 ? ROJO : '#3df5b0'} strokeWidth={3} strokeLinecap="round" initial={{ x1: x(f.m), x2: x(f.m) }} animate={visto ? { x1: x(Math.min(f.m, f.h)), x2: x(Math.max(f.m, f.h)) } : {}} transition={{ delay: d, duration: reduce ? 0 : 0.9, ease: [0.2, 0.8, 0.2, 1] }} />
@@ -161,6 +165,7 @@ export function Pesas({ filas, fmt, titulo }: { filas: { id: string; nombre: str
         </g>
       })}
     </svg>}</div>
+    <p className="g-toque" role="status">{fs ? <><b>{fs.nombre}</b>: ellas {fmt(fs.m)}, ellos {fmt(fs.h)}. {fs.h > fs.m ? `Ellas cobran un ${nf(((fs.h - fs.m) / fs.h) * 100, 1)} % menos.` : `Ellas cobran un ${nf(((fs.m - fs.h) / fs.h) * 100, 1)} % más.`}</> : 'Toca una fila para ver los dos sueldos.'}</p>
     <ul className="g-legend"><li><i style={{ background: MUJ, height: 8, borderRadius: 4 }} />Mujeres</li><li><i style={{ background: HOM, height: 8, borderRadius: 4 }} />Hombres</li><li><i style={{ background: ROJO, height: 3 }} />Brecha</li></ul>
     <details className="g-table"><summary>Ver como tabla</summary><table><thead><tr><th /><th>Mujeres</th><th>Hombres</th><th>Brecha</th></tr></thead><tbody>
       {filas.map(f => <tr key={f.id}><th scope="row">{f.nombre}</th><td>{fmt(f.m)}</td><td>{fmt(f.h)}</td><td>{nf(((f.h - f.m) / f.h) * 100, 1)} %</td></tr>)}
@@ -196,6 +201,7 @@ export function Memorial({ años, titulo }: { años: { año: number; n: number; 
         </g>
       })}
     </svg>}</div>
+    <p className="g-toque" role="status">{hover != null ? (() => { const a = años.find(x => x.año === hover)!; return <><b>{a.año}</b>: {a.n} mujeres asesinadas por su pareja o expareja{a.parcial ? ' (año en curso)' : ''}.</> })() : 'Toca un año para leer su cifra.'}</p>
   </figure>
 }
 
