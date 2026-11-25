@@ -55,6 +55,11 @@ export function Micro({ id, c }: { id: string; c: string }) {
       return <S>{barX(8, 31, 78 - a, 14, c, .1, .65)}{barX(86 - a, 31, a, 14, '#3df5b0', .25)}
         <text x="8" y="26" className="mi-t">gasta</text><text x="86" y="60" className="mi-t" textAnchor="end">ahorra</text></S>
     }
+    case 'sanidad': {
+      const u = ((R.sanidad?.ultimas as number[] | undefined) ?? []).slice(-12), m = n('sanidad', 'media') || 1, w = 84 / Math.max(1, u.length)
+      const d = 'M6 46' + u.map((v, i) => { const x = 6 + i * w, h = lim(6 + (v / m - .85) * 110, 5, 34); return `H${x + w * .35}l${w * .12} 4l${w * .14} ${-h - 4}l${w * .16} ${h + 10}l${w * .1} -10H${x + w}` }).join('')
+      return <S><path d={d} fill="none" stroke={c} strokeWidth="1.5" strokeLinejoin="round" className="mi-ecg" pathLength={100} /><circle cx="90" cy="46" r="2.6" fill="#fff" className="mi-latido" /></S>
+    }
     case 'turismo': return <S>
       {['M10 14 Q 34 10, 48 40', 'M86 14 Q 62 12, 48 40', 'M82 66 Q 62 60, 48 40'].map((d, i) => <g key={i}>
         <path id={`mi-tu${i}`} d={d} fill="none" stroke={c} strokeOpacity=".35" strokeWidth="1.3" />

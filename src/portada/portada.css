@@ -392,6 +392,7 @@ html, body { overflow-x: hidden }
 .mi-anillo { stroke-dashoffset: var(--len); transition: stroke-dashoffset 1.1s cubic-bezier(.22, 1, .36, 1) .1s }
 .is-vista .mi-anillo { stroke-dashoffset: var(--off) }
 .mi-traza { stroke-dasharray: 140; stroke-dashoffset: 140; transition: stroke-dashoffset 1.2s cubic-bezier(.22, 1, .36, 1) .25s } .is-vista .mi-traza { stroke-dashoffset: 0 }
+.mi-ecg { stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset 2.2s linear .2s } .is-vista .mi-ecg { stroke-dashoffset: 0 }
 .mi-ola { animation: mi-ola 3.8s linear infinite } @keyframes mi-ola { to { transform: translateX(-48px) } }
 .mi-radar { transform-origin: 48px 38px; animation: mi-radar 8.5s linear infinite } @keyframes mi-radar { to { transform: rotate(360deg) } }
 .mi-sube { animation: mi-sube 3.4s ease-in-out infinite } @keyframes mi-sube { 0% { transform: translateY(8px); opacity: 0 } 30% { opacity: .75 } 100% { transform: translateY(-16px); opacity: 0 } }
@@ -425,7 +426,8 @@ html, body { overflow-x: hidden }
 }
 @media (prefers-reduced-motion: reduce) {
   .cinta-pista, .mi-ola, .mi-radar, .mi-sube, .mi-onda, .mi-viaje, .mi-latido { animation: none }
-  .mi-x, .mi-x-der, .mi-y, .mi-anillo, .mi-traza { transition: none }
+  .mi-x, .mi-x-der, .mi-y, .mi-anillo, .mi-traza, .mi-ecg { transition: none }
+  .mi-ecg { stroke-dashoffset: 0 }
   .cinta-ver { overflow-x: auto }
 }
 @media (max-width: 860px) { .cabecera { gap: 0 } .bf-largo { display: none } .areas-sel { margin-top: 10px } }

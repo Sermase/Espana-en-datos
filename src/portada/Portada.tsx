@@ -32,6 +32,7 @@ function cifras(id: string): { n: number; f: (v: number) => string; l: string }[
     case 'cuentas': return [{ n: (Number(r.gasto) / Number(r.pib)) * 100, f: pct(1), l: `del PIB gastan las administraciones (${r.año})` }, { n: (Number(r.ingreso) - Number(r.gasto)) / Number(r.pib) * 100, f: pct(1), l: Number(r.ingreso) < Number(r.gasto) ? 'déficit' : 'superávit' }]
     case 'subvenciones': return [{ n: Number(r.imp) / 1e9, f: v => `${es(v, 1)} mil M€`, l: 'en ayudas, últimos 12 meses' }, { n: Number(r.n) / 1e6, f: v => `${es(v, 1)} M`, l: 'concesiones' }]
     case 'impuestos': return [{ n: Number(r.total12) / 1000, f: v => `${es(v, 1)} mil M€`, l: 'recaudados en 12 meses' }, { n: Number(r.var), f: pct(1, true), l: 'en un año' }]
+    case 'sanidad': return [{ n: Number(r.vida), f: v => `${es(v, 1)} años`, l: `de esperanza de vida (${r.año})` }, ...(r.muertes ? [{ n: Number(r.muertes), f: ent, l: `muertes en una semana, ${es(Math.abs(Number(r.muertes) / Number(r.media) - 1) * 100, 0)} % ${Number(r.muertes) >= Number(r.media) ? 'más' : 'menos'} de lo normal` }] : [])]
     case 'turismo': return [{ n: Number(r.turistas) / 1e6, f: v => `${es(v, 1)} M`, l: `turistas internacionales en ${r.año}` }, ...(r.gasto ? [{ n: Number(r.gasto) / 1000, f: (v: number) => `${es(v, 1)} mil M€`, l: 'de gasto' }] : [])]
     case 'igualdad': return [{ n: Number(r.brecha), f: v => `${es(v, 1)} %`, l: `brecha salarial por hora, ${r.año}` }, { n: Number(r.ue), f: v => `${es(v, 1)} %`, l: 'media de la UE' }]
     case 'coches': return [{ n: Number(r.nuevos), f: v => es(v, 0), l: 'turismos nuevos en 12 meses' }, { n: Number(r.enchufables), f: v => `${es(v, 1)} %`, l: 'eléctricos o enchufables' }]
@@ -42,7 +43,7 @@ function cifras(id: string): { n: number; f: (v: number) => string; l: string }[
     default: return []
   }
 }
-const FUENTE: Record<string, string> = { turismo: 'INE y Eurostat, cada semana', igualdad: 'INE y Eurostat, cada semana', coches: 'DGT, cada mes', hogares: 'INE y Eurostat, cada semana', aire: 'Agencia Europea, cada dos horas', seguridad: 'Ministerio del Interior, cada trimestre', impuestos: 'Agencia Tributaria, cada semana', cuentas: 'Eurostat, cada semana', subvenciones: 'BDNS, cada día', vivienda: 'INE, cada semana', agua: `Datos del ${fecha}`, poblacion: 'Padrón del INE', economia: 'Eurostat, cada día', energia: 'En directo, Red Eléctrica', comercio: 'Eurostat, cada semana', gasolineras: 'Datos de hoy' }
+const FUENTE: Record<string, string> = { sanidad: 'INE y Eurostat, cada semana', turismo: 'INE y Eurostat, cada semana', igualdad: 'INE y Eurostat, cada semana', coches: 'DGT, cada mes', hogares: 'INE y Eurostat, cada semana', aire: 'Agencia Europea, cada dos horas', seguridad: 'Ministerio del Interior, cada trimestre', impuestos: 'Agencia Tributaria, cada semana', cuentas: 'Eurostat, cada semana', subvenciones: 'BDNS, cada día', vivienda: 'INE, cada semana', agua: `Datos del ${fecha}`, poblacion: 'Padrón del INE', economia: 'Eurostat, cada día', energia: 'En directo, Red Eléctrica', comercio: 'Eurostat, cada semana', gasolineras: 'Datos de hoy' }
 
 
 
@@ -70,6 +71,7 @@ const CINTA: { n: string; v: string; id: string; cambio?: number }[] = [
   ...(R.vivienda ? [{ n: 'Vivienda', v: `${es((R.vivienda.ipv_a as [string, number])[1], 1)} %`, id: 'vivienda', cambio: (R.vivienda.ipv_a as [string, number])[1] }] : []),
   ...(R.impuestos ? [{ n: 'Recaudación', v: `${es(Number(R.impuestos.var), 1)} %`, id: 'impuestos', cambio: Number(R.impuestos.var) }] : []),
   ...(R.coches ? [{ n: 'Enchufables', v: `${es(Number(R.coches.enchufables), 1)} %`, id: 'coches' }] : []),
+  ...(R.sanidad?.muertes ? [{ n: 'Muertes en una semana', v: es(Number(R.sanidad.muertes), 0), id: 'sanidad' }] : []),
   ...(R.turismo ? [{ n: 'Turistas', v: `${es(Number(R.turismo.turistas) / 1e6, 1)} M`, id: 'turismo' }] : []),
 ]
 function Cinta() {
