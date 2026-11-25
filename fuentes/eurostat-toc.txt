@@ -45,12 +45,12 @@
 "                        Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - quarterly data"	"migr_asyumtpfq"	"dataset"	"10.11.2026"	"10.11.2026"	"2022-Q1"	"2026-Q3"	2211744
 "                        Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - monthly data"	"migr_asyumtpfm"	"dataset"	"18.11.2026"	"13.11.2026"	"2022-03"	"2026-10"	6380232
 "                        Unaccompanied minors benefiting from temporary protection at the end of the month by citizenship, age and sex - monthly data"	"migr_asyumtpsm"	"dataset"	"18.11.2026"	"13.11.2026"	"2022-03"	"2026-10"	6059726
-"                        Decisions withdrawing temporary protection to unaccompanied minors by citizenship and reason - quarterly data"	"migr_asyumtpwq"	"dataset"	"20.11.2026"	"09.10.2026"	"2022-Q1"	"2026-Q3"	590190
+"                        Decisions withdrawing temporary protection to unaccompanied minors by citizenship and reason - quarterly data"	"migr_asyumtpwq"	"dataset"	"24.11.2026"	"09.10.2026"	"2022-Q1"	"2026-Q3"	593280
 "                    Decisions granting temporary protection by citizenship, age and sex - annual aggregated data"	"migr_asytpfa"	"dataset"	"26.10.2026"	"12.01.2026"	"2022"	"2025"	807342
 "                    Decisions granting temporary protection by citizenship, age and sex - quarterly data"	"migr_asytpfq"	"dataset"	"10.11.2026"	"04.11.2026"	"2022-Q1"	"2026-Q3"	3874270
 "                    Decisions granting temporary protection by citizenship, age and sex - monthly data"	"migr_asytpfm"	"dataset"	"18.11.2026"	"04.11.2026"	"2022-03"	"2026-10"	11234620
 "                    Beneficiaries of temporary protection at the end of the month by citizenship, age and sex - monthly data"	"migr_asytpsm"	"dataset"	"18.11.2026"	"04.11.2026"	"2022-03"	"2026-10"	11202940
-"                    Decisions withdrawing temporary protection by citizenship and reason - quarterly data"	"migr_asytpwq"	"dataset"	"20.11.2026"	"09.10.2026"	"2022-Q1"	"2026-Q3"	606670
+"                    Decisions withdrawing temporary protection by citizenship and reason - quarterly data"	"migr_asytpwq"	"dataset"	"24.11.2026"	"09.10.2026"	"2022-Q1"	"2026-Q3"	609760
 "                        Temporary employees by educational attainment level"	"lfsa_etgaed"	"dataset"	"30.10.2026"	"17.04.2026"	"1983"	"2025"	255104
 "                            Part-time employment and temporary contracts - annual data (1993–2020)"	"lfsi_pt_a_h"	"dataset"	"20.07.2026"	"08.01.2026"	"1993"	"2020"	71105
 "                            Part-time employment and temporary contracts - quarterly data (1992–2020)"	"lfsi_pt_q_h"	"dataset"	"20.07.2026"	"08.01.2026"	"1992-Q2"	"2020-Q4"	779935
