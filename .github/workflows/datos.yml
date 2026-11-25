@@ -93,6 +93,10 @@ jobs:
         if: contains(github.event.head_commit.message, '[sonda]')
         continue-on-error: true
         run: node scripts/sonda-turismo.mjs
+      - name: Turismo (INE FRONTUR, EGATUR, ocupación hotelera, viviendas turísticas; Eurostat)
+        if: github.event.schedule == '43 15 * * 2' || contains(github.event.head_commit.message, '[turismo]')
+        continue-on-error: true
+        run: node scripts/turismo.mjs
       - name: Enlaces a las fuentes
         if: github.event.schedule == '43 15 * * 2' || contains(github.event.head_commit.message, '[enlaces]')
         continue-on-error: true
@@ -101,11 +105,11 @@ jobs:
         continue-on-error: true
         run: node scripts/aire-ahora.mjs
       - name: Guardar datos nuevos
-        if: (github.event_name != 'push' && github.event.schedule != '52 */2 * * *') || contains(github.event.head_commit.message, '[datos]') || contains(github.event.head_commit.message, '[agua]') || contains(github.event.head_commit.message, '[gasolineras]') || contains(github.event.head_commit.message, '[poblacion]') || contains(github.event.head_commit.message, '[economia]') || contains(github.event.head_commit.message, '[energia]') || contains(github.event.head_commit.message, '[comercio]') || contains(github.event.head_commit.message, '[vivienda]') || contains(github.event.head_commit.message, '[cuentas]') || contains(github.event.head_commit.message, '[saneamiento]') || contains(github.event.head_commit.message, '[impuestos]') || contains(github.event.head_commit.message, '[seguridad]') || contains(github.event.head_commit.message, '[aire]') || contains(github.event.head_commit.message, '[hogares]') || contains(github.event.head_commit.message, '[coches]') || contains(github.event.head_commit.message, '[igualdad]') || contains(github.event.head_commit.message, '[sonda]') || contains(github.event.head_commit.message, '[enlaces]')
+        if: (github.event_name != 'push' && github.event.schedule != '52 */2 * * *') || contains(github.event.head_commit.message, '[datos]') || contains(github.event.head_commit.message, '[agua]') || contains(github.event.head_commit.message, '[gasolineras]') || contains(github.event.head_commit.message, '[poblacion]') || contains(github.event.head_commit.message, '[economia]') || contains(github.event.head_commit.message, '[energia]') || contains(github.event.head_commit.message, '[comercio]') || contains(github.event.head_commit.message, '[vivienda]') || contains(github.event.head_commit.message, '[cuentas]') || contains(github.event.head_commit.message, '[saneamiento]') || contains(github.event.head_commit.message, '[impuestos]') || contains(github.event.head_commit.message, '[seguridad]') || contains(github.event.head_commit.message, '[aire]') || contains(github.event.head_commit.message, '[hogares]') || contains(github.event.head_commit.message, '[coches]') || contains(github.event.head_commit.message, '[igualdad]') || contains(github.event.head_commit.message, '[turismo]') || contains(github.event.head_commit.message, '[sonda]') || contains(github.event.head_commit.message, '[enlaces]')
         run: |
           git config user.name "datos-bot"
           git config user.email "datos-bot@users.noreply.github.com"
-          git add src/agua/data/snapshot.json src/agua/data/consumo.json src/resumen.json public/agua/data public/gasolineras/data public/poblacion/data public/economia/data public/energia/data public/comercio/data public/vivienda/data public/cuentas/data public/impuestos/data public/seguridad/data public/aire/data public/hogares/data public/coches/data public/igualdad/data fuentes
+          git add src/agua/data/snapshot.json src/agua/data/consumo.json src/resumen.json public/agua/data public/gasolineras/data public/poblacion/data public/economia/data public/energia/data public/comercio/data public/vivienda/data public/cuentas/data public/impuestos/data public/seguridad/data public/aire/data public/hogares/data public/coches/data public/igualdad/data public/turismo/data fuentes
           git diff --cached --quiet || git commit -m "Datos del $(date -u +%Y-%m-%d)"
           for i in 1 2 3 4; do git pull --rebase -q && git push && break; sleep 10; done
       - run: npm run build
