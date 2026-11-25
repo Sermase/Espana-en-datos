@@ -18,13 +18,14 @@ export type Tema = {
   plan?: string
 }
 
-export const AREAS: { id: AreaId; nombre: string; lema: string }[] = [
-  { id: 'gente', nombre: 'Gente', lema: 'Cuántos somos, cómo vivimos, de qué enfermamos y qué estudiamos.' },
-  { id: 'economia', nombre: 'Economía', lema: 'Lo que ganamos, lo que cuesta vivir, lo que reparte lo público y lo que vendemos al mundo.' },
-  { id: 'publico', nombre: 'Sector público', lema: 'Lo que ingresan y gastan las administraciones, en qué, y a quién ayudan.' },
-  { id: 'territorio', nombre: 'Territorio', lema: 'El agua, el clima, las montañas y el campo.' },
-  { id: 'movilidad', nombre: 'Energía y movilidad', lema: 'La luz, el combustible y cómo nos movemos.' },
-  { id: 'ocio', nombre: 'Cultura y ocio', lema: 'Cine, museos, libros y deporte.' },
+/** Cada área tiene su color: el de España en la portada cuando se elige. */
+export const AREAS: { id: AreaId; nombre: string; lema: string; color: string }[] = [
+  { id: 'gente', nombre: 'Gente', lema: 'Cuántos somos, cómo vivimos, de qué enfermamos y qué estudiamos.', color: '#a993ff' },
+  { id: 'economia', nombre: 'Economía', lema: 'Lo que ganamos, lo que cuesta vivir, lo que reparte lo público y lo que vendemos al mundo.', color: '#3df5b0' },
+  { id: 'publico', nombre: 'Sector público', lema: 'Lo que ingresan y gastan las administraciones, en qué, y a quién ayudan.', color: '#f2b880' },
+  { id: 'territorio', nombre: 'Territorio', lema: 'El agua, el clima, las montañas y el campo.', color: '#3fe6ff' },
+  { id: 'movilidad', nombre: 'Energía y movilidad', lema: 'La luz, el combustible y cómo nos movemos.', color: '#ffb02e' },
+  { id: 'ocio', nombre: 'Cultura y ocio', lema: 'Cine, museos, libros y deporte.', color: '#f78fb3' },
 ]
 
 export const TEMAS: Tema[] = [

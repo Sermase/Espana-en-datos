@@ -1,12 +1,14 @@
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
-import { ArrowRight, Building2, Car, Droplets, Factory, Fuel, GraduationCap, HandCoins, HeartPulse, House, Landmark, Luggage, Mountain, Plane, PiggyBank, Receipt, Route, Scale, ScrollText, ShieldCheck, Ship, ShoppingBasket, Thermometer, TrainFront, TrendingUp, Trophy, Users, Clapperboard, Wheat, Wind, Zap, type LucideIcon } from 'lucide-react'
+import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from 'motion/react'
+import { ArrowDown, ArrowUpRight, Building2, Car, ChevronDown, Clapperboard, Droplets, Factory, Fuel, GraduationCap, HandCoins, HeartPulse, House, Landmark, Luggage, Mountain, Plane, PiggyBank, Receipt, Route, Scale, ScrollText, ShieldCheck, Ship, ShoppingBasket, Thermometer, TrainFront, TrendingUp, Trophy, Users, Wheat, Wind, Zap, type LucideIcon } from 'lucide-react'
 import resumen from '../resumen.json'
-import { useEffect, useRef, useState, type CSSProperties } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import { CountUp } from '../graficos/CountUp'
-import { AREAS, TEMAS, type Tema } from '../temas'
+import { useInView } from '../graficos/util'
+import { AREAS, TEMAS, type AreaId, type Tema } from '../temas'
 import { A } from '../Fuentes'
 import { Hero } from './Hero'
 import { Instalar } from './Instalar'
+import { Micro } from './Micro'
 
 const fecha = new Date(resumen.agua.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
 const reserva = (resumen.agua.a / resumen.agua.c) * 100
@@ -55,106 +57,136 @@ const ICONO: Record<string, LucideIcon> = {
   energia: Zap, gasolineras: Fuel, coches: Car, trenes: TrainFront, aeropuertos: Plane, carreteras: Route, cultura: Clapperboard, deporte: Trophy,
 }
 const ABIERTOS = AREAS.flatMap(a => TEMAS.filter(t => t.area === a.id && t.ruta))
+const AREAS_ABIERTAS = AREAS.filter(a => ABIERTOS.some(t => t.area === a.id))
 const PLAN = TEMAS.filter(t => !t.ruta)
+const MARCA = '#3fe6ff'
 
-/** Cinta tipo canal de bolsa: el dato principal de cada tema y, si lo hay, cuánto cambia. */
-const CAMBIO: Record<string, [number, string] | undefined> = {
-  impuestos: R.impuestos ? [Number(R.impuestos.var), 'en un año'] : undefined,
-  seguridad: R.seguridad ? [Number(R.seguridad.var), 'en un año'] : undefined,
-  aire: R.aire ? [Number(R.aire.vs1990), 'desde 1990'] : undefined,
-}
-const CINTA = [
-  ...ABIERTOS.flatMap(t => { const c = cifras(t.id)[0]; return c ? [{ id: t.id, n: t.nombre, v: c.f(c.n), l: c.l, cambio: CAMBIO[t.id] }] : [] }),
-  ...(R.gasolineras ? [{ id: 'gasolineras', n: 'Diésel', v: `${es(Number(R.gasolineras.dsl), 3)} €`, l: 'litro, mediana de hoy', cambio: undefined }] : []),
-  ...(R.energia ? [{ id: 'energia', n: 'Luz', v: `${es(Number(R.energia.pvpc), 3)} €`, l: 'kWh hoy, tarifa regulada', cambio: undefined }] : []),
+/** Cinta tipo canal de bolsa, fina y pegada arriba: lo que cambia cada día. */
+const CINTA: { n: string; v: string; id: string; cambio?: number }[] = [
+  { n: 'Embalses', v: `${es(reserva, 1)} %`, id: 'agua' },
+  ...(R.energia ? [{ n: 'Luz hoy', v: `${es(Number(R.energia.pvpc), 3)} €/kWh`, id: 'energia' }, { n: 'Renovable ayer', v: `${es(Number(R.energia.ren), 0)} %`, id: 'energia' }] : []),
+  ...(R.gasolineras ? [{ n: 'Gasolina 95', v: `${es(Number(R.gasolineras.g95), 3)} €`, id: 'gasolineras' }, { n: 'Diésel', v: `${es(Number(R.gasolineras.dsl), 3)} €`, id: 'gasolineras' }] : []),
+  ...(R.economia ? [{ n: 'IPC', v: `${es((R.economia.ipc as [string, number])[1], 1)} %`, id: 'economia' }, { n: 'Paro', v: `${es((R.economia.paro as [string, number])[1], 1)} %`, id: 'economia' }, { n: 'PIB', v: `${es((R.economia.pib as [string, number])[1], 1)} %`, id: 'economia', cambio: (R.economia.pib as [string, number])[1] }] : []),
+  ...(R.vivienda ? [{ n: 'Vivienda', v: `${es((R.vivienda.ipv_a as [string, number])[1], 1)} %`, id: 'vivienda', cambio: (R.vivienda.ipv_a as [string, number])[1] }] : []),
+  ...(R.impuestos ? [{ n: 'Recaudación', v: `${es(Number(R.impuestos.var), 1)} %`, id: 'impuestos', cambio: Number(R.impuestos.var) }] : []),
+  ...(R.coches ? [{ n: 'Enchufables', v: `${es(Number(R.coches.enchufables), 1)} %`, id: 'coches' }] : []),
+  ...(R.turismo ? [{ n: 'Turistas', v: `${es(Number(R.turismo.turistas) / 1e6, 1)} M`, id: 'turismo' }] : []),
 ]
 function Cinta() {
   const items = (oculto: boolean) => CINTA.map((c, k) => { const t = TEMAS.find(x => x.id === c.id)!; return <a key={k} href={t.ruta} tabIndex={oculto ? -1 : undefined} style={{ '--c': t.color } as CSSProperties}>
-    <span className="ci-n">{c.n}</span><b>{c.v}</b>
-    {c.cambio && Number.isFinite(c.cambio[0]) && <em className={c.cambio[0] >= 0 ? 'sube' : 'baja'}>{c.cambio[0] >= 0 ? '▲' : '▼'} {es(Math.abs(c.cambio[0]), 1)} %</em>}
-    <small>{c.l}</small>
+    <i />{c.n} <b>{c.v}</b>{c.cambio != null && <em className={c.cambio >= 0 ? 'sube' : 'baja'}>{c.cambio >= 0 ? '▲' : '▼'}</em>}
   </a> })
-  return <div className="cinta" aria-label="Datos de hoy de cada tema">
-    <div className="cinta-pista"><span>{items(false)}</span><span aria-hidden>{items(true)}</span></div>
+  return <div className="cinta" role="region" aria-label="Indicadores del día">
+    <span className="cinta-hoy"><i className="vivo" />Hoy</span>
+    <div className="cinta-ver"><div className="cinta-pista"><span>{items(false)}</span><span aria-hidden>{items(true)}</span></div></div>
   </div>
 }
 
-/** La hora de España, en vivo. */
-function Reloj() {
-  const [ahora, setAhora] = useState(() => new Date())
-  useEffect(() => { const t = setInterval(() => setAhora(new Date()), 15000); return () => clearInterval(t) }, [])
-  const f = ahora.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' })
-  const h = ahora.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' })
-  return <span className="reloj-vivo"><i className="vivo" />En directo <span>· {f} · {h}</span></span>
-}
-
-/** El tema elegido: su nombre, para qué sirve, sus cifras de hoy y la puerta para entrar. */
-function Panel({ t }: { t: Tema }) {
-  const Ico = ICONO[t.id] ?? TrendingUp, cs = cifras(t.id).slice(0, 2)
-  return <div className="panel" style={{ '--c': t.color } as CSSProperties} aria-live="polite">
+/** La ficha del área elegida (o de todas): qué cuenta y qué temas tiene, sin repetir las cifras de las tarjetas. */
+function Ficha({ area, setArea }: { area: AreaId | null; setArea: (a: AreaId | null) => void }) {
+  const a = AREAS.find(x => x.id === area)
+  const baja = () => document.getElementById('temas')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  return <div className="ficha" style={{ '--c': a?.color ?? MARCA } as CSSProperties} aria-live="polite">
     <AnimatePresence mode="wait" initial={false}>
-      <motion.div key={t.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: .28 }}>
-        <span className="pa-area">{AREAS.find(a => a.id === t.area)?.nombre}</span>
-        <h2><Ico size={26} strokeWidth={1.8} />{t.nombre}</h2>
-        <p>{t.lema}</p>
-        {cs.length > 0 && <dl>{cs.map((c, k) => <div key={c.l}><dd><CountUp value={c.n} fmt={c.f} delay={k * .08} duration={.9} /></dd><dt>{c.l}</dt></div>)}</dl>}
-        <div className="pa-pie"><a className="pa-entrar" href={t.ruta}>Entrar en {t.nombre}<ArrowRight size={18} /></a><small><i className="vivo" /> {FUENTE[t.id] ?? 'Datos oficiales'}</small></div>
+      <motion.div key={area ?? 'todo'} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: .25 }}>
+        {!a ? <>
+          <h2><b><CountUp value={ABIERTOS.length} fmt={v => String(Math.round(v))} /></b> temas en {AREAS_ABIERTAS.length} áreas</h2>
+          <p>Datos oficiales que se actualizan solos. Elige un área para ver qué cuenta, o baja a las fichas.</p>
+          <ul className="fi-areas">{AREAS_ABIERTAS.map(x => <li key={x.id}><button onClick={() => setArea(x.id)} style={{ '--c': x.color } as CSSProperties}><i />{x.nombre}<small>{ABIERTOS.filter(t => t.area === x.id).length}</small></button></li>)}</ul>
+        </> : <>
+          <h2>{a.nombre}</h2>
+          <p>{a.lema}</p>
+          <ul className="fi-temas">{ABIERTOS.filter(t => t.area === a.id).map(t => { const Ico = ICONO[t.id] ?? TrendingUp
+            return <li key={t.id}><a href={t.ruta} style={{ '--c': t.color } as CSSProperties}><Ico size={16} />{t.nombre}</a></li> })}</ul>
+        </>}
+        <button className="fi-bajar" onClick={baja}>Ver {a ? `las fichas de ${a.nombre}` : 'todas las fichas'}<ArrowDown size={16} /></button>
       </motion.div>
     </AnimatePresence>
   </div>
 }
 
+/** Tarjeta de tema: nombre, dato principal grande en su color, el secundario, la fuente y un micrográfico vivo. */
+function Tarjeta({ t, i }: { t: Tema; i: number }) {
+  const [ref, vista] = useInView<HTMLAnchorElement>()
+  const cs = cifras(t.id), Ico = ICONO[t.id] ?? TrendingUp
+  return <motion.li layout initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: .97, transition: { duration: .15 } }} transition={{ delay: (i % 3) * .05, duration: .4 }}>
+    <a ref={ref} id={`tarjeta-${t.id}`} href={t.ruta} className={`tarjeta ${vista ? 'is-vista' : ''}`} style={{ '--c': t.color } as CSSProperties}>
+      <div className="ta-txt">
+        <h3><Ico size={16} strokeWidth={2} />{t.nombre}<ArrowUpRight size={15} className="ta-flecha" /></h3>
+        {cs[0] && <><b className="ta-dato"><CountUp value={cs[0].n} fmt={cs[0].f} start={vista} duration={1.1} /></b><span className="ta-et">{cs[0].l}</span></>}
+        {cs[1] && <span className="ta-sec"><b>{cs[1].f(cs[1].n)}</b> · {cs[1].l}</span>}
+        <small className="ta-fuente">{FUENTE[t.id] ?? 'Datos oficiales'}</small>
+      </div>
+      <Micro id={t.id} c={t.color} />
+    </a>
+  </motion.li>
+}
+
+function Fichas({ area, setArea }: { area: AreaId | null; setArea: (a: AreaId | null) => void }) {
+  const chips: { id: AreaId | null; nombre: string; n: number }[] = [{ id: null, nombre: 'Todos', n: ABIERTOS.length }, ...AREAS_ABIERTAS.map(a => ({ id: a.id, nombre: a.nombre, n: ABIERTOS.filter(t => t.area === a.id).length }))]
+  return <section className="fichas" id="temas" aria-labelledby="fichas-t">
+    <h2 id="fichas-t" className="sr-only">Temas</h2>
+    <LayoutGroup>
+      <nav className="filtro" aria-label="Filtrar por área">
+        {chips.map(c => <button key={c.id ?? 'todo'} onClick={() => setArea(c.id)} aria-pressed={area === c.id} className={area === c.id ? 'is-on' : ''}>
+          {area === c.id && <motion.i className="filtro-pildora" layoutId="filtro-pildora" transition={{ type: 'spring', stiffness: 420, damping: 34 }} />}
+          <span>{c.nombre} <small>{c.n}</small></span>
+        </button>)}
+      </nav>
+      <AnimatePresence mode="popLayout" initial={false}>
+        {AREAS_ABIERTAS.filter(a => !area || a.id === area).map(a => <motion.section key={a.id} layout className="fi-area" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: .15 } }}>
+          <header><h3 style={{ '--c': a.color } as CSSProperties}><i />{a.nombre}</h3><p>{a.lema}</p></header>
+          <ul className="tarjetas">{ABIERTOS.filter(t => t.area === a.id).map((t, i) => <Tarjeta key={t.id} t={t} i={i} />)}</ul>
+        </motion.section>)}
+      </AnimatePresence>
+    </LayoutGroup>
+  </section>
+}
+
+function Pronto() {
+  const [abierto, setAbierto] = useState(false)
+  return <section className="pronto-caja">
+    <button onClick={() => setAbierto(!abierto)} aria-expanded={abierto}><span><i />Próximamente <small>{PLAN.length} temas en preparación</small></span><ChevronDown size={18} style={{ transform: abierto ? 'rotate(180deg)' : undefined }} /></button>
+    {abierto && <ul>{PLAN.map(t => { const Ico = ICONO[t.id] ?? TrendingUp; return <li key={t.id} style={{ '--c': t.color } as CSSProperties}><b><Ico size={15} />{t.nombre}</b><span>{AREAS.find(a => a.id === t.area)?.nombre}</span><p>{t.plan ?? t.lema}</p></li> })}</ul>}
+  </section>
+}
+
 export default function Portada() {
   const reduce = useReducedMotion()
-  const [i, setI] = useState(0), [quieto, setQuieto] = useState(0)
-  const conRaton = useRef(typeof matchMedia !== 'undefined' && matchMedia('(hover: hover)').matches)
-  const tira = useRef<HTMLDivElement>(null)
-  const t = ABIERTOS[i]
-  // España va cambiando de tema sola; en cuanto alguien elige, se para un rato
+  const [area, setArea] = useState<AreaId | null>(null), [ambiente, setAmbiente] = useState(0)
+  // con «todas», España va tomando el color de cada área, despacio
   useEffect(() => {
-    if (reduce) return
-    const espera = Math.max(4500, quieto - Date.now())
-    const id = setTimeout(() => setI(k => (k + 1) % ABIERTOS.length), espera)
+    if (area || reduce) return
+    const id = setTimeout(() => setAmbiente(k => (k + 1) % (AREAS_ABIERTAS.length + 1)), 4200)
     return () => clearTimeout(id)
-  }, [i, quieto, reduce])
-  // en el móvil, la tira de temas acompaña al tema activo
-  useEffect(() => {
-    const nav = tira.current, el = nav?.querySelector<HTMLElement>('.is-on')
-    if (nav && el && nav.scrollWidth > nav.clientWidth) { const n = nav.getBoundingClientRect(), r = el.getBoundingClientRect(); nav.scrollTo({ left: nav.scrollLeft + r.left - n.left - n.width / 2 + r.width / 2, behavior: reduce ? 'auto' : 'smooth' }) }
-  }, [i, reduce])
-  const elige = (k: number) => { setI(k); setQuieto(Date.now() + 20000) }
+  }, [area, ambiente, reduce])
+  const color = area ? AREAS.find(a => a.id === area)!.color : ambiente === 0 ? MARCA : AREAS_ABIERTAS[ambiente - 1].color
   return (
-    <main className="portada">
-      <div className="barra">
-        <Reloj />
-        <span className="barra-der"><a href="./acerca/index.html">Acerca de</a><Instalar /></span>
-      </div>
-      <header className="cabecera">
-        <div className="cab-txt">
-          <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8, delay: .2 }}>España<span>en datos</span></motion.h1>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: .8 }}>El país como un cuadro de mando: datos oficiales que se actualizan solos. Elige un tema.</motion.p>
-          <Panel t={t} />
-        </div>
-        <Hero color={t.color} />
-      <nav className="selector" aria-label="Temas" ref={tira}>
-        {AREAS.map(a => { const ts = ABIERTOS.filter(x => x.area === a.id); if (!ts.length) return null
-          return <div key={a.id} className="sel-area"><span>{a.nombre}</span>
-            {ts.map(x => { const k = ABIERTOS.indexOf(x), Ico = ICONO[x.id] ?? TrendingUp, on = k === i
-              return <a key={x.id} href={x.ruta} className={on ? 'is-on' : ''} style={{ '--c': x.color } as CSSProperties} aria-current={on ? 'true' : undefined}
-                onPointerEnter={e => { if (e.pointerType === 'mouse') elige(k) }} onFocus={() => elige(k)}
-                onClick={e => { if (!conRaton.current && !on) { e.preventDefault(); elige(k) } }}>
-                {on && <motion.i className="sel-pildora" layoutId="sel-pildora" transition={{ type: 'spring', stiffness: 420, damping: 34 }} />}
-                <Ico size={17} strokeWidth={1.9} /><span>{x.nombre}</span>
-              </a> })}
-          </div> })}
-      </nav>
-      <p className="sel-pista">{conRaton.current ? 'Pasa el ratón por un tema para verlo y haz clic para entrar.' : 'Toca un tema para verlo; tócalo otra vez, o «Entrar», para abrirlo.'}</p>
-      </header>
+    <>
       <Cinta />
-      <footer className="pie">
-        {PLAN.length > 0 && <p className="pronto"><span>Próximamente</span>{PLAN.map(x => { const Ico = ICONO[x.id] ?? TrendingUp; return <i key={x.id} title={x.plan ?? x.lema} style={{ '--c': x.color } as CSSProperties}><Ico size={14} />{x.nombre}</i> })}</p>}
-        <p>Fuentes oficiales, enlazadas en cada tema: <A id="boletin">MITECO</A>, <A id="siane">IGN</A>, <A id="ine_padron">INE</A>, <A id="eurostat">Eurostat</A>, <A id="ree">REE</A>, <A id="aemet">AEMET</A>. Sin registro, sin anuncios. <a className="pie-acerca" href="./acerca/index.html">Acerca de España en datos · hecho por Istari Core</a></p>
-      </footer>
-    </main>
+      <main className="portada">
+        <div className="barra">
+          <span className="barra-fecha"><span className="bf-largo">Datos oficiales · se actualizan solos · </span>{new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Madrid' })}</span>
+          <span className="barra-der"><a href="./acerca/index.html">Acerca de</a><Instalar /></span>
+        </div>
+        <header className="cabecera">
+          <div className="cab-txt">
+            <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8, delay: .2 }}>España<span>en datos</span></motion.h1>
+            <nav className="areas-sel" aria-label="Áreas">
+              <button onClick={() => setArea(null)} aria-pressed={!area} className={!area ? 'is-on' : ''} style={{ '--c': MARCA } as CSSProperties}>Todo</button>
+              {AREAS_ABIERTAS.map(a => <button key={a.id} onClick={() => setArea(area === a.id ? null : a.id)} aria-pressed={area === a.id} className={area === a.id ? 'is-on' : ''} style={{ '--c': a.color } as CSSProperties}><i />{a.nombre}</button>)}
+            </nav>
+            <Ficha area={area} setArea={setArea} />
+          </div>
+          <Hero color={color} />
+        </header>
+        <Fichas area={area} setArea={setArea} />
+        <Pronto />
+        <footer className="pie">
+          <p>Fuentes oficiales, enlazadas en cada tema: <A id="boletin">MITECO</A>, <A id="siane">IGN</A>, <A id="ine_padron">INE</A>, <A id="eurostat">Eurostat</A>, <A id="ree">REE</A>, <A id="aemet">AEMET</A>, DGT, BDNS, Agencia Tributaria y Ministerio del Interior. Sin registro, sin anuncios.</p>
+          <p><a className="pie-acerca" href="./acerca/index.html">Acerca de España en datos · hecho por Istari Core</a></p>
+        </footer>
+      </main>
+    </>
   )
 }
