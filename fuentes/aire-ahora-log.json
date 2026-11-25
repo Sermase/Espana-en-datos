@@ -1,7 +1,7 @@
 {
  "avisos": [],
- "descarga": "200 1559867",
- "filas": 59015,
+ "descarga": "200 1581857",
+ "filas": 60152,
  "ultimaHora": "2026-11-25T00:00:00.000Z",
  "miteco": 0,
  "metadatos": [
@@ -22,6 +22,6 @@
    "estaciones": 0
   }
  ],
- "estaciones": 512,
+ "estaciones": 471,
  "sinCoordenadas": 0
 }
