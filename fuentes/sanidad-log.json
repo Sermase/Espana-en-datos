@@ -1,0 +1,459 @@
+{
+ "avisos": [],
+ "vida": {
+  "filas": 10617,
+  "dims": {
+   "freq": [
+    "A"
+   ],
+   "unit": [
+    "YR"
+   ],
+   "sex": [
+    "T",
+    "M",
+    "F"
+   ],
+   "age": [
+    "Y_LT1",
+    "Y65"
+   ],
+   "geo": [
+    "EU27_2020",
+    "EU28",
+    "EU27_2007",
+    "EA21",
+    "EA20",
+    "BE",
+    "BG",
+    "CZ",
+    "DK",
+    "DE",
+    "DE_TOT",
+    "EE",
+    "IE",
+    "EL",
+    "ES",
+    "FR",
+    "FX",
+    "HR",
+    "IT",
+    "CY",
+    "LV",
+    "LT",
+    "LU",
+    "HU",
+    "MT"
+   ]
+  },
+  "tiempos": [
+   "1975",
+   "2024"
+  ]
+ },
+ "vidaCcaa": {
+  "filas": 1140,
+  "dims": {
+   "freq": [
+    "A"
+   ],
+   "unit": [
+    "YR"
+   ],
+   "sex": [
+    "T",
+    "M",
+    "F"
+   ],
+   "age": [
+    "Y_LT1"
+   ],
+   "geo": [
+    "ES11",
+    "ES12",
+    "ES13",
+    "ES21",
+    "ES22",
+    "ES23",
+    "ES24",
+    "ES30",
+    "ES41",
+    "ES42",
+    "ES43",
+    "ES51",
+    "ES52",
+    "ES53",
+    "ES61",
+    "ES62",
+    "ES63",
+    "ES64",
+    "ES70"
+   ]
+  },
+  "tiempos": [
+   "2005",
+   "2024"
+  ]
+ },
+ "tabla73035": {
+  "series": 2916,
+  "muestra": [
+   "I-XXII.Todas las causas. Total. Todas las edades. Total Nacional. Personas. ",
+   "Albacete. Todas las edades. I-XXII.Todas las causas. Total. Personas. ",
+   "Alicante/Alacant. Todas las edades. I-XXII.Todas las causas. Total. Personas. ",
+   "Almería. Todas las edades. I-XXII.Todas las causas. Total. Personas. ",
+   "Araba/Álava. Todas las edades. I-XXII.Todas las causas. Total. Personas. ",
+   "I-XXII.Todas las causas. Total. Todas las edades. Asturias. Personas. ",
+   "Ávila. Todas las edades. I-XXII.Todas las causas. Total. Personas. ",
+   "Badajoz. Todas las edades. I-XXII.Todas las causas. Total. Personas. ",
+   "I-XXII.Todas las causas. Total. Todas las edades. Balears, Illes. Personas. ",
+   "Barcelona. Todas las edades. I-XXII.Todas las causas. Total. Personas. ",
+   "Valladolid. Todas las edades. XX.Causas externas de mortalidad. Mujeres. Personas. ",
+   "Zamora. Todas las edades. XX.Causas externas de mortalidad. Mujeres. Personas. ",
+   "Zaragoza. Todas las edades. XX.Causas externas de mortalidad. Mujeres. Personas. ",
+   "XX.Causas externas de mortalidad. Mujeres. Todas las edades. Ceuta. Personas. ",
+   "XX.Causas externas de mortalidad. Mujeres. Todas las edades. Melilla. Personas. ",
+   "XX.Causas externas de mortalidad. Mujeres. Todas las edades. Extranjero. Personas. "
+  ]
+ },
+ "capitulos": [
+  "I-XXII Todas las causas",
+  "I Enfermedades infecciosas y parasitarias",
+  "II Tumores",
+  "III Enfermedades de la sangre y de los órganos hematopoyéticos, y ciertos trastornos que afectan al mecanismo de la inmunidad",
+  "IV Enfermedades endocrinas, nutricionales y metabólicas",
+  "V Trastornos mentales y del comportamiento",
+  "VI-VIII Enfermedades del sistema nervioso y de los órganos de los sentidos",
+  "IX Enfermedades del sistema circulatorio",
+  "X Enfermedades del sistema respiratorio",
+  "XI Enfermedades del sistema digestivo",
+  "XII Enfermedades de la piel y del tejido subcutáneo",
+  "XIII Enfermedades del sistema osteomuscular y del tejido conjuntivo",
+  "XIV Enfermedades del sistema genitourinario",
+  "XV Embarazo, parto y puerperio",
+  "XVI Afecciones originadas en el periodo perinatal",
+  "XVII Malformaciones congénitas, deformidades y anomalías cromosómicas",
+  "XVIII Síntomas, signos y hallazgos anormales clínicos y de laboratorio, no clasificados en otra parte",
+  "XX Causas externas de mortalidad"
+ ],
+ "tabla7947": {
+  "series": 7920,
+  "muestra": [
+   "I-XXII.Todas las causas. Total. Todas las edades. Total Nacional. Personas. ",
+   "I-XXII.Todas las causas. Total. Menos de 1 año. Total Nacional. Personas. ",
+   "I-XXII.Todas las causas. Total. De 1 a 4 años. Total Nacional. Personas. ",
+   "I-XXII.Todas las causas. Total. De 5 a 9 años. Total Nacional. Personas. ",
+   "I-XXII.Todas las causas. Total. De 10 a 14 años. Total Nacional. Personas. ",
+   "I-XXII.Todas las causas. Total. De 15 a 19 años. Total Nacional. Personas. ",
+   "I-XXII.Todas las causas. Total. De 20 a 24 años. Total Nacional. Personas. ",
+   "I-XXII.Todas las causas. Total. De 25 a 29 años. Total Nacional. Personas. ",
+   "I-XXII.Todas las causas. Total. De 30 a 34 años. Total Nacional. Personas. ",
+   "I-XXII.Todas las causas. Total. De 35 a 39 años. Total Nacional. Personas. ",
+   "Mujeres. De 70 a 74 años. Total Nacional. Otras causas externas y sus efectos tardíos. Personas. ",
+   "Mujeres. De 75 a 79 años. Total Nacional. Otras causas externas y sus efectos tardíos. Personas. ",
+   "Mujeres. De 80 a 84 años. Total Nacional. Otras causas externas y sus efectos tardíos. Personas. ",
+   "Mujeres. De 85 a 89 años. Total Nacional. Otras causas externas y sus efectos tardíos. Personas. ",
+   "Mujeres. De 90 a 94 años. Total Nacional. Otras causas externas y sus efectos tardíos. Personas. ",
+   "Mujeres. 95 y más años. Total Nacional. Otras causas externas y sus efectos tardíos. Personas. "
+  ]
+ },
+ "top": [],
+ "semanas": {
+  "filas": 878,
+  "dims": {
+   "freq": [
+    "W"
+   ],
+   "sex": [
+    "T"
+   ],
+   "unit": [
+    "NR"
+   ],
+   "geo": [
+    "ES"
+   ]
+  },
+  "tiempos": [
+   "2010-W01",
+   "2026-W44"
+  ]
+ },
+ "exceso": {
+  "filas": 2494,
+  "dims": {
+   "freq": [
+    "M"
+   ],
+   "unit": [
+    "PC"
+   ],
+   "geo": [
+    "EU27_2020",
+    "BE",
+    "BG",
+    "CZ",
+    "DK",
+    "DE",
+    "EE",
+    "IE",
+    "EL",
+    "ES",
+    "FR",
+    "HR",
+    "IT",
+    "CY",
+    "LV",
+    "LT",
+    "LU",
+    "HU",
+    "MT",
+    "NL",
+    "AT",
+    "PL",
+    "PT",
+    "RO",
+    "SI"
+   ]
+  },
+  "tiempos": [
+   "2020-01",
+   "2026-06"
+  ]
+ },
+ "medicos": {
+  "filas": 2558,
+  "dims": {
+   "freq": [
+    "A"
+   ],
+   "unit": [
+    "P_HTHAB"
+   ],
+   "geo": [
+    "BE",
+    "BE10",
+    "BE21",
+    "BE22",
+    "BE23",
+    "BE24",
+    "BE25",
+    "BE31",
+    "BE32",
+    "BE33",
+    "BE34",
+    "BE35",
+    "BG",
+    "BG31",
+    "BG32",
+    "BG33",
+    "BG34",
+    "BG41",
+    "BG42",
+    "CZ",
+    "CZ01",
+    "CZ02",
+    "CZ03",
+    "CZ04",
+    "CZ05"
+   ]
+  },
+  "tiempos": [
+   "2005",
+   "2025"
+  ]
+ },
+ "camas": {
+  "filas": 2339,
+  "dims": {
+   "freq": [
+    "A"
+   ],
+   "unit": [
+    "P_HTHAB"
+   ],
+   "geo": [
+    "BE",
+    "BE10",
+    "BE21",
+    "BE22",
+    "BE23",
+    "BE24",
+    "BE25",
+    "BE31",
+    "BE32",
+    "BE33",
+    "BE34",
+    "BE35",
+    "BG",
+    "BG31",
+    "BG32",
+    "BG33",
+    "BG34",
+    "BG41",
+    "BG42",
+    "CZ",
+    "CZ01",
+    "CZ02",
+    "CZ03",
+    "CZ04",
+    "CZ05"
+   ]
+  },
+  "tiempos": [
+   "2005",
+   "2025"
+  ]
+ },
+ "gasto": {
+  "filas": 7658,
+  "dims": {
+   "freq": [
+    "A"
+   ],
+   "unit": [
+    "EUR_HAB",
+    "PPS_HAB",
+    "PC_GDP",
+    "PC_CHE"
+   ],
+   "icha11_hf": [
+    "TOT_HF",
+    "HF1",
+    "HF2",
+    "HF3"
+   ],
+   "geo": [
+    "EU27_2020",
+    "EU28",
+    "EU27_2007",
+    "EU15",
+    "EA21",
+    "EA20",
+    "EA19",
+    "BE",
+    "BG",
+    "CZ",
+    "DK",
+    "DE",
+    "EE",
+    "IE",
+    "EL",
+    "ES",
+    "FR",
+    "HR",
+    "IT",
+    "CY",
+    "LV",
+    "LT",
+    "LU",
+    "HU",
+    "MT"
+   ]
+  },
+  "tiempos": [
+   "2012",
+   "2025"
+  ]
+ },
+ "espera": {
+  "filas": 17208,
+  "dims": {
+   "freq": [
+    "A"
+   ],
+   "unit": [
+    "PC"
+   ],
+   "quant_inc": [
+    "TOTAL",
+    "QU1",
+    "QU2",
+    "QU3",
+    "QU4",
+    "QU5"
+   ],
+   "reason": [
+    "TXP",
+    "TXP_TFAR_WLIST",
+    "TFAR",
+    "WLIST"
+   ],
+   "age": [
+    "Y_GE16"
+   ],
+   "sex": [
+    "T"
+   ],
+   "geo": [
+    "EU",
+    "EU27_2020",
+    "EU28",
+    "EU27_2007",
+    "EA",
+    "EA21",
+    "EA20",
+    "EA19",
+    "EA18",
+    "BE",
+    "BG",
+    "CZ",
+    "DK",
+    "DE",
+    "EE",
+    "IE",
+    "EL",
+    "ES",
+    "FR",
+    "HR",
+    "IT",
+    "CY",
+    "LV",
+    "LT",
+    "LU"
+   ]
+  },
+  "tiempos": [
+   "2008",
+   "2025"
+  ]
+ },
+ "resumen": {
+  "año": 2024,
+  "vida": 84,
+  "hombres": 81.4,
+  "mujeres": 86.5,
+  "semana": "2026-W44",
+  "muertes": 8015,
+  "media": 7528,
+  "ultimas": [
+   7732,
+   7746,
+   8138,
+   8455,
+   7722,
+   7537,
+   7571,
+   8293,
+   8054,
+   8377,
+   7878,
+   7901,
+   7643,
+   7831,
+   8191,
+   7901,
+   7401,
+   7609,
+   7701,
+   7635,
+   7784,
+   7882,
+   7678,
+   7681,
+   7885,
+   8015
+  ]
+ },
+ "tamaño": 46095
+}
