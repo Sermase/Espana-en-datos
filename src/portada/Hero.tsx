@@ -13,7 +13,9 @@ export type Lectura = { id: string; lon: number; lat: number; color: string; val
 const reduce = () => typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
 const ease = (t: number) => 1 - Math.pow(1 - Math.min(1, Math.max(0, t)), 3)
 
-export function Hero({ lecturas }: { lecturas: Lectura[] }) {
+/** `foco`: la lectura que se está contando ahora; al cambiar, una onda de su color recorre el mapa desde su sitio. */
+export function Hero({ lecturas, foco, onFoco, onListo }: { lecturas: Lectura[]; foco: number; onFoco: (i: number, fijo: boolean) => void; onListo?: () => void }) {
+  const ondaRef = useRef<{ x: number; y: number; c: string; t: number } | null>(null), origen = useRef({ x: 0, y: 0 })
   const wrap = useRef<HTMLDivElement>(null), cv = useRef<HTMLCanvasElement>(null)
   const [size, setSize] = useState<{ w: number; h: number } | null>(null)
   const [fase, setFase] = useState(0) // 0 montando · 1 lecturas
@@ -45,6 +47,7 @@ export function Hero({ lecturas }: { lecturas: Lectura[] }) {
     // El lienzo ocupa toda la ventana (los puntos llegan desde cualquier sitio) y el mapa se monta en su hueco.
     const lz = c.parentElement!.getBoundingClientRect()
     const ox = lz.left + scrollX, oy = lz.top + scrollY
+    origen.current = { x: ox, y: oy }
     const CW = document.documentElement.clientWidth, CH = Math.max(innerHeight, oy + size.h + 40)
     Object.assign(c.style, { left: `${-ox}px`, top: `${-oy}px`, width: `${CW}px`, height: `${CH}px` })
     c.width = CW * dpr; c.height = CH * dpr
@@ -88,25 +91,36 @@ export function Hero({ lecturas }: { lecturas: Lectura[] }) {
           if (ptr) { const dx = p.tx + p.vx - ptr.x, dy = p.ty + p.vy - ptr.y, d2 = dx * dx + dy * dy; if (d2 < 3600) { const f = (1 - Math.sqrt(d2) / 60) * 2.2; p.vx += (dx / (Math.sqrt(d2) || 1)) * f; p.vy += (dy / (Math.sqrt(d2) || 1)) * f } }
           p.vx *= 0.86; p.vy *= 0.86; x = p.tx + p.vx; y = p.ty + p.vy
         }
-        const brillo = k < 1 ? 0.4 + k * 0.5 : 0.72 + 0.28 * Math.sin(t * 1.6 + p.tw)
+        let brillo = k < 1 ? 0.4 + k * 0.5 : 0.72 + 0.28 * Math.sin(t * 1.6 + p.tw), col = k < 1 ? '#bfefff' : p.c, r = p.r
+        // onda del dato que se está contando: un anillo de su color que sale de su sitio y cruza el mapa
+        const O = ondaRef.current
+        if (montado && O) {
+          const dt = (now - O.t) / 1000, d = Math.hypot(p.tx - O.x, p.ty - O.y), R = dt * 330, banda = Math.abs(d - R)
+          if (dt < 2.4 && banda < 26) { const f = 1 - banda / 26; brillo = Math.min(1, brillo + f * 0.6); col = O.c; r = p.r + f * 1.6 }
+          else if (d < 30 + Math.min(dt, 1) * 14) { col = O.c; brillo = 1 }
+        }
         ctx.globalAlpha = brillo
-        ctx.fillStyle = k < 1 ? '#bfefff' : p.c
-        ctx.fillRect(x - p.r / 2, y - p.r / 2, p.r, p.r)
+        ctx.fillStyle = col
+        ctx.fillRect(x - r / 2, y - r / 2, r, r)
       }
       ctx.globalAlpha = 1
-      if (!lanzado && t > DUR - 0.2) { lanzado = true; setFase(1) }
+      if (!lanzado && t > DUR - 0.2) { lanzado = true; setFase(1); onListo?.() }
       raf = requestAnimationFrame(frame)
     }
-    if (reduce()) { t0 = performance.now() - (DUR + 5) * 1000; frame(performance.now()); cancelAnimationFrame(raf); setFase(1) }
+    if (reduce()) { t0 = performance.now() - (DUR + 5) * 1000; frame(performance.now()); cancelAnimationFrame(raf); setFase(1); onListo?.() }
     else raf = requestAnimationFrame(frame)
     const vis = () => { if (document.hidden) cancelAnimationFrame(raf); else if (!reduce()) raf = requestAnimationFrame(frame) }
     document.addEventListener('visibilitychange', vis)
     return () => { cancelAnimationFrame(raf); removeEventListener('pointermove', move); document.removeEventListener('pointerleave', leave); document.removeEventListener('visibilitychange', vis) }
   }, [size, proj, anclas])
 
+  useEffect(() => {
+    const a = anclas[foco]; if (!a || !fase) return
+    ondaRef.current = { x: a.p[0] + origen.current.x, y: a.p[1] + origen.current.y, c: a.color, t: performance.now() }
+  }, [foco, anclas, fase])
   const Lect = ({ a, x, y, izq, i }: { a: (typeof anclas)[number]; x?: number; y?: number; izq?: boolean; i: number }) => {
     const Tag = a.href ? 'a' : 'div'
-    return <Tag href={a.href} className={`lectura ${ancho ? (izq ? 'is-izq' : 'is-der') : 'is-lista'}`} style={{ ...(ancho ? { left: x, top: y } : {}), ['--c' as string]: a.color, ['--i' as string]: i }}>
+    return <Tag href={a.href} onPointerEnter={() => onFoco(i, true)} onFocus={() => onFoco(i, true)} className={`lectura ${ancho ? (izq ? 'is-izq' : 'is-der') : 'is-lista'} ${foco === i ? 'is-foco' : ''}`} style={{ ...(ancho ? { left: x, top: y } : {}), ['--c' as string]: a.color, ['--i' as string]: i }}>
       <b>{a.valor}</b><small>{a.texto}</small>
     </Tag>
   }
@@ -115,10 +129,10 @@ export function Hero({ lecturas }: { lecturas: Lectura[] }) {
       <div className="hero-lienzo" style={{ height: size?.h }}>
         <canvas ref={cv} className="hero-puntos" aria-hidden />
         {ancho && <svg className="l-lineas" width={size?.w} height={size?.h} aria-hidden>
-          {cajas.map(({ a, x, y, izq }, i) => { const xe = izq ? x + 150 : x - 150; return <polyline key={a.id} points={`${a.p[0]},${a.p[1]} ${xe + (izq ? 24 : -24)},${y} ${xe},${y}`} style={{ stroke: a.color, ['--i' as string]: i } as React.CSSProperties} /> })}
+          {cajas.map(({ a, x, y, izq }) => { const i = anclas.indexOf(a); const xe = izq ? x + 150 : x - 150; return <polyline key={a.id} points={`${a.p[0]},${a.p[1]} ${xe + (izq ? 24 : -24)},${y} ${xe},${y}`} className={foco === i ? 'is-foco' : ''} style={{ stroke: a.color, ['--i' as string]: i } as React.CSSProperties} /> })}
         </svg>}
-        {anclas.map((a, i) => <i key={a.id} className="l-punto" style={{ left: a.p[0], top: a.p[1], ['--c' as string]: a.color, ['--i' as string]: i } as React.CSSProperties} />)}
-        {ancho && cajas.map(({ a, x, y, izq }, i) => <Lect key={a.id} a={a} x={x} y={y} izq={izq} i={i} />)}
+        {anclas.map((a, i) => <i key={a.id} className={`l-punto ${foco === i ? 'is-foco' : ''}`} style={{ left: a.p[0], top: a.p[1], ['--c' as string]: a.color, ['--i' as string]: i } as React.CSSProperties} />)}
+        {ancho && cajas.map(({ a, x, y, izq }) => <Lect key={a.id} a={a} x={x} y={y} izq={izq} i={anclas.indexOf(a)} />)}
       </div>
       {!ancho && <div className="lecturas-lista">{anclas.map((a, i) => <Lect key={a.id} a={a} i={i} />)}</div>}
     </div>

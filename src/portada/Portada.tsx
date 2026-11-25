@@ -1,12 +1,13 @@
-import { motion } from 'motion/react'
-import { ArrowUpRight } from 'lucide-react'
+import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from 'motion/react'
+import { ArrowUpRight, Building2, Car, Droplets, Factory, Fuel, GraduationCap, HandCoins, HeartPulse, House, Landmark, Luggage, Mountain, Plane, PiggyBank, Receipt, Route, Scale, ScrollText, ShieldCheck, Ship, ShoppingBasket, Thermometer, TrainFront, TrendingUp, Trophy, Users, Clapperboard, Wheat, Wind, Zap, type LucideIcon } from 'lucide-react'
 import resumen from '../resumen.json'
-import { useState, type PointerEvent } from 'react'
-import { AnimatePresence, LayoutGroup } from 'motion/react'
+import { useEffect, useState, type CSSProperties, type PointerEvent } from 'react'
 import { CountUp } from '../graficos/CountUp'
 import { AREAS, TEMAS, type AreaId, type Tema } from '../temas'
 import { A } from '../Fuentes'
 import { Hero, type Lectura } from './Hero'
+import { Pregunta } from './Pregunta'
+import { Instalar } from './Instalar'
 
 const fecha = new Date(resumen.agua.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
 const reserva = (resumen.agua.a / resumen.agua.c) * 100
@@ -151,6 +152,8 @@ const LECTURAS: Lectura[] = [
   { id: 'poblacion', lon: -3.7, lat: 40.42, color: color('poblacion'), valor: `${es(Number(R.poblacion?.total ?? 0) / 1e6, 1)} M`, texto: 'habitantes', href: ruta('poblacion') },
   { id: 'economia', lon: 2.17, lat: 41.39, color: color('economia'), valor: `${es((R.economia?.ipc as [string, number])?.[1] ?? 0, 1)} %`, texto: 'inflación anual (IPC)', href: ruta('economia') },
   { id: 'comercio', lon: -5.45, lat: 36.15, color: color('comercio'), valor: `${es(Number(R.comercio?.exp ?? 0), 0)} mil M€`, texto: 'vendido al mundo', href: ruta('comercio') },
+  ...(R.turismo ? [{ id: 'turismo', lon: 2.65, lat: 39.57, color: color('turismo'), valor: `${es(Number(R.turismo.turistas) / 1e6, 1)} M`, texto: `turistas extranjeros en ${R.turismo.año}`, href: ruta('turismo') }] : []),
+  ...(R.vivienda ? [{ id: 'vivienda', lon: -0.38, lat: 39.47, color: color('vivienda'), valor: `${(R.vivienda.ipv_a as [string, number])[1] > 0 ? '+' : ''}${es((R.vivienda.ipv_a as [string, number])[1], 1)} %`, texto: 'sube la vivienda en un año', href: ruta('vivienda') }] : []),
 ]
 const TICKER = [
   ['Embalses', `${Math.round(reserva)} %`, 'agua'], ['Gasolina 95', `${es(Number(R.gasolineras?.g95 ?? 0), 3)} €/l`, 'gasolineras'], ['Diésel', `${es(Number(R.gasolineras?.dsl ?? 0), 3)} €/l`, 'gasolineras'],
@@ -159,72 +162,107 @@ const TICKER = [
   ['Habitantes', `${es(Number(R.poblacion?.total ?? 0) / 1e6, 1)} M`, 'poblacion'], ['Exportaciones', `${es(Number(R.comercio?.exp ?? 0), 0)} mil M€`, 'comercio'],
 ] as const
 
-/** Foco de luz que sigue al puntero sobre la tarjeta (solo cambia dos variables CSS, sin repintar React). */
+/** Foco de luz que sigue al puntero (solo cambia dos variables CSS, sin repintar React). */
 const foco = (e: PointerEvent<HTMLElement>) => { const r = e.currentTarget.getBoundingClientRect(); e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`); e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`) }
 
-/** Los temas por áreas: chips para filtrar (con una píldora que se desliza) y, en cada área, las tarjetas con sus datos clave. */
-function Areas() {
+const ICONO: Record<string, LucideIcon> = {
+  poblacion: Users, sociedad: Building2, seguridad: ShieldCheck, igualdad: Scale, sanidad: HeartPulse, educacion: GraduationCap,
+  economia: TrendingUp, vivienda: House, comercio: Ship, hogares: ShoppingBasket, turismo: Luggage, industria: Factory,
+  cuentas: Landmark, impuestos: Receipt, presupuestos: PiggyBank, subvenciones: HandCoins, contratos: ScrollText,
+  agua: Droplets, aire: Wind, clima: Thermometer, montana: Mountain, agricultura: Wheat,
+  energia: Zap, gasolineras: Fuel, coches: Car, trenes: TrainFront, aeropuertos: Plane, carreteras: Route, cultura: Clapperboard, deporte: Trophy,
+}
+
+/** El menú de temas: chips de área con píldora que se desliza y, en cada área, un mosaico de baldosas con su dato vivo. */
+function Mosaico() {
   const [area, setArea] = useState<AreaId | null>(null)
   const abiertos = TEMAS.filter(t => t.ruta).length
   const chips: { id: AreaId | null; nombre: string }[] = [{ id: null, nombre: 'Todo' }, ...AREAS]
   return <LayoutGroup>
-    <nav className="areas-nav" aria-label="Áreas">
+    <nav className="areas-nav" aria-label="Áreas" id="temas">
       {chips.map(c => <button key={c.id ?? 'todo'} className={area === c.id ? 'is-on' : ''} onClick={() => setArea(area === c.id ? null : c.id)} aria-pressed={area === c.id}>
         {area === c.id && <motion.i className="chip-pildora" layoutId="chip-pildora" transition={{ type: 'spring', stiffness: 420, damping: 34 }} />}
-        <span>{c.nombre}{c.id == null && <small>{abiertos} abiertos de {TEMAS.length}</small>}</span>
+        <span>{c.nombre}{c.id == null && <small>{abiertos} temas</small>}</span>
       </button>)}
     </nav>
     <AnimatePresence mode="popLayout" initial={false}>
       {AREAS.filter(a => !area || a.id === area).map(a => {
-        const temas = [...TEMAS.filter(t => t.area === a.id && t.ruta), ...TEMAS.filter(t => t.area === a.id && !t.ruta)]
+        const abiertosA = TEMAS.filter(t => t.area === a.id && t.ruta), plan = TEMAS.filter(t => t.area === a.id && !t.ruta)
         return <motion.section key={a.id} className="area" layout initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12, transition: { duration: .2 } }} transition={{ duration: .45, ease: [0.2, 0.8, 0.2, 1] }}>
           <header>
             <motion.h2 initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: .5 }}>{a.nombre}</motion.h2>
             <p>{a.lema}</p>
             <motion.i className="area-linea" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: .9, ease: [0.2, 0.8, 0.2, 1] }} />
           </header>
-          <ul className="temas">
-            {temas.map((t, i) => {
-              const abierto = !!t.ruta, cs = cifras(t.id)
-              const Card = abierto ? motion.a : motion.div
-              return (
-                <motion.li layout key={t.id} className={abierto ? 'es-abierto' : 'es-plan'} style={{ '--c': t.color } as React.CSSProperties}
-                  initial={{ opacity: 0, y: 26, clipPath: 'inset(0 0 100% 0)' }} whileInView={{ opacity: 1, y: 0, clipPath: 'inset(0 0 0% 0)' }} viewport={{ once: true, margin: '-30px' }}
-                  transition={{ delay: i * .08, duration: .6, ease: [0.2, 0.8, 0.2, 1] }}>
-                  <Card href={t.ruta} className="tema" onPointerMove={foco} whileHover={abierto ? { y: -3 } : undefined} transition={{ type: 'spring', stiffness: 300, damping: 24 }}>
-                    <div className="tema-txt">
-                      <h3>{t.nombre}{abierto && <ArrowUpRight size={18} />}</h3>
-                      <p>{abierto ? t.lema : t.plan ?? t.lema}</p>
-                      {cs.length > 0 && <dl className="cifras">{cs.map((c, k) => <div key={c.l}><dt>{c.l}</dt><dd><CountUp value={c.n} fmt={c.f} delay={.25 + k * .12} duration={1.3} /></dd></div>)}</dl>}
-                      <small>{abierto ? <><i className="vivo" /> {FUENTE[t.id] ?? 'Datos oficiales'}</> : 'En preparación'}</small>
-                    </div>
-                    {abierto && <Mini t={t} />}
-                  </Card>
-                </motion.li>
-              )
-            })}
-          </ul>
+          {abiertosA.length > 0 && <ul className="baldosas">
+            {abiertosA.map((t, i) => { const cs = cifras(t.id), Ico = ICONO[t.id] ?? TrendingUp; return (
+              <motion.li layout key={t.id} style={{ '--c': t.color } as CSSProperties}
+                initial={{ opacity: 0, y: 22, scale: .97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: '-20px' }}
+                transition={{ delay: (i % 4) * .07, duration: .55, ease: [0.2, 0.8, 0.2, 1] }}>
+                <a href={t.ruta} className="baldosa" onPointerMove={foco}>
+                  <span className="b-ico"><Ico size={22} strokeWidth={1.8} /></span>
+                  <h3>{t.nombre}<ArrowUpRight size={16} /></h3>
+                  {cs[0] && <div className="b-dato"><b><CountUp value={cs[0].n} fmt={cs[0].f} delay={.2} duration={1.3} /></b><small>{cs[0].l}</small></div>}
+                  {cs[1] && <div className="b-dato2"><b>{cs[1].f(cs[1].n)}</b> {cs[1].l}</div>}
+                  <p className="b-lema">{t.lema}</p>
+                  <small className="b-pie"><i className="vivo" /> {FUENTE[t.id] ?? 'Datos oficiales'}</small>
+                  <Mini t={t} />
+                </a>
+              </motion.li>) })}
+          </ul>}
+          {plan.length > 0 && <p className="pronto"><span>{abiertosA.length ? 'Próximamente' : 'En preparación'}</span>{plan.map(t => { const Ico = ICONO[t.id] ?? TrendingUp; return <i key={t.id} title={t.plan ?? t.lema} style={{ '--c': t.color } as CSSProperties}><Ico size={14} />{t.nombre}</i> })}</p>}
         </motion.section>
       })}
     </AnimatePresence>
   </LayoutGroup>
 }
 
+/** La hora de España, en vivo. */
+function Reloj() {
+  const [ahora, setAhora] = useState(() => new Date())
+  useEffect(() => { const t = setInterval(() => setAhora(new Date()), 15000); return () => clearInterval(t) }, [])
+  const f = ahora.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' })
+  const h = ahora.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' })
+  return <span className="reloj-vivo"><i className="vivo" style={{ '--c': '#3df5b0' } as CSSProperties} />En directo <span>· {f} · {h}</span></span>
+}
+
 export default function Portada() {
+  const reduce = useReducedMotion()
+  const [focoI, setFocoI] = useState(0), [fijo, setFijo] = useState(0), [listo, setListo] = useState(false)
+  // el mapa va contando sus datos uno a uno; si alguien pasa por una lectura, se queda en ella un rato
+  useEffect(() => {
+    if (!listo || reduce) return
+    const t = setTimeout(() => setFocoI(i => (i + 1) % LECTURAS.length), Date.now() < fijo ? fijo - Date.now() : 4200)
+    return () => clearTimeout(t)
+  }, [focoI, fijo, listo, reduce])
+  const L = LECTURAS[focoI]
   return (
     <main className="portada">
+      <div className="barra">
+        <Reloj />
+        <span className="barra-der"><a href="./acerca/index.html">Acerca de</a><Instalar /></span>
+      </div>
       <header className="cabecera">
         <div className="cab-txt">
           <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8, delay: .2 }}>España<span>en datos</span></motion.h1>
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: .8 }}>El país como un cuadro de mando. Datos oficiales que se actualizan solos: cuánta agua queda, cuánto cuesta la luz esta hora, cuántos somos y qué le vendemos al mundo.</motion.p>
-          <motion.p className="cab-pista" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.2, duration: .8 }}>Pasa el ratón o el dedo por el mapa. Toca un dato para abrir su tema.</motion.p>
+          <div className="ahora" aria-live="polite">
+            <span className="ahora-k">Ahora mismo</span>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.a key={L.id} href={L.href} className="ahora-dato" style={{ '--c': L.color } as CSSProperties} initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }} transition={{ duration: .35 }}>
+                <b>{L.valor}</b><span>{L.texto}<ArrowUpRight size={18} /></span>
+              </motion.a>
+            </AnimatePresence>
+            <span className="ahora-pasos" aria-hidden>{LECTURAS.map((l, i) => <i key={l.id} className={i === focoI ? 'is-on' : ''} style={{ '--c': l.color } as CSSProperties} />)}</span>
+          </div>
         </div>
-        <Hero lecturas={LECTURAS} />
+        <Hero lecturas={LECTURAS} foco={focoI} onFoco={(i, f) => { setFocoI(i); if (f) setFijo(Date.now() + 9000) }} onListo={() => setListo(true)} />
       </header>
       <div className="ticker" aria-label="Datos de hoy">
-        <div className="ticker-pista">{[0, 1].map(k => <span key={k} aria-hidden={k === 1}>{TICKER.map(([n, v, id]) => <a key={n} href={ruta(id)} style={{ ['--c' as string]: color(id) }}><i />{n} <b>{v}</b></a>)}</span>)}</div>
+        <div className="ticker-pista">{[0, 1].map(k => <span key={k} aria-hidden={k === 1}>{TICKER.map(([n, v, id]) => <a key={n} href={ruta(id)} tabIndex={k ? -1 : undefined} style={{ ['--c' as string]: color(id) }}><i />{n} <b>{v}</b></a>)}</span>)}</div>
       </div>
-      <Areas />
+      <Pregunta />
+      <Mosaico />
       <footer className="pie">Fuentes oficiales, enlazadas en cada tema: <A id="boletin">MITECO</A>, <A id="siane">IGN</A>, <A id="ine_padron">INE</A>, <A id="eurostat">Eurostat</A>, <A id="ree">REE</A>, <A id="aemet">AEMET</A>. Sin registro, sin anuncios. <a className="pie-acerca" href="./acerca/index.html">Acerca de España en datos · hecho por Istari Core</a></footer>
     </main>
   )
