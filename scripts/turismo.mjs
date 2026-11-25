@@ -84,7 +84,8 @@ try { const t = await ineUnidas([10838, 23994, 75715], 160); datos.gastoPais = p
 try { const t = await ineUnidas([10839, 23998, 75714], 160); datos.gastoCcaa = porClave(t, p => p.map(ccaaDe).find(Boolean) ?? (p.some(x => /^total/i.test(x)) ? 'Total' : null), medidaGasto); log.gastoCcaa = Object.keys(datos.gastoCcaa) } catch (e) { log.avisos.push('egatur ccaa: ' + e.message) }
 try {
   const t = await ineUnidas([13938, 23997, 75717], 30)
-  datos.partidas = porClave(t, p => { const r = p.filter(x => !GENERICO.test(x) && !/^gasto|^partidas|medio|^total$/i.test(x)); return r.length ? r.join(' · ') : 'Total' }, p => (/gasto total|^total/i.test(p.join(' ')) || !/medio|variaci|distribu/i.test(p.join(' '))) ? 'total' : null)
+  // «Turista. Gasto en paquete turístico. Total Nacional. Dato base»: la partida es el trozo que empieza por «Gasto» u «Otros gastos»
+  datos.partidas = porClave(t, p => { const x = p.find(x => /^(gasto|otros gastos)/i.test(x)); return x ? (/^gasto total$/i.test(x) ? 'Total' : x.replace(/^gasto (en |no incluido en )?/i, m => /no incluido/i.test(m) ? 'Fuera del paquete: ' : '').replace(/^./, c => c.toUpperCase())) : null }, () => 'total')
   log.partidas = Object.keys(datos.partidas)
 } catch (e) { log.avisos.push('egatur partidas: ' + e.message) }
 
@@ -135,7 +136,7 @@ try {
   const pts = {}
   for (const s of t) {
     if (esVariacion(s.partes) || !/pernoctaci/i.test(s.nombre)) continue
-    const nombre = s.partes.find(x => !/^nacional$|pernoctaci|viajer|total categor|residentes|^dato/i.test(x)); if (!nombre) continue
+    const nombre = s.partes.find(x => !/^nacional$|pernoctaci|viajer|total categor|residentes|^dato|establecimientos/i.test(x)); if (!nombre || /establecimientos|^total/i.test(nombre)) continue
     const quien = /residentes en espa/i.test(s.nombre) ? 'esp' : /extranjero/i.test(s.nombre) ? 'ext' : 'tot'
     Object.assign(((pts[nombre] ??= {})[quien] ??= {}), s.d)
   }

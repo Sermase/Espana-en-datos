@@ -46,7 +46,9 @@ type Props = {
  * con cruz que sigue al dedo o al ratón (también con las flechas del teclado),
  * leyenda si hay varias series y la tabla de datos debajo.
  */
-export function LineChart({ series: todas, alto = 200, titulo, fx, fy, fxEje, ticksX, yMin, yMax, banda, marcas = [], ahora, etiquetasFinal = true, pie }: Props) {
+export function LineChart({ series: entrada, alto = 200, titulo, fx, fy, fxEje, ticksX, yMin, yMax, banda, marcas = [], ahora, etiquetasFinal = true, pie }: Props) {
+  // las series de fondo (comparación) van en gris si no traen color propio; si no, heredarían el acento de la página
+  const todas = entrada.map(s => (s.color || !s.fondo ? s : { ...s, color: '#7f939c' }))
   const [wrap, W] = useWidth<HTMLDivElement>()
   const [view, seen] = useInView<HTMLDivElement>()
   const [hx, setHx] = useState<number | null>(null)

@@ -48,11 +48,13 @@ export function silueta(m: L.Map, color = '#03090f') {
   const huecos = es.coordinates.map(pol => pol[0].map(([x, y]) => [y, x] as L.LatLngTuple))
   const mundo: L.LatLngTuple[] = [[-85, -180], [-85, 180], [85, 180], [85, -180]]
   const renderer = L.svg({ pane: 'mascara', padding: 0.5 })
-  const fuera = L.polygon([mundo, ...huecos], { renderer, pane: 'mascara', interactive: false, stroke: false, fillColor: color, fillOpacity: 0.95, fillRule: 'evenodd' }).addTo(m)
-  const borde = L.polygon(huecos, { renderer, pane: 'mascara', interactive: false, fill: false, color: '#9fd8ea', weight: 1, opacity: 0.35 }).addTo(m)
+  const fuera = L.polygon([mundo, ...huecos], { renderer, pane: 'mascara', interactive: false, stroke: false, fillColor: color, fillOpacity: 1, fillRule: 'evenodd' }).addTo(m)
+  // borde de la silueta con brillo, como en Caudal
+  const halo = L.polygon(huecos, { renderer, pane: 'mascara', interactive: false, fill: false, color: '#3fe6ff', weight: 6, opacity: 0.18, className: 'silueta-halo' }).addTo(m)
+  const borde = L.polygon(huecos, { renderer, pane: 'mascara', interactive: false, fill: false, color: '#7fefff', weight: 1.4, opacity: 0.85 }).addTo(m)
   const ajusta = () => {
-    const z = m.getZoom(), k = z <= 8 ? 1 : z >= 10 ? 0 : (10 - z) / 2
-    fuera.setStyle({ fillOpacity: 0.95 * k }); borde.setStyle({ opacity: 0.35 * k })
+    const z = m.getZoom(), k = z <= 9 ? 1 : z >= 11 ? 0 : (11 - z) / 2
+    fuera.setStyle({ fillOpacity: k }); borde.setStyle({ opacity: 0.85 * k }); halo.setStyle({ opacity: 0.18 * k })
   }
   m.on('zoomend', ajusta); ajusta()
   m.setMaxBounds([[25.5, -21], [46, 7]])
