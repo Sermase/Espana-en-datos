@@ -249,3 +249,74 @@ html, body { overflow-x: hidden }
 @media (prefers-reduced-motion: reduce) { .baldosa, .b-ico, .pq-res a, .pq-azar, .pq-azar svg { transition: none } .baldosa:hover, .pq-res a:hover { transform: none } }
 .baldosa .mini { top: 14px; right: 12px; bottom: auto; width: 78px; height: 56px }
 .ahora-dato span { display: inline-flex; align-items: center; gap: 6px }
+
+/* ===== Portada v3: España de un color por tema, panel del tema, selector y cinta de bolsa ===== */
+.cabecera { grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: 40px; align-items: center }
+.cab-txt > p { font-size: 18px; margin-top: 16px }
+.panel { margin-top: 26px; min-height: 300px; padding: 22px 24px 20px; border: 1px solid color-mix(in oklab, var(--c) 35%, transparent); border-left: 3px solid var(--c); border-radius: 6px;
+  background: linear-gradient(150deg, color-mix(in oklab, var(--c) 10%, #07141d), rgba(7, 20, 29, .7) 60%); transition: border-color .6s, background .6s; box-shadow: 0 20px 60px -30px color-mix(in oklab, var(--c) 50%, transparent) }
+.pa-area { font-size: 12.5px; letter-spacing: .08em; color: var(--muted) }
+.panel h2 { display: flex; align-items: center; gap: 10px; margin: 4px 0 8px; font: 700 clamp(28px, 3.2vw, 38px)/1.1 Oxanium, sans-serif; color: var(--c) }
+.panel p { margin: 0 0 16px; font-size: 16px; line-height: 1.5; color: #c7dde4; max-width: 46ch }
+.panel dl { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 0 0 18px }
+.panel dl div { display: flex; flex-direction: column }
+.panel dd { margin: 0; font: 700 32px/1.05 Oxanium, sans-serif; color: #fff; font-variant-numeric: tabular-nums }
+.panel dt { font-size: 13px; color: var(--muted); max-width: 22ch }
+.pa-pie { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px }
+.pa-entrar { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 24px; background: var(--c); color: #03090f; font: 700 15px Barlow, sans-serif; transition: transform .2s, box-shadow .2s }
+.pa-entrar:hover { transform: translateY(-1px); box-shadow: 0 8px 24px -8px var(--c) }
+.pa-entrar svg { transition: transform .2s } .pa-entrar:hover svg { transform: translateX(3px) }
+.pa-pie small { font-size: 12.5px; color: var(--muted) }
+.pa-pie .vivo, .reloj-vivo .vivo { --c: #3df5b0 }
+
+.selector { display: flex; flex-wrap: wrap; gap: 14px 26px; margin-top: 30px; position: relative }
+.sel-area { display: flex; flex-wrap: wrap; align-items: center; gap: 6px }
+.sel-area > span { width: 100%; font-size: 12px; letter-spacing: .08em; color: var(--muted) }
+.selector a { position: relative; isolation: isolate; display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border: 1px solid rgba(160, 220, 240, .14); border-radius: 22px; color: #c7dde4; font: 600 14.5px Barlow, sans-serif; background: #07141d; transition: color .2s, border-color .2s }
+.selector a svg { color: var(--c); transition: transform .3s }
+.selector a:hover { border-color: color-mix(in oklab, var(--c) 60%, transparent); color: #fff }
+.selector a.is-on { color: #03090f; border-color: var(--c) }
+.selector a.is-on svg { color: #03090f; transform: rotate(-8deg) scale(1.1) }
+.selector a > span, .selector a > svg { position: relative; z-index: 1 }
+.sel-pildora { position: absolute; inset: -1px; z-index: 0; border-radius: 22px; background: var(--c); box-shadow: 0 0 22px -2px var(--c) }
+.sel-pista { margin: 12px 0 0; font-size: 13px; color: var(--muted) }
+
+/* cinta de bolsa */
+.cinta { margin: 28px -28px 0; overflow: hidden; border-block: 1px solid rgba(160, 220, 240, .14); background: linear-gradient(90deg, rgba(7, 20, 29, .95), rgba(4, 14, 21, .95)); mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent) }
+.cinta-pista { display: flex; width: max-content; animation: ticker 70s linear infinite }
+.cinta:hover .cinta-pista { animation-play-state: paused }
+.cinta-pista > span { display: flex }
+.cinta a { display: inline-grid; grid-template-columns: auto auto auto; grid-template-rows: auto auto; column-gap: 8px; align-items: baseline; padding: 10px 24px 9px; border-right: 1px solid rgba(160, 220, 240, .08); white-space: nowrap }
+.ci-n { font: 600 12.5px Oxanium, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--c) }
+.cinta a b { font: 700 18px Oxanium, sans-serif; color: #fff; font-variant-numeric: tabular-nums }
+.cinta a em { font: 600 13px Oxanium, sans-serif; font-style: normal; color: #c7dde4 }
+.cinta a em.sube::first-letter { color: #3df5b0 } .cinta a em.baja::first-letter { color: #ff8a8a }
+.cinta a small { grid-column: 1 / -1; font-size: 11.5px; color: var(--muted) }
+.pie .pronto { margin: 0 0 14px }
+@media (prefers-reduced-motion: reduce) { .cinta-pista { animation: none } .cinta { overflow-x: auto } }
+@media (max-width: 860px) {
+  .cabecera { grid-template-columns: 1fr; gap: 0 }
+  .cabecera { display: flex; flex-direction: column }
+  .cab-txt { display: contents }
+  .cab-txt > h1 { order: 1 } .cab-txt > p { order: 2; font-size: 15.5px; margin-top: 10px }
+  .hero-mapa { order: 3; margin-top: 8px }
+  .panel { order: 5; margin-top: 0; min-height: 0; padding: 16px 16px 14px }
+  .panel h2 { font-size: 26px } .panel p { font-size: 14.5px; margin-bottom: 12px } .panel dd { font-size: 25px } .panel dl { margin-bottom: 14px; gap: 6px 20px }
+  .selector { flex-wrap: nowrap; gap: 0 14px; margin: 6px -18px 12px; padding: 4px 18px 6px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity }
+  .selector::-webkit-scrollbar { display: none }
+  .sel-area { flex-wrap: nowrap; flex: none }
+  .sel-area > span { display: none }
+  .selector a { flex: none; scroll-snap-align: center; padding: 8px 12px; font-size: 14px }
+  .sel-pista { display: none }
+  .cinta { margin: 22px -18px 0 }
+  .cinta a { padding: 9px 18px 8px } .cinta a b { font-size: 16px }
+}
+.cabecera > .selector, .cabecera > .sel-pista { grid-column: 1 / -1 }
+@media (max-width: 860px) { .cabecera > .selector { order: 4 } .cabecera > .sel-pista { order: 6 } }
+@media (max-width: 860px) {
+  .cabecera { align-items: stretch }
+  .selector { scroll-snap-type: none }
+  .panel dl { flex-wrap: nowrap } .panel dt { max-width: 18ch }
+}
+.cabecera .sel-pista { font-size: 13px; margin: 10px 0 0; max-width: none }
+.cabecera { row-gap: 14px }
