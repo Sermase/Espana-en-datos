@@ -1,5 +1,5 @@
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from 'motion/react'
-import { ArrowDown, ArrowUpRight, Building2, Car, ChevronDown, Clapperboard, Droplets, Factory, Fuel, GraduationCap, HandCoins, HeartPulse, House, Landmark, Luggage, Mountain, Plane, PiggyBank, Receipt, Route, Scale, ScrollText, ShieldCheck, Ship, ShoppingBasket, Thermometer, TrainFront, TrendingUp, Trophy, Users, Wheat, Wind, Zap, type LucideIcon } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Building2, Car, ChevronDown, Clapperboard, Cpu, Droplets, Factory, FlaskConical, Fuel, GraduationCap, HandCoins, HandHeart, HeartPulse, House, Landmark, Luggage, Mountain, Plane, PiggyBank, Receipt, Route, Scale, ScrollText, ShieldCheck, Ship, ShoppingBasket, Thermometer, TrainFront, TrendingUp, Trophy, Users, Wheat, Wind, Zap, type LucideIcon } from 'lucide-react'
 import resumen from '../resumen.json'
 import { useEffect, useState, type CSSProperties } from 'react'
 import { CountUp } from '../graficos/CountUp'
@@ -51,7 +51,7 @@ const es = (v: number, d = 1) => v.toLocaleString('es-ES', { maximumFractionDigi
 
 const ICONO: Record<string, LucideIcon> = {
   poblacion: Users, sociedad: Building2, seguridad: ShieldCheck, igualdad: Scale, sanidad: HeartPulse, educacion: GraduationCap,
-  economia: TrendingUp, vivienda: House, comercio: Ship, hogares: ShoppingBasket, turismo: Luggage, industria: Factory,
+  economia: TrendingUp, vivienda: House, comercio: Ship, hogares: ShoppingBasket, turismo: Luggage, empresas: Factory, migraciones: Plane, derechos: HandHeart, ciencia: FlaskConical, digital: Cpu,
   cuentas: Landmark, impuestos: Receipt, presupuestos: PiggyBank, subvenciones: HandCoins, contratos: ScrollText,
   agua: Droplets, aire: Wind, clima: Thermometer, montana: Mountain, agricultura: Wheat,
   energia: Zap, gasolineras: Fuel, coches: Car, trenes: TrainFront, aeropuertos: Plane, carreteras: Route, cultura: Clapperboard, deporte: Trophy,

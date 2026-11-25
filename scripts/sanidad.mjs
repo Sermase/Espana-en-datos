@@ -85,15 +85,17 @@ try {
 try {
   const t = await ine(7947, 3)
   const c = {}
+  const fijo = (x) => SEXO[x] || /^(Todas las edades|Total Nacional|Personas|Menos de 1 año)$/.test(x) || /^De \d+ a \d+ años$|^\d+ y más años$|^De \d+ y más años$/.test(x)
   for (const s of t) {
     if (!s.p.includes('Todas las edades')) continue
-    const sx = SEXO[s.p.find(x => SEXO[x])], causa = s.p.find(x => /^\d{3}/.test(x) || /^[IVXL]+(-[IVXL]+)?\s*\./.test(x))
+    const sx = SEXO[s.p.find(x => SEXO[x])], causa = s.p.filter(x => !fijo(x)).join('. ')
     if (!sx || !causa) continue
     (c[causa] ??= {})[sx] = s.d
   }
   const año = Object.keys(c[Object.keys(c).find(k => /Todas las causas/i.test(k))]?.T ?? {}).sort().at(-1)
-  datos.top = { año, lista: Object.entries(c).filter(([k]) => /^\d{3}/.test(k)).map(([k, v]) => ({ n: k.replace(/^\d{3}(-\d{3})?\s*/, ''), cod: k.slice(0, 3), T: v.T?.[año] ?? null, M: v.M?.[año] ?? null, F: v.F?.[año] ?? null })).filter(x => x.T).sort((a, b) => b.T - a.T) }
-  log.top = datos.top.lista.slice(0, 30).map(x => `${x.cod} ${x.n} ${x.T}`)
+  const cap = (k) => /^[IVXL]+(-[IVXL]+)?\s*\./.test(k)
+  datos.top = { año, lista: Object.entries(c).filter(([k]) => !cap(k)).map(([k, v]) => ({ n: k, T: v.T?.[año] ?? null, M: v.M?.[año] ?? null, F: v.F?.[año] ?? null })).filter(x => x.T).sort((a, b) => b.T - a.T) }
+  log.top = datos.top.lista.map(x => `${x.n} ${x.T}`)
 } catch (e) { log.avisos.push('top causas: ' + e.message) }
 
 // 3. El latido: muertes semana a semana y exceso de mortalidad mensual
