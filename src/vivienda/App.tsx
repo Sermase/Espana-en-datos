@@ -94,7 +94,7 @@ function Precios({ d }: { d: Datos }) {
   const base = (() => { const m = new Map<string, number[]>(); for (const [p, v] of e?.gi ?? []) m.set(p.slice(0, 4), [...(m.get(p.slice(0, 4)) ?? []), v]); return [...m].map(([y, vs]) => [y, Math.abs(vs.reduce((a, b) => a + b, 0) / vs.length - 100)] as const).sort((a, b) => a[1] - b[1])[0]?.[0] })()
   return <div className="graficos">
     <Card t="¿Cuánto sube la vivienda?" wide lead={<>{ult && <>En el {per(ult[0])} el precio subía un <b>{pct(ult[1])}</b> en un año. </>}{max07 && gi && <>El índice está en {nf(gi[1], 0)}, {gi[1] > max07[1] ? <>ya por encima del máximo de la burbuja ({nf(max07[1], 0)} en {per(max07[0])})</> : <>todavía por debajo del máximo de la burbuja ({nf(max07[1], 0)} en {per(max07[0])})</>}. {(() => { const y15 = e?.gi?.filter(x => x[0].startsWith('2015')); const v15 = y15?.length ? y15.reduce((a, b) => a + b[1], 0) / y15.length : null; return <> Cómo leerlo: {base} vale 100{v15 && base !== '2015' ? <>, y 2015 vale {nf(v15, 0)}: una casa que en {base} costaba 100.000 € costaba unos {nf(v15 * 1000, 0)} € en 2015</> : ''}.</> })()}</>}</>} fuente={<>{ineUrl(d.tablas.ipv)} · índice de precios de vivienda, base {base} = 100</>}>
-      <LineChart unidad="Índice, 2015 = 100" titulo="Índice de precios de vivienda" series={[{ id: 'g', nombre: 'General', datos: pts(e?.gi), color: ACC, area: true }, { id: 'n', nombre: 'Nueva', datos: pts(e?.ni), color: NUEVA }, { id: 'u', nombre: 'Segunda mano', datos: pts(e?.ui), color: USADA }]} fx={t => per(new Date(t).toISOString().slice(0, 7).replace(/-(\d\d)$/, (_, m) => `-T${Math.ceil(+m / 3)}`))} fxEje={anio} fy={v => nf(v, 0)} />
+      <LineChart unidad={`Índice: la media de ${base} vale 100 (por eso cada trimestre de ${base} queda algo por encima o por debajo)`} titulo="Índice de precios de vivienda" series={[{ id: 'g', nombre: 'General', datos: pts(e?.gi), color: ACC, area: true }, { id: 'n', nombre: 'Nueva', datos: pts(e?.ni), color: NUEVA }, { id: 'u', nombre: 'Segunda mano', datos: pts(e?.ui), color: USADA }]} fx={t => per(new Date(t).toISOString().slice(0, 7).replace(/-(\d\d)$/, (_, m) => `-T${Math.ceil(+m / 3)}`))} fxEje={anio} fy={v => nf(v, 0)} />
     </Card>
     <Card t="Por comunidades" lead={<>Variación anual del precio. Donde más sube: <b>{ccaa[0]?.n}</b> ({pct(ccaa[0]?.a ?? 0)}); donde menos, {ccaa.at(-1)?.n} ({pct(ccaa.at(-1)?.a ?? 0)}). Toca el mapa.</>}>
       <MapaProvincias grupo={c => CCAA_DE_PROV[c] ?? null} claveGrupo="ccaa" valor={r => porCcaa.get(r) ?? null} fmt={v => pct(v)} titulo="Subida del precio de la vivienda por comunidad" color={ACC} escala={ESCALA_CALOR} sel={sel} onSel={setSel} nota="Cuanto más sube, más oscuro y rojo. El INE da este dato por comunidad, no por provincia." />
@@ -162,7 +162,7 @@ function Alquiler({ d }: { d: Datos }) {
   const busca = q.length >= 2 ? munis.filter(m => m.k.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').includes(qn)).slice(0, 8) : []
   return <div className="graficos">
     <Card t="Lo que sube el alquiler" wide lead={<>Índice de precios de vivienda en alquiler del INE, sacado de las declaraciones de la renta. En {año}, los alquileres subieron un <b>{pct(e?.a?.at(-1)?.[1] ?? 0)}</b> en España. Es un dato anual que se publica con retraso: refleja contratos vivos, no solo los nuevos.</>} fuente={<>{ineUrl(d.tablas.alquiler)} · índice de precios de vivienda en alquiler (2015 = 100)</>}>
-      <LineChart unidad="Índice, 2015 = 100" titulo="Índice de alquiler en España" series={[{ id: 'i', nombre: 'Índice', datos: pts(e?.i), color: ACC, area: true }]} fx={anio} fy={v => nf(v, 0)} alto={190} />
+      <LineChart unidad={`Índice: ${baseDe(e?.i) ?? "el año base"} = 100`} titulo="Índice de alquiler en España" series={[{ id: 'i', nombre: 'Índice', datos: pts(e?.i), color: ACC, area: true }]} fx={anio} fy={v => nf(v, 0)} alto={190} />
     </Card>
     <Card t="Busca tu municipio" lead={`Los ${nf(munis.length)} municipios con dato del INE.`}>
       <label className="buscar"><Search size={16} /><input value={q} onChange={e => setQ(e.target.value)} placeholder="Escribe un municipio…" aria-label="Buscar municipio" /></label>
@@ -176,6 +176,12 @@ function Alquiler({ d }: { d: Datos }) {
       <Barras titulo="Municipios donde menos sube el alquiler" fmt={v => pct(v)} limite={12} items={sube.slice(-30).reverse().map(m => ({ id: m.k, nombre: m.k, valor: m.a[1], color: '#3987e5' }))} />
     </Card>
   </div>
+}
+
+/** El año cuya media vale 100 (el INE cambia de base: 2015, 2025…). */
+function baseDe(serie?: [string, number][]) {
+  const m = new Map<string, number[]>(); for (const [p, v] of serie ?? []) m.set(String(p).slice(0, 4), [...(m.get(String(p).slice(0, 4)) ?? []), v])
+  return [...m].map(([y, vs]) => [y, Math.abs(vs.reduce((a, b) => a + b, 0) / vs.length - 100)] as const).sort((a, b) => a[1] - b[1])[0]?.[0]
 }
 
 export default function App() {
