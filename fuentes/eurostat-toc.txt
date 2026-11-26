@@ -16,9 +16,9 @@
 "                        Total economy deficit/surplus - ENP-South countries"	"enps_gov_10dde"	"dataset"	"05.03.2026"	"05.03.2026"	"2005"	"2025"	62
 "                            Income quintile share ratio - S80/S20 - ENP-South countries"	"enps_ilc_di11"	"dataset"	"05.03.2026"	"12.05.2025"	"2005"	"2023"	33
 "                            Gini coefficient - ENP-South countries"	"enps_ilc_di12"	"dataset"	"05.03.2026"	"02.06.2025"	"2005"	"2023"	40
-"                        Government deficit/surplus and debt - ENP-East countries"	"enpe_gov_10dd"	"dataset"	"03.02.2026"	"03.02.2026"	"2005"	"2025"	428
-"                            Income quintile share ratio - S80/S20 - ENP-East countries"	"enpe_ilc_di11"	"dataset"	"03.02.2026"	"03.02.2026"	"2005"	"2024"	109
-"                            Gini coefficient - ENP-East countries"	"enpe_ilc_di12"	"dataset"	"03.02.2026"	"03.02.2026"	"2005"	"2024"	89
+"                        Government deficit/surplus and debt - ENP-East countries"	"enpe_gov_10dd"	"dataset"	"03.02.2026"	"26.11.2026"	"2005"	"2025"	428
+"                            Income quintile share ratio - S80/S20 - ENP-East countries"	"enpe_ilc_di11"	"dataset"	"03.02.2026"	"26.11.2026"	"2005"	"2024"	109
+"                            Gini coefficient - ENP-East countries"	"enpe_ilc_di12"	"dataset"	"03.02.2026"	"26.11.2026"	"2005"	"2024"	89
 "                            Median equivalised net income - EUR per person - ENP-East countries"	"enpe_ilc_di03"	"dataset"	"03.02.2026"	"03.02.2026"	"2005"	"2024"	70
 "                Government deficit and debt"	"gov_10dd"	"folder"	" "	" "	" "	" "	
 "                    Structure of government debt"	"gov_10dd_sgd"	"folder"	" "	" "	" "	" "	
