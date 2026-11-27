@@ -55,6 +55,11 @@ export function Micro({ id, c }: { id: string; c: string }) {
       return <S>{barX(8, 31, 78 - a, 14, c, .1, .65)}{barX(86 - a, 31, a, 14, '#3df5b0', .25)}
         <text x="8" y="26" className="mi-t">gasta</text><text x="86" y="60" className="mi-t" textAnchor="end">ahorra</text></S>
     }
+    case 'hoy': {
+      const d = 'M6 40H16l3 -5l3 9l3 -7l3 4H34l3 -3l3 8l4 -30l4 52l4 -38l3 14l3 -8H62l3 3l3 -6l3 5H90'
+      return <S><path d={d} fill="none" stroke={c} strokeWidth="1.5" strokeLinejoin="round" className="mi-ecg" pathLength={100} />
+        <circle cx="48" cy="40" r="3" fill="none" stroke={c} strokeWidth="1" className="mi-latido" /></S>
+    }
     case 'sanidad': {
       const u = ((R.sanidad?.ultimas as number[] | undefined) ?? []).slice(-12), m = n('sanidad', 'media') || 1, w = 84 / Math.max(1, u.length)
       const d = 'M6 46' + u.map((v, i) => { const x = 6 + i * w, h = lim(6 + (v / m - .85) * 110, 5, 34); return `H${x + w * .35}l${w * .12} 4l${w * .14} ${-h - 4}l${w * .16} ${h + 10}l${w * .1} -10H${x + w}` }).join('')

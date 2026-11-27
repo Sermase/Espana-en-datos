@@ -91,7 +91,8 @@ try {
   }
   const sec = (c) => items.filter(x => x.s === c)
   const noPersona = (t) => !/\b(don|doña|dña\.?|d\.)\s+[A-ZÁÉÍÓÚÑ]/.test(t)
-  const fmt = (x) => ({ t: x.it.titulo.replace(/\s+/g, ' ').slice(0, 260), dep: x.dep.replace(/^MINISTERIO DE(L| LA| LOS)? /i, '').toLowerCase().replace(/^./, c => c.toUpperCase()), u: x.it.url_html ?? x.it.url_pdf?.texto })
+  const corta = (t) => { t = t.replace(/\s+/g, ' '); if (t.length <= 230) return t; const c = t.slice(0, 230), k = c.lastIndexOf(' '); return c.slice(0, k > 150 ? k : 230).replace(/[,;:\s]+$/, '') + '…' }
+  const fmt = (x) => ({ t: corta(x.it.titulo), dep: x.dep.replace(/^MINISTERIO D(E|EL|E LA|E LOS) /i, ''), u: x.it.url_html ?? x.it.url_pdf?.texto })
   const ayudasRe = /subvenci|ayuda|becas?\b|bases reguladoras|convocatoria de/i
   out.boe = {
     fecha: `${fecha.slice(0, 4)}-${fecha.slice(4, 6)}-${fecha.slice(6)}`, url: d.sumario_diario?.url_pdf?.texto ?? null, total: items.length,
@@ -117,7 +118,8 @@ try {
   log.ree = A(j.included).map(x => `${x.type}: ${x.attributes?.values?.length}`)
   const sp = A(j.included).find(x => /spot/i.test(x.type + ' ' + (x.attributes?.title ?? ''))) ?? A(j.included).find(x => !/pvpc/i.test(x.type))
   const pv = A(j.included).find(x => /pvpc/i.test(x.type))
-  const serie = (x) => A(x?.attributes?.values).map(v => ({ h: v.datetime, v: v.value }))
+  // el mercado mayorista ya publica por cuartos de hora: se pasa a la media de cada hora
+  const serie = (x) => { const por = new Map(); for (const v of A(x?.attributes?.values)) { const h = v.datetime.slice(0, 13), a = por.get(h) ?? { h: h + ':00', s: 0, n: 0 }; a.s += v.value; a.n++; por.set(h, a) } return [...por.values()].map(a => ({ h: a.h, v: Math.round((a.s / a.n) * 100) / 100 })) }
   if (sp) out.mercado.spot = { titulo: sp.attributes?.title ?? sp.type, horas: serie(sp) }
   if (pv) out.mercado.pvpc = { titulo: pv.attributes?.title ?? pv.type, horas: serie(pv) }
 } catch (e) { log.ree = String(e.message) }
@@ -130,6 +132,6 @@ if (out.tiempo?.anomMedia != null) cinta.push({ n: 'Temperatura frente a lo norm
 if (out.mercado.eurusd) cinta.push({ n: 'Euro', v: `${es(out.mercado.eurusd.v, 4)} $`, cambio: out.mercado.eurusd.antes != null ? out.mercado.eurusd.v - out.mercado.eurusd.antes : undefined })
 if (out.boe) cinta.push({ n: 'BOE de hoy', v: `${out.boe.total} textos` })
 writeFileSync(OUT + '/hoy.json', JSON.stringify(out))
-writeFileSync(OUT + '/cinta.json', JSON.stringify({ actualizado: out.actualizado, items: cinta }))
+writeFileSync(OUT + '/cinta.json', JSON.stringify({ actualizado: out.actualizado, items: cinta, num: { sismos24h: out.sismos?.n24h, magMax24h: out.sismos?.magMax24h, naranja: out.avisos?.naranjaOMas, anom: out.tiempo?.anomMedia } }))
 mkdirSync(here('../fuentes'), { recursive: true }); writeFileSync(here('../fuentes/hoy-muestra.json'), JSON.stringify(out)); writeFileSync(here('../fuentes/hoy-log.json'), JSON.stringify({ ...log, fecha: out.actualizado, claves: Object.keys(out) }, null, 1))
 console.log('hoy:', Object.keys(out).join(' '), Object.keys(log).length > 1 ? 'AVISOS ' + JSON.stringify(log) : '')

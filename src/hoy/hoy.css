@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+/* España hoy: acento rosa vivo. */
+:root { --surface: #07141d; --bg: #03090f; --panel: #07141d; --line: rgba(160, 220, 240, .12); --ink: #e6f6fb; --muted: #86a9b5; --acc: #ff5fd2; color-scheme: dark }
+* { box-sizing: border-box }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: Barlow, system-ui, sans-serif }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer }
+:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px }
+.boot { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--muted) }
+.boot svg { color: var(--acc) }
+
+.eco { max-width: 1280px; margin: 0 auto; padding: 22px 24px 40px }
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px }
+.home-link { font-size: 12px; letter-spacing: .08em; color: var(--muted); text-decoration: none }
+.home-link::before { content: '‹ ' }
+.home-link:hover { color: var(--acc) }
+.brand h1 { font-family: Oxanium, sans-serif; font-weight: 700; font-size: 38px; letter-spacing: .14em; text-transform: uppercase; margin: 0; line-height: 1.05 }
+.brand p { margin: 2px 0 0; color: var(--acc); font-size: 14px }
+.rango { display: flex; gap: 4px }
+.rango button { padding: 6px 11px; border: 1px solid var(--line); border-radius: 3px; font-size: 13px; font-weight: 600; color: var(--muted) }
+.rango button.is-on { border-color: var(--acc); color: var(--ink); background: color-mix(in oklab, var(--acc) 12%, transparent) }
+
+.menu { position: sticky; top: 0; z-index: 10; display: flex; gap: 4px; margin: 18px -24px 16px; padding: 8px 24px; overflow-x: auto; background: linear-gradient(#03090f 80%, rgba(3, 9, 15, 0)); scrollbar-width: none }
+.menu button { flex: none; display: inline-flex; align-items: center; gap: 7px; padding: 9px 14px; border: 1px solid var(--line); border-radius: 3px; font-weight: 600; font-size: 14.5px; background: var(--panel); transition: border-color .2s, background .2s }
+.menu button svg { color: var(--muted) }
+.menu button:hover { border-color: color-mix(in oklab, var(--acc) 50%, transparent) }
+.menu button.is-on { border-color: var(--acc); background: color-mix(in oklab, var(--acc) 14%, var(--panel)) }
+.menu button.is-on svg { color: var(--acc) }
+.intro { color: #c7dde4; font-size: 15.5px; margin: 0 0 14px; max-width: 70ch }
+
+.kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px }
+.kpi { position: relative; display: grid; gap: 2px; text-align: left; padding: 16px 16px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; transition: border-color .2s, transform .2s }
+.kpi:hover { border-color: var(--acc); transform: translateY(-2px) }
+.kpi-l { font-size: 13.5px; color: var(--muted) }
+.kpi-v { font: 700 32px/1.1 Oxanium, sans-serif; font-variant-numeric: tabular-nums }
+.kpi-d { font-size: 12.5px; color: var(--muted) }
+.kpi-d.is-good { color: #3df5b0 }
+.kpi-d.is-bad { color: #ff8a95 }
+.kpi svg { width: 100%; height: 30px; margin-top: 8px }
+.kpi svg path { fill: none; stroke: var(--acc); stroke-width: 1.6; vector-effect: non-scaling-stroke }
+.kpi-p { font-size: 11.5px; color: var(--muted) }
+
+.graficos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start }
+.gcard { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 18px 18px 14px; min-width: 0 }
+.gcard.is-wide { grid-column: 1 / -1 }
+.gcard h2 { margin: 0; font-family: Oxanium, sans-serif; font-size: 20px; font-weight: 600 }
+.gcard .lead { margin: 6px 0 12px; color: #c7dde4; font-size: 15px; line-height: 1.45; max-width: 72ch }
+.gcard .lead b { color: #fff }
+.note, .fuente { color: var(--muted); font-size: 12.5px; margin: 6px 0 0 }
+.src { color: var(--muted); font-size: 12px; margin-top: 24px }
+@media (max-width: 900px) {
+  .eco { padding: 14px 12px 30px }
+  .brand h1 { font-size: 28px }
+  .menu { margin: 12px -12px 12px; padding: 8px 12px }
+  .graficos { grid-template-columns: 1fr }
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px }
+  .kpi { padding: 12px }
+  .kpi-v { font-size: 24px }
+}
+.fuente a, .fuentes a { color: var(--ink); text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--acc) 60%, transparent); text-underline-offset: 2px }
+.fuente a:hover, .fuentes a:hover { color: var(--acc) }
+
+.kpis { margin-bottom: 16px }
+.kpi { cursor: default }
+.kpi:hover { transform: none; border-color: var(--line) }
+.kpi-l { display: flex; align-items: center; justify-content: flex-start; gap: 6px; text-align: left }
+.kpi-l svg { flex: none }
+.kpi-l svg { color: var(--acc) }
+.modo { display: flex; gap: 4px; margin-bottom: 6px }
+.modo button { padding: 4px 10px; border: 1px solid var(--line); border-radius: 3px; font-size: 13px; color: var(--muted) }
+.modo button.is-on { border-color: var(--acc); color: var(--ink) }
+.vivo { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--acc); margin-right: 6px; box-shadow: 0 0 0 0 rgba(255, 95, 210, .6); animation: vivo 2s infinite }
+@keyframes vivo { 70% { box-shadow: 0 0 0 8px rgba(255, 95, 210, 0) } 100% { box-shadow: 0 0 0 0 rgba(255, 95, 210, 0) } }
+@media (prefers-reduced-motion: reduce) { .vivo { animation: none } }
+
+.vivo-txt { margin: 0; font-size: 13px; color: var(--muted); display: flex; align-items: center }
+.kpi { --acc: #ff5fd2 }
+.kpi-v small { font-size: 14px }
+.kpi .kpi-l svg { width: 15px; height: 15px; margin: 0; flex: none }
+
+.hoy-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(300px, 1fr); gap: 16px; align-items: start }
+.capas { margin-bottom: 8px }
+.capas button, .modo button { display: inline-flex; align-items: center; gap: 6px }
+.lateral { padding: 14px; position: sticky; top: 62px }
+.hmapa { margin: 6px auto 0; max-width: 820px }
+.hmapa-plot { position: relative; width: 100% }
+.hmapa-plot svg { display: block; overflow: visible }
+.hm-prov { stroke: rgba(3, 9, 15, .9); stroke-width: .8; transition: fill .4s, fill-opacity .4s }
+.hm-prov.es-temp { cursor: pointer }
+.hm-prov.es-temp:hover { stroke: #fff; stroke-width: 1.3 }
+.hm-prov.is-sel { stroke: #fff; stroke-width: 2.2 }
+.hm-ciudad { cursor: pointer }
+.hm-ciudad circle { stroke: #e6f6fb; stroke-width: 1.2 }
+.hm-ciudad.is-sel circle { stroke: #fff; stroke-width: 2.4 }
+.hm-ciudad text { font: 600 11px Barlow, sans-serif; fill: #cfe3ea; paint-order: stroke; stroke: #03090f; stroke-width: 3px; pointer-events: none }
+.hm-sismo { cursor: pointer }
+.hm-pto { stroke: rgba(255, 255, 255, .55); stroke-width: .8; transition: stroke-width .15s }
+.hm-sismo:hover .hm-pto, .hm-sismo.is-sel .hm-pto { stroke: #fff; stroke-width: 2.2 }
+.hm-onda { fill: none; stroke: #ff5fd2; stroke-width: 1.5; transform-box: fill-box; transform-origin: center; animation: onda 2.6s ease-out infinite }
+@keyframes onda { from { transform: scale(1); opacity: .9 } to { transform: scale(3.4); opacity: 0 } }
+@media (prefers-reduced-motion: reduce) { .hm-onda { animation: none; opacity: 0 } }
+.hmapa:not(.is-seen) .hm-prov { opacity: 0 }
+.hmapa.is-seen .hm-prov { animation: hm-in .5s ease-out backwards }
+@keyframes hm-in { from { opacity: 0 } }
+@media (prefers-reduced-motion: reduce) { .hmapa .hm-prov { opacity: 1; animation: none } }
+.hm-ley { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; font-size: 12.5px; color: var(--muted) }
+.hm-ley > i { width: 150px; height: 8px; border-radius: 2px }
+.hm-ley small { flex-basis: 100% }
+.hm-escala { display: inline-flex !important; align-items: center; gap: 6px; width: auto !important; height: auto !important }
+.hm-escala b { width: 10px; height: 10px; border-radius: 50%; background: #ff5fd2 }
+
+.ficha-hoy { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: center; padding: 12px; margin-bottom: 10px; border: 1px solid var(--c); border-radius: 4px; background: color-mix(in oklab, var(--c) 10%, transparent) }
+.ficha-n { font: 700 28px/1 Oxanium, sans-serif; color: #fff; font-variant-numeric: tabular-nums }
+.ficha-hoy strong { display: block; font-size: 15.5px }
+.ficha-hoy small { display: block; color: #c7dde4; font-size: 12.5px; line-height: 1.4; margin-top: 2px }
+.ficha-hoy a { grid-column: 2; font-size: 13px; color: var(--ink); text-underline-offset: 2px }
+.hoy-lista { list-style: none; margin: 0; padding: 0; max-height: 540px; overflow: auto; display: grid; gap: 1px }
+.hoy-lista button { width: 100%; display: grid; grid-template-columns: 2.6em minmax(0, 1fr); align-items: center; gap: 10px; padding: 6px 8px; border: 1px solid transparent; border-radius: 3px; text-align: left; font-size: 14px; line-height: 1.25 }
+.hoy-lista button:hover { background: rgba(255, 255, 255, .04) }
+.hoy-lista button.is-on { border-color: var(--acc); background: color-mix(in oklab, var(--acc) 10%, transparent) }
+.hoy-lista small { display: block; color: var(--muted); font-size: 12px }
+.mag { font: 700 16px Oxanium, sans-serif; color: #ff5fd2; font-variant-numeric: tabular-nums; text-align: right }
+.hoy-lista button:has(.barra-an) { grid-template-columns: 76px minmax(0, 1fr) auto }
+.barra-an { position: relative; height: 8px; border-radius: 4px; background: rgba(160, 220, 240, .06) }
+.barra-an::after { content: ''; position: absolute; left: 50%; top: -2px; bottom: -2px; width: 1px; background: rgba(160, 220, 240, .3) }
+.barra-an i { position: absolute; top: 0; bottom: 0; border-radius: 3px }
+.an-n { overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.hoy-lista b { font: 600 14px Oxanium, sans-serif; font-variant-numeric: tabular-nums }
+
+.chip-nivel { display: inline-block; margin-left: 6px; padding: 2px 9px; border: 1px solid var(--n); border-radius: 12px; font-size: 13px; color: #fff; background: color-mix(in oklab, var(--n) 16%, transparent) }
+.avisos { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 12px; margin-top: 10px }
+.aviso { border: 1px solid var(--line); border-left: 4px solid var(--n); border-radius: 4px; padding: 12px 14px; background: color-mix(in oklab, var(--n) 5%, var(--panel)) }
+.aviso header { display: flex; align-items: center; gap: 8px }
+.aviso header svg { color: var(--n); flex: none }
+.aviso h3 { margin: 0; font: 600 17px Oxanium, sans-serif; flex: 1 }
+.nivel { font-size: 12.5px; font-weight: 700; color: #07141d; background: var(--n); padding: 1px 8px; border-radius: 10px }
+.vig { margin: 6px 0 4px; font-size: 12.5px; color: var(--muted) }
+.aviso-txt { margin: 4px 0 8px; font-size: 13.5px; color: #c7dde4; line-height: 1.4 }
+.zonas { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0 0 }
+.zonas span { padding: 2px 8px; border-radius: 10px; font-size: 12.5px; background: rgba(160, 220, 240, .08); color: #dfeff4 }
+.zonas button { padding: 2px 8px; border-radius: 10px; font-size: 12.5px; border: 1px solid var(--line); color: var(--ink) }
+
+.boe-lista { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 10px }
+.boe-lista a { color: #e6f6fb; text-decoration: none; font-size: 14.5px; line-height: 1.35; display: block }
+.boe-lista a:hover { color: var(--acc); text-decoration: underline }
+.boe-lista small { color: var(--muted); font-size: 12px }
+
+.horas-barras { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 3px; align-items: end; height: 190px; padding-top: 6px }
+.hora { position: relative; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch }
+.hora i { display: block; border-radius: 3px 3px 0 0; transition: height .4s }
+.hora small { height: 16px; text-align: center; font-size: 11px; color: var(--muted); line-height: 16px }
+.hora.es-ahora::before { content: ''; position: absolute; inset: 0 -2px 16px; border: 1px dashed #fff; border-radius: 3px; opacity: .6; pointer-events: none }
+.hora:hover i { filter: brightness(1.25) }
+.pto { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 5px }
+
+@media (max-width: 900px) {
+  .hoy-grid { grid-template-columns: 1fr }
+  .lateral { position: static }
+  .hoy-lista { max-height: 340px }
+  .avisos { grid-template-columns: 1fr }
+  .horas-barras { height: 150px; gap: 2px }
+}

@@ -1,5 +1,5 @@
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from 'motion/react'
-import { ArrowDown, ArrowUpRight, Building2, Car, ChevronDown, Clapperboard, Cpu, Droplets, Factory, FlaskConical, Fuel, GraduationCap, HandCoins, HandHeart, HeartPulse, House, Landmark, Luggage, Mountain, Plane, PiggyBank, Receipt, Route, Scale, ScrollText, ShieldCheck, Ship, ShoppingBasket, Thermometer, TrainFront, TrendingUp, Trophy, Users, Wheat, Wind, Zap, type LucideIcon } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Building2, Car, ChevronDown, Clapperboard, Cpu, Droplets, Factory, FlaskConical, Fuel, GraduationCap, HandCoins, HandHeart, HeartPulse, House, Landmark, Luggage, Mountain, Plane, PiggyBank, Radio, Receipt, Route, Scale, ScrollText, ShieldCheck, Ship, ShoppingBasket, Thermometer, TrainFront, TrendingUp, Trophy, Users, Wheat, Wind, Zap, type LucideIcon } from 'lucide-react'
 import resumen from '../resumen.json'
 import { useEffect, useState, type CSSProperties } from 'react'
 import { CountUp } from '../graficos/CountUp'
@@ -43,7 +43,7 @@ function cifras(id: string): { n: number; f: (v: number) => string; l: string }[
     default: return []
   }
 }
-const FUENTE: Record<string, string> = { sanidad: 'INE y Eurostat, cada semana', turismo: 'INE y Eurostat, cada semana', igualdad: 'INE y Eurostat, cada semana', coches: 'DGT, cada mes', hogares: 'INE y Eurostat, cada semana', aire: 'Agencia Europea, cada dos horas', seguridad: 'Ministerio del Interior, cada trimestre', impuestos: 'Agencia Tributaria, cada semana', cuentas: 'Eurostat, cada semana', subvenciones: 'BDNS, cada día', vivienda: 'INE, cada semana', agua: `Datos del ${fecha}`, poblacion: 'Padrón del INE', economia: 'Eurostat, cada día', energia: 'En directo, Red Eléctrica', comercio: 'Eurostat, cada semana', gasolineras: 'Datos de hoy' }
+const FUENTE: Record<string, string> = { hoy: 'IGN, AEMET, BOE, Red Eléctrica y BCE, cada dos horas', sanidad: 'INE y Eurostat, cada semana', turismo: 'INE y Eurostat, cada semana', igualdad: 'INE y Eurostat, cada semana', coches: 'DGT, cada mes', hogares: 'INE y Eurostat, cada semana', aire: 'Agencia Europea, cada dos horas', seguridad: 'Ministerio del Interior, cada trimestre', impuestos: 'Agencia Tributaria, cada semana', cuentas: 'Eurostat, cada semana', subvenciones: 'BDNS, cada día', vivienda: 'INE, cada semana', agua: `Datos del ${fecha}`, poblacion: 'Padrón del INE', economia: 'Eurostat, cada día', energia: 'En directo, Red Eléctrica', comercio: 'Eurostat, cada semana', gasolineras: 'Datos de hoy' }
 
 
 
@@ -54,13 +54,30 @@ const ICONO: Record<string, LucideIcon> = {
   poblacion: Users, sociedad: Building2, seguridad: ShieldCheck, igualdad: Scale, sanidad: HeartPulse, educacion: GraduationCap,
   economia: TrendingUp, vivienda: House, comercio: Ship, hogares: ShoppingBasket, turismo: Luggage, empresas: Factory, migraciones: Plane, derechos: HandHeart, ciencia: FlaskConical, digital: Cpu,
   cuentas: Landmark, impuestos: Receipt, presupuestos: PiggyBank, subvenciones: HandCoins, contratos: ScrollText,
-  agua: Droplets, aire: Wind, clima: Thermometer, montana: Mountain, agricultura: Wheat,
+  hoy: Radio, agua: Droplets, aire: Wind, clima: Thermometer, montana: Mountain, agricultura: Wheat,
   energia: Zap, gasolineras: Fuel, coches: Car, trenes: TrainFront, aeropuertos: Plane, carreteras: Route, cultura: Clapperboard, deporte: Trophy,
 }
 const ABIERTOS = AREAS.flatMap(a => TEMAS.filter(t => t.area === a.id && t.ruta))
 const AREAS_ABIERTAS = AREAS.filter(a => ABIERTOS.some(t => t.area === a.id))
 const PLAN = TEMAS.filter(t => !t.ruta)
 const MARCA = '#3fe6ff'
+
+
+/** Lo de hoy (terremotos, avisos, temperatura): el robot lo rehace cada dos horas y no se guarda en el repositorio, así que se pide al abrir. */
+type Vivo = { actualizado: string; items: { n: string; v: string; cambio?: number }[]; num?: { sismos24h?: number; magMax24h?: number | null; naranja?: number; anom?: number | null } }
+function useHoy() {
+  const [v, setV] = useState<Vivo | null>(null)
+  useEffect(() => { fetch('./hoy/data/cinta.json').then(r => r.ok ? r.json() : null).then(setV, () => {}) }, [])
+  return v
+}
+function cifrasHoy(v: Vivo | null): { n: number; f: (x: number) => string; l: string }[] {
+  const x = v?.num; if (!x) return []
+  const out: { n: number; f: (x: number) => string; l: string }[] = []
+  if (x.sismos24h != null) out.push({ n: x.sismos24h, f: v => es(v, 0), l: 'terremotos en las últimas 24 h' })
+  if (x.anom != null) out.push({ n: x.anom, f: v => `${v > 0 ? '+' : ''}${es(v, 1)} °C`, l: 'frente a lo normal hoy' })
+  if (x.naranja != null) out.push({ n: x.naranja, f: v => es(v, 0), l: 'zonas con aviso naranja o rojo' })
+  return out
+}
 
 /** Cinta tipo canal de bolsa, fina y pegada arriba: lo que cambia cada día. */
 const CINTA: { n: string; v: string; id: string; cambio?: number }[] = [
@@ -74,8 +91,9 @@ const CINTA: { n: string; v: string; id: string; cambio?: number }[] = [
   ...(R.sanidad?.muertes ? [{ n: 'Muertes en una semana', v: es(Number(R.sanidad.muertes), 0), id: 'sanidad' }] : []),
   ...(R.turismo ? [{ n: 'Turistas', v: `${es(Number(R.turismo.turistas) / 1e6, 1)} M`, id: 'turismo' }] : []),
 ]
-function Cinta() {
-  const items = (oculto: boolean) => CINTA.map((c, k) => { const t = TEMAS.find(x => x.id === c.id)!; return <a key={k} href={t.ruta} tabIndex={oculto ? -1 : undefined} style={{ '--c': t.color } as CSSProperties}>
+function Cinta({ vivo }: { vivo: Vivo | null }) {
+  const todos = [...CINTA, ...(vivo?.items ?? []).map(i => ({ ...i, id: 'hoy' }))]
+  const items = (oculto: boolean) => todos.map((c, k) => { const t = TEMAS.find(x => x.id === c.id)!; return <a key={k} href={t.ruta} tabIndex={oculto ? -1 : undefined} style={{ '--c': t.color } as CSSProperties}>
     <i />{c.n} <b>{c.v}</b>{c.cambio != null && <em className={c.cambio >= 0 ? 'sube' : 'baja'}>{c.cambio >= 0 ? '▲' : '▼'}</em>}
   </a> })
   return <div className="cinta" role="region" aria-label="Indicadores del día">
@@ -108,9 +126,9 @@ function Ficha({ area, setArea }: { area: AreaId | null; setArea: (a: AreaId | n
 }
 
 /** Tarjeta de tema: nombre, dato principal grande en su color, el secundario, la fuente y un micrográfico vivo. */
-function Tarjeta({ t, i }: { t: Tema; i: number }) {
+function Tarjeta({ t, i, vivo }: { t: Tema; i: number; vivo: Vivo | null }) {
   const [ref, vista] = useInView<HTMLAnchorElement>()
-  const cs = cifras(t.id), Ico = ICONO[t.id] ?? TrendingUp
+  const cs = t.id === 'hoy' ? cifrasHoy(vivo) : cifras(t.id), Ico = ICONO[t.id] ?? TrendingUp
   return <motion.li layout initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: .97, transition: { duration: .15 } }} transition={{ delay: (i % 3) * .05, duration: .4 }}>
     <a ref={ref} id={`tarjeta-${t.id}`} href={t.ruta} className={`tarjeta ${vista ? 'is-vista' : ''}`} style={{ '--c': t.color } as CSSProperties}>
       <div className="ta-txt">
@@ -124,7 +142,7 @@ function Tarjeta({ t, i }: { t: Tema; i: number }) {
   </motion.li>
 }
 
-function Fichas({ area, setArea }: { area: AreaId | null; setArea: (a: AreaId | null) => void }) {
+function Fichas({ area, setArea, vivo }: { area: AreaId | null; setArea: (a: AreaId | null) => void; vivo: Vivo | null }) {
   const chips: { id: AreaId | null; nombre: string; n: number }[] = [{ id: null, nombre: 'Todos', n: ABIERTOS.length }, ...AREAS_ABIERTAS.map(a => ({ id: a.id, nombre: a.nombre, n: ABIERTOS.filter(t => t.area === a.id).length }))]
   return <section className="fichas" id="temas" aria-labelledby="fichas-t">
     <h2 id="fichas-t" className="sr-only">Temas</h2>
@@ -138,7 +156,7 @@ function Fichas({ area, setArea }: { area: AreaId | null; setArea: (a: AreaId | 
       <AnimatePresence mode="popLayout" initial={false}>
         {AREAS_ABIERTAS.filter(a => !area || a.id === area).map(a => <motion.section key={a.id} layout className="fi-area" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: .15 } }}>
           <header><h3 style={{ '--c': a.color } as CSSProperties}><i />{a.nombre}</h3><p>{a.lema}</p></header>
-          <ul className="tarjetas">{ABIERTOS.filter(t => t.area === a.id).map((t, i) => <Tarjeta key={t.id} t={t} i={i} />)}</ul>
+          <ul className="tarjetas">{ABIERTOS.filter(t => t.area === a.id).map((t, i) => <Tarjeta key={t.id} t={t} i={i} vivo={vivo} />)}</ul>
         </motion.section>)}
       </AnimatePresence>
     </LayoutGroup>
@@ -154,7 +172,7 @@ function Pronto() {
 }
 
 export default function Portada() {
-  const reduce = useReducedMotion()
+  const reduce = useReducedMotion(), vivo = useHoy()
   const [area, setArea] = useState<AreaId | null>(null), [ambiente, setAmbiente] = useState(0)
   // con «todas», España va tomando el color de cada área, despacio
   useEffect(() => {
@@ -165,7 +183,7 @@ export default function Portada() {
   const color = area ? AREAS.find(a => a.id === area)!.color : ambiente === 0 ? MARCA : AREAS_ABIERTAS[ambiente - 1].color
   return (
     <>
-      <Cinta />
+      <Cinta vivo={vivo} />
       <main className="portada">
         <div className="barra">
           <span className="barra-fecha"><span className="bf-largo">Datos oficiales · se actualizan solos · </span>{new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Madrid' })}</span>
@@ -182,7 +200,7 @@ export default function Portada() {
           </div>
           <Hero color={color} />
         </header>
-        <Fichas area={area} setArea={setArea} />
+        <Fichas area={area} setArea={setArea} vivo={vivo} />
         <Pronto />
         <footer className="pie">
           <p>Fuentes oficiales, enlazadas en cada tema: <A id="boletin">MITECO</A>, <A id="siane">IGN</A>, <A id="ine_padron">INE</A>, <A id="eurostat">Eurostat</A>, <A id="ree">REE</A>, <A id="aemet">AEMET</A>, DGT, BDNS, Agencia Tributaria y Ministerio del Interior. Sin registro, sin anuncios.</p>
