@@ -92,7 +92,7 @@ jobs:
       - name: Sondas de fuentes futuras
         if: contains(github.event.head_commit.message, '[sonda]')
         continue-on-error: true
-        run: node scripts/sonda-turismo.mjs
+        run: node scripts/sonda-hoy.mjs
       - name: Turismo (INE FRONTUR, EGATUR, ocupación hotelera, viviendas turísticas; Eurostat)
         if: github.event.schedule == '43 15 * * 2' || contains(github.event.head_commit.message, '[turismo]')
         continue-on-error: true
