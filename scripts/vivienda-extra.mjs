@@ -35,23 +35,17 @@ try {
   const fila = ([nom, o]) => { const m = nom.match(/^(\d{2,5}) (.+)$/); return { cod: m ? m[1] : nom, n: m ? m[2] : nom, ...o } }
   const todo = [...ter].map(fila).filter(f => f.t && f.v != null)
   out.nacional = todo.find(f => f.cod === 'Total Nacional')
-  out.ccaa = todo.filter(f => /^\d{2}$/.test(f.cod) && ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19'].includes(f.cod))
   // las provincias también tienen código de 2 cifras: se distinguen porque el INE lista cada CCAA y después sus provincias en este orden
+  // El INE lista cada comunidad (código 01–19, en orden) justo antes de sus provincias: una fila es comunidad si su código es el siguiente esperado.
   const orden = [...ter.keys()].filter(k => /^\d{2} /.test(k))
-  const ccaaIds = new Set(); const prov = []; let esCcaa = true
-  // Heurística estable: una CCAA es la que aparece antes de provincias con su mismo código de comunidad en el INE (01–19); provincias 01–52 se resuelven por nombre
   out.provincias = []; out.ccaa = []
-  const CCAA = new Set(['Andalucía', 'Aragón', 'Asturias, Principado de', 'Balears, Illes', 'Canarias', 'Cantabria', 'Castilla y León', 'Castilla - La Mancha', 'Cataluña', 'Comunitat Valenciana', 'Extremadura', 'Galicia', 'Madrid, Comunidad de', 'Murcia, Región de', 'Navarra, Comunidad Foral de', 'País Vasco', 'Rioja, La', 'Ceuta', 'Melilla'])
-  let ccaaActual = null
+  let esperado = 1, actual = null
   for (const k of orden) {
     const f = fila([k, ter.get(k)])
-    const esC = CCAA.has(f.n) && (ccaaActual === null || ter.has(k)) && !(out.ccaa.length && out.provincias.length && f.n === 'Ceuta' && false)
-    // En las comunidades uniprovinciales el INE repite el nombre (CCAA y provincia): el primero es la CCAA, el segundo la provincia
-    if (CCAA.has(f.n) && !out.ccaa.some(c => c.n === f.n)) { out.ccaa.push(f); ccaaActual = f; continue }
-    out.provincias.push({ ...f, ccaa: ccaaActual?.n })
+    if (+f.cod === esperado) { esperado++; actual = f; out.ccaa.push(f) } else out.provincias.push({ ...f, ccaa: actual?.n })
   }
   // municipios: más vacías y mayor proporción (≥ 5.000 viviendas)
-  const muni = [...ter].filter(([k]) => /^\d{5} /.test(k)).map(fila).filter(f => f.t && f.v != null)
+  const muni = [...ter].filter(([k]) => /^\d{5} /.test(k) && !/^\d{5} Resto de /.test(k)).map(fila).filter(f => f.t && f.v != null)
   out.nMunicipios = muni.length
   out.topAbs = [...muni].sort((a, b) => b.v - a.v).slice(0, 15)
   out.topPct = muni.filter(f => f.t >= 5000).sort((a, b) => b.v / b.t - a.v / a.t).slice(0, 15)
