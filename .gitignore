@@ -3,3 +3,5 @@ dist
 *.tsbuildinfo
 .tmp/
 public/aire/data/ahora.json
+public/hoy/data/hoy.json
+public/hoy/data/cinta.json
