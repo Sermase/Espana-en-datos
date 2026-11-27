@@ -1,0 +1,920 @@
+{
+ "fecha": "2026-11-27T16:11:22.062Z",
+ "censo": {
+  "59500": {
+   "n": 64,
+   "series": [
+    "Total, Repetitividad en las tareas, Total, Valores absolutos = 3907.5 (undefined)",
+    "Total, Repetitividad en las tareas, Total, Porcentajes = 100 (undefined)",
+    "Total, Repetitividad en las tareas, Siempre, en gran medida o en cierta medida, Valores absolutos = 3194 (undefined)",
+    "Total, Repetitividad en las tareas, Siempre, en gran medida o en cierta medida, Porcentajes = 81.74 (undefined)"
+   ]
+  },
+  "59501": {
+   "n": 64,
+   "series": [
+    "Total, Repetitividad en las tareas, Total, Valores absolutos = 20373.4 (undefined)",
+    "Total, Repetitividad en las tareas, Total, Porcentajes = 100 (undefined)",
+    "Total, Repetitividad en las tareas, Siempre, en gran medida o en cierta medida, Valores absolutos = 16341.9 (undefined)",
+    "Total, Repetitividad en las tareas, Siempre, en gran medida o en cierta medida, Porcentajes = 80.21 (undefined)"
+   ]
+  },
+  "59502": {
+   "n": 64,
+   "series": [
+    "Total, Repetitividad en las tareas, Total, Valores absolutos = 3907.5 (undefined)",
+    "Total, Repetitividad en las tareas, Total, Porcentajes = 100 (undefined)",
+    "Total, Repetitividad en las tareas, Siempre, en gran medida o en cierta medida, Valores absolutos = 3194 (undefined)",
+    "Total, Repetitividad en las tareas, Siempre, en gran medida o en cierta medida, Porcentajes = 81.74 (undefined)"
+   ]
+  },
+  "59503": {
+   "n": 1280,
+   "series": [
+    "Total, Trabajar con dispositivos digitales, Total, Valores absolutos = 24280.9 (undefined)",
+    "Total, Trabajar con dispositivos digitales, Total, Porcentajes = 100 (undefined)",
+    "Total, Trabajar con dispositivos digitales, La mitad o más, Valores absolutos = 9447.2 (undefined)",
+    "Total, Trabajar con dispositivos digitales, La mitad o más, Porcentajes = 38.91 (undefined)"
+   ]
+  },
+  "59504": {
+   "n": 440,
+   "series": [
+    "Total, Valores absolutos en miles, Total = 24280.9 (undefined)",
+    "Total, Valores absolutos en miles, Amplia o muy amplia influencia tanto en el orden como en el contenido = 7572 (undefined)",
+    "Total, Valores absolutos en miles, Amplia o muy amplia influencia en el orden y cierta influencia en el contenido = 1562.4 (undefined)",
+    "Total, Valores absolutos en miles, Amplia o muy amplia influencia en el orden y poca o ninguna en el contenido = 738.1 (undefined)"
+   ]
+  },
+  "59505": {
+   "n": 320,
+   "series": [
+    "Total, Repetitividad en las tareas, Total, Valores absolutos = 24280.9 (undefined)",
+    "Total, Repetitividad en las tareas, Total, Porcentajes = 100 (undefined)",
+    "Total, Repetitividad en las tareas, Siempre, en gran medida o en cierta medida, Valores absolutos = 19535.9 (undefined)",
+    "Total, Repetitividad en las tareas, Siempre, en gran medida o en cierta medida, Porcentajes = 80.46 (undefined)"
+   ]
+  },
+  "59506": "HTTP 404",
+  "59507": {
+   "n": 3,
+   "series": [
+    "Total = 52.5 (undefined)",
+    "Hombres = 46.6 (undefined)",
+    "Mujeres = 58.7 (undefined)"
+   ]
+  },
+  "59508": {
+   "n": 4,
+   "series": [
+    "Total = 72.39 (undefined)",
+    "Española y doble nacionalidad = 73.5 (undefined)",
+    "Extranjera UE-27 = 74.43 (undefined)",
+    "Extranjera resto = 64.46 (undefined)"
+   ]
+  },
+  "59509": {
+   "n": 3,
+   "series": [
+    "Total = 3.38 (undefined)",
+    "Hombres = 2.78 (undefined)",
+    "Mujeres = 4.04 (undefined)"
+   ]
+  },
+  "59510": {
+   "n": 3,
+   "series": [
+    "Total = 72.39 (undefined)",
+    "Hombres = 77.14 (undefined)",
+    "Mujeres = 67.62 (undefined)"
+   ]
+  },
+  "59511": {
+   "n": 5,
+   "series": [
+    "Ocupados = 9.52 (undefined)",
+    "Ocupados a tiempo parcial = -14.63 (undefined)",
+    "Ocupados a tiempo completo = 14.63 (undefined)",
+    "Asalariados contrato temporal = -4.89 (undefined)"
+   ]
+  },
+  "59512": "HTTP 404",
+  "59513": {
+   "n": 3,
+   "series": [
+    "Total = 11.5 (undefined)",
+    "Hombres = 11.4 (undefined)",
+    "Mujeres = 11.5 (undefined)"
+   ]
+  },
+  "59514": {
+   "n": 3,
+   "series": [
+    "Española y doble nacionalidad = 9.5 (undefined)",
+    "Extranjera UE-27 = 13.6 (undefined)",
+    "Extranjera, resto = 23.3 (undefined)"
+   ]
+  },
+  "59515": {
+   "n": 60,
+   "series": [
+    "Total viviendas familiares (1.1+1.2), Total (tamaño de municipio) = 26626315 (undefined)",
+    "Total viviendas familiares (1.1+1.2), Menos de 101 habitantes = 158791 (undefined)",
+    "Total viviendas familiares (1.1+1.2), De 101 a 500 = 816300 (undefined)",
+    "Total viviendas familiares (1.1+1.2), De 501 a 1.000 = 687614 (undefined)"
+   ]
+  },
+  "59516": {
+   "n": 39,
+   "series": [
+    "Total, Total = 26623708 (undefined)",
+    "Total, Antes de 1900 = 508637 (undefined)",
+    "Total, De 1900 a 1920 = 1393089 (undefined)",
+    "Total, De 1921 a 1940 = 1055529 (undefined)"
+   ]
+  },
+  "59517": {
+   "n": 432,
+   "series": [
+    "Total (tamaño de municipio), Total, Total (superficie útil) = 26623708 (undefined)",
+    "Total (tamaño de municipio), Total, Menos de 30m2 = 317445 (undefined)",
+    "Total (tamaño de municipio), Total, Entre 30 y 45m2 = 1936766 (undefined)",
+    "Total (tamaño de municipio), Total, Entre 46 y 60m2 = 4522467 (undefined)"
+   ]
+  },
+  "59518": {
+   "n": 48,
+   "series": [
+    "Total (tamaño de municipio), Total (régimen de tenencia) = 18536616 (undefined)",
+    "Total (tamaño de municipio), En propiedad = 13988627 (undefined)",
+    "Total (tamaño de municipio), En alquiler = 2983619 (undefined)",
+    "Total (tamaño de municipio), Otro régimen de tenencia = 1564370 (undefined)"
+   ]
+  },
+  "59519": {
+   "n": 72,
+   "series": [
+    "Total (tamaño del hogar), Total (superficie útil) = 18536616 (undefined)",
+    "Total (tamaño del hogar), Menos de 30m2 = 167134 (undefined)",
+    "Total (tamaño del hogar), Entre 30 y 45m2 = 1016879 (undefined)",
+    "Total (tamaño del hogar), Entre 46 y 60m2 = 2975863 (undefined)"
+   ]
+  },
+  "59520": {
+   "n": 2592,
+   "series": [
+    "Total, Total Nacional, Total (tamaño de municipio) = 26626315 (undefined)",
+    "Total, Total Nacional, Menos de 101 habitantes = 158791 (undefined)",
+    "Total, Total Nacional, De 101 a 500 = 816300 (undefined)",
+    "Total, Total Nacional, De 501 a 1.000 = 687614 (undefined)"
+   ]
+  },
+  "59521": {
+   "n": 2808,
+   "series": [
+    "Total, Total Nacional, Total = 26623708 (undefined)",
+    "Total, Total Nacional, Antes de 1900 = 508637 (undefined)",
+    "Total, Total Nacional, De 1900 a 1920 = 1393089 (undefined)",
+    "Total, Total Nacional, De 1921 a 1940 = 1055529 (undefined)"
+   ]
+  },
+  "59522": {
+   "n": 31104,
+   "series": [
+    "Total, Total Nacional, Total (superficie útil), Total (tamaño de municipio) = 26623708 (undefined)",
+    "Total, Total Nacional, Total (superficie útil), Menos de 101 habitantes = 158791 (undefined)",
+    "Total, Total Nacional, Total (superficie útil), De 101 a 500 = 816299 (undefined)",
+    "Total, Total Nacional, Total (superficie útil), De 501 a 1.000 = 687614 (undefined)"
+   ]
+  },
+  "59523": {
+   "n": 3456,
+   "series": [
+    "Total Nacional, Total (régimen de tenencia), Total (tamaño de municipio) = 18536616 (undefined)",
+    "Total Nacional, Total (régimen de tenencia), Menos de 101 habitantes = 39835 (undefined)",
+    "Total Nacional, Total (régimen de tenencia), De 101 a 500 = 296626 (undefined)",
+    "Total Nacional, Total (régimen de tenencia), De 501 a 1.000 = 309198 (undefined)"
+   ]
+  },
+  "59524": {
+   "n": 5184,
+   "series": [
+    "Total Nacional, Total (tamaño del hogar), Total (superficie útil) = 18536616 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), Menos de 30m2 = 167134 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), Entre 30 y 45m2 = 1016879 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), Entre 46 y 60m2 = 2975863 (undefined)"
+   ]
+  },
+  "59525": {
+   "n": 24396,
+   "series": [
+    "Total Nacional, Total = 26623708 (undefined)",
+    "Total Nacional, Vivienda principal = 18536616 (undefined)",
+    "Total Nacional, Vivienda no principal = 8087092 (undefined)",
+    "01001 Alegría-Dulantzi, Total = 1290 (undefined)"
+   ]
+  },
+  "59526": {
+   "n": 453,
+   "series": [
+    "01059 Vitoria-Gasteiz, Total = 119853 (undefined)",
+    "01059 Vitoria-Gasteiz, Vivienda principal = 107165 (undefined)",
+    "01059 Vitoria-Gasteiz, Vivienda no principal = 12688 (undefined)",
+    "02003 Albacete, Total = 86881 (undefined)"
+   ]
+  },
+  "59527": {
+   "n": 5889,
+   "series": [
+    "01059 Vitoria-Gasteiz, Total, Total = 119853 (undefined)",
+    "01059 Vitoria-Gasteiz, Total, Antes de 1900 = 1043 (undefined)",
+    "01059 Vitoria-Gasteiz, Total, De 1900 a 1920 = 852 (undefined)",
+    "01059 Vitoria-Gasteiz, Total, De 1921 a 1940 = 998 (undefined)"
+   ]
+  },
+  "59528": {
+   "n": 5436,
+   "series": [
+    "01059 Vitoria-Gasteiz, Total, Total (superficie útil) = 119853 (undefined)",
+    "01059 Vitoria-Gasteiz, Total, Menos de 30m2 = 73 (undefined)",
+    "01059 Vitoria-Gasteiz, Total, Entre 30 y 45m2 = 1621 (undefined)",
+    "01059 Vitoria-Gasteiz, Total, Entre 46 y 60m2 = 11807 (undefined)"
+   ]
+  },
+  "59529": {
+   "n": 604,
+   "series": [
+    "01059 Vitoria-Gasteiz, Total (régimen de tenencia) = 107165 (undefined)",
+    "01059 Vitoria-Gasteiz, En propiedad = 88571 (undefined)",
+    "01059 Vitoria-Gasteiz, En alquiler = 16237 (undefined)",
+    "01059 Vitoria-Gasteiz, Otro régimen de tenencia = 2357 (undefined)"
+   ]
+  },
+  "59530": {
+   "n": 10872,
+   "series": [
+    "01059 Vitoria-Gasteiz, Total (tamaño del hogar), Total (superficie útil) = 107165 (undefined)",
+    "01059 Vitoria-Gasteiz, Total (tamaño del hogar), Menos de 30m2 = 30 (undefined)",
+    "01059 Vitoria-Gasteiz, Total (tamaño del hogar), Entre 30 y 45m2 = 1174 (undefined)",
+    "01059 Vitoria-Gasteiz, Total (tamaño del hogar), Entre 46 y 60m2 = 9818 (undefined)"
+   ]
+  },
+  "59531": {
+   "n": 58626,
+   "series": [
+    "Total Nacional, Viviendas totales = 26623708 (undefined)",
+    "Total Nacional, Viviendas vacías = 3828307 (undefined)",
+    "Total Nacional, Mediana consumo anual = 2196 (undefined)",
+    "Total Nacional, Viviendas con bajo consumo = 941637 (undefined)"
+   ]
+  },
+  "59532": {
+   "n": 25385,
+   "series": [
+    "0100101 Alegría-Dulantzi distrito 01 *, Percentil 10 de consumo eléctrico en kwh = 629 (undefined)",
+    "0100101 Alegría-Dulantzi distrito 01 *, Percentil 25 de consumo eléctrico en kwh = 1210 (undefined)",
+    "0100101 Alegría-Dulantzi distrito 01 *, Percentil 50 de consumo eléctrico en kwh = 1972 (undefined)",
+    "0100101 Alegría-Dulantzi distrito 01 *, Percentil 75 de consumo eléctrico en kwh = 2859 (undefined)"
+   ]
+  },
+  "59533": {
+   "n": 72,
+   "series": [
+    "Total (tamaño de municipio), Total (tamaño del hogar) = 18539223 (undefined)",
+    "Total (tamaño de municipio), 1 persona = 5001166 (undefined)",
+    "Total (tamaño de municipio), 2 personas = 5203749 (undefined)",
+    "Total (tamaño de municipio), 3 personas = 3837982 (undefined)"
+   ]
+  },
+  "59534": {
+   "n": 54,
+   "series": [
+    "Total (tipo de hogar), Total (tamaño del hogar) = 18539223 (undefined)",
+    "Total (tipo de hogar), 1 persona = 5001166 (undefined)",
+    "Total (tipo de hogar), 2 personas = 5203749 (undefined)",
+    "Total (tipo de hogar), 3 personas = 3837982 (undefined)"
+   ]
+  },
+  "59535": {
+   "n": 72,
+   "series": [
+    "Total (estructura del hogar), Total (tamaño del hogar) = 18539223 (undefined)",
+    "Total (estructura del hogar), 1 persona = 5001166 (undefined)",
+    "Total (estructura del hogar), 2 personas = 5203749 (undefined)",
+    "Total (estructura del hogar), 3 personas = 3837982 (undefined)"
+   ]
+  },
+  "59536": {
+   "n": 108,
+   "series": [
+    "Total (tipo de hogar), Total (tamaño de municipio) = 18539223 (undefined)",
+    "Total (tipo de hogar), Menos de 101 habitantes = 39835 (undefined)",
+    "Total (tipo de hogar), De 101 a 500 = 296627 (undefined)",
+    "Total (tipo de hogar), De 501 a 1.000 = 309198 (undefined)"
+   ]
+  },
+  "59537": {
+   "n": 30,
+   "series": [
+    "Total (régimen de tenencia), Total (tamaño del hogar) = 18539223 (undefined)",
+    "Total (régimen de tenencia), 1 persona = 5001166 (undefined)",
+    "Total (régimen de tenencia), 2 personas = 5203749 (undefined)",
+    "Total (régimen de tenencia), 3 personas = 3837982 (undefined)"
+   ]
+  },
+  "59538": {
+   "n": 5184,
+   "series": [
+    "Total Nacional, Total (tamaño del hogar), Total (tamaño de municipio) = 18539223 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), Menos de 101 habitantes = 39835 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), De 101 a 500 = 296627 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), De 501 a 1.000 = 309198 (undefined)"
+   ]
+  },
+  "59539": {
+   "n": 3888,
+   "series": [
+    "Total Nacional, Total (tamaño del hogar), Total (tipo de hogar) = 18539223 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), Hogar unipersonal = 5001166 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), Hogar multipersonal pero que no forma familia = 558224 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), Hogar de una familia sin otras personas adicionales y ningún núcleo = 259444 (undefined)"
+   ]
+  },
+  "59540": {
+   "n": 5184,
+   "series": [
+    "Total Nacional, Total (tamaño del hogar), Total (estructura del hogar) = 18539223 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), Hogar con una mujer sola menor de 65 años = 1227549 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), Hogar con un hombre solo menor de 65 años = 1684442 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), Hogar con una mujer sola de 65 años o más = 1479441 (undefined)"
+   ]
+  },
+  "59541": {
+   "n": 7776,
+   "series": [
+    "Total Nacional, Total (tamaño de municipio), Total (tipo de hogar) = 18539223 (undefined)",
+    "Total Nacional, Total (tamaño de municipio), Hogar unipersonal = 5001166 (undefined)",
+    "Total Nacional, Total (tamaño de municipio), Hogar multipersonal pero que no forma familia = 558224 (undefined)",
+    "Total Nacional, Total (tamaño de municipio), Hogar de una familia sin otras personas adicionales y ningún núcleo = 259444 (undefined)"
+   ]
+  },
+  "59542": {
+   "n": 2160,
+   "series": [
+    "Total Nacional, Total (tamaño del hogar), Total (régimen de tenencia) = 18539223 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), En propiedad = 13988627 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), En alquiler = 2983619 (undefined)",
+    "Total Nacional, Total (tamaño del hogar), Otro régimen de tenencia = 1564370 (undefined)"
+   ]
+  },
+  "59543": {
+   "n": 48792,
+   "series": [
+    "Total Nacional, Total (tamaño del hogar) = 18539223 (undefined)",
+    "Total Nacional, 1 persona = 5001166 (undefined)",
+    "Total Nacional, 2 personas = 5203749 (undefined)",
+    "Total Nacional, 3 personas = 3837982 (undefined)"
+   ]
+  },
+  "59544": {
+   "n": 8154,
+   "series": [
+    "01059 Vitoria-Gasteiz, Total (tamaño del hogar), Total (tipo de hogar) = 107165 (undefined)",
+    "01059 Vitoria-Gasteiz, Total (tamaño del hogar), Hogar unipersonal = 33223 (undefined)",
+    "01059 Vitoria-Gasteiz, Total (tamaño del hogar), Hogar multipersonal pero que no forma familia = 3187 (undefined)",
+    "01059 Vitoria-Gasteiz, Total (tamaño del hogar), Hogar de una familia sin otras personas adicionales y ningún núcleo = 1124 (undefined)"
+   ]
+  },
+  "59545": {
+   "n": 10872,
+   "series": [
+    "01059 Vitoria-Gasteiz, Total (tamaño del hogar), Total (estructura del hogar) = 107165 (undefined)",
+    "01059 Vitoria-Gasteiz, Total (tamaño del hogar), Hogar con una mujer sola menor de 65 años = 9190 (undefined)",
+    "01059 Vitoria-Gasteiz, Total (tamaño del hogar), Hogar con un hombre solo menor de 65 años = 10887 (undefined)",
+    "01059 Vitoria-Gasteiz, Total (tamaño del hogar), Hogar con una mujer sola de 65 años o más = 9591 (undefined)"
+   ]
+  },
+  "59546": {
+   "n": 25,
+   "series": [
+    "Total (tamaño del núcleo), Total (tipo del núcleo) = 13174873 (undefined)",
+    "Total (tamaño del núcleo), Pareja sin hijos = 3719926 (undefined)",
+    "Total (tamaño del núcleo), Pareja con hijos = 6339755 (undefined)",
+    "Total (tamaño del núcleo), Progenitor 1 con hijos = 2511237 (undefined)"
+   ]
+  },
+  "59547": {
+   "n": 5,
+   "series": [
+    "Total, Total = 13174873 (undefined)",
+    "Total, Pareja de derecho = 8282411 (undefined)",
+    "Total, Pareja de hecho (ambos solteros) = 868340 (undefined)",
+    "Total, Pareja de hecho (otro tipo) = 908930 (undefined)"
+   ]
+  },
+  "59548": {
+   "n": 5,
+   "series": [
+    "Total, Total = 13174873 (undefined)",
+    "Total, Pareja de distinto sexo = 9951511 (undefined)",
+    "Total, Pareja del mismo sexo, femenino = 41922 (undefined)",
+    "Total, Pareja del mismo sexo, masculino = 66248 (undefined)"
+   ]
+  },
+  "59549": {
+   "n": 1800,
+   "series": [
+    "Total Nacional, Total (tipo del núcleo), Total (tamaño del núcleo) = 13174873 (undefined)",
+    "Total Nacional, Total (tipo del núcleo), 2 personas = 5834602 (undefined)",
+    "Total Nacional, Total (tipo del núcleo), 3 personas = 3838633 (undefined)",
+    "Total Nacional, Total (tipo del núcleo), 4 personas = 2862597 (undefined)"
+   ]
+  },
+  "59550": {
+   "n": 360,
+   "series": [
+    "Total Nacional, Total = 13174873 (undefined)",
+    "Total Nacional, Pareja de derecho = 8282411 (undefined)",
+    "Total Nacional, Pareja de hecho (ambos solteros) = 868340 (undefined)",
+    "Total Nacional, Pareja de hecho (otro tipo) = 908930 (undefined)"
+   ]
+  },
+  "59551": {
+   "n": 360,
+   "series": [
+    "Total Nacional, Total = 13174873 (undefined)",
+    "Total Nacional, Pareja de distinto sexo = 9951511 (undefined)",
+    "Total Nacional, Pareja del mismo sexo, femenino = 41922 (undefined)",
+    "Total Nacional, Pareja del mismo sexo, masculino = 66248 (undefined)"
+   ]
+  },
+  "59552": {
+   "n": 306,
+   "series": [
+    "Total, Ambos sexos = 333826 (undefined)",
+    "Total, Hombre = 158279 (undefined)",
+    "Total, Mujer = 175547 (undefined)",
+    "0 años, Ambos sexos = 982 (undefined)"
+   ]
+  },
+  "59553": {
+   "n": 198,
+   "series": [
+    "Total, Ambos sexos, Total = 333826 (undefined)",
+    "Total, Ambos sexos, España = 247370 (undefined)",
+    "Total, Ambos sexos, Extranjero = 86456 (undefined)",
+    "Total, Hombre, Total = 158279 (undefined)"
+   ]
+  },
+  "59554": {
+   "n": 198,
+   "series": [
+    "Total, Ambos sexos, Total = 333826 (undefined)",
+    "Total, Ambos sexos, Española = 256440 (undefined)",
+    "Total, Ambos sexos, Extranjera = 77386 (undefined)",
+    "Total, Hombre, Total = 158279 (undefined)"
+   ]
+  },
+  "59555": {
+   "n": 660,
+   "series": [
+    "Ambos sexos, Total, Total = 333826 (undefined)",
+    "Ambos sexos, Total, Centros residenciales para mayores (residencias , viviendas tuteladas, ...) = 134776 (undefined)",
+    "Ambos sexos, Total, Centros residenciales para personas con discapacidad = 21198 (undefined)",
+    "Ambos sexos, Total, Instituciones sanitarias = 7268 (undefined)"
+   ]
+  },
+  "59556": {
+   "n": 72,
+   "series": [
+    "Ambos sexos, Total, Total = 333826 (undefined)",
+    "Ambos sexos, Total, Educación primaria e inferior = 149819 (undefined)",
+    "Ambos sexos, Total, Primera etapa de Educación Secundaria y similar = 68125 (undefined)",
+    "Ambos sexos, Total, Segunda etapa de Educación Secundaria y Educación Postsecundaria no Superior = 48222 (undefined)"
+   ]
+  },
+  "59557": {
+   "n": 84,
+   "series": [
+    "Ambos sexos, Total, Total = 317509 (undefined)",
+    "Ambos sexos, Total, Ocupada/o = 43350 (undefined)",
+    "Ambos sexos, Total, Parada/o = 19102 (undefined)",
+    "Ambos sexos, Total, Pensionista de invalidez = 23742 (undefined)"
+   ]
+  },
+  "59558": {
+   "n": 120,
+   "series": [
+    "Total, Total (tamaño de municipio) = 20928 (undefined)",
+    "Total, Menos de 101 habitantes = 30 (undefined)",
+    "Total, De 101 a 500 = 466 (undefined)",
+    "Total, De 501 a 1.000 = 573 (undefined)"
+   ]
+  },
+  "59559": {
+   "n": 864,
+   "series": [
+    "Total Nacional, Total, Ambos sexos = 333826 (undefined)",
+    "Total Nacional, Total, Hombre = 158279 (undefined)",
+    "Total Nacional, Total, Mujer = 175547 (undefined)",
+    "Total Nacional, Centros residenciales para mayores (residencias , viviendas tuteladas, ...), Ambos sexos = 134776 (undefined)"
+   ]
+  },
+  "59560": {
+   "n": 3456,
+   "series": [
+    "Total Nacional, Total, Total (tamaño de municipio) = 333826 (undefined)",
+    "Total Nacional, Total, Menos de 101 habitantes = 215 (undefined)",
+    "Total Nacional, Total, De 101 a 500 = 5636 (undefined)",
+    "Total Nacional, Total, De 501 a 1.000 = 6138 (undefined)"
+   ]
+  }
+ },
+ "ops": {
+  "8 CENSOPV Censos de Población y Viviendas": [],
+  "15 IPV Índice de Precios de la Vivienda (IPV)": [
+   [
+    79541,
+    "Ponderaciones IPV nacional: general, vivienda nueva y de segunda mano.",
+    "2008",
+    "null"
+   ],
+   [
+    80270,
+    "Índices por CCAA: general, vivienda nueva y de segunda mano. Trimestrales",
+    "2007",
+    "null"
+   ],
+   [
+    79540,
+    "Índices por CCAA: general, vivienda nueva y de segunda mano",
+    "2007",
+    "null"
+   ],
+   [
+    79563,
+    "Índices por CCAA: general, vivienda nueva y de segunda mano ",
+    "2007",
+    "null"
+   ],
+   [
+    80271,
+    "Índices por CCAA: general, vivienda nueva y de segunda mano. Medias anuales",
+    "2007",
+    "null"
+   ],
+   [
+    80272,
+    "Ponderaciones IPV nacional: general, vivienda nueva y de segunda mano.",
+    "2008",
+    "null"
+   ]
+  ],
+  "70 PROH Proyección de Hogares": [],
+  "153 TICH Encuesta sobre Equipamiento y Uso de Tecnologías de Información y Comunicación en los Hogares": [],
+  "155 ECV Encuesta de Condiciones de Vida (ECV)": [
+   [
+    9994,
+    "Hogares por régimen de tenencia de la vivienda y edad y sexo de la persona de referencia.",
+    "2004",
+    "null"
+   ],
+   [
+    9995,
+    "Hogares por régimen de tenencia de la vivienda y nacionalidad de la persona de referencia.",
+    "2004",
+    "null"
+   ],
+   [
+    9996,
+    "Hogares por régimen de tenencia de la vivienda y tipo de hogar.",
+    "2004",
+    "null"
+   ],
+   [
+    9997,
+    "Hogares por régimen de tenencia de la vivienda y comunidades autónomas",
+    "2004",
+    "null"
+   ],
+   [
+    60179,
+    "Hogares por régimen de tenencia de la vivienda y tamaño del hogar.",
+    "2008",
+    "null"
+   ],
+   [
+    60180,
+    "Hogares por régimen de tenencia de la vivienda y número de perceptores.",
+    "2008",
+    "null"
+   ],
+   [
+    76845,
+    "Hogares por régimen de tenencia de la vivienda y comunidades autónomas",
+    "2004",
+    "null"
+   ],
+   [
+    60181,
+    "Hogares por régimen de tenencia de la vivienda y grado de urbanización.",
+    "2008",
+    "null"
+   ],
+   [
+    59949,
+    "Renta por persona y unidad consumo por régimen de tenencia de la vivienda.",
+    "2008",
+    "null"
+   ],
+   [
+    59960,
+    "Tasa de riesgo de pobreza por régimen de tenencia de la vivienda.",
+    "2008",
+    "null"
+   ],
+   [
+    59971,
+    "Tasa de riesgo de pobreza con umbral fijo en el año 2008 por régimen de tenencia de la vivienda.",
+    "2008",
+    "null"
+   ],
+   [
+    60147,
+    "Personas con carencia material por régimen de tenencia de la vivienda.",
+    "2008",
+    "null"
+   ],
+   [
+    10002,
+    "Hogares que sufren determinados problemas en la vivienda y su entorno por régimen de tenencia de la vivienda.",
+    "2004",
+    ""
+   ],
+   [
+    60263,
+    "Riesgo de pobreza o exclusión social (objetivo Europa 2030) y sus componentes por régimen de tenencia de la vivienda.",
+    "2014",
+    "null"
+   ],
+   [
+    61790,
+    "Riesgo de pobreza o exclusión social (estrategia Europa 2020) y sus componentes por régimen de tenencia de la vivienda.",
+    "2008",
+    "null"
+   ],
+   [
+    59956,
+    "Renta por hogar por régimen de tenencia de la vivienda.",
+    "2008",
+    "null"
+   ],
+   [
+    60153,
+    "Hogares con carencia material por régimen de tenencia de la vivienda.",
+    "2008",
+    "null"
+   ],
+   [
+    59953,
+    "Personas por decil de renta por unidad de consumo y régimen de tenencia de la vivienda.",
+    "2008",
+    "null"
+   ],
+   [
+    60166,
+    "Personas con carencia en un determinado número de conceptos (estrategia Europa 2020) por régimen de tenencia de la vivienda.",
+    "2008",
+    "null"
+   ],
+   [
+    60170,
+    "Hogares con carencia en un determinado número de conceptos (estrategia Europa 2020) por régimen de tenencia de la vivienda.",
+    "2008",
+    "null"
+   ],
+   [
+    60161,
+    "Personas de 16 y más años con carencia en necesidades básicas y actividades sociales y de ocio por régimen de tenencia de la vivienda.",
+    "2013",
+    "null"
+   ],
+   [
+    60174,
+    "Personas según dificultades para llegar a fin de mes y régimen de tenencia de la vivienda.",
+    "2008",
+    "null"
+   ],
+   [
+    60178,
+    "Hogares según dificultades para llegar a fin de mes y régimen de tenencia de la vivienda.",
+    "2008",
+    "null"
+   ]
+  ],
+  "161 EGHE Encuesta de Gasto de los Hogares en Educación": [],
+  "314 EPF Encuesta de Presupuestos Familiares (EPF)": [],
+  "353 ADRH Atlas de distribución de renta de los hogares": [],
+  "410 VTE Viviendas turísticas en España": [],
+  "432 IPVA Índice de Precios de Vivienda en Alquiler": [],
+  "463 CENSOP Censo de Población": [],
+  "473 EEECN Estadística estructural de empresas: Sector Construcción": [],
+  "481 IRAV Índice de Referencia de Arrendamientos de Vivienda": [],
+  "486 IPCO Índice de Producción de la Construcción": [],
+  "490 OCE Cifras del censo electoral": []
+ },
+ "eurostat": {
+  "ilc_lvho02": {
+   "label": "Distribution of population by tenure status, type of household and income group",
+   "dims": {
+    "freq": "A=Annual",
+    "rskpovth": "TOTAL=Total | A_60=Above 60% | B_60=Below 60%",
+    "hhcomp": "TOTAL=Total | M1=One single male | F1=One single female | A1=One adult | A1_DCH=One adult with dependent children | A2=Two adults | A2_DCH1=Two adults with one dependent child | A2_DCH2=Two adults with two dependent children | A2_DCH_GE3=Two adults with three or more dependent children | A_GE3=Three or more adults | A_GE3_DCH=Three or more adults with dependent children | DCH=Household with dependent children | NDCH=Household without dependent children | A1_LT65=One adult younger than 65 years | A1_GE65=One adult 65 years or over | A2_2LT65=Two adults younger than 65 years | A2_GE1_GE65=Two adults, at least one aged 65 years or over",
+    "tenure": "TOTAL=Total | OWN=Owner | OWN_L=Owner, with mortgage or loan | OWN_NL=Owner, no outstanding mortgage or housing loan | RENT=Tenant | RENT_MKT=Tenant, rent at market price | RENT_FR=Tenant, rent at reduced price or free",
+    "unit": "PC=Percentage",
+    "geo": "ES=Spain",
+    "time": "2025=2025"
+   },
+   "valores": 357
+  },
+  "ilc_lvho01": {
+   "label": "Distribution of population by degree of urbanisation, dwelling type and income group",
+   "dims": {
+    "freq": "A=Annual",
+    "rskpovth": "TOTAL=Total | A_60=Above 60% | B_60=Below 60%",
+    "building": "TOTAL=Total | HOUSE=House | HOUSE_D=Detached house | HOUSE_SD=Semi-detached house | FLAT=Flat | FLAT_LT10=Flat in a building with less than ten dwellings | FLAT_GE10=Flat in a building with ten or more dwellings | OTH=Others",
+    "deg_urb": "TOTAL=Total | DEG1=Cities | DEG2=Towns and suburbs | DEG3=Rural areas",
+    "unit": "PC=Percentage",
+    "geo": "ES=Spain",
+    "time": "2025=2025"
+   },
+   "valores": 96
+  },
+  "ilc_lvho03": {
+   "label": "Average number of rooms per person by tenure status and dwelling type from 2003 onwards",
+   "dims": {
+    "freq": "A=Annual",
+    "unit": "AVG=Average",
+    "building": "TOTAL=Total | HOUSE=House | FLAT=Flat | OTH=Others",
+    "tenure": "TOTAL=Total | OWN=Owner | RENT=Tenant",
+    "geo": "ES=Spain",
+    "time": "2025=2025"
+   },
+   "valores": 11
+  },
+  "ilc_lvho05a": {
+   "label": "Overcrowding rate by age, sex and poverty status - total population",
+   "dims": {
+    "freq": "A=Annual",
+    "unit": "PC=Percentage",
+    "rskpovth": "TOTAL=Total | A_60=Above 60% | B_60=Below 60%",
+    "age": "TOTAL=Total | Y_LT6=Less than 6 years | Y6-11=From 6 to 11 years | Y12-17=From 12 to 17 years | Y15-19=From 15 to 19 years | Y15-24=From 15 to 24 years | Y15-29=From 15 to 29 years | Y16-19=From 16 to 19 years | Y16-24=From 16 to 24 years | Y16-29=From 16 to 29 years | Y_LT18=Less than 18 years | Y18-64=From 18 to 64 years | Y20-24=From 20 to 24 years | Y20-29=From 20 to 29 years | Y25-29=From 25 to 29 years | Y_GE65=65 years or over",
+    "sex": "T=Total | M=Males | F=Females",
+    "geo": "ES=Spain",
+    "time": "2025=2025"
+   },
+   "valores": 144
+  },
+  "ilc_lvho07a": {
+   "label": "Housing cost overburden rate by age, sex and poverty status",
+   "dims": {
+    "freq": "A=Annual",
+    "unit": "PC=Percentage",
+    "rskpovth": "TOTAL=Total | A_60=Above 60% | B_60=Below 60%",
+    "age": "TOTAL=Total | Y_LT6=Less than 6 years | Y6-11=From 6 to 11 years | Y12-17=From 12 to 17 years | Y15-19=From 15 to 19 years | Y15-24=From 15 to 24 years | Y15-29=From 15 to 29 years | Y16-19=From 16 to 19 years | Y16-24=From 16 to 24 years | Y16-29=From 16 to 29 years | Y_LT18=Less than 18 years | Y18-24=From 18 to 24 years | Y18-64=From 18 to 64 years | Y20-24=From 20 to 24 years | Y20-29=From 20 to 29 years | Y25-29=From 25 to 29 years | Y_GE65=65 years or over",
+    "sex": "T=Total | M=Males | F=Females",
+    "geo": "ES=Spain",
+    "time": "2025=2025"
+   },
+   "valores": 153
+  },
+  "ilc_lvho15": {
+   "label": "Overcrowding rate by age, sex and group of citizenship (total population aged 18 and over)",
+   "dims": {
+    "freq": "A=Annual",
+    "unit": "PC=Percentage",
+    "citizen": "EU27_2020_FOR=EU27 countries (from 2020) except reporting country | EU28_FOR=EU28 countries (2013-2020) except reporting country | EU27_2007_FOR=EU27 countries (2007-2013) except reporting country | NEU27_2020_FOR=Non-EU27 countries (from 2020) nor reporting country | NEU28_FOR=Non-EU28 countries (2013-2020) nor reporting country | NEU27_2007_FOR=Non-EU27 countries (2007-2013) nor reporting country | FOR=Foreign country | NAT=Reporting country",
+    "sex": "T=Total | M=Males | F=Females",
+    "age": "Y16-29=From 16 to 29 years | Y18-54=From 18 to 54 years | Y18-59=From 18 to 59 years | Y18-64=From 18 to 64 years | Y_GE18=18 years or over | Y20-64=From 20 to 64 years | Y25-54=From 25 to 54 years | Y25-59=From 25 to 59 years | Y55-64=From 55 to 64 years | Y_GE55=55 years or over | Y_GE60=60 years or over | Y_GE65=65 years or over",
+    "geo": "ES=Spain",
+    "time": "2025=2025"
+   },
+   "valores": 144
+  },
+  "ilc_lvho50a": {
+   "label": "Share of people living in under-occupied dwellings by age, sex and poverty status - total population",
+   "dims": {
+    "freq": "A=Annual",
+    "unit": "PC=Percentage",
+    "rskpovth": "TOTAL=Total | A_60=Above 60% | B_60=Below 60%",
+    "sex": "T=Total | M=Males | F=Females",
+    "age": "TOTAL=Total | Y_LT18=Less than 18 years | Y18-64=From 18 to 64 years | Y_GE65=65 years or over",
+    "geo": "ES=Spain",
+    "time": "2025=2025"
+   },
+   "valores": 36
+  },
+  "ilc_mded01": {
+   "label": "Share of housing costs in disposable household income, by type of household and income group",
+   "dims": {
+    "freq": "A=Annual",
+    "hhcomp": "TOTAL=Total | M1=One single male | F1=One single female | A1=One adult | A1_DCH=One adult with dependent children | A2=Two adults | A2_DCH1=Two adults with one dependent child | A2_DCH2=Two adults with two dependent children | A2_DCH_GE3=Two adults with three or more dependent children | A_GE3=Three or more adults | A_GE3_DCH=Three or more adults with dependent children | DCH=Household with dependent children | NDCH=Household without dependent children | A1_LT65=One adult younger than 65 years | A1_GE65=One adult 65 years or over | A2_2LT65=Two adults younger than 65 years | A2_GE1_GE65=Two adults, at least one aged 65 years or over",
+    "rskpovth": "TOTAL=Total | A_60=Above 60% | B_60=Below 60%",
+    "unit": "PC=Percentage",
+    "geo": "ES=Spain",
+    "time": "2025=2025"
+   },
+   "valores": 51
+  },
+  "cens_21dwoc": "HTTP 404",
+  "cens_21dwtp": "HTTP 404",
+  "cens_21hhtn": "HTTP 404",
+  "cens_21ho": "HTTP 404",
+  "hbs_exp_t121": {
+   "label": "Mean consumption expenditure per household by COICOP consumption purpose",
+   "dims": {
+    "freq": "A=Annual",
+    "coicop": "CP01=Food and non-alcoholic beverages | CP011=Food | CP0111=Bread and cereals | CP01111=Rice | CP01113=Bread | CP01114=Other bakery products | CP01116=Pasta products and couscous | CP01118=Other cereal products | CP0112=Meat | CP01121=Beef and veal | CP01122=Pork | CP01123=Lamb and goat | CP01124=Poultry | CP01126_01127=Dried, salted or smoked meat and edible meat offal | CP01128A=Other preserved or processed meat and meat preparations | CP01128B=Other fresh, chilled or frozen edible meat | CP0113=Fish and seafood | CP01131_01132=Fresh, chilled or frozen fish | CP01133_01134=Fresh, chilled or frozen seafood | CP01135=Dried, smoked or salted fish and seafood | CP01136=Other preserved or processed fish and seafood and fish and seafood preparations | CP0114=Milk, cheese and eggs | CP01141=Fresh whole milk | CP01142=Fresh low fat milk | CP01143=Preserved milk | CP01144=Yoghurt | CP01145=Cheese and curd | CP01146=Other milk products | CP01147=Eggs | CP0115=Oils and fats | CP01151=Butter | CP01152=Margarine and other vegetable fats | CP01153=Olive oil | CP01154=Other edible oils | CP01155=Other edible animal fats | CP0116=Fruit | CP0116A=Citrus fruits (fresh, chilled or frozen) | CP0116B=Bananas (fresh, chilled or frozen) | CP0116C=Apples (fresh, chilled or frozen) | CP0116D=Pears (fresh, chilled or frozen) …(236)",
+    "unit": "PPS_HH=Purchasing power standard (PPS) per household",
+    "geo": "ES=Spain",
+    "time": "2020=2020"
+   },
+   "valores": 174
+  },
+  "prc_hpi_a": {
+   "label": "House price index - annual data",
+   "dims": {
+    "freq": "A=Annual",
+    "purchase": "TOTAL=Total | DW_NEW=Purchases of newly built dwellings | DW_EXST=Purchases of existing dwellings",
+    "unit": "I15_A_AVG=Annual average index, 2015=100 | I25_A_AVG=Annual average index, 2025=100 | RCH_A_AVG=Annual average rate of change",
+    "geo": "ES=Spain",
+    "time": "2025=2025"
+   },
+   "valores": 9
+  }
+ },
+ "catastro": {
+  "https://www.catastro.hacienda.gob.es/esp/estadisticas.asp": {
+   "tipo": "text/html",
+   "bytes": 16044,
+   "enlaces": [
+    "estadisticas.html"
+   ],
+   "inicio": "<!doctype html> <html lang=\"es\" class=\"h-100\"><!-- InstanceBegin template=\"/Templates/plantilla_esp2.dwt\" codeOutsideHTMLIsLocked=\"false\" --> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <meta name=\"description\" content=\"Portal de la Dirección Ge"
+  },
+  "https://www.catastro.hacienda.gob.es/webinet/estadisticas.htm": {
+   "tipo": "text/html",
+   "bytes": 16044,
+   "enlaces": [
+    "estadisticas.html"
+   ],
+   "inicio": "<!doctype html> <html lang=\"es\" class=\"h-100\"><!-- InstanceBegin template=\"/Templates/plantilla_esp2.dwt\" codeOutsideHTMLIsLocked=\"false\" --> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <meta name=\"description\" content=\"Portal de la Dirección Ge"
+  },
+  "https://datos.gob.es/en/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares": {
+   "tipo": "text/html; charset=utf-8",
+   "bytes": 128236,
+   "enlaces": [
+    "https://datos.gob.es/es/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "https://datos.gob.es/es/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "https://datos.gob.es/en/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "https://datos.gob.es/ca/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "https://datos.gob.es/gl/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "https://datos.gob.es/eu/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "/es/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "/en/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "/ca/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "/gl/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "/eu/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "/es/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "/en/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "/ca/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "/gl/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "/eu/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "http://www.linkedin.com/shareArticle?mini=true&url=https://datos.gob.es/en/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "https://x.com/intent/tweet?url=https://datos.gob.es/en/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "https://wa.me/?text=https://datos.gob.es/en/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "mailto:?subject=https://datos.gob.es/en/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares&body=Check out this site https://datos.gob.es/en/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares",
+    "https://datos.gob.es/en/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares.xml",
+    "https://datos.gob.es/en/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares.jsonld",
+    "https://datos.gob.es/en/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares.csv",
+    "https://datos.gob.es/en/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares.ttl",
+    "https://datos.gob.es/en/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares.rdf",
+    "https://www.catastro.hacienda.gob.es/esp/estadistica_3.asp",
+    "https://www.catastro.hacienda.gob.es/esp/estadistica_3.asp",
+    "https://www.catastro.hacienda.gob.es/esp/estadistica_3.asp",
+    "https://www.catastro.hacienda.gob.es/esp/estadistica_3.asp",
+    "https://www.catastro.hacienda.gob.es/esp/estadistica_3.asp",
+    "https://www.catastro.hacienda.gob.es/esp/estadistica_3.asp",
+    "https://www.catastro.hacienda.gob.es/esp/estadistica_3.asp",
+    "https://www.catastro.hacienda.gob.es/esp/estadistica_3.asp"
+   ],
+   "inicio": "<!DOCTYPE html> <!--[if IE 9]> <html lang=\"en\" class=\"ie9\"> <![endif]--> <!--[if gt IE 8]><!--> <html lang=\"en\"> <!--<![endif]--> <head> <meta charset=\"utf-8\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <!-- Script de implantacion para datos.gob.es (Insuit) --> <script "
+  },
+  "https://www.catastro.hacienda.gob.es/documentos/estadisticas/metodologia_titulares.pdf": {
+   "tipo": "application/pdf;charset=ANSI",
+   "bytes": 311544,
+   "enlaces": [],
+   "inicio": ""
+  }
+ }
+}
