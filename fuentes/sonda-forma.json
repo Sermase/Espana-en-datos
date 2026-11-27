@@ -1,102 +1,1147 @@
 {
- "ign": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<rss xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:gml=\"http://www.opengis.net/gml\" xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\" xmlns:georss=\"http://www.georss.org/georss\" xmlns:taxo=\"http://purl.org/rss/1.0/modules/taxonomy/\" version=\"2.0\">\r\n  <channel>\r\n    <title>GeoRSS Sismología IGN</title>\r\n    <link>http://www.ign.es/ign/rss</link>\r\n    <description>Este canal te permite consultar los terremotos ocurridos en España durante los últimos diez días. Esta información está sujeta a modificaciones como consecuencia de la continua revisión del análisis sísmico.</description>\r\n    <language>es</language>\r\n    <dc:language>es</dc:language>\r\n    <item>\r\n      <title>-Info.terremoto: 27/11/2026 2:44:33</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xfgwf</link>\r\n      <description>Se ha producido un terremoto de magnitud 4.2 en ATLÁNTICO-MADEIRA en la fecha 27/11/2026 2:44:33 en la siguiente localización: 32.4199,-17.1873</description>\r\n      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xfgwf</guid>\r\n      <geo:lat>32.4199</geo:lat>\r\n      <geo:long>-17.1873</geo:long>\r\n    </item>\r\n    <item>\r\n      <title>-Info.terremoto: 27/11/2026 1:58:16</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xffhe</link>\r\n      <description>Se ha producido un terremoto de magnitud 3.4 en SW CABO DE SAN VICENTE en la fecha 27/11/2026 1:58:16 en la siguiente localización: 36.4004,-11.2704</description>\r\n      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xffhe</guid>\r\n      <geo:lat>36.4004</geo:lat>\r\n      <geo:long>-11.2704</geo:long>\r\n    </item>\r\n    <item>\r\n      <title>-Info.terremoto: 27/11/2026 1:54:48</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xffef</link>\r\n      <description>Se ha producido un terremoto de magnitud 3.6 en AZORES-CABO DE SAN VICENTE en la fecha 27/11/2026 1:54:48 en la siguiente localización: 37.1913,-14.5598</description>\r\n      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xffef</guid>\r\n      <geo:lat>37.1913</geo:lat>\r\n      <geo:long>-14.5598</geo:long>\r\n    </item>\r\n    <item>\r\n      <title>-Info.terremoto: 27/11/2026 1:13:43</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xfduq</link>\r\n      <description>Se ha producido un terremoto de magnitud 3.0 en W EL PINAR DE EL HIERRO.IHI en la fecha 27/11/2026 1:13:43 en la siguiente localización: 27.6754,-18.1784</description>\r\n      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xfduq</guid>\r\n      <geo:lat>27.6754</geo:lat>\r\n      <geo:long>-18.1784</geo:long>\r\n    </item>\r\n    <item>\r\n      <title>-Info.terremoto: 26/11/2026 10:46:15</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xebeu</link>\r\n      <description>Se ha producido un terremoto de magnitud 3.3 en NE VALLE DE BARDAJÍ.HU en la fecha 26/11/2026 10:46:15 en la siguiente localización: 42.4504,0.4714</description>\r\n      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xebeu</guid>\r\n      <geo:lat>42.4504</geo:lat>\r\n      <geo:long>0.4714</geo:long>\r\n    </item>\r\n    <item>\r\n      <title>-Info.terremoto: 26/11/2026 8:57:43</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xdxpr</link>\r\n      <description>Se ha producido un terremoto de magnitud 3.6 en NW CHLEF.ARG en la fecha 26/11/2026 8:57:43 en la siguiente localización: 36.353,1.0118</description>\r\n      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xdxpr</guid>\r\n      <geo:lat>36.353</geo:lat>\r\n      <geo:long>1.0118</geo:long>\r\n    </item>\r\n    <item>\r\n      <title>-Info.terremoto: 25/11/2026 13:45:02</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xclov</link>\r\n      <description>Se ha producido un terremoto de magnitud 2.8 en S OUED NJA.MAC en la fecha 25/11/2026 13:45:02 en la siguiente localización: 33.7433,-5.1459</description>\r\n      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xclov</guid>\r\n      <geo:lat>33.7433</geo:lat>\r\n      <geo:long>-5.1459</geo:long>\r\n    </item>\r\n    <item>\r\n      <title>-Info.terremoto: 25/11/2026 8:32:54</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xcbhb</link>\r\n ",
- "meteoalarm": {
+ "boe": {
   "claves": [
-   "warnings"
+   "numero",
+   "sumario_diario",
+   "seccion"
   ],
-  "n": 190,
-  "forma": "{alert: {identifier: \"2.49.0.0.724.0.ES.261122073808.711501COCO221433088\", incidents: \"Update\", info: [2] {area: [1] {areaDesc: \"Costa - Noroeste de A Coruña\", geocode: [1] {…}}, category: [1] \"Met\", certainty: \"Likely\", contact: \"AEMET\", description: \"Viento del Oeste de 50 a 61 km/h (fuerza 7) hasta mediodía., effective: \"2026-11-22T08:34:53+01:00\", event: \"Aviso de costeros de nivel amarillo\", expires: \"2026-11-22T14:59:59+01:00\", headline: \"Aviso de costeros de nivel amarillo. Costa - Noroeste de A , instruction: \"Esté atento. Manténgase informado de la predicción meteorol, language: \"es-ES\", onset: \"2026-11-22T08:00:00+01:00\", parameter: [2] {value: \"2; yellow; Moderate\", valueName: \"awareness_level\"}, responseType: [1] \"Monitor\", senderName: \"AEMET. Agencia Estatal de Meteorología\", severity: \"Moderate\", urgency: \"Immediate\", web: \"https://www.aemet.es/es/eltiempo/prediccion/avisos\"}, msgType: \"Update\", references: \"http://www.aemet.es,2.49.0.0.724.0.ES.261121102608.711501CO, scope: \"Public\", sender: \"http://www.aemet.es\", sent: \"2026-11-22T07:38:08+00:00\", status: \"Actual\"}, uuid: \"e7f5cee4-eb9e-4775-b2b4-6d56094e4919\"}",
-  "ejemplos": [
-   "{\"alert\":{\"identifier\":\"2.49.0.0.724.0.ES.261122073808.711501COCO221433088\",\"incidents\":\"Update\",\"info\":[{\"area\":[{\"areaDesc\":\"Costa - Noroeste de A Coruña\",\"geocode\":[{\"value\":\"ES846\",\"valueName\":\"EMMA_ID\"}]}],\"category\":[\"Met\"],\"certainty\":\"Likely\",\"contact\":\"AEMET\",\"description\":\"Viento del Oeste de 50 a 61 km/h (fuerza 7) hasta mediodía. Mar combinada del Oeste de 4 a 5 m.\",\"effective\":\"2026-11-22T08:34:53+01:00\",\"event\":\"Aviso de costeros de nivel amarillo\",\"expires\":\"2026-11-22T14:59:59+01:00\",\"headline\":\"Aviso de costeros de nivel amarillo. Costa - Noroeste de A Coruña\",\"instruction\":\"Esté atento. Manténgase informado de la predicción meteorológica más actualizada. Se pueden producir daños moderados a personas y bienes, especialmente a aquellos vulnerables o en zonas expuestas al fenómeno.\",\"language\":\"es-ES\",\"onset\":\"2026-11-22T08:00:00+01:00\",\"parameter\":[{\"value\":\"2; yellow; Moderate\",\"valueName\":\"awareness_level\"},{\"value\":\"7; coastalevent\",\"valueName\":\"awareness_type\"}],\"responseType\":[\"Monitor\"],\"senderName\":\"AEMET. Agencia Estatal de Meteorología\",\"severity\":\"Moderate\",\"urgency\":\"Immediate\",\"web\":\"https://www.aemet.es/es/eltiempo/prediccion/avisos\"},{\"area\":[{\"areaDesc\":\"Costa - Noroeste de A Coruña\",\"geocode\":[{\"value\":\"ES846\",\"valueName\":\"EMMA_ID\"}]}],\"category\":[\"Met\"],\"certainty\":\"Likely\",\"contact\":\"AEMET\",\"description\":\"Viento del Oeste de 50 a 61 km/h (fuerza 7) hasta mediodía. Mar combinada del Oeste de 4 a 5 m.\",\"effective\":\"2026-11-22T08:34:53+01:00\",\"event\":\"Moderate coastalevent warning\",\"expires\":\"2026-11-22T14:59:59+01:00\",\"headline\":\"Moderate coastalevent warning. Costa - Noroeste de A Coruña\",\"instruction\":\"Be aware, keep up to date with the latest weather forecast. Moderate damages to people and properties may occur, especially to those vul",
-   "{\"alert\":{\"identifier\":\"2.49.0.0.724.0.ES.261122073808.711502COCO221133088\",\"incidents\":\"Update\",\"info\":[{\"area\":[{\"areaDesc\":\"Costa - Oeste de A Coruña\",\"geocode\":[{\"value\":\"ES847\",\"valueName\":\"EMMA_ID\"}]}],\"category\":[\"Met\"],\"certainty\":\"Likely\",\"contact\":\"AEMET\",\"description\":\"Mar combinada del Oeste de 4 a 5 m.\",\"effective\":\"2026-11-22T08:34:53+01:00\",\"event\":\"Aviso de costeros de nivel amarillo\",\"expires\":\"2026-11-22T11:59:59+01:00\",\"headline\":\"Aviso de costeros de nivel amarillo. Costa - Oeste de A Coruña\",\"instruction\":\"Esté atento. Manténgase informado de la predicción meteorológica más actualizada. Se pueden producir daños moderados a personas y bienes, especialmente a aquellos vulnerables o en zonas expuestas al fenómeno.\",\"language\":\"es-ES\",\"onset\":\"2026-11-22T08:00:00+01:00\",\"parameter\":[{\"value\":\"2; yellow; Moderate\",\"valueName\":\"awareness_level\"},{\"value\":\"7; coastalevent\",\"valueName\":\"awareness_type\"}],\"responseType\":[\"Monitor\"],\"senderName\":\"AEMET. Agencia Estatal de Meteorología\",\"severity\":\"Moderate\",\"urgency\":\"Immediate\",\"web\":\"https://www.aemet.es/es/eltiempo/prediccion/avisos\"},{\"area\":[{\"areaDesc\":\"Costa - Oeste de A Coruña\",\"geocode\":[{\"value\":\"ES847\",\"valueName\":\"EMMA_ID\"}]}],\"category\":[\"Met\"],\"certainty\":\"Likely\",\"contact\":\"AEMET\",\"description\":\"Mar combinada del Oeste de 4 a 5 m.\",\"effective\":\"2026-11-22T08:34:53+01:00\",\"event\":\"Moderate coastalevent warning\",\"expires\":\"2026-11-22T11:59:59+01:00\",\"headline\":\"Moderate coastalevent warning. Costa - Oeste de A Coruña\",\"instruction\":\"Be aware, keep up to date with the latest weather forecast. Moderate damages to people and properties may occur, especially to those vulnerable or in exposed areas.\",\"language\":\"en-GB\",\"onset\":\"2026-11-22T08:00:00+01:00\",\"parameter\":[{\"value\":\"2; yellow; Moderate\",\"va"
+  "forma": "{numero: \"295\", sumario_diario: {identificador: \"BOE-S-2026-295\", url_pdf: {szBytes: \"455033\", szKBytes: \"444\", texto: \"https://www.boe.es/boe/dias/2026/11/27/pdfs/BOE-S-2026-295.pdf\"}}, seccion: [7] {codigo: \"1\", nombre: \"I. Disposiciones generales\", departamento: [5] {codigo: \"9585\", nombre: \"MINISTERIO DE LA PRESIDENCIA, JUSTICIA Y RELACIONES CON LAS CORTES\", epigrafe: [10] {nombre: \"Organización\", item: {…}}}}}",
+  "secciones": [
+   [
+    "1",
+    "I. Disposiciones generales",
+    [
+     "MINISTERIO DE LA PRESIDENCIA, JUSTICIA Y RELACIONES CON LAS CORTES (10)",
+     "MINISTERIO DE EDUCACIÓN, FORMACIÓN PROFESIONAL Y DEPORTES (5)",
+     "MINISTERIO PARA LA TRANSICIÓN ECOLÓGICA Y EL RETO DEMOGRÁFICO (6)",
+     "MINISTERIO DE CULTURA (2)",
+     "MINISTERIO PARA LA TRANSFORMACIÓN DIGITAL Y DE LA FUNCIÓN PÚBLICA (1)"
+    ]
+   ],
+   [
+    "2A",
+    "II. Autoridades y personal. - A. Nombramientos, situaciones e incidencias",
+    [
+     "MINISTERIO DEL INTERIOR (1)",
+     "MINISTERIO DE AGRICULTURA, PESCA Y ALIMENTACIÓN (1)",
+     "MINISTERIO DE POLÍTICA TERRITORIAL Y MEMORIA DEMOCRÁTICA (1)",
+     "MINISTERIO DE CIENCIA, INNOVACIÓN Y UNIVERSIDADES (1)",
+     "COMUNIDAD AUTÓNOMA DE CATALUÑA (1)",
+     "UNIVERSIDADES (1)"
+    ]
+   ],
+   [
+    "2B",
+    "II. Autoridades y personal. - B. Oposiciones y concursos",
+    [
+     "CONSEJO GENERAL DEL PODER JUDICIAL (1)",
+     "MINISTERIO DEL INTERIOR (1)",
+     "TRIBUNAL DE CUENTAS (1)",
+     "COMUNIDAD FORAL DE NAVARRA (1)",
+     "ADMINISTRACIÓN LOCAL (2)",
+     "UNIVERSIDADES (2)"
+    ]
+   ],
+   [
+    "3",
+    "III. Otras disposiciones",
+    [
+     "CONSEJO GENERAL DEL PODER JUDICIAL (2)",
+     "MINISTERIO DE ASUNTOS EXTERIORES, UNIÓN EUROPEA Y COOPERACIÓN (1)",
+     "MINISTERIO DE DEFENSA (1)",
+     "MINISTERIO DE HACIENDA (1)",
+     "MINISTERIO DEL INTERIOR (1)",
+     "MINISTERIO DE EDUCACIÓN, FORMACIÓN PROFESIONAL Y DEPORTES (1)",
+     "MINISTERIO DE AGRICULTURA, PESCA Y ALIMENTACIÓN (2)",
+     "MINISTERIO DE POLÍTICA TERRITORIAL Y MEMORIA DEMOCRÁTICA (1)"
+    ]
+   ],
+   [
+    "5A",
+    "V. Anuncios. - A. Contratación del Sector Público",
+    [
+     "MINISTERIO DE LA PRESIDENCIA, JUSTICIA Y RELACIONES CON LAS CORTES (0)",
+     "MINISTERIO DE DEFENSA (0)",
+     "MINISTERIO DEL INTERIOR (0)",
+     "MINISTERIO DE TRANSPORTES Y MOVILIDAD SOSTENIBLE (0)",
+     "MINISTERIO DE TRABAJO Y ECONOMÍA SOCIAL (0)",
+     "MINISTERIO PARA LA TRANSICIÓN ECOLÓGICA Y EL RETO DEMOGRÁFICO (0)",
+     "MINISTERIO DE CULTURA (0)",
+     "MINISTERIO DE ECONOMÍA, COMERCIO Y EMPRESA (0)"
+    ]
+   ],
+   [
+    "5B",
+    "V. Anuncios. - B. Otros anuncios oficiales",
+    [
+     "MINISTERIO DE TRANSPORTES Y MOVILIDAD SOSTENIBLE (0)",
+     "MINISTERIO DE POLÍTICA TERRITORIAL Y MEMORIA DEMOCRÁTICA (0)",
+     "MINISTERIO PARA LA TRANSICIÓN ECOLÓGICA Y EL RETO DEMOGRÁFICO (0)",
+     "MINISTERIO DE VIVIENDA Y AGENDA URBANA (0)",
+     "MINISTERIO DE CULTURA (0)",
+     "COMUNIDAD AUTÓNOMA DE CATALUÑA (0)",
+     "COMUNIDAD AUTÓNOMA DE ANDALUCÍA (0)",
+     "COMUNIDAD AUTÓNOMA DE EXTREMADURA (0)"
+    ]
+   ],
+   [
+    "5C",
+    "V. Anuncios. - C. Anuncios particulares",
+    [
+     "ANUNCIOS PARTICULARES (0)"
+    ]
+   ]
   ],
-  "valores": {
-   "awareness_level": [
-    "2; yellow; Moderate",
-    "3; orange; Severe",
-    "1; green; Minor"
+  "s1": "{\"dep\":\"MINISTERIO DE LA PRESIDENCIA, JUSTICIA Y RELACIONES CON LAS CORTES\",\"ep\":{\"nombre\":\"Organización\",\"item\":{\"identificador\":\"BOE-A-2026-24906\",\"control\":\"2026/18580\",\"titulo\":\"Real Decreto 1034/2026, de 25 de noviembre, por el que se regula la Comisión Asesora de Libertad Religiosa.\",\"url_pdf\":{\"szBytes\":\"260801\",\"szKBytes\":\"255\",\"pagina_inicial\":\"161397\",\"pagina_final\":\"161407\",\"texto\":\"https://www.boe.es/boe/dias/2026/11/27/pdfs/BOE-A-2026-24906.pdf\"},\"url_html\":\"https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-24906\",\"url_xml\":\"https://www.boe.es/diario_boe/xml.php?id=BOE-A-2026-24906\"}},\"item\":null}",
+  "s2A": "{\"dep\":\"MINISTERIO DEL INTERIOR\",\"ep\":{\"nombre\":\"Destinos\",\"item\":{\"identificador\":\"BOE-A-2026-24936\",\"control\":\"2026/18635\",\"titulo\":\"Resolución de 23 de noviembre de 2026, de la Subsecretaría, por la que se resuelve la convocatoria de libre designación, efectuada por Resolución de 2 de octubre de 2026, en los Servicios Centrales de la Secretaría General de Instituciones Penitenciarias.\",\"url_pdf\":{\"szBytes\":\"192328\",\"szKBytes\":\"188\",\"pagina_inicial\":\"162029\",\"pagina_final\":\"162029\",\"texto\":\"https://www.boe.es/boe/dias/2026/11/27/pdfs/BOE-A-2026-24936.pdf\"},\"url_html\":\"https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-24936\",\"url_xml\":\"https://www.boe.es/diario_boe/xml.php?id=BOE-A-2026-24936\"}},\"item\":null}",
+  "s2B": "{\"dep\":\"CONSEJO GENERAL DEL PODER JUDICIAL\",\"ep\":{\"nombre\":\"Carrera Judicial\",\"item\":{\"identificador\":\"BOE-A-2026-24947\",\"control\":\"2026/18663\",\"titulo\":\"Acuerdo de 24 de noviembre de 2026, de la Comisión Permanente del Consejo General del Poder Judicial, por el que se modifica el Acuerdo de 22 de septiembre de 2026, por el que se aprueba la relación definitiva de personas admitidas y excluidas y se designa al Tribunal calificador de las pruebas de especialización en el orden jurisdiccional social, convocadas por Acuerdo de 26 de mayo de 2026.\",\"url_pdf\":{\"szBytes\":\"192708\",\"szKBytes\":\"188\",\"pagina_inicial\":\"162043\",\"pagina_final\":\"162043\",\"texto\":\"https://www.boe.es/boe/dias/2026/11/27/pdfs/BOE-A-2026-24947.pdf\"},\"url_html\":\"https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-24947\",\"url_xml\":\"https://www.boe.es/diario_boe/xml.php?id=BOE-A-2026-24947\"}},\"item\":null}",
+  "s3": "{\"dep\":\"CONSEJO GENERAL DEL PODER JUDICIAL\",\"ep\":{\"nombre\":\"Audiencias Provinciales\",\"item\":{\"identificador\":\"BOE-A-2026-24978\",\"control\":\"2026/18313\",\"titulo\":\"Acuerdo de 17 de noviembre de 2026, de la Comisión Permanente del Consejo General del Poder Judicial, por el que se aprueba la especialización de las Secciones 15.ª y 29.ª de la Audiencia Provincial de Madrid en materia de Violencia contra la Infancia y la Adolescencia, de forma exclusiva y no excluyente.\",\"url_pdf\":{\"szBytes\":\"193440\",\"szKBytes\":\"189\",\"pagina_inicial\":\"162148\",\"pagina_final\":\"162148\",\"texto\":\"https://www.boe.es/boe/dias/2026/11/27/pdfs/BOE-A-2026-24978.pdf\"},\"url_html\":\"https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-24978\",\"url_xml\":\"https://www.boe.es/diario_boe/xml.php?id=BOE-A-2026-24978\"}},\"item\":null}",
+  "departamentos2B": [
+   "CONSEJO GENERAL DEL PODER JUDICIAL",
+   "MINISTERIO DEL INTERIOR",
+   "TRIBUNAL DE CUENTAS",
+   "COMUNIDAD FORAL DE NAVARRA",
+   "ADMINISTRACIÓN LOCAL",
+   "UNIVERSIDADES"
+  ]
+ },
+ "meteoalarm": {
+  "vivos": 57,
+  "zonas": [
+   [
+    "ES070",
+    "Valle del Almanzora y Los Vélez"
    ],
-   "awareness_type": [
-    "7; coastalevent",
-    "5; high-temperature",
-    "6; low-temperature",
-    "2; snow-ice",
-    "4; Fog",
-    "10; Rain",
-    "3; Thunderstorm",
-    "9; avalanches",
-    "1; Wind"
+   [
+    "ES071",
+    "Nacimiento y Campo de Tabernas"
    ],
-   "severity": [
-    "Moderate",
-    "Severe",
-    "Minor"
+   [
+    "ES072",
+    "Poniente y Almería Capital"
    ],
-   "event": [
-    "Aviso de costeros de nivel amarillo",
-    "Moderate coastalevent warning",
-    "Aviso de costeros de nivel naranja",
-    "Severe coastalevent warning",
-    "Aviso de temperaturas máximas de nivel verde",
-    "Minor high-temperature warning",
-    "Aviso de temperaturas mínimas de nivel verde",
-    "Minor low-temperature warning",
-    "Aviso de nevadas de nivel verde",
-    "Minor snow warning",
-    "Aviso de costeros de nivel verde",
-    "Minor coastalevent warning",
-    "Aviso de nieblas de nivel verde",
-    "Minor fog warning",
-    "Aviso de lluvias de nivel verde",
-    "Minor rain warning",
-    "Aviso de tormentas de nivel verde",
-    "Minor thunderstorm warning",
-    "Aviso de aludes de nivel verde",
-    "Minor avalanches warning",
-    "Aviso de vientos de nivel verde",
-    "Minor wind warning",
-    "Aviso de lluvias de nivel amarillo",
-    "Moderate rain warning",
-    "Aviso de galernas de nivel verde"
+   [
+    "ES073",
+    "Levante almeriense"
    ],
-   "lang": [
-    "es-ES",
-    "en-GB"
+   [
+    "ES074",
+    "Grazalema"
+   ],
+   [
+    "ES075",
+    "Campiña gaditana"
+   ],
+   [
+    "ES076",
+    "Litoral gaditano"
+   ],
+   [
+    "ES077",
+    "Estrecho"
+   ],
+   [
+    "ES078",
+    "Sierra y Pedroches"
+   ],
+   [
+    "ES079",
+    "Campiña cordobesa"
+   ],
+   [
+    "ES080",
+    "Subbética cordobesa"
+   ],
+   [
+    "ES081",
+    "Cuenca del Genil"
+   ],
+   [
+    "ES082",
+    "Guadix y Baza"
+   ],
+   [
+    "ES083",
+    "Nevada y Alpujarras"
+   ],
+   [
+    "ES084",
+    "Costa granadina"
+   ],
+   [
+    "ES085",
+    "Aracena"
+   ],
+   [
+    "ES086",
+    "Andévalo y Condado"
+   ],
+   [
+    "ES087",
+    "Litoral de Huelva"
+   ],
+   [
+    "ES088",
+    "Morena y Condado"
+   ],
+   [
+    "ES089",
+    "Cazorla y Segura"
+   ],
+   [
+    "ES090",
+    "Valle del Guadalquivir de Jaén"
+   ],
+   [
+    "ES091",
+    "Capital y Montes de Jaén"
+   ],
+   [
+    "ES092",
+    "Antequera"
+   ],
+   [
+    "ES093",
+    "Ronda"
+   ],
+   [
+    "ES094",
+    "Sol y Guadalhorce"
+   ],
+   [
+    "ES095",
+    "Axarquía"
+   ],
+   [
+    "ES096",
+    "Sierra norte de Sevilla"
+   ],
+   [
+    "ES097",
+    "Campiña sevillana"
+   ],
+   [
+    "ES098",
+    "Sierra sur de Sevilla"
+   ],
+   [
+    "ES099",
+    "Pirineo oscense"
+   ],
+   [
+    "ES100",
+    "Centro de Huesca"
+   ],
+   [
+    "ES101",
+    "Sur de Huesca"
+   ],
+   [
+    "ES102",
+    "Albarracín y Jiloca"
+   ],
+   [
+    "ES103",
+    "Gúdar y Maestrazgo"
+   ],
+   [
+    "ES104",
+    "Bajo Aragón de Teruel"
+   ],
+   [
+    "ES105",
+    "Cinco Villas de Zaragoza"
+   ],
+   [
+    "ES106",
+    "Ibérica zaragozana"
+   ],
+   [
+    "ES107",
+    "Ribera del Ebro de Zaragoza"
+   ],
+   [
+    "ES108",
+    "Litoral occidental asturiano"
+   ],
+   [
+    "ES109",
+    "Litoral oriental asturiano"
+   ],
+   [
+    "ES110",
+    "Suroccidental asturiana"
+   ],
+   [
+    "ES111",
+    "Central y Valles Mineros"
+   ],
+   [
+    "ES112",
+    "Cordillera y Picos de Europa"
+   ],
+   [
+    "ES113",
+    "Ibiza y Formentera"
+   ],
+   [
+    "ES114",
+    "Sierra Tramontana"
+   ],
+   [
+    "ES115",
+    "Norte y nordeste de Mallorca"
+   ],
+   [
+    "ES116",
+    "Interior de Mallorca"
+   ],
+   [
+    "ES117",
+    "Sur de Mallorca"
+   ],
+   [
+    "ES118",
+    "Levante mallorquín"
+   ],
+   [
+    "ES119",
+    "Menorca"
+   ],
+   [
+    "ES120",
+    "Norte de Gran Canaria"
+   ],
+   [
+    "ES121",
+    "Cumbres de Gran Canaria"
+   ],
+   [
+    "ES122",
+    "Este, sur y oeste de Gran Canaria"
+   ],
+   [
+    "ES123",
+    "Lanzarote"
+   ],
+   [
+    "ES124",
+    "Fuerteventura"
+   ],
+   [
+    "ES125",
+    "Cumbres de La Palma"
+   ],
+   [
+    "ES126",
+    "Este de La Palma"
+   ],
+   [
+    "ES127",
+    "Oeste de La Palma"
+   ],
+   [
+    "ES128",
+    "La Gomera"
+   ],
+   [
+    "ES129",
+    "El Hierro"
+   ],
+   [
+    "ES130",
+    "Norte de Tenerife"
+   ],
+   [
+    "ES131",
+    "Área metropolitana de Tenerife"
+   ],
+   [
+    "ES132",
+    "Este, sur y oeste de Tenerife"
+   ],
+   [
+    "ES133",
+    "Litoral cántabro"
+   ],
+   [
+    "ES134",
+    "Liébana"
+   ],
+   [
+    "ES135",
+    "Centro y valle de Villaverde"
+   ],
+   [
+    "ES136",
+    "Cantabria del Ebro"
+   ],
+   [
+    "ES137",
+    "Meseta de Ávila"
+   ],
+   [
+    "ES138",
+    "Sistema Central de Ávila"
+   ],
+   [
+    "ES139",
+    "Sur de Ávila"
+   ],
+   [
+    "ES140",
+    "Cordillera Cantábrica de Burgos"
+   ],
+   [
+    "ES141",
+    "Norte de Burgos"
+   ],
+   [
+    "ES142",
+    "Condado de Treviño"
+   ],
+   [
+    "ES143",
+    "Meseta de Burgos"
+   ],
+   [
+    "ES144",
+    "Ibérica de Burgos"
+   ],
+   [
+    "ES145",
+    "Cordillera Cantábrica de León"
+   ],
+   [
+    "ES146",
+    "Bierzo de León"
+   ],
+   [
+    "ES147",
+    "Meseta de León"
+   ],
+   [
+    "ES148",
+    "Cordillera Cantábrica de Palencia"
+   ],
+   [
+    "ES149",
+    "Meseta de Palencia"
+   ],
+   [
+    "ES150",
+    "Meseta de Salamanca"
+   ],
+   [
+    "ES151",
+    "Sistema Central de Salamanca"
+   ],
+   [
+    "ES152",
+    "Sur de Salamanca"
+   ],
+   [
+    "ES153",
+    "Meseta de Segovia"
+   ],
+   [
+    "ES154",
+    "Sistema Central de Segovia"
+   ],
+   [
+    "ES155",
+    "Ibérica de Soria"
+   ],
+   [
+    "ES156",
+    "Meseta de Soria"
+   ],
+   [
+    "ES157",
+    "Sistema Central de Soria"
+   ],
+   [
+    "ES158",
+    "Meseta de Valladolid"
+   ],
+   [
+    "ES159",
+    "Sanabria"
+   ],
+   [
+    "ES160",
+    "Meseta de Zamora"
+   ],
+   [
+    "ES161",
+    "La Mancha albaceteña"
+   ],
+   [
+    "ES162",
+    "Alcaraz y Segura"
+   ],
+   [
+    "ES163",
+    "Hellín y Almansa"
+   ],
+   [
+    "ES164",
+    "Montes del norte y Anchuras"
+   ],
+   [
+    "ES165",
+    "La Mancha de Ciudad Real"
+   ],
+   [
+    "ES166",
+    "Valle del Guadiana"
+   ],
+   [
+    "ES167",
+    "Sierras de Alcudia y Madrona"
+   ],
+   [
+    "ES168",
+    "Alcarria conquense"
+   ],
+   [
+    "ES169",
+    "Serranía de Cuenca"
+   ],
+   [
+    "ES170",
+    "La Mancha conquense"
+   ],
+   [
+    "ES171",
+    "Serranía de Guadalajara"
+   ],
+   [
+    "ES172",
+    "Parameras de Molina"
+   ],
+   [
+    "ES173",
+    "Alcarria de Guadalajara"
+   ],
+   [
+    "ES174",
+    "Sierra de San Vicente"
+   ],
+   [
+    "ES175",
+    "Valle del Tajo"
+   ],
+   [
+    "ES176",
+    "Montes de Toledo"
+   ],
+   [
+    "ES177",
+    "La Mancha toledana"
+   ],
+   [
+    "ES178",
+    "Prepirineo de Barcelona"
+   ],
+   [
+    "ES179",
+    "Depresión central de Barcelona"
+   ],
+   [
+    "ES180",
+    "Prelitoral de Barcelona"
+   ],
+   [
+    "ES181",
+    "Litoral de Barcelona"
+   ],
+   [
+    "ES182",
+    "Pirineo de Girona"
+   ],
+   [
+    "ES183",
+    "Prelitoral de Girona"
+   ],
+   [
+    "ES184",
+    "Ampurdán"
+   ],
+   [
+    "ES185",
+    "Litoral sur de Girona"
+   ],
+   [
+    "ES186",
+    "Valle de Arán"
+   ],
+   [
+    "ES187",
+    "Pirineo de Lleida"
+   ],
+   [
+    "ES188",
+    "Depresión central de Lleida"
+   ],
+   [
+    "ES189",
+    "Depresión central de Tarragona"
+   ],
+   [
+    "ES190",
+    "Prelitoral norte de Tarragona"
+   ],
+   [
+    "ES191",
+    "Litoral norte de Tarragona"
+   ],
+   [
+    "ES192",
+    "Litoral sur de Tarragona"
+   ],
+   [
+    "ES193",
+    "Prelitoral sur de Tarragona"
+   ],
+   [
+    "ES194",
+    "Vegas del Guadiana"
+   ],
+   [
+    "ES195",
+    "La Siberia extremeña"
+   ],
+   [
+    "ES196",
+    "Barros y Serena"
+   ],
+   [
+    "ES197",
+    "Sur de Badajoz"
+   ],
+   [
+    "ES198",
+    "Norte de Cáceres"
+   ],
+   [
+    "ES199",
+    "Tajo y Alagón"
+   ],
+   [
+    "ES200",
+    "Meseta cacereña"
+   ],
+   [
+    "ES201",
+    "Villuercas y Montánchez"
+   ],
+   [
+    "ES202",
+    "Noroeste de A Coruña"
+   ],
+   [
+    "ES203",
+    "Oeste de A Coruña"
+   ],
+   [
+    "ES204",
+    "Interior de A Coruña"
+   ],
+   [
+    "ES205",
+    "Suroeste de A Coruña"
+   ],
+   [
+    "ES206",
+    "A Mariña"
+   ],
+   [
+    "ES207",
+    "Centro de Lugo"
+   ],
+   [
+    "ES208",
+    "Montaña de Lugo"
+   ],
+   [
+    "ES209",
+    "Sur de Lugo"
+   ],
+   [
+    "ES210",
+    "Noroeste de Ourense"
+   ],
+   [
+    "ES211",
+    "Miño de Ourense"
+   ],
+   [
+    "ES212",
+    "Sur de Ourense"
+   ],
+   [
+    "ES213",
+    "Montaña de Ourense"
+   ],
+   [
+    "ES214",
+    "Valdeorras"
+   ],
+   [
+    "ES215",
+    "Rias Baixas"
+   ],
+   [
+    "ES216",
+    "Interior de Pontevedra"
+   ],
+   [
+    "ES217",
+    "Miño de Pontevedra"
+   ],
+   [
+    "ES218",
+    "Sierra de Madrid"
+   ],
+   [
+    "ES219",
+    "Metropolitana y Henares"
+   ],
+   [
+    "ES220",
+    "Sur, Vegas y Oeste"
+   ],
+   [
+    "ES221",
+    "Altiplano de Murcia"
+   ],
+   [
+    "ES222",
+    "Noroeste de Murcia"
+   ],
+   [
+    "ES223",
+    "Vega del Segura"
+   ],
+   [
+    "ES224",
+    "Valle del Guadalentín, Lorca y Águilas"
+   ],
+   [
+    "ES225",
+    "Campo de Cartagena y Mazarrón"
+   ],
+   [
+    "ES226",
+    "Vertiente cantábrica de Navarra"
+   ],
+   [
+    "ES227",
+    "Centro de Navarra"
+   ],
+   [
+    "ES228",
+    "Pirineo navarro"
+   ],
+   [
+    "ES229",
+    "Ribera del Ebro de Navarra"
+   ],
+   [
+    "ES230",
+    "Cuenca del Nervión"
+   ],
+   [
+    "ES231",
+    "Llanada alavesa"
+   ],
+   [
+    "ES232",
+    "Rioja alavesa"
+   ],
+   [
+    "ES233",
+    "Gipuzkoa litoral"
+   ],
+   [
+    "ES234",
+    "Gipuzkoa interior"
+   ],
+   [
+    "ES235",
+    "Bizkaia litoral"
+   ],
+   [
+    "ES236",
+    "Bizkaia interior"
+   ],
+   [
+    "ES237",
+    "Ribera del Ebro de La Rioja"
+   ],
+   [
+    "ES238",
+    "Ibérica riojana"
+   ],
+   [
+    "ES239",
+    "Litoral norte de Alicante"
+   ],
+   [
+    "ES240",
+    "Interior de Alicante"
+   ],
+   [
+    "ES241",
+    "Litoral sur de Alicante"
+   ],
+   [
+    "ES242",
+    "Interior norte de Castellón"
+   ],
+   [
+    "ES243",
+    "Litoral norte de Castellón"
+   ],
+   [
+    "ES244",
+    "Interior sur de Castellón"
+   ],
+   [
+    "ES245",
+    "Litoral sur de Castellón"
+   ],
+   [
+    "ES246",
+    "Interior norte de Valencia"
+   ],
+   [
+    "ES247",
+    "Litoral norte de Valencia"
+   ],
+   [
+    "ES248",
+    "Interior sur de Valencia"
+   ],
+   [
+    "ES249",
+    "Litoral sur de Valencia"
+   ],
+   [
+    "ES250",
+    "Ceuta"
+   ],
+   [
+    "ES251",
+    "Melilla"
+   ],
+   [
+    "ES840",
+    "Costa - Gipuzkoa litoral"
+   ],
+   [
+    "ES841",
+    "Costa - Bizkaia litoral"
+   ],
+   [
+    "ES842",
+    "Costa - Litoral cántabro"
+   ],
+   [
+    "ES843",
+    "Costa - Litoral oriental asturiano"
+   ],
+   [
+    "ES844",
+    "Costa - Litoral occidental asturiano"
+   ],
+   [
+    "ES845",
+    "Costa - A Mariña"
+   ],
+   [
+    "ES846",
+    "Costa - Noroeste de A Coruña"
+   ],
+   [
+    "ES847",
+    "Costa - Oeste de A Coruña"
+   ],
+   [
+    "ES848",
+    "Costa - Suroeste de A Coruña"
+   ],
+   [
+    "ES849",
+    "Costa - Rias Baixas"
+   ],
+   [
+    "ES850",
+    "Costa - Miño de Pontevedra"
+   ],
+   [
+    "ES851",
+    "Costa - Litoral de Huelva"
+   ],
+   [
+    "ES852",
+    "Costa - Litoral gaditano"
+   ],
+   [
+    "ES853",
+    "Costa - Estrecho"
+   ],
+   [
+    "ES854",
+    "Costa - Sol y Guadalhorce"
+   ],
+   [
+    "ES855",
+    "Costa - Axarquía"
+   ],
+   [
+    "ES856",
+    "Costa - Costa granadina"
+   ],
+   [
+    "ES857",
+    "Costa - Poniente y Almería Capital"
+   ],
+   [
+    "ES858",
+    "Costa - Levante almeriense"
+   ],
+   [
+    "ES859",
+    "Costa - Valle del Guadalentín, Lorca y Águilas"
+   ],
+   [
+    "ES860",
+    "Costa - Campo de Cartagena y Mazarrón"
+   ],
+   [
+    "ES861",
+    "Costa - Litoral sur de Alicante"
+   ],
+   [
+    "ES862",
+    "Costa - Litoral norte de Alicante"
+   ],
+   [
+    "ES863",
+    "Costa - Litoral sur de Valencia"
+   ],
+   [
+    "ES864",
+    "Costa - Litoral norte de Valencia"
+   ],
+   [
+    "ES865",
+    "Costa - Litoral sur de Castellón"
+   ],
+   [
+    "ES866",
+    "Costa - Litoral norte de Castellón"
+   ],
+   [
+    "ES867",
+    "Costa - Litoral sur de Tarragona"
+   ],
+   [
+    "ES868",
+    "Costa - Litoral norte de Tarragona"
+   ],
+   [
+    "ES869",
+    "Costa - Litoral de Barcelona"
+   ],
+   [
+    "ES870",
+    "Costa - Litoral sur de Girona"
+   ],
+   [
+    "ES871",
+    "Costa - Ceuta"
+   ],
+   [
+    "ES872",
+    "Costa - Melilla"
+   ],
+   [
+    "ES873",
+    "Costa - Ibiza y Formentera"
+   ],
+   [
+    "ES874",
+    "Costa - Sur de Mallorca"
+   ],
+   [
+    "ES875",
+    "Costa - Sierra Tramontana"
+   ],
+   [
+    "ES876",
+    "Costa - Norte y nordeste de Mallorca"
+   ],
+   [
+    "ES877",
+    "Costa - Levante mallorquín"
+   ],
+   [
+    "ES878",
+    "Costa - Menorca"
+   ],
+   [
+    "ES879",
+    "Costa - El Hierro"
+   ],
+   [
+    "ES880",
+    "Costa - Oeste de La Palma"
+   ],
+   [
+    "ES881",
+    "Costa - Este de La Palma"
+   ],
+   [
+    "ES882",
+    "Costa - La Gomera"
+   ],
+   [
+    "ES883",
+    "Costa - Norte de Tenerife"
+   ],
+   [
+    "ES884",
+    "Costa - Área metropolitana de Tenerife"
+   ],
+   [
+    "ES885",
+    "Costa - Este, sur y oeste de Tenerife"
+   ],
+   [
+    "ES886",
+    "Costa - Este, sur y oeste de Gran Canaria"
+   ],
+   [
+    "ES887",
+    "Costa - Norte de Gran Canaria"
+   ],
+   [
+    "ES888",
+    "Costa - Fuerteventura"
+   ],
+   [
+    "ES889",
+    "Costa - Lanzarote"
+   ],
+   [
+    "ES890",
+    "Costa - Ampurdán"
+   ]
+  ],
+  "ejemploNaranja": null,
+  "geocodes": [
+   "EMMA_ID"
+  ]
+ },
+ "emma1": "HTTP 404",
+ "emma2": "fetch failed",
+ "emma3": {
+  "tipo": null,
+  "bytes": 422644,
+  "inicio": "\n\t<!DOCTYPE html>\n\t<html lang=\"en\">\n\t\t<head>\n\t\t\t<meta charset=\"UTF-8\">\n\t\t\t<title>MeteoAlarm | Early Warnings for Europe</title>\n\t\t\t<meta property=\"og:title\" content=\"MeteoAlarm | Early Warnings for Europe\" />\n\t\t\t<meta property=\"og:url\" content=\"http://meteoalarm.org/en/live/\" />\n\t\t\t<meta property=\"og:image\" content=\"https://assets.meteoalarm.org/snapshots/europe.png\" />\n\t\t\t<meta name=\"description\" content=\"MeteoAlarm is an Early Warning Dissemination System that visualises, aggregates, and acces"
+ },
+ "normales": [
+  {
+   "a": 1991,
+   "b": 2000,
+   "intento": 0,
+   "error": "UND_ERR_CONNECT_TIMEOUT"
+  },
+  {
+   "a": 1991,
+   "b": 2000,
+   "intento": 1,
+   "error": "UND_ERR_CONNECT_TIMEOUT"
+  },
+  {
+   "a": 1991,
+   "b": 2000,
+   "n": 3653,
+   "muestra": [
+    6.8,
+    4.8,
+    2.3
    ]
   },
-  "geo": [
-   "[{\"areaDesc\":\"Costa - Noroeste de A Coruña\",\"geocode\":[{\"value\":\"ES846\",\"valueName\":\"EMMA_ID\"}]}]",
-   "[{\"areaDesc\":\"Costa - Oeste de A Coruña\",\"geocode\":[{\"value\":\"ES847\",\"valueName\":\"EMMA_ID\"}]}]",
-   "[{\"areaDesc\":\"Costa - Suroeste de A Coruña\",\"geocode\":[{\"value\":\"ES848\",\"valueName\":\"EMMA_ID\"}]}]"
-  ],
-  "conGeometria": 0
- },
- "boe": "(s.departamento ?? []).map is not a function",
- "openmeteo": "fetch failed",
- "dgtInfocar": "HTTP 502",
- "dgtInfocarHttp": "HTTP 502",
- "dgtNap": "HTTP 404",
- "dgtNapIni": {
-  "tipo": "text/html; charset=utf-8",
-  "bytes": 28185,
-  "inicio": "<!DOCTYPE html>\n<!--[if IE 7]> <html lang=\"es\" class=\"ie ie7\"> <![endif]-->\n<!--[if IE 8]> <html lang=\"es\" class=\"ie ie8\"> <![endif]-->\n<!--[if IE 9]> <html lang=\"es\" class=\"ie9\"> <![endif]-->\n<!--[if gt IE 8]><!--> <html lang=\"es\"> <!--<![endif]-->\n  <head>\n    <!--[if lte ie 8]><script type=\"text/javascript\" src=\"/fanstatic/vendor/:version:2024-02-19T13:19:51.12/html5.min.js\"></script><![endif]-->\n<link rel=\"stylesheet\" type=\"text/css\" href=\"/fanstatic/vendor/:version:2024-02-19T13:19:51.12/select2/select2.min.css\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"/fanstatic/css/:version:2024-02-19T13:19:51.12/main.min.css\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"/fanstatic/vendor/:v"
- },
- "dgtEtraffic": {
-  "tipo": "text/html",
-  "bytes": 5041,
-  "inicio": "<!doctype html>\n<html lang=\"es\">\n\t<head>\n\t\t<meta charset=\"UTF-8\" />\n\t\t<link rel=\"preconnect\" href=\"https://www.ign.es\" />\n\t\t<link rel=\"icon\" id=\"app-favicon\" href=\"\" />\n\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n\t\t<title>Etraffic</title>\n\t\t<script type=\"module\" crossorigin src=\"/etrafficWEB/assets/js/index-Cgw2qpEG.js\"></script>\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/i18n-C0AU9P0C.js\">\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/ui-CyuMv1Wl.js\">\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/leaflet-BFAKfZ46.js\">\n\t\t<link rel=\"stylesheet\" crossorigin href=\"/etrafficWEB/assets/css/index"
- },
- "dgtEtrafficApi": {
-  "tipo": "text/html",
-  "bytes": 5041,
-  "inicio": "<!doctype html>\n<html lang=\"es\">\n\t<head>\n\t\t<meta charset=\"UTF-8\" />\n\t\t<link rel=\"preconnect\" href=\"https://www.ign.es\" />\n\t\t<link rel=\"icon\" id=\"app-favicon\" href=\"\" />\n\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n\t\t<title>Etraffic</title>\n\t\t<script type=\"module\" crossorigin src=\"/etrafficWEB/assets/js/index-Cgw2qpEG.js\"></script>\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/i18n-C0AU9P0C.js\">\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/ui-CyuMv1Wl.js\">\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/leaflet-BFAKfZ46.js\">\n\t\t<link rel=\"stylesheet\" crossorigin href=\"/etrafficWEB/assets/css/index"
- },
- "dgtWms": {
-  "tipo": "text/html",
-  "bytes": 5041,
-  "inicio": "<!doctype html>\n<html lang=\"es\">\n\t<head>\n\t\t<meta charset=\"UTF-8\" />\n\t\t<link rel=\"preconnect\" href=\"https://www.ign.es\" />\n\t\t<link rel=\"icon\" id=\"app-favicon\" href=\"\" />\n\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n\t\t<title>Etraffic</title>\n\t\t<script type=\"module\" crossorigin src=\"/etrafficWEB/assets/js/index-Cgw2qpEG.js\"></script>\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/i18n-C0AU9P0C.js\">\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/ui-CyuMv1Wl.js\">\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/leaflet-BFAKfZ46.js\">\n\t\t<link rel=\"stylesheet\" crossorigin href=\"/etrafficWEB/assets/css/index"
- },
- "euribor": "KEY,FREQ,REF_AREA,CURRENCY,PROVIDER_FM,INSTRUMENT_FM,PROVIDER_FM_ID,DATA_TYPE_FM,TIME_PERIOD,OBS_VALUE,OBS_STATUS,OBS_CONF,OBS_PRE_BREAK,OBS_COM,TIME_FORMAT,BREAKS,COLLECTION,COMPILING_ORG,DISS_ORG,DOM_SER_IDS,FM_CONTRACT_TIME,FM_COUPON_RATE,FM_IDENTIFIER,FM_LOT_SIZE,FM_MATURITY,FM_OUTS_AMOUNT,FM_PUT_CALL,FM_STRIKE_PRICE,PUBL_MU,PUBL_PUBLIC,UNIT_INDEX_BASE,COMPILATION,COVERAGE,DECIMALS,SOURCE_AGENCY,SOURCE_PUB,TITLE,TITLE_COMPL,UNIT,UNIT_MULT\r\nFM.M.U2.EUR.RT.MM.EURIBOR1YD_.HSTA,M,U2,EUR,RT,MM,EURIBOR1YD_,HSTA,2026-08,2.9536667,A,F,,,P1M,,A,,,EURIBOR1YD=,,,,,,,,,,,,,,7,,,\"Euribor 1-year - Historical close, average of observations through period\",\"Euro area (changing composition) - Money Market - Euribor 1-year - Historical close, average of observations through period - Euro, provided by Re",
- "cambio": "KEY,FREQ,CURRENCY,CURRENCY_DENOM,EXR_TYPE,EXR_SUFFIX,TIME_PERIOD,OBS_VALUE,OBS_STATUS,OBS_CONF,OBS_PRE_BREAK,OBS_COM,TIME_FORMAT,BREAKS,COLLECTION,COMPILING_ORG,DISS_ORG,DOM_SER_IDS,PUBL_ECB,PUBL_MU,PUBL_PUBLIC,UNIT_INDEX_BASE,COMPILATION,COVERAGE,DECIMALS,NAT_TITLE,SOURCE_AGENCY,SOURCE_PUB,TITLE,TITLE_COMPL,UNIT,UNIT_MULT\r\nEXR.D.USD.EUR.SP00.A,D,USD,EUR,SP00,A,2026-11-24,1.0963,A,F,,,P1D,,A,,,,,,,99Q1=100,,,4,,4F0,,US dollar/Euro ECB reference exchange rate,\"ECB reference exchange rate, US dollar/Euro, 2.15 pm (C.E.T.)\",USD,0\r\nEXR.D.USD.EUR.SP00.A,D,USD,EUR,SP00,A,2026-11-25,1.0935,A,F,,,P1D,,A,,,,,,,99Q1=100,,,4,,4F0,,US dollar/Euro ECB reference exchange rate,\"ECB reference exchange rate, US dollar/Euro, 2.15 pm (C.E.T.)\",USD,0\r\nEXR.D.USD.EUR.SP00.A,D,USD,EUR,SP00,A,2026-11-26,1.0975,A,",
- "ree": "{\"data\":{\"type\":\"Precios mercado peninsular en tiempo real\",\"id\":\"mer13\",\"attributes\":{\"title\":\"Precios mercado peninsular en tiempo real\",\"last-update\":\"2026-11-26T20:46:05.000+01:00\",\"description\":null},\"meta\":{\"cache-control\":{\"cache\":\"MISS\"}}},\"included\":[{\"type\":\"PVPC\",\"id\":\"1001\",\"groupId\":null,\"attributes\":{\"title\":\"PVPC\",\"description\":null,\"color\":\"#ffcf09\",\"icon\":null,\"type\":null,\"magnitude\":\"price\",\"composite\":false,\"last-update\":\"2026-11-26T20:46:05.000+01:00\",\"values\":[{\"value\":213.89,\"percentage\":0.4760304460072999,\"datetime\":\"2026-11-27T00:00:00.000+01:00\"},{\"value\":196.2,\"percentage\":0.4743713733075435,\"datetime\":\"2026-11-27T01:00:00.000+01:00\"},{\"value\":197.88,\"percentage\":0.48043119355151986,\"datetime\":\"2026-11-27T02:00:00.000+01:00\"},{\"value\":194.96,\"percentage\":0.4799015384615385,\"datetime\":\"2026-11-27T03:00:00.000+01:00\"},{\"value\":189.38,\"percentage\":0.4801967645418125,\"datetime\":\"2026-11-27T04:00:00.000+01:00\"},{\"value\":190.75,\"percentage\":0.48518377209716396,\"datetime\":\"2026-11-27T05:00:00.000+01:00\"},{\"value\":217.63,\"percentage\":0.5007247543887905,\"datetime\":\"2026-11-27T06:00:00.000+01:00\"},{\"value\":280.04,\"percentage\":0.5404508259996912,\"datetime\":\"2026-11-27T07:00:00.000+01:00\"},{\"value\":296.5,\"percentage\":0.5462115211023708,\"datetime\":\"2026-11-27T08:00:00.000+01:00\"},{\"value\":244.96,\"percentage\":0.5060947894715094,\"datetime\":\"2026-11-27T09:00:00.000+01:00\"},{\"value\":286.04,\"percentage\":0.5617990768928607,\"datetime\":\"2026-11-27T10:00:00.000+01:00\"},{\"value\":259.05,\"percentage\":0.5805432297969612,\"datetime\":\"2026-11-27T11:00:00.000+01:00\"},{\"value\":254.1,\"percentage\":0.5804417844987094,\"datetime\":\"2026-11-27T12:00:00.000+01:00\"},{\"value\":252.94,\"percentage\":0.5816584647932668,\"datetime\":\"2026-11-27T13:00:00.000+01:00\"},{\"value\":178.59,\"percentage\":0.5072282655002982,\"datetime\":\"2026-11-27T14:00:00.000+01:00\"},{\"value\":191.94,\"percentage\":0.5160509759638652,\"datetime\":\"2026-11-27T15:00:00.000+01:00\"},{\"value\":233.99,\"percentage\":0.5466289772461804,\"datetime\":\"2026-11-27T16:00:00.000+01:00\"},{\"value\":283.55,\"percentage\":0.5560130988097339,\"datetime\":\"2026-11-27T17:00:00.000+01:00\"},{\"value\":379.63,\"percentage\":0.5889114685943875,\"datetime\":\"2026-11-27T18:00:00.000+01:00\"},{\"value\":368.23,\"percentage\":0.5815106675299654,\"datetime\":\"2026-11-27T19:00:00.000+01:00\"},{\"value\":368.88,\"percentage\":0.5810048826586864,\"datetime\":\"2026-11-27T20:00:00.000+01:00\"},{\"value\":357.45,\"percentage\":0.5742629930114868,\"datetime\":\"2026-11-27T21:00:00.000"
+  {
+   "a": 2001,
+   "b": 2010,
+   "n": 3652,
+   "muestra": [
+    7.9,
+    7.2,
+    6.6
+   ]
+  },
+  {
+   "a": 2011,
+   "b": 2020,
+   "n": 3653,
+   "muestra": [
+    5.8,
+    5.3,
+    4.5
+   ]
+  }
+ ],
+ "openmeteo": {
+  "latitude": 40.39599,
+  "longitude": -3.6793447,
+  "generationtime_ms": 0.09226799011230469,
+  "utc_offset_seconds": 3600,
+  "timezone": "Europe/Madrid",
+  "timezone_abbreviation": "GMT+1",
+  "elevation": 667,
+  "current_units": {
+   "time": "iso8601",
+   "interval": "seconds",
+   "temperature_2m": "°C"
+  },
+  "current": {
+   "time": "2026-11-27T15:00",
+   "interval": 900,
+   "temperature_2m": 11.4
+  },
+  "daily_units": {
+   "time": "iso8601",
+   "temperature_2m_max": "°C",
+   "temperature_2m_min": "°C",
+   "temperature_2m_mean": "°C"
+  },
+  "daily": {
+   "time": [
+    "2026-11-27",
+    "2026-11-28",
+    "2026-11-29"
+   ],
+   "temperature_2m_max": [
+    12.1,
+    11.8,
+    13
+   ],
+   "temperature_2m_min": [
+    1.2,
+    2.4,
+    3.8
+   ],
+   "temperature_2m_mean": [
+    6.3,
+    6.8,
+    7.7
+   ]
+  }
+ }
 }
