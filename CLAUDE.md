@@ -18,3 +18,4 @@
 - Los textos de los paneles se calculan a partir del dato (sube/baja, más/menos). Si añades frases, que también lo hagan.
 - Antes de dar algo por bueno: `npx tsc -b && npm run build`, y capturas en 1440×900 y 390×844.
 - Movimiento: respetar `prefers-reduced-motion`.
+- Vivienda, secciones «Vacías» y «Tenencia»: `scripts/vivienda-extra.mjs` (Censo 2021 del INE: viviendas vacías por consumo eléctrico, tabla 59531; tenencia de la ECV, tablas 9997 y 9994; tenencia por tamaño de municipio, 59523) → `public/vivienda/data/extra.json`. «Vacía» es una estimación por consumo de luz, no una cifra de viviendas en venta. Sin fuente abierta: oferta y demanda reales, y titulares del Catastro (su portal de estadísticas no ofrece fichero descargable; la sonda `fuentes/sonda-vivienda4.json` lo comprobó): decirlo en la página.

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { motion } from 'motion/react'
-import { Gauge, Home, KeyRound, Landmark, Search, TrendingUp } from 'lucide-react'
-import { Apiladas, Barras, CountUp, LineChart, nf } from '../graficos'
+import { Gauge, Home, KeyRound, Landmark, Moon, Scale, Search, TrendingUp } from 'lucide-react'
+import { Apiladas, Barras, ColApiladas, CountUp, LineChart, nf } from '../graficos'
 import { Holo3D } from '../holo3d/Holo3D'
 import { edificio } from '../holo3d/modelos'
 import { ESCALA_CALOR, MapaProvincias, colorEscala } from '../geo/MapaProvincias'
@@ -25,6 +25,8 @@ const SECCIONES = [
   { id: 'compraventas', nombre: 'Compraventas', icon: Home },
   { id: 'hipotecas', nombre: 'Hipotecas', icon: Landmark },
   { id: 'alquiler', nombre: 'Alquiler', icon: KeyRound },
+  { id: 'vacias', nombre: 'Vacías', icon: Moon },
+  { id: 'tenencia', nombre: 'Tenencia', icon: Scale },
 ] as const
 type Sec = (typeof SECCIONES)[number]['id']
 
@@ -178,6 +180,98 @@ function Alquiler({ d }: { d: Datos }) {
   </div>
 }
 
+type Fila = { cod: string; n: string; t: number; v: number; m?: number; b?: number; e?: number; ccaa?: string }
+type Tenen = Record<string, Record<string, [number, number][]>>
+type Extra = {
+  nacional?: Fila; ccaa?: Fila[]; provincias?: Fila[]; topAbs?: Fila[]; topPct?: Fila[]; menosPct?: Fila[]; nMunicipios?: number
+  tenenciaCcaa?: Tenen; tenenciaEdad?: Tenen; tenenciaTamano?: { reg: string; tam: string; v: number }[]
+}
+const CAT = [
+  { id: 'Propiedad sin hipoteca', nombre: 'Propiedad, sin hipoteca', color: '#3987e5' },
+  { id: 'Propiedad con hipoteca', nombre: 'Propiedad, con hipoteca', color: '#9085e9' },
+  { id: 'Alquiler a precio de mercado', nombre: 'Alquiler a precio de mercado', color: '#d95926' },
+  { id: 'Alquiler inferior al precio de mercado', nombre: 'Alquiler más barato que el mercado', color: '#c98500' },
+  { id: 'Cesión', nombre: 'Cesión gratuita o semigratuita', color: '#199e70' },
+]
+const ultimo = (s?: [number, number][]) => s?.at(-1)
+
+function Vacias({ x }: { x: Extra }) {
+  const [sel, setSel] = useState<string | null>(null)
+  const [modo, setModo] = useState<'pct' | 'num'>('pct')
+  const prov = x.provincias ?? [], nac = x.nacional
+  if (!nac) return <div className="graficos"><Card t="Viviendas vacías"><p className="note">Todavía no hay datos del Censo cargados.</p></Card></div>
+  const porCod = new Map(prov.map(p => [p.cod, p]))
+  const pctV = (f: Fila) => (f.v / f.t) * 100
+  const valor = (c: string) => { const f = porCod.get(c); return f ? (modo === 'pct' ? pctV(f) : f.v) : null }
+  const rk = [...prov].sort((a, b) => (modo === 'pct' ? pctV(b) - pctV(a) : b.v - a.v))
+  const provDe = (cod: string) => porCod.get(cod.slice(0, 2))?.n
+  const s = sel ? porCod.get(sel) : null
+  const esp = nac.e ?? 0, bajo = nac.b ?? 0
+  return <div className="graficos">
+    <Card t="Casas sin nadie dentro" wide lead={<>El Censo 2021 del INE mira el consumo de luz de cada vivienda durante un año: si es casi cero, la da por <b>vacía</b>. Salen <b>{nf(nac.v)}</b> de {nf(nac.t)}: un <b>{nf(pctV(nac), 1)} %</b>. Otras {nf(esp)} ({nf((esp / nac.t) * 100, 1)} %) tienen un uso esporádico, típico de segundas residencias. Es una <b>estimación</b>: vacía no significa que esté en venta ni en alquiler.</>} fuente={<a href="https://www.ine.es/jaxiT3/Tabla.htm?t=59531" target="_blank" rel="noopener noreferrer">INE, Censos 2021, tabla 59531</a>}>
+      <div className="modo" role="radiogroup" aria-label="Qué ver">{(['pct', 'num'] as const).map(m => <button key={m} role="radio" aria-checked={modo === m} className={modo === m ? 'is-on' : ''} onClick={() => setModo(m)}>{m === 'pct' ? 'Qué parte' : 'Cuántas'}</button>)}</div>
+      <MapaProvincias valor={valor} fmt={modo === 'pct' ? (v => `${nf(v, 1)} %`) : (v => nf(v))} titulo="Viviendas vacías por provincia" color={ACC} escala={ESCALA_CALOR} sel={sel} onSel={setSel} nota="Cuanto más oscuro y rojo, más viviendas vacías." />
+    </Card>
+    {s && <Card t={s.n} lead={<>{nf(s.v)} viviendas vacías de {nf(s.t)} ({nf(pctV(s), 1)} %), y {nf(s.e ?? 0)} de uso esporádico. {pctV(s) > pctV(nac) ? 'Más' : 'Menos'} que la media de España ({nf(pctV(nac), 1)} %).</>}>
+      <Barras titulo={`Uso de las viviendas en ${s.n}`} fmt={v => nf(v)} unidad="viviendas" limite={4} items={[{ id: 'v', nombre: 'Vacías', valor: s.v, color: ACC }, { id: 'e', nombre: 'Uso esporádico', valor: s.e ?? 0, color: '#d95926' }, { id: 'b', nombre: 'Consumo bajo', valor: s.b ?? 0, color: '#3987e5' }]} />
+    </Card>}
+    <Card t="Ranking de provincias" lead={rk[0] && <>{modo === 'pct' ? 'Mayor proporción' : 'Más viviendas vacías'}: <b>{rk[0].n}</b> ({modo === 'pct' ? `${nf(pctV(rk[0]), 1)} %` : nf(rk[0].v)}). En el otro extremo, {rk.at(-1)!.n} ({modo === 'pct' ? `${nf(pctV(rk.at(-1)!), 1)} %` : nf(rk.at(-1)!.v)}).</>}>
+      <Barras titulo="Provincias por viviendas vacías" fmt={modo === 'pct' ? (v => `${nf(v, 1)} %`) : (v => nf(v))} limite={12} items={rk.map(p => ({ id: p.cod, nombre: p.n, valor: modo === 'pct' ? pctV(p) : p.v, color: ACC, destacado: p.cod === sel, onClick: () => setSel(p.cod) }))} />
+    </Card>
+    {x.topPct && <Card t="Pueblos con más casas vacías" lead={<>Entre los {nf(x.nMunicipios ?? 0)} municipios con dato, los que tienen al menos 5.000 viviendas y mayor proporción de vacías. Suelen ser zonas de turismo de costa o de despoblación.</>}>
+      <Barras titulo="Municipios con mayor proporción de viviendas vacías" fmt={v => `${nf(v, 0)} %`} limite={12} items={x.topPct.map(f => ({ id: f.cod, nombre: `${f.n}${provDe(f.cod) ? ` (${provDe(f.cod)})` : ''}`, valor: pctV(f), color: ACC }))} />
+    </Card>}
+    {x.topAbs && <Card t="Ciudades con más vacías" lead="En cifras absolutas mandan las ciudades grandes, aunque su proporción sea baja.">
+      <Barras titulo="Municipios con más viviendas vacías" fmt={v => nf(v)} unidad="viviendas" limite={10} items={x.topAbs.map(f => ({ id: f.cod, nombre: f.n, valor: f.v, color: '#3987e5' }))} />
+    </Card>}
+    {x.ccaa && <Curiosidades titulo="¿Sabías que…?" items={[
+      (() => { const c = [...x.ccaa!].sort((a, b) => pctV(b) - pctV(a)); return <>Por comunidades, la proporción más alta de viviendas vacías es la de <b>{c[0].n}</b> ({nf(pctV(c[0]), 1)} %) y la más baja la de {c.at(-1)!.n} ({nf(pctV(c.at(-1)!), 1)} %).</> })(),
+      <>Sumando vacías y de uso esporádico, <b>{nf(((nac.v + esp) / nac.t) * 100, 0)} de cada 100</b> viviendas de España se usan poco o nada.</>,
+      bajo > 0 && <>Otras {nf(bajo)} viviendas tienen un consumo bajo pero no nulo: alguien las usa, aunque poco.</>,
+    ]} />}
+    <Card t="Lo que no hay en abierto">
+      <p className="note">No existe una cifra oficial abierta de «viviendas en venta» ni de «viviendas en alquiler disponibles», ni de demanda real: los portales inmobiliarios no publican datos libres. Tampoco he podido descargar los titulares del Catastro (cuántas viviendas tiene cada propietario, personas físicas o empresas): su portal de estadísticas no ofrece el fichero de forma automática. Cuando haya una fuente libre y estable, entrará aquí.</p>
+    </Card>
+  </div>
+}
+
+function Tenencia({ x }: { x: Extra }) {
+  const [sel, setSel] = useState<string | null>(null)
+  const [cat, setCat] = useState<'Propiedad' | 'Alquiler a precio de mercado'>('Propiedad')
+  const nac = x.tenenciaCcaa?.['Total Nacional']
+  if (!nac) return <div className="graficos"><Card t="Régimen de tenencia"><p className="note">Todavía no hay datos de tenencia cargados.</p></Card></div>
+  const anios = (nac.Propiedad ?? []).map(a => a[0])
+  const aniosCat = (nac['Propiedad sin hipoteca'] ?? []).map(a => a[0])
+  const val = (s: Record<string, [number, number][]> | undefined, c: string, y: number) => s?.[c]?.find(a => a[0] === y)?.[1] ?? 0
+  const ult = anios.at(-1)!
+  const prop = ultimo(nac.Propiedad)![1], mer = ultimo(nac['Alquiler a precio de mercado'])?.[1] ?? 0
+  const prop0 = nac.Propiedad.find(a => a[0] === 2008)?.[1], mer0 = nac['Alquiler a precio de mercado'].find(a => a[0] === 2008)?.[1]
+  const ccaa = Object.entries(x.tenenciaCcaa ?? {}).filter(([k]) => k !== 'Total Nacional').map(([k, v]) => ({ k, n: ccaaCorta(k) ?? k, v: ultimo(v[cat])?.[1] ?? null })).filter(c => c.v != null).sort((a, b) => b.v! - a.v!)
+  const porCcaa = new Map(ccaa.map(c => [c.n, c.v]))
+  const edades = ['De 16 a 29 años', 'De 30 a 44 años', 'De 45 a 64 años', '65 y más años']
+  const ed = (g: string) => x.tenenciaEdad?.[`Ambos sexos · ${g} · Total Nacional`]
+  const joven = ed(edades[0]), mayor = ed(edades[3])
+  const tam = (x.tenenciaTamano ?? []).filter(r => r.tam !== 'Total (tamaño de municipio)')
+  const tams = [...new Set(tam.map(r => r.tam))]
+  const propTam = tams.map(t => { const tot = tam.find(r => r.tam === t && r.reg === 'Total (régimen de tenencia)')?.v, p = tam.find(r => r.tam === t && r.reg === 'En propiedad')?.v; return tot && p ? { t, v: (p / tot) * 100 } : null }).filter((r): r is { t: string; v: number } => !!r)
+  return <div className="graficos">
+    <Card t="¿Propietarios o inquilinos?" wide lead={<>En {ult}, el <b>{nf(prop, 1)} %</b> de los hogares vivía en una casa en propiedad y el <b>{nf(mer, 1)} %</b> en alquiler a precio de mercado.{prop0 != null && mer0 != null && <> En 2008 eran el {nf(prop0, 1)} % y el {nf(mer0, 1)} %: la propiedad {prop < prop0 ? 'baja' : 'sube'} y el alquiler {mer > mer0 ? 'sube' : 'baja'}.</>} Encuesta de Condiciones de Vida; el desglose por tipo empieza en {aniosCat[0]}.</>} fuente={<a href="https://www.ine.es/jaxiT3/Tabla.htm?t=9997" target="_blank" rel="noopener noreferrer">INE, ECV, tabla 9997</a>}>
+      <ColApiladas titulo="Cómo viven los hogares españoles" xs={aniosCat.map(String)} cadaX={2} total={false} unidad="% de hogares" fy={v => `${nf(v, 0)} %`} tramos={CAT.map(c => ({ id: c.id, nombre: c.nombre, color: c.color, v: aniosCat.map(y => val(nac, c.id, y)) }))} alto={240} />
+    </Card>
+    {joven && mayor && <Card t="Según la edad" lead={<>Entre 16 y 29 años, solo el <b>{nf(ultimo(joven.Propiedad)?.[1] ?? 0, 0)} %</b> vive en una casa propia y casi la mitad ({nf(ultimo(joven['Alquiler a precio de mercado'])?.[1] ?? 0, 0)} %) paga alquiler de mercado; a partir de los 65 años, el {nf(ultimo(mayor.Propiedad)?.[1] ?? 0, 0)} % es propietario. Edad de la persona de referencia del hogar.</>}>
+      <ColApiladas titulo="Tenencia por edad de la persona de referencia" xs={edades.map(g => g.replace('De ', '').replace(' años', '').replace('y más', '+'))} total={false} unidad="% de hogares" fy={v => `${nf(v, 0)} %`} tramos={CAT.map(c => ({ id: c.id, nombre: c.nombre, color: c.color, v: edades.map(g => ultimo(ed(g)?.[c.id])?.[1] ?? 0) }))} alto={220} />
+    </Card>}
+    <Card t="Por comunidades" lead={<>{cat === 'Propiedad' ? 'Hogares en propiedad' : 'Hogares en alquiler a precio de mercado'} en {ult}. {ccaa[0] && <>Más: <b>{ccaa[0].n}</b> ({nf(ccaa[0].v!, 1)} %); menos: {ccaa.at(-1)!.n} ({nf(ccaa.at(-1)!.v!, 1)} %). </>}El dato es de comunidad, no de provincia.</>}>
+      <div className="modo" role="radiogroup" aria-label="Qué ver">{([['Propiedad', 'Propiedad'], ['Alquiler a precio de mercado', 'Alquiler']] as const).map(([m, t]) => <button key={m} role="radio" aria-checked={cat === m} className={cat === m ? 'is-on' : ''} onClick={() => setCat(m)}>{t}</button>)}</div>
+      <MapaProvincias grupo={c => CCAA_DE_PROV[c] ?? null} claveGrupo="ccaa" valor={r => porCcaa.get(r) ?? null} fmt={v => `${nf(v, 1)} %`} titulo="Régimen de tenencia por comunidad" color={ACC} escala={ESCALA_CALOR} sel={sel} onSel={setSel} nota="Cuanto más alto, más oscuro y rojo." />
+      <Barras titulo="Ranking de comunidades" fmt={v => `${nf(v, 1)} %`} limite={19} items={ccaa.map(c => ({ id: c.k, nombre: c.n, valor: c.v!, color: ACC, destacado: sel === c.n, onClick: () => setSel(c.n) }))} />
+    </Card>
+    {propTam.length > 0 && <Card t="Pueblo o ciudad" lead={<>Según el Censo 2021, el {nf(propTam[0].v, 0)} % de los hogares de los municipios más pequeños vive en casa propia, frente al {nf(propTam.at(-1)!.v, 0)} % en las ciudades de más de 500.000 habitantes. Primera residencia.</>} fuente={<a href="https://www.ine.es/jaxiT3/Tabla.htm?t=59523" target="_blank" rel="noopener noreferrer">INE, Censos 2021, tabla 59523</a>}>
+      <Barras titulo="Hogares en propiedad según el tamaño del municipio" fmt={v => `${nf(v, 0)} %`} limite={12} items={propTam.map(r => ({ id: r.t, nombre: r.t.replace('Menos de 101 habitantes', 'Menos de 101').replace('Más de 500.000', 'Más de 500.000 hab.'), valor: r.v, color: ACC }))} />
+    </Card>}
+  </div>
+}
+
 /** El año cuya media vale 100 (el INE cambia de base: 2015, 2025…). */
 function baseDe(serie?: [string, number][]) {
   const m = new Map<string, number[]>(); for (const [p, v] of serie ?? []) m.set(String(p).slice(0, 4), [...(m.get(String(p).slice(0, 4)) ?? []), v])
@@ -187,8 +281,10 @@ function baseDe(serie?: [string, number][]) {
 export default function App() {
   const [d, setD] = useState<Datos | null>(null), [err, setErr] = useState(false)
   const [euribor, setEuribor] = useState<Ser | null>(null)
+  const [extra, setExtra] = useState<Extra>({})
   useEffect(() => {
     fetch('./data/vivienda.json').then(r => r.json()).then(setD, () => setErr(true))
+    fetch('./data/extra.json').then(r => r.json()).then(setExtra, () => {})
     fetch('../economia/data/series.json').then(r => r.json()).then(j => setEuribor(j.temas?.vivienda?.euribor?.d ?? null), () => {})
   }, [])
   const init = location.hash.slice(1) as Sec
@@ -215,13 +311,15 @@ export default function App() {
         {sec === 'compraventas' && <Compraventas d={d} />}
         {sec === 'hipotecas' && <Hipotecas d={d} euribor={euribor} />}
         {sec === 'alquiler' && <Alquiler d={d} />}
+        {sec === 'vacias' && <Vacias x={extra} />}
+        {sec === 'tenencia' && <Tenencia x={extra} />}
       </motion.div>
       {sec === 'resumen' && e?.gi && cv?.total && <Curiosidades titulo="¿Sabías que…?" items={[
         (() => { const a = e.gi!.at(-1)!, b = e.gi!.find(x => x[0].startsWith('2015')); return b && <>Desde 2015 la vivienda se ha encarecido un <b>{nf((a[1] / b[1] - 1) * 100, 0)} %</b>.</> })(),
         (() => { const año = new Map<string, number>(); for (const [p, v] of cv.total!) año.set(p.slice(0, 4), (año.get(p.slice(0, 4)) ?? 0) + v); const c = [...año].filter(([y]) => +y < new Date().getFullYear()); const m = c.reduce((x, y) => (y[1] > x[1] ? y : x)), n = c.reduce((x, y) => (y[1] < x[1] ? y : x)); return <>El año con más ventas fue <b>{m[0]}</b> ({nf(m[1])} viviendas) y el de menos, {n[0]} ({nf(n[1])}).</> })(),
         cv.nueva && <>De cada 10 casas que se venden, {nf((suma12(cv.nueva) / suma12(cv.total)) * 10, 0)} son nuevas: el resto, de segunda mano.</>,
       ]} />}
-      <Fuentes ids={[]} extra={[{ n: 'INE · Índice de precios de vivienda', u: `https://www.ine.es/jaxiT3/Tabla.htm?t=${d.tablas.ipv}` }, { n: 'INE · Transmisiones de derechos de la propiedad', u: `https://www.ine.es/jaxiT3/Tabla.htm?t=${d.tablas.compraventas}` }, { n: 'INE · Hipotecas', u: `https://www.ine.es/jaxiT3/Tabla.htm?t=${d.tablas.hipotecas}` }, { n: 'INE · Índice de alquiler', u: `https://www.ine.es/jaxiT3/Tabla.htm?t=${d.tablas.alquiler}` }]} />
+      <Fuentes ids={[]} extra={[{ n: 'INE · Índice de precios de vivienda', u: `https://www.ine.es/jaxiT3/Tabla.htm?t=${d.tablas.ipv}` }, { n: 'INE · Transmisiones de derechos de la propiedad', u: `https://www.ine.es/jaxiT3/Tabla.htm?t=${d.tablas.compraventas}` }, { n: 'INE · Hipotecas', u: `https://www.ine.es/jaxiT3/Tabla.htm?t=${d.tablas.hipotecas}` }, { n: 'INE · Índice de alquiler', u: `https://www.ine.es/jaxiT3/Tabla.htm?t=${d.tablas.alquiler}` }, { n: 'INE · Censos 2021: viviendas por intensidad de uso', u: 'https://www.ine.es/jaxiT3/Tabla.htm?t=59531' }, { n: 'INE · Encuesta de Condiciones de Vida: tenencia', u: 'https://www.ine.es/jaxiT3/Tabla.htm?t=9997' }]} />
       <p className="src">Datos del INE descargados cada semana. El precio es un índice, no euros por metro cuadrado: el valor por metro cuadrado del Ministerio de Vivienda llegará en una próxima versión.</p>
     </main>
   )
