@@ -53,7 +53,9 @@ jobs:
       - name: Vivienda (INE y Ministerio de Vivienda), los martes
         if: github.event.schedule == '43 15 * * 2' || github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[datos]') || contains(github.event.head_commit.message, '[vivienda]')
         continue-on-error: true
-        run: node scripts/vivienda.mjs
+        run: |
+          node scripts/vivienda.mjs
+          node scripts/vivienda-extra.mjs
       - name: Cuentas públicas (Eurostat), los martes
         if: github.event.schedule == '43 15 * * 2' || github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[datos]') || contains(github.event.head_commit.message, '[cuentas]')
         continue-on-error: true
