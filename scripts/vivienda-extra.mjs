@@ -22,7 +22,7 @@ try {
   const d = await tabla(59531, 1)
   const ter = new Map()
   for (const s of d) {
-    const i = s.Nombre.indexOf(', ')
+    const i = s.Nombre.lastIndexOf(', ')
     if (i < 0) continue
     const nom = s.Nombre.slice(0, i), v = s.Nombre.slice(i + 2)
     const val = s.Data?.[0]?.Valor
@@ -73,7 +73,7 @@ try { out.tenenciaEdad = await tenencia(9994, 25) } catch (e) { out.errorEdad = 
 // 3) Censo 2021: tenencia por tamaño del municipio (59523) y principal / no principal
 try {
   const d = await tabla(59523, 1)
-  out.tenenciaTamano = d.map(s => { const p = s.Nombre.split(', '); return { reg: p[1], tam: p[2], v: +s.Data?.[0]?.Valor } }).filter(f => f.tam && f.v && f.reg && f.reg !== 'Total (régimen de tenencia)' || (f.reg === 'Total (régimen de tenencia)' && f.tam))
+  out.tenenciaTamano = d.map(s => { const p = s.Nombre.split(', '); return { ter: p[0], reg: p[1], tam: p[2], v: +s.Data?.[0]?.Valor } }).filter(f => f.ter === 'Total Nacional' && f.tam && f.reg && f.v).map(({ reg, tam, v }) => ({ reg, tam, v }))
 } catch (e) { out.errorTamano = String(e.message) }
 writeFileSync(here('../public/vivienda/data/extra.json'), JSON.stringify(out))
 console.log('ok', Object.keys(out))
