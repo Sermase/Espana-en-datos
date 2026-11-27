@@ -43,13 +43,13 @@
 "                    Temporary protection of unaccompanied minors"	"migr_asyumtp"	"folder"	" "	" "	" "	" "	
 "                        Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - annual aggregated data"	"migr_asyumtpfa"	"dataset"	"10.11.2026"	"10.11.2026"	"2022"	"2025"	462296
 "                        Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - quarterly data"	"migr_asyumtpfq"	"dataset"	"10.11.2026"	"10.11.2026"	"2022-Q1"	"2026-Q3"	2211744
-"                        Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - monthly data"	"migr_asyumtpfm"	"dataset"	"18.11.2026"	"13.11.2026"	"2022-03"	"2026-10"	6380232
-"                        Unaccompanied minors benefiting from temporary protection at the end of the month by citizenship, age and sex - monthly data"	"migr_asyumtpsm"	"dataset"	"18.11.2026"	"13.11.2026"	"2022-03"	"2026-10"	6059726
+"                        Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - monthly data"	"migr_asyumtpfm"	"dataset"	"26.11.2026"	"13.11.2026"	"2022-03"	"2026-10"	6396712
+"                        Unaccompanied minors benefiting from temporary protection at the end of the month by citizenship, age and sex - monthly data"	"migr_asyumtpsm"	"dataset"	"26.11.2026"	"13.11.2026"	"2022-03"	"2026-10"	6080326
 "                        Decisions withdrawing temporary protection to unaccompanied minors by citizenship and reason - quarterly data"	"migr_asyumtpwq"	"dataset"	"24.11.2026"	"09.10.2026"	"2022-Q1"	"2026-Q3"	593280
 "                    Decisions granting temporary protection by citizenship, age and sex - annual aggregated data"	"migr_asytpfa"	"dataset"	"26.10.2026"	"12.01.2026"	"2022"	"2025"	807342
 "                    Decisions granting temporary protection by citizenship, age and sex - quarterly data"	"migr_asytpfq"	"dataset"	"10.11.2026"	"04.11.2026"	"2022-Q1"	"2026-Q3"	3874270
-"                    Decisions granting temporary protection by citizenship, age and sex - monthly data"	"migr_asytpfm"	"dataset"	"18.11.2026"	"04.11.2026"	"2022-03"	"2026-10"	11234620
-"                    Beneficiaries of temporary protection at the end of the month by citizenship, age and sex - monthly data"	"migr_asytpsm"	"dataset"	"18.11.2026"	"04.11.2026"	"2022-03"	"2026-10"	11202940
+"                    Decisions granting temporary protection by citizenship, age and sex - monthly data"	"migr_asytpfm"	"dataset"	"26.11.2026"	"04.11.2026"	"2022-03"	"2026-10"	11267580
+"                    Beneficiaries of temporary protection at the end of the month by citizenship, age and sex - monthly data"	"migr_asytpsm"	"dataset"	"26.11.2026"	"04.11.2026"	"2022-03"	"2026-10"	11235900
 "                    Decisions withdrawing temporary protection by citizenship and reason - quarterly data"	"migr_asytpwq"	"dataset"	"24.11.2026"	"09.10.2026"	"2022-Q1"	"2026-Q3"	609760
 "                        Temporary employees by educational attainment level"	"lfsa_etgaed"	"dataset"	"30.10.2026"	"17.04.2026"	"1983"	"2025"	255104
 "                            Part-time employment and temporary contracts - annual data (1993–2020)"	"lfsi_pt_a_h"	"dataset"	"20.07.2026"	"08.01.2026"	"1993"	"2020"	71105
@@ -191,13 +191,13 @@
 "                Temporary protection statistics on children"	"mci_asytp"	"folder"	" "	" "	" "	" "	
 "                    Decisions granting temporary protection by citizenship, age and sex - annual aggregated data"	"migr_asytpfa"	"dataset"	"26.10.2026"	"12.01.2026"	"2022"	"2025"	807342
 "                    Decisions granting temporary protection by citizenship, age and sex - quarterly data"	"migr_asytpfq"	"dataset"	"10.11.2026"	"04.11.2026"	"2022-Q1"	"2026-Q3"	3874270
-"                    Decisions granting temporary protection by citizenship, age and sex - monthly data"	"migr_asytpfm"	"dataset"	"18.11.2026"	"04.11.2026"	"2022-03"	"2026-10"	11234620
-"                    Beneficiaries of temporary protection at the end of the month by citizenship, age and sex - monthly data"	"migr_asytpsm"	"dataset"	"18.11.2026"	"04.11.2026"	"2022-03"	"2026-10"	11202940
+"                    Decisions granting temporary protection by citizenship, age and sex - monthly data"	"migr_asytpfm"	"dataset"	"26.11.2026"	"04.11.2026"	"2022-03"	"2026-10"	11267580
+"                    Beneficiaries of temporary protection at the end of the month by citizenship, age and sex - monthly data"	"migr_asytpsm"	"dataset"	"26.11.2026"	"04.11.2026"	"2022-03"	"2026-10"	11235900
 "                Temporary protection statistics on unaccompanied minors"	"mci_asyumtp"	"folder"	" "	" "	" "	" "	
 "                    Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - annual aggregated data"	"migr_asyumtpfa"	"dataset"	"10.11.2026"	"10.11.2026"	"2022"	"2025"	462296
 "                    Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - quarterly data"	"migr_asyumtpfq"	"dataset"	"10.11.2026"	"10.11.2026"	"2022-Q1"	"2026-Q3"	2211744
-"                    Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - monthly data"	"migr_asyumtpfm"	"dataset"	"18.11.2026"	"13.11.2026"	"2022-03"	"2026-10"	6380232
-"                    Unaccompanied minors benefiting from temporary protection at the end of the month by citizenship, age and sex - monthly data"	"migr_asyumtpsm"	"dataset"	"18.11.2026"	"13.11.2026"	"2022-03"	"2026-10"	6059726
+"                    Decisions granting temporary protection to unaccompanied minors by citizenship, age and sex - monthly data"	"migr_asyumtpfm"	"dataset"	"26.11.2026"	"13.11.2026"	"2022-03"	"2026-10"	6396712
+"                    Unaccompanied minors benefiting from temporary protection at the end of the month by citizenship, age and sex - monthly data"	"migr_asyumtpsm"	"dataset"	"26.11.2026"	"13.11.2026"	"2022-03"	"2026-10"	6080326
 "                    Persons at risk of poverty or social exclusion by age and sex"	"ilc_peps01n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	90372
 "                    Persons at risk of poverty or social exclusion by age, sex and group of country of birth"	"ilc_peps06n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	179841
 "                    Persons at risk of poverty or social exclusion by age, sex and group of citizenship"	"ilc_peps05n"	"dataset"	"20.10.2026"	"30.04.2026"	"2015"	"2025"	134638
