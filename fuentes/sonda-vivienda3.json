@@ -1,0 +1,28 @@
+{
+ "https://www.catastro.hacienda.gob.es/esp/estadistica_3.asp": {
+  "tipo": "text/html",
+  "bytes": 16044,
+  "enlaces": [],
+  "inicio": " Portal del Catastro: Página no encontrada icono ayuda Dirección General del Catastro ¿Qué es el Catastro? Conozca el Catastro Organigrama Plan estratégico. Dirección por Objetivos Carta de Servicios Memoria Anual El Catastro en cifras Contratación Usos y utilidades Usos fiscales Otros usos Empleo público Convocatorias Empleo público del Ministerio de Hacienda Empleo público de la AGE Difusión de la información Acceso a la información Productos Informes 2015-2020 mercado Castilla La Mancha Estadísticas Revista CT catastro Otras publicaciones Colaboración administrativa Manual para la colaboración con EELL'});\" target=\"_blank\">Manual para la colaboración con EELL Convenios de colaboración Deber de colaboración e intercambio de información Herramientas informáticas para la colaboración Contáctenos Buscar Inicio Página no encontrada no hemos encontrado la página Aviso legal Calendario Mapa web Accesibilidad Enlaces de interés Dirección General del Catastro Paseo de la Castellana, nº272. 28046, Madrid (España) Exención de responsabilidad El portal de la Dirección General del Catastro ofrece traducciones de sus contenidos a través del servicio automatizado gratuito Google Translate. Dado que Google Translate es un servicio de traducción externa, no se controla la calidad y exactitud del contenido traducido. La Dirección General del Catastro no respalda directamente el servicio de traducción, ni indica que sea la única solución disponible. La Dirección General del Catastro no se ha",
+  "urls": []
+ },
+ "https://datos.gob.es/es/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares.csv": {
+  "tipo": "text/html; charset=utf-8",
+  "bytes": 2613,
+  "enlaces": [],
+  "inicio": "URL,TIPO DE ENTIDAD,NOTA,IDENTIFICADOR,TÍTULO,DESCRIPCIÓN,TEMÁTICAS,ETIQUETAS,FECHA DE CREACIÓN,FECHA DE ÚLTIMA MODIFICACIÓN,FRECUENCIA DE ACTUALIZACIÓN,IDIOMAS,ÓRGANO PUBLICADOR,CONDICIONES DE USO,COBERTURA GEOGRÁFICA,COBERTURA TEMPORAL,VIGENCIA DEL RECURSO,RECURSOS RELACIONADOS,NORMATIVA,OTRO IDENTIFICADOR,DISTRIBUCIONES,URL DE ACCESO https://datos.gob.es/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares,dataset,ES_DCAT-AP-ES,,[es]Estadísticas catastrales: Catastro Inmobiliario Titulares,\"[es]La Dirección General del Catastro tiene atribuida la competencia de la generación de las Estadísticas Catastrales, incluidas estas dentro del Plan Estadístico Nacional. Las Estadísticas Catastrales contienen información acerca de las principales variables del Catastro Inmobiliario, existiendo un apartado específico para cada tipo de bienes: urbano, rústico y de características especiales, así como para los datos correspondientes a la titularidad catastral. Catastro Inmobiliario Titulares incluye el número de titulares en urbana y rústica (a nivel de CCAA y provincia se ofrece desglose según número de bienes inmuebles). El R.D. Legislativo 1/2004, de 5 de marzo, por el que se aprueba el Texto refundido de la Ley del Catastro Inmobiliario (TRLCI), en su artículo 4, establece que la formación y el mantenimiento del Catastro Inmobiliario, así como la difusión de la información catastral es competencia exclusiva del Estado a través de la Dirección General del Catas",
+  "urls": [
+   "https://www.catastro.hacienda.gob.es/esp/estadistica_3.asp[MEDIA_TYPE]CSV",
+   "https://www.catastro.hacienda.gob.es/esp/estadistica_3.asp[MEDIA_TYPE]XLS"
+  ]
+ },
+ "https://datos.gob.es/es/catalogo/e05250001-estadisticas-catastrales-catastro-inmobiliario-titulares.jsonld": {
+  "tipo": "text/html; charset=utf-8",
+  "bytes": 11091,
+  "enlaces": [],
+  "inicio": "{ \"@context\": { \"adms\": \"http://www.w3.org/ns/adms#\", \"brick\": \"https://brickschema.org/schema/Brick#\", \"csvw\": \"http://www.w3.org/ns/csvw#\", \"dc\": \"http://purl.org/dc/elements/1.1/\", \"dcam\": \"http://purl.org/dc/dcam/\", \"dcat\": \"http://www.w3.org/ns/dcat#\", \"dcatap\": \"http://data.europa.eu/r5r/\", \"dcmitype\": \"http://purl.org/dc/dcmitype/\", \"dct\": \"http://purl.org/dc/terms/\", \"doap\": \"http://usefulinc.com/ns/doap#\", \"eli\": \"http://data.europa.eu/eli/ontology#\", \"foaf\": \"http://xmlns.com/foaf/0.1/\", \"geo\": \"http://www.opengis.net/ont/geosparql#\", \"locn\": \"http://www.w3.org/ns/locn#\", \"odrl\": \"http://www.w3.org/ns/odrl/2/\", \"org\": \"http://www.w3.org/ns/org#\", \"owl\": \"http://www.w3.org/2002/07/owl#\", \"prof\": \"http://www.w3.org/ns/dx/prof/\", \"prov\": \"http://www.w3.org/ns/prov#\", \"qb\": \"http://purl.org/linked-data/cube#\", \"rdf\": \"http://www.w3.org/1999/02/22-rdf-syntax-ns#\", \"rdfs\": \"http://www.w3.org/2000/01/rdf-schema#\", \"schema\": \"https://schema.org/\", \"schema1\": \"http://schema.org/\", \"sh\": \"http://www.w3.org/ns/shacl#\", \"skos\": \"http://www.w3.org/2004/02/skos/core#\", \"sosa\": \"http://www.w3.org/ns/sosa/\", \"spdx\": \"http://spdx.org/rdf/terms#\", \"ssn\": \"http://www.w3.org/ns/ssn/\", \"time\": \"http://www.w3.org/2006/time#\", \"vann\": \"http://purl.org/vocab/vann/\", \"vcard\": \"http://www.w3.org/2006/vcard/ns#\", \"voaf\": \"http://purl.org/vocommons/voaf#\", \"void\": \"http://rdfs.org/ns/void#\", \"wgs\": \"https://www.w3.org/2003/01/geo/wgs84_pos#\", \"xsd\": \"http://www.w3.org/2001/XMLSchema#\" }, \"@gra",
+  "urls": [
+   "http://www.w3.org/ns/csv"
+  ]
+ }
+}
