@@ -29,7 +29,7 @@
   "53456": "Coste unitario del agua [] | Suministro de agua [] | Alcantarillado y Depuración []",
   "53457": "Longitud de la red de suministro por habitante (metros/habitante) [] | Longitud de la red de alcantarillado por habitante (metros/habitante) [] | Pérdidas reales por km de red de suministro (m3/km/año) [] | Número de tanques de tormenta []",
   "53458": "Nacional. Alimentos. Índice. [] | Andalucía. Alimentos. Índice. [] | Aragón. Alimentos. Índice. [] | Asturias, Principado de. Alimentos. Índice. [] | Balears, Illes. Alimentos. Índice. [] | Canarias. Alimentos. Índice. [] | Cantabria. Alimentos. Índice. [] | Castilla y León. Alimentos. Índice. [] | Castilla - La Mancha. Alimentos. Índice. [] | Cataluña. Alimentos. Índice. [] | Comunitat Valenciana. Alimentos. Índice. [] | Extremadura. Alimentos. Índice. []",
-  "53459": "Nacional. Alimentos. Índice. [] | Albacete. Alimentos. Índice. [] | Alicante/Alacant. Alimentos. Índice. [] | Almería. Alimentos. Índice. [] | Araba/Álava. Alimentos. Índice. [] | Asturias. Alimentos. Índice. [] | Ávila. Alimentos. Índice. [] | Badajoz. Alimentos. Índice. [] | Balears, Illes. Alimentos. Índice. [] | Barcelona. Alimentos. Índice. [] | Bizkaia. Alimentos. Índice. [] | Burgos. Alimentos. Índice. []",
+  "53459": "ERROR j is not iterable",
   "_serieCruda": "{\"Nombre\":\"España, Volumen de aguas residuales tratadas\",\"MetaData\":[{\"T3_Variable\":\"Total Nacional\",\"Nombre\":\"España\",\"Codigo\":\"00\"},{\"T3_Variable\":\"tipo de indicador\",\"Nombre\":\"Volumen de aguas residuales tratadas\",\"Codigo\":\"volumendeaguasresidualestratadas\"}],\"Data\":[{\"NombrePeriodo\":\"2024\",\"Valor\":17180033}]}",
   "_ok": "2024 (y 2022), 18 territorios"
  },
