@@ -1,0 +1,102 @@
+{
+ "ign": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<rss xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:gml=\"http://www.opengis.net/gml\" xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\" xmlns:georss=\"http://www.georss.org/georss\" xmlns:taxo=\"http://purl.org/rss/1.0/modules/taxonomy/\" version=\"2.0\">\r\n  <channel>\r\n    <title>GeoRSS Sismología IGN</title>\r\n    <link>http://www.ign.es/ign/rss</link>\r\n    <description>Este canal te permite consultar los terremotos ocurridos en España durante los últimos diez días. Esta información está sujeta a modificaciones como consecuencia de la continua revisión del análisis sísmico.</description>\r\n    <language>es</language>\r\n    <dc:language>es</dc:language>\r\n    <item>\r\n      <title>-Info.terremoto: 27/11/2026 2:44:33</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xfgwf</link>\r\n      <description>Se ha producido un terremoto de magnitud 4.2 en ATLÁNTICO-MADEIRA en la fecha 27/11/2026 2:44:33 en la siguiente localización: 32.4199,-17.1873</description>\r\n      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xfgwf</guid>\r\n      <geo:lat>32.4199</geo:lat>\r\n      <geo:long>-17.1873</geo:long>\r\n    </item>\r\n    <item>\r\n      <title>-Info.terremoto: 27/11/2026 1:58:16</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xffhe</link>\r\n      <description>Se ha producido un terremoto de magnitud 3.4 en SW CABO DE SAN VICENTE en la fecha 27/11/2026 1:58:16 en la siguiente localización: 36.4004,-11.2704</description>\r\n      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xffhe</guid>\r\n      <geo:lat>36.4004</geo:lat>\r\n      <geo:long>-11.2704</geo:long>\r\n    </item>\r\n    <item>\r\n      <title>-Info.terremoto: 27/11/2026 1:54:48</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xffef</link>\r\n      <description>Se ha producido un terremoto de magnitud 3.6 en AZORES-CABO DE SAN VICENTE en la fecha 27/11/2026 1:54:48 en la siguiente localización: 37.1913,-14.5598</description>\r\n      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xffef</guid>\r\n      <geo:lat>37.1913</geo:lat>\r\n      <geo:long>-14.5598</geo:long>\r\n    </item>\r\n    <item>\r\n      <title>-Info.terremoto: 27/11/2026 1:13:43</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xfduq</link>\r\n      <description>Se ha producido un terremoto de magnitud 3.0 en W EL PINAR DE EL HIERRO.IHI en la fecha 27/11/2026 1:13:43 en la siguiente localización: 27.6754,-18.1784</description>\r\n      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xfduq</guid>\r\n      <geo:lat>27.6754</geo:lat>\r\n      <geo:long>-18.1784</geo:long>\r\n    </item>\r\n    <item>\r\n      <title>-Info.terremoto: 26/11/2026 10:46:15</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xebeu</link>\r\n      <description>Se ha producido un terremoto de magnitud 3.3 en NE VALLE DE BARDAJÍ.HU en la fecha 26/11/2026 10:46:15 en la siguiente localización: 42.4504,0.4714</description>\r\n      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xebeu</guid>\r\n      <geo:lat>42.4504</geo:lat>\r\n      <geo:long>0.4714</geo:long>\r\n    </item>\r\n    <item>\r\n      <title>-Info.terremoto: 26/11/2026 8:57:43</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xdxpr</link>\r\n      <description>Se ha producido un terremoto de magnitud 3.6 en NW CHLEF.ARG en la fecha 26/11/2026 8:57:43 en la siguiente localización: 36.353,1.0118</description>\r\n      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xdxpr</guid>\r\n      <geo:lat>36.353</geo:lat>\r\n      <geo:long>1.0118</geo:long>\r\n    </item>\r\n    <item>\r\n      <title>-Info.terremoto: 25/11/2026 13:45:02</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xclov</link>\r\n      <description>Se ha producido un terremoto de magnitud 2.8 en S OUED NJA.MAC en la fecha 25/11/2026 13:45:02 en la siguiente localización: 33.7433,-5.1459</description>\r\n      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xclov</guid>\r\n      <geo:lat>33.7433</geo:lat>\r\n      <geo:long>-5.1459</geo:long>\r\n    </item>\r\n    <item>\r\n      <title>-Info.terremoto: 25/11/2026 8:32:54</title>\r\n      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2026xcbhb</link>\r\n ",
+ "meteoalarm": {
+  "claves": [
+   "warnings"
+  ],
+  "n": 190,
+  "forma": "{alert: {identifier: \"2.49.0.0.724.0.ES.261122073808.711501COCO221433088\", incidents: \"Update\", info: [2] {area: [1] {areaDesc: \"Costa - Noroeste de A Coruña\", geocode: [1] {…}}, category: [1] \"Met\", certainty: \"Likely\", contact: \"AEMET\", description: \"Viento del Oeste de 50 a 61 km/h (fuerza 7) hasta mediodía., effective: \"2026-11-22T08:34:53+01:00\", event: \"Aviso de costeros de nivel amarillo\", expires: \"2026-11-22T14:59:59+01:00\", headline: \"Aviso de costeros de nivel amarillo. Costa - Noroeste de A , instruction: \"Esté atento. Manténgase informado de la predicción meteorol, language: \"es-ES\", onset: \"2026-11-22T08:00:00+01:00\", parameter: [2] {value: \"2; yellow; Moderate\", valueName: \"awareness_level\"}, responseType: [1] \"Monitor\", senderName: \"AEMET. Agencia Estatal de Meteorología\", severity: \"Moderate\", urgency: \"Immediate\", web: \"https://www.aemet.es/es/eltiempo/prediccion/avisos\"}, msgType: \"Update\", references: \"http://www.aemet.es,2.49.0.0.724.0.ES.261121102608.711501CO, scope: \"Public\", sender: \"http://www.aemet.es\", sent: \"2026-11-22T07:38:08+00:00\", status: \"Actual\"}, uuid: \"e7f5cee4-eb9e-4775-b2b4-6d56094e4919\"}",
+  "ejemplos": [
+   "{\"alert\":{\"identifier\":\"2.49.0.0.724.0.ES.261122073808.711501COCO221433088\",\"incidents\":\"Update\",\"info\":[{\"area\":[{\"areaDesc\":\"Costa - Noroeste de A Coruña\",\"geocode\":[{\"value\":\"ES846\",\"valueName\":\"EMMA_ID\"}]}],\"category\":[\"Met\"],\"certainty\":\"Likely\",\"contact\":\"AEMET\",\"description\":\"Viento del Oeste de 50 a 61 km/h (fuerza 7) hasta mediodía. Mar combinada del Oeste de 4 a 5 m.\",\"effective\":\"2026-11-22T08:34:53+01:00\",\"event\":\"Aviso de costeros de nivel amarillo\",\"expires\":\"2026-11-22T14:59:59+01:00\",\"headline\":\"Aviso de costeros de nivel amarillo. Costa - Noroeste de A Coruña\",\"instruction\":\"Esté atento. Manténgase informado de la predicción meteorológica más actualizada. Se pueden producir daños moderados a personas y bienes, especialmente a aquellos vulnerables o en zonas expuestas al fenómeno.\",\"language\":\"es-ES\",\"onset\":\"2026-11-22T08:00:00+01:00\",\"parameter\":[{\"value\":\"2; yellow; Moderate\",\"valueName\":\"awareness_level\"},{\"value\":\"7; coastalevent\",\"valueName\":\"awareness_type\"}],\"responseType\":[\"Monitor\"],\"senderName\":\"AEMET. Agencia Estatal de Meteorología\",\"severity\":\"Moderate\",\"urgency\":\"Immediate\",\"web\":\"https://www.aemet.es/es/eltiempo/prediccion/avisos\"},{\"area\":[{\"areaDesc\":\"Costa - Noroeste de A Coruña\",\"geocode\":[{\"value\":\"ES846\",\"valueName\":\"EMMA_ID\"}]}],\"category\":[\"Met\"],\"certainty\":\"Likely\",\"contact\":\"AEMET\",\"description\":\"Viento del Oeste de 50 a 61 km/h (fuerza 7) hasta mediodía. Mar combinada del Oeste de 4 a 5 m.\",\"effective\":\"2026-11-22T08:34:53+01:00\",\"event\":\"Moderate coastalevent warning\",\"expires\":\"2026-11-22T14:59:59+01:00\",\"headline\":\"Moderate coastalevent warning. Costa - Noroeste de A Coruña\",\"instruction\":\"Be aware, keep up to date with the latest weather forecast. Moderate damages to people and properties may occur, especially to those vul",
+   "{\"alert\":{\"identifier\":\"2.49.0.0.724.0.ES.261122073808.711502COCO221133088\",\"incidents\":\"Update\",\"info\":[{\"area\":[{\"areaDesc\":\"Costa - Oeste de A Coruña\",\"geocode\":[{\"value\":\"ES847\",\"valueName\":\"EMMA_ID\"}]}],\"category\":[\"Met\"],\"certainty\":\"Likely\",\"contact\":\"AEMET\",\"description\":\"Mar combinada del Oeste de 4 a 5 m.\",\"effective\":\"2026-11-22T08:34:53+01:00\",\"event\":\"Aviso de costeros de nivel amarillo\",\"expires\":\"2026-11-22T11:59:59+01:00\",\"headline\":\"Aviso de costeros de nivel amarillo. Costa - Oeste de A Coruña\",\"instruction\":\"Esté atento. Manténgase informado de la predicción meteorológica más actualizada. Se pueden producir daños moderados a personas y bienes, especialmente a aquellos vulnerables o en zonas expuestas al fenómeno.\",\"language\":\"es-ES\",\"onset\":\"2026-11-22T08:00:00+01:00\",\"parameter\":[{\"value\":\"2; yellow; Moderate\",\"valueName\":\"awareness_level\"},{\"value\":\"7; coastalevent\",\"valueName\":\"awareness_type\"}],\"responseType\":[\"Monitor\"],\"senderName\":\"AEMET. Agencia Estatal de Meteorología\",\"severity\":\"Moderate\",\"urgency\":\"Immediate\",\"web\":\"https://www.aemet.es/es/eltiempo/prediccion/avisos\"},{\"area\":[{\"areaDesc\":\"Costa - Oeste de A Coruña\",\"geocode\":[{\"value\":\"ES847\",\"valueName\":\"EMMA_ID\"}]}],\"category\":[\"Met\"],\"certainty\":\"Likely\",\"contact\":\"AEMET\",\"description\":\"Mar combinada del Oeste de 4 a 5 m.\",\"effective\":\"2026-11-22T08:34:53+01:00\",\"event\":\"Moderate coastalevent warning\",\"expires\":\"2026-11-22T11:59:59+01:00\",\"headline\":\"Moderate coastalevent warning. Costa - Oeste de A Coruña\",\"instruction\":\"Be aware, keep up to date with the latest weather forecast. Moderate damages to people and properties may occur, especially to those vulnerable or in exposed areas.\",\"language\":\"en-GB\",\"onset\":\"2026-11-22T08:00:00+01:00\",\"parameter\":[{\"value\":\"2; yellow; Moderate\",\"va"
+  ],
+  "valores": {
+   "awareness_level": [
+    "2; yellow; Moderate",
+    "3; orange; Severe",
+    "1; green; Minor"
+   ],
+   "awareness_type": [
+    "7; coastalevent",
+    "5; high-temperature",
+    "6; low-temperature",
+    "2; snow-ice",
+    "4; Fog",
+    "10; Rain",
+    "3; Thunderstorm",
+    "9; avalanches",
+    "1; Wind"
+   ],
+   "severity": [
+    "Moderate",
+    "Severe",
+    "Minor"
+   ],
+   "event": [
+    "Aviso de costeros de nivel amarillo",
+    "Moderate coastalevent warning",
+    "Aviso de costeros de nivel naranja",
+    "Severe coastalevent warning",
+    "Aviso de temperaturas máximas de nivel verde",
+    "Minor high-temperature warning",
+    "Aviso de temperaturas mínimas de nivel verde",
+    "Minor low-temperature warning",
+    "Aviso de nevadas de nivel verde",
+    "Minor snow warning",
+    "Aviso de costeros de nivel verde",
+    "Minor coastalevent warning",
+    "Aviso de nieblas de nivel verde",
+    "Minor fog warning",
+    "Aviso de lluvias de nivel verde",
+    "Minor rain warning",
+    "Aviso de tormentas de nivel verde",
+    "Minor thunderstorm warning",
+    "Aviso de aludes de nivel verde",
+    "Minor avalanches warning",
+    "Aviso de vientos de nivel verde",
+    "Minor wind warning",
+    "Aviso de lluvias de nivel amarillo",
+    "Moderate rain warning",
+    "Aviso de galernas de nivel verde"
+   ],
+   "lang": [
+    "es-ES",
+    "en-GB"
+   ]
+  },
+  "geo": [
+   "[{\"areaDesc\":\"Costa - Noroeste de A Coruña\",\"geocode\":[{\"value\":\"ES846\",\"valueName\":\"EMMA_ID\"}]}]",
+   "[{\"areaDesc\":\"Costa - Oeste de A Coruña\",\"geocode\":[{\"value\":\"ES847\",\"valueName\":\"EMMA_ID\"}]}]",
+   "[{\"areaDesc\":\"Costa - Suroeste de A Coruña\",\"geocode\":[{\"value\":\"ES848\",\"valueName\":\"EMMA_ID\"}]}]"
+  ],
+  "conGeometria": 0
+ },
+ "boe": "(s.departamento ?? []).map is not a function",
+ "openmeteo": "fetch failed",
+ "dgtInfocar": "HTTP 502",
+ "dgtInfocarHttp": "HTTP 502",
+ "dgtNap": "HTTP 404",
+ "dgtNapIni": {
+  "tipo": "text/html; charset=utf-8",
+  "bytes": 28185,
+  "inicio": "<!DOCTYPE html>\n<!--[if IE 7]> <html lang=\"es\" class=\"ie ie7\"> <![endif]-->\n<!--[if IE 8]> <html lang=\"es\" class=\"ie ie8\"> <![endif]-->\n<!--[if IE 9]> <html lang=\"es\" class=\"ie9\"> <![endif]-->\n<!--[if gt IE 8]><!--> <html lang=\"es\"> <!--<![endif]-->\n  <head>\n    <!--[if lte ie 8]><script type=\"text/javascript\" src=\"/fanstatic/vendor/:version:2024-02-19T13:19:51.12/html5.min.js\"></script><![endif]-->\n<link rel=\"stylesheet\" type=\"text/css\" href=\"/fanstatic/vendor/:version:2024-02-19T13:19:51.12/select2/select2.min.css\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"/fanstatic/css/:version:2024-02-19T13:19:51.12/main.min.css\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"/fanstatic/vendor/:v"
+ },
+ "dgtEtraffic": {
+  "tipo": "text/html",
+  "bytes": 5041,
+  "inicio": "<!doctype html>\n<html lang=\"es\">\n\t<head>\n\t\t<meta charset=\"UTF-8\" />\n\t\t<link rel=\"preconnect\" href=\"https://www.ign.es\" />\n\t\t<link rel=\"icon\" id=\"app-favicon\" href=\"\" />\n\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n\t\t<title>Etraffic</title>\n\t\t<script type=\"module\" crossorigin src=\"/etrafficWEB/assets/js/index-Cgw2qpEG.js\"></script>\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/i18n-C0AU9P0C.js\">\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/ui-CyuMv1Wl.js\">\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/leaflet-BFAKfZ46.js\">\n\t\t<link rel=\"stylesheet\" crossorigin href=\"/etrafficWEB/assets/css/index"
+ },
+ "dgtEtrafficApi": {
+  "tipo": "text/html",
+  "bytes": 5041,
+  "inicio": "<!doctype html>\n<html lang=\"es\">\n\t<head>\n\t\t<meta charset=\"UTF-8\" />\n\t\t<link rel=\"preconnect\" href=\"https://www.ign.es\" />\n\t\t<link rel=\"icon\" id=\"app-favicon\" href=\"\" />\n\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n\t\t<title>Etraffic</title>\n\t\t<script type=\"module\" crossorigin src=\"/etrafficWEB/assets/js/index-Cgw2qpEG.js\"></script>\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/i18n-C0AU9P0C.js\">\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/ui-CyuMv1Wl.js\">\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/leaflet-BFAKfZ46.js\">\n\t\t<link rel=\"stylesheet\" crossorigin href=\"/etrafficWEB/assets/css/index"
+ },
+ "dgtWms": {
+  "tipo": "text/html",
+  "bytes": 5041,
+  "inicio": "<!doctype html>\n<html lang=\"es\">\n\t<head>\n\t\t<meta charset=\"UTF-8\" />\n\t\t<link rel=\"preconnect\" href=\"https://www.ign.es\" />\n\t\t<link rel=\"icon\" id=\"app-favicon\" href=\"\" />\n\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n\t\t<title>Etraffic</title>\n\t\t<script type=\"module\" crossorigin src=\"/etrafficWEB/assets/js/index-Cgw2qpEG.js\"></script>\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/i18n-C0AU9P0C.js\">\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/ui-CyuMv1Wl.js\">\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/leaflet-BFAKfZ46.js\">\n\t\t<link rel=\"stylesheet\" crossorigin href=\"/etrafficWEB/assets/css/index"
+ },
+ "euribor": "KEY,FREQ,REF_AREA,CURRENCY,PROVIDER_FM,INSTRUMENT_FM,PROVIDER_FM_ID,DATA_TYPE_FM,TIME_PERIOD,OBS_VALUE,OBS_STATUS,OBS_CONF,OBS_PRE_BREAK,OBS_COM,TIME_FORMAT,BREAKS,COLLECTION,COMPILING_ORG,DISS_ORG,DOM_SER_IDS,FM_CONTRACT_TIME,FM_COUPON_RATE,FM_IDENTIFIER,FM_LOT_SIZE,FM_MATURITY,FM_OUTS_AMOUNT,FM_PUT_CALL,FM_STRIKE_PRICE,PUBL_MU,PUBL_PUBLIC,UNIT_INDEX_BASE,COMPILATION,COVERAGE,DECIMALS,SOURCE_AGENCY,SOURCE_PUB,TITLE,TITLE_COMPL,UNIT,UNIT_MULT\r\nFM.M.U2.EUR.RT.MM.EURIBOR1YD_.HSTA,M,U2,EUR,RT,MM,EURIBOR1YD_,HSTA,2026-08,2.9536667,A,F,,,P1M,,A,,,EURIBOR1YD=,,,,,,,,,,,,,,7,,,\"Euribor 1-year - Historical close, average of observations through period\",\"Euro area (changing composition) - Money Market - Euribor 1-year - Historical close, average of observations through period - Euro, provided by Re",
+ "cambio": "KEY,FREQ,CURRENCY,CURRENCY_DENOM,EXR_TYPE,EXR_SUFFIX,TIME_PERIOD,OBS_VALUE,OBS_STATUS,OBS_CONF,OBS_PRE_BREAK,OBS_COM,TIME_FORMAT,BREAKS,COLLECTION,COMPILING_ORG,DISS_ORG,DOM_SER_IDS,PUBL_ECB,PUBL_MU,PUBL_PUBLIC,UNIT_INDEX_BASE,COMPILATION,COVERAGE,DECIMALS,NAT_TITLE,SOURCE_AGENCY,SOURCE_PUB,TITLE,TITLE_COMPL,UNIT,UNIT_MULT\r\nEXR.D.USD.EUR.SP00.A,D,USD,EUR,SP00,A,2026-11-24,1.0963,A,F,,,P1D,,A,,,,,,,99Q1=100,,,4,,4F0,,US dollar/Euro ECB reference exchange rate,\"ECB reference exchange rate, US dollar/Euro, 2.15 pm (C.E.T.)\",USD,0\r\nEXR.D.USD.EUR.SP00.A,D,USD,EUR,SP00,A,2026-11-25,1.0935,A,F,,,P1D,,A,,,,,,,99Q1=100,,,4,,4F0,,US dollar/Euro ECB reference exchange rate,\"ECB reference exchange rate, US dollar/Euro, 2.15 pm (C.E.T.)\",USD,0\r\nEXR.D.USD.EUR.SP00.A,D,USD,EUR,SP00,A,2026-11-26,1.0975,A,",
+ "ree": "{\"data\":{\"type\":\"Precios mercado peninsular en tiempo real\",\"id\":\"mer13\",\"attributes\":{\"title\":\"Precios mercado peninsular en tiempo real\",\"last-update\":\"2026-11-26T20:46:05.000+01:00\",\"description\":null},\"meta\":{\"cache-control\":{\"cache\":\"MISS\"}}},\"included\":[{\"type\":\"PVPC\",\"id\":\"1001\",\"groupId\":null,\"attributes\":{\"title\":\"PVPC\",\"description\":null,\"color\":\"#ffcf09\",\"icon\":null,\"type\":null,\"magnitude\":\"price\",\"composite\":false,\"last-update\":\"2026-11-26T20:46:05.000+01:00\",\"values\":[{\"value\":213.89,\"percentage\":0.4760304460072999,\"datetime\":\"2026-11-27T00:00:00.000+01:00\"},{\"value\":196.2,\"percentage\":0.4743713733075435,\"datetime\":\"2026-11-27T01:00:00.000+01:00\"},{\"value\":197.88,\"percentage\":0.48043119355151986,\"datetime\":\"2026-11-27T02:00:00.000+01:00\"},{\"value\":194.96,\"percentage\":0.4799015384615385,\"datetime\":\"2026-11-27T03:00:00.000+01:00\"},{\"value\":189.38,\"percentage\":0.4801967645418125,\"datetime\":\"2026-11-27T04:00:00.000+01:00\"},{\"value\":190.75,\"percentage\":0.48518377209716396,\"datetime\":\"2026-11-27T05:00:00.000+01:00\"},{\"value\":217.63,\"percentage\":0.5007247543887905,\"datetime\":\"2026-11-27T06:00:00.000+01:00\"},{\"value\":280.04,\"percentage\":0.5404508259996912,\"datetime\":\"2026-11-27T07:00:00.000+01:00\"},{\"value\":296.5,\"percentage\":0.5462115211023708,\"datetime\":\"2026-11-27T08:00:00.000+01:00\"},{\"value\":244.96,\"percentage\":0.5060947894715094,\"datetime\":\"2026-11-27T09:00:00.000+01:00\"},{\"value\":286.04,\"percentage\":0.5617990768928607,\"datetime\":\"2026-11-27T10:00:00.000+01:00\"},{\"value\":259.05,\"percentage\":0.5805432297969612,\"datetime\":\"2026-11-27T11:00:00.000+01:00\"},{\"value\":254.1,\"percentage\":0.5804417844987094,\"datetime\":\"2026-11-27T12:00:00.000+01:00\"},{\"value\":252.94,\"percentage\":0.5816584647932668,\"datetime\":\"2026-11-27T13:00:00.000+01:00\"},{\"value\":178.59,\"percentage\":0.5072282655002982,\"datetime\":\"2026-11-27T14:00:00.000+01:00\"},{\"value\":191.94,\"percentage\":0.5160509759638652,\"datetime\":\"2026-11-27T15:00:00.000+01:00\"},{\"value\":233.99,\"percentage\":0.5466289772461804,\"datetime\":\"2026-11-27T16:00:00.000+01:00\"},{\"value\":283.55,\"percentage\":0.5560130988097339,\"datetime\":\"2026-11-27T17:00:00.000+01:00\"},{\"value\":379.63,\"percentage\":0.5889114685943875,\"datetime\":\"2026-11-27T18:00:00.000+01:00\"},{\"value\":368.23,\"percentage\":0.5815106675299654,\"datetime\":\"2026-11-27T19:00:00.000+01:00\"},{\"value\":368.88,\"percentage\":0.5810048826586864,\"datetime\":\"2026-11-27T20:00:00.000+01:00\"},{\"value\":357.45,\"percentage\":0.5742629930114868,\"datetime\":\"2026-11-27T21:00:00.000"
+}

@@ -1,12 +1,12 @@
 {
- "fecha": "2026-11-27T14:01:47.657Z",
+ "fecha": "2026-11-27T14:03:49.900Z",
  "pruebas": {
   "ign-rss": {
    "url": "https://www.ign.es/ign/RssTools/sismologia.xml",
    "status": 200,
    "tipo": "application/xml;charset=UTF-8",
    "bytes": 13945,
-   "ms": 209,
+   "ms": 164,
    "inicio": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<rss xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:gml=\"http://www.opengis.net/gml\" xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\" xmlns:georss=\"http://www.georss.org/georss\" xmlns:taxo=\"http://purl.org/rss/1.0/modules/taxonomy/\" version=\"2.0\">\r\n  <channel>\r\n    <title>GeoRSS Sismología IGN</title>\r\n    <link>http://www.ign.es/ign/rss</link>\r\n    <description>Este canal te permite consultar los terremotos ocurridos en España durante los últimos diez días. Esta información está sujeta a modificaciones como consecuencia de la continua revisión del análisis sísmico.</description>\r\n    <language>es</language>\r\n    <dc:language>es</dc:language>\r\n    <item>\r\n      <title>-Info.terremoto: 27/11/2026 2:44:33</title>\r\n      <li"
   },
   "ign-ultimos": {
@@ -14,7 +14,7 @@
    "status": 200,
    "tipo": "text/html;charset=UTF-8",
    "bytes": 192200,
-   "ms": 34,
+   "ms": 44,
    "inicio": "<!DOCTYPE html> <html class=\"aui ltr\" dir=\"ltr\" lang=\"es-ES\"> <head> <title>Información de los últimos terremotos (10 días, 30 días, último año) - Instituto Geogr&aacute;fico Nacional</title> <meta http-equiv=\"Cache-Control\" content=\"max-age=3600\"/> <meta http-equiv=\"last-modified\" content=\"Fri, 14 Dec 2016 12:58:00 GMT\" /> <meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\"/> <meta name=\"google-site-verification\" content=\"ISK5_ZcnAXEJIbCj7RnAFYGbEPPyiwlFq58BfGEEg28\"/> <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/> <meta content=\"initial-scale=1.0, width=device-width\" name=\"viewport\" /> <meta http-equiv=\"expires\" content=\"no-cache\"/> <meta http-equiv=\"pragma\" content=\"no-cache\"/> <meta name=\"author\" content=\"Instituto Geogr&aacute;fico Nacional\"/> <meta name=\"title\" content=\"Geoportal oficial del Instituto Geogr&aacute;fico Nacional de Espa&ntilde;a\"/> <meta "
   },
   "ign-ultimos-csv": {
@@ -22,7 +22,7 @@
    "status": 200,
    "tipo": "text/html;charset=UTF-8",
    "bytes": 104237,
-   "ms": 12,
+   "ms": 556,
    "inicio": "<!DOCTYPE html> <html class=\"aui ltr\" dir=\"ltr\" lang=\"es-ES\"> <head> <title>Catálogo de terremotos - Instituto Geogr&aacute;fico Nacional</title> <meta http-equiv=\"Cache-Control\" content=\"max-age=3600\"/> <meta http-equiv=\"last-modified\" content=\"Fri, 14 Dec 2016 12:58:00 GMT\" /> <meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\"/> <meta name=\"google-site-verification\" content=\"ISK5_ZcnAXEJIbCj7RnAFYGbEPPyiwlFq58BfGEEg28\"/> <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/> <meta content=\"initial-scale=1.0, width=device-width\" name=\"viewport\" /> <meta http-equiv=\"expires\" content=\"no-cache\"/> <meta http-equiv=\"pragma\" content=\"no-cache\"/> <meta name=\"author\" content=\"Instituto Geogr&aacute;fico Nacional\"/> <meta name=\"title\" content=\"Geoportal oficial del Instituto Geogr&aacute;fico Nacional de Espa&ntilde;a\"/> <meta name=\"Description\" content=\"El Portal Web del Insti"
   },
   "usgs-espana": {
@@ -30,15 +30,15 @@
    "status": 200,
    "tipo": "application/json; charset=utf-8",
    "bytes": 315,
-   "ms": 327,
-   "inicio": "{\"type\":\"FeatureCollection\",\"metadata\":{\"generated\":1795788108000,\"url\":\"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minlatitude=26&maxlatitude=45&minlongitude=-20&maxlongitude=6&starttime=2026-11-26&minmagnitude=2\",\"title\":\"USGS Earthquakes\",\"status\":200,\"api\":\"2.8.4\",\"count\":0},\"features\":[]}"
+   "ms": 388,
+   "inicio": "{\"type\":\"FeatureCollection\",\"metadata\":{\"generated\":1795788230000,\"url\":\"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minlatitude=26&maxlatitude=45&minlongitude=-20&maxlongitude=6&starttime=2026-11-26&minmagnitude=2\",\"title\":\"USGS Earthquakes\",\"status\":200,\"api\":\"2.8.4\",\"count\":0},\"features\":[]}"
   },
   "emsc-fdsn": {
    "url": "https://www.seismicportal.eu/fdsnws/event/1/query?format=json&minlat=26&maxlat=45&minlon=-20&maxlon=6&start=2026-11-26&limit=20",
    "status": 200,
    "tipo": "application/json",
    "bytes": 10905,
-   "ms": 2090,
+   "ms": 2082,
    "inicio": "{\"type\":\"FeatureCollection\",\"metadata\":{\"count\":20},\"features\":[{\n  \"type\": \"Feature\",\n  \"geometry\": {\n    \"type\": \"Point\",\n    \"coordinates\": [\n      2.5623,\n      44.6976,\n      -5.0\n    ]\n  },\n  \"id\": \"20261127_0000169\",\n  \"properties\": {\n    \"source_id\": \"2096120\",\n    \"source_catalog\": \"EMSC-RTS\",\n    \"lastupdate\": \"2026-11-27T11:14:21.233521Z\",\n    \"time\": \"2026-11-27T11:06:25.550627Z\",\n    \"flynn_region\": \"FRANCE\",\n    \"lat\": 44.6976,\n    \"lon\": 2.5623,\n    \"depth\": 5.0,\n    \"evtype\": \"ke\",\n    \"auth\": \"ReNaSS\",\n    \"mag\": 2.3,\n    \"magtype\": \"ml\",\n    \"unid\": \"20261127_0000169\"\n  }\n},{"
   },
   "meteoalarm-api": {
@@ -46,7 +46,7 @@
    "status": 200,
    "tipo": "application/json; charset=utf-8",
    "bytes": 1542223,
-   "ms": 5227,
+   "ms": 4999,
    "inicio": "{\"warnings\":[{\"alert\":{\"identifier\":\"2.49.0.0.724.0.ES.261122073808.711501COCO221433088\",\"incidents\":\"Update\",\"info\":[{\"area\":[{\"areaDesc\":\"Costa - Noroeste de A Coruña\",\"geocode\":[{\"value\":\"ES846\",\"valueName\":\"EMMA_ID\"}]}],\"category\":[\"Met\"],\"certainty\":\"Likely\",\"contact\":\"AEMET\",\"description\":\"Viento del Oeste de 50 a 61 km/h (fuerza 7) hasta mediodía. Mar combinada del Oeste de 4 a 5 m.\",\"effective\":\"2026-11-22T08:34:53+01:00\",\"event\":\"Aviso de costeros de nivel amarillo\",\"expires\":\"2026-11-22T14:59:59+01:00\",\"headline\":\"Aviso de costeros de nivel amarillo. Costa - Noroeste de A Coruña\",\"instruction\":\"Esté atento. Manténgase informado de la predicción meteorológica más actualizada. Se pueden producir daños moderados a personas y bienes, especialmente a aquellos vulnerables o en zonas expuestas al fenómeno.\",\"language\":\"es-ES\",\"onset\":\"2026-11-22T08:00:00+01:00\",\"parameter\":[{\"value\":\"2; yellow; Moderate\",\"valueName\":\"awareness_level\"},{\"value\":\"7; coastalevent\",\"valueName\":\"awareness_type\"}],\"responseType\":[\"Monitor\"],\"senderName\":\"AEMET. Agencia Estatal de Meteorología\",\"severity\":\"Moderate\",\"urgency\":\"Immediate\",\"web\":\"https://www.aemet.es/es/eltiempo/prediccion/avi"
   },
   "meteoalarm-atom": {
@@ -54,47 +54,47 @@
    "status": 200,
    "tipo": "application/atom+xml; charset=utf-8",
    "bytes": 52240,
-   "ms": 1082,
+   "ms": 1339,
    "inicio": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:cap=\"urn:oasis:names:tc:emergency:cap:1.2\">\n  <link rel=\"hub\" href=\"https://pubsubhubbub.appspot.com/\"/>\n  <link type=\"application/atom+xml\" rel=\"self\" href=\"https://feeds.meteoalarm.org/feeds/meteoalarm-legacy-atom-spain\"/>\n  <link type=\"text/html\" rel=\"alternate\" href=\"https://meteoalarm.org\"/>\n  <rights>Copyright © 2026 MeteoAlarm.Org. Licensed under terms equivalent to CC BY 4.0, with additional requirements for redistributing outlined in our Terms and Conditions.</rights>\n  <generator>MeteoAlarm Producer Server</generator>\n  <logo>https://feeds.meteoalarm.org/images/logo.svg</logo>\n  <author>\n    <name>meteoalarm.org</name>\n    <uri>https://meteoalarm.org</uri>\n    <email>meteoalarm@geosphere.at</email>\n  </author>\n  <id>tag:meteoalarm.org,2021-02-19:ES</id>\n  <title>MeteoAlarm - Alerting Europe for Extreme Weather</title>\n  <updated>2026-11-27T13:36:19.585902Z</updated>\n  <entry>\n    <cap:geocode>\n      <valueName>EMMA_ID</valueName>\n      <value>ES126</value>\n    </cap:geocode>\n    <link title=\"Este de La Palma\" href=\"https://meteoalarm.org?geocode=EMMA_ID:ES126\" hreflang=\"en\"/>\n    <cap:"
   },
   "aemet-avisos-cap": {
    "url": "https://www.aemet.es/documentos_d/eltiempo/prediccion/avisos/rss/CAP_AFAE_wah_.rss",
    "status": 404,
    "tipo": "text/html",
-   "bytes": 10856,
-   "ms": 198,
+   "bytes": 10857,
+   "ms": 615,
    "inicio": "﻿<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<!-- ERROR 400 ==> Bad Request -->\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"es\" lang=\"es\">\n\t<head>\n\t\t<meta name=\"keywords\" content=\"AEMET,Agencia,Estatal,Meteorología,España\" />\n\t\t<meta name=\"author\" content=\"Agencia Estatal de Meteorología\" />\n\t\t<meta name=\"title\" content=\"Agencia Estatal de Meteorología\" />\n\t\t<meta name=\"DC.title\" content=\"Agencia Estatal de Meteorología\" />\n\t\t<meta name=\"distribution\" content=\"global\" />\n\t\t<meta name=\"lang\" content=\"e"
   },
   "om-actual": {
    "url": "https://api.open-meteo.com/v1/forecast?latitude=40.42,41.39,37.39,43.26,39.47&longitude=-3.70,2.17,-5.98,-2.93,-0.38&current=temperature_2m,precipitation,wind_speed_10m&timezone=Europe%2FMadrid",
    "status": 200,
    "tipo": "application/json; charset=utf-8",
-   "bytes": 2206,
-   "ms": 80,
-   "inicio": "[{\"latitude\":40.39599,\"longitude\":-3.6793447,\"generationtime_ms\":0.05447864532470703,\"utc_offset_seconds\":3600,\"timezone\":\"Europe/Madrid\",\"timezone_abbreviation\":\"GMT+1\",\"elevation\":667.0,\"current_units\":{\"time\":\"iso8601\",\"interval\":\"seconds\",\"temperature_2m\":\"°C\",\"precipitation\":\"mm\",\"wind_speed_10m\":\"km/h\"},\"current\":{\"time\":\"2026-11-27T15:00\",\"interval\":900,\"temperature_2m\":11.4,\"precipitation\":0.00,\"wind_speed_10m\":3.3}},{\"latitude\":41.414772,\"longitude\":2.2254717,\"generationtime_ms\":0.049233436584472656,\"utc_offset_seconds\":3600,\"timezone\":\"Europe/Madrid\",\"timezone_abbreviation\":\"GMT+1\",\"elevation\":29.0,\"location_id\":1,\"current_units\":{\"time\":\"iso8601\",\"interval\":\"seconds\",\"temperature_2m\":\"°C\",\"precipitation\":\"mm\",\"wind_speed_10m\":\"km/h\"},\"current\":{\"time\":\"2026-11-27T15:00\",\"interval\":900,\"temperature_2m\":14.1,\"precipitation\":0.00,\"wind_speed_10m\":3.4}},{\"latitude\":37.364082,\"longitude\":-5.956622,\"generationtime_ms\":0.031828880310058594,\"utc_offset_seconds\":3600,\"timezone\":\"Europe/Madrid\",\"timezone_abbreviation\":\"GMT+1\",\"elevation\":16.0,\"location_id\":2,\"current_units\":{\"time\":\"iso8601\",\"interval\":\"seconds\",\"temperature_2m\":\"°C\",\"precipitation\":\"mm\",\"wind_speed_10m\":\"km/h\""
+   "bytes": 2204,
+   "ms": 124,
+   "inicio": "[{\"latitude\":40.39599,\"longitude\":-3.6793447,\"generationtime_ms\":0.13267993927001953,\"utc_offset_seconds\":3600,\"timezone\":\"Europe/Madrid\",\"timezone_abbreviation\":\"GMT+1\",\"elevation\":667.0,\"current_units\":{\"time\":\"iso8601\",\"interval\":\"seconds\",\"temperature_2m\":\"°C\",\"precipitation\":\"mm\",\"wind_speed_10m\":\"km/h\"},\"current\":{\"time\":\"2026-11-27T15:00\",\"interval\":900,\"temperature_2m\":11.4,\"precipitation\":0.00,\"wind_speed_10m\":3.3}},{\"latitude\":41.414772,\"longitude\":2.2254717,\"generationtime_ms\":0.14781951904296875,\"utc_offset_seconds\":3600,\"timezone\":\"Europe/Madrid\",\"timezone_abbreviation\":\"GMT+1\",\"elevation\":29.0,\"location_id\":1,\"current_units\":{\"time\":\"iso8601\",\"interval\":\"seconds\",\"temperature_2m\":\"°C\",\"precipitation\":\"mm\",\"wind_speed_10m\":\"km/h\"},\"current\":{\"time\":\"2026-11-27T15:00\",\"interval\":900,\"temperature_2m\":14.1,\"precipitation\":0.00,\"wind_speed_10m\":3.4}},{\"latitude\":37.364082,\"longitude\":-5.956622,\"generationtime_ms\":0.10836124420166016,\"utc_offset_seconds\":3600,\"timezone\":\"Europe/Madrid\",\"timezone_abbreviation\":\"GMT+1\",\"elevation\":16.0,\"location_id\":2,\"current_units\":{\"time\":\"iso8601\",\"interval\":\"seconds\",\"temperature_2m\":\"°C\",\"precipitation\":\"mm\",\"wind_speed_10m\":\"km/h\"},"
   },
   "om-archivo": {
    "url": "https://archive-api.open-meteo.com/v1/archive?latitude=40.42&longitude=-3.70&start_date=1991-11-20&end_date=1991-11-30&daily=temperature_2m_mean&timezone=Europe%2FMadrid",
    "status": 200,
    "tipo": "application/json; charset=utf-8",
-   "bytes": 479,
-   "ms": 444,
-   "inicio": "{\"latitude\":40.386642,\"longitude\":-3.6760864,\"generationtime_ms\":0.04696846008300781,\"utc_offset_seconds\":3600,\"timezone\":\"Europe/Madrid\",\"timezone_abbreviation\":\"GMT+1\",\"elevation\":667.0,\"daily_units\":{\"time\":\"iso8601\",\"temperature_2m_mean\":\"°C\"},\"daily\":{\"time\":[\"1991-11-20\",\"1991-11-21\",\"1991-11-22\",\"1991-11-23\",\"1991-11-24\",\"1991-11-25\",\"1991-11-26\",\"1991-11-27\",\"1991-11-28\",\"1991-11-29\",\"1991-11-30\"],\"temperature_2m_mean\":[4.9,4.8,4.2,1.8,3.7,5.7,6.3,7.5,7.5,7.7,6.9]}}"
+   "bytes": 476,
+   "ms": 675,
+   "inicio": "{\"latitude\":40.386642,\"longitude\":-3.6760864,\"generationtime_ms\":0.05340576171875,\"utc_offset_seconds\":3600,\"timezone\":\"Europe/Madrid\",\"timezone_abbreviation\":\"GMT+1\",\"elevation\":667.0,\"daily_units\":{\"time\":\"iso8601\",\"temperature_2m_mean\":\"°C\"},\"daily\":{\"time\":[\"1991-11-20\",\"1991-11-21\",\"1991-11-22\",\"1991-11-23\",\"1991-11-24\",\"1991-11-25\",\"1991-11-26\",\"1991-11-27\",\"1991-11-28\",\"1991-11-29\",\"1991-11-30\"],\"temperature_2m_mean\":[4.9,4.8,4.2,1.8,3.7,5.7,6.3,7.5,7.5,7.7,6.9]}}"
   },
   "om-clima": {
    "url": "https://climate-api.open-meteo.com/v1/climate?latitude=40.42&longitude=-3.70&start_date=2040-11-20&end_date=2040-11-21&models=EC_Earth3P_HR&daily=temperature_2m_mean",
    "status": 200,
    "tipo": "application/json; charset=utf-8",
-   "bytes": 310,
-   "ms": 484,
-   "inicio": "{\"latitude\":40.40001,\"longitude\":-3.699997,\"generationtime_ms\":0.41615962982177734,\"utc_offset_seconds\":0,\"timezone\":\"GMT\",\"timezone_abbreviation\":\"GMT\",\"elevation\":667.0,\"daily_units\":{\"time\":\"iso8601\",\"temperature_2m_mean\":\"°C\"},\"daily\":{\"time\":[\"2040-11-20\",\"2040-11-21\"],\"temperature_2m_mean\":[9.7,10.7]}}"
+   "bytes": 309,
+   "ms": 686,
+   "inicio": "{\"latitude\":40.40001,\"longitude\":-3.699997,\"generationtime_ms\":0.0947713851928711,\"utc_offset_seconds\":0,\"timezone\":\"GMT\",\"timezone_abbreviation\":\"GMT\",\"elevation\":667.0,\"daily_units\":{\"time\":\"iso8601\",\"temperature_2m_mean\":\"°C\"},\"daily\":{\"time\":[\"2040-11-20\",\"2040-11-21\"],\"temperature_2m_mean\":[9.7,10.7]}}"
   },
   "dgt-nap-v3": {
    "url": "https://nap.dgt.es/datex2/v3/dgt/SituationPublication/datex2.xml",
    "status": 404,
    "tipo": "text/html; charset=utf-8",
    "bytes": 162,
-   "ms": 496,
+   "ms": 563,
    "inicio": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body bgcolor=\"white\">\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
   },
   "dgt-infocar": {
@@ -102,15 +102,15 @@
    "status": 502,
    "tipo": "text/html",
    "bytes": 3854,
-   "ms": 599,
+   "ms": 575,
    "inicio": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\">\n    <head>\n        <title>The page is temporarily unavailable</title>\n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n        <style type=\"text/css\">\n            /*<![CDATA[*/\n            body {\n                background-color: #FAF5F5;\n                color: #000;\n                font-size: 0.9em;\n                font-family: sans-serif,helvetica;\n                margin: 0;\n                padding: 0;\n            }\n            :link {\n                color: #0B2335;\n            }\n            :visited {\n                color: #0B2335;\n            }\n            a:hover {\n                color: #0069DA;\n            }\n            h1 {\n                text-align: center;\n                margin: 0;\n                padding: 0.6em 2em 0.4em;\n                background-color: #0B2335;\n                color: #fff;\n                font-weight: normal;\n                font-size: 1.75em;\n                border-bottom: 2px solid #000;\n            }\n            h1 strong {\n                font-weight: bold;\n                font-size: 1.5em;\n            }\n            h2 {\n                text-align: center;\n                background-color: #0B2335;\n                font-size: 1.1em;\n                font-weight: bold;\n                color: #fff;\n                margin: 0;\n                padding: 0.5em;\n  "
   },
   "dgt-incidencias-geojson": {
    "url": "https://infocar.dgt.es/etraffic/BuscarElementos?latNS=44&longNS=4&latSW=35&longSW=-10&zoom=6&accion=getElementos&Camaras=false&SensoresTrafico=false&SensoresMeteorologico=false&Paneles=false&Radares=false&IncidenciasRETENCION=true&IncidenciasOBRAS=false&IncidenciasMETEOROLOGICA=true&IncidenciasPUERTOS=false&IncidenciasOTROS=true&IncidenciasEVENTOS=false&IncidenciasRESTRICCIONES=false&niveles=true&caracter=acontecimiento",
    "status": 200,
    "tipo": "text/html",
-   "bytes": 5040,
-   "ms": 678,
+   "bytes": 5038,
+   "ms": 1138,
    "inicio": "<!doctype html>\n<html lang=\"es\">\n\t<head>\n\t\t<meta charset=\"UTF-8\" />\n\t\t<link rel=\"preconnect\" href=\"https://www.ign.es\" />\n\t\t<link rel=\"icon\" id=\"app-favicon\" href=\"\" />\n\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n\t\t<title>Etraffic</title>\n\t\t<script type=\"module\" crossorigin src=\"/etrafficWEB/assets/js/index-Cgw2qpEG.js\"></script>\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/i18n-C0AU9P0C.js\">\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/ui-CyuMv1Wl.js\">\n\t\t<link rel=\"modulepreload\" crossorigin href=\"/etrafficWEB/assets/js/leaflet-BFAKfZ46.js\">\n\t\t<link rel=\"stylesheet\" crossorigin href=\"/etrafficWEB/assets/css/index-Cxurspbg.css\">\n\t\n                                <script>!function(e){var n=\"https://s.go-mpulse.ne"
   },
   "boe-sumario": {
@@ -118,7 +118,7 @@
    "status": 200,
    "tipo": "application/json",
    "bytes": 334469,
-   "ms": 783,
+   "ms": 1339,
    "inicio": "{\n    \"status\": {\n        \"code\": \"200\",\n        \"text\": \"ok\"\n    },\n    \"data\": {\n        \"sumario\": {\n            \"metadatos\": {\n                \"publicacion\": \"BOE\",\n                \"fecha_publicacion\": \"20261127\"\n            },\n            \"diario\": [\n                {\n                    \"numero\": \"295\",\n                    \"sumario_diario\": {\n                        \"identificador\": \"BOE-S-2026-295\",\n                        \"url_pdf\": {\n                            \"szBytes\": \"455033\",\n                            \"szKBytes\": \"444\",\n                            \"texto\": \"https:\\/\\/www.boe.es\\/boe\\/dias\\/2026\\/11\\/27\\/pdfs\\/BOE-S-2026-295.pdf\"\n                        }\n                    },\n                    \"seccion\": [\n                        {\n                            \"codigo\": \"1\",\n                            \"nombre\": \"I. Disposiciones generales\",\n                            \"departamento\": [\n                                {\n                                    \"codigo\": \"9585\",\n                                    \"nombre\": \"MINISTERIO DE LA PRESIDENCIA, JUSTICIA Y RELACIONES CON LAS CORTES\",\n                                    \"epigrafe\": [\n                                        {\n                                            \"nombre\": \"Organizaci\\u00f3n\",\n                                            \"item\": {\n                                                \"identificador\": \"BOE-A-2026-24906\",\n                                                \"control\": \"2026\\/18580"
   },
   "boe-sumario-ayer": {
@@ -126,31 +126,31 @@
    "status": 200,
    "tipo": "application/json",
    "bytes": 412225,
-   "ms": 625,
+   "ms": 1335,
    "inicio": "{\n    \"status\": {\n        \"code\": \"200\",\n        \"text\": \"ok\"\n    },\n    \"data\": {\n        \"sumario\": {\n            \"metadatos\": {\n                \"publicacion\": \"BOE\",\n                \"fecha_publicacion\": \"20261126\"\n            },\n            \"diario\": [\n                {\n                    \"numer"
   },
   "ree-precio": {
    "url": "https://apidatos.ree.es/es/datos/mercados/precios-mercados-tiempo-real?start_date=2026-11-27T00:00&end_date=2026-11-27T23:59&time_trunc=hour",
    "status": 200,
    "tipo": "application/json",
-   "bytes": 10528,
-   "ms": 628,
-   "inicio": "{\"data\":{\"type\":\"Precios mercado peninsular en tiempo real\",\"id\":\"mer13\",\"attributes\":{\"title\":\"Precios mercado peninsular en tiempo real\",\"last-update\":\"2026-11-26T20:46:05.000+01:00\",\"description\":null},\"meta\":{\"cache-control\":{\"cache\":\"HIT\",\"expireAt\":\"2026-11-28T14:50:34\"}}},\"included\":[{\"type\":\"PVPC\",\"id\":\"1001\",\"groupId\":null,\"attributes\":{\"title\":\"PVPC\",\"description\":null,\"color\":\"#ffcf09\",\"icon\":null,\"type\":null,\"magnitude\":\"price\",\"composite\":false,\"last-update\":\"2026-11-26T20:46:05.000+01:00\",\"values\":[{\"value\":213.89,\"percentage\":0.4760304460072999,\"datetime\":\"2026-11-27T00:00:00.00"
+   "bytes": 10496,
+   "ms": 924,
+   "inicio": "{\"data\":{\"type\":\"Precios mercado peninsular en tiempo real\",\"id\":\"mer13\",\"attributes\":{\"title\":\"Precios mercado peninsular en tiempo real\",\"last-update\":\"2026-11-26T20:46:05.000+01:00\",\"description\":null},\"meta\":{\"cache-control\":{\"cache\":\"MISS\"}}},\"included\":[{\"type\":\"PVPC\",\"id\":\"1001\",\"groupId\":null,\"attributes\":{\"title\":\"PVPC\",\"description\":null,\"color\":\"#ffcf09\",\"icon\":null,\"type\":null,\"magnitude\":\"price\",\"composite\":false,\"last-update\":\"2026-11-26T20:46:05.000+01:00\",\"values\":[{\"value\":213.89,\"percentage\":0.4760304460072999,\"datetime\":\"2026-11-27T00:00:00.000+01:00\"},{\"value\":196.2,\"percen"
   },
   "ecb-euribor": {
    "url": "https://data-api.ecb.europa.eu/service/data/FM/M.U2.EUR.RT.MM.EURIBOR1YD_.HSTA?lastNObservations=3&format=jsondata",
    "status": 200,
    "tipo": "application/vnd.sdmx.data+json;version=1.0.0-wd",
    "bytes": 4177,
-   "ms": 1656,
-   "inicio": "{\"header\":{\"id\":\"45618d7d-ddef-4eae-b17d-65b87c5585c1\",\"test\":false,\"prepared\":\"2026-11-27T14:02:03.254+00:00\",\"sender\":{\"id\":\"ECB\"}},\"dataSets\":[{\"action\":\"Replace\",\"validFrom\":\"2026-11-27T14:02:03.254+00:00\",\"series\":{\"0:0:0:0:0:0:0\":{\"attributes\":[0,null,0,null,null,0,null,null,null,null,null,null,null,null,null,null,null,null,null,0,null,null,0,0,0,0],\"observations\":{\"0\":[2.9536667,0,0,null,nu"
+   "ms": 3395,
+   "inicio": "{\"header\":{\"id\":\"4c977a80-f23a-4215-8a18-59b749b8b457\",\"test\":false,\"prepared\":\"2026-11-27T14:04:10.752+00:00\",\"sender\":{\"id\":\"ECB\"}},\"dataSets\":[{\"action\":\"Replace\",\"validFrom\":\"2026-11-27T14:04:10.752+00:00\",\"series\":{\"0:0:0:0:0:0:0\":{\"attributes\":[0,null,0,null,null,0,null,null,null,null,null,null,null,null,null,null,null,null,null,0,null,null,0,0,0,0],\"observations\":{\"0\":[2.9536667,0,0,null,nu"
   },
   "ecb-cambio": {
    "url": "https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?lastNObservations=3&format=jsondata",
    "status": 200,
    "tipo": "application/vnd.sdmx.data+json;version=1.0.0-wd",
    "bytes": 3354,
-   "ms": 100,
+   "ms": 2426,
    "inicio": "{\"header\":{\"id\":\"7f50e950-e170-4662-8c30-a784c1f7af2a\",\"test\":false,\"prepared\":\"2026-11-26T15:00:05.478+00:00\",\"sender\":{\"id\":\"ECB\"}},\"dataSets\":[{\"action\":\"Replace\",\"validFrom\":\"2026-11-26T15:00:05.478+00:00\",\"series\":{\"0:0:0:0:0\":{\"attributes\":[0,null,0,null,null,null,null,null,null,0,null,null,0,null,0,null,0,0,0,0],\"observations\":{\"0\":[1.0963,0,0,null,null],\"1\":[1.0935,0,0,null,null],\"2\":[1.09"
   }
  }
