@@ -1,17 +1,17 @@
 {
  "tiempo_real": {
-  "filas": 54,
+  "filas": 179,
   "primera": "2026-11-27 21:00",
-  "ultima": "2026-11-28 01:25",
+  "ultima": "2026-11-28 11:50",
   "claves": "ts,dem,eol,nuc,gf,car,cc,hid,aut,inter,icb,sol,solFot,solTer,bio,cogenResto,expAnd,expMar,expPor,expFra,expTot,impFra,impPor,impMar,impAnd,impTot,conb,turb,gnhd,bat,consBat,dif,vap"
  },
  "_cors": "*",
  "mix_hora": "ERROR HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error Interno\",\"detail\":\"Los datos solicitados no est\\u00e1n disponibles en este momento. Int\\u00e9ntelo de nuevo m\\u00e1s t",
  "demanda_tr": {
-  "Prevista": "288 datos · 2026-11-28T00:00 → 2026-11-28T23:55 27505 0.342",
-  "Programada": "288 datos · 2026-11-28T00:00 → 2026-11-28T23:55 26421 0.329",
-  "Real": "13 datos · 2026-11-28T00:00 → 2026-11-28T01:00 27463 0.253",
-  "Programada total": "288 datos · 2026-11-28T00:00 → 2026-11-28T23:55 26421 0.329"
+  "Prevista": "288 datos · 2026-11-28T00:00 → 2026-11-28T23:55 27680 0.341",
+  "Programada": "288 datos · 2026-11-28T00:00 → 2026-11-28T23:55 26779 0.33",
+  "Real": "142 datos · 2026-11-28T00:00 → 2026-11-28T11:45 34143 0.26",
+  "Programada total": "288 datos · 2026-11-28T00:00 → 2026-11-28T23:55 26779 0.33"
  },
  "precios_hora": {
   "PVPC": "48 datos · 2026-11-27T00:00 → 2026-11-28T23:00 238.01 0.51",
