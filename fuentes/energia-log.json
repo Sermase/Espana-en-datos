@@ -1,21 +1,21 @@
 {
  "tiempo_real": {
-  "filas": 179,
+  "filas": 235,
   "primera": "2026-11-27 21:00",
-  "ultima": "2026-11-28 11:50",
+  "ultima": "2026-11-28 16:30",
   "claves": "ts,dem,eol,nuc,gf,car,cc,hid,aut,inter,icb,sol,solFot,solTer,bio,cogenResto,expAnd,expMar,expPor,expFra,expTot,impFra,impPor,impMar,impAnd,impTot,conb,turb,gnhd,bat,consBat,dif,vap"
  },
  "_cors": "*",
  "mix_hora": "ERROR HTTP 400 {\"errors\":[{\"status\":\"400\",\"title\":\"Error Interno\",\"detail\":\"Los datos solicitados no est\\u00e1n disponibles en este momento. Int\\u00e9ntelo de nuevo m\\u00e1s t",
  "demanda_tr": {
-  "Prevista": "288 datos · 2026-11-28T00:00 → 2026-11-28T23:55 27680 0.341",
-  "Programada": "288 datos · 2026-11-28T00:00 → 2026-11-28T23:55 26779 0.33",
-  "Real": "142 datos · 2026-11-28T00:00 → 2026-11-28T11:45 34143 0.26",
-  "Programada total": "288 datos · 2026-11-28T00:00 → 2026-11-28T23:55 26779 0.33"
+  "Prevista": "288 datos · 2026-11-28T00:00 → 2026-11-28T23:55 27650 0.34",
+  "Programada": "288 datos · 2026-11-28T00:00 → 2026-11-28T23:55 26865 0.33",
+  "Real": "197 datos · 2026-11-28T00:00 → 2026-11-28T16:20 32411 0.254",
+  "Programada total": "288 datos · 2026-11-28T00:00 → 2026-11-28T23:55 26871 0.33"
  },
  "precios_hora": {
   "PVPC": "48 datos · 2026-11-27T00:00 → 2026-11-28T23:00 238.01 0.51",
-  "Precio mercado spot": "192 datos · 2026-11-27T00:00 → 2026-11-28T23:45 215.25 1"
+  "Precio mercado spot": "288 datos · 2026-11-27T00:00 → 2026-11-29T23:45 188.33 1"
  },
  "balance_dia": "ERROR HTTP 502 {\"errors\":[{\"status\":\"502\",\"title\":\"Error Interno\",\"detail\":\"Los datos solicitados no est\\u00e1n disponibles en este momento. Int\\u00e9ntelo de nuevo m\\u00e1s t",
  "co2_dia": {
@@ -97,7 +97,7 @@
   "fallos": [],
   "series": {
    "PVPC": "2007 días · 2021-06-01T00:00 → 2026-11-28T00:00",
-   "Precio mercado spot": "4715 días · 2014-01-01T00:00 → 2026-11-28T00:00"
+   "Precio mercado spot": "4716 días · 2014-01-01T00:00 → 2026-11-29T00:00"
   }
  }
 }
