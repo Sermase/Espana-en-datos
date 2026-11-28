@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }   # historial completo: la tabla de fuentes mira cuándo cambió cada fichero
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci
@@ -126,6 +127,9 @@ jobs:
           git add src/agua/data/snapshot.json src/agua/data/consumo.json src/resumen.json public/agua/data public/gasolineras/data public/poblacion/data public/economia/data public/energia/data public/comercio/data public/vivienda/data public/cuentas/data public/impuestos/data public/seguridad/data public/aire/data public/hogares/data public/coches/data public/igualdad/data public/turismo/data public/sanidad/data public/hoy/data fuentes
           git diff --cached --quiet || git commit -m "Datos del $(date -u +%Y-%m-%d)"
           for i in 1 2 3 4; do git pull --rebase -q && git push && break; sleep 10; done
+      - name: Tabla interna de fuentes
+        continue-on-error: true
+        run: node scripts/tabla-fuentes.mjs
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with: { path: dist }

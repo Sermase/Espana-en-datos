@@ -44,7 +44,7 @@ export default function App() {
 
       <section className="ac-bloque">
         <h2>De dónde salen los datos</h2>
-        <p>Solo de fuentes oficiales y de acceso libre. Cada gráfico enlaza a la tabla exacta de la que sale, para que cualquiera pueda comprobarlo. Los principales organismos:</p>
+        <p>Solo de fuentes oficiales y de acceso libre. Cada gráfico enlaza a la tabla exacta de la que sale, para que cualquiera pueda comprobarlo. Los principales organismos (la lista completa, con frecuencia y licencia, está en la <a href="../datos/index.html">tabla de fuentes</a>):</p>
         <ul className="ac-org">{ORGANISMOS.map(o => <li key={o.n}><a href={o.u} {...ext}>{o.n}</a></li>)}</ul>
       </section>
 
