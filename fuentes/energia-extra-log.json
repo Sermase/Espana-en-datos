@@ -22,16 +22,16 @@
   "2013: HTTP 502 {\"errors\":[{\"status\":\"502\",\"title\":\"Error Interno\","
  ],
  "intercambios": {
-  "francia/Exportación": "155 · 2014-01 → 2026-11 -862268.47",
-  "francia/Importación": "155 · 2014-01 → 2026-11 373531.5",
-  "francia/saldo": "155 · 2014-01 → 2026-11 -488736.97",
-  "portugal/Exportación": "155 · 2014-01 → 2026-11 -1237598.73",
-  "portugal/Importación": "155 · 2014-01 → 2026-11 346942.6",
-  "portugal/saldo": "155 · 2014-01 → 2026-11 -890656.13",
-  "marruecos/Exportación": "155 · 2014-01 → 2026-11 -410848.15",
-  "marruecos/saldo": "155 · 2014-01 → 2026-11 -407887.2",
-  "andorra/Exportación": "152 · 2014-01 → 2026-11 -24264.72",
-  "andorra/saldo": "152 · 2014-01 → 2026-11 -24264.72",
+  "francia/Exportación": "155 · 2014-01 → 2026-11 -869063.85",
+  "francia/Importación": "155 · 2014-01 → 2026-11 421957.58",
+  "francia/saldo": "155 · 2014-01 → 2026-11 -447106.27",
+  "portugal/Exportación": "155 · 2014-01 → 2026-11 -1284620.45",
+  "portugal/Importación": "155 · 2014-01 → 2026-11 350308.65",
+  "portugal/saldo": "155 · 2014-01 → 2026-11 -934311.8",
+  "marruecos/Exportación": "155 · 2014-01 → 2026-11 -426738.15",
+  "marruecos/saldo": "155 · 2014-01 → 2026-11 -423777.2",
+  "andorra/Exportación": "152 · 2014-01 → 2026-11 -25279.42",
+  "andorra/saldo": "152 · 2014-01 → 2026-11 -25279.42",
   "marruecos/Importación": "98 · 2015-07 → 2026-11 2960.95"
  },
  "ire": {
