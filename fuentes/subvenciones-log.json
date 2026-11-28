@@ -1,8 +1,8 @@
 {
  "meses": {
-  "2026-11": "96525 de 96525 concesiones (100.0 %), 1127 M€, 83 s",
-  "2026-10": "510635 de 510635 concesiones (100.0 %), 2954 M€, 140 s",
-  "2026-09": "1428136 de 1428136 concesiones (100.0 %), 2445 M€, 343 s"
+  "2026-11": "100359 de 100359 concesiones (100.0 %), 1628 M€, 75 s",
+  "2026-10": "535099 de 535099 concesiones (100.0 %), 2972 M€, 117 s",
+  "2026-09": "1428436 de 1428436 concesiones (100.0 %), 2447 M€, 261 s"
  },
  "orden": "order=fechaConcesion&direccion=asc"
 }
